@@ -10,7 +10,6 @@ HEADERS	+= bigletter.h \
 	cbiface.h \
 	cmdiface.h \
 	cmdinterpret.h \
-	complex.h \
 	confdata.h \
 	devserver.h \
 	dspiface.h \
@@ -56,7 +55,6 @@ HEADERS	+= bigletter.h \
 SOURCES	+= \
 	Logfile.cpp \
 	cmdinterpret.cpp \
-	complex.cpp \
 	confdata.cpp \
 	devserver.cpp \
 	dspiface.cpp \
@@ -122,6 +120,8 @@ TRANSLATIONS    = wm3000i_gb.ts \
 # Input
 #The following line was inserted by qt3to4
 QT += xml  qt3support 
+
+LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin
 INSTALLS += target

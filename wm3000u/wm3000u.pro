@@ -16,7 +16,6 @@ HEADERS	+= logfile.h \
 	wmeditor.h \
 	eparameter.h \
 	wm3000u.h \
-	complex.h \
 	dspiface.h \
 	tools.h \
 	widgeom.h \
@@ -61,7 +60,6 @@ SOURCES	+= Logfile.cpp \
 	zerainfo.cpp \
 	wmeditor.cpp \
 	eparameter.cpp \
-	complex.cpp \
 	dspiface.cpp \
 	tools.cpp \
 	confdata.cpp \
@@ -410,6 +408,8 @@ TRANSLATIONS    = wm3000u_gb.ts \
 # Input
 #The following line was inserted by qt3to4
 QT += xml  qt3support dbus
+
+LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin
 INSTALLS += target
