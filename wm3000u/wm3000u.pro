@@ -25,7 +25,6 @@ HEADERS	+= logfile.h \
 	zhserveriface.h \
 	parse.h \
 	en61850.h \
-	cbiface.h \
 	scpi.h \
 	cmdinterpret.h \
 	scpiface.h \

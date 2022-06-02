@@ -5,7 +5,8 @@ QT += qt3support
 
 HEADERS = \
     bigletter.h \
-    complex.h
+    complex.h \
+    cbiface.h
 
 SOURCES = \
     bigletter.cpp \

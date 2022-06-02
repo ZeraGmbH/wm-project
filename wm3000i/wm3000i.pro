@@ -7,7 +7,6 @@ INCLUDEPATH	+= .
 
 
 HEADERS	+= \
-	cbiface.h \
 	cmdinterpret.h \
 	confdata.h \
 	devserver.h \
