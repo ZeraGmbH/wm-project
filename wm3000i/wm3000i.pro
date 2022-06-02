@@ -7,7 +7,6 @@ INCLUDEPATH	+= .
 
 
 HEADERS	+= \
-	cmdinterpret.h \
 	confdata.h \
 	devserver.h \
 	dspiface.h \
@@ -19,16 +18,13 @@ HEADERS	+= \
 	logfile.h \
 	logfileview.h \
 	ownerror.h \
-	parse.h \
 	pcbiface.h \
 	range.h \
-	zeraglobal.h \
 	wmglobal.h \
 	wm3000i.h \
 	zhclientsocket.h \
 	zhserveriface.h \
 	zerainfo.h \
-	scpi.h \
 	wm3000scpiface.h \
 	scpiface.h \
 	tools.h \
@@ -52,7 +48,6 @@ HEADERS	+= \
 
 SOURCES	+= \
 	Logfile.cpp \
-	cmdinterpret.cpp \
 	confdata.cpp \
 	devserver.cpp \
 	dspiface.cpp \
@@ -63,13 +58,11 @@ SOURCES	+= \
 	logfileview.cpp \
 	main.cpp \
 	ownerror.cpp \
-	parse.cpp \
 	pcbiface.cpp \
 	wm3000i.cpp \
 	zhclientsocket.cpp \
 	zhserveriface.cpp \
 	zerainfo.cpp \
-	scpi.cpp \
 	wm3000scpiface.cpp \
 	scpiface.cpp \
 	tools.cpp \

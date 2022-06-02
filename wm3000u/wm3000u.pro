@@ -23,14 +23,10 @@ HEADERS	+= logfile.h \
 	pcbiface.h \
 	zhclientsocket.h \
 	zhserveriface.h \
-	parse.h \
 	en61850.h \
-	scpi.h \
-	cmdinterpret.h \
 	scpiface.h \
 	wm3000scpiface.h \
 	devserver.h \
-	zeraglobal.h \
 	formatinfo.h \
     confdialogbase.h \
     rangedialogbase.h \
@@ -67,12 +63,9 @@ SOURCES	+= Logfile.cpp \
 	pcbiface.cpp \
 	zhclientsocket.cpp \
 	zhserveriface.cpp \
-	parse.cpp \
-	scpi.cpp \
 	scpiface.cpp \
 	wm3000scpiface.cpp \
 	devserver.cpp \
-	cmdinterpret.cpp \
 	formatinfo.cpp \
     wmviewbase.cpp \
     wmmeasvaluesbase.cpp \
