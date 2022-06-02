@@ -43,7 +43,6 @@ HEADERS	+= logfile.h \
     dbushelperadapter.h \
     releaseinfo.h \
     wmoffsetvalbase.h \
-    dspactvalues.h \
     movingwindowfilter.h
 
 SOURCES	+= Logfile.cpp \
@@ -84,7 +83,6 @@ SOURCES	+= Logfile.cpp \
     range.cpp \
     wmglobal.cpp \
     wmoffsetvalbase.cpp \
-    dspactvalues.cpp \
     movingwindowfilter.cpp
 
 FORMS	= wmviewbase.ui \
