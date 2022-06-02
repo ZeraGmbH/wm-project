@@ -2,7 +2,7 @@
 #define MOVINGWINDOWFILTER_H
 
 #include <QList>
-#include "wmglobal.h"
+#include "dspactvalues.h"
 
 class cMovingWindowFilter
 {
