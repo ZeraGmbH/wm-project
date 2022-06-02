@@ -16,7 +16,6 @@ HEADERS	+= logfile.h \
 	eparameter.h \
 	wm3000u.h \
 	dspiface.h \
-	tools.h \
 	confdata.h \
 	pcbiface.h \
 	zhclientsocket.h \
@@ -50,7 +49,6 @@ SOURCES	+= Logfile.cpp \
 	wmeditor.cpp \
 	eparameter.cpp \
 	dspiface.cpp \
-	tools.cpp \
 	confdata.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \

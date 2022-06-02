@@ -26,7 +26,6 @@ HEADERS	+= \
 	zerainfo.h \
 	wm3000scpiface.h \
 	scpiface.h \
-	tools.h \
 	wmeditor.h \
     wmviewbase.h \
     wmmeasvaluesbase.h \
@@ -59,7 +58,6 @@ SOURCES	+= \
 	zerainfo.cpp \
 	wm3000scpiface.cpp \
 	scpiface.cpp \
-	tools.cpp \
 	wmeditor.cpp \
     wmviewbase.cpp \
     wmmeasvaluesbase.cpp \

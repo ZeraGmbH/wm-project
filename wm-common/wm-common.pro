@@ -14,6 +14,7 @@ HEADERS = \
     parse.h \
     releaseinfo.h \
     scpi.h \
+    tools.h \
     widgeom.h \
     zeraglobal.h
 
@@ -27,5 +28,6 @@ SOURCES = \
     releaseinfo.cpp \
     parse.cpp \
     scpi.cpp \
+    tools.cpp \
     widgeom.cpp
 
