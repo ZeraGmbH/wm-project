@@ -12,6 +12,7 @@ HEADERS = \
     ethadress.h \
     movingwindowfilter.h \
     parse.h \
+    releaseinfo.h \
     scpi.h \
     widgeom.h \
     zeraglobal.h
@@ -23,6 +24,7 @@ SOURCES = \
     dspactvalues.cpp \
     ethadress.cpp \
     movingwindowfilter.cpp \
+    releaseinfo.cpp \
     parse.cpp \
     scpi.cpp \
     widgeom.cpp

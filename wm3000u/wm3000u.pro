@@ -39,7 +39,6 @@ HEADERS	+= logfile.h \
     csessionhelper.h \
     dbushelper.h \
     dbushelperadapter.h \
-    releaseinfo.h \
     wmoffsetvalbase.h
 
 SOURCES	+= Logfile.cpp \
@@ -74,7 +73,6 @@ SOURCES	+= Logfile.cpp \
     csessionhelper.cpp \
     dbushelper.cpp \
     dbushelperadapter.cpp \
-    releaseinfo.cpp \
     range.cpp \
     wmglobal.cpp \
     wmoffsetvalbase.cpp
