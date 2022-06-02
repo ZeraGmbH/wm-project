@@ -1,7 +1,6 @@
 #ifndef RELEASEINFO_H
 #define RELEASEINFO_H
 
-
 #include <QObject>
 #include <QProcess>
 

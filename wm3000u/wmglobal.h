@@ -143,8 +143,6 @@
 #define OffsetJustDataFilePath QDir::homePath()+"/wm3000u/offsetdata"
 #define NSAOffsetJustDataFilePath QDir::homePath()+"/wm3000u/.offsetinfo"
 
-#define ReleaseInfoFilePath "/opt/zera/conf/CHANGELOG"
-
 const int nmaxRecentOEFiles = 5;
 const int nmaxRecentMVFiles = 5;
 const int nmaxRecentSESFiles = 5;

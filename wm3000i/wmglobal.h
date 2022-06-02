@@ -120,9 +120,6 @@
 #define OffsetJustLogFilePath QDir::homePath()+"/wm3000i/log/OffsetJust.log"
 #define OffsetJustDataFilePath QDir::homePath()+"/wm3000i/offsetdata"
 #define NSAOffsetJustDataFilePath QDir::homePath()+"/wm3000i/.offsetinfo"
-//#define ReleaseInfoFilePath "/home/peter/conf/CHANGELOG"
-#define ReleaseInfoFilePath "/opt/zera/conf/CHANGELOG"
-
 
 const int nmaxRecentOEFiles = 5;
 const int nmaxRecentMVFiles = 5;

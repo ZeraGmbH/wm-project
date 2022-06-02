@@ -4,6 +4,7 @@
 #include "releaseinfo.h"
 #include "wmglobal.h"
 
+#define ReleaseInfoFilePath "/opt/zera/conf/CHANGELOG"
 
 cReleaseInfo::cReleaseInfo(QObject *parent)
 {
