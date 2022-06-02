@@ -27,7 +27,6 @@ HEADERS	+= \
 	wm3000scpiface.h \
 	scpiface.h \
 	tools.h \
-	widgeom.h \
 	wmeditor.h \
     wmviewbase.h \
     wmmeasvaluesbase.h \
@@ -62,7 +61,6 @@ SOURCES	+= \
 	wm3000scpiface.cpp \
 	scpiface.cpp \
 	tools.cpp \
-	widgeom.cpp \
 	wmeditor.cpp \
     wmviewbase.cpp \
     wmmeasvaluesbase.cpp \

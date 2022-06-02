@@ -13,6 +13,7 @@ HEADERS = \
     movingwindowfilter.h \
     parse.h \
     scpi.h \
+    widgeom.h \
     zeraglobal.h
 
 SOURCES = \
@@ -23,5 +24,6 @@ SOURCES = \
     ethadress.cpp \
     movingwindowfilter.cpp \
     parse.cpp \
-    scpi.cpp
+    scpi.cpp \
+    widgeom.cpp
 

@@ -17,7 +17,6 @@ HEADERS	+= logfile.h \
 	wm3000u.h \
 	dspiface.h \
 	tools.h \
-	widgeom.h \
 	confdata.h \
 	pcbiface.h \
 	zhclientsocket.h \
@@ -54,7 +53,6 @@ SOURCES	+= Logfile.cpp \
 	dspiface.cpp \
 	tools.cpp \
 	confdata.cpp \
-	widgeom.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
 	zhclientsocket.cpp \
