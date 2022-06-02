@@ -42,8 +42,7 @@ HEADERS	+= logfile.h \
     dbushelper.h \
     dbushelperadapter.h \
     releaseinfo.h \
-    wmoffsetvalbase.h \
-    movingwindowfilter.h
+    wmoffsetvalbase.h
 
 SOURCES	+= Logfile.cpp \
 	main.cpp \
@@ -82,8 +81,7 @@ SOURCES	+= Logfile.cpp \
     releaseinfo.cpp \
     range.cpp \
     wmglobal.cpp \
-    wmoffsetvalbase.cpp \
-    movingwindowfilter.cpp
+    wmoffsetvalbase.cpp
 
 FORMS	= wmviewbase.ui \
 	rangedialogbase.ui \

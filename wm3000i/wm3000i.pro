@@ -43,7 +43,6 @@ HEADERS	+= \
     csessionhelper.h \
     releaseinfo.h \
     wmoffsetvalbase.h \
-    movingwindowfilter.h
 
 SOURCES	+= \
 	Logfile.cpp \
@@ -80,7 +79,6 @@ SOURCES	+= \
     releaseinfo.cpp \
     range.cpp \
     wmoffsetvalbase.cpp \
-    movingwindowfilter.cpp \
     confdialogbase.cpp
 
 
