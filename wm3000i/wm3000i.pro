@@ -6,7 +6,7 @@ CONFIG	+= qt debug
 INCLUDEPATH	+= .
 
 
-HEADERS	+= bigletter.h \
+HEADERS	+= \
 	cbiface.h \
 	cmdiface.h \
 	cmdinterpret.h \
@@ -88,7 +88,6 @@ SOURCES	+= \
     wmrawactualconfigbase.cpp \
     csessionhelper.cpp \
     releaseinfo.cpp \
-    bigletter.cpp \
     range.cpp \
     wmoffsetvalbase.cpp \
     movingwindowfilter.cpp \
@@ -121,6 +120,7 @@ TRANSLATIONS    = wm3000i_gb.ts \
 #The following line was inserted by qt3to4
 QT += xml  qt3support 
 
+INCLUDEPATH += ../wm-common
 LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin

@@ -8,7 +8,6 @@ INCLUDEPATH	+= .
 HEADERS	+= logfile.h \
 	range.h \
 	wmglobal.h \
-	bigletter.h \
 	lbrowser.h \
 	ownerror.h \
 	logfileview.h \
@@ -92,7 +91,6 @@ SOURCES	+= Logfile.cpp \
     releaseinfo.cpp \
     range.cpp \
     wmglobal.cpp \
-    bigletter.cpp \
     wmoffsetvalbase.cpp \
     dspactvalues.cpp \
     movingwindowfilter.cpp
@@ -409,6 +407,7 @@ TRANSLATIONS    = wm3000u_gb.ts \
 #The following line was inserted by qt3to4
 QT += xml  qt3support dbus
 
+INCLUDEPATH += ../wm-common
 LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin
