@@ -9,6 +9,7 @@ HEADERS = \
     cbiface.h \
     cmdinterpret.h \
     dspactvalues.h \
+    ethadress.h \
     movingwindowfilter.h \
     parse.h \
     scpi.h \
@@ -19,6 +20,7 @@ SOURCES = \
     complex.cpp \
     cmdinterpret.cpp \
     dspactvalues.cpp \
+    ethadress.cpp \
     movingwindowfilter.cpp \
     parse.cpp \
     scpi.cpp

@@ -19,7 +19,6 @@ HEADERS	+= logfile.h \
 	tools.h \
 	widgeom.h \
 	confdata.h \
-	ethadress.h \
 	pcbiface.h \
 	zhclientsocket.h \
 	zhserveriface.h \
@@ -56,7 +55,6 @@ SOURCES	+= Logfile.cpp \
 	tools.cpp \
 	confdata.cpp \
 	widgeom.cpp \
-	ethadress.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
 	zhclientsocket.cpp \

@@ -12,7 +12,6 @@ HEADERS	+= \
 	dspiface.h \
 	en61850.h \
 	eparameter.h \
-	ethadress.h \
 	formatinfo.h \
 	lbrowser.h \
 	logfile.h \
@@ -50,7 +49,6 @@ SOURCES	+= \
 	devserver.cpp \
 	dspiface.cpp \
 	eparameter.cpp \
-	ethadress.cpp \
 	formatinfo.cpp \
 	lbrowser.cpp \
 	logfileview.cpp \
