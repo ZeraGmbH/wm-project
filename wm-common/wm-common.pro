@@ -9,6 +9,7 @@ HEADERS = \
     cbiface.h \
     cmdinterpret.h \
     dspactvalues.h \
+    en61850.h \
     ethadress.h \
     movingwindowfilter.h \
     parse.h \

@@ -10,7 +10,6 @@ HEADERS	+= \
 	confdata.h \
 	devserver.h \
 	dspiface.h \
-	en61850.h \
 	eparameter.h \
 	formatinfo.h \
 	lbrowser.h \

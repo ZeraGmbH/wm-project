@@ -19,7 +19,6 @@ HEADERS	+= logfile.h \
 	pcbiface.h \
 	zhclientsocket.h \
 	zhserveriface.h \
-	en61850.h \
 	scpiface.h \
 	wm3000scpiface.h \
 	devserver.h \
