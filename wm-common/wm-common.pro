@@ -16,6 +16,7 @@ HEADERS = \
     scpi.h \
     tools.h \
     widgeom.h \
+    wmeditor.h \
     zeraglobal.h
 
 SOURCES = \
@@ -29,5 +30,6 @@ SOURCES = \
     parse.cpp \
     scpi.cpp \
     tools.cpp \
+    wmeditor.cpp \
     widgeom.cpp
 

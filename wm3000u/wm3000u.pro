@@ -12,7 +12,6 @@ HEADERS	+= logfile.h \
 	ownerror.h \
 	logfileview.h \
 	zerainfo.h \
-	wmeditor.h \
 	eparameter.h \
 	wm3000u.h \
 	dspiface.h \
@@ -46,7 +45,6 @@ SOURCES	+= Logfile.cpp \
 	ownerror.cpp \
 	logfileview.cpp \
 	zerainfo.cpp \
-	wmeditor.cpp \
 	eparameter.cpp \
 	dspiface.cpp \
 	confdata.cpp \
