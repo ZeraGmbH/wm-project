@@ -29,7 +29,6 @@ HEADERS	+=  \
     wmrawactualvalbase.h \
     wmrawactualconfigbase.h \
     wmviewbase.h \
-    versionviewbase.h \
     dbushelper.h \
     dbushelperadapter.h \
     wmoffsetvalbase.h
@@ -56,7 +55,6 @@ SOURCES	+=  \
     wmrawactualvalbase.cpp \
     confdialogbase.cpp \
     rangedialogbase.cpp \
-    versionviewbase.cpp \
     wmmeasconfigbase.cpp \
     wmrawactualconfigbase.cpp \
     dbushelper.cpp \
@@ -69,7 +67,6 @@ FORMS	= wmviewbase.ui \
 	wmmeasvaluesbase.ui \
 	wmoeviewbase.ui \
 	wmrawactualvalbase.ui \
-	versionviewbase.ui \
 	wmmeasconfigbase.ui \
 	wmrawactualconfigbase.ui \
     confdialogbase.ui \

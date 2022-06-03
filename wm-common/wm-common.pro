@@ -7,6 +7,7 @@ HEADERS = \
     gui/en61850monitor.h \
     gui/bigletter.h \
     gui/lbrowser.h \
+    gui/versionviewbase.h \
     gui/wmeditor.h \
     complex.h \
     cbiface.h \
@@ -31,6 +32,7 @@ SOURCES = \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/lbrowser.cpp \
+    gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
     complex.cpp \
     cmdinterpret.cpp \
@@ -46,4 +48,5 @@ SOURCES = \
     widgeom.cpp
 
 FORMS = \
-    gui/en61850monitor.ui
+    gui/en61850monitor.ui \
+    gui/versionviewbase.ui
