@@ -18,6 +18,7 @@ HEADERS = \
     releaseinfo.h \
     scpi.h \
     tools.h \
+    versserial.h \
     widgeom.h \
     wmeditor.h \
     zeraglobal.h

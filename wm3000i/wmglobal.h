@@ -195,19 +195,6 @@ struct cwmActValues {  // wird an andere objekte gesendet
 };
 
 
-struct tVersSerial
-{
-    QString DeviceName;
-    QString DeviceVersion;
-    QString PCBSerialNr;
-    QString PCBVersion;
-    QString PCBServer;
-    QString DSPVersion;
-    QString DSPServer;
-    QString JDataChksum;
-};
-
-
 class cCalcInfo
 {
 public:

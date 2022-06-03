@@ -14,6 +14,7 @@
 #include <q3ptrlist.h>
 
 #include "wmglobal.h"
+#include "versserial.h"
 #include "cbiface.h"
 #include "confdata.h"
 #include "cmdinterpret.h"

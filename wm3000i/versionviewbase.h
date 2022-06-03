@@ -12,7 +12,7 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-#include "wmglobal.h"
+#include "versserial.h"
 
 namespace Ui {
     class VersionViewBase;

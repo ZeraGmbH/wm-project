@@ -7,6 +7,7 @@
 #include <qstringlist.h>
 
 #include "tools.h"
+#include "versserial.h"
 #include "wmglobal.h"
 #include "confdata.h"
 #include "scpiface.h"

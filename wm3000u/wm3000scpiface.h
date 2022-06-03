@@ -8,6 +8,7 @@
 
 #include "tools.h"
 #include "wmglobal.h"
+#include "versserial.h"
 #include "confdata.h"
 #include "scpiface.h"
 #include "en61850.h"
