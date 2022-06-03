@@ -2,10 +2,8 @@
 #include <QCloseEvent>
 #include <QTimer>
 #include <QFileInfo>
-#include "sessionhelper.h"
 #include "en61850monitor.h"
 #include "ui_en61850monitor.h"
-#include "wmglobal.h"
 
 EN61850monbase::EN61850monbase(QWidget* parent, QString machineName):
     QDialog(parent),
@@ -24,13 +22,13 @@ EN61850monbase::~EN61850monbase()
 
 void EN61850monbase::init()
 {
-    m_Timer.setSingleShot(true);
     ETHStatus.ByteCount[0] = 0;
     ETHStatus.ByteCount[1] = 0;
     ETHStatus.SyncLostCount = 0;
     ETHStatus.ETHErrors = 0;
-        
+
     m_pTimer = new QTimer();
+    m_Timer.setSingleShot(true);
     QObject::connect(m_pTimer,SIGNAL(timeout()),this,SLOT(TimerSlot()));
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
     LoadSession(".ses");
@@ -46,12 +44,14 @@ void EN61850monbase::destroy()
 
 void EN61850monbase::ShowHideSlot(bool b)
 {
-    if (b) {
+    if (b)
+    {
         show();
         emit InformationRequest(); // anfrage an wm3000 die status infos zu besorgen
         m_pTimer->start(2000); // wenn sichtbar -> timer läuft
     }
-    else {
+    else
+    {
         close();
         m_pTimer->stop();
     }
@@ -62,19 +62,19 @@ void EN61850monbase::closeEvent( QCloseEvent * ce )
 {
     m_widGeometry.SetGeometry(pos(),size());
     m_widGeometry.SetVisible(0);
-    emit isVisibleSignal(false);
     m_Timer.start(500);
+    emit isVisibleSignal(false);
     ce->accept();
 }
 
 
-void EN61850monbase::resizeEvent ( QResizeEvent *)
+void EN61850monbase::resizeEvent(QResizeEvent *)
 {
     m_Timer.start(500);
 }
 
 
-void EN61850monbase::moveEvent( QMoveEvent *)
+void EN61850monbase::moveEvent(QMoveEvent *)
 {
     m_Timer.start(500);
 }
@@ -97,7 +97,7 @@ void EN61850monbase::SetETHStatusSlot( cEN61850Info *ethInfo )
     QString s;
     double count;
     ulong stat;
- 
+
     ETHStatus = *ethInfo;
     count = ETHStatus.ByteCount[0]*4294967296.0+ethInfo->ByteCount[1];
     s = QString("%1").arg( count, 0, 'f', 0 ); // keine nachkommastellen
@@ -105,19 +105,19 @@ void EN61850monbase::SetETHStatusSlot( cEN61850Info *ethInfo )
     p = l = s.length();
     i = 1;
     while (p>3) {
-	s.insert(l-(i*3),'.');
-	i++;
-	p -= 3;
+    s.insert(l-(i*3),'.');
+    i++;
+    p -= 3;
     }
-	    
+
     ui->ByteCountValLabel->setText(s);
-    
+
     count = ETHStatus.SyncLostCount;
     s = QString("%1").arg( count, 0, 'f', 0 ); // keine nachkommastellen
     ui->LostSyncValLabel->setText(s);
-    
+
     stat = ETHStatus.ETHErrors;
-    
+
     ui->savPducheckBox->setChecked(stat & savPdu);
     ui->ASDUcheckBox->setChecked(stat & noASDU);
     ui->seqASDUcheckBox->setChecked(stat & seqASDU);
@@ -127,14 +127,14 @@ void EN61850monbase::SetETHStatusSlot( cEN61850Info *ethInfo )
     ui->confRevcheckBox->setChecked(stat & confRev);
     ui->smpSynchcheckBox->setChecked(stat & smpSync);
     ui->seqDatacheckBox->setChecked(stat & seqData);
-    
+
     ui->MACSyncLostcheckBox->setChecked(stat & macSyncLost);
     ui->DataSyncLostcheckBox->setChecked(stat & dataSyncLost);
     ui->nASDUcheckBox->setChecked(stat & ASDUnavail);
     ui->ETHMacAdrcheckBox->setChecked(stat & ETHMacAdressError);
     ui->ETHHeadercheckBox->setChecked(stat & ETHHeaderAppIdError);
     ui->PriorityTaggedcheckBox->setChecked(stat & ETHPriorityTaggedError);
-    
+
     ui->FIFOOvfcheckBox->setChecked(stat & FifoOverflow);
     ui->CRCErrorcheckBox->setChecked(stat & CRCError);
     ui->AlignErrorcheckBox->setChecked(stat & AlignError);

@@ -29,7 +29,6 @@ HEADERS	+=  \
     wmrawactualvalbase.h \
     wmrawactualconfigbase.h \
     wmviewbase.h \
-    en61850monitor.h \
     versionviewbase.h \
     dbushelper.h \
     dbushelperadapter.h \
@@ -55,7 +54,6 @@ SOURCES	+=  \
     wmmeasvaluesbase.cpp \
     wmoeviewbase.cpp \
     wmrawactualvalbase.cpp \
-    en61850monitor.cpp \
     confdialogbase.cpp \
     rangedialogbase.cpp \
     versionviewbase.cpp \
@@ -71,7 +69,6 @@ FORMS	= wmviewbase.ui \
 	wmmeasvaluesbase.ui \
 	wmoeviewbase.ui \
 	wmrawactualvalbase.ui \
-	en61850monitor.ui \
 	versionviewbase.ui \
 	wmmeasconfigbase.ui \
 	wmrawactualconfigbase.ui \

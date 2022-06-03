@@ -26,7 +26,6 @@ HEADERS	+= \
     wmmeasvaluesbase.h \
     wmoeviewbase.h \
     wmrawactualvalbase.h \
-    en61850monitor.h \
     confdialogbase.h \
     rangedialogbase.h \
     versionviewbase.h \
@@ -54,7 +53,6 @@ SOURCES	+= \
     wmmeasvaluesbase.cpp \
     wmoeviewbase.cpp \
     wmrawactualvalbase.cpp \
-    en61850monitor.cpp \
     rangedialogbase.cpp \
     versionviewbase.cpp \
     wmmeasconfigbase.cpp \
@@ -64,7 +62,6 @@ SOURCES	+= \
 
 
 FORMS	= confdialogbase.ui \
-	en61850monitor.ui \
 	rangedialogbase.ui \
 	versionviewbase.ui \
 	wmmeasconfigbase.ui \

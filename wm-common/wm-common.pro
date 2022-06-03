@@ -10,6 +10,7 @@ HEADERS = \
     cmdinterpret.h \
     dspactvalues.h \
     en61850.h \
+    en61850monitor.h \
     ethadress.h \
     lbrowser.h \
     logfile.h \
@@ -30,6 +31,7 @@ SOURCES = \
     bigletter.cpp \
     complex.cpp \
     cmdinterpret.cpp \
+    en61850monitor.cpp \
     ethadress.cpp \
     lbrowser.cpp \
     logfile.cpp \
@@ -43,3 +45,5 @@ SOURCES = \
     wmeditor.cpp \
     widgeom.cpp
 
+FORMS = \
+    en61850monitor.ui
