@@ -28,7 +28,6 @@ SOURCES = \
     bigletter.cpp \
     complex.cpp \
     cmdinterpret.cpp \
-    dspactvalues.cpp \
     ethadress.cpp \
     lbrowser.cpp \
     movingwindowfilter.cpp \

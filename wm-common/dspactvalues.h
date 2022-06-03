@@ -4,10 +4,6 @@
 class cDspActValues  // raw data, wie vom dsp geliefert
 {
 public:
-    cDspActValues();
-
-    cDspActValues operator = (cDspActValues dspVals);
-
     float kfkorrf; // kreisfrequenz  korrektur koeffizient
     float rmsnf, ampl1nf;
     float rmsxf, ampl1xf;
