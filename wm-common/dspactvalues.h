@@ -28,4 +28,8 @@ public:
     float fastRMSX1;
 };
 
+struct cDspMaxValues { // raw data, die maxima
+    float maxn, maxx, maxRdy;
+};
+
 #endif // DSPACTVALUES_H

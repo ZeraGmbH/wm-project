@@ -158,9 +158,6 @@ typedef Q3PtrList<cDspVar> cDspVarPtrList;
 
 
 
-struct cDspMaxValues { // raw data, die maxima
-    float maxn, maxx, maxRdy;
-};
 
 
 struct cwmActValues {  // wird an andere objekte gesendet
