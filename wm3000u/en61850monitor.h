@@ -7,6 +7,7 @@
 
 #include "en61850.h"
 #include "widgeom.h"
+#include "sessionhelper.h"
 
 namespace Ui {
     class EN61850monbase;
@@ -17,7 +18,7 @@ class EN61850monbase : public QDialog
     Q_OBJECT
 
 public:
-    explicit EN61850monbase(QWidget* parent);
+    explicit EN61850monbase(QWidget* parent, QString machineName);
     ~EN61850monbase();
 
 public slots:
@@ -48,6 +49,7 @@ private:
     cWidgetGeometry m_widGeometry;
     cEN61850Info ETHStatus;
     QTimer m_Timer;
+    SessionHelper m_sessionHelper;
 
     virtual void init();
     virtual void destroy();

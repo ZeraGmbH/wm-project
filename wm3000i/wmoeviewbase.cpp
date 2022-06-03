@@ -1,12 +1,12 @@
-//Added by qt3to4:
 #include <QCloseEvent>
 #include <QFileInfo>
 #include "wmoeviewbase.h"
 #include "ui_wmoeviewbase.h"
 
-WMOeViewBase::WMOeViewBase( QWidget* parent):
+WMOeViewBase::WMOeViewBase(QWidget* parent, QString machineName):
     QDialog(parent),
-    ui(new Ui::WMOeViewBase )
+    ui(new Ui::WMOeViewBase),
+    m_sessionHelper(machineName)
 {
     ui->setupUi(this);
     init();
@@ -90,14 +90,13 @@ void WMOeViewBase::ShowHideOESlot( bool b )
 
 void WMOeViewBase::SaveSession(QString session)
 {
-    cSessionHelper::writeSession(this,m_widGeometry,session);
+    m_sessionHelper.writeSession(this, m_widGeometry, session);
 }
 
 
 bool WMOeViewBase::LoadSession(QString session)
 {
-  cWidgetGeometry tmpGeometry;
-  tmpGeometry=cSessionHelper::readSession(this, session);
+  cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
   if(tmpGeometry.m_Size.isValid())
   {
     m_widGeometry=tmpGeometry;

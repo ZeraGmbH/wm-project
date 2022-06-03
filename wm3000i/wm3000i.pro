@@ -32,7 +32,6 @@ HEADERS	+= \
     versionviewbase.h \
     wmmeasconfigbase.h \
     wmrawactualconfigbase.h \
-    csessionhelper.h \
     wmoffsetvalbase.h \
 
 SOURCES	+= \
@@ -60,7 +59,6 @@ SOURCES	+= \
     versionviewbase.cpp \
     wmmeasconfigbase.cpp \
     wmrawactualconfigbase.cpp \
-    csessionhelper.cpp \
     wmoffsetvalbase.cpp \
     confdialogbase.cpp
 

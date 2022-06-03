@@ -7,6 +7,7 @@
 
 #include "ownerror.h"
 #include "widgeom.h"
+#include "sessionhelper.h"
 
 
 namespace Ui {
@@ -18,7 +19,7 @@ class WMOeViewBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit WMOeViewBase(QWidget* parent);
+    explicit WMOeViewBase(QWidget* parent, QString machineName);
     ~WMOeViewBase();
 
 public slots:
@@ -40,6 +41,7 @@ private:
     cWidgetGeometry m_widGeometry;
     cOwnErrorViewData m_OwnErrorView;
     QTimer m_Timer;
+    SessionHelper m_sessionHelper;
     void init();
     void destroy();
 

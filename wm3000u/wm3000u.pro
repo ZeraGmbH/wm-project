@@ -31,7 +31,6 @@ HEADERS	+=  \
     wmviewbase.h \
     en61850monitor.h \
     versionviewbase.h \
-    csessionhelper.h \
     dbushelper.h \
     dbushelperadapter.h \
     wmoffsetvalbase.h
@@ -62,7 +61,6 @@ SOURCES	+=  \
     versionviewbase.cpp \
     wmmeasconfigbase.cpp \
     wmrawactualconfigbase.cpp \
-    csessionhelper.cpp \
     dbushelper.cpp \
     dbushelperadapter.cpp \
     wmglobal.cpp \

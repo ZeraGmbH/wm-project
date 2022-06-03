@@ -2,14 +2,15 @@
 #include <QCloseEvent>
 #include <QTimer>
 #include <QFileInfo>
-#include "csessionhelper.h"
+#include "sessionhelper.h"
 #include "en61850monitor.h"
 #include "ui_en61850monitor.h"
 #include "wmglobal.h"
 
-EN61850monbase::EN61850monbase( QWidget* parent):
+EN61850monbase::EN61850monbase(QWidget* parent, QString machineName):
     QDialog(parent),
-    ui(new Ui::EN61850monbase)
+    ui(new Ui::EN61850monbase),
+    m_sessionHelper(machineName)
 {
     ui->setupUi(this);
     init();
@@ -146,8 +147,7 @@ void EN61850monbase::SetETHStatusSlot( cEN61850Info *ethInfo )
 
 bool EN61850monbase::LoadSession( QString session )
 {
-  cWidgetGeometry tmpGeometry;
-  tmpGeometry=cSessionHelper::readSession(this, session);
+  cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
   if(tmpGeometry.m_Size.isValid())
   {
     m_widGeometry=tmpGeometry;
@@ -162,7 +162,7 @@ bool EN61850monbase::LoadSession( QString session )
 
 void EN61850monbase::SaveSession( QString session )
 {
-  cSessionHelper::writeSession(this,m_widGeometry,session);
+    m_sessionHelper.writeSession(this, m_widGeometry, session);
 }
 
 

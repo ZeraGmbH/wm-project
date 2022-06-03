@@ -14,8 +14,6 @@
 #include "range.h"
 #include "dspactvalues.h"
 
-#include "csessionhelper.h"
-
 //#define DEBUG 1
 
 //#define FVWM 1

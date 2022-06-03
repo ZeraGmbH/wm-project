@@ -10,17 +10,21 @@
 #include <q3textedit.h>
 #include <qdialog.h>
 #include <qevent.h>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QCloseEvent>
 #include "widgeom.h"
+#include "sessionhelper.h"
 
 class CLogFileView:public QDialog
 {
     Q_OBJECT
     
 public:
-    CLogFileView(const QString,const long, QWidget *parent, const char * wname = 0);
+    CLogFileView(const QString,
+                 const long max,
+                 QWidget *parent,
+                 const char *wname,
+                 QString machineName);
     virtual ~CLogFileView();
     Q3TextEdit *m_pText;
     
@@ -41,8 +45,10 @@ signals:
     
 private:
     cWidgetGeometry m_widGeometry;
-    QTimer showT, m_Timer;
+    QTimer showT;
     QStringList m_loglist;
+    QTimer m_Timer;
+    SessionHelper m_sessionHelper;
     
 private slots:
     void showList();
