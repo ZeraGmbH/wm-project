@@ -7,6 +7,7 @@ HEADERS = \
     gui/en61850monitor.h \
     gui/bigletter.h \
     gui/lbrowser.h \
+    gui/wmeditor.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
@@ -24,13 +25,13 @@ HEADERS = \
     tools.h \
     versserial.h \
     widgeom.h \
-    wmeditor.h \
     zeraglobal.h
 
 SOURCES = \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/lbrowser.cpp \
+    gui/wmeditor.cpp \
     complex.cpp \
     cmdinterpret.cpp \
     ethadress.cpp \
@@ -42,7 +43,6 @@ SOURCES = \
     scpi.cpp \
     sessionhelper.cpp \
     tools.cpp \
-    wmeditor.cpp \
     widgeom.cpp
 
 FORMS = \
