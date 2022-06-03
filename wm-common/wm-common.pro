@@ -17,6 +17,7 @@ HEADERS = \
     range.h \
     releaseinfo.h \
     scpi.h \
+    tcpconfig.h \
     tools.h \
     versserial.h \
     widgeom.h \

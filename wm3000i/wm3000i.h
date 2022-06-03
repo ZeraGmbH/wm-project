@@ -17,7 +17,7 @@
 #include <Q3ValueList>
 
 #include "zhclientsocket.h"
-#include "wmglobal.h"
+#include "tcpconfig.h"
 #include "logfile.h"
 #include "range.h"
 #include "ownerror.h"

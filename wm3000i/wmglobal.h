@@ -146,14 +146,7 @@ enum UserDecisions {AbortProgram,Stop,Retry,SimulationMode}; // benutzer entsche
 enum Languages {de,gb,pl};
 
 
-class cTCPConfig
-{
-    public:
-    cTCPConfig(){};
 
-    QString pcbHost, dspHost;
-    uint pcbPort, dspPort;
-};
 
 
 class cDspVar; // forward
