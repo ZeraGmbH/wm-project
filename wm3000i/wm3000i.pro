@@ -85,7 +85,7 @@ TRANSLATIONS    = wm3000i_gb.ts \
 #The following line was inserted by qt3to4
 QT += xml  qt3support 
 
-INCLUDEPATH += ../wm-common
+INCLUDEPATH += ../wm-common ../wm-common/gui
 LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin

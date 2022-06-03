@@ -4,13 +4,13 @@ CONFIG += staticlib
 QT += qt3support 
 
 HEADERS = \
+    gui/en61850monitor.h \
     bigletter.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
     dspactvalues.h \
     en61850.h \
-    en61850monitor.h \
     ethadress.h \
     lbrowser.h \
     logfile.h \
@@ -28,10 +28,10 @@ HEADERS = \
     zeraglobal.h
 
 SOURCES = \
+    gui/en61850monitor.cpp \
     bigletter.cpp \
     complex.cpp \
     cmdinterpret.cpp \
-    en61850monitor.cpp \
     ethadress.cpp \
     lbrowser.cpp \
     logfile.cpp \
@@ -46,4 +46,4 @@ SOURCES = \
     widgeom.cpp
 
 FORMS = \
-    en61850monitor.ui
+    gui/en61850monitor.ui
