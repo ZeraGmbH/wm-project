@@ -12,6 +12,7 @@ HEADERS = \
     en61850.h \
     ethadress.h \
     lbrowser.h \
+    logfile.h \
     movingwindowfilter.h \
     parse.h \
     range.h \
@@ -30,6 +31,7 @@ SOURCES = \
     cmdinterpret.cpp \
     ethadress.cpp \
     lbrowser.cpp \
+    logfile.cpp \
     movingwindowfilter.cpp \
     range.cpp \
     releaseinfo.cpp \

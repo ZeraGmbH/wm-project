@@ -12,7 +12,6 @@ HEADERS	+= \
 	dspiface.h \
 	eparameter.h \
 	formatinfo.h \
-	logfile.h \
 	logfileview.h \
 	ownerror.h \
 	pcbiface.h \
@@ -37,7 +36,6 @@ HEADERS	+= \
     wmoffsetvalbase.h \
 
 SOURCES	+= \
-	Logfile.cpp \
 	confdata.cpp \
 	devserver.cpp \
 	dspiface.cpp \
