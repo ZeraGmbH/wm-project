@@ -5,7 +5,7 @@ QT += qt3support
 
 HEADERS = \
     gui/en61850monitor.h \
-    bigletter.h \
+    gui/bigletter.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
@@ -29,7 +29,7 @@ HEADERS = \
 
 SOURCES = \
     gui/en61850monitor.cpp \
-    bigletter.cpp \
+    gui/bigletter.cpp \
     complex.cpp \
     cmdinterpret.cpp \
     ethadress.cpp \
