@@ -14,6 +14,7 @@ HEADERS = \
     lbrowser.h \
     movingwindowfilter.h \
     parse.h \
+    range.h \
     releaseinfo.h \
     scpi.h \
     tools.h \
@@ -29,6 +30,7 @@ SOURCES = \
     ethadress.cpp \
     lbrowser.cpp \
     movingwindowfilter.cpp \
+    range.cpp \
     releaseinfo.cpp \
     parse.cpp \
     scpi.cpp \

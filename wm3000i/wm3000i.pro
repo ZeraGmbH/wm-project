@@ -16,7 +16,6 @@ HEADERS	+= \
 	logfileview.h \
 	ownerror.h \
 	pcbiface.h \
-	range.h \
 	wmglobal.h \
 	wm3000i.h \
 	zhclientsocket.h \
@@ -64,7 +63,6 @@ SOURCES	+= \
     wmmeasconfigbase.cpp \
     wmrawactualconfigbase.cpp \
     csessionhelper.cpp \
-    range.cpp \
     wmoffsetvalbase.cpp \
     confdialogbase.cpp
 

@@ -6,7 +6,6 @@ CONFIG	+= qt debug
 INCLUDEPATH	+= .
 
 HEADERS	+= logfile.h \
-	range.h \
 	wmglobal.h \
 	ownerror.h \
 	logfileview.h \
@@ -66,7 +65,6 @@ SOURCES	+= Logfile.cpp \
     csessionhelper.cpp \
     dbushelper.cpp \
     dbushelperadapter.cpp \
-    range.cpp \
     wmglobal.cpp \
     wmoffsetvalbase.cpp
 
