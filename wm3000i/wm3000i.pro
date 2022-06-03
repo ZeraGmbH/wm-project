@@ -12,7 +12,6 @@ HEADERS	+= \
 	dspiface.h \
 	eparameter.h \
 	formatinfo.h \
-	lbrowser.h \
 	logfile.h \
 	logfileview.h \
 	ownerror.h \
@@ -45,7 +44,6 @@ SOURCES	+= \
 	dspiface.cpp \
 	eparameter.cpp \
 	formatinfo.cpp \
-	lbrowser.cpp \
 	logfileview.cpp \
 	main.cpp \
 	ownerror.cpp \

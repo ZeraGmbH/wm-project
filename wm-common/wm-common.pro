@@ -11,6 +11,7 @@ HEADERS = \
     dspactvalues.h \
     en61850.h \
     ethadress.h \
+    lbrowser.h \
     movingwindowfilter.h \
     parse.h \
     releaseinfo.h \
@@ -26,6 +27,7 @@ SOURCES = \
     cmdinterpret.cpp \
     dspactvalues.cpp \
     ethadress.cpp \
+    lbrowser.cpp \
     movingwindowfilter.cpp \
     releaseinfo.cpp \
     parse.cpp \

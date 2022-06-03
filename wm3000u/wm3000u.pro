@@ -8,7 +8,6 @@ INCLUDEPATH	+= .
 HEADERS	+= logfile.h \
 	range.h \
 	wmglobal.h \
-	lbrowser.h \
 	ownerror.h \
 	logfileview.h \
 	zerainfo.h \
@@ -40,7 +39,6 @@ HEADERS	+= logfile.h \
 
 SOURCES	+= Logfile.cpp \
 	main.cpp \
-	lbrowser.cpp \
 	ownerror.cpp \
 	logfileview.cpp \
 	zerainfo.cpp \
