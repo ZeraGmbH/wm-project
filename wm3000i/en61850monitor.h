@@ -26,7 +26,7 @@ class EN61850monbase : public QDialog
     Q_OBJECT
 
 public:
-    explicit EN61850monbase( QWidget* parent = 0);
+    explicit EN61850monbase(QWidget* parent);
     ~EN61850monbase();
 
 public slots:

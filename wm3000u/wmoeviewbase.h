@@ -18,7 +18,7 @@ class WMOeViewBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit WMOeViewBase( QWidget* parent = 0);
+    explicit WMOeViewBase(QWidget* parent);
     ~WMOeViewBase();
 
 public slots:

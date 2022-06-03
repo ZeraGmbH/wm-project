@@ -20,7 +20,7 @@ class CLogFileView:public QDialog
     Q_OBJECT
     
 public:
-    CLogFileView(const QString,const long,QWidget * parent = 0, const char * wname = 0);
+    CLogFileView(const QString, const long, QWidget *parent, const char * wname = 0);
     virtual ~CLogFileView();
     Q3TextEdit *m_pText;
     
