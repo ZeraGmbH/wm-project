@@ -18,6 +18,7 @@ HEADERS = \
     range.h \
     releaseinfo.h \
     scpi.h \
+    sessionhelper.h \
     tcpconfig.h \
     tools.h \
     versserial.h \
@@ -37,6 +38,7 @@ SOURCES = \
     releaseinfo.cpp \
     parse.cpp \
     scpi.cpp \
+    sessionhelper.cpp \
     tools.cpp \
     wmeditor.cpp \
     widgeom.cpp
