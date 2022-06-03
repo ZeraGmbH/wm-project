@@ -9,8 +9,6 @@
 #include <q3textbrowser.h>
 #include <q3mainwindow.h>
 
-class cLittleBrowser;
-
 class cLittleBrowser : public Q3MainWindow
 {
    Q_OBJECT

@@ -6,13 +6,13 @@ QT += qt3support
 HEADERS = \
     gui/en61850monitor.h \
     gui/bigletter.h \
+    gui/lbrowser.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
     dspactvalues.h \
     en61850.h \
     ethadress.h \
-    lbrowser.h \
     logfile.h \
     movingwindowfilter.h \
     parse.h \
@@ -30,10 +30,10 @@ HEADERS = \
 SOURCES = \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
+    gui/lbrowser.cpp \
     complex.cpp \
     cmdinterpret.cpp \
     ethadress.cpp \
-    lbrowser.cpp \
     logfile.cpp \
     movingwindowfilter.cpp \
     range.cpp \
