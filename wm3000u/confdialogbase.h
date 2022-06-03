@@ -5,7 +5,7 @@
 #include <qdialog.h>
 #include <QRadioButton>
 #include "qvalidator.h"
-#include "wmglobal.h"
+#include "confdata.h"
 
 namespace Ui {
     class ConfDialogBase;
