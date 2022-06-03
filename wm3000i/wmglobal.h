@@ -110,7 +110,6 @@
 
 #define WMVersion "V2.33"
 
-#define wm3000iHome QDir::homePath()
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000i/log/ServerComm.log"
 //#define SelftestLogFilePath "/usr/share/wm3000i/log/Selftest.log"

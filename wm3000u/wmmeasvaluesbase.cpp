@@ -255,7 +255,7 @@ void WMMeasValuesBase::resizeMeas()
 bool WMMeasValuesBase::LoadSession(QString session)
 {
     QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000u/%2%3").arg(wm3000uHome).arg(name()).arg(fi.fileName());
+    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls); 
     if ( file.open( QIODevice::ReadOnly ) ) {
 	QDataStream stream( &file );
@@ -290,13 +290,13 @@ void WMMeasValuesBase::SaveSession(QString session)
 {
     QFileInfo fi(session);
 
-    if(!QDir(QString("%1/.wm3000u/").arg(wm3000uHome)).exists())
+    if(!QDir(QString("%1/.wm3000u/").arg(QDir::homePath())).exists())
     {
       //create temporary object that gets deleted when leaving the control block
-      QDir().mkdir(QString("%1/.wm3000u/").arg(wm3000uHome));
+      QDir().mkdir(QString("%1/.wm3000u/").arg(QDir::homePath()));
     }
 
-    QString ls = QString("%1/.wm3000u/%2%3").arg(wm3000uHome).arg(name()).arg(fi.fileName());
+    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls); 
 //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {

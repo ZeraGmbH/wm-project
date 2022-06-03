@@ -186,11 +186,11 @@ cWM3000U::cWM3000U()
     DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHERRORS",1,vMemory));
     DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
 
-    if(!QDir(QString("%1/wm3000u/log/").arg(wm3000uHome)).exists())
+    if(!QDir(QString("%1/wm3000u/log/").arg(QDir::homePath())).exists())
     {
       //create temporary object that gets deleted when leaving the control block
-      QDir().mkdir(QString("%1/wm3000u/").arg(wm3000uHome));
-      QDir().mkdir(QString("%1/wm3000u/log/").arg(wm3000uHome));
+      QDir().mkdir(QString("%1/wm3000u/").arg(QDir::homePath()));
+      QDir().mkdir(QString("%1/wm3000u/log/").arg(QDir::homePath()));
     }
 
     m_SelftestLogfile.setName(QDir(SelftestLogFilePath).absPath());
@@ -3608,7 +3608,7 @@ bool cWM3000U::LoadSettings(QString session)
 {
     bool ret;
     QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000u/wm3000u%2").arg(wm3000uHome).arg(fi.fileName());
+    QString ls = QString("%1/.wm3000u/wm3000u%2").arg(QDir::homePath()).arg(fi.fileName());
     QFile file(ls);
     if ((ret = file.open( QIODevice::ReadOnly ) )) {
     QDataStream stream(&file);
@@ -3623,7 +3623,7 @@ bool cWM3000U::LoadSettings(QString session)
 void cWM3000U::WriteSettings(QString session)
 {
     QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000u/wm3000u%2").arg(wm3000uHome).arg(fi.fileName());
+    QString ls = QString("%1/.wm3000u/wm3000u%2").arg(QDir::homePath()).arg(fi.fileName());
     QFile file(ls);
 //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {

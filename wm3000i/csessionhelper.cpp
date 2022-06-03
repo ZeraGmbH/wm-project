@@ -12,13 +12,13 @@ cSessionHelper::cSessionHelper()
 void cSessionHelper::writeSession(QWidget *widget, cWidgetGeometry geometry, QString session)
 {
   QFileInfo fi(session);
-  if(!QDir(QString("%1/.wm3000i/").arg(wm3000iHome)).exists())
+  if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
   {
     //create temporary object that gets deleted when leaving the control block
-    QDir().mkdir(QString("%1/.wm3000i/").arg(wm3000iHome));
+    QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
   }
 
-  QString ls = QString("%1/.wm3000i/%2%3").arg(wm3000iHome).arg(widget->name()).arg(fi.fileName());
+  QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(widget->name()).arg(fi.fileName());
   QFile file(ls);
   //    file.remove();
   if(file.open(QIODevice::Unbuffered | QIODevice::WriteOnly))
@@ -42,7 +42,7 @@ cWidgetGeometry cSessionHelper::readSession(QWidget *widget, QString session)
 {
   cWidgetGeometry geometry;
   QFileInfo fi(session);
-  QString ls = QString("%1/.wm3000i/%2%3").arg(wm3000iHome).arg(widget->name()).arg(fi.fileName());
+  QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(widget->name()).arg(fi.fileName());
   QFile file(ls);
   if ( file.open( QIODevice::ReadOnly ) ) {
       QDataStream stream( &file );
