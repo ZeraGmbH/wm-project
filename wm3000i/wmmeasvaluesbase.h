@@ -17,7 +17,7 @@
 #include <QTimer>
 
 #include "bigletter.h"
-#include "wmglobal.h"
+#include "confdata.h"
 #include "widgeom.h"
 #include "wmmeasconfigbase.h"
 #include "formatinfo.h"

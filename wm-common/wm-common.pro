@@ -17,6 +17,7 @@ HEADERS = \
     settings/ownerrorviewdata.h \
     settings/sessionhelper.h \
     calcinfo.h \
+    common-modes.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \

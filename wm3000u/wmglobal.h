@@ -145,11 +145,6 @@
 
 const float TDBase = 100.0e6; // 100 mhz auflösung für td messung (pps->1. sample)
 
-enum DisplayModes {ANSI,IEC,MaxCompMode}; // compmodi
-enum LPDisplayModes {totalRms, H1Rms}; // lastpunkt anzeige modi
-enum VekAmplModes {x1, x1_SQRT2}; // x 1, x 1/sqrt(2)
-enum VekPrimSekModes {prim, sek};
-enum VekWinkelModes {mathpos, techpos}; // winkel anzeige math. pos. bzw. techn. pos.
 enum SyncSources {Intern,Extern,MaxSSource}; // sync sources
 enum SignalFreqs {F16,F50,F60,MaxFreq}; // -> feste abtastfrequenzen
 enum SampleRates {S80,S256,MaxSRate}; // abtastraten

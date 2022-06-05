@@ -1,12 +1,13 @@
-//Added by qt3to4:
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <Q3BoxLayout>
 #include <QResizeEvent>
 #include <QFileInfo>
+#include <QDir>
 #include "wmmeasvaluesbase.h"
 #include "ui_wmmeasvaluesbase.h"
 #include "eparameter.h"
+#include "common-modes.h"
 
 extern eUnit LoadpointUnit[];
 extern eUnit ErrorUnit[];

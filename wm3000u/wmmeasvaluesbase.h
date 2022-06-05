@@ -8,7 +8,7 @@
 #include <QTimer>
 
 #include "bigletter.h"
-#include "wmglobal.h"
+#include "confdata.h"
 #include "wmactvalues.h"
 #include "widgeom.h"
 #include "wmmeasconfigbase.h"

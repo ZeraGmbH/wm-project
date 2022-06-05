@@ -4,6 +4,8 @@
 #include <QFileInfo>
 #include "wmrawactualvalbase.h"
 #include "ui_wmrawactualvalbase.h"
+#include "common-modes.h"
+
 
 const double PI2 = 6.283185307;
 

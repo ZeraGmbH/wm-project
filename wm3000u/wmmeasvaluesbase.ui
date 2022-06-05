@@ -396,7 +396,7 @@
  <includes>
   <include location="local">bigletter.h</include>
   <include location="global">qlabel.h</include>
-  <include location="local">wmglobal.h</include>
+  <include location="local">confdata.h</include>
   <include location="local">widgeom.h</include>
   <include location="local">wmmeasconfigbase.h</include>
   <include location="local">formatinfo.h</include>

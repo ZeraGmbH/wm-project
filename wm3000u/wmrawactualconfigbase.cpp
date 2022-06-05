@@ -1,6 +1,6 @@
 #include "wmrawactualconfigbase.h"
 #include "ui_wmrawactualconfigbase.h"
-#include "wmglobal.h"
+#include "common-modes.h"
 
 WMRawActualConfigBase::WMRawActualConfigBase( QWidget* parent):
     QDialog(parent),
