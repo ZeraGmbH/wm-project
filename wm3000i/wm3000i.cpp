@@ -32,6 +32,9 @@
 #include "eparameter.h"
 #include "tools.h"
 #include "maxperiods.h"
+#include "scpiaffectatatuscode.h"
+#include "scpioperationstates.h"
+#include "scpiquestionstates.h"
 
 
 extern WMViewBase *g_WMView;
@@ -1761,9 +1764,9 @@ case ConfigurationTestTMode:
 		    }
 	
             if ( (bOverload = (bOvln || bOvlx)) == true )
-				emit AffectStatus(SetQuestStat, QeustOverLoad); // und an status system melden
+                emit AffectStatus(SetQuestStat, QuestOverLoad); // und an status system melden
 		    else
-				emit AffectStatus(ResetQuestStat, QeustOverLoad);
+                emit AffectStatus(ResetQuestStat, QuestOverLoad);
 			    
 		    if (mustDo)
 			AHS++; //  weiter mit bereiche synchronisieren

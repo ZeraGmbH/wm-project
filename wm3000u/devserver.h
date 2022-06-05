@@ -47,8 +47,6 @@ private:
 };
     
 
-// class cSCPIFace;
-
 class cDeviceServer:  public Q3ServerSocket // asynchroner device server pure virtual
 {
     Q_OBJECT

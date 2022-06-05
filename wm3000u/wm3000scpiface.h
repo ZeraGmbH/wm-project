@@ -13,6 +13,8 @@
 #include "confdata.h"
 #include "scpiface.h"
 #include "en61850.h"
+#include "scpicommoncmdtype.h"
+#include "scpiexecutecommandstates.h"
 
 enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
 			

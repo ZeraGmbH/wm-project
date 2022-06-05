@@ -1,11 +1,14 @@
-#include <qfile.h>
-
+#include "wm3000scpiface.h"
 #include "tools.h"
 #include "confdata.h"
 #include "eparameter.h"
-#include "wm3000scpiface.h"
 #include "wm3000u.h"
 #include "maxperiods.h"
+#include "scpi.h"
+#include "scpistatsyst.h"
+#include "scpistatebits.h"
+#include "scpierrortypes.h"
+#include "scpierrorindicator.h"
 
 extern cWM3000U* g_WMDevice;
 extern  scpiErrorType SCPIError[];

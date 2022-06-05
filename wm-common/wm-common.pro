@@ -17,7 +17,23 @@ HEADERS = \
     gui/wmeditor.h \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
+    scpi/definitions/scpicommoncmdtype.h \
+    scpi/definitions/scpiopcstates.h \
+    scpi/definitions/scpiaffectatatuscode.h \
+    scpi/definitions/scpierrorindicator.h \
+    scpi/definitions/scpiexecutecommandstates.h \
+    scpi/definitions/scpioperationstates.h \
+    scpi/definitions/scpiquestionstates.h \
+    scpi/definitions/scpisesrbits.h \
+    scpi/definitions/scpistatebits.h \
+    scpi/cbiface.h \
+    scpi/cmdinterpret.h \
     scpi/cmdtimer.h \
+    scpi/parse.h \
+    scpi/scpi.h \
+    scpi/scpierrortypes.h \
+    scpi/scpiface.h \
+    scpi/scpistatsyst.h \
     settings/confdata.h \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
@@ -28,16 +44,12 @@ HEADERS = \
     calcinfo.h \
     common-modes.h \
     complex.h \
-    cbiface.h \
-    cmdinterpret.h \
     en61850.h \
     logfile.h \
     maxperiods.h \
     movingwindowfilter.h \
-    parse.h \
     range.h \
     releaseinfo.h \
-    scpi.h \
     tcpconfig.h \
     tools.h \
     versserial.h \
@@ -55,7 +67,13 @@ SOURCES = \
     gui/wmeditor.cpp \
     gui/wmoeviewbase.cpp \
     gui/wmrawactualconfigbase.cpp \
+    scpi/cmdinterpret.cpp \
     scpi/cmdtimer.cpp \
+    scpi/parse.cpp \
+    scpi/scpi.cpp \
+    scpi/scpierrortypes.cpp \
+    scpi/scpiface.cpp \
+    scpi/scpistatsyst.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/sessionhelper.cpp \
@@ -63,13 +81,10 @@ SOURCES = \
     service-interfaces/zhclientsocket.cpp \
     service-interfaces/zhserveriface.cpp \
     complex.cpp \
-    cmdinterpret.cpp \
     logfile.cpp \
     movingwindowfilter.cpp \
     range.cpp \
     releaseinfo.cpp \
-    parse.cpp \
-    scpi.cpp \
     tools.cpp \
     widgeom.cpp
 
@@ -80,6 +95,9 @@ FORMS = \
     gui/wmrawactualconfigbase.ui
 
 INCLUDEPATH += \
+    client-interfaces \
     dsp \
+    scpi \
+    scpi/definitions \
     settings \
     service-interfaces

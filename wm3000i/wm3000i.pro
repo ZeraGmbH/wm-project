@@ -16,7 +16,6 @@ HEADERS	+= \
 	wm3000i.h \
 	zerainfo.h \
 	wm3000scpiface.h \
-	scpiface.h \
     wmviewbase.h \
     wmmeasvaluesbase.h \
     wmrawactualvalbase.h \
@@ -35,7 +34,6 @@ SOURCES	+= \
 	wm3000i.cpp \
 	zerainfo.cpp \
 	wm3000scpiface.cpp \
-	scpiface.cpp \
     wmviewbase.cpp \
     wmmeasvaluesbase.cpp \
     wmrawactualvalbase.cpp \
@@ -71,6 +69,7 @@ INCLUDEPATH += \
     ../wm-common/client-interfaces \
     ../wm-common/dsp \
     ../wm-common/gui \
+    ../wm-common/scpi/definitions \
     ../wm-common/scpi \
     ../wm-common/settings \
     ../wm-common/service-interfaces

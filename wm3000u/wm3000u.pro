@@ -12,7 +12,6 @@ HEADERS	+=  \
 	eparameter.h \
 	wm3000u.h \
 	pcbiface.h \
-	scpiface.h \
 	wm3000scpiface.h \
 	devserver.h \
 	formatinfo.h \
@@ -33,7 +32,6 @@ SOURCES	+=  \
 	eparameter.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
-	scpiface.cpp \
 	wm3000scpiface.cpp \
 	devserver.cpp \
 	formatinfo.cpp \
@@ -360,6 +358,7 @@ INCLUDEPATH += \
     ../wm-common/client-interfaces \
     ../wm-common/dsp \
     ../wm-common/gui \
+    ../wm-common/scpi/definitions \
     ../wm-common/scpi \
     ../wm-common/settings \
     ../wm-common/service-interfaces

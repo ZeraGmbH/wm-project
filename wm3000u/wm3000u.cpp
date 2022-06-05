@@ -32,6 +32,9 @@
 #include "eparameter.h"
 #include "tools.h"
 #include "maxperiods.h"
+#include "scpiaffectatatuscode.h"
+#include "scpioperationstates.h"
+#include "scpiquestionstates.h"
 
 extern WMViewBase *g_WMView;
 extern char* MModeName[];
