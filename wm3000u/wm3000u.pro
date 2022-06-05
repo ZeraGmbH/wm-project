@@ -363,7 +363,7 @@ INCLUDEPATH += \
     ../wm-common/gui \
     ../wm-common/dsp \
     ../wm-common/settings \
-    ../wm-common/zera-hardware-io
+    ../wm-common/service-interfaces
 
 LIBS += -L../wm-common -lwm-common
 

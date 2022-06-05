@@ -5,7 +5,6 @@ QT += qt3support
 
 HEADERS = \
     dsp/dspactvalues.h \
-    dsp/dspiface.h \
     dsp/dspvar.h \
     gui/bigletter.h \
     gui/en61850monitor.h \
@@ -19,8 +18,9 @@ HEADERS = \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
     settings/sessionhelper.h \
-    zera-hardware-io/zhclientsocket.h \
-    zera-hardware-io/zhserveriface.h \
+    service-interfaces/dspiface.h \
+    service-interfaces/zhclientsocket.h \
+    service-interfaces/zhserveriface.h \
     calcinfo.h \
     common-modes.h \
     complex.h \
@@ -42,7 +42,6 @@ HEADERS = \
     zeraglobal.h
 
 SOURCES = \
-    dsp/dspiface.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/lbrowser.cpp \
@@ -53,8 +52,9 @@ SOURCES = \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/sessionhelper.cpp \
-    zera-hardware-io/zhclientsocket.cpp \
-    zera-hardware-io/zhserveriface.cpp \
+    service-interfaces/dspiface.cpp \
+    service-interfaces/zhclientsocket.cpp \
+    service-interfaces/zhserveriface.cpp \
     complex.cpp \
     cmdinterpret.cpp \
     logfile.cpp \
@@ -74,4 +74,4 @@ FORMS = \
 INCLUDEPATH += \
     dsp \
     settings \
-    zera-hardware-io
+    service-interfaces
