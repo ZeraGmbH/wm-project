@@ -4,6 +4,7 @@ CONFIG += staticlib
 QT += qt3support 
 
 HEADERS = \
+    calcinfo.h \
     gui/en61850monitor.h \
     gui/bigletter.h \
     gui/lbrowser.h \

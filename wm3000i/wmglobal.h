@@ -140,18 +140,6 @@ enum UserDecisions {AbortProgram,Stop,Retry,SimulationMode}; // benutzer entsche
 enum Languages {de,gb,pl};
 
 
-class cCalcInfo
-{
-public:
-    cCalcInfo(const QString chn, const QString rng)
-        :m_sChannel(chn), m_sRange(rng){};
-    QString m_sChannel;
-    QString m_sRange;
-};
-
-typedef Q3PtrList<cCalcInfo> cPhaseCalcInfoList;
-
-
 class cJustMeasInfo
 {
 

@@ -28,6 +28,7 @@
 #include "devserver.h"
 #include "wm3000scpiface.h"
 #include "movingwindowfilter.h"
+#include "calcinfo.h"
 
 class cRSelectString: public QString {
 public:    

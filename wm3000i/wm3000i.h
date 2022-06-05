@@ -27,6 +27,7 @@
 #include "devserver.h"
 #include "wm3000scpiface.h"
 #include "movingwindowfilter.h"
+#include "calcinfo.h"
 
 
 class cRSelectString: public QString {
@@ -416,7 +417,7 @@ protected:
     cWMRangeList m_sNRangeList; // verkettete liste von absolut bereichen
     cWMRangeList m_sXRangeList; // verkettete liste von absolut bereichen
     cWMRangeList m_sECTRangeList; // liste für die bereiche der elektronischen wandler
-    cPhaseCalcInfoList m_CalcInfoList; // liste mit bereichen, deren phasenkorrektur koeffizienten zu berechnen sind (kanal, bereich)
+    cCalcInfoList m_CalcInfoList; // liste mit bereichen, deren phasenkorrektur koeffizienten zu berechnen sind (kanal, bereich)
     cPhaseNodeMeasInfoList m_PhaseNodeMeasInfoList; // liste mit bereichinfo´s , und allen parameter die erforderlich siehe cPhaseNodeMeasInfo (wmglobal)
     cOffsetMeasInfoList m_OffsetMeasInfoList; // dito
     QStringList m_SelftestInfoList;
