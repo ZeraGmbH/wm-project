@@ -18,6 +18,7 @@ HEADERS = \
     cbiface.h \
     cmdinterpret.h \
     dspactvalues.h \
+    dspvar.h \
     en61850.h \
     logfile.h \
     movingwindowfilter.h \

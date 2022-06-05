@@ -14,6 +14,7 @@
 #include "complex.h"
 #include "range.h"
 #include "dspactvalues.h"
+#include "dspvar.h"
 
 
 
@@ -165,8 +166,6 @@ enum SignalModes {AC, DC, maxSMode}; // signal modi
 enum UserDecisions {AbortProgram,Stop,Retry,SimulationMode}; // benutzer entscheidungen
 enum Languages {de,gb,pl};
 
-
-class cDspVar; // forward
 
 typedef Q3MemArray<float> cDspVarMemArray;
 typedef Q3PtrList<cDspVar> cDspVarPtrList;

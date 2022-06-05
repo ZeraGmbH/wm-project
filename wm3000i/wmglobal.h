@@ -13,6 +13,7 @@
 #include "complex.h"
 #include "range.h"
 #include "dspactvalues.h"
+#include "dspvar.h"
 
 //#define DEBUG 1
 
@@ -144,17 +145,8 @@ enum Languages {de,gb,pl};
 
 
 
-
-
-class cDspVar; // forward
-
 typedef Q3MemArray<float> cDspVarMemArray;
 typedef Q3PtrList<cDspVar> cDspVarPtrList;
-
-
-
-
-
 
 
 struct cwmActValues {  // wird an andere objekte gesendet
