@@ -11,7 +11,6 @@
 #include <QTime>
 
 #include "sessionhelper.h"
-#include "wmglobal.h"
 #include "logfileview.h"
 
 CLogFileView::CLogFileView(const QString cap,

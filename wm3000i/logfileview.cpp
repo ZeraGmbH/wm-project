@@ -6,12 +6,9 @@
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <q3textstream.h>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QCloseEvent>
 #include <QTime>
-
-#include "wmglobal.h"
 #include "logfileview.h"
 
 CLogFileView::CLogFileView(const QString cap,
