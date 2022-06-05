@@ -10,13 +10,13 @@ HEADERS = \
     gui/versionviewbase.h \
     gui/wmeditor.h \
     settings/confdata.h \
+    settings/ethadress.h \
     settings/sessionhelper.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
     dspactvalues.h \
     en61850.h \
-    ethadress.h \
     logfile.h \
     movingwindowfilter.h \
     parse.h \
@@ -36,10 +36,10 @@ SOURCES = \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
     settings/confdata.cpp \
+    settings/ethadress.cpp \
     settings/sessionhelper.cpp \
     complex.cpp \
     cmdinterpret.cpp \
-    ethadress.cpp \
     logfile.cpp \
     movingwindowfilter.cpp \
     range.cpp \
