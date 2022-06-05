@@ -3,9 +3,7 @@
 #include "scpiface.h"
 #include "wm3000scpiface.h"
 #include "devserver.h"
-
-
-
+#include "clientsocketdevice.h"
 
 cDeviceServer::cDeviceServer( quint16 port, int backlog, QObject *parent, const char *name)
     :Q3ServerSocket(port, backlog, parent, name) 
