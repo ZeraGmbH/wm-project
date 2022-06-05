@@ -13,6 +13,7 @@
 #include "cbiface.h"
 #include "scpi.h"
 #include "cmdinterpret.h"
+#include "clientiodevice.h"
 
 
 struct scpiErrorType
@@ -169,8 +170,6 @@ private slots:
 private:
     QString m_sCmd;
 };
-
-class cClientIODevice; // forward
 
 class cSCPIFace : public QObject, public cbIFace  // virtuelle basisklasse eines scpi interfaces
 {

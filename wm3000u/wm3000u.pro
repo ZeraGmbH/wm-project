@@ -357,8 +357,9 @@ QT += xml  qt3support dbus
 
 INCLUDEPATH += \
     ../wm-common \
-    ../wm-common/gui \
+    ../wm-common/client-interfaces \
     ../wm-common/dsp \
+    ../wm-common/gui \
     ../wm-common/settings \
     ../wm-common/service-interfaces
 

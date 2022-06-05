@@ -21,23 +21,8 @@
 #include "cmdinterpret.h"
 #include "scpiface.h"
 #include "en61850.h"
+#include "clientiodevice.h"
 
-
-class cClientIODevice: public QObject // dies haben alle client io devices gemein, egal ob tcp/ip socket oder serial 
-{
-    Q_OBJECT    
-    
-public:    
-    cClientIODevice(){};
-    
-signals:
-    void SendCommand( QString&); // der client hat ein kommando und sendet dieses
-    void connectionClosed(cClientIODevice*); // der client meldet sich ab
-    
-public slots:
-    virtual void ReceiveAnswer( QString&) = 0; // pure virtual
-};
-	
 
 class cClientSocketDevice : public cClientIODevice
 {
@@ -62,8 +47,6 @@ private:
     QString m_sOutput;
 };
     
-
-// class cSCPIFace;
 
 class cDeviceServer:  public Q3ServerSocket // asynchroner device server pure virtual
 {
@@ -91,7 +74,7 @@ class cwm3000DeviceServer:  public cDeviceServer  // der wm3000 device server
     
 public:
     cwm3000DeviceServer( quint16 port, int backlog = 1, QObject * parent = 0, const char * name = 0 );
-    virtual void newConnection(int); // instanziiert ein client socket device und ein wm3000 scpi interfaceund trägt das interface in die liste ein 
+    virtual void newConnection(int); // instanziiert ein client socket device und ein wm3000 scpi interfaceund trägt das interface in die liste ein
     virtual void newConnection(cClientIODevice*); // nimmt das bereits instanziierte xxx interface, generiert noch ein wm3000 scpi interface und trägt das interface in die liste ein
     
 public slots:

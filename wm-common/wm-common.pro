@@ -4,6 +4,7 @@ CONFIG += staticlib
 QT += qt3support 
 
 HEADERS = \
+    client-interfaces/clientiodevice.h \
     dsp/dspactvalues.h \
     dsp/dspvar.h \
     gui/bigletter.h \
