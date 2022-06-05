@@ -96,36 +96,36 @@ void cSCPIFace::AffectSCPIStatus(uchar action, ushort stat)
     switch (action)
     {
     case SetOperStat:
-    m_pOperationStat->SetConditionBit(stat);
-    break;
+        m_pOperationStat->SetConditionBit(stat);
+        break;
 
     case ResetOperStat:
-    m_pOperationStat->ResetConditionBit(stat);
-    if (stat == OperConfiguring)
-    {
-        SetnoOperFlag(true);
-        if (m_nOPCQState == OQAS)
-        // wenn wir in opc query active state sind und die Configuration fertig war
+        m_pOperationStat->ResetConditionBit(stat);
+        if (stat == OperConfiguring)
         {
-            // d.h. es war eine *opc? abfrage während wir dabei waren zu konfigurieren
+            SetnoOperFlag(true);
+            if (m_nOPCQState == OQAS)
+                // wenn wir in opc query active state sind und die Configuration fertig war
             {
-                //QString s;
-                //emit SendAnswer(s = QString("+1")); // dann senden wir jetzt die antwort darauf
-                setOPCQState(OQIS); // und wechseln wieder in den operation query idle state
+                // d.h. es war eine *opc? abfrage während wir dabei waren zu konfigurieren
+                {
+                    //QString s;
+                    //emit SendAnswer(s = QString("+1")); // dann senden wir jetzt die antwort darauf
+                    setOPCQState(OQIS); // und wechseln wieder in den operation query idle state
+                }
             }
+            //else
+            //  SetnoOperFlag(true);
         }
-        //else
-          //  SetnoOperFlag(true);
-    }
-    break;
+        break;
 
     case SetQuestStat:
-    m_pQuestionableStat->SetConditionBit(stat);
-    break;
+        m_pQuestionableStat->SetConditionBit(stat);
+        break;
 
     case ResetQuestStat:
-    m_pQuestionableStat->ResetConditionBit(stat);
-    break;
+        m_pQuestionableStat->ResetConditionBit(stat);
+        break;
     }
 }
 
@@ -188,9 +188,9 @@ void cSCPIFace::DeviceReset(char* s)
 {
     QString keyw = m_pParser->GetKeyword(&s);
     if ( keyw.isEmpty() ) // hier darf nichts stehen
-    ResetDevice();
+        ResetDevice();
     else
-    AddEventError(ParameterNotAllowed);
+        AddEventError(ParameterNotAllowed);
 }
 
 
@@ -198,9 +198,9 @@ void cSCPIFace::SetDeviceOPC(char* s)
 {
     QString keyw = m_pParser->GetKeyword(&s);
     if ( keyw.isEmpty() ) // hier darf nichts stehen
-    OPCCommand();
+        OPCCommand();
     else
-    AddEventError(ParameterNotAllowed);
+        AddEventError(ParameterNotAllowed);
 }
 
 
@@ -208,9 +208,9 @@ void cSCPIFace::DeviceClearStatus(char* s)
 {
     QString keyw = m_pParser->GetKeyword(&s);
     if ( keyw.isEmpty() ) // hier darf nichts stehen
-    DeviceClearStatus();
+        DeviceClearStatus();
     else
-    AddEventError(ParameterNotAllowed);
+        AddEventError(ParameterNotAllowed);
 }
 
 
@@ -232,14 +232,14 @@ void cSCPIFace::SetIEEE488Register(char* s, uchar& reg)
     QString par = m_pParser->GetKeyword(&s); // holt den parameter aus dem kommando
     int nPar = par.toInt(&ok);
     if ( (ok) && (nPar < 256) ) {
-    par = m_pParser->GetKeyword(&s);
-    if ( par.isEmpty() )
-        reg = nPar;
-    else
-        AddEventError(InvalidSeparator); // macht agilent auch so
+        par = m_pParser->GetKeyword(&s);
+        if ( par.isEmpty() )
+            reg = nPar;
+        else
+            AddEventError(InvalidSeparator); // macht agilent auch so
     }
     else
-    AddEventError(NumericDataError);
+        AddEventError(NumericDataError);
 }
 
 
@@ -258,7 +258,7 @@ void cSCPIFace::SetSTB(uchar b) // status register setzen
 {
     m_nSTB |= b;
     if (m_nSTB & m_nSRE & 0xBF) // wenn enabled
-    m_nSTB |= STBrqs; // request service message ins stb
+        m_nSTB |= STBrqs; // request service message ins stb
 }
 
 
@@ -285,7 +285,7 @@ void cSCPIFace::SetESR(uchar b) // standard event status register setzen
 {
     m_nESR |= b;
     if (m_nESR & m_nESE) // falls enabled setzen wir
-    SetSTB(STBesb);
+        SetSTB(STBesb);
 }
 
 
@@ -402,21 +402,21 @@ char* cSCPIFace::SCPIQuery( int cmd, char* s) {
     QString keyw = m_pParser->GetKeyword(&s);
     if ( keyw.isEmpty() ) // hier darf nichts stehen
     {
-    switch ((int)cmd)
-    {
-    case IdentQuery: return GetDeviceIdentification(); // *IDN?
-    case SelfTestQuery: return DeviceSelfTest(); // *TST?
-    case OperationCompleteQuery: return GetDeviceOPC(); // *OPC?
-    case StdEventStatEnableQuery: return GetDeviceESE(); // *ESE?
-    case StdEventStatRegQuery: return GetDeviceESR();// *ESR?
-    case ServiceRequestEnableQuery: return GetDeviceSRE();// *SRE?
-    case StatusByteQuery: return GetDeviceSTB(); // *STB?
-    default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
-    }
+        switch ((int)cmd)
+        {
+        case IdentQuery: return GetDeviceIdentification(); // *IDN?
+        case SelfTestQuery: return DeviceSelfTest(); // *TST?
+        case OperationCompleteQuery: return GetDeviceOPC(); // *OPC?
+        case StdEventStatEnableQuery: return GetDeviceESE(); // *ESE?
+        case StdEventStatRegQuery: return GetDeviceESR();// *ESR?
+        case ServiceRequestEnableQuery: return GetDeviceSRE();// *SRE?
+        case StatusByteQuery: return GetDeviceSTB(); // *STB?
+        default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
+        }
     }
     else
     {
-    AddEventError(ParameterNotAllowed);
+        AddEventError(ParameterNotAllowed);
     }
 
     return 0;
