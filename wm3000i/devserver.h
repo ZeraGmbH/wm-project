@@ -23,31 +23,6 @@
 #include "en61850.h"
 #include "clientiodevice.h"
 
-
-class cClientSocketDevice : public cClientIODevice
-{
-    Q_OBJECT
-    
-public:
-    cClientSocketDevice(int sock, QObject *parent = 0, const char*  name = 0);
-    ~cClientSocketDevice();
-    
-public slots:
-    virtual void ReceiveAnswer( QString&); 
-        
-private slots:
-    void ReadCommand(); // wenn daten da sind
-    void SendAnswer( int); // von notifier aktiviert mit int fd als parameter
-    void CloseConnection();
-    
-private:
-    Q3Socket* m_pSock;
-    QSocketNotifier* m_pZDSWriteNotifyer;
-    QString m_sInput;
-    QString m_sOutput;
-};
-    
-
 class cDeviceServer:  public Q3ServerSocket // asynchroner device server pure virtual
 {
     Q_OBJECT
