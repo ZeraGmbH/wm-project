@@ -364,7 +364,12 @@ TRANSLATIONS    = wm3000u_gb.ts \
 # Input
 QT += xml  qt3support dbus
 
-INCLUDEPATH += ../wm-common ../wm-common/gui ../wm-common/settings
+INCLUDEPATH += \
+    ../wm-common \
+    ../wm-common/gui \
+    ../wm-common/dsp \
+    ../wm-common/settings
+
 LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin

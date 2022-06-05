@@ -4,6 +4,8 @@ CONFIG += staticlib
 QT += qt3support 
 
 HEADERS = \
+    dsp/dspactvalues.h \
+    dsp/dspvar.h \
     gui/bigletter.h \
     gui/en61850monitor.h \
     gui/lbrowser.h \
@@ -21,8 +23,6 @@ HEADERS = \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
-    dspactvalues.h \
-    dspvar.h \
     en61850.h \
     logfile.h \
     maxperiods.h \
@@ -65,4 +65,6 @@ FORMS = \
     gui/versionviewbase.ui \
     gui/wmoeviewbase.ui
 
-INCLUDEPATH += settings
+INCLUDEPATH += \
+    dsp \
+    settings
