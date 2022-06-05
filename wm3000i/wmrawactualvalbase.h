@@ -19,6 +19,7 @@
 #include "confdata.h"
 #include "wmrawactualconfigbase.h"
 #include "tools.h"
+#include "wmactvalues.h"
 
 #include <qvariant.h>
 #include <qdialog.h>

@@ -17,7 +17,8 @@
 #include <qstringlist.h>
 
 #include "ownerrorviewdata.h"
-#include "wmglobal.h"
+#include "wmactvalues.h"
+#include "confdata.h"
 #include "complex.h"
 
 

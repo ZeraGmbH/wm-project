@@ -2,8 +2,7 @@
 
 #include "devserver.h"
 #include "scpiface.h"
-#include "scpi.h" // für scpi knoten
-// #include "wm3000u.h"
+#include "scpi.h"
 
 
 scpiErrorType SCPIError[scpiLastError] = { 	{0,(char*)"No error"},

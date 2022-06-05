@@ -8,6 +8,7 @@
 
 #include "tools.h"
 #include "versserial.h"
+#include "wmactvalues.h"
 #include "wmglobal.h"
 #include "confdata.h"
 #include "scpiface.h"

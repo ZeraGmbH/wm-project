@@ -6,6 +6,7 @@
 #include <QTimer>
 
 #include "wmglobal.h"
+#include "wmactvalues.h"
 #include "widgeom.h"
 #include "confdata.h"
 #include "wmrawactualconfigbase.h"

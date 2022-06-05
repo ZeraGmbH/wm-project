@@ -30,6 +30,7 @@ HEADERS = \
     tools.h \
     versserial.h \
     widgeom.h \
+    wmactvalues.h \
     zeraglobal.h
 
 SOURCES = \

@@ -21,6 +21,7 @@
 #include "widgeom.h"
 #include "wmmeasconfigbase.h"
 #include "formatinfo.h"
+#include "wmactvalues.h"
 
 namespace Ui {
     class WMMeasValuesBase;
