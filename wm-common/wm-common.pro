@@ -4,9 +4,9 @@ CONFIG += staticlib
 QT += qt3support 
 
 HEADERS = \
-    client-interfaces/clientiodevice.h \
-    client-interfaces/clientsocketdevice.h \
-    client-interfaces/deviceserver.h \
+    client-access/clientiodevice.h \
+    client-access/clientsocketdevice.h \
+    client-access/deviceserver.h \
     dsp/dspactvalues.h \
     dsp/dspvar.h \
     gui/bigletter.h \
@@ -59,8 +59,8 @@ HEADERS = \
     zeraglobal.h
 
 SOURCES = \
-    client-interfaces/clientsocketdevice.cpp \
-    client-interfaces/deviceserver.cpp \
+    client-access/clientsocketdevice.cpp \
+    client-access/deviceserver.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/lbrowser.cpp \
@@ -97,7 +97,7 @@ FORMS = \
     gui/wmrawactualconfigbase.ui
 
 INCLUDEPATH += \
-    client-interfaces \
+    client-access \
     dsp \
     scpi \
     scpi/definitions \

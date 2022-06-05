@@ -66,7 +66,7 @@ QT += xml  qt3support
 
 INCLUDEPATH += \
     ../wm-common \
-    ../wm-common/client-interfaces \
+    ../wm-common/client-access \
     ../wm-common/dsp \
     ../wm-common/gui \
     ../wm-common/scpi/definitions \
