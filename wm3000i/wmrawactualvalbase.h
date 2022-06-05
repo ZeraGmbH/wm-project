@@ -23,7 +23,6 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-#include "wmglobal.h"
 #include "widgeom.h"
 #include "wmrawactualconfigbase.h"
 #include "tools.h"

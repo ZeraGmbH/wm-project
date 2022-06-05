@@ -5,7 +5,6 @@
 #include <qdialog.h>
 #include <QTimer>
 
-#include "wmglobal.h"
 #include "wmactvalues.h"
 #include "widgeom.h"
 #include "confdata.h"
