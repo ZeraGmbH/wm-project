@@ -11,8 +11,6 @@
 #include <q3socket.h>
 #include <q3socketdevice.h> 
 #include <qsocketnotifier.h>
-#include <q3ptrlist.h>
-
 #include "wmglobal.h"
 #include "wmactvalues.h"
 #include "versserial.h"
@@ -22,26 +20,7 @@
 #include "scpiface.h"
 #include "en61850.h"
 #include "clientiodevice.h"
-
-class cDeviceServer:  public Q3ServerSocket // asynchroner device server pure virtual
-{
-    Q_OBJECT
-    
-public:
-    cDeviceServer( quint16 port, int backlog = 1, QObject * parent = 0, const char * name = 0 );
-    virtual void newConnection(int) = 0; // instanziiert ein client socket device und trägt es in liste ein 
-    
-signals:
-    void RemoteCtrlInfo(bool); // wir informieren ob remote control oder nicht
- 
-private slots:
-    void CloseConnection(cClientIODevice*); // clients melden sich hierüber ab
-   
-protected:    
-    Q3PtrList<cSCPIFace> m_SCPIFacePtrList; // die liste aller angelegten interfaces
-    void setPriority(); // alle clients werden informiert
-};
-
+#include "deviceserver.h"
 
 class cwm3000DeviceServer:  public cDeviceServer  // der wm3000 device server
 {

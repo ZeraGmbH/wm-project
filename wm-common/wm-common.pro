@@ -6,6 +6,7 @@ QT += qt3support
 HEADERS = \
     client-interfaces/clientiodevice.h \
     client-interfaces/clientsocketdevice.h \
+    client-interfaces/deviceserver.h \
     dsp/dspactvalues.h \
     dsp/dspvar.h \
     gui/bigletter.h \
@@ -59,6 +60,7 @@ HEADERS = \
 
 SOURCES = \
     client-interfaces/clientsocketdevice.cpp \
+    client-interfaces/deviceserver.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/lbrowser.cpp \
