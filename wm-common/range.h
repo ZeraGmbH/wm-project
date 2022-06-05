@@ -3,7 +3,8 @@
 #ifndef RANGE_H
 #define RANGE_H
 
-#include <qstring.h>
+#include <QString>
+#include <Q3PtrList>
 
 class CRange;
 
@@ -43,5 +44,6 @@ private:
     QString m_sOffsetKorrKey;
 } ;   
 
+typedef Q3PtrList<CWMRange> cWMRangeList;
 
 #endif    

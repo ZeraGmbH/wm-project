@@ -175,6 +175,7 @@ public:
     QString m_sRange;
 };
 
+typedef Q3PtrList<cCalcInfo> cCalcInfoList;
 
 class cJustMeasInfo
 {
@@ -192,10 +193,7 @@ public:
     int m_nnMeas; // anzahl messungen zur messwertbestimmung
 };
 
-
-typedef Q3PtrList<CWMRange> cWMRangeList;
-typedef Q3PtrList<cCalcInfo> cCalcInfoList;
 typedef Q3PtrList<cJustMeasInfo> cPhaseNodeMeasInfoList;
 typedef Q3PtrList<cJustMeasInfo> cOffsetMeasInfoList;
-#endif
 
+#endif
