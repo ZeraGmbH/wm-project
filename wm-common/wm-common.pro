@@ -5,6 +5,7 @@ QT += qt3support
 
 HEADERS = \
     dsp/dspactvalues.h \
+    dsp/dspiface.h \
     dsp/dspvar.h \
     gui/bigletter.h \
     gui/en61850monitor.h \
@@ -41,6 +42,7 @@ HEADERS = \
     zeraglobal.h
 
 SOURCES = \
+    dsp/dspiface.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/lbrowser.cpp \

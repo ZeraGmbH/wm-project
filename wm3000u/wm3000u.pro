@@ -11,7 +11,6 @@ HEADERS	+=  \
 	zerainfo.h \
 	eparameter.h \
 	wm3000u.h \
-	dspiface.h \
 	pcbiface.h \
 	scpiface.h \
 	wm3000scpiface.h \
@@ -33,7 +32,6 @@ SOURCES	+=  \
 	ownerror.cpp \
 	zerainfo.cpp \
 	eparameter.cpp \
-	dspiface.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
 	scpiface.cpp \

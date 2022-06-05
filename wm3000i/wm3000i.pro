@@ -8,7 +8,6 @@ INCLUDEPATH	+= .
 
 HEADERS	+= \
 	devserver.h \
-	dspiface.h \
 	eparameter.h \
 	formatinfo.h \
 	ownerror.h \
@@ -29,7 +28,6 @@ HEADERS	+= \
 
 SOURCES	+= \
 	devserver.cpp \
-	dspiface.cpp \
 	eparameter.cpp \
 	formatinfo.cpp \
 	main.cpp \
