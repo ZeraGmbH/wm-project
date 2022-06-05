@@ -20,7 +20,7 @@ class CLogFileView:public QDialog
     Q_OBJECT
     
 public:
-    CLogFileView(const QString,
+    CLogFileView(const QString cap,
                  const long max,
                  QWidget *parent,
                  const char *wname,

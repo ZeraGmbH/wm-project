@@ -11,7 +11,6 @@ HEADERS	+= \
 	dspiface.h \
 	eparameter.h \
 	formatinfo.h \
-	logfileview.h \
 	ownerror.h \
 	pcbiface.h \
 	wmglobal.h \
@@ -35,7 +34,6 @@ SOURCES	+= \
 	dspiface.cpp \
 	eparameter.cpp \
 	formatinfo.cpp \
-	logfileview.cpp \
 	main.cpp \
 	ownerror.cpp \
 	pcbiface.cpp \

@@ -7,6 +7,7 @@ HEADERS = \
     gui/bigletter.h \
     gui/en61850monitor.h \
     gui/lbrowser.h \
+    gui/logfileview.h \
     gui/maxrecentfiles.h \
     gui/versionviewbase.h \
     gui/wmeditor.h \
@@ -40,6 +41,7 @@ SOURCES = \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/lbrowser.cpp \
+    gui/logfileview.cpp \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
     gui/wmoeviewbase.cpp \

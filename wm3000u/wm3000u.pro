@@ -8,7 +8,6 @@ INCLUDEPATH	+= .
 HEADERS	+=  \
 	wmglobal.h \
 	ownerror.h \
-	logfileview.h \
 	zerainfo.h \
 	eparameter.h \
 	wm3000u.h \
@@ -34,7 +33,6 @@ HEADERS	+=  \
 SOURCES	+=  \
 	main.cpp \
 	ownerror.cpp \
-	logfileview.cpp \
 	zerainfo.cpp \
 	eparameter.cpp \
 	dspiface.cpp \

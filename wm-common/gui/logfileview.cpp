@@ -9,6 +9,8 @@
 #include <QResizeEvent>
 #include <QCloseEvent>
 #include <QTime>
+
+#include "sessionhelper.h"
 #include "logfileview.h"
 
 CLogFileView::CLogFileView(const QString cap,
@@ -19,6 +21,7 @@ CLogFileView::CLogFileView(const QString cap,
     QDialog(parent, wname),
     m_sessionHelper(machineName)
 {
+    m_Timer.setSingleShot(true);
     setCaption(cap);
     m_pText=new Q3TextEdit(this);
     m_pText->setTextFormat(Qt::LogText);
@@ -26,7 +29,6 @@ CLogFileView::CLogFileView(const QString cap,
     setMinimumSize(200,200);
     LoadSession(".ses");
     showT.start(2000);
-    m_Timer.setSingleShot(true);
     QObject::connect(&showT,SIGNAL(timeout()),this,SLOT(showList())); 
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
 }
