@@ -13,6 +13,7 @@
 #include "scpi.h"
 #include "cmdinterpret.h"
 #include "clientiodevice.h"
+#include "cmdtimer.h"
 
 
 struct scpiErrorType
@@ -152,23 +153,6 @@ enum QuestionStates { QuestServerProblems = 0x100,
 
 
 
-class cCmdTimer: public QTimer
-{
-    Q_OBJECT
-    
-public:
-     cCmdTimer(QObject * parent = 0, const char * name = 0 );
-     int start(int, QString&);
-     
-signals:
-     void Command2Execute(QString&);
-     
-private slots:
-    void TimeExpired();
-    
-private:
-    QString m_sCmd;
-};
 
 class cSCPIFace : public QObject, public cbIFace  // virtuelle basisklasse eines scpi interfaces
 {

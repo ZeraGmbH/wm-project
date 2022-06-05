@@ -17,6 +17,7 @@ HEADERS = \
     gui/wmeditor.h \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
+    scpi/cmdtimer.h \
     settings/confdata.h \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
@@ -54,6 +55,7 @@ SOURCES = \
     gui/wmeditor.cpp \
     gui/wmoeviewbase.cpp \
     gui/wmrawactualconfigbase.cpp \
+    scpi/cmdtimer.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/sessionhelper.cpp \

@@ -71,6 +71,7 @@ INCLUDEPATH += \
     ../wm-common/client-interfaces \
     ../wm-common/dsp \
     ../wm-common/gui \
+    ../wm-common/scpi \
     ../wm-common/settings \
     ../wm-common/service-interfaces
 
