@@ -13,7 +13,6 @@ HEADERS	+=  \
 	eparameter.h \
 	wm3000u.h \
 	dspiface.h \
-	confdata.h \
 	pcbiface.h \
 	zhclientsocket.h \
 	zhserveriface.h \
@@ -40,7 +39,6 @@ SOURCES	+=  \
 	zerainfo.cpp \
 	eparameter.cpp \
 	dspiface.cpp \
-	confdata.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
 	zhclientsocket.cpp \
@@ -369,10 +367,9 @@ TRANSLATIONS    = wm3000u_gb.ts \
                   wm3000u_pl.ts
 
 # Input
-#The following line was inserted by qt3to4
 QT += xml  qt3support dbus
 
-INCLUDEPATH += ../wm-common ../wm-common/gui
+INCLUDEPATH += ../wm-common ../wm-common/gui ../wm-common/settings
 LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin

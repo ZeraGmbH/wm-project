@@ -9,6 +9,7 @@ HEADERS = \
     gui/lbrowser.h \
     gui/versionviewbase.h \
     gui/wmeditor.h \
+    settings/confdata.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
@@ -34,6 +35,7 @@ SOURCES = \
     gui/lbrowser.cpp \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
+    settings/confdata.cpp \
     complex.cpp \
     cmdinterpret.cpp \
     ethadress.cpp \

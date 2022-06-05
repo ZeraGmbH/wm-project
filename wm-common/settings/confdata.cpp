@@ -1,7 +1,6 @@
 // implementierung cConfData
 
 #include <qdatastream.h>
-#include "wmglobal.h"
 #include "confdata.h"
  
 

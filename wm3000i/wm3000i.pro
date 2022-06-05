@@ -7,7 +7,6 @@ INCLUDEPATH	+= .
 
 
 HEADERS	+= \
-	confdata.h \
 	devserver.h \
 	dspiface.h \
 	eparameter.h \
@@ -33,7 +32,6 @@ HEADERS	+= \
     wmoffsetvalbase.h \
 
 SOURCES	+= \
-	confdata.cpp \
 	devserver.cpp \
 	dspiface.cpp \
 	eparameter.cpp \
@@ -82,7 +80,7 @@ TRANSLATIONS    = wm3000i_gb.ts \
 #The following line was inserted by qt3to4
 QT += xml  qt3support 
 
-INCLUDEPATH += ../wm-common ../wm-common/gui
+INCLUDEPATH += ../wm-common ../wm-common/gui ../wm-common/settings
 LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin
