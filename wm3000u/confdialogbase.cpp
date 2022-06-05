@@ -2,6 +2,7 @@
 #include "confdialogbase.h"
 #include "ui_confdialogbase.h"
 #include "wm3000u.h"
+#include "maxperiods.h"
 
 extern cWM3000U* g_WMDevice;
 

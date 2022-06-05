@@ -14,7 +14,8 @@
 #include <q3mainwindow.h>
 #include <qlabel.h>
 #include <QTextEdit>
-#include "wmglobal.h"
+#include "maxrecentfiles.h"
+#include "confdata.h"
 #include "wmeditor.h"
 #include "widgeom.h"
 

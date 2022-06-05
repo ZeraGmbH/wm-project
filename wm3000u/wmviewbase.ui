@@ -861,7 +861,8 @@
  </customwidgets>
  <includes>
   <include location="global">qlabel.h</include>
-  <include location="local">wmglobal.h</include>
+  <include location="local">maxrecentfiles.h</include>
+  <include location="local">confdata.h</include>
   <include location="local">wmeditor.h</include>
   <include location="local">widgeom.h</include>
  </includes>

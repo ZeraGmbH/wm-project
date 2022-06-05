@@ -115,11 +115,6 @@
 #define OffsetJustDataFilePath QDir::homePath()+"/wm3000i/offsetdata"
 #define NSAOffsetJustDataFilePath QDir::homePath()+"/wm3000i/.offsetinfo"
 
-const int nmaxRecentOEFiles = 5;
-const int nmaxRecentMVFiles = 5;
-const int nmaxRecentSESFiles = 5;
-const int nmaxS80MeasPeriod = 40;
-const int nmaxS256MeasPeriod = 14;
 const float TDBase = 100.0e6; // 100 mhz auflösung für td messung (pps->1. sample)
 
 enum DisplayModes {ANSI,IEC,MaxCompMode}; // compmodi

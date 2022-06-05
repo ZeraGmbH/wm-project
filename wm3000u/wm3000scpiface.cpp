@@ -5,6 +5,7 @@
 #include "eparameter.h"
 #include "wm3000scpiface.h"
 #include "wm3000u.h"
+#include "maxperiods.h"
 
 extern cWM3000U* g_WMDevice;
 extern  scpiErrorType SCPIError[];

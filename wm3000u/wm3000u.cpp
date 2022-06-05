@@ -28,10 +28,10 @@
 #include "wmviewbase.h"
 #include "logfile.h"
 #include "range.h"
-#include "wmglobal.h"
 #include "wm3000u.h"
 #include "eparameter.h"
 #include "tools.h"
+#include "maxperiods.h"
 
 extern WMViewBase *g_WMView;
 extern char* MModeName[];

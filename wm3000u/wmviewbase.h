@@ -6,7 +6,8 @@
 #include <qlabel.h>
 #include <QTimer>
 
-#include "wmglobal.h"
+#include "maxrecentfiles.h"
+#include "confdata.h"
 #include "wmeditor.h"
 #include "widgeom.h"
 

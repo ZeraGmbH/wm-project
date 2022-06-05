@@ -4,10 +4,10 @@ CONFIG += staticlib
 QT += qt3support 
 
 HEADERS = \
-    calcinfo.h \
-    gui/en61850monitor.h \
     gui/bigletter.h \
+    gui/en61850monitor.h \
     gui/lbrowser.h \
+    gui/maxrecentfiles.h \
     gui/versionviewbase.h \
     gui/wmeditor.h \
     gui/wmoeviewbase.h \
@@ -15,6 +15,7 @@ HEADERS = \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
     settings/sessionhelper.h \
+    calcinfo.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
@@ -22,6 +23,7 @@ HEADERS = \
     dspvar.h \
     en61850.h \
     logfile.h \
+    maxperiods.h \
     movingwindowfilter.h \
     parse.h \
     range.h \
