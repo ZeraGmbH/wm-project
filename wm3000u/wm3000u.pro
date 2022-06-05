@@ -13,8 +13,6 @@ HEADERS	+=  \
 	wm3000u.h \
 	dspiface.h \
 	pcbiface.h \
-	zhclientsocket.h \
-	zhserveriface.h \
 	scpiface.h \
 	wm3000scpiface.h \
 	devserver.h \
@@ -38,8 +36,6 @@ SOURCES	+=  \
 	dspiface.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
-	zhclientsocket.cpp \
-	zhserveriface.cpp \
 	scpiface.cpp \
 	wm3000scpiface.cpp \
 	devserver.cpp \
@@ -368,7 +364,8 @@ INCLUDEPATH += \
     ../wm-common \
     ../wm-common/gui \
     ../wm-common/dsp \
-    ../wm-common/settings
+    ../wm-common/settings \
+    ../wm-common/zera-hardware-io
 
 LIBS += -L../wm-common -lwm-common
 

@@ -18,6 +18,8 @@ HEADERS = \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
     settings/sessionhelper.h \
+    zera-hardware-io/zhclientsocket.h \
+    zera-hardware-io/zhserveriface.h \
     calcinfo.h \
     common-modes.h \
     complex.h \
@@ -49,6 +51,8 @@ SOURCES = \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/sessionhelper.cpp \
+    zera-hardware-io/zhclientsocket.cpp \
+    zera-hardware-io/zhserveriface.cpp \
     complex.cpp \
     cmdinterpret.cpp \
     logfile.cpp \
@@ -67,4 +71,5 @@ FORMS = \
 
 INCLUDEPATH += \
     dsp \
-    settings
+    settings \
+    zera-hardware-io

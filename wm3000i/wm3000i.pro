@@ -15,8 +15,6 @@ HEADERS	+= \
 	pcbiface.h \
 	wmglobal.h \
 	wm3000i.h \
-	zhclientsocket.h \
-	zhserveriface.h \
 	zerainfo.h \
 	wm3000scpiface.h \
 	scpiface.h \
@@ -38,8 +36,6 @@ SOURCES	+= \
 	ownerror.cpp \
 	pcbiface.cpp \
 	wm3000i.cpp \
-	zhclientsocket.cpp \
-	zhserveriface.cpp \
 	zerainfo.cpp \
 	wm3000scpiface.cpp \
 	scpiface.cpp \
@@ -79,7 +75,8 @@ INCLUDEPATH += \
     ../wm-common \
     ../wm-common/gui \
     ../wm-common/dsp \
-    ../wm-common/settings
+    ../wm-common/settings \
+    ../wm-common/zera-hardware-io
 
 LIBS += -L../wm-common -lwm-common
 
