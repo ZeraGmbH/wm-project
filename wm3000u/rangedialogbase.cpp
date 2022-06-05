@@ -1,7 +1,7 @@
-//Added by qt3to4:
 #include <QShowEvent>
 #include "rangedialogbase.h"
 #include "ui_rangedialogbase.h"
+#include "wmglobal.h"
 
 RangeDialogBase::RangeDialogBase( QWidget* parent ):
     QDialog(parent),

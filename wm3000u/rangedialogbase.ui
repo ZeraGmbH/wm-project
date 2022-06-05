@@ -97,7 +97,8 @@
  <layoutdefault spacing="6" margin="11"/>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <includes>
-  <include location="local">wmglobal.h</include>
+ <include location="local">range.h</include>
+ <include location="local">confdata.h</include>
  </includes>
  <resources/>
  <connections>

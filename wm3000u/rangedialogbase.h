@@ -6,7 +6,8 @@
 #include <QComboBox>
 #include <QGridLayout>
 #include <QLabel>
-#include "wmglobal.h"
+#include "range.h"
+#include "confdata.h"
 
 
 namespace Ui {
