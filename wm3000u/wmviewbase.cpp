@@ -182,7 +182,7 @@ void WMViewBase::ActualizeStates()
 	    m_pRangeXLabel->show();
 	    break;
 	case Un_EVT:
-	    m_pRangeXLabel->setText(QString("ChEVT=%1").arg(m_ConfData.m_sRangeEVT));
+	    m_pRangeXLabel->setText(QString("ChEVT=%1").arg(m_ConfData.m_sRangeET));
 	    m_pRangeXLabel->show();
 	    break;
 	case Un_nConvent:

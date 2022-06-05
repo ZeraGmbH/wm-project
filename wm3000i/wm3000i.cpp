@@ -141,7 +141,7 @@ cWM3000I::cWM3000I()
     
     m_ConfData.m_sRangeNVorgabe = "Auto";
     m_ConfData.m_sRangeXVorgabe = "Auto";
-    m_ConfData.m_sRangeECTVorgabe = "Auto";
+    m_ConfData.m_sRangeETVorgabe = "Auto";
     
     DspIFace = new cDspIFace (m_ConfData.m_sADSPFile, TCPConfig.dspHost, TCPConfig.dspPort);
     connect(DspIFace,SIGNAL(iFaceAsync(const QString&)),this,SLOT(DspIFaceAsyncDataSlot(const QString&))); 
@@ -327,13 +327,13 @@ void cWM3000I::ActionHandler(int entryAHS)
 	// abgleich der vorgaben 
 	if  ( m_ConfData.m_sRangeNVorgabe != QString("Auto") ) m_ConfData.m_sRangeNSoll = m_ConfData.m_sRangeNVorgabe;
 	if  ( m_ConfData.m_sRangeXVorgabe != QString("Auto") ) m_ConfData.m_sRangeXSoll = m_ConfData.m_sRangeXVorgabe;
-	if  ( m_ConfData.m_sRangeECTVorgabe != QString("Auto") ) m_ConfData.m_sRangeECTSoll = m_ConfData.m_sRangeECTVorgabe;
+	if  ( m_ConfData.m_sRangeETVorgabe != QString("Auto") ) m_ConfData.m_sRangeETSoll = m_ConfData.m_sRangeETVorgabe;
 	
 	// das hier war vorher syncrange .... jetzt angepasst auf statemachine
 	if (m_ConfData.m_bSimulation) { // wir sind durch fehler oder sonst wie in sim.
 	    m_ConfData.m_sRangeN = m_ConfData.m_sRangeNSoll; // wir tun so als ob alles gesetzt worden wäre	
 	    m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
-	    m_ConfData.m_sRangeECT = m_ConfData.m_sRangeECTSoll;
+	    m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
 	    emit SendConfDataSignal(&m_ConfData); // und teilen dies mit
 	    AHS = wm3000Idle;
 	}
@@ -448,11 +448,11 @@ void cWM3000I::ActionHandler(int entryAHS)
 		    break;
 		case In_ECT:
 		    rng = Range(rss,m_sECTRangeList);
-		    m_ConfData.m_sRangeECT = rng->Name();
-		    if (m_ConfData.m_sRangeECT != m_ConfData.m_sRangeECTSoll)
+		    m_ConfData.m_sRangeET = rng->Name();
+		    if (m_ConfData.m_sRangeET != m_ConfData.m_sRangeETSoll)
 		    {
 			StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
-			PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeECTSoll,m_sECTRangeList)->Selector());
+			PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeETSoll,m_sECTRangeList)->Selector());
 		    }
 		    else
 			m_ActTimer->start(0,wm3000Continue);
@@ -493,7 +493,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 		m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
 		break;
 	    case In_ECT:
-		m_ConfData.m_sRangeECT = m_ConfData.m_sRangeECTSoll;
+		m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
 		break;
 	    default :		
 		break;
@@ -1401,7 +1401,7 @@ case ConfigurationTestTMode:
 		    break;
 		case In_ECT:
 		case In_nConvent: // wir lesen dies in jedem fall    
-		    PCBIFace->readGainCorrection(1,  Range(m_ConfData.m_sRangeECT,m_sECTRangeList)->Selector(), ActValues.RMSXSek);
+		    PCBIFace->readGainCorrection(1,  Range(m_ConfData.m_sRangeET,m_sECTRangeList)->Selector(), ActValues.RMSXSek);
 		}
 		AHS++;
 	    }
@@ -1448,7 +1448,7 @@ case ConfigurationTestTMode:
 		    break;
 		case In_ECT:
 		case In_nConvent:    
-		    PCBIFace->readPhaseCorrection(1, Range(m_ConfData.m_sRangeECT,m_sECTRangeList)->Selector(), ActValues.Frequenz);
+		    PCBIFace->readPhaseCorrection(1, Range(m_ConfData.m_sRangeET,m_sECTRangeList)->Selector(), ActValues.Frequenz);
 		}
 		AHS++;
 	    }
@@ -1497,7 +1497,7 @@ case ConfigurationTestTMode:
                     PCBIFace->readOffsetCorrection(1, Range(m_ConfData.m_sRangeX,m_sNRangeList)->Selector(), ActValues.RMSXSek);
                 break;
                 default:
-                    PCBIFace->readOffsetCorrection(1, Range(m_ConfData.m_sRangeECT,m_sECTRangeList)->Selector(), ActValues.RMSXSek);
+                    PCBIFace->readOffsetCorrection(1, Range(m_ConfData.m_sRangeET,m_sECTRangeList)->Selector(), ActValues.RMSXSek);
                 break;
             }
             AHS++;
@@ -1707,7 +1707,7 @@ case ConfigurationTestTMode:
 			break;
 		    case In_ECT:
 			if (MaxValues.maxRdy > 0) // in dieser betriebsart dürfen wir nur testen wenn gültige max data vorhanden waren
-			    bOvlx = TestOverload(m_sECTRangeList, m_ConfData.m_sRangeECT, MaxValues.maxx);	
+			    bOvlx = TestOverload(m_sECTRangeList, m_ConfData.m_sRangeET, MaxValues.maxx);	
 			else
 			    bOvlx = false;
 			break;
@@ -1751,8 +1751,8 @@ case ConfigurationTestTMode:
 			break;
 		    case In_ECT:
 			if ( bOvlx || (MaxValues.maxRdy > 0) )
-			    mustDo |= SelectRange(m_sECTRangeList, m_ConfData.m_sRangeECT, m_ConfData.m_sRangeECTSoll, m_ConfData.m_sRangeECTVorgabe, MaxValues.maxx, bOvlx);
-            bOverloadMax = ( bOvln && (m_ConfData.m_sRangeN == m_sNRangeList.first()->Name())) || ( bOvlx && (m_ConfData.m_sRangeECT == m_sECTRangeList.first()->Name()) );
+			    mustDo |= SelectRange(m_sECTRangeList, m_ConfData.m_sRangeET, m_ConfData.m_sRangeETSoll, m_ConfData.m_sRangeETVorgabe, MaxValues.maxx, bOvlx);
+            bOverloadMax = ( bOvln && (m_ConfData.m_sRangeN == m_sNRangeList.first()->Name())) || ( bOvlx && (m_ConfData.m_sRangeET == m_sECTRangeList.first()->Name()) );
 			break;
 	
 		    default : 
@@ -2160,7 +2160,7 @@ case ConfigurationTestTMode:
     if (PhaseNodeMeasInfo->m_nMMode == In_IxAbs)
         NewConfData.m_sRangeXVorgabe = PhaseNodeMeasInfo->m_srngX; // bereich kanal x
 	else
-        NewConfData.m_sRangeECTVorgabe = PhaseNodeMeasInfo->m_srngX; // bereich kanal x
+        NewConfData.m_sRangeETVorgabe = PhaseNodeMeasInfo->m_srngX; // bereich kanal x
 	m_PhaseNodeMeasState = PhaseNodeMeasExec1; // hier müssen wir später weitermachen
 	QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(PhaseJustSyncSlot())); 
 	SetConfDataSlot(&NewConfData); // und die neue konfiguration
@@ -2172,7 +2172,7 @@ case ConfigurationTestTMode:
     case PhaseNodeMeasExec1: // konfiguriert ist
 	NewConfData.m_sRangeNSoll = NewConfData.m_sRangeN =NewConfData.m_sRangeNVorgabe; // bereich kanal n
 	NewConfData.m_sRangeXSoll = NewConfData.m_sRangeX = NewConfData.m_sRangeXVorgabe; // bereich kanal x
-	NewConfData.m_sRangeECTSoll = NewConfData.m_sRangeECT = NewConfData.m_sRangeECTVorgabe; // bereich kanal x
+	NewConfData.m_sRangeETSoll = NewConfData.m_sRangeET = NewConfData.m_sRangeETVorgabe; // bereich kanal x
 	m_PhaseNodeMeasState = PhaseNodeMeasExec2; // hier müssen wir später weitermachen
 	mCount = PhaseNodeMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
     m_sJustText = trUtf8("Einschwingzeit läuft" );
@@ -2472,7 +2472,7 @@ case ConfigurationTestTMode:
          if (OffsetMeasInfo->m_nMMode == In_IxAbs)
             NewConfData.m_sRangeXVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
          else
-            NewConfData.m_sRangeECTVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
+            NewConfData.m_sRangeETVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
          m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
          QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(OffsetJustSyncSlot()));
          SetConfDataSlot(&NewConfData); // und die neue konfiguration
@@ -2485,7 +2485,7 @@ case ConfigurationTestTMode:
     case OffsetMeasWM3000Exec1Var:
         NewConfData.m_sRangeNSoll = NewConfData.m_sRangeN =NewConfData.m_sRangeNVorgabe; // bereich kanal n
         NewConfData.m_sRangeXSoll = NewConfData.m_sRangeX = NewConfData.m_sRangeXVorgabe; // bereich kanal x
-        NewConfData.m_sRangeECTSoll = NewConfData.m_sRangeECT = NewConfData.m_sRangeECTVorgabe; // bereich kanal x
+        NewConfData.m_sRangeETSoll = NewConfData.m_sRangeET = NewConfData.m_sRangeETVorgabe; // bereich kanal x
         m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
         mCount = OffsetMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
         m_sJustText = trUtf8("Einschwingzeit läuft" );
@@ -3348,7 +3348,7 @@ void cWM3000I::DefaultSettings(cConfData& cdata) // alle einstellungen default
     
     cdata.m_sRangeN = m_ConfData.m_sRangeNVorgabe = m_ConfData.m_sRangeNSoll  = "15.0A";
     cdata.m_sRangeX = m_ConfData.m_sRangeXVorgabe = m_ConfData.m_sRangeXSoll  = "15.0A";
-    cdata.m_sRangeECT = m_ConfData.m_sRangeECTVorgabe = m_ConfData.m_sRangeECTSoll = "15.0V";
+    cdata.m_sRangeET = m_ConfData.m_sRangeETVorgabe = m_ConfData.m_sRangeETSoll = "15.0V";
     
     cdata.FirstASDU = 1;
     cdata.LastASDU = 1;
@@ -3389,8 +3389,8 @@ void cWM3000I::DefaultSettingsMeasurement(cConfData& cdata) // alle mess einstel
     cdata.m_NSecondary = "15A";
     cdata.m_XPrimary = "15A";
     cdata.m_XSecondary = "15A";
-    cdata.m_ECTPrimary = "15A";
-    cdata.m_ECTSecondary = "15V";
+    cdata.m_ETPrimary = "15A";
+    cdata.m_ETSecondary = "15V";
 }
 
 
@@ -3925,7 +3925,7 @@ void cWM3000I::StoreResultsSlot()
 	    s = m_ConfData.m_sRangeX;
 	    break;
 	case In_ECT:
-	    s = m_ConfData.m_sRangeECT;
+	    s = m_ConfData.m_sRangeET;
 	    break;
 	case In_nConvent: 
 	    s = "-----"; 	  
@@ -4431,8 +4431,8 @@ void cWM3000I::SimulatedMeasurement()
         ActValues.dspActValues.rmsxf = 0.0; // differenz vektor = 0
         break;
     case  In_ECT:
-        e =  m_ConfData.m_ECTSecondary;
-        r = Range(m_ConfData.m_sRangeECT,m_sECTRangeList);
+        e =  m_ConfData.m_ETSecondary;
+        r = Range(m_ConfData.m_sRangeET,m_sECTRangeList);
         val = r->Value();
         rej = r->Rejection();
         ActValues.dspActValues.rmsxf = e.toDouble() * rnd;
@@ -4524,8 +4524,8 @@ void cWM3000I::CmpActValues() {  // here we will do all the necessary computatio
         SekX = m_ConfData.m_XSecondary;
         break;
     case In_ECT:
-        PrimX = m_ConfData.m_ECTPrimary;
-        SekX = m_ConfData.m_ECTSecondary;
+        PrimX = m_ConfData.m_ETPrimary;
+        SekX = m_ConfData.m_ETSecondary;
         break;
     }
     
@@ -4551,7 +4551,7 @@ void cWM3000I::CmpActValues() {  // here we will do all the necessary computatio
         rej = r->Rejection();
 	break;
     case In_ECT:
-        r = Range(m_ConfData.m_sRangeECT,m_sECTRangeList);
+        r = Range(m_ConfData.m_sRangeET,m_sECTRangeList);
         val = r->Value();
         rej = r->Rejection();
 	break;
@@ -4653,8 +4653,8 @@ void cWM3000I::CmpRMSValues()
         SekX = m_ConfData.m_XSecondary;
     break;
     case In_ECT:
-        PrimX = m_ConfData.m_ECTPrimary;
-        SekX = m_ConfData.m_ECTSecondary;
+        PrimX = m_ConfData.m_ETPrimary;
+        SekX = m_ConfData.m_ETSecondary;
     break;
     }
 
@@ -4680,7 +4680,7 @@ void cWM3000I::CmpRMSValues()
         rej = range->Rejection();
     break;
     case In_ECT:
-        range = Range(m_ConfData.m_sRangeECT,m_sECTRangeList);
+        range = Range(m_ConfData.m_sRangeET,m_sECTRangeList);
         val = range->Value();
         rej = range->Rejection();
     break;
@@ -4781,7 +4781,7 @@ void cWM3000I::CorrActValues() {  // here we will do all the necessary correctio
                 range = Range(m_ConfData.m_sRangeX, m_sXRangeList);
                 break;
             case In_ECT:
-                range = Range(m_ConfData.m_sRangeECT, m_sECTRangeList);
+                range = Range(m_ConfData.m_sRangeET, m_sECTRangeList);
                 break;
             }
 
@@ -4845,7 +4845,7 @@ void cWM3000I::CorrRMSValues()
                 range = Range(m_ConfData.m_sRangeX, m_sXRangeList);
                 break;
             case In_ECT:
-                range = Range(m_ConfData.m_sRangeECT, m_sECTRangeList);
+                range = Range(m_ConfData.m_sRangeET, m_sECTRangeList);
                 break;
             }
 

@@ -27,10 +27,10 @@ void RangeDialogBase::ActualizeDialog() // aktualisiert dialoganzeige
     ui->RangeXComboBox->setCurrentItem(m_sNXItemList.findIndex(m_ConfData.m_sRangeXVorgabe));
     else
     ui->RangeXComboBox->setCurrentItem(m_sNXItemList.findIndex(m_ConfData.m_sRangeX));
-    if ( m_ConfData.m_sRangeECTVorgabe == "Auto")
-    ui->RangeECTComboBox->setCurrentItem(m_sECTItemList.findIndex(m_ConfData.m_sRangeECTVorgabe));
+    if ( m_ConfData.m_sRangeETVorgabe == "Auto")
+    ui->RangeECTComboBox->setCurrentItem(m_sECTItemList.findIndex(m_ConfData.m_sRangeETVorgabe));
     else
-    ui->RangeECTComboBox->setCurrentItem(m_sECTItemList.findIndex(m_ConfData.m_sRangeECT));
+    ui->RangeECTComboBox->setCurrentItem(m_sECTItemList.findIndex(m_ConfData.m_sRangeET));
     switch (m_ConfData.m_nMeasMode) {
     case In_IxDiff:
     case In_IxAbs:
@@ -96,8 +96,8 @@ void RangeDialogBase::SetXRangeSlot( const QString & xr)
 
 void RangeDialogBase::SetECTRangeSlot( const QString & er)
 {
-    m_ConfData.m_sRangeECTVorgabe=er;
-    if ( er != QString("Auto") ) m_ConfData.m_sRangeECTSoll=er;
+    m_ConfData.m_sRangeETVorgabe=er;
+    if ( er != QString("Auto") ) m_ConfData.m_sRangeETSoll=er;
     emit SendRange(&m_ConfData);
 }
 

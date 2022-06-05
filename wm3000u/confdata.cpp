@@ -19,10 +19,10 @@ void cConfData::serialize(QDataStream& ts)
     ts << m_MacSourceAdr << m_MacDestAdr;
     ts << m_sOETFile << m_sResultFile; 
     ts << m_NPrimary << m_NSecondary << m_XPrimary << m_XSecondary;
-    ts << m_EVTPrimary << m_EVTSecondary;
+    ts << m_ETPrimary << m_ETSecondary;
     ts << m_sRangeN << m_sRangeNSoll << m_sRangeNVorgabe;
     ts << m_sRangeX << m_sRangeXSoll << m_sRangeXVorgabe;
-    ts << m_sRangeEVT << m_sRangeEVTSoll << m_sRangeEVTVorgabe;
+    ts << m_sRangeET << m_sRangeETSoll << m_sRangeETVorgabe;
     ts << m_sADSPFile;
     ts << m_nPriorityTagged;
     ts << m_nEthTypeHeader;
@@ -51,10 +51,10 @@ bool cConfData::deserialize(QDataStream& ts)
         ts >> m_MacSourceAdr >> m_MacDestAdr;
         ts >> m_sOETFile >> m_sResultFile;
         ts >> m_NPrimary >> m_NSecondary >> m_XPrimary >> m_XSecondary;
-        ts >> m_EVTPrimary >> m_EVTSecondary;
+        ts >> m_ETPrimary >> m_ETSecondary;
         ts >> m_sRangeN >> m_sRangeNSoll >> m_sRangeNVorgabe;
         ts >> m_sRangeX >> m_sRangeXSoll >> m_sRangeXVorgabe;
-        ts >> m_sRangeEVT >> m_sRangeEVTSoll >> m_sRangeEVTVorgabe;
+        ts >> m_sRangeET >> m_sRangeETSoll >> m_sRangeETVorgabe;
         ts >> m_sADSPFile;
         ts >> m_nPriorityTagged;
         ts >> m_nEthTypeHeader;

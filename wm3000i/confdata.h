@@ -57,11 +57,11 @@ public:
     // bereiche für übersetzungsverhältnisse
     QString m_NPrimary,m_NSecondary;  // normal wandler primär, sekundär werte
     QString m_XPrimary,m_XSecondary; // x wandler (prüfling)
-    QString m_ECTPrimary,m_ECTSecondary; // ect (rogowsky)
+    QString m_ETPrimary,m_ETSecondary; // ect (rogowsky)
     // anwählbare bereiche 
     QString m_sRangeN,m_sRangeNSoll,m_sRangeNVorgabe; // bereichN gesetzt, soll, gewählt
     QString m_sRangeX,m_sRangeXSoll,m_sRangeXVorgabe; // bereichDUT gesetzt, soll, gewählt
-    QString m_sRangeECT,m_sRangeECTSoll,m_sRangeECTVorgabe;  // bereichECT  gesetzt, soll, gewählt
+    QString m_sRangeET,m_sRangeETSoll,m_sRangeETVorgabe;  // bereichECT/EVT  gesetzt, soll, gewählt
     QString m_sADSPFile;
 };
 

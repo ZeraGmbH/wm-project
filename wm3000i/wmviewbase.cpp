@@ -172,7 +172,7 @@ void WMViewBase::ActualizeStates()
             m_pRangeXLabel->show();
             break;
         case In_ECT:
-            m_pRangeXLabel->setText(QString("ChECT=%1").arg(m_ConfData.m_sRangeECT));
+            m_pRangeXLabel->setText(QString("ChECT=%1").arg(m_ConfData.m_sRangeET));
             m_pRangeXLabel->show();
             break;
         case In_nConvent:

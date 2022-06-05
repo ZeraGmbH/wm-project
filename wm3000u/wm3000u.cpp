@@ -141,7 +141,7 @@ cWM3000U::cWM3000U()
 
     m_ConfData.m_sRangeNVorgabe = "Auto";
     m_ConfData.m_sRangeXVorgabe = "Auto";
-    m_ConfData.m_sRangeEVTVorgabe = "Auto";
+    m_ConfData.m_sRangeETVorgabe = "Auto";
 
     DspIFace = new cDspIFace (m_ConfData.m_sADSPFile, TCPConfig.dspHost, TCPConfig.dspPort);
     connect(DspIFace,SIGNAL(iFaceAsync(const QString&)),this,SLOT(DspIFaceAsyncDataSlot(const QString&)));
@@ -366,13 +366,13 @@ void cWM3000U::ActionHandler(int entryAHS)
     // abgleich der vorgaben
     if  ( m_ConfData.m_sRangeNVorgabe != QString("Auto") ) m_ConfData.m_sRangeNSoll = m_ConfData.m_sRangeNVorgabe;
     if  ( m_ConfData.m_sRangeXVorgabe != QString("Auto") ) m_ConfData.m_sRangeXSoll = m_ConfData.m_sRangeXVorgabe;
-    if  ( m_ConfData.m_sRangeEVTVorgabe != QString("Auto") ) m_ConfData.m_sRangeEVTSoll = m_ConfData.m_sRangeEVTVorgabe;
+    if  ( m_ConfData.m_sRangeETVorgabe != QString("Auto") ) m_ConfData.m_sRangeETSoll = m_ConfData.m_sRangeETVorgabe;
 
     // das hier war vorher syncrange .... jetzt angepasst auf statemachine
     if (m_ConfData.m_bSimulation) { // wir sind durch fehler oder sonst wie in sim.
         m_ConfData.m_sRangeN = m_ConfData.m_sRangeNSoll; // wir tun so als ob alles gesetzt worden wäre
         m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
-        m_ConfData.m_sRangeEVT = m_ConfData.m_sRangeEVTSoll;
+        m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
         emit SendConfDataSignal(&m_ConfData); // und teilen dies mit
         AHS = wm3000Idle;
     }
@@ -482,11 +482,11 @@ void cWM3000U::ActionHandler(int entryAHS)
             break;
         case Un_EVT:
             rng = Range(rss,m_sEVTRangeList);
-            m_ConfData.m_sRangeEVT = rng->Name();
-            if (m_ConfData.m_sRangeEVT != m_ConfData.m_sRangeEVTSoll)
+            m_ConfData.m_sRangeET = rng->Name();
+            if (m_ConfData.m_sRangeET != m_ConfData.m_sRangeETSoll)
             {
             StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
-            PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeEVTSoll,m_sEVTRangeList)->Selector());
+            PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeETSoll,m_sEVTRangeList)->Selector());
             }
             else
             m_ActTimer->start(0,wm3000Continue);
@@ -525,7 +525,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
         break;
         case Un_EVT:
-        m_ConfData.m_sRangeEVT = m_ConfData.m_sRangeEVTSoll;
+        m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
         break;
         default :
         break;
@@ -1379,7 +1379,7 @@ case ConfigurationTestSenseMode:
             if ( m_ConfData.m_nMeasMode == Un_UxAbs)
                 PCBIFace->readGainCorrection(1,  Range(m_ConfData.m_sRangeX,m_sNRangeList)->Selector(), ActValues.RMSXSek);
             else
-                PCBIFace->readGainCorrection(1,  Range(m_ConfData.m_sRangeEVT,m_sEVTRangeList)->Selector(), ActValues.RMSXSek);
+                PCBIFace->readGainCorrection(1,  Range(m_ConfData.m_sRangeET,m_sEVTRangeList)->Selector(), ActValues.RMSXSek);
 
             AHS++;
         }
@@ -1423,7 +1423,7 @@ case ConfigurationTestSenseMode:
             if ( m_ConfData.m_nMeasMode == Un_UxAbs)
                 PCBIFace->readPhaseCorrection(1, Range(m_ConfData.m_sRangeX,m_sNRangeList)->Selector(), ActValues.Frequenz);
             else
-                PCBIFace->readPhaseCorrection(1, Range(m_ConfData.m_sRangeEVT,m_sEVTRangeList)->Selector(), ActValues.Frequenz);
+                PCBIFace->readPhaseCorrection(1, Range(m_ConfData.m_sRangeET,m_sEVTRangeList)->Selector(), ActValues.Frequenz);
 
             AHS++;
         }
@@ -1468,7 +1468,7 @@ case ConfigurationTestSenseMode:
             if ( m_ConfData.m_nMeasMode == Un_UxAbs)
                 PCBIFace->readOffsetCorrection(1, Range(m_ConfData.m_sRangeX,m_sNRangeList)->Selector(), ActValues.RMSXSek);
             else
-                PCBIFace->readOffsetCorrection(1, Range(m_ConfData.m_sRangeEVT,m_sEVTRangeList)->Selector(), ActValues.RMSXSek);
+                PCBIFace->readOffsetCorrection(1, Range(m_ConfData.m_sRangeET,m_sEVTRangeList)->Selector(), ActValues.RMSXSek);
 
             AHS++;
         }
@@ -1629,8 +1629,8 @@ case ConfigurationTestSenseMode:
                 bOverloadMax = true;
             break;
             case Un_EVT:
-            mustDo |= SelectRange(m_sEVTRangeList,m_ConfData.m_sRangeEVT,m_ConfData.m_sRangeEVTSoll,m_ConfData.m_sRangeEVTVorgabe,MaxValues.maxx, bOvlx);
-            if ( bOvlx && (m_ConfData.m_sRangeEVT == m_sEVTRangeList.first()->Name()) )
+            mustDo |= SelectRange(m_sEVTRangeList,m_ConfData.m_sRangeET,m_ConfData.m_sRangeETSoll,m_ConfData.m_sRangeETVorgabe,MaxValues.maxx, bOvlx);
+            if ( bOvlx && (m_ConfData.m_sRangeET == m_sEVTRangeList.first()->Name()) )
                 bOverloadMax = true;
             break;
             default : break;
@@ -2003,7 +2003,7 @@ case ConfigurationTestSenseMode:
         if (PhaseNodeMeasInfo->m_nMMode == Un_UxAbs)
             NewConfData.m_sRangeXVorgabe = PhaseNodeMeasInfo->m_srngX; // bereich kanal x
         else
-            NewConfData.m_sRangeEVTVorgabe = PhaseNodeMeasInfo->m_srngX; // bereich kanal x
+            NewConfData.m_sRangeETVorgabe = PhaseNodeMeasInfo->m_srngX; // bereich kanal x
         m_PhaseNodeMeasState = PhaseNodeMeasExec1; // hier müssen wir später weitermachen
         QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(PhaseJustSyncSlot()));
         SetConfDataSlot(&NewConfData); // und die neue konfiguration
@@ -2015,7 +2015,7 @@ case ConfigurationTestSenseMode:
     case PhaseNodeMeasExec1: // konfiguriert ist
         NewConfData.m_sRangeNSoll = NewConfData.m_sRangeN =NewConfData.m_sRangeNVorgabe; // bereich kanal n
         NewConfData.m_sRangeXSoll = NewConfData.m_sRangeX = NewConfData.m_sRangeXVorgabe; // bereich kanal x
-        NewConfData.m_sRangeEVTSoll = NewConfData.m_sRangeEVT = NewConfData.m_sRangeEVTVorgabe; // bereich kanal x
+        NewConfData.m_sRangeETSoll = NewConfData.m_sRangeET = NewConfData.m_sRangeETVorgabe; // bereich kanal x
         m_PhaseNodeMeasState = PhaseNodeMeasExec2; // hier müssen wir später weitermachen
         mCount = PhaseNodeMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
         m_sJustText = trUtf8("Einschwingzeit läuft" );
@@ -2307,7 +2307,7 @@ case ConfigurationTestSenseMode:
          if (OffsetMeasInfo->m_nMMode == Un_UxAbs)
             NewConfData.m_sRangeXVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
          else
-            NewConfData.m_sRangeEVTVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
+            NewConfData.m_sRangeETVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
          m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
          QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(OffsetJustSyncSlot()));
          SetConfDataSlot(&NewConfData); // und die neue konfiguration
@@ -2320,7 +2320,7 @@ case ConfigurationTestSenseMode:
     case OffsetMeasWM3000Exec1Var:
         NewConfData.m_sRangeNSoll = NewConfData.m_sRangeN =NewConfData.m_sRangeNVorgabe; // bereich kanal n
         NewConfData.m_sRangeXSoll = NewConfData.m_sRangeX = NewConfData.m_sRangeXVorgabe; // bereich kanal x
-        NewConfData.m_sRangeEVTSoll = NewConfData.m_sRangeEVT = NewConfData.m_sRangeEVTVorgabe; // bereich kanal x
+        NewConfData.m_sRangeETSoll = NewConfData.m_sRangeET = NewConfData.m_sRangeETVorgabe; // bereich kanal x
         m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
         mCount = OffsetMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
         m_sJustText = trUtf8("Einschwingzeit läuft" );
@@ -3176,7 +3176,7 @@ void cWM3000U::DefaultSettings(cConfData& cdata) // alle einstellungen default
 
     cdata.m_sRangeN = m_ConfData.m_sRangeNVorgabe = m_ConfData.m_sRangeNSoll  = "480V";
     cdata.m_sRangeX = m_ConfData.m_sRangeXVorgabe = m_ConfData.m_sRangeXSoll  = "480V";
-    cdata.m_sRangeEVT = m_ConfData.m_sRangeEVTVorgabe = m_ConfData.m_sRangeEVTSoll = "15.0V";
+    cdata.m_sRangeET = m_ConfData.m_sRangeETVorgabe = m_ConfData.m_sRangeETSoll = "15.0V";
 
     cdata.FirstASDU = 1;
     cdata.LastASDU = 1;
@@ -3217,8 +3217,8 @@ void cWM3000U::DefaultSettingsMeasurement(cConfData& cdata) // alle mess einstel
     cdata.m_NSecondary = "100V";
     cdata.m_XPrimary = "100V";
     cdata.m_XSecondary = "100V";
-    cdata.m_EVTPrimary = "100V";
-    cdata.m_EVTSecondary = "15.0V";
+    cdata.m_ETPrimary = "100V";
+    cdata.m_ETSecondary = "15.0V";
 }
 
 
@@ -3758,7 +3758,7 @@ void cWM3000U::StoreResultsSlot()
         s = m_ConfData.m_sRangeX;
         break;
     case Un_EVT:
-        s = m_ConfData.m_sRangeEVT;
+        s = m_ConfData.m_sRangeET;
         break;
     case Un_nConvent:
         s = "-----";
@@ -4249,8 +4249,8 @@ void cWM3000U::SimulatedMeasurement()
         rej = r->Rejection();
     break;
               case Un_EVT:
-        e =  m_ConfData.m_EVTSecondary;
-        r = Range(m_ConfData.m_sRangeEVT,m_sEVTRangeList);
+        e =  m_ConfData.m_ETSecondary;
+        r = Range(m_ConfData.m_sRangeET,m_sEVTRangeList);
         val = r->Value();
         rej = r->Rejection();
     break;
@@ -4345,8 +4345,8 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
         SekX = m_ConfData.m_XSecondary;
         break;
     case Un_EVT:
-        PrimX = m_ConfData.m_EVTPrimary;
-        SekX = m_ConfData.m_EVTSecondary;
+        PrimX = m_ConfData.m_ETPrimary;
+        SekX = m_ConfData.m_ETSecondary;
         break;
     }
 
@@ -4372,7 +4372,7 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
         rej = r->Rejection();
         break;
     case Un_EVT:
-        r = Range(m_ConfData.m_sRangeEVT,m_sEVTRangeList);
+        r = Range(m_ConfData.m_sRangeET,m_sEVTRangeList);
         val = r->Value();
         rej = r->Rejection();
         break;
@@ -4457,8 +4457,8 @@ void cWM3000U::CmpRMSValues()
         SekX = m_ConfData.m_XSecondary;
     break;
     case Un_EVT:
-        PrimX = m_ConfData.m_EVTPrimary;
-        SekX = m_ConfData.m_EVTSecondary;
+        PrimX = m_ConfData.m_ETPrimary;
+        SekX = m_ConfData.m_ETSecondary;
     break;
     }
 
@@ -4484,7 +4484,7 @@ void cWM3000U::CmpRMSValues()
         rej = range->Rejection();
     break;
     case Un_EVT:
-        range = Range(m_ConfData.m_sRangeEVT,m_sEVTRangeList);
+        range = Range(m_ConfData.m_sRangeET,m_sEVTRangeList);
         val = range->Value();
         rej = range->Rejection();
     break;
@@ -4577,7 +4577,7 @@ void cWM3000U::CorrActValues()
             if (m_ConfData.m_nMeasMode == Un_UxAbs)
                 r = Range(m_ConfData.m_sRangeX, m_sXRangeList);
             else
-                r = Range(m_ConfData.m_sRangeEVT, m_sEVTRangeList);
+                r = Range(m_ConfData.m_sRangeET, m_sEVTRangeList);
 
             if (measOffsetCorrectionHash.contains(key = r->getOffsKorrKey()))
                 offsetCorr = measOffsetCorrectionHash[key];
@@ -4635,7 +4635,7 @@ void cWM3000U::CorrRMSValues()
             if (m_ConfData.m_nMeasMode == Un_UxAbs)
                 range = Range(m_ConfData.m_sRangeX, m_sXRangeList);
             else
-                range = Range(m_ConfData.m_sRangeEVT, m_sEVTRangeList);
+                range = Range(m_ConfData.m_sRangeET, m_sEVTRangeList);
 
             if (measOffsetCorrectionHash.contains(key = range->getOffsKorrKey()))
                 offsetCorr = measOffsetCorrectionHash[key];

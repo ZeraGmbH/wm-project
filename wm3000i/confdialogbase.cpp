@@ -287,12 +287,12 @@ void ConfDialogBase::SetRatioMenu()
     ui->xSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_XSecondary));
 
 
-    ui->RatioPrimECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ECTPrimary));
-    ui->RatioSekECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ECTSecondary));
-    ui->ectPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ECTPrimary));
-    ui->ectPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_ECTPrimary));
-    ui->ectSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ECTSecondary));
-    ui->ectSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_ECTSecondary));
+    ui->RatioPrimECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETPrimary));
+    ui->RatioSekECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETSecondary));
+    ui->ectPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ETPrimary));
+    ui->ectPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_ETPrimary));
+    ui->ectSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ETSecondary));
+    ui->ectSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_ETSecondary));
 }
 
 
@@ -313,8 +313,8 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
         m_ConfDataTemp.m_XSecondary = genRatioText( ui->RatioSekXLineEdit->text(), ui->xSek_3radioButton, ui->xSek_w3radioButton);
         break;
     case In_ECT:
-        m_ConfDataTemp.m_ECTPrimary = genRatioText( ui->RatioPrimECTLineEdit->text(), ui->ectPrim_3radioButton, ui->ectPrim_w3radioButton);
-        m_ConfDataTemp.m_ECTSecondary = genRatioText( ui->RatioSekECTLineEdit->text(), ui->ectSek_3radioButton, ui->ectSek_w3radioButton);
+        m_ConfDataTemp.m_ETPrimary = genRatioText( ui->RatioPrimECTLineEdit->text(), ui->ectPrim_3radioButton, ui->ectPrim_w3radioButton);
+        m_ConfDataTemp.m_ETSecondary = genRatioText( ui->RatioSekECTLineEdit->text(), ui->ectSek_3radioButton, ui->ectSek_w3radioButton);
         break;
     }
 

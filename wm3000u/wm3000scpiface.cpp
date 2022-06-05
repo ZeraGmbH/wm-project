@@ -53,7 +53,7 @@ void cWM3000SCPIFace::ResetDevice()
     
     m_ConfDataTarget.m_sRangeNVorgabe = "480V";
     m_ConfDataTarget.m_sRangeXVorgabe = "480V";
-    m_ConfDataTarget.m_sRangeEVTVorgabe = "15.0V";
+    m_ConfDataTarget.m_sRangeETVorgabe = "15.0V";
     m_ConfDataTarget.m_bSimulation = false; // reset schaltet auf normalen messbetrieb
     m_ConfDataTarget.m_bRunning = true; // läuft 
     
@@ -499,7 +499,7 @@ void cWM3000SCPIFace::mSetRange(char* s)
 	{
 	case 0: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeNVorgabe;break;
 	case 1: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeXVorgabe;break;
-	case 2: sl = &m_sEVTItemList; nrange = &m_ConfDataTarget.m_sRangeEVTVorgabe;break;
+	case 2: sl = &m_sEVTItemList; nrange = &m_ConfDataTarget.m_sRangeETVorgabe;break;
 	default: break;
 	}
     
@@ -532,7 +532,7 @@ char* cWM3000SCPIFace::mGetRange()
     {
     case 0: s = m_ConfDataActual.m_sRangeN; break;
     case 1: s = m_ConfDataActual.m_sRangeX; break;
-    case 2: s = m_ConfDataActual.m_sRangeEVT; break;
+    case 2: s = m_ConfDataActual.m_sRangeET; break;
     default: break;
     }
     
@@ -778,7 +778,7 @@ char* cWM3000SCPIFace::mGetConfRatioEvt()
 {
     QString rs;
 
-    rs = QString("%1:%2").arg(m_ConfDataActual.m_EVTPrimary).arg(m_ConfDataActual.m_EVTSecondary);
+    rs = QString("%1:%2").arg(m_ConfDataActual.m_ETPrimary).arg(m_ConfDataActual.m_ETSecondary);
     return sAlloc(rs);
 }
 
@@ -788,8 +788,8 @@ void cWM3000SCPIFace::mSetConfRatioEvt(char* s)
     QString sprim, ssek; 
     if ( GetTransformerRatio(&s, sprim, ssek,true) )
     {
-        m_ConfDataTarget.m_EVTPrimary = sprim;
-        m_ConfDataTarget.m_EVTSecondary = ssek;
+        m_ConfDataTarget.m_ETPrimary = sprim;
+        m_ConfDataTarget.m_ETSecondary = ssek;
     }
 }
 
@@ -1669,7 +1669,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     
 	m_ConfDataTarget.m_sRangeNVorgabe = "Auto";
 	m_ConfDataTarget.m_sRangeXVorgabe = "Auto";
-	m_ConfDataTarget.m_sRangeEVTVorgabe = "Auto";
+	m_ConfDataTarget.m_sRangeETVorgabe = "Auto";
     
 	emit SendRange(&m_ConfDataTarget); // bereich automatik einstellen
 	m_nWait4What = wait4RangeAutomatic; 
