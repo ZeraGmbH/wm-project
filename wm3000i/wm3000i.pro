@@ -23,7 +23,6 @@ HEADERS	+= \
 	scpiface.h \
     wmviewbase.h \
     wmmeasvaluesbase.h \
-    wmoeviewbase.h \
     wmrawactualvalbase.h \
     confdialogbase.h \
     rangedialogbase.h \
@@ -48,7 +47,6 @@ SOURCES	+= \
 	scpiface.cpp \
     wmviewbase.cpp \
     wmmeasvaluesbase.cpp \
-    wmoeviewbase.cpp \
     wmrawactualvalbase.cpp \
     rangedialogbase.cpp \
     wmmeasconfigbase.cpp \
@@ -61,7 +59,6 @@ FORMS	= confdialogbase.ui \
 	rangedialogbase.ui \
 	wmmeasconfigbase.ui \
 	wmmeasvaluesbase.ui \
-	wmoeviewbase.ui \
 	wmrawactualconfigbase.ui \
 	wmrawactualvalbase.ui \
         wmoffsetvalbase.ui \

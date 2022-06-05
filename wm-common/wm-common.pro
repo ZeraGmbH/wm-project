@@ -9,6 +9,7 @@ HEADERS = \
     gui/lbrowser.h \
     gui/versionviewbase.h \
     gui/wmeditor.h \
+    gui/wmoeviewbase.h \
     settings/confdata.h \
     settings/ethadress.h \
     settings/sessionhelper.h \
@@ -35,6 +36,7 @@ SOURCES = \
     gui/lbrowser.cpp \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
+    gui/wmoeviewbase.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/sessionhelper.cpp \
@@ -51,6 +53,7 @@ SOURCES = \
 
 FORMS = \
     gui/en61850monitor.ui \
-    gui/versionviewbase.ui
+    gui/versionviewbase.ui \
+    gui/wmoeviewbase.ui
 
 INCLUDEPATH += settings
