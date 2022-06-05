@@ -15,7 +15,7 @@
 #include <qdialog.h>
 #include <QTimer>
 
-#include "ownerror.h"
+#include "ownerrorviewdata.h"
 #include "widgeom.h"
 #include "sessionhelper.h"
 

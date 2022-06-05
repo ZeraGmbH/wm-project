@@ -12,6 +12,7 @@ HEADERS = \
     gui/wmoeviewbase.h \
     settings/confdata.h \
     settings/ethadress.h \
+    settings/ownerrorviewdata.h \
     settings/sessionhelper.h \
     complex.h \
     cbiface.h \

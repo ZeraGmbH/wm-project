@@ -16,20 +16,9 @@
 #include <qstring.h>
 #include <qstringlist.h>
 
+#include "ownerrorviewdata.h"
 #include "wmglobal.h"
 #include "complex.h"
-
-struct cOwnErrorViewData
-{
-    bool m_bValid;
-    QString m_sTrName; // der wandlername
-    QString m_sPrim;
-    QString m_sSec;
-    QString m_sLoad;
-    QString m_sAmpl;
-    QString m_sPhase;
-};  
-    
 
 class cOwnError:public QObject
 {
