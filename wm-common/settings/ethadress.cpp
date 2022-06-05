@@ -60,13 +60,13 @@ bool cETHAdress::SetMacAdress(QString& s)
 
 QDataStream& operator << (QDataStream& qds, const cETHAdress& eadr)
 {
-    for (int i = 0; i < 6; i++) qds << (Q_UINT8&) (eadr.MacAdrByte[i]);
+    for (int i = 0; i < 6; i++) qds << (quint8&) (eadr.MacAdrByte[i]);
     return qds;
 }
 
 
 QDataStream& operator >> (QDataStream& qds, const cETHAdress& eadr)
 {
-    for (int i = 0; i < 6; i++) qds >> (Q_UINT8&) (eadr.MacAdrByte[i]);
+    for (int i = 0; i < 6; i++) qds >> (quint8&) (eadr.MacAdrByte[i]);
     return qds;
 }

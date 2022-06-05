@@ -57,7 +57,7 @@ void cClientSocketDevice::SendAnswer(int)
 }
 
 
-cDeviceServer::cDeviceServer( Q_UINT16 port, int backlog, QObject *parent, const char *name)
+cDeviceServer::cDeviceServer( quint16 port, int backlog, QObject *parent, const char *name)
     :Q3ServerSocket(port, backlog, parent, name) 
 {
 }    
@@ -88,7 +88,7 @@ void cDeviceServer::setPriority() // alle clients werden informiert
 	m_SCPIFacePtrList.at(i)->ReceivePriority(i);
 }
     
-cwm3000DeviceServer::cwm3000DeviceServer( Q_UINT16 port, int backlog, QObject * parent, const char * name)
+cwm3000DeviceServer::cwm3000DeviceServer( quint16 port, int backlog, QObject * parent, const char * name)
     :cDeviceServer( port, backlog, parent, name)
 {
     m_pV = 0;

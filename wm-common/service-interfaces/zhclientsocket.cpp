@@ -81,7 +81,7 @@ void cZHClientSocket::SendQuery(QString& cmds) { // gibt ein kommando an einem s
 }
 
 
-void cZHClientSocket::connectToHost (const QString& host,Q_UINT16 port)
+void cZHClientSocket::connectToHost (const QString& host,quint16 port)
 {
     m_nError = 0; // wir setzen neu auf
     m_bHostFound = false; 

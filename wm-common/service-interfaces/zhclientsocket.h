@@ -21,7 +21,7 @@ public:
     void SendCommand(QString&); // kommando an socket wenn nur ack als antwort akzeptiert wird
     void SendCommand(QString&,QStringList&); // kommando an socket mit list als mögl. antworten
     void SendQuery(QString&); // query socket intern antwortliste leer -> rückmeldung ist rückgabewert
-    virtual void connectToHost (const QString&,Q_UINT16);
+    virtual void connectToHost (const QString&,quint16);
     QString& GetAnswer();
     int GetError();
     void SetError(int);
