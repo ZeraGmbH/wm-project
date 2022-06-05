@@ -48,8 +48,8 @@ private slots:
     virtual void winkelmathcheckedSlot();
     virtual void winkeltechcheckedSlot();
     virtual void SendData2AppSlot();
-    virtual void PrimcheckedSlot();
-    virtual void SekcheckedSlot();
+    virtual void primCheckedSlot();
+    virtual void sekCheckedSlot();
 
 };
 

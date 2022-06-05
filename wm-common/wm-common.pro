@@ -14,6 +14,7 @@ HEADERS = \
     gui/versionviewbase.h \
     gui/wmeditor.h \
     gui/wmoeviewbase.h \
+    gui/wmrawactualconfigbase.h \
     settings/confdata.h \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
@@ -49,6 +50,7 @@ SOURCES = \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
     gui/wmoeviewbase.cpp \
+    gui/wmrawactualconfigbase.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/sessionhelper.cpp \
@@ -69,7 +71,8 @@ SOURCES = \
 FORMS = \
     gui/en61850monitor.ui \
     gui/versionviewbase.ui \
-    gui/wmoeviewbase.ui
+    gui/wmoeviewbase.ui \
+    gui/wmrawactualconfigbase.ui
 
 INCLUDEPATH += \
     dsp \

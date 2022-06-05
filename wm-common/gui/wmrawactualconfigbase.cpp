@@ -40,12 +40,12 @@ void WMRawActualConfigBase::ActualizeDisplay()
 
     ui->Amplx1radioButton->setChecked(isx1);
     ui->Amplx1_sqrt2radioButton->setChecked(!isx1);
-    
+
     bool ismathpos = (WinkelDisplayMode == mathpos);
-    
+
     ui->MathradioButton->setChecked(ismathpos);
     ui->TechradioButton->setChecked(!ismathpos);
-    
+
     if (dcMode)
     {
         ui->Amplx1_sqrt2radioButton->setEnabled(false);
@@ -60,7 +60,7 @@ void WMRawActualConfigBase::ActualizeDisplay()
     }
 
     bool isPrim = (AmplPrimSekMode == prim);
-    
+
     ui->PrimradioButton->setChecked(isPrim);
     ui->SekradioButton->setChecked(!isPrim);
 }
@@ -83,7 +83,7 @@ void WMRawActualConfigBase::amplx1_sq2checkedSlot()
 
 void WMRawActualConfigBase::winkelmathcheckedSlot()
 {
-    WinkelDisplayMode = mathpos; 
+    WinkelDisplayMode = mathpos;
     ActualizeDisplay();
 }
 
