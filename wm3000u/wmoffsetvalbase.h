@@ -6,7 +6,6 @@
 #include <QTimer>
 
 #include "wm3000u.h"
-#include "wmglobal.h"
 #include "widgeom.h"
 #include "confdata.h"
 #include "tools.h"
