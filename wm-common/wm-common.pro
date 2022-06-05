@@ -10,6 +10,7 @@ HEADERS = \
     gui/versionviewbase.h \
     gui/wmeditor.h \
     settings/confdata.h \
+    settings/sessionhelper.h \
     complex.h \
     cbiface.h \
     cmdinterpret.h \
@@ -22,7 +23,6 @@ HEADERS = \
     range.h \
     releaseinfo.h \
     scpi.h \
-    sessionhelper.h \
     tcpconfig.h \
     tools.h \
     versserial.h \
@@ -36,6 +36,7 @@ SOURCES = \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
     settings/confdata.cpp \
+    settings/sessionhelper.cpp \
     complex.cpp \
     cmdinterpret.cpp \
     ethadress.cpp \
@@ -45,10 +46,11 @@ SOURCES = \
     releaseinfo.cpp \
     parse.cpp \
     scpi.cpp \
-    sessionhelper.cpp \
     tools.cpp \
     widgeom.cpp
 
 FORMS = \
     gui/en61850monitor.ui \
     gui/versionviewbase.ui
+
+INCLUDEPATH += settings
