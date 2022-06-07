@@ -1,16 +1,9 @@
 // definition wmsocket
 
-#include <qapplication.h>
-#include <qeventloop.h>
+#include "zhclientsocket.h"
 #include <qstring.h>
 #include <qstringlist.h>
 #include <q3socket.h>
-#include <q3textstream.h>
-#include <qmessagebox.h>
-#include <qtimer.h>
-
-#include "zhclientsocket.h"
-
 
 cZHClientSocket::cZHClientSocket(int t, QObject *parent, const char *name)
     :Q3Socket(parent,name)
@@ -28,7 +21,6 @@ cZHClientSocket::cZHClientSocket(int t, QObject *parent, const char *name)
     QObject::connect(&DecoupleTimer,SIGNAL(timeout()),this,SLOT(SendError()));
 }
 
-
 QString cZHClientSocket::readLine()
 {
     QString s = Q3Socket::readLine();
@@ -38,7 +30,6 @@ QString cZHClientSocket::readLine()
     emit SendLogData(l);
     return s;
 }
-
 
 int cZHClientSocket::writeLine(QString &s)
 {
@@ -58,13 +49,11 @@ int cZHClientSocket::writeLine(QString &s)
     return ret;
 }
 
-
 void cZHClientSocket::SendCommand(QString& cmds) { // gibt ein kommando an einem socket aus 
     QStringList sl;
     sl.append("ACK"); // nur ack !!!!!
     SendCommand(cmds, sl);
 }
-
 
 void cZHClientSocket::SendCommand(QString& cmds,QStringList& sl) { // kommando an socket mit liste der möglichen antwort en
     m_sCommand = cmds;
@@ -74,12 +63,10 @@ void cZHClientSocket::SendCommand(QString& cmds,QStringList& sl) { // kommando a
     ToDataTimer.start(m_nTime,true); // wir starten den timeout timer
 }
 
-
 void cZHClientSocket::SendQuery(QString& cmds) { // gibt ein kommando an einem socket aus 
     QStringList sl; // leere liste....akzeptiert jede antwort
     SendCommand(cmds, sl);
 }
-
 
 void cZHClientSocket::connectToHost (const QString& host,quint16 port)
 {
@@ -95,18 +82,15 @@ void cZHClientSocket::connectToHost (const QString& host,quint16 port)
     ToConnTimer.start(m_nTime,true);
 }
 
-
 QString& cZHClientSocket::GetAnswer()
 {
     return m_sAnswer;
 }
 
-
 int cZHClientSocket::GetError()
 {
     return m_nError;
 }
-
 
 void cZHClientSocket::SetError(int e)
 {
@@ -123,9 +107,7 @@ bool cZHClientSocket::hostfound()
     return m_bHostFound;
 }
 
-
 // hier sind alle slots
-
 void cZHClientSocket::TCPErrorHandling(int e)
 {
     QString l;
@@ -188,7 +170,6 @@ void cZHClientSocket::ReceiveInput()
     }
 }
 
-
 void cZHClientSocket::DataTimerExpired()
 {
     m_nError |= myErrSocketReadTimeOut;
@@ -196,7 +177,6 @@ void cZHClientSocket::DataTimerExpired()
     emit SendLogData (l);
     emit Error(); // fehler signal senden
 }
-
 
 void cZHClientSocket::ConnectTimerExpired()
 {
@@ -206,12 +186,10 @@ void cZHClientSocket::ConnectTimerExpired()
     emit Error(); // fehler signal senden
 }
 
-
 void cZHClientSocket::SendError()
 {
     emit Error(); // fehler signal senden
 }
-
 
 void cZHClientSocket::ConnectionDone()
 {
