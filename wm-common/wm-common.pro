@@ -81,6 +81,7 @@ SOURCES = \
     scales-and-units/angleunits.cpp \
     scales-and-units/currentunits.cpp \
     scales-and-units/errorunits.cpp \
+    scales-and-units/eunit.cpp \
     scales-and-units/loadpointunits.cpp \
     scales-and-units/rcfunits.cpp \
     scales-and-units/scalefactors.cpp \
