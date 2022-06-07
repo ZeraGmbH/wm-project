@@ -2,7 +2,7 @@
 #include <QDir>
 
 SessionHelper::SessionHelper(QString machineName, SessionHelperAppendStrategy *appendStrategy) :
-    m_SessionPath(QString("%1/.%2/").arg(QDir::homePath(), machineName)),
+    m_SessionPath(QString("%1/.%2").arg(QDir::homePath(), machineName)),
     m_appendStrategy(appendStrategy)
 {
 }
@@ -54,5 +54,8 @@ cWidgetGeometry SessionHelper::readSession(QWidget *widget, QString session)
 
 QString SessionHelper::getSessionFileName(QWidget *widget, QString session)
 {
-    return QString("%1%2%3").arg(m_SessionPath).arg(widget->name()).arg(session);
+    QFileInfo fi(session);
+    QString name = QString("%1/%2%3").arg(m_SessionPath).arg(widget->name()).arg(fi.fileName());
+    return name;
 }
+
