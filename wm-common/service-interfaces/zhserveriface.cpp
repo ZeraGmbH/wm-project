@@ -1,9 +1,6 @@
 // implementation cZHServerIFace
 
-#include <q3textstream.h>
-
 #include "zhserveriface.h"
-
 
 cZHServerIFace::cZHServerIFace(QString hn, int hp, int t)
 {
@@ -17,6 +14,3 @@ cZHServerIFace::~cZHServerIFace()
 {
     delete iFaceSock;
 }
-
-
-
