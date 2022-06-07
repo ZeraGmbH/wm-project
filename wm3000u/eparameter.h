@@ -3,6 +3,7 @@
 #ifndef EPARAMETER_H
 #define EPARAMETER_H
 
+#include "eunit.h"
 #include <qstring.h>
 
 enum ScaleFactors { d3, dw3, AnzScaleFactors};
@@ -13,16 +14,6 @@ enum LoadpointUnits {LPProzent, LPPromill, AnzLoadPointUnits};
 enum AngleUnits { Anglegrad, Anglemin , Anglecrad, Anglemrad, Angleurad, Anglegrad2, Anglerad , AnzAngleUnits};
 enum RCFUnits { nix, AnzRCFUnits};
 
-class eUnit { 
-public:    
-    eUnit(){};
-    eUnit(QString s, double d)
-	:Name(s), fak(d){};
-    friend QDataStream& operator << (QDataStream& ds, eUnit& eu);
-    friend QDataStream& operator >> (QDataStream& ds, eUnit& eu);
-    QString Name;
-    double fak;
-};
 
 
 class eParameter	{

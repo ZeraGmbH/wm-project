@@ -18,6 +18,7 @@ HEADERS = \
     gui/wmeditor.h \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
+    scales-and-units/eunit.h \
     scpi/definitions/scpicommoncmdtype.h \
     scpi/definitions/scpiopcstates.h \
     scpi/definitions/scpiaffectatatuscode.h \
