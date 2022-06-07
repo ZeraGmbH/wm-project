@@ -1,9 +1,15 @@
 #include "sessionhelper.h"
 #include <QDir>
 
-SessionHelper::SessionHelper(QString machineName) :
-    m_SessionPath(QString("%1/.%2/").arg(QDir::homePath(), machineName))
+SessionHelper::SessionHelper(QString machineName, SessionHelperAppendStrategy *appendStrategy) :
+    m_SessionPath(QString("%1/.%2/").arg(QDir::homePath(), machineName)),
+    m_appendStrategy(appendStrategy)
 {
+}
+
+SessionHelper::~SessionHelper()
+{
+    delete m_appendStrategy;
 }
 
 void SessionHelper::writeSession(QWidget *widget, cWidgetGeometry geometry, QString session)
@@ -21,6 +27,7 @@ void SessionHelper::writeSession(QWidget *widget, cWidgetGeometry geometry, QStr
 
         QDataStream stream( &file );
         stream << geometry;
+        m_appendStrategy->writeSessionAppend(stream);
         file.close();
     }
 }
@@ -32,7 +39,6 @@ cWidgetGeometry SessionHelper::readSession(QWidget *widget, QString session)
     if ( file.open( QIODevice::ReadOnly ) ) {
         QDataStream stream( &file );
         stream >> geometry;
-        file.close();
         widget->hide();
         widget->resize(geometry.m_Size);
         widget->move(geometry.m_Point);
@@ -40,6 +46,8 @@ cWidgetGeometry SessionHelper::readSession(QWidget *widget, QString session)
             widget->show();
         }
         widget->move(geometry.m_Point);
+        m_appendStrategy->readSessionAppend(stream);
+        file.close();
     }
     return geometry;
 }

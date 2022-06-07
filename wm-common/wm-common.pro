@@ -47,6 +47,8 @@ HEADERS = \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
     settings/sessionhelper.h \
+    settings/sessionhelperappendstrategy.h \
+    settings/sessionhelperappendzero.h \
     service-interfaces/dspiface.h \
     service-interfaces/zhclientsocket.h \
     service-interfaces/zhserveriface.h \
