@@ -17,7 +17,7 @@ enum RCFUnits { nix, AnzRCFUnits};
 
 class eParameter	{
 public:
-    eParameter(QString s) {eP = s;Unit=0;}; 
+    eParameter(QString s) {eP = s;Unit=0;};
     eParameter(){Unit=0;};
     ~eParameter(){};
     
