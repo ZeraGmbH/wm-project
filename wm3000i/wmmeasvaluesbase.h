@@ -71,7 +71,6 @@ private:
 
     void init();
     void destroy();
-    void cmpResize();
     virtual void ActualizeDisplay();
 
 private slots:
