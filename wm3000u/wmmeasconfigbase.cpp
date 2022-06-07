@@ -4,8 +4,8 @@
 #include "eparameter.h"
 #include "errorunits.h"
 #include "voltageunits.h"
+#include "loadpointunits.h"
 
-extern eUnit LoadpointUnit[];
 extern eUnit AngleUnit[];
 
 

@@ -10,9 +10,9 @@
 #include "ui_wmmeasvaluesbase.h"
 #include "common-modes.h"
 #include "eparameter.h"
+#include "loadpointunits.h"
 #include "errorunits.h"
 
-extern eUnit LoadpointUnit[];
 extern eUnit AngleUnit[];
 extern eUnit RCFUnit[];
 

@@ -7,10 +7,9 @@
 #include "errorunits.h"
 #include "voltageunits.h"
 #include "currentunits.h"
+#include "loadpointunits.h"
 #include <qdatastream.h>
 
-eUnit LoadpointUnit[AnzLoadPointUnits] = { eUnit("%", 1.0e-2),
-                                           eUnit(QString(QChar(8240)), 1.0e-3) }; // promille
 
 eUnit AngleUnit[AnzAngleUnits] = { eUnit(QString(QChar(176)), 1.0),
                                    eUnit("'", 0.01666666),

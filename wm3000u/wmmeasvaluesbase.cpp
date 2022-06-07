@@ -9,8 +9,8 @@
 #include "common-modes.h"
 #include "eparameter.h"
 #include "errorunits.h"
+#include "loadpointunits.h"
 
-extern eUnit LoadpointUnit[];
 extern eUnit AngleUnit[];
 extern eUnit RCFUnit[];
 

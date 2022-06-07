@@ -3,9 +3,9 @@
 #include "eparameter.h"
 #include "errorunits.h"
 #include "currentunits.h"
+#include "loadpointunits.h"
 #include "common-modes.h"
 
-extern eUnit LoadpointUnit[];
 extern eUnit AngleUnit[];
 
 

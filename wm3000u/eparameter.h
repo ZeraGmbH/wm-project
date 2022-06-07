@@ -6,7 +6,6 @@
 #include "eunit.h"
 #include <qstring.h>
 
-enum LoadpointUnits {LPProzent, LPPromill, AnzLoadPointUnits};
 enum AngleUnits { Anglegrad, Anglemin , Anglecrad, Anglemrad, Angleurad, Anglegrad2, Anglerad , AnzAngleUnits};
 enum RCFUnits { nix, AnzRCFUnits};
 
