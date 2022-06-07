@@ -1,5 +1,3 @@
-// headerdatei formatinfo.h
-
 #ifndef FORMATINFO_H
 #define FORMATINFO_H
 

@@ -13,7 +13,6 @@ HEADERS	+=  \
 	pcbiface.h \
 	wm3000scpiface.h \
 	devserver.h \
-	formatinfo.h \
     confdialogbase.h \
     rangedialogbase.h \
     wmmeasvaluesbase.h \
@@ -32,7 +31,6 @@ SOURCES	+=  \
 	pcbiface.cpp \
 	wm3000scpiface.cpp \
 	devserver.cpp \
-	formatinfo.cpp \
     wmviewbase.cpp \
     wmmeasvaluesbase.cpp \
     wmrawactualvalbase.cpp \

@@ -54,6 +54,7 @@ HEADERS = \
     common-modes.h \
     complex.h \
     en61850.h \
+    formatinfo.h \
     logfile.h \
     maxperiods.h \
     movingwindowfilter.h \
@@ -100,6 +101,7 @@ SOURCES = \
     service-interfaces/zhclientsocket.cpp \
     service-interfaces/zhserveriface.cpp \
     complex.cpp \
+    formatinfo.cpp \
     logfile.cpp \
     movingwindowfilter.cpp \
     range.cpp \
