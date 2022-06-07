@@ -3,14 +3,13 @@
 #include <qfile.h>
 #include <qmessagebox.h>
 #include <qfileinfo.h>
-//Added by qt3to4:
 #include <Q3TextStream>
 #include <Q3ValueList>
 #include <math.h>
 
 #include "ownerror.h"
 #include "wmoeviewbase.h"
-#include "eparameter.h"
+#include "wmparameter.h"
 #include "complex.h"
 
 const double PI_180 = 1.74532925e-2;

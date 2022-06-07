@@ -1,7 +1,7 @@
 #include "wm3000scpiface.h"
 #include "tools.h"
 #include "confdata.h"
-#include "eparameter.h"
+#include "wmparameter.h"
 #include "wm3000i.h"
 #include "maxperiods.h"
 #include "scpi.h"

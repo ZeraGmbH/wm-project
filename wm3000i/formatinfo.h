@@ -4,7 +4,7 @@
 #define FORMATINFO_H
 
 #include <qdatastream.h>
-#include "eparameter.h"
+#include "eunit.h"
 
 class cFormatInfo
 {

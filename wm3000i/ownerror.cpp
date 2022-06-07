@@ -10,7 +10,7 @@
 
 #include "ownerror.h"
 #include "wmoeviewbase.h"
-#include "eparameter.h"
+#include "wmparameter.h"
 #include "complex.h"
 
 const double PI_180 = 1.74532925e-2;

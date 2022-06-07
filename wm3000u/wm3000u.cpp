@@ -29,7 +29,7 @@
 #include "logfile.h"
 #include "range.h"
 #include "wm3000u.h"
-#include "eparameter.h"
+#include "wmparameter.h"
 #include "tools.h"
 #include "maxperiods.h"
 #include "scpiaffectatatuscode.h"

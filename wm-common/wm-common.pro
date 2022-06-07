@@ -64,6 +64,7 @@ HEADERS = \
     versserial.h \
     widgeom.h \
     wmactvalues.h \
+    wmparameter.h \
     zeraglobal.h
 
 SOURCES = \
@@ -103,7 +104,8 @@ SOURCES = \
     range.cpp \
     releaseinfo.cpp \
     tools.cpp \
-    widgeom.cpp
+    widgeom.cpp \
+    wmparameter.cpp
 
 FORMS = \
     gui/en61850monitor.ui \
