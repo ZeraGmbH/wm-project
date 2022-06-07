@@ -19,6 +19,7 @@ HEADERS = \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
     scales-and-units/eunit.h \
+    scales-and-units/scalefactors.h \
     scpi/definitions/scpicommoncmdtype.h \
     scpi/definitions/scpiopcstates.h \
     scpi/definitions/scpiaffectatatuscode.h \
@@ -70,6 +71,7 @@ SOURCES = \
     gui/wmeditor.cpp \
     gui/wmoeviewbase.cpp \
     gui/wmrawactualconfigbase.cpp \
+    scales-and-units/scalefactors.cpp \
     scpi/cmdinterpret.cpp \
     scpi/cmdtimer.cpp \
     scpi/parse.cpp \
@@ -100,6 +102,7 @@ FORMS = \
 INCLUDEPATH += \
     client-access \
     dsp \
+    scales-and-units \
     scpi \
     scpi/definitions \
     settings \

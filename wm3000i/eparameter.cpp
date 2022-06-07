@@ -3,11 +3,9 @@
 // und zum wandeln derselben
 
 
+#include "scalefactors.h"
 #include <qdatastream.h>
 #include "eparameter.h"
-
-eUnit ScaleFactor[AnzScaleFactors] = {eUnit("/3", 0.33333333),
-			                eUnit("/w3", 0.57735026)};	   
 
 eUnit CurrentUnit[AnzCurrentUnits] ={ eUnit("kA/w3", 577.3502692),
 				eUnit("mA/w3", 0.5773502e-3),
