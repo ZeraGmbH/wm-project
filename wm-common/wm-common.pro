@@ -18,6 +18,7 @@ HEADERS = \
     gui/wmeditor.h \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
+    scales-and-units/currentunits.h \
     scales-and-units/errorunits.h \
     scales-and-units/eunit.h \
     scales-and-units/scalefactors.h \
@@ -73,6 +74,7 @@ SOURCES = \
     gui/wmeditor.cpp \
     gui/wmoeviewbase.cpp \
     gui/wmrawactualconfigbase.cpp \
+    scales-and-units/currentunits.cpp \
     scales-and-units/errorunits.cpp \
     scales-and-units/scalefactors.cpp \
     scales-and-units/voltageunits.cpp \

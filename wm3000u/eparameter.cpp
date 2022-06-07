@@ -6,13 +6,8 @@
 #include "scalefactors.h"
 #include "errorunits.h"
 #include "voltageunits.h"
+#include "currentunits.h"
 #include <qdatastream.h>
-
-eUnit CurrentUnit[AnzCurrentUnits] ={ eUnit("kA", 1.0e3),
-                                      eUnit("mA", 1.0e-3),
-                                      eUnit("uA", 1.0e-6),
-                                      eUnit("A", 1.0) };
-
 
 eUnit LoadpointUnit[AnzLoadPointUnits] = { eUnit("%", 1.0e-2),
                                            eUnit(QString(QChar(8240)), 1.0e-3) }; // promille
