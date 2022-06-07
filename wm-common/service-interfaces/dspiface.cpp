@@ -670,17 +670,17 @@ void cDspIFace::SetOffsetCorrection(int chn, float val) // setzt für kanal (int
 void cDspIFace::GetInterfaceData()
 {
     QString list;
-    QStringList DataEntryList, DataList; // werte zuorden 
+    // werte zuorden
     QString s;
     bool ok;
     
     list = iFaceSock->GetAnswer();
-    DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit allen werten
+    QStringList DataEntryList = list.split(";"); // wir haben jetzt eine stringliste mit allen werten
     float *val = m_pMeasData->data();
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
 	s = *it;
 	s = s.section(":",1,1);
-	DataList = QStringList::split(",",s);
+    QStringList DataList = s.split(",");
 	for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2,val++ ) {
 	    s = *it2;
 	    s.remove(';');
@@ -878,7 +878,6 @@ void cDspIFace::SendDspMemoryReadCommand()
 void cDspIFace::SendDspMemoryWriteCommand()
 {
     QString list;
-    QStringList DataEntryList; 
     QString s, Cmd;
     Q3TextStream ts( &Cmd, QIODevice::WriteOnly );
     
@@ -887,7 +886,7 @@ void cDspIFace::SendDspMemoryWriteCommand()
     list = m_pMeasData->VarList(); // liste mit allen variablen und deren länge
     float* fval = m_pMeasData->data();
     ulong* lval = (ulong*) fval;
-    DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit je variable, länge
+    QStringList DataEntryList = list.split(";"); // wir haben jetzt eine stringliste mit je variable, länge
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
 	s = *it; // einen eintrag variable, länge
 	ts << s.section(",",0,0); // den namen,

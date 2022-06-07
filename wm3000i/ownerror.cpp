@@ -167,7 +167,7 @@ void cOwnError::SetConfInfoSlot(cConfData *cd)
 		if (!line.isEmpty()) { // es steht was in der zeile 
 		    if ( isValidEntry(line) ) { // die zeile ist vollständig und ok
 			m_sOEEntriesList.push_back(line); // zeile in die liste
-			QStringList words = QStringList::split(";",line); // zeile in teilworte zerlegen
+            QStringList words = line.split(";");
 			line = words.first();
 			if (m_sNPrimList.find(line) == m_sNPrimList.end())
 			    m_sNPrimList.push_back(line);
@@ -212,9 +212,8 @@ void cOwnError::SetActualValuesSlot(cwmActValues *av)
 
 bool cOwnError::isValidEntry(QString s) 
 {
-    QStringList words;
     eParameter eP;
-    words=QStringList::split(";",s); // zeile in teilworte zerlegen
+    QStringList words = s.split(";");
     if (words.size() != 5) return false; // 5 einträge erforderlich
     eP = words.first();
     if ( !(eP.isCurrent() || eP.withoutUnit()) ) return false; // der 1. eintrag muss ein strom sein
