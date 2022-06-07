@@ -22,7 +22,7 @@ class WMMeasValuesBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit WMMeasValuesBase(QWidget* parent);
+    explicit WMMeasValuesBase(QWidget* parent, QString machineName);
     ~WMMeasValuesBase();
 
 public slots:

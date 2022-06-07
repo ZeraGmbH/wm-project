@@ -14,7 +14,7 @@
 #include "angleunits.h"
 #include "rcfunits.h"
 
-WMMeasValuesBase::WMMeasValuesBase(QWidget *parent) :
+WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase)
 {
@@ -228,12 +228,6 @@ void WMMeasValuesBase::ActualizeDisplay()
 }
 
 
-void WMMeasValuesBase::saveConfiguration()
-{
-    SaveSession(".ses");
-}
-
-
 bool WMMeasValuesBase::LoadSession(QString session)
 {
     QFileInfo fi(session);
@@ -317,4 +311,10 @@ void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* 
 
     m_nDisplayMode = m;
     m_nLPDisplayMode = m2;
+}
+
+
+void WMMeasValuesBase::saveConfiguration()
+{
+    SaveSession(".ses");
 }

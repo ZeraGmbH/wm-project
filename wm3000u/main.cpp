@@ -107,13 +107,14 @@ int main(int argc, char *argv[])
   if (!bdc)
       g_WMView->configureWMwoDC();
 
+  QString machineName = "wm3000u";
 
   cReleaseInfo *g_ReleaseView = new cReleaseInfo(g_app);
   QObject::connect(g_WMView, SIGNAL(UIhilfeReleaseInfoActionActivated()),g_ReleaseView,SLOT(show()));
 
   cZeraInfo *g_WMInfo = new cZeraInfo; // info slots
 
-  WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView); // fehlermesswerte anzeige erzeugen
+  WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView, machineName); // fehlermesswerte anzeige erzeugen
   QObject::connect(g_WMView,SIGNAL(UIansichtFehlerMessungActionToggled(bool)),g_WMErrMeasValView,SLOT(ShowHideMVSlot(bool))); // öffnen der fehlermesswert anzeige
   QObject::connect(g_WMErrMeasValView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtFehlerMessungActionSet(bool))); //schliessen der fehlermesswert anzeige
   QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMErrMeasValView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
@@ -124,7 +125,7 @@ int main(int argc, char *argv[])
   QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMErrMeasValView,SLOT(SetConfInfoSlot( cConfData*))); // konfiguration an fehlermesswert anzeige senden
   QObject::connect(g_WMView,SIGNAL(StoreResultSignal()),g_WMDevice,SLOT(StoreResultsSlot())); // ergebnisse in xml file speichern
   QObject::connect(g_WMView,SIGNAL(StartRangeObsermatic()),g_WMDevice,SLOT(RangeObsermaticSlot())); // für testzwecke bereichautomatik von hand triggern
-  WMOeViewBase *g_WMOeView = new WMOeViewBase(g_WMView, "wm3000u"); // eigenfehleranzeige erzeugen
+  WMOeViewBase *g_WMOeView = new WMOeViewBase(g_WMView, machineName); // eigenfehleranzeige erzeugen
   QObject::connect(g_WMView,SIGNAL(UIansichtEigenfehlerActionToggled(bool)),g_WMOeView,SLOT(ShowHideOESlot(bool))); // öffnen der eigenfehleranzeige
   QObject::connect(g_WMOeView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtEigenfehlerActionSet(bool))); //schliessen der eigenfehleranzeige
   QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMOeView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
@@ -149,17 +150,17 @@ int main(int argc, char *argv[])
   CLogFileView* g_WMSCPILogFileView;
   if (bconvent)
       g_WMSCPILogFileView =
-              new CLogFileView(QObject::tr("WM1000U SCPI Kommunikation"), 100, g_WMView, "WMSCPILogView", "wm3000u");
+              new CLogFileView(QObject::tr("WM1000U SCPI Kommunikation"), 100, g_WMView, "WMSCPILogView", machineName);
   else
       g_WMSCPILogFileView =
-              new CLogFileView(QObject::tr("WM3000U SCPI Kommunikation"), 100, g_WMView, "WMSCPILogView", "wm3000u");
+              new CLogFileView(QObject::tr("WM3000U SCPI Kommunikation"), 100, g_WMView, "WMSCPILogView", machineName);
 
   QObject::connect(g_WMView,SIGNAL(UIansichtDialogActionToggled(bool)),g_WMSCPILogFileView,SLOT(ShowHideLogFileSlot(bool))); // öffnen der kommunikation anzeige
   QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMSCPILogFileView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMSCPILogFileView,SLOT(LoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMSCPILogFileView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtDialogActionSet(bool))); //schliessen der kommunikation anzeige
 
-  EN61850monitor *g_ETHMonitor = new EN61850monitor(g_WMView, "wm3000u");
+  EN61850monitor *g_ETHMonitor = new EN61850monitor(g_WMView, machineName);
   QObject::connect(g_WMView,SIGNAL(UIansichtEN61850ActionToggled(bool)),g_ETHMonitor,SLOT(ShowHideSlot(bool))); // öffnen der eth status anzeige
   QObject::connect(g_ETHMonitor,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtEN61850ActionSet(bool))); //schliessen der eth status anzeige
   QObject::connect((QObject*)g_WMDevice,SIGNAL(EN61850StatusSignal(cEN61850Info*)),g_ETHMonitor,SLOT(SetETHStatusSlot( cEN61850Info*))); // setzen der eth status info

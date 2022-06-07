@@ -12,7 +12,7 @@
 #include "angleunits.h"
 #include "rcfunits.h"
 
-WMMeasValuesBase::WMMeasValuesBase(QWidget *parent) :
+WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase)
 {
@@ -286,6 +286,8 @@ void WMMeasValuesBase::SaveSession(QString session)
 
         QDataStream stream( &file );
         stream << m_widGeometry;
+
+
 
         for (int i = 0; i < 4; i++)
             stream << m_Format[i];
