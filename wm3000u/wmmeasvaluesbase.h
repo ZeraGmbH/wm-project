@@ -62,7 +62,6 @@ private:
     void init();
     void destroy();
     void ActualizeDisplay();
-    void resizeMeas();
 
 private slots:
     void saveConfiguration();

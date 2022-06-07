@@ -154,9 +154,6 @@ void WMMeasValuesBase::ActualizeLoadPoint()
     ui->mBigLPNUnit->display(m_Format[0].UnitInfo.Name);
     ui->mBigLoadpointX->display(QString("%1").arg(AnzeigeWertX,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
     ui->mBigLPXUnit->display(m_Format[0].UnitInfo.Name);
-
-    if (ui->mBigLoadpointN->isFormatChanged() || ui->mBigLoadpointX->isFormatChanged())
-        resizeMeas();
 }
 
 
@@ -213,23 +210,6 @@ void WMMeasValuesBase::ActualizeDisplay()
         ui->mBigRCFName->setEnabled(false);
         ui->mBigRCFUnit->setEnabled(false);
     }
-
-    if (ui->mBigAmplError->isFormatChanged() || ui->mBigAngleError->isFormatChanged())
-        resizeMeas();
-}
-
-
-void WMMeasValuesBase::resizeMeas()
-{
-    static int n = 1;
-    QSize size = this->size();
-    if (n > 0)
-    {
-        n--;
-        QSize tsize = QSize(size.width()+1, size.height()+1);
-        resize(tsize);
-    }
-    resize(size);
 }
 
 
