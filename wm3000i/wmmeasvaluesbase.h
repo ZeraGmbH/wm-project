@@ -66,7 +66,7 @@ private:
 
 private slots:
     void saveConfiguration();
-
+    friend class SessionHelperAppendWMMeasValues;
 };
 
 #endif // WMMEASVALUESBASE_H

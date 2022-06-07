@@ -1,4 +1,5 @@
-//Added by qt3to4:
+#include "wmmeasvaluesbase.h"
+#include "sessionhelperappendwmmeasvalues.h"
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <Q3BoxLayout>
@@ -6,7 +7,6 @@
 #include <QShowEvent>
 #include <QFileInfo>
 #include <QDir>
-#include "wmmeasvaluesbase.h"
 #include "ui_wmmeasvaluesbase.h"
 #include "common-modes.h"
 #include "loadpointunits.h"
@@ -17,7 +17,7 @@
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionHelper(machineName)
+    m_sessionHelper(machineName, new SessionHelperAppendWMMeasValues(this))
 {
     ui->setupUi(this);
     init();
@@ -231,69 +231,22 @@ void WMMeasValuesBase::ActualizeDisplay()
 
 bool WMMeasValuesBase::LoadSession(QString session)
 {
-    QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    if ( file.open( QIODevice::ReadOnly ) ) {
-        QDataStream stream( &file );
-        stream >> m_widGeometry;
-
-        for (int i = 0; i< 4; i++)
-            stream >> m_Format[i];
-
-        stream >> m_nDisplayMode;
-        stream >> m_nLPDisplayMode;
-
-        file.close();
-        hide();
-        resize(m_widGeometry.m_Size);
-        move(m_widGeometry.m_Point);
-        if (m_widGeometry.vi)
-        {
-            show();
-            emit isVisibleSignal(true);
-        }
-        // FVWM und Gnome verhalten sich anders
-#ifndef FVWM
-        move(m_widGeometry.m_Point);
-#endif
+    cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
+    if(tmpGeometry.m_Size.isValid())
+    {
+        m_widGeometry = tmpGeometry;
         return true;
     }
-    return false;
+    else
+    {
+        return false;
+    }
 }
 
 
 void WMMeasValuesBase::SaveSession(QString session)
 {
-    if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
-    {
-        //create temporary object that gets deleted when leaving the control block
-        QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
-    }
-
-    QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    //    file.remove();
-    if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-        file.at(0);
-        int vi;
-        vi = (isVisible()) ? 1 : 0;
-        if (vi)
-            m_widGeometry.SetGeometry(pos(),size());
-        m_widGeometry.SetVisible(vi);
-
-        QDataStream stream( &file );
-        stream << m_widGeometry;
-
-        for (int i = 0; i < 4; i++)
-            stream << m_Format[i];
-
-        stream << m_nDisplayMode;
-        stream << m_nLPDisplayMode;
-
-        file.close();
-    }
+    m_sessionHelper.writeSession(this, m_widGeometry, session);
 }
 
 
