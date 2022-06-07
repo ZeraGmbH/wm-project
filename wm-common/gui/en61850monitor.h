@@ -59,8 +59,8 @@ private:
     cEN61850Info ETHStatus;
     SessionHelper m_sessionHelper;
 
-    virtual void init();
-    virtual void destroy();
+    void init();
+    void destroy();
 
 private slots:
     void TimerSlot();
