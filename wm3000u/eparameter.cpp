@@ -1,4 +1,4 @@
-// implementierung eParameter
+// implementierung WmParameter
 // zur überprüfung von einheiten behafteter größen
 // und zum wandeln derselben
 
@@ -25,12 +25,12 @@ QDataStream& operator >> (QDataStream& ds, eUnit& eu)
 }
 
 
-void eParameter::operator =(QString s) {
+void WmParameter::operator =(QString s) {
     eP = s;
     Unit = 0;
 }
 
-bool eParameter::Test(eUnit* eu, int n)
+bool WmParameter::Test(eUnit* eu, int n)
 {
     for (int i=0; i<n; i++,eu++)
     {
@@ -50,44 +50,44 @@ bool eParameter::Test(eUnit* eu, int n)
     return false;
 }
 
-bool eParameter::isCurrent() {
+bool WmParameter::isCurrent() {
     Unit = 0;
     return Test(CurrentUnit, sizeof(CurrentUnit)/sizeof(eUnit));
 }
 
 
-bool eParameter::isVoltage() {
+bool WmParameter::isVoltage() {
     Unit = 0;
     return Test(VoltageUnit, sizeof(VoltageUnit)/sizeof(eUnit));
 }
 
 
-bool eParameter::isLoadPoint() {
+bool WmParameter::isLoadPoint() {
     Unit = 0;
     return Test(LoadpointUnit, sizeof(LoadpointUnit)/sizeof(eUnit));
 }
 
 
-bool eParameter::isError() {
+bool WmParameter::isError() {
     Unit = 0;
     return Test(ErrorUnit, sizeof(ErrorUnit)/sizeof(eUnit));
 }
 
 
-bool eParameter::isAngle() {
+bool WmParameter::isAngle() {
     Unit = 0;
     return Test(AngleUnit, sizeof(AngleUnit)/sizeof(eUnit));
 }
 
 
-bool eParameter::withoutUnit() {
+bool WmParameter::withoutUnit() {
     bool t;
     eP.toDouble(&t);
     return t;
 }
 
 
-double eParameter::toDouble(bool* ok) {
+double WmParameter::toDouble(bool* ok) {
     QString s = eP;
     if (Unit != 0) {
         s.remove(Unit->Name);
@@ -107,7 +107,7 @@ double eParameter::toDouble(bool* ok) {
 }
 
 
-bool eParameter::isScaleFactor()
+bool WmParameter::isScaleFactor()
 {
     Unit = 0;
     return Test(ScaleFactor, sizeof(ScaleFactor)/sizeof(eUnit));

@@ -4407,7 +4407,7 @@ void cWM3000I::SimulatedMeasurement()
     
     double rnd = 1.0+ (0.02 * random() / RAND_MAX);
     
-    eParameter e = m_ConfData.m_NSecondary;
+    WmParameter e = m_ConfData.m_NSecondary;
 
     ActValues.dspActValues.rmsnf = e.toDouble() * rnd;
     CWMRange* r = Range(m_ConfData.m_sRangeN,m_sNRangeList);
@@ -4511,8 +4511,8 @@ void cWM3000I::CmpActValues() {  // here we will do all the necessary computatio
     
     // setzen der übersetzungsverhältnisse
     
-    eParameter PrimN, PrimX;
-    eParameter SekN, SekX;
+    WmParameter PrimN, PrimX;
+    WmParameter SekN, SekX;
     
     PrimN = m_ConfData.m_NPrimary;
     SekN = m_ConfData.m_NSecondary;
@@ -4640,8 +4640,8 @@ void cWM3000I::CmpRMSValues()
 
     // setzen der übersetzungsverhältnisse
 
-    eParameter PrimN, PrimX;
-    eParameter SekN, SekX;
+    WmParameter PrimN, PrimX;
+    WmParameter SekN, SekX;
 
     PrimN = m_ConfData.m_NPrimary;
     SekN = m_ConfData.m_NSecondary;

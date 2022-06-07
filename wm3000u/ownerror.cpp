@@ -30,11 +30,11 @@ cOwnError::~cOwnError()
 }
 
 struct tepOEEntry {
-    eParameter Prim;
-    eParameter Sek;
-    eParameter LP;
-    eParameter BetragF;
-    eParameter WinkelF;
+    WmParameter Prim;
+    WmParameter Sek;
+    WmParameter LP;
+    WmParameter BetragF;
+    WmParameter WinkelF;
 };
 
 struct tOEKoefficient {
@@ -66,7 +66,7 @@ complex cOwnError::CmpOECorrVector()
 		tOEKoefficient OEKoefficient; 
 		tepOEEntry epEntries;
 		for ( QStringList::Iterator it = relEntriesList.begin(); it != relEntriesList.end(); ++it ) {
-		    eParameter *ep = &epEntries.Prim;
+		    WmParameter *ep = &epEntries.Prim;
 		    for (int i=0; i<5; i++,ep++)  *ep = (*it).section(';',i,i);
 		    OEKoefficient.OELP = epEntries.Sek.toDouble() * epEntries.LP.toDouble() ;
 		    OEKoefficient.OEBetragF = epEntries.BetragF.toDouble();
@@ -211,7 +211,7 @@ void cOwnError::SetActualValuesSlot(cwmActValues *av)
 
 bool cOwnError::isValidEntry(QString s) 
 {
-    eParameter eP;
+    WmParameter eP;
     QStringList words = s.split(";");
     if (words.size() != 5) return false; // 5 einträge erforderlich
     eP = words.first();

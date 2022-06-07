@@ -1483,7 +1483,7 @@ bool cWM3000SCPIFace::GetTransformerRatio(char** s, QString& ps, QString& ss, bo
     bool ok = true ; 
     int i;
     QString par[2];
-    eParameter ep[2];
+    WmParameter ep[2];
     
     QString ws = m_pParser->SetWhiteSpace(" :"); // wir definieren whitespace um
     

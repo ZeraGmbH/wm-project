@@ -6,11 +6,11 @@
 #include "eunit.h"
 #include <qstring.h>
 
-class eParameter	{
+class WmParameter	{
 public:
-    eParameter(QString s) {eP = s;Unit=0;};
-    eParameter(){Unit=0;};
-    ~eParameter(){};
+    WmParameter(QString s) {eP = s;Unit=0;};
+    WmParameter(){Unit=0;};
+    ~WmParameter(){};
     
     void operator = (QString);
     bool isCurrent();
