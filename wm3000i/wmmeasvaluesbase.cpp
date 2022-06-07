@@ -8,11 +8,11 @@
 #include <QDir>
 #include "wmmeasvaluesbase.h"
 #include "ui_wmmeasvaluesbase.h"
-#include "eparameter.h"
 #include "common-modes.h"
+#include "eparameter.h"
+#include "errorunits.h"
 
 extern eUnit LoadpointUnit[];
-extern eUnit ErrorUnit[];
 extern eUnit AngleUnit[];
 extern eUnit RCFUnit[];
 

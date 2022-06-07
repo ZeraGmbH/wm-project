@@ -1,11 +1,11 @@
 #include "wmmeasconfigbase.h"
 #include "ui_wmmeasconfigbase.h"
-#include "eparameter.h"
 #include "common-modes.h"
+#include "eparameter.h"
+#include "errorunits.h"
 
 extern eUnit LoadpointUnit[];
 extern eUnit VoltageUnit[];
-extern eUnit ErrorUnit[];
 extern eUnit AngleUnit[];
 
 

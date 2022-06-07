@@ -2,10 +2,10 @@
 // zur überprüfung von einheiten behafteter größen
 // und zum wandeln derselben
 
-
-#include "scalefactors.h"
-#include <qdatastream.h>
 #include "eparameter.h"
+#include "scalefactors.h"
+#include "errorunits.h"
+#include <qdatastream.h>
 
 eUnit CurrentUnit[AnzCurrentUnits] ={ eUnit("kA/w3", 577.3502692),
                                       eUnit("mA/w3", 0.5773502e-3),
@@ -39,9 +39,6 @@ eUnit VoltageUnit[AnzVoltageUnits] = { eUnit("MV", 1.0e6),
 eUnit LoadpointUnit[AnzLoadPointUnits] = { eUnit("%", 1.0e-2),
                                            eUnit(QString(QChar(8240)), 1.0e-3) }; // promille
 
-eUnit ErrorUnit[AnzErrorUnits] = { eUnit("%", 1.0e-2),
-                                   eUnit(QString(QChar(8240)), 1.0e-3), // promille
-                                   eUnit("ppm", 1.0e-6) };
 
 eUnit AngleUnit[AnzAngleUnits] = { eUnit(QString(QChar(176)), 1.0),
                                    eUnit("'", 0.01666666),
