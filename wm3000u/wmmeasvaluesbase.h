@@ -2,7 +2,6 @@
 #define WMMEASVALUESBASE_H
 
 #include <qvariant.h>
-#include <qpixmap.h>
 #include <qdialog.h>
 #include <qlabel.h>
 #include <QTimer>
@@ -56,7 +55,6 @@ private:
     int m_nDisplayMode;
     int m_nLPDisplayMode;
 
-    QPixmap image0;
     QTimer m_Timer;
 
     void init();
