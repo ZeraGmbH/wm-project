@@ -52,7 +52,6 @@ signals:
 protected:
     virtual void closeEvent( QCloseEvent * ce );
     virtual void resizeEvent( QResizeEvent * e );
-    virtual void showEvent( QShowEvent* e);
     virtual void moveEvent( QMoveEvent *);
     virtual void contextMenuEvent( QContextMenuEvent * );
 

@@ -77,12 +77,6 @@ void WMMeasValuesBase::resizeEvent(QResizeEvent * e)
 }
 
 
-void WMMeasValuesBase::showEvent(QShowEvent *e)
-{
-    this->QDialog::showEvent(e);
-}
-
-
 void WMMeasValuesBase::moveEvent(QMoveEvent *)
 {
     m_Timer.start(500);
