@@ -8,7 +8,6 @@ INCLUDEPATH	+= .
 
 HEADERS	+= \
 	devserver.h \
-	eparameter.h \
 	formatinfo.h \
 	ownerror.h \
 	pcbiface.h \
@@ -26,7 +25,6 @@ HEADERS	+= \
 
 SOURCES	+= \
 	devserver.cpp \
-	eparameter.cpp \
 	formatinfo.cpp \
 	main.cpp \
 	ownerror.cpp \

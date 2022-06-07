@@ -441,7 +441,6 @@
  </customwidgets>
  <includes>
   <include location="local">formatinfo.h</include>
-  <include location="local">eparameter.h</include>
  </includes>
  <resources/>
  <connections>

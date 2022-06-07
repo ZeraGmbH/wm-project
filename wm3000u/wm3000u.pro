@@ -9,7 +9,6 @@ HEADERS	+=  \
 	wmglobal.h \
 	ownerror.h \
 	zerainfo.h \
-	eparameter.h \
 	wm3000u.h \
 	pcbiface.h \
 	wm3000scpiface.h \
@@ -29,7 +28,6 @@ SOURCES	+=  \
 	main.cpp \
 	ownerror.cpp \
 	zerainfo.cpp \
-	eparameter.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
 	wm3000scpiface.cpp \

@@ -13,7 +13,6 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include "formatinfo.h"
-#include "eparameter.h"
 
 namespace Ui {
     class WMMeasConfigBase;

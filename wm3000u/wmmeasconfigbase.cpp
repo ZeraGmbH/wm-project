@@ -1,7 +1,6 @@
 #include "wmmeasconfigbase.h"
 #include "ui_wmmeasconfigbase.h"
 #include "common-modes.h"
-#include "eparameter.h"
 #include "errorunits.h"
 #include "voltageunits.h"
 #include "loadpointunits.h"

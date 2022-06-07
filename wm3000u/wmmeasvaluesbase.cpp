@@ -7,7 +7,6 @@
 #include "wmmeasvaluesbase.h"
 #include "ui_wmmeasvaluesbase.h"
 #include "common-modes.h"
-#include "eparameter.h"
 #include "errorunits.h"
 #include "loadpointunits.h"
 #include "angleunits.h"

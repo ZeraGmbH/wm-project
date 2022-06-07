@@ -1,6 +1,5 @@
 #include "wmmeasconfigbase.h"
 #include "ui_wmmeasconfigbase.h"
-#include "eparameter.h"
 #include "errorunits.h"
 #include "currentunits.h"
 #include "loadpointunits.h"
