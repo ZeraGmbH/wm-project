@@ -11,9 +11,6 @@
 #include "angleunits.h"
 #include <qdatastream.h>
 
-
-eUnit RCFUnit[AnzRCFUnits] = { eUnit("", 1.0) };
-
 QDataStream& operator << (QDataStream& ds, eUnit& eu)
 {
     ds << eu.Name << eu.fak;

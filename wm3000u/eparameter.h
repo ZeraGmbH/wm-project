@@ -6,10 +6,6 @@
 #include "eunit.h"
 #include <qstring.h>
 
-enum RCFUnits { nix, AnzRCFUnits};
-
-
-
 class eParameter	{
 public:
     eParameter(QString s) {eP = s;Unit=0;};

@@ -11,8 +11,7 @@
 #include "errorunits.h"
 #include "loadpointunits.h"
 #include "angleunits.h"
-
-extern eUnit RCFUnit[];
+#include "rcfunits.h"
 
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent) :
     QDialog(parent),

@@ -23,6 +23,7 @@ HEADERS = \
     scales-and-units/errorunits.h \
     scales-and-units/eunit.h \
     scales-and-units/loadpointunits.h \
+    scales-and-units/rcfunits.h \
     scales-and-units/scalefactors.h \
     scales-and-units/voltageunits.h \
     scpi/definitions/scpicommoncmdtype.h \
@@ -80,6 +81,7 @@ SOURCES = \
     scales-and-units/currentunits.cpp \
     scales-and-units/errorunits.cpp \
     scales-and-units/loadpointunits.cpp \
+    scales-and-units/rcfunits.cpp \
     scales-and-units/scalefactors.cpp \
     scales-and-units/voltageunits.cpp \
     scpi/cmdinterpret.cpp \
