@@ -330,7 +330,7 @@ or mA,A,kA</translation>
     </message>
 </context>
 <context>
-    <name>EN61850monbase</name>
+    <name>EN61850monitor</name>
     <message>
         <source>EN61850-9-2 Monitor</source>
         <translation>EN61850-9-2 Monitoring</translation>

@@ -5,22 +5,22 @@
 #include "en61850monitor.h"
 #include "ui_en61850monitor.h"
 
-EN61850monbase::EN61850monbase(QWidget* parent, QString machineName):
+EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
     QDialog(parent),
-    ui(new Ui::EN61850monbase),
+    ui(new Ui::EN61850monitor),
     m_sessionHelper(machineName)
 {
     ui->setupUi(this);
     init();
 }
 
-EN61850monbase::~EN61850monbase()
+EN61850monitor::~EN61850monitor()
 {
     destroy();
     delete ui;
 }
 
-void EN61850monbase::init()
+void EN61850monitor::init()
 {
     ETHStatus.ByteCount[0] = 0;
     ETHStatus.ByteCount[1] = 0;
@@ -35,14 +35,14 @@ void EN61850monbase::init()
 }
 
 
-void EN61850monbase::destroy()
+void EN61850monitor::destroy()
 {
     delete m_pTimer;
     SaveSession(".ses");
 }
 
 
-void EN61850monbase::ShowHideSlot(bool b)
+void EN61850monitor::ShowHideSlot(bool b)
 {
     if (b)
     {
@@ -58,7 +58,7 @@ void EN61850monbase::ShowHideSlot(bool b)
 }
 
 
-void EN61850monbase::closeEvent( QCloseEvent * ce )
+void EN61850monitor::closeEvent( QCloseEvent * ce )
 {
     m_widGeometry.SetGeometry(pos(),size());
     m_widGeometry.SetVisible(0);
@@ -68,31 +68,31 @@ void EN61850monbase::closeEvent( QCloseEvent * ce )
 }
 
 
-void EN61850monbase::resizeEvent(QResizeEvent *)
+void EN61850monitor::resizeEvent(QResizeEvent *)
 {
     m_Timer.start(500);
 }
 
 
-void EN61850monbase::moveEvent(QMoveEvent *)
+void EN61850monitor::moveEvent(QMoveEvent *)
 {
     m_Timer.start(500);
 }
 
 
-void EN61850monbase::TimerSlot()
+void EN61850monitor::TimerSlot()
 {
     emit InformationRequest(); // anfrage an wm3000 die status infos zu besorgen
 }
 
 
-void EN61850monbase::saveConfiguration()
+void EN61850monitor::saveConfiguration()
 {
     SaveSession(".ses");
 }
 
 
-void EN61850monbase::SetETHStatusSlot( cEN61850Info *ethInfo )
+void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
 {
     QString s;
     double count;
@@ -105,9 +105,9 @@ void EN61850monbase::SetETHStatusSlot( cEN61850Info *ethInfo )
     p = l = s.length();
     i = 1;
     while (p>3) {
-    s.insert(l-(i*3),'.');
-    i++;
-    p -= 3;
+        s.insert(l-(i*3),'.');
+        i++;
+        p -= 3;
     }
 
     ui->ByteCountValLabel->setText(s);
@@ -145,35 +145,35 @@ void EN61850monbase::SetETHStatusSlot( cEN61850Info *ethInfo )
 }
 
 
-bool EN61850monbase::LoadSession( QString session )
+bool EN61850monitor::LoadSession( QString session )
 {
-  cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
-  if(tmpGeometry.m_Size.isValid())
-  {
-    m_widGeometry=tmpGeometry;
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+    cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
+    if(tmpGeometry.m_Size.isValid())
+    {
+        m_widGeometry=tmpGeometry;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 
-void EN61850monbase::SaveSession( QString session )
+void EN61850monitor::SaveSession( QString session )
 {
     m_sessionHelper.writeSession(this, m_widGeometry, session);
 }
 
 
-void EN61850monbase::accept()
+void EN61850monitor::accept()
 {
     emit isVisibleSignal(false);
     QDialog::accept();
 }
 
 
-void EN61850monbase::reject()
+void EN61850monitor::reject()
 {
     emit ResetETHStatus();
 }

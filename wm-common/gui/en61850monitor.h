@@ -19,16 +19,16 @@
 #include "sessionhelper.h"
 
 namespace Ui {
-    class EN61850monbase;
+    class EN61850monitor;
 }
 
-class EN61850monbase : public QDialog
+class EN61850monitor : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit EN61850monbase(QWidget* parent, QString machineName);
-    ~EN61850monbase();
+    explicit EN61850monitor(QWidget* parent, QString machineName);
+    ~EN61850monitor();
 
 public slots:
     virtual void ShowHideSlot( bool b );
@@ -53,7 +53,7 @@ protected slots:
 
 
 private:
-    Ui::EN61850monbase *ui;
+    Ui::EN61850monitor *ui;
     QTimer *m_pTimer, m_Timer;
     cWidgetGeometry m_widGeometry;
     cEN61850Info ETHStatus;

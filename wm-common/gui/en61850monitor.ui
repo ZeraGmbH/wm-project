@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EN61850monbase</class>
- <widget class="QDialog" name="EN61850monbase">
+ <class>EN61850monitor</class>
+ <widget class="QDialog" name="EN61850monitor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -496,7 +496,7 @@
   <connection>
    <sender>buttonOk</sender>
    <signal>clicked()</signal>
-   <receiver>EN61850monbase</receiver>
+   <receiver>EN61850monitor</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -512,7 +512,7 @@
   <connection>
    <sender>buttonCancel</sender>
    <signal>pressed()</signal>
-   <receiver>EN61850monbase</receiver>
+   <receiver>EN61850monitor</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
