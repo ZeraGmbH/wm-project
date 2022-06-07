@@ -12,6 +12,7 @@
 #include "widgeom.h"
 #include "wmmeasconfigbase.h"
 #include "formatinfo.h"
+#include "sessionhelper.h"
 
 namespace Ui {
     class WMMeasValuesBase;
@@ -56,6 +57,7 @@ private:
     int m_nLPDisplayMode;
 
     QTimer m_Timer;
+    SessionHelper m_sessionHelper;
 
     void init();
     void destroy();
