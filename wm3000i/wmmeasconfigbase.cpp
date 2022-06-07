@@ -5,9 +5,7 @@
 #include "currentunits.h"
 #include "loadpointunits.h"
 #include "common-modes.h"
-
-extern eUnit AngleUnit[];
-
+#include "angleunits.h"
 
 WMMeasConfigBase::WMMeasConfigBase(QWidget* parent):
     QDialog(parent),

@@ -10,8 +10,8 @@
 #include "eparameter.h"
 #include "errorunits.h"
 #include "loadpointunits.h"
+#include "angleunits.h"
 
-extern eUnit AngleUnit[];
 extern eUnit RCFUnit[];
 
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent) :

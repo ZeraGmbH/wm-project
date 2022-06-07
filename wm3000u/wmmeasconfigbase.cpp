@@ -5,6 +5,7 @@
 #include "errorunits.h"
 #include "voltageunits.h"
 #include "loadpointunits.h"
+#include "angleunits.h"
 
 extern eUnit AngleUnit[];
 
