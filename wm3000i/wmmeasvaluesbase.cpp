@@ -54,6 +54,24 @@ void WMMeasValuesBase::destroy()
 }
 
 
+void WMMeasValuesBase::adjustBoxWidths()
+{
+    if (QLayout *lay=layout())
+    {
+        QLayoutIterator it = lay->iterator();
+        QLayoutItem *child;
+        int  w;
+        while ( (child = it.current()) != 0 )
+        {
+            Q3BoxLayout *l = (Q3BoxLayout*) child->layout();
+            w = l->minimumSize().width();
+            ((Q3BoxLayout*) lay)->setStretchFactor(l,w);
+            ++it;
+        }
+    }
+}
+
+
 void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
 {
     m_widGeometry.SetGeometry(pos(),size());
@@ -72,10 +90,10 @@ void WMMeasValuesBase::ShowHideMVSlot(bool b)
 
 void WMMeasValuesBase::resizeEvent(QResizeEvent * e)
 {
+    adjustBoxWidths();
     this->QDialog::resizeEvent(e);
     m_Timer.start(500);
 }
-
 
 void WMMeasValuesBase::moveEvent(QMoveEvent *)
 {

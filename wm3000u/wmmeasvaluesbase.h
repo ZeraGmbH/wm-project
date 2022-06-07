@@ -62,6 +62,7 @@ private:
     void init();
     void destroy();
     void ActualizeDisplay();
+    void adjustBoxWidths();
 
 private slots:
     void saveConfiguration();
