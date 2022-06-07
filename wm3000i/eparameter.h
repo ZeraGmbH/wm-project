@@ -6,7 +6,6 @@
 #include "eunit.h"
 #include <qstring.h>
 
-enum VoltageUnits {VoltMV, VoltkV3, VoltkVw3, VoltkV, VoltV3, VoltVw3, VoltmV3, VoltmVw3,VoltmV, VoltuV, VoltV, AnzVoltageUnits};
 enum CurrentUnits {CurrkAw3,CurrmAw3, CurruAw3, CurrkA3, CurrmA3, CurruA3, CurrkA, CurrmA,CurruA,  CurrAw3, CurrA3, CurrA, AnzCurrentUnits};
 enum LoadpointUnits {LPProzent, LPPromill, AnzLoadPointUnits};
 enum AngleUnits { Anglegrad, Anglemin , Anglecrad, Anglemrad, Angleurad, AngleGrad2, Anglerad , AnzAngleUnits};

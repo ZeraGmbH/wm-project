@@ -21,6 +21,7 @@ HEADERS = \
     scales-and-units/errorunits.h \
     scales-and-units/eunit.h \
     scales-and-units/scalefactors.h \
+    scales-and-units/voltageunits.h \
     scpi/definitions/scpicommoncmdtype.h \
     scpi/definitions/scpiopcstates.h \
     scpi/definitions/scpiaffectatatuscode.h \
@@ -74,6 +75,7 @@ SOURCES = \
     gui/wmrawactualconfigbase.cpp \
     scales-and-units/errorunits.cpp \
     scales-and-units/scalefactors.cpp \
+    scales-and-units/voltageunits.cpp \
     scpi/cmdinterpret.cpp \
     scpi/cmdtimer.cpp \
     scpi/parse.cpp \
