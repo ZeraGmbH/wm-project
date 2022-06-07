@@ -33,7 +33,7 @@ void WMMeasValuesBase::init()
 {
     m_Timer.setSingleShot(true);
     m_nDisplayMode = IEC; // wmglobal
-    m_nLPDisplayMode = totalRms; 
+    m_nLPDisplayMode = totalRms;
     m_pContextMenu = new WMMeasConfigBase(this);
     m_Format[0] = cFormatInfo(7,3,LoadpointUnit[LPProzent]); // defaults
     m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
@@ -122,101 +122,101 @@ void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
 
 void WMMeasValuesBase::ActualizeLoadPoint()
 {
-      double AnzeigeWertN, AnzeigeWertX;
- 
-      if (m_nLPDisplayMode == totalRms)
-      {
-	  if (m_Format[0].UnitInfo.Name == "%")
-	  {
-	      AnzeigeWertN = m_ActValues.LoadPoint;
-	      AnzeigeWertX = m_ActValues.LoadPointX;
-	  }
-	  else
-	  {
-	      AnzeigeWertN = m_ActValues.RMSN / m_Format[0].UnitInfo.fak;
-	      AnzeigeWertX = m_ActValues.RMSX / m_Format[0].UnitInfo.fak;
-	  }
-      }
-      else
-      {
-	  if (m_Format[0].UnitInfo.Name == "%")
-	  {
-	      AnzeigeWertN = m_ActValues.LoadPoint1;
-	      AnzeigeWertX = m_ActValues.LoadPoint1X;
-	  }
-	  else
-	  {
-	      AnzeigeWertN = m_ActValues.RMSN1 / m_Format[0].UnitInfo.fak;
-	      AnzeigeWertX = m_ActValues.RMSX1 / m_Format[0].UnitInfo.fak;
-	  }
-      }
-   
-      ui->mBigLoadpointN->display(QString("%1").arg(AnzeigeWertN,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
-      ui->mBigLPNUnit->display(m_Format[0].UnitInfo.Name);
-      ui->mBigLoadpointX->display(QString("%1").arg(AnzeigeWertX,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
-      ui->mBigLPXUnit->display(m_Format[0].UnitInfo.Name);
+    double AnzeigeWertN, AnzeigeWertX;
 
-     if (ui->mBigLoadpointN->isFormatChanged() || ui->mBigLoadpointX->isFormatChanged())
+    if (m_nLPDisplayMode == totalRms)
+    {
+        if (m_Format[0].UnitInfo.Name == "%")
+        {
+            AnzeigeWertN = m_ActValues.LoadPoint;
+            AnzeigeWertX = m_ActValues.LoadPointX;
+        }
+        else
+        {
+            AnzeigeWertN = m_ActValues.RMSN / m_Format[0].UnitInfo.fak;
+            AnzeigeWertX = m_ActValues.RMSX / m_Format[0].UnitInfo.fak;
+        }
+    }
+    else
+    {
+        if (m_Format[0].UnitInfo.Name == "%")
+        {
+            AnzeigeWertN = m_ActValues.LoadPoint1;
+            AnzeigeWertX = m_ActValues.LoadPoint1X;
+        }
+        else
+        {
+            AnzeigeWertN = m_ActValues.RMSN1 / m_Format[0].UnitInfo.fak;
+            AnzeigeWertX = m_ActValues.RMSX1 / m_Format[0].UnitInfo.fak;
+        }
+    }
+
+    ui->mBigLoadpointN->display(QString("%1").arg(AnzeigeWertN,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
+    ui->mBigLPNUnit->display(m_Format[0].UnitInfo.Name);
+    ui->mBigLoadpointX->display(QString("%1").arg(AnzeigeWertX,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
+    ui->mBigLPXUnit->display(m_Format[0].UnitInfo.Name);
+
+    if (ui->mBigLoadpointN->isFormatChanged() || ui->mBigLoadpointX->isFormatChanged())
         resizeMeas();
 }
 
 
 void WMMeasValuesBase::ActualizeDisplay()
 {
-   double AnzeigeWert;
-   double normphi = 57.295779; // 360/(2*PI) winkel sind im bogenmass (rad)
-   
-   if (m_nDisplayMode == IEC)
-       AnzeigeWert = m_ActValues.AmplErrorIEC;
-   else
-       AnzeigeWert = m_ActValues.AmplErrorANSI;
-   
-   AnzeigeWert = AnzeigeWert / ( 100.0 * m_Format[1].UnitInfo.fak );
-   ui->mBigAmplError->display(QString("%1").arg(AnzeigeWert,m_Format[1].FieldWidth,'f',m_Format[1].Resolution));
-   ui->mBigErrorUnit->display(m_Format[1].UnitInfo.Name);
-   
-   AnzeigeWert = m_ActValues.AngleError * normphi; // jetzt is et in °
-   AnzeigeWert /= m_Format[2].UnitInfo.fak;
-   ui->mBigAngleError->display(QString("%1").arg(AnzeigeWert,m_Format[2].FieldWidth,'f',m_Format[2].Resolution));
-   ui->mBigAngleUnit->display(m_Format[2].UnitInfo.Name);
-   
-   AnzeigeWert = m_ActValues.RCF;
-   ui->mBigRCF->display(QString("%1").arg(AnzeigeWert,m_Format[3].FieldWidth,'f',m_Format[3].Resolution));
+    double AnzeigeWert;
+    double normphi = 57.295779; // 360/(2*PI) winkel sind im bogenmass (rad)
 
-   if (m_nDisplayMode == ANSI || !m_ActValues.bvalid  || m_ConfData.m_bDCmeasurement)
-   {
-       ui->mBigAngleName->setEnabled(false);
-       ui->mBigAngleError->setEnabled(false);
-       ui->mBigAngleUnit->setEnabled(false);
-   }
-   else
-   {
-       ui->mBigAngleName->setEnabled(true);
-       ui->mBigAngleError->setEnabled(true);
-       ui->mBigAngleUnit->setEnabled(true);
-   }
+    if (m_nDisplayMode == IEC)
+        AnzeigeWert = m_ActValues.AmplErrorIEC;
+    else
+        AnzeigeWert = m_ActValues.AmplErrorANSI;
 
-   if (m_ActValues.bvalid)
-   {
-       ui->mBigAmplError->setEnabled(true);
-       ui->mBigErrorName->setEnabled(true);
-       ui->mBigErrorUnit->setEnabled(true);
-       ui->mBigRCF->setEnabled(true);
-       ui->mBigRCFName->setEnabled(true);
-       ui->mBigRCFUnit->setEnabled(true);
-   }
-   else
-   {
-       ui->mBigAmplError->setEnabled(false);
-       ui->mBigErrorName->setEnabled(false);
-       ui->mBigErrorUnit->setEnabled(false);
-       ui->mBigRCF->setEnabled(false);
-       ui->mBigRCFName->setEnabled(false);
-       ui->mBigRCFUnit->setEnabled(false);
-   }
+    AnzeigeWert = AnzeigeWert / ( 100.0 * m_Format[1].UnitInfo.fak );
+    ui->mBigAmplError->display(QString("%1").arg(AnzeigeWert,m_Format[1].FieldWidth,'f',m_Format[1].Resolution));
+    ui->mBigErrorUnit->display(m_Format[1].UnitInfo.Name);
 
-   if (ui->mBigAmplError->isFormatChanged() || ui->mBigAngleError->isFormatChanged())
-       resizeMeas();
+    AnzeigeWert = m_ActValues.AngleError * normphi; // jetzt is et in °
+    AnzeigeWert /= m_Format[2].UnitInfo.fak;
+    ui->mBigAngleError->display(QString("%1").arg(AnzeigeWert,m_Format[2].FieldWidth,'f',m_Format[2].Resolution));
+    ui->mBigAngleUnit->display(m_Format[2].UnitInfo.Name);
+
+    AnzeigeWert = m_ActValues.RCF;
+    ui->mBigRCF->display(QString("%1").arg(AnzeigeWert,m_Format[3].FieldWidth,'f',m_Format[3].Resolution));
+
+    if (m_nDisplayMode == ANSI || !m_ActValues.bvalid  || m_ConfData.m_bDCmeasurement)
+    {
+        ui->mBigAngleName->setEnabled(false);
+        ui->mBigAngleError->setEnabled(false);
+        ui->mBigAngleUnit->setEnabled(false);
+    }
+    else
+    {
+        ui->mBigAngleName->setEnabled(true);
+        ui->mBigAngleError->setEnabled(true);
+        ui->mBigAngleUnit->setEnabled(true);
+    }
+
+    if (m_ActValues.bvalid)
+    {
+        ui->mBigAmplError->setEnabled(true);
+        ui->mBigErrorName->setEnabled(true);
+        ui->mBigErrorUnit->setEnabled(true);
+        ui->mBigRCF->setEnabled(true);
+        ui->mBigRCFName->setEnabled(true);
+        ui->mBigRCFUnit->setEnabled(true);
+    }
+    else
+    {
+        ui->mBigAmplError->setEnabled(false);
+        ui->mBigErrorName->setEnabled(false);
+        ui->mBigErrorUnit->setEnabled(false);
+        ui->mBigRCF->setEnabled(false);
+        ui->mBigRCFName->setEnabled(false);
+        ui->mBigRCFUnit->setEnabled(false);
+    }
+
+    if (ui->mBigAmplError->isFormatChanged() || ui->mBigAngleError->isFormatChanged())
+        resizeMeas();
 }
 
 
@@ -257,31 +257,31 @@ bool WMMeasValuesBase::LoadSession(QString session)
 {
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls); 
+    QFile file(ls);
     if ( file.open( QIODevice::ReadOnly ) ) {
-	QDataStream stream( &file );
-	stream >> m_widGeometry;
+        QDataStream stream( &file );
+        stream >> m_widGeometry;
 
-    for (int i = 0; i< 4; i++)
-	    stream >> m_Format[i];
+        for (int i = 0; i< 4; i++)
+            stream >> m_Format[i];
 
-	stream >> m_nDisplayMode;
-	stream >> m_nLPDisplayMode;
-	
-	file.close();
-	hide();
-	resize(m_widGeometry.m_Size);
-	move(m_widGeometry.m_Point);
-	if (m_widGeometry.vi)
-	{
-	    show();
-	    emit isVisibleSignal(true);
-	}
-// FVWM und Gnome verhalten sich anders
+        stream >> m_nDisplayMode;
+        stream >> m_nLPDisplayMode;
+
+        file.close();
+        hide();
+        resize(m_widGeometry.m_Size);
+        move(m_widGeometry.m_Point);
+        if (m_widGeometry.vi)
+        {
+            show();
+            emit isVisibleSignal(true);
+        }
+        // FVWM und Gnome verhalten sich anders
 #ifndef FVWM 
-	move(m_widGeometry.m_Point);
+        move(m_widGeometry.m_Point);
 #endif   
-    	return true;
+        return true;
     }
     return false;
 }
@@ -293,31 +293,31 @@ void WMMeasValuesBase::SaveSession(QString session)
 
     if(!QDir(QString("%1/.wm3000u/").arg(QDir::homePath())).exists())
     {
-      //create temporary object that gets deleted when leaving the control block
-      QDir().mkdir(QString("%1/.wm3000u/").arg(QDir::homePath()));
+        //create temporary object that gets deleted when leaving the control block
+        QDir().mkdir(QString("%1/.wm3000u/").arg(QDir::homePath()));
     }
 
     QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls); 
-//    file.remove();
+    QFile file(ls);
+    //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-	file.at(0);
-	int vi;
-	vi = (isVisible()) ? 1 : 0;
-	if (vi) 
-	    m_widGeometry.SetGeometry(pos(),size());
-	m_widGeometry.SetVisible(vi);
-	
-	QDataStream stream( &file );
-	stream << m_widGeometry;
+        file.at(0);
+        int vi;
+        vi = (isVisible()) ? 1 : 0;
+        if (vi)
+            m_widGeometry.SetGeometry(pos(),size());
+        m_widGeometry.SetVisible(vi);
 
-    for (int i = 0; i < 4; i++)
-	    stream << m_Format[i];
+        QDataStream stream( &file );
+        stream << m_widGeometry;
 
-	stream << m_nDisplayMode;
-	stream << m_nLPDisplayMode;
-	
-	file.close();
+        for (int i = 0; i < 4; i++)
+            stream << m_Format[i];
+
+        stream << m_nDisplayMode;
+        stream << m_nLPDisplayMode;
+
+        file.close();
     }
 }
 
@@ -333,7 +333,7 @@ void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* 
 {
     int i;
     for(i = 0; i < n; i++, fi++)
-	m_Format[i] = *fi;
+        m_Format[i] = *fi;
     
     m_nDisplayMode = m;
     m_nLPDisplayMode = m2;

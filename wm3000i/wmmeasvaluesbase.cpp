@@ -60,8 +60,8 @@ void WMMeasValuesBase::cmpResize()
     {
         QLayoutIterator it = lay->iterator();
         QLayoutItem *child;
-         int  w;
-         bool test;
+        int  w;
+        bool test;
         while ( (child = it.current()) != 0 )
         {
             Q3BoxLayout *l = (Q3BoxLayout*) child->layout();
@@ -145,97 +145,97 @@ void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
 
 void WMMeasValuesBase::ActualizeLoadPoint()
 {
-      double AnzeigeWertN, AnzeigeWertX;
+    double AnzeigeWertN, AnzeigeWertX;
 
-      if (m_nLPDisplayMode == totalRms)
-      {
-      if (m_Format[0].UnitInfo.Name == "%")
-      {
-          AnzeigeWertN = m_ActValues.LoadPoint;
-          AnzeigeWertX = m_ActValues.LoadPointX;
-      }
-      else
-      {
-          AnzeigeWertN = m_ActValues.RMSN / m_Format[0].UnitInfo.fak;
-          AnzeigeWertX = m_ActValues.RMSX / m_Format[0].UnitInfo.fak;
-      }
-      }
-      else
-      {
-      if (m_Format[0].UnitInfo.Name == "%")
-      {
-          AnzeigeWertN = m_ActValues.LoadPoint1;
-          AnzeigeWertX = m_ActValues.LoadPoint1X;
-      }
-      else
-      {
-          AnzeigeWertN = m_ActValues.RMSN1 / m_Format[0].UnitInfo.fak;
-          AnzeigeWertX = m_ActValues.RMSX1 / m_Format[0].UnitInfo.fak;
-      }
-      }
+    if (m_nLPDisplayMode == totalRms)
+    {
+        if (m_Format[0].UnitInfo.Name == "%")
+        {
+            AnzeigeWertN = m_ActValues.LoadPoint;
+            AnzeigeWertX = m_ActValues.LoadPointX;
+        }
+        else
+        {
+            AnzeigeWertN = m_ActValues.RMSN / m_Format[0].UnitInfo.fak;
+            AnzeigeWertX = m_ActValues.RMSX / m_Format[0].UnitInfo.fak;
+        }
+    }
+    else
+    {
+        if (m_Format[0].UnitInfo.Name == "%")
+        {
+            AnzeigeWertN = m_ActValues.LoadPoint1;
+            AnzeigeWertX = m_ActValues.LoadPoint1X;
+        }
+        else
+        {
+            AnzeigeWertN = m_ActValues.RMSN1 / m_Format[0].UnitInfo.fak;
+            AnzeigeWertX = m_ActValues.RMSX1 / m_Format[0].UnitInfo.fak;
+        }
+    }
 
-      ui->mBigLoadpointN->display(QString("%1").arg(AnzeigeWertN,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
-      ui->mBigLPNUnit->display(m_Format[0].UnitInfo.Name);
-      ui->mBigLoadpointX->display(QString("%1").arg(AnzeigeWertX,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
-      ui->mBigLPXUnit->display(m_Format[0].UnitInfo.Name);
+    ui->mBigLoadpointN->display(QString("%1").arg(AnzeigeWertN,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
+    ui->mBigLPNUnit->display(m_Format[0].UnitInfo.Name);
+    ui->mBigLoadpointX->display(QString("%1").arg(AnzeigeWertX,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
+    ui->mBigLPXUnit->display(m_Format[0].UnitInfo.Name);
 
 }
 
 
 void WMMeasValuesBase::ActualizeDisplay()
 {
-   double AnzeigeWert;
-   double normphi = 57.295779; // 360/(2*PI) winkel sind im bogenmass (rad)
+    double AnzeigeWert;
+    double normphi = 57.295779; // 360/(2*PI) winkel sind im bogenmass (rad)
 
-   if (m_nDisplayMode == IEC)
-       AnzeigeWert = m_ActValues.AmplErrorIEC;
-   else
-       AnzeigeWert = m_ActValues.AmplErrorANSI;
+    if (m_nDisplayMode == IEC)
+        AnzeigeWert = m_ActValues.AmplErrorIEC;
+    else
+        AnzeigeWert = m_ActValues.AmplErrorANSI;
 
-   AnzeigeWert = AnzeigeWert / ( 100.0 * m_Format[1].UnitInfo.fak );
-   ui->mBigAmplError->display(QString("%1").arg(AnzeigeWert,m_Format[1].FieldWidth,'f',m_Format[1].Resolution));
-   ui->mBigErrorUnit->display(m_Format[1].UnitInfo.Name);
+    AnzeigeWert = AnzeigeWert / ( 100.0 * m_Format[1].UnitInfo.fak );
+    ui->mBigAmplError->display(QString("%1").arg(AnzeigeWert,m_Format[1].FieldWidth,'f',m_Format[1].Resolution));
+    ui->mBigErrorUnit->display(m_Format[1].UnitInfo.Name);
 
-   AnzeigeWert = m_ActValues.AngleError * normphi; // jetzt is et in °
-   AnzeigeWert /= m_Format[2].UnitInfo.fak;
-   ui->mBigAngleError->display(QString("%1").arg(AnzeigeWert,m_Format[2].FieldWidth,'f',m_Format[2].Resolution));
-   ui->mBigAngleUnit->display(m_Format[2].UnitInfo.Name);
+    AnzeigeWert = m_ActValues.AngleError * normphi; // jetzt is et in °
+    AnzeigeWert /= m_Format[2].UnitInfo.fak;
+    ui->mBigAngleError->display(QString("%1").arg(AnzeigeWert,m_Format[2].FieldWidth,'f',m_Format[2].Resolution));
+    ui->mBigAngleUnit->display(m_Format[2].UnitInfo.Name);
 
-   AnzeigeWert = m_ActValues.RCF;
-   ui->mBigRCF->display(QString("%1").arg(AnzeigeWert,m_Format[3].FieldWidth,'f',m_Format[3].Resolution));
+    AnzeigeWert = m_ActValues.RCF;
+    ui->mBigRCF->display(QString("%1").arg(AnzeigeWert,m_Format[3].FieldWidth,'f',m_Format[3].Resolution));
 
 
-   if (m_nDisplayMode == ANSI || !m_ActValues.bvalid || m_ConfData.m_bDCmeasurement)
-   {
-       ui->mBigAngleName->setEnabled(false);
-       ui->mBigAngleError->setEnabled(false);
-       ui->mBigAngleUnit->setEnabled(false);
-   }
-   else
-   {
-       ui->mBigAngleName->setEnabled(true);
-       ui->mBigAngleError->setEnabled(true);
-       ui->mBigAngleUnit->setEnabled(true);
-   }
+    if (m_nDisplayMode == ANSI || !m_ActValues.bvalid || m_ConfData.m_bDCmeasurement)
+    {
+        ui->mBigAngleName->setEnabled(false);
+        ui->mBigAngleError->setEnabled(false);
+        ui->mBigAngleUnit->setEnabled(false);
+    }
+    else
+    {
+        ui->mBigAngleName->setEnabled(true);
+        ui->mBigAngleError->setEnabled(true);
+        ui->mBigAngleUnit->setEnabled(true);
+    }
 
-   if (m_ActValues.bvalid)
-   {
-       ui->mBigAmplError->setEnabled(true);
-       ui->mBigErrorName->setEnabled(true);
-       ui->mBigErrorUnit->setEnabled(true);
-       ui->mBigRCF->setEnabled(true);
-       ui->mBigRCFName->setEnabled(true);
-       ui->mBigRCFUnit->setEnabled(true);
-   }
-   else
-   {
-       ui->mBigAmplError->setEnabled(false);
-       ui->mBigErrorName->setEnabled(false);
-       ui->mBigErrorUnit->setEnabled(false);
-       ui->mBigRCF->setEnabled(false);
-       ui->mBigRCFName->setEnabled(false);
-       ui->mBigRCFUnit->setEnabled(false);
-   }
+    if (m_ActValues.bvalid)
+    {
+        ui->mBigAmplError->setEnabled(true);
+        ui->mBigErrorName->setEnabled(true);
+        ui->mBigErrorUnit->setEnabled(true);
+        ui->mBigRCF->setEnabled(true);
+        ui->mBigRCFName->setEnabled(true);
+        ui->mBigRCFUnit->setEnabled(true);
+    }
+    else
+    {
+        ui->mBigAmplError->setEnabled(false);
+        ui->mBigErrorName->setEnabled(false);
+        ui->mBigErrorUnit->setEnabled(false);
+        ui->mBigRCF->setEnabled(false);
+        ui->mBigRCFName->setEnabled(false);
+        ui->mBigRCFUnit->setEnabled(false);
+    }
 }
 
 
@@ -251,27 +251,27 @@ bool WMMeasValuesBase::LoadSession(QString session)
     QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls);
     if ( file.open( QIODevice::ReadOnly ) ) {
-    QDataStream stream( &file );
-    stream >> m_widGeometry;
+        QDataStream stream( &file );
+        stream >> m_widGeometry;
 
-    for (int i = 0; i< 4; i++)
-        stream >> m_Format[i];
+        for (int i = 0; i< 4; i++)
+            stream >> m_Format[i];
 
-    stream >> m_nDisplayMode;
-    stream >> m_nLPDisplayMode;
+        stream >> m_nDisplayMode;
+        stream >> m_nLPDisplayMode;
 
-    file.close();
-    hide();
-    resize(m_widGeometry.m_Size);
-    move(m_widGeometry.m_Point);
-    if (m_widGeometry.vi)
-    {
-        show();
-        emit isVisibleSignal(true);
-    }
-// FVWM und Gnome verhalten sich anders
+        file.close();
+        hide();
+        resize(m_widGeometry.m_Size);
+        move(m_widGeometry.m_Point);
+        if (m_widGeometry.vi)
+        {
+            show();
+            emit isVisibleSignal(true);
+        }
+        // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
-    move(m_widGeometry.m_Point);
+        move(m_widGeometry.m_Point);
 #endif
         return true;
     }
@@ -283,32 +283,32 @@ void WMMeasValuesBase::SaveSession(QString session)
 {
     if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
     {
-      //create temporary object that gets deleted when leaving the control block
-      QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
+        //create temporary object that gets deleted when leaving the control block
+        QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
     }
 
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls);
-//    file.remove();
+    //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-    file.at(0);
-    int vi;
-    vi = (isVisible()) ? 1 : 0;
-    if (vi)
-        m_widGeometry.SetGeometry(pos(),size());
-    m_widGeometry.SetVisible(vi);
+        file.at(0);
+        int vi;
+        vi = (isVisible()) ? 1 : 0;
+        if (vi)
+            m_widGeometry.SetGeometry(pos(),size());
+        m_widGeometry.SetVisible(vi);
 
-    QDataStream stream( &file );
-    stream << m_widGeometry;
+        QDataStream stream( &file );
+        stream << m_widGeometry;
 
-    for (int i = 0; i < 4; i++)
-        stream << m_Format[i];
+        for (int i = 0; i < 4; i++)
+            stream << m_Format[i];
 
-    stream << m_nDisplayMode;
-    stream << m_nLPDisplayMode;
+        stream << m_nDisplayMode;
+        stream << m_nLPDisplayMode;
 
-    file.close();
+        file.close();
     }
 }
 
@@ -324,7 +324,7 @@ void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* 
 {
     int i;
     for(i = 0; i < n; i++, fi++)
-    m_Format[i] = *fi;
+        m_Format[i] = *fi;
 
     m_nDisplayMode = m;
     m_nLPDisplayMode = m2;
