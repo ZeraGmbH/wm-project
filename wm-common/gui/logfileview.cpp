@@ -29,7 +29,7 @@ CLogFileView::CLogFileView(const QString cap,
     setMinimumSize(200,200);
     LoadSession(".ses");
     showT.start(2000);
-    QObject::connect(&showT,SIGNAL(timeout()),this,SLOT(showList())); 
+    QObject::connect(&showT,SIGNAL(timeout()),this,SLOT(showList()));
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
 }
 
@@ -55,14 +55,14 @@ void CLogFileView::AddLogTextSlot(const QString& s)
 void CLogFileView::showList()
 {
     if (m_loglist.count()) { // ist überhaupt etwas gesendet worden ?
-	QString s;
-	Q3TextStream ts( &s, QIODevice::WriteOnly );
-    int i;
-	for (i = 0; i < (m_loglist.count()-1); i++) 
-	    ts << m_loglist[i] << "\n";
-	ts << m_loglist[i];
-	m_loglist.clear();
-	m_pText->append(s);
+        QString s;
+        Q3TextStream ts( &s, QIODevice::WriteOnly );
+        int i;
+        for (i = 0; i < (m_loglist.count()-1); i++)
+            ts << m_loglist[i] << "\n";
+        ts << m_loglist[i];
+        m_loglist.clear();
+        m_pText->append(s);
     }
 }
 
@@ -81,16 +81,16 @@ void CLogFileView::SaveSession(QString session)
 
 bool CLogFileView::LoadSession(QString session)
 {
-  cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-  if(tmpGeometry.m_Size.isValid())
-  {
-    m_widGeometry=tmpGeometry;
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+    cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
+    if(tmpGeometry.m_Size.isValid())
+    {
+        m_widGeometry=tmpGeometry;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 
@@ -114,7 +114,7 @@ void CLogFileView::closeEvent (QCloseEvent* ce)
     ce->accept();
 }   
 
-	
+
 void CLogFileView::show()
 {
     QDialog::show();
