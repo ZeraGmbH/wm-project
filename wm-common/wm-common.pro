@@ -1,7 +1,7 @@
 TEMPLATE = lib
 CONFIG += staticlib
 
-QT += qt3support 
+QT += qt3support network
 
 HEADERS = \
     client-access/clientiodevice.h \
@@ -113,6 +113,7 @@ SOURCES = \
     movingwindowfilter.cpp \
     range.cpp \
     releaseinfo.cpp \
+    tcpconfig.cpp \
     tools.cpp \
     widgeom.cpp \
     wmparameter.cpp

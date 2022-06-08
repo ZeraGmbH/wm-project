@@ -12,4 +12,6 @@ class cTCPConfig
     uint pcbPort, dspPort;
 };
 
+QStringList getIPv4AddressList();
+
 #endif // TCPCONFIG_H
