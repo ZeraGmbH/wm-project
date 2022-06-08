@@ -64,7 +64,7 @@ private:
 
     void init();
     void destroy();
-    virtual void ActualizeDisplay();
+    void ActualizeDisplay();
     void adjustBoxWidths();
 
 private slots:

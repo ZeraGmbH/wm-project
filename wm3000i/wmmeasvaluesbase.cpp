@@ -82,7 +82,10 @@ void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
 
 void WMMeasValuesBase::ShowHideMVSlot(bool b)
 {
-    if (b) show();else close();
+    if (b)
+        show();
+    else
+        close();
 }
 
 
@@ -113,7 +116,6 @@ void WMMeasValuesBase::ActualizeLPSlot( cwmActValues * av )
 }
 
 
-
 void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
 {
     m_ConfData = *cd;
@@ -122,6 +124,8 @@ void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
         ui->mBigAngleName->setVisible(false);
         ui->mBigAngleError->setVisible(false);
         ui->mBigAngleUnit->setVisible(false);
+        m_nLPDisplayMode = totalRms;
+        m_nDisplayMode = IEC; // wmglobal
     }
     else
     {
@@ -129,6 +133,7 @@ void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
         ui->mBigAngleError->setVisible(true);
         ui->mBigAngleUnit->setVisible(true);
     }
+    repaint();
 }
 
 
@@ -192,7 +197,6 @@ void WMMeasValuesBase::ActualizeDisplay()
 
     AnzeigeWert = m_ActValues.RCF;
     ui->mBigRCF->display(QString("%1").arg(AnzeigeWert,m_Format[3].FieldWidth,'f',m_Format[3].Resolution));
-
 
     if (m_nDisplayMode == ANSI || !m_ActValues.bvalid || m_ConfData.m_bDCmeasurement)
     {

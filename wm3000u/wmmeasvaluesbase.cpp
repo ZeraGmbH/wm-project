@@ -15,7 +15,7 @@
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionReadWrite(machineName)
+    m_sessionReadWrite(machineName, new SessionAppendCustom(this))
 {
     ui->setupUi(this);
     init();
@@ -30,7 +30,6 @@ WMMeasValuesBase::~WMMeasValuesBase()
 
 void WMMeasValuesBase::init()
 {
-    m_Timer.setSingleShot(true);
     m_nDisplayMode = IEC; // wmglobal
     m_nLPDisplayMode = totalRms;
     m_pContextMenu = new WMMeasConfigBase(this);
@@ -38,6 +37,7 @@ void WMMeasValuesBase::init()
     m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
     m_Format[2] = cFormatInfo(7,4,AngleUnit[Anglegrad]);
     m_Format[3] = cFormatInfo(6,4,RCFUnit[nix]);
+    m_Timer.setSingleShot(true);
     connect(this,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool, int,int,int, cFormatInfo*)));
     connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(int,int,int, cFormatInfo*)));
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
@@ -48,6 +48,24 @@ void WMMeasValuesBase::init()
 void WMMeasValuesBase::destroy()
 {
     SaveSession(".ses");
+}
+
+
+void WMMeasValuesBase::adjustBoxWidths()
+{
+    if (QLayout *lay=layout())
+    {
+        QLayoutIterator it = lay->iterator();
+        QLayoutItem *child;
+        int  w;
+        while ( (child = it.current()) != 0 )
+        {
+            Q3BoxLayout *l = (Q3BoxLayout*) child->layout();
+            w = l->minimumSize().width();
+            ((Q3BoxLayout*) lay)->setStretchFactor(l,w);
+            ++it;
+        }
+    }
 }
 
 
@@ -77,7 +95,7 @@ void WMMeasValuesBase::resizeEvent(QResizeEvent * e)
     m_Timer.start(500);
 }
 
-void WMMeasValuesBase::moveEvent( QMoveEvent *)
+void WMMeasValuesBase::moveEvent(QMoveEvent *)
 {
     m_Timer.start(500);
 }
@@ -178,7 +196,7 @@ void WMMeasValuesBase::ActualizeDisplay()
     AnzeigeWert = m_ActValues.RCF;
     ui->mBigRCF->display(QString("%1").arg(AnzeigeWert,m_Format[3].FieldWidth,'f',m_Format[3].Resolution));
 
-    if (m_nDisplayMode == ANSI || !m_ActValues.bvalid  || m_ConfData.m_bDCmeasurement)
+    if (m_nDisplayMode == ANSI || !m_ActValues.bvalid || m_ConfData.m_bDCmeasurement)
     {
         ui->mBigAngleName->setEnabled(false);
         ui->mBigAngleError->setEnabled(false);
@@ -212,92 +230,24 @@ void WMMeasValuesBase::ActualizeDisplay()
 }
 
 
-void WMMeasValuesBase::adjustBoxWidths()
-{
-    if (QLayout *lay=layout())
-    {
-        QLayoutIterator it = lay->iterator();
-        QLayoutItem *child;
-        int  w;
-        while ( (child = it.current()) != 0 )
-        {
-            Q3BoxLayout *l = (Q3BoxLayout*) child->layout();
-            w = l->minimumSize().width();
-            ((Q3BoxLayout*) lay)->setStretchFactor(l,w);
-            ++it;
-        }
-    }
-}
-
-
 bool WMMeasValuesBase::LoadSession(QString session)
 {
-    QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    if ( file.open( QIODevice::ReadOnly ) ) {
-        QDataStream stream( &file );
-        stream >> m_widGeometry;
-
-        for (int i = 0; i< 4; i++)
-            stream >> m_Format[i];
-
-        stream >> m_nDisplayMode;
-        stream >> m_nLPDisplayMode;
-
-        file.close();
-        hide();
-        resize(m_widGeometry.m_Size);
-        move(m_widGeometry.m_Point);
-        if (m_widGeometry.vi)
-        {
-            show();
-            emit isVisibleSignal(true);
-        }
-        // FVWM und Gnome verhalten sich anders
-#ifndef FVWM 
-        move(m_widGeometry.m_Point);
-#endif   
+    cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
+    if(tmpGeometry.m_Size.isValid())
+    {
+        m_widGeometry = tmpGeometry;
         return true;
     }
-    return false;
+    else
+    {
+        return false;
+    }
 }
 
 
 void WMMeasValuesBase::SaveSession(QString session)
 {
-    QFileInfo fi(session);
-
-    if(!QDir(QString("%1/.wm3000u/").arg(QDir::homePath())).exists())
-    {
-        //create temporary object that gets deleted when leaving the control block
-        QDir().mkdir(QString("%1/.wm3000u/").arg(QDir::homePath()));
-    }
-
-    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    //    file.remove();
-    if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-        file.at(0);
-        int vi;
-        vi = (isVisible()) ? 1 : 0;
-        if (vi)
-            m_widGeometry.SetGeometry(pos(),size());
-        m_widGeometry.SetVisible(vi);
-
-        QDataStream stream( &file );
-        stream << m_widGeometry;
-
-
-
-        for (int i = 0; i < 4; i++)
-            stream << m_Format[i];
-
-        stream << m_nDisplayMode;
-        stream << m_nLPDisplayMode;
-
-        file.close();
-    }
+    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
 }
 
 
@@ -305,6 +255,24 @@ void WMMeasValuesBase::contextMenuEvent( QContextMenuEvent * )
 {
     emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
     m_pContextMenu->show();
+}
+
+void WMMeasValuesBase::transferSessionCustom(QDataStream &stream, bool write)
+{
+    if(write) {
+        for (int i = 0; i < 4; i++)
+            stream << m_Format[i];
+
+        stream << m_nDisplayMode;
+        stream << m_nLPDisplayMode;
+    }
+    else {
+        for (int i = 0; i< 4; i++)
+            stream >> m_Format[i];
+
+        stream >> m_nDisplayMode;
+        stream >> m_nLPDisplayMode;
+    }
 }
 
 

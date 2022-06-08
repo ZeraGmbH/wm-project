@@ -8,17 +8,18 @@
 
 #include "bigletter.h"
 #include "confdata.h"
-#include "wmactvalues.h"
 #include "widgeom.h"
 #include "wmmeasconfigbase.h"
 #include "formatinfo.h"
+#include "wmactvalues.h"
 #include "sessionreadwrite.h"
+#include "sessionappendcustom.h"
 
 namespace Ui {
     class WMMeasValuesBase;
 }
 
-class WMMeasValuesBase : public QDialog
+class WMMeasValuesBase : public QDialog, public ISessionAppendCustomHandler
 {
     Q_OBJECT
 
@@ -34,19 +35,21 @@ public slots:
     virtual void ActualizeLoadPoint();
     bool LoadSession( QString session );
     void SaveSession( QString session );
-    virtual void ReceiveFormatInfoSlot( int m, int m2, int n, cFormatInfo * fi );
+    virtual void ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo * fi );
 
 signals:
     void isVisibleSignal(bool);
     void SendFormatInfoSignal(bool, int, int, int, cFormatInfo*);
 
 protected:
-    virtual void closeEvent( QCloseEvent * ce );
-    virtual void resizeEvent( QResizeEvent * e );
-    virtual void moveEvent( QMoveEvent *);
-    virtual void contextMenuEvent( QContextMenuEvent * );
+    virtual void closeEvent( QCloseEvent * ce ) override;
+    virtual void resizeEvent( QResizeEvent * e ) override;
+    virtual void moveEvent( QMoveEvent *) override;
+    virtual void contextMenuEvent( QContextMenuEvent * ) override;
 
 private:
+    virtual void transferSessionCustom(QDataStream& stream, bool write) override;
+
     Ui::WMMeasValuesBase *ui;
     cWidgetGeometry m_widGeometry;
     cwmActValues m_ActValues;
@@ -66,7 +69,6 @@ private:
 
 private slots:
     void saveConfiguration();
-
 };
 
 #endif // WMMEASVALUESBASE_H
