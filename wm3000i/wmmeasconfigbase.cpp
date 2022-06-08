@@ -22,13 +22,13 @@ WMMeasConfigBase::~WMMeasConfigBase()
 
 void WMMeasConfigBase::init()
 {
-   int i;
+    int i;
 
-   m_LPUnit[0] = LoadpointUnit + LPProzent;
-   m_LPUnit[1] = CurrentUnit + CurrA;
-   m_LPUnit[2] = CurrentUnit + CurrkA;
+    m_LPUnit[0] = LoadpointUnit + LPProzent;
+    m_LPUnit[1] = CurrentUnit + CurrA;
+    m_LPUnit[2] = CurrentUnit + CurrkA;
 
-   for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
         ui->LPcomboBox->insertItem(m_LPUnit[i]->Name);
 
     m_ErrUnit[0] = ErrorUnit + ErrProzent;
@@ -57,7 +57,7 @@ void WMMeasConfigBase::ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFor
 {
     int i;
     for(i = 0; i < n; i++, fi++)
-    m_Format[i] = *fi;
+        m_Format[i] = *fi;
 
     m_nDisplayMode = m;
     m_nLPDisplayMode = m2;

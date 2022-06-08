@@ -22,15 +22,15 @@ WMMeasConfigBase::~WMMeasConfigBase()
 
 void WMMeasConfigBase::init()
 {
-   int i;
-   
-   m_LPUnit[0] = LoadpointUnit + LPProzent;
-   m_LPUnit[1] = VoltageUnit + VoltV;
-   m_LPUnit[2] = VoltageUnit + VoltkV;
+    int i;
+
+    m_LPUnit[0] = LoadpointUnit + LPProzent;
+    m_LPUnit[1] = VoltageUnit + VoltV;
+    m_LPUnit[2] = VoltageUnit + VoltkV;
     
-   for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
         ui->LPcomboBox->insertItem(m_LPUnit[i]->Name);
-       
+
     m_ErrUnit[0] = ErrorUnit + ErrProzent;
     m_ErrUnit[1] = ErrorUnit + Errppm;
     // FcomboBox-	>insertItem(ErrorUnit[ErrPromill]->Name);
@@ -57,7 +57,7 @@ void WMMeasConfigBase::ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFor
 {
     int i;
     for(i = 0; i < n; i++, fi++)
-	m_Format[i] = *fi;
+        m_Format[i] = *fi;
     
     dcMode = dc;
     m_nDisplayMode = m;
@@ -66,7 +66,7 @@ void WMMeasConfigBase::ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFor
     ui->LPspinBoxFW->setValue(m_Format[0].FieldWidth);
     ui->LPspinBoxRS->setValue(m_Format[0].Resolution);
     ui->LPcomboBox->setCurrentText(m_Format[0].UnitInfo.Name);
-		
+
     ui->ErrspinBoxFW->setValue(m_Format[1].FieldWidth);
     ui->ErrspinBoxRS->setValue(m_Format[1].Resolution);
     ui->ErrcomboBox->setCurrentText(m_Format[1].UnitInfo.Name);
@@ -91,7 +91,7 @@ void WMMeasConfigBase::LPComboActivatedSlot(int index)
 
 void WMMeasConfigBase::ErrComboActivatedSlot(int index)
 {
-    m_Format[1].UnitInfo = *m_ErrUnit[index];	
+    m_Format[1].UnitInfo = *m_ErrUnit[index];
 }
 
 
@@ -161,7 +161,7 @@ void WMMeasConfigBase::SendData2AppSlot()
 {
     m_Format[0].FieldWidth = ui->LPspinBoxFW->value();
     m_Format[0].Resolution = ui->LPspinBoxRS->value();
-  		
+
     m_Format[1].FieldWidth = ui->ErrspinBoxFW->value();
     m_Format[1].Resolution = ui->ErrspinBoxRS->value();
     
