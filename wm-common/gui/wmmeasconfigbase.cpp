@@ -37,7 +37,7 @@ void WMMeasConfigBase::init()
     m_angleUnit.append(AngleUnit + Anglemrad);
     m_angleUnit.append(AngleUnit + Angleurad);
     m_angleUnit.append(AngleUnit + Anglerad);
-    for(auto unit : m_errUnitList) {
+    for(auto unit : m_angleUnit) {
         ui->WcomboBox->insertItem(unit->Name);
     }
 
