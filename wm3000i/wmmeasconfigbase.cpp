@@ -22,8 +22,6 @@ WMMeasConfigBase::~WMMeasConfigBase()
 
 void WMMeasConfigBase::init()
 {
-    int i;
-
     m_lpUnitList.append(LoadpointUnit + LPProzent);
     m_lpUnitList.append(CurrentUnit + CurrA);
     m_lpUnitList.append(CurrentUnit + CurrkA);
@@ -37,15 +35,15 @@ void WMMeasConfigBase::init()
         ui->ErrcomboBox->insertItem(unit->Name);
     }
 
-    m_AngleUnit[0] = AngleUnit + Anglegrad;
-    m_AngleUnit[1] = AngleUnit + Anglemin;
-    m_AngleUnit[2] = AngleUnit + Anglecrad;
-    m_AngleUnit[3] = AngleUnit + Anglemrad;
-    m_AngleUnit[4] = AngleUnit + Angleurad;
-    m_AngleUnit[5] = AngleUnit + Anglerad;
-
-    for (i = 0; i < 6; i++)
-        ui->WcomboBox->insertItem(m_AngleUnit[i]->Name);
+    m_angleUnit.append(AngleUnit + Anglegrad);
+    m_angleUnit.append(AngleUnit + Anglemin);
+    m_angleUnit.append(AngleUnit + Anglecrad);
+    m_angleUnit.append(AngleUnit + Anglemrad);
+    m_angleUnit.append(AngleUnit + Angleurad);
+    m_angleUnit.append(AngleUnit + Anglerad);
+    for(auto unit : m_errUnitList) {
+        ui->WcomboBox->insertItem(unit->Name);
+    }
 
     m_nDisplayMode = IEC; // wmglobal
     m_nLPDisplayMode = totalRms;
@@ -96,7 +94,7 @@ void WMMeasConfigBase::ErrComboActivatedSlot(int index)
 
 void WMMeasConfigBase::WComboActivatedSlot(int index)
 {
-    m_Format[2].UnitInfo = *m_AngleUnit[index];
+    m_Format[2].UnitInfo = *m_angleUnit[index];
 }
 
 

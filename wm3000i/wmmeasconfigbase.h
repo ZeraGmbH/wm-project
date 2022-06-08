@@ -29,7 +29,7 @@ private:
     Ui::WMMeasConfigBase *ui;
     QList<eUnit*> m_lpUnitList;
     QList<eUnit*> m_errUnitList;
-    eUnit* m_AngleUnit[6];
+    QList<eUnit*> m_angleUnit;
     cFormatInfo m_Format[4];
     int m_nDisplayMode;
     int m_nLPDisplayMode;
