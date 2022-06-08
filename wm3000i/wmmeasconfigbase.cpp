@@ -1,8 +1,6 @@
 #include "wmmeasconfigbase.h"
 #include "ui_wmmeasconfigbase.h"
 #include "errorunits.h"
-#include "currentunits.h"
-#include "loadpointunits.h"
 #include "common-modes.h"
 #include "angleunits.h"
 
@@ -23,9 +21,6 @@ WMMeasConfigBase::~WMMeasConfigBase()
 
 void WMMeasConfigBase::init()
 {
-    m_lpUnitList.append(LoadpointUnit + LPProzent);
-    m_lpUnitList.append(CurrentUnit + CurrA);
-    m_lpUnitList.append(CurrentUnit + CurrkA);
     for(auto unit : m_lpUnitList) {
         ui->LPcomboBox->insertItem(unit->Name);
     }

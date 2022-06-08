@@ -29,6 +29,8 @@
 #include "versionviewbase.h"
 #include "wmmeasconfigbase.h"
 #include "releaseinfo.h"
+#include "currentunits.h"
+#include "loadpointunits.h"
 
 QApplication *g_app;
 cWM3000I* g_WMDevice;
@@ -115,6 +117,9 @@ int main(int argc, char *argv[])
     cZeraInfo *g_WMInfo = new cZeraInfo; // info slots
 
     QList<eUnit *>lpUnitList;
+    lpUnitList.append(LoadpointUnit + LPProzent);
+    lpUnitList.append(CurrentUnit + CurrA);
+    lpUnitList.append(CurrentUnit + CurrkA);
     WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView, machineName, lpUnitList); // fehlermesswerte anzeige erzeugen
     QObject::connect(g_WMView,SIGNAL(UIansichtFehlerMessungActionToggled(bool)),g_WMErrMeasValView,SLOT(ShowHideMVSlot(bool))); // öffnen der fehlermesswert anzeige
     QObject::connect(g_WMErrMeasValView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtFehlerMessungActionSet(bool))); //schliessen der fehlermesswert anzeige
