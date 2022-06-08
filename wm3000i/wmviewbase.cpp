@@ -103,7 +103,7 @@ void WMViewBase::init()
     connect(ui->JustagePhaseAction,SIGNAL(activated()),this,SIGNAL(UIJustagePhaseActionActivated()));
     connect(ui->JustageKoeffBerechnungAction,SIGNAL(activated()),this,SIGNAL(UIJustageKoeffBerechnungActionActivated()));
     connect(ui->JustageOffsetAction,SIGNAL(activated()),this,SIGNAL(UIJustageOffsetActionActivated()));
-    connect(ui->JustageOffsetberechnungAction,SIGNAL(activated()),this,SIGNAL(UIJustageOffsetBerechnungActionActivated()));
+    connect(ui->JustageOffsetBerechnungAction,SIGNAL(activated()),this,SIGNAL(UIJustageOffsetBerechnungActionActivated()));
     connect(ui->messungOffsetabgleichWM3000Action,SIGNAL(activated()),this,SIGNAL(UIJustageOffsetVarActionActivated()));
     connect(ui->messungOffsetKanalNAction,SIGNAL(activated()),this,SIGNAL(UIMessungOffsetKanalNActivated()));
     connect(ui->messungOffsetKanalXAction,SIGNAL(activated()),this,SIGNAL(UIMessungOffsetKanalXActivated()));

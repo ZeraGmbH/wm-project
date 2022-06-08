@@ -147,7 +147,7 @@
     <addaction name="JustageKoeffBerechnungAction"/>
     <addaction name="separator"/>
     <addaction name="JustageOffsetAction"/>
-    <addaction name="JustageOffsetberechnungAction"/>
+    <addaction name="JustageOffsetBerechnungAction"/>
     <addaction name="separator"/>
     <addaction name="justageFlashProgAction"/>
     <addaction name="justageFlasExportAction"/>
@@ -802,7 +802,7 @@
     <string>Offset</string>
    </property>
   </action>
-  <action name="JustageOffsetberechnungAction">
+  <action name="JustageOffsetBerechnungAction">
    <property name="text">
     <string>Offsetberechnung</string>
    </property>
