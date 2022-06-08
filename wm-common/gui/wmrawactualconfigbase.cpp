@@ -26,7 +26,7 @@ void WMRawActualConfigBase::init()
 
 void WMRawActualConfigBase::ReceiveDisplayConfSlot(bool dc, int m, int m2, int m3)
 {
-    dcMode = dc;
+    m_dcMode = dc;
     AmplDisplayMode = m;
     WinkelDisplayMode = m2;
     AmplPrimSekMode = m3;
@@ -46,7 +46,7 @@ void WMRawActualConfigBase::ActualizeDisplay()
     ui->MathradioButton->setChecked(ismathpos);
     ui->TechradioButton->setChecked(!ismathpos);
 
-    if (dcMode)
+    if (m_dcMode)
     {
         ui->Amplx1_sqrt2radioButton->setEnabled(false);
         ui->MathradioButton->setEnabled(false);

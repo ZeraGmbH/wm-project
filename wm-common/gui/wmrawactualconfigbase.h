@@ -34,7 +34,7 @@ signals:
 
 private:
     Ui::WMRawActualConfigBase *ui;
-    bool dcMode;
+    bool m_dcMode;
     int AmplDisplayMode;
     int WinkelDisplayMode;
     int AmplPrimSekMode;

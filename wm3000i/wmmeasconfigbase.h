@@ -42,7 +42,7 @@ private:
     cFormatInfo m_Format[4];
     int m_nDisplayMode;
     int m_nLPDisplayMode;
-    bool dcMode;
+    bool m_dcMode;
 
     void init();
     virtual void Actualize();
