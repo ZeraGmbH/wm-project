@@ -3,17 +3,12 @@
 #ifndef LOGFILEVIEW_H
 #define LOGFILEVIEW_H
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qtimer.h>
-#include <q3textedit.h>
-#include <qdialog.h>
-#include <qevent.h>
+#include <QTimer>
+#include <QDialog>
+#include "sessionreadwrite.h"
+#include <Q3TextEdit>
 #include <QResizeEvent>
 #include <QCloseEvent>
-#include "widgeom.h"
-#include "sessionreadwrite.h"
 
 class CLogFileView:public QDialog
 {
@@ -33,8 +28,7 @@ public slots:
     bool LoadSession(QString);
     void ShowHideLogFileSlot(bool); // sichtbar oder nicht
     void AddLogTextSlot(const QString&); // wenn neue daten einlaufen
-    void show(); // mittels timer aktiviert
-    
+
 protected:
     virtual void closeEvent ( QCloseEvent * );
     virtual void resizeEvent ( QResizeEvent *);
@@ -45,7 +39,7 @@ signals:
     
 private:
     cWidgetGeometry m_widGeometry;
-    QTimer showT;
+    QTimer m_timerDelayShow;
     QStringList m_loglist;
     QTimer m_Timer;
     SessionReadWrite m_sessionReadWrite;
