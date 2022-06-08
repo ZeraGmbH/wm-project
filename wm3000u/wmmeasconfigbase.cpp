@@ -2,8 +2,6 @@
 #include "ui_wmmeasconfigbase.h"
 #include "common-modes.h"
 #include "errorunits.h"
-#include "voltageunits.h"
-#include "loadpointunits.h"
 #include "angleunits.h"
 
 WMMeasConfigBase::WMMeasConfigBase(QWidget* parent, QList<eUnit *> lpUnitList):
@@ -23,9 +21,6 @@ WMMeasConfigBase::~WMMeasConfigBase()
 
 void WMMeasConfigBase::init()
 {
-    m_lpUnitList.append(LoadpointUnit + LPProzent);
-    m_lpUnitList.append(VoltageUnit + VoltV);
-    m_lpUnitList.append(VoltageUnit + VoltkV);
     for(auto unit : m_lpUnitList) {
         ui->LPcomboBox->insertItem(unit->Name);
     }
