@@ -10,7 +10,7 @@
 #include <QCloseEvent>
 #include <QTime>
 
-#include "sessionhelper.h"
+#include "sessionreadwrite.h"
 #include "logfileview.h"
 
 CLogFileView::CLogFileView(const QString cap,
@@ -19,7 +19,7 @@ CLogFileView::CLogFileView(const QString cap,
                            const char *wname,
                            QString machineName) :
     QDialog(parent, wname),
-    m_sessionHelper(machineName)
+    m_sessionReadWrite(machineName)
 {
     m_Timer.setSingleShot(true);
     setCaption(cap);
@@ -75,13 +75,13 @@ void CLogFileView::saveConfiguration()
 
 void CLogFileView::SaveSession(QString session)
 {
-    m_sessionHelper.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
 }
 
 
 bool CLogFileView::LoadSession(QString session)
 {
-  cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
+  cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
   if(tmpGeometry.m_Size.isValid())
   {
     m_widGeometry=tmpGeometry;

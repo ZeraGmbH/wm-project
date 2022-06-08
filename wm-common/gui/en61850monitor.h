@@ -16,7 +16,7 @@
 
 #include "en61850.h"
 #include "widgeom.h"
-#include "sessionhelper.h"
+#include "sessionreadwrite.h"
 
 namespace Ui {
     class EN61850monitor;
@@ -57,7 +57,7 @@ private:
     QTimer *m_pTimer, m_Timer;
     cWidgetGeometry m_widGeometry;
     cEN61850Info ETHStatus;
-    SessionHelper m_sessionHelper;
+    SessionReadWrite m_sessionReadWrite;
 
     void init();
     void destroy();

@@ -8,7 +8,7 @@
 EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
     QDialog(parent),
     ui(new Ui::EN61850monitor),
-    m_sessionHelper(machineName)
+    m_sessionReadWrite(machineName)
 {
     ui->setupUi(this);
     init();
@@ -147,7 +147,7 @@ void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
 
 bool EN61850monitor::LoadSession( QString session )
 {
-    cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
+    cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
     if(tmpGeometry.m_Size.isValid())
     {
         m_widGeometry=tmpGeometry;
@@ -162,7 +162,7 @@ bool EN61850monitor::LoadSession( QString session )
 
 void EN61850monitor::SaveSession( QString session )
 {
-    m_sessionHelper.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
 }
 
 

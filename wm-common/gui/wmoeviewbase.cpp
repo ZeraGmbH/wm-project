@@ -6,7 +6,7 @@
 WMOeViewBase::WMOeViewBase(QWidget* parent, QString machineName):
     QDialog(parent),
     ui(new Ui::WMOeViewBase),
-    m_sessionHelper(machineName)
+    m_sessionReadWrite(machineName)
 {
     ui->setupUi(this);
     init();
@@ -90,13 +90,13 @@ void WMOeViewBase::ShowHideOESlot( bool b )
 
 void WMOeViewBase::SaveSession(QString session)
 {
-    m_sessionHelper.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
 }
 
 
 bool WMOeViewBase::LoadSession(QString session)
 {
-  cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
+  cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
   if(tmpGeometry.m_Size.isValid())
   {
     m_widGeometry=tmpGeometry;

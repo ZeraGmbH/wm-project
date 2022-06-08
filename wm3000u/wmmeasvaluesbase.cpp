@@ -15,7 +15,7 @@
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionHelper(machineName)
+    m_sessionReadWrite(machineName)
 {
     ui->setupUi(this);
     init();

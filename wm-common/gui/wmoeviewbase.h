@@ -17,7 +17,7 @@
 
 #include "ownerrorviewdata.h"
 #include "widgeom.h"
-#include "sessionhelper.h"
+#include "sessionreadwrite.h"
 
 
 namespace Ui {
@@ -51,7 +51,7 @@ private:
     cWidgetGeometry m_widGeometry;
     cOwnErrorViewData m_OwnErrorView;
     QTimer m_Timer;
-    SessionHelper m_sessionHelper;
+    SessionReadWrite m_sessionReadWrite;
     void init();
     void destroy();
 

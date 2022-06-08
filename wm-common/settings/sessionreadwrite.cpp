@@ -1,18 +1,18 @@
-#include "sessionhelper.h"
+#include "sessionreadwrite.h"
 #include <QDir>
 
-SessionHelper::SessionHelper(QString machineName, SessionHelperAppendStrategy *appendStrategy) :
+SessionReadWrite::SessionReadWrite(QString machineName, SessionHelperAppendStrategy *appendStrategy) :
     m_SessionPath(QString("%1/.%2").arg(QDir::homePath(), machineName)),
     m_appendStrategy(appendStrategy)
 {
 }
 
-SessionHelper::~SessionHelper()
+SessionReadWrite::~SessionReadWrite()
 {
     delete m_appendStrategy;
 }
 
-void SessionHelper::writeSession(QWidget *widget, cWidgetGeometry geometry, QString session)
+void SessionReadWrite::writeSession(QWidget *widget, cWidgetGeometry geometry, QString session)
 {
     if(!QDir(m_SessionPath).exists()) {
         QDir().mkdir(m_SessionPath);
@@ -32,7 +32,7 @@ void SessionHelper::writeSession(QWidget *widget, cWidgetGeometry geometry, QStr
     }
 }
 
-cWidgetGeometry SessionHelper::readSession(QWidget *widget, QString session)
+cWidgetGeometry SessionReadWrite::readSession(QWidget *widget, QString session)
 {
     cWidgetGeometry geometry;
     QFile file(getSessionFileName(widget, session));
@@ -52,7 +52,7 @@ cWidgetGeometry SessionHelper::readSession(QWidget *widget, QString session)
     return geometry;
 }
 
-QString SessionHelper::getSessionFileName(QWidget *widget, QString session)
+QString SessionReadWrite::getSessionFileName(QWidget *widget, QString session)
 {
     QFileInfo fi(session);
     QString name = QString("%1/%2%3").arg(m_SessionPath).arg(widget->name()).arg(fi.fileName());

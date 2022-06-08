@@ -1,5 +1,5 @@
-#ifndef SESSIONHELPER_H
-#define SESSIONHELPER_H
+#ifndef SESSIONREADWRITE_H
+#define SESSIONREADWRITE_H
 
 #include <QString>
 #include <QWidget>
@@ -7,11 +7,11 @@
 #include "sessionhelperappendzero.h"
 #include "widgeom.h"
 
-class SessionHelper
+class SessionReadWrite
 {
 public:
-    SessionHelper(QString machineName, SessionHelperAppendStrategy* appendStrategy = new SessionHelperAppendZero);
-    virtual ~SessionHelper();
+    SessionReadWrite(QString machineName, SessionHelperAppendStrategy* appendStrategy = new SessionHelperAppendZero);
+    virtual ~SessionReadWrite();
     void writeSession(QWidget *widget, cWidgetGeometry geometry, QString session);
     cWidgetGeometry readSession(QWidget *widget, QString session);
 private:
@@ -20,4 +20,4 @@ private:
     SessionHelperAppendStrategy* m_appendStrategy;
 };
 
-#endif // SESSIONHELPER_H
+#endif // SESSIONREADWRITE_H

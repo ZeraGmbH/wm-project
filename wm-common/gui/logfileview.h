@@ -13,7 +13,7 @@
 #include <QResizeEvent>
 #include <QCloseEvent>
 #include "widgeom.h"
-#include "sessionhelper.h"
+#include "sessionreadwrite.h"
 
 class CLogFileView:public QDialog
 {
@@ -48,7 +48,7 @@ private:
     QTimer showT;
     QStringList m_loglist;
     QTimer m_Timer;
-    SessionHelper m_sessionHelper;
+    SessionReadWrite m_sessionReadWrite;
     
 private slots:
     void showList();

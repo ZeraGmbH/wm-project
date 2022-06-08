@@ -17,7 +17,7 @@
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionHelper(machineName, new SessionHelperAppendWMMeasValues(this))
+    m_sessionReadWrite(machineName, new SessionHelperAppendWMMeasValues(this))
 {
     ui->setupUi(this);
     init();
@@ -231,7 +231,7 @@ void WMMeasValuesBase::ActualizeDisplay()
 
 bool WMMeasValuesBase::LoadSession(QString session)
 {
-    cWidgetGeometry tmpGeometry = m_sessionHelper.readSession(this, session);
+    cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
     if(tmpGeometry.m_Size.isValid())
     {
         m_widGeometry = tmpGeometry;
@@ -246,7 +246,7 @@ bool WMMeasValuesBase::LoadSession(QString session)
 
 void WMMeasValuesBase::SaveSession(QString session)
 {
-    m_sessionHelper.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
 }
 
 
