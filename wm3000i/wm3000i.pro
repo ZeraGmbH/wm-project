@@ -10,7 +10,6 @@ HEADERS	+= \
 	devserver.h \
 	ownerror.h \
 	pcbiface.h \
-    sessionhelperappendwmmeasvalues.h \
 	wmglobal.h \
 	wm3000i.h \
 	zerainfo.h \
@@ -28,7 +27,6 @@ SOURCES	+= \
 	main.cpp \
 	ownerror.cpp \
 	pcbiface.cpp \
-    sessionhelperappendwmmeasvalues.cpp \
 	wm3000i.cpp \
 	zerainfo.cpp \
 	wm3000scpiface.cpp \

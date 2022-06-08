@@ -1,5 +1,4 @@
 #include "wmmeasvaluesbase.h"
-#include "sessionhelperappendwmmeasvalues.h"
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <Q3BoxLayout>
@@ -17,7 +16,7 @@
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionReadWrite(machineName, new SessionHelperAppendWMMeasValues(this))
+    m_sessionReadWrite(machineName, new SessionAppendCustom(this))
 {
     ui->setupUi(this);
     init();
@@ -254,6 +253,24 @@ void WMMeasValuesBase::contextMenuEvent( QContextMenuEvent * )
 {
     emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
     m_pContextMenu->show();
+}
+
+void WMMeasValuesBase::transferSessionCustom(QDataStream &stream, bool write)
+{
+    if(write) {
+        for (int i = 0; i < 4; i++)
+            stream << m_Format[i];
+
+        stream << m_nDisplayMode;
+        stream << m_nLPDisplayMode;
+    }
+    else {
+        for (int i = 0; i< 4; i++)
+            stream >> m_Format[i];
+
+        stream >> m_nDisplayMode;
+        stream >> m_nLPDisplayMode;
+    }
 }
 
 

@@ -13,12 +13,13 @@
 #include "formatinfo.h"
 #include "wmactvalues.h"
 #include "sessionreadwrite.h"
+#include "sessionappendcustom.h"
 
 namespace Ui {
     class WMMeasValuesBase;
 }
 
-class WMMeasValuesBase : public QDialog
+class WMMeasValuesBase : public QDialog, public ISessionAppendCustomHandler
 {
     Q_OBJECT
 
@@ -47,6 +48,8 @@ protected:
     virtual void contextMenuEvent( QContextMenuEvent * );
 
 private:
+    virtual void transferSessionCustom(QDataStream& stream, bool write) override;
+
     Ui::WMMeasValuesBase *ui;
     cWidgetGeometry m_widGeometry;
     cwmActValues m_ActValues;
@@ -66,7 +69,6 @@ private:
 
 private slots:
     void saveConfiguration();
-    friend class SessionHelperAppendWMMeasValues;
 };
 
 #endif // WMMEASVALUESBASE_H

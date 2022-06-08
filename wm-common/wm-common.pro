@@ -47,6 +47,7 @@ HEADERS = \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
     settings/sessionreadwrite.h \
+    settings/sessionappendcustom.h \
     settings/sessionappendstrategy.h \
     settings/sessionappendzero.h \
     service-interfaces/dspiface.h \
