@@ -42,10 +42,10 @@ signals:
     void SendFormatInfoSignal(bool, int, int, int, cFormatInfo*);
 
 protected:
-    virtual void closeEvent( QCloseEvent * ce );
-    virtual void resizeEvent( QResizeEvent * e );
-    virtual void moveEvent( QMoveEvent *);
-    virtual void contextMenuEvent( QContextMenuEvent * );
+    virtual void closeEvent( QCloseEvent * ce ) override;
+    virtual void resizeEvent( QResizeEvent * e ) override;
+    virtual void moveEvent( QMoveEvent *) override;
+    virtual void contextMenuEvent( QContextMenuEvent * ) override;
 
 private:
     virtual void transferSessionCustom(QDataStream& stream, bool write) override;
