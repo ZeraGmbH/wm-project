@@ -1,16 +1,15 @@
+#include "wmviewbase.h"
+#include "wmglobal.h"
+#include "wmeditor.h"
+#include "widgeom.h"
+#include "ui_wmviewbase.h"
+#include "tcpconfig.h"
 #include <Q3MainWindow>
 #include <qlabel.h>
 #include <QFileInfo>
 #include <Q3FileDialog>
 #include <QStatusBar>
-#include <QDebug>
 #include <QTextEdit>
-
-#include "wmglobal.h"
-#include "wmeditor.h"
-#include "widgeom.h"
-#include "wmviewbase.h"
-#include "ui_wmviewbase.h"
 
 WMViewBase::WMViewBase(QWidget *parent) :
     Q3MainWindow(parent),
@@ -166,6 +165,8 @@ void WMViewBase::ActualizeStates()
 
     m_pFreqLabel->setText( m_bFreqQuestionable ? tr("!!SignalFrequenz!!") : tr(""));
     
+    m_pIPLabel->setText(QString("IP=%1").arg(getIPv4AddressList().join("/")));
+
     QFileInfo fi (m_ConfData.m_sOETFile);
     m_pOETLabel->setText("EFT="+((m_ConfData.m_sOETFile=="") ? tr("Keine") : fi.baseName())); // statuszeile eigenfehlertabelle eintragen
     UpdateRecentFileList(recentOETFiles,m_ConfData.m_sOETFile);
@@ -306,6 +307,9 @@ void WMViewBase::CreateStatusBar()
     m_pFreqLabel=new QLabel("",this); // erstmal kein fehler
     m_pFreqLabel->setStyleSheet("QLabel {color:red;}");
     statusBar()->addPermanentWidget(m_pFreqLabel,0);
+    m_pIPLabel= new QLabel("", this);
+    statusBar()->addPermanentWidget(m_pIPLabel,0);
+
     m_pDummyLabel=new QLabel("",this); // letztes feld ist bereich N in statuszeile
     statusBar()->addPermanentWidget(m_pDummyLabel,1);
 }

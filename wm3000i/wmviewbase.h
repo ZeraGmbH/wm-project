@@ -120,6 +120,7 @@ private:
     QLabel* m_pRangeNLabel;
     cConfData m_ConfData;
     QLabel* m_pFreqLabel;
+    QLabel* m_pIPLabel;
     QLabel* m_pDummyLabel;
     QLabel* m_pOETLabel;
     int m_nrecentOEFileIds[nmaxRecentOEFiles];
