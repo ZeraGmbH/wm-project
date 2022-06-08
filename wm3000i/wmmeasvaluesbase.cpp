@@ -13,13 +13,13 @@
 #include "angleunits.h"
 #include "rcfunits.h"
 
-WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName) :
+WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<eUnit *> lpUnitList) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
     m_sessionReadWrite(machineName, new SessionAppendCustom(this))
 {
     ui->setupUi(this);
-    init();
+    init(lpUnitList);
 }
 
 WMMeasValuesBase::~WMMeasValuesBase()
@@ -29,11 +29,11 @@ WMMeasValuesBase::~WMMeasValuesBase()
 }
 
 
-void WMMeasValuesBase::init()
+void WMMeasValuesBase::init(QList<eUnit *>lpUnitList)
 {
     m_nDisplayMode = IEC; // wmglobal
     m_nLPDisplayMode = totalRms;
-    m_pContextMenu = new WMMeasConfigBase(this);
+    m_pContextMenu = new WMMeasConfigBase(this, lpUnitList);
     m_Format[0] = cFormatInfo(7,3,LoadpointUnit[LPProzent]); // defaults
     m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
     m_Format[2] = cFormatInfo(7,4,AngleUnit[Anglegrad]);

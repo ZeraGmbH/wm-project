@@ -114,7 +114,8 @@ int main(int argc, char *argv[])
 
   cZeraInfo *g_WMInfo = new cZeraInfo; // info slots
 
-  WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView, machineName); // fehlermesswerte anzeige erzeugen
+  QList<eUnit *>lpUnitList;
+  WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView, machineName, lpUnitList); // fehlermesswerte anzeige erzeugen
   QObject::connect(g_WMView,SIGNAL(UIansichtFehlerMessungActionToggled(bool)),g_WMErrMeasValView,SLOT(ShowHideMVSlot(bool))); // öffnen der fehlermesswert anzeige
   QObject::connect(g_WMErrMeasValView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtFehlerMessungActionSet(bool))); //schliessen der fehlermesswert anzeige
   QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMErrMeasValView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten

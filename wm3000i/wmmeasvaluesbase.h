@@ -24,7 +24,7 @@ class WMMeasValuesBase : public QDialog, public ISessionAppendCustomHandler
     Q_OBJECT
 
 public:
-    explicit WMMeasValuesBase(QWidget* parent, QString machineName);
+    explicit WMMeasValuesBase(QWidget* parent, QString machineName, QList<eUnit*> lpUnitList);
     ~WMMeasValuesBase();
 
 public slots:
@@ -62,7 +62,7 @@ private:
     QTimer m_Timer;
     SessionReadWrite m_sessionReadWrite;
 
-    void init();
+    void init(QList<eUnit *>lpUnitList);
     void destroy();
     void ActualizeDisplay();
     void adjustBoxWidths();

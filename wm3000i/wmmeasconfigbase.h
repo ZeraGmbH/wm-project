@@ -14,7 +14,7 @@ class WMMeasConfigBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit WMMeasConfigBase(QWidget* parent);
+    explicit WMMeasConfigBase(QWidget* parent, QList<eUnit *> lpUnitList);
     ~WMMeasConfigBase();
 
 public slots:
@@ -35,7 +35,7 @@ private:
     int m_nLPDisplayMode;
     bool m_dcMode;
 
-    void init();
+    void init(QList<eUnit *> lpUnitList);
     virtual void Actualize();
 
 private slots:

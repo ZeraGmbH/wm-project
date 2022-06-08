@@ -6,12 +6,12 @@
 #include "loadpointunits.h"
 #include "angleunits.h"
 
-WMMeasConfigBase::WMMeasConfigBase(QWidget* parent):
+WMMeasConfigBase::WMMeasConfigBase(QWidget* parent, QList<eUnit *> lpUnitList):
     QDialog(parent),
     ui(new Ui::WMMeasConfigBase)
 {
     ui->setupUi(this);
-    init();
+    init(lpUnitList);
 }
 
 WMMeasConfigBase::~WMMeasConfigBase()
@@ -20,7 +20,7 @@ WMMeasConfigBase::~WMMeasConfigBase()
     delete ui;
 }
 
-void WMMeasConfigBase::init()
+void WMMeasConfigBase::init(QList<eUnit *> lpUnitList)
 {
     m_lpUnitList.append(LoadpointUnit + LPProzent);
     m_lpUnitList.append(VoltageUnit + VoltV);
