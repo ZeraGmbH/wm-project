@@ -15,7 +15,6 @@ HEADERS	+=  \
 	devserver.h \
     confdialogbase.h \
     rangedialogbase.h \
-    wmmeasvaluesbase.h \
     wmrawactualvalbase.h \
     wmviewbase.h \
     dbushelper.h \
@@ -31,7 +30,6 @@ SOURCES	+=  \
 	wm3000scpiface.cpp \
 	devserver.cpp \
     wmviewbase.cpp \
-    wmmeasvaluesbase.cpp \
     wmrawactualvalbase.cpp \
     confdialogbase.cpp \
     rangedialogbase.cpp \
@@ -42,7 +40,6 @@ SOURCES	+=  \
 
 FORMS	= wmviewbase.ui \
 	rangedialogbase.ui \
-	wmmeasvaluesbase.ui \
 	wmrawactualvalbase.ui \
     confdialogbase.ui \
     wmoffsetvalbase.ui

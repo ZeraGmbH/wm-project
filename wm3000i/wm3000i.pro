@@ -15,7 +15,6 @@ HEADERS	+= \
 	zerainfo.h \
 	wm3000scpiface.h \
     wmviewbase.h \
-    wmmeasvaluesbase.h \
     wmrawactualvalbase.h \
     confdialogbase.h \
     rangedialogbase.h \
@@ -30,7 +29,6 @@ SOURCES	+= \
 	zerainfo.cpp \
 	wm3000scpiface.cpp \
     wmviewbase.cpp \
-    wmmeasvaluesbase.cpp \
     wmrawactualvalbase.cpp \
     rangedialogbase.cpp \
     wmoffsetvalbase.cpp \
@@ -39,7 +37,6 @@ SOURCES	+= \
 
 FORMS	= confdialogbase.ui \
 	rangedialogbase.ui \
-	wmmeasvaluesbase.ui \
 	wmrawactualvalbase.ui \
         wmoffsetvalbase.ui \
 	wmviewbase.ui

@@ -17,6 +17,7 @@ HEADERS = \
     gui/versionviewbase.h \
     gui/wmeditor.h \
     gui/wmmeasconfigbase.h \
+    gui/wmmeasvaluesbase.h \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
     scales-and-units/angleunits.h \
@@ -82,6 +83,7 @@ SOURCES = \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
     gui/wmmeasconfigbase.cpp \
+    gui/wmmeasvaluesbase.cpp \
     gui/wmoeviewbase.cpp \
     gui/wmrawactualconfigbase.cpp \
     scales-and-units/angleunits.cpp \
@@ -119,12 +121,14 @@ FORMS = \
     gui/en61850monitor.ui \
     gui/versionviewbase.ui \
     gui/wmmeasconfigbase.ui \
+    gui/wmmeasvaluesbase.ui \
     gui/wmoeviewbase.ui \
     gui/wmrawactualconfigbase.ui
 
 INCLUDEPATH += \
     client-access \
     dsp \
+    gui \
     scales-and-units \
     scpi \
     scpi/definitions \
