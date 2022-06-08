@@ -24,12 +24,12 @@ void WMMeasConfigBase::init()
 {
     int i;
 
-    m_LPUnit[0] = LoadpointUnit + LPProzent;
-    m_LPUnit[1] = CurrentUnit + CurrA;
-    m_LPUnit[2] = CurrentUnit + CurrkA;
-
-    for (i = 0; i < 3; i++)
-        ui->LPcomboBox->insertItem(m_LPUnit[i]->Name);
+    m_lpUnitList.append(LoadpointUnit + LPProzent);
+    m_lpUnitList.append(CurrentUnit + CurrA);
+    m_lpUnitList.append(CurrentUnit + CurrkA);
+    for(auto unit : m_lpUnitList) {
+        ui->LPcomboBox->insertItem(unit->Name);
+    }
 
     m_ErrUnit[0] = ErrorUnit + ErrProzent;
     m_ErrUnit[1] = ErrorUnit + Errppm;
@@ -85,7 +85,7 @@ void WMMeasConfigBase::ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFor
 
 void WMMeasConfigBase::LPComboActivatedSlot(int index)
 {
-    m_Format[0].UnitInfo = *m_LPUnit[index];
+    m_Format[0].UnitInfo = *m_lpUnitList[index];
 }
 
 
