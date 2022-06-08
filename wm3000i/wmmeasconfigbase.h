@@ -28,7 +28,7 @@ signals:
 private:
     Ui::WMMeasConfigBase *ui;
     QList<eUnit*> m_lpUnitList;
-    eUnit* m_ErrUnit[2];
+    QList<eUnit*> m_errUnitList;
     eUnit* m_AngleUnit[6];
     cFormatInfo m_Format[4];
     int m_nDisplayMode;

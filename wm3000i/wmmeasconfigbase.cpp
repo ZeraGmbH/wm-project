@@ -31,12 +31,11 @@ void WMMeasConfigBase::init()
         ui->LPcomboBox->insertItem(unit->Name);
     }
 
-    m_ErrUnit[0] = ErrorUnit + ErrProzent;
-    m_ErrUnit[1] = ErrorUnit + Errppm;
-    // FcomboBox-	>insertItem(ErrorUnit[ErrPromill]->Name);
-
-    for (i = 0; i < 2; i++)
-        ui->ErrcomboBox->insertItem(m_ErrUnit[i]->Name);
+    m_errUnitList.append(ErrorUnit + ErrProzent);
+    m_errUnitList.append(ErrorUnit + Errppm);
+    for(auto unit : m_errUnitList) {
+        ui->ErrcomboBox->insertItem(unit->Name);
+    }
 
     m_AngleUnit[0] = AngleUnit + Anglegrad;
     m_AngleUnit[1] = AngleUnit + Anglemin;
@@ -91,7 +90,7 @@ void WMMeasConfigBase::LPComboActivatedSlot(int index)
 
 void WMMeasConfigBase::ErrComboActivatedSlot(int index)
 {
-    m_Format[1].UnitInfo = *m_ErrUnit[index];
+    m_Format[1].UnitInfo = *m_errUnitList[index];
 }
 
 
