@@ -1,9 +1,8 @@
 #ifndef WMVIEWBASE_H
 #define WMVIEWBASE_H
 
-#include <qvariant.h>
-#include <q3mainwindow.h>
-#include <qlabel.h>
+#include <Q3MainWindow>
+#include <QLabel>
 #include <QTimer>
 
 #include "maxrecentfiles.h"
