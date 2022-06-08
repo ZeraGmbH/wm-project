@@ -16,6 +16,7 @@ HEADERS = \
     gui/maxrecentfiles.h \
     gui/versionviewbase.h \
     gui/wmeditor.h \
+    gui/wmmeasconfigbase.h \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
     scales-and-units/angleunits.h \
@@ -80,6 +81,7 @@ SOURCES = \
     gui/logfileview.cpp \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
+    gui/wmmeasconfigbase.cpp \
     gui/wmoeviewbase.cpp \
     gui/wmrawactualconfigbase.cpp \
     scales-and-units/angleunits.cpp \
@@ -116,6 +118,7 @@ SOURCES = \
 FORMS = \
     gui/en61850monitor.ui \
     gui/versionviewbase.ui \
+    gui/wmmeasconfigbase.ui \
     gui/wmoeviewbase.ui \
     gui/wmrawactualconfigbase.ui
 
