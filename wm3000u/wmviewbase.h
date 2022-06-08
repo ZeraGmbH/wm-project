@@ -122,6 +122,7 @@ private:
     QStringList recentSESFiles;
     bool m_bJustified;
     bool m_bFreqQuestionable;
+    QTimer m_iPPollTimer;
 
     void init();
     void destroy();
@@ -138,6 +139,7 @@ private slots:
     virtual void JustFlashExportSlot();
     virtual void JustFlashImportSlot();
     virtual void SaveDefaultSessionSlot(bool);
+    void onIpPollTimer();
 
 };
 

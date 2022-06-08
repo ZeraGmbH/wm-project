@@ -115,6 +115,9 @@ void WMViewBase::init()
     connect(ui->hilfeVersionAction,SIGNAL(activated()),this,SIGNAL(UIhilfeVersionActionActivated()));
     connect(ui->hilfeReleaseInfoAction,SIGNAL(activated()),this,SIGNAL(UIhilfeReleaseInfoActionActivated()));
 
+    connect(&m_iPPollTimer,SIGNAL(timeout()), this, SLOT(onIpPollTimer()));
+    m_iPPollTimer.setSingleShot(false);
+    m_iPPollTimer.start(3000);
 }
 
 
@@ -164,8 +167,6 @@ void WMViewBase::ActualizeStates()
     m_pStatusLabel->setText( m_bJustified ? tr("Justiert") : tr("Nicht justiert"));
 
     m_pFreqLabel->setText( m_bFreqQuestionable ? tr("!!SignalFrequenz!!") : tr(""));
-    
-    m_pIPLabel->setText(QString("IP=%1").arg(getIPv4AddressList().join("/")));
 
     QFileInfo fi (m_ConfData.m_sOETFile);
     m_pOETLabel->setText("EFT="+((m_ConfData.m_sOETFile=="") ? tr("Keine") : fi.baseName())); // statuszeile eigenfehlertabelle eintragen
@@ -659,6 +660,11 @@ void WMViewBase::JustFlashImportSlot()
 void WMViewBase::SaveDefaultSessionSlot(bool)
 {
     SaveSession(".ses");
+}
+
+void WMViewBase::onIpPollTimer()
+{
+    m_pIPLabel->setText(QString("IP=%1").arg(getIPv4AddressList().join("/")));
 }
 
 
