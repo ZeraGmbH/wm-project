@@ -1,9 +1,9 @@
 #ifndef WMMEASCONFIGBASE_H
 #define WMMEASCONFIGBASE_H
 
-#include <qvariant.h>
-#include <qdialog.h>
 #include "formatinfo.h"
+#include <QDialog>
+#include <QList>
 
 namespace Ui {
     class WMMeasConfigBase;
@@ -27,9 +27,9 @@ signals:
 
 private:
     Ui::WMMeasConfigBase *ui;
-    eUnit* m_LPUnit[3];
-    eUnit* m_ErrUnit[2];
-    eUnit* m_AngleUnit[6];
+    QList<eUnit*> m_lpUnitList;
+    QList<eUnit*> m_errUnitList;
+    QList<eUnit*> m_angleUnit;
     cFormatInfo m_Format[4];
     int m_nDisplayMode;
     int m_nLPDisplayMode;

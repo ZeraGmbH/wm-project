@@ -22,32 +22,29 @@ WMMeasConfigBase::~WMMeasConfigBase()
 
 void WMMeasConfigBase::init()
 {
-    int i;
+    m_lpUnitList.append(LoadpointUnit + LPProzent);
+    m_lpUnitList.append(VoltageUnit + VoltV);
+    m_lpUnitList.append(VoltageUnit + VoltkV);
+    for(auto unit : m_lpUnitList) {
+        ui->LPcomboBox->insertItem(unit->Name);
+    }
 
-    m_LPUnit[0] = LoadpointUnit + LPProzent;
-    m_LPUnit[1] = VoltageUnit + VoltV;
-    m_LPUnit[2] = VoltageUnit + VoltkV;
-    
-    for (i = 0; i < 3; i++)
-        ui->LPcomboBox->insertItem(m_LPUnit[i]->Name);
+    m_errUnitList.append(ErrorUnit + ErrProzent);
+    m_errUnitList.append(ErrorUnit + Errppm);
+    for(auto unit : m_errUnitList) {
+        ui->ErrcomboBox->insertItem(unit->Name);
+    }
 
-    m_ErrUnit[0] = ErrorUnit + ErrProzent;
-    m_ErrUnit[1] = ErrorUnit + Errppm;
-    // FcomboBox-	>insertItem(ErrorUnit[ErrPromill]->Name);
-    
-    for (i = 0; i < 2; i++)
-        ui->ErrcomboBox->insertItem(m_ErrUnit[i]->Name);
+    m_angleUnit.append(AngleUnit + Anglegrad);
+    m_angleUnit.append(AngleUnit + Anglemin);
+    m_angleUnit.append(AngleUnit + Anglecrad);
+    m_angleUnit.append(AngleUnit + Anglemrad);
+    m_angleUnit.append(AngleUnit + Angleurad);
+    m_angleUnit.append(AngleUnit + Anglerad);
+    for(auto unit : m_errUnitList) {
+        ui->WcomboBox->insertItem(unit->Name);
+    }
 
-    m_AngleUnit[0] = AngleUnit + Anglegrad;
-    m_AngleUnit[1] = AngleUnit + Anglemin;
-    m_AngleUnit[2] = AngleUnit + Anglecrad;
-    m_AngleUnit[3] = AngleUnit + Anglemrad;
-    m_AngleUnit[4] = AngleUnit + Angleurad;
-    m_AngleUnit[5] = AngleUnit + Anglerad;
-    
-    for (i = 0; i < 6; i++)
-        ui->WcomboBox->insertItem(m_AngleUnit[i]->Name);
-    
     m_nDisplayMode = IEC; // wmglobal
     m_nLPDisplayMode = totalRms;
 }
@@ -85,19 +82,19 @@ void WMMeasConfigBase::ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFor
 
 void WMMeasConfigBase::LPComboActivatedSlot(int index)
 {
-    m_Format[0].UnitInfo = *m_LPUnit[index];
+    m_Format[0].UnitInfo = *m_lpUnitList[index];
 }
 
 
 void WMMeasConfigBase::ErrComboActivatedSlot(int index)
 {
-    m_Format[1].UnitInfo = *m_ErrUnit[index];
+    m_Format[1].UnitInfo = *m_errUnitList[index];
 }
 
 
 void WMMeasConfigBase::WComboActivatedSlot(int index)
 {
-    m_Format[2].UnitInfo = *m_AngleUnit[index];
+    m_Format[2].UnitInfo = *m_angleUnit[index];
 }
 
 
