@@ -2,6 +2,7 @@ TEMPLATE	= app
 LANGUAGE	= C++
 
 CONFIG	+= qt
+CONFIG += c++11
 
 INCLUDEPATH	+= .
 
