@@ -1,7 +1,7 @@
 TEMPLATE	= app
 LANGUAGE	= C++
 
-CONFIG	+= qt debug
+CONFIG	+= qt
 
 INCLUDEPATH	+= .
 
