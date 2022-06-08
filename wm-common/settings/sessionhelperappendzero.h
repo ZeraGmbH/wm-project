@@ -1,9 +1,9 @@
 #ifndef SESSIONHELPERAPPENDZERO_H
 #define SESSIONHELPERAPPENDZERO_H
 
-#include "sessionhelperappendstrategy.h"
+#include "sessionappendstrategy.h"
 
-class SessionHelperAppendZero : public SessionHelperAppendStrategy
+class SessionHelperAppendZero : public SessionAppendStrategy
 {
 public:
     virtual void writeSessionAppend(QDataStream& stream) override { Q_UNUSED(stream) }

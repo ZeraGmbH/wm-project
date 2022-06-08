@@ -1,11 +1,11 @@
 #ifndef SESSIONHELPERAPPENDWMMEASVALUES_H
 #define SESSIONHELPERAPPENDWMMEASVALUES_H
 
-#include <sessionhelperappendstrategy.h>
+#include <sessionappendstrategy.h>
 
 class WMMeasValuesBase;
 
-class SessionHelperAppendWMMeasValues : public SessionHelperAppendStrategy
+class SessionHelperAppendWMMeasValues : public SessionAppendStrategy
 {
 public:
     SessionHelperAppendWMMeasValues(WMMeasValuesBase *values);

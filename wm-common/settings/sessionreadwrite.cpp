@@ -1,7 +1,7 @@
 #include "sessionreadwrite.h"
 #include <QDir>
 
-SessionReadWrite::SessionReadWrite(QString machineName, SessionHelperAppendStrategy *appendStrategy) :
+SessionReadWrite::SessionReadWrite(QString machineName, SessionAppendStrategy *appendStrategy) :
     m_SessionPath(QString("%1/.%2").arg(QDir::homePath(), machineName)),
     m_appendStrategy(appendStrategy)
 {

@@ -3,10 +3,10 @@
 
 #include <QDataStream>
 
-class SessionHelperAppendStrategy
+class SessionAppendStrategy
 {
 public:
-    virtual ~SessionHelperAppendStrategy() {}
+    virtual ~SessionAppendStrategy() {}
     virtual void writeSessionAppend(QDataStream& stream) = 0;
     virtual void readSessionAppend(QDataStream& stream) = 0;
 };
