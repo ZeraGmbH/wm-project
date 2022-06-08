@@ -14,7 +14,7 @@ class WMMeasConfigBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit WMMeasConfigBase(QWidget* parent = 0);
+    explicit WMMeasConfigBase(QWidget* parent);
     ~WMMeasConfigBase();
 
 public slots:
