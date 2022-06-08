@@ -1,6 +1,5 @@
 #include "logfileview.h"
 #include <QString>
-#include <Q3TextStream>
 #include <QTime>
 #include "sessionreadwrite.h"
 
@@ -44,13 +43,8 @@ void CLogFileView::AddLogTextSlot(const QString& s)
 
 void CLogFileView::showList()
 {
-    if (m_loglist.count()) { // ist überhaupt etwas gesendet worden ?
-        QString s;
-        Q3TextStream ts( &s, QIODevice::WriteOnly );
-        int i;
-        for (i = 0; i < (m_loglist.count()-1); i++)
-            ts << m_loglist[i] << "\n";
-        ts << m_loglist[i];
+    if (m_loglist.count()) {
+        QString s = m_loglist.join("\n");
         m_loglist.clear();
         m_pText->append(s);
     }
