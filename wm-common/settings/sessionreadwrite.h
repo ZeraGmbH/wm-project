@@ -4,13 +4,13 @@
 #include <QString>
 #include <QWidget>
 #include "sessionappendstrategy.h"
-#include "sessionhelperappendzero.h"
+#include "sessionappendzero.h"
 #include "widgeom.h"
 
 class SessionReadWrite
 {
 public:
-    SessionReadWrite(QString machineName, SessionAppendStrategy* appendStrategy = new SessionHelperAppendZero);
+    SessionReadWrite(QString machineName, SessionAppendStrategy* appendStrategy = new SessionAppendZero);
     virtual ~SessionReadWrite();
     void writeSession(QWidget *widget, cWidgetGeometry geometry, QString session);
     cWidgetGeometry readSession(QWidget *widget, QString session);

@@ -48,7 +48,7 @@ HEADERS = \
     settings/ownerrorviewdata.h \
     settings/sessionreadwrite.h \
     settings/sessionappendstrategy.h \
-    settings/sessionhelperappendzero.h \
+    settings/sessionappendzero.h \
     service-interfaces/dspiface.h \
     service-interfaces/zhclientsocket.h \
     service-interfaces/zhserveriface.h \

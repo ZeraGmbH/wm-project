@@ -3,7 +3,7 @@
 
 #include "sessionappendstrategy.h"
 
-class SessionHelperAppendZero : public SessionAppendStrategy
+class SessionAppendZero : public SessionAppendStrategy
 {
 public:
     virtual void writeSessionAppend(QDataStream& stream) override { Q_UNUSED(stream) }
