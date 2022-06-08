@@ -27,13 +27,13 @@ void WMMeasConfigBase::init()
     m_lpUnitList.append(LoadpointUnit + LPProzent);
     m_lpUnitList.append(CurrentUnit + CurrA);
     m_lpUnitList.append(CurrentUnit + CurrkA);
-    for(eUnit* unit : m_lpUnitList) {
+    for(auto unit : m_lpUnitList) {
         ui->LPcomboBox->insertItem(unit->Name);
     }
 
     m_errUnitList.append(ErrorUnit + ErrProzent);
     m_errUnitList.append(ErrorUnit + Errppm);
-    for(eUnit* unit : m_errUnitList) {
+    for(auto unit : m_errUnitList) {
         ui->ErrcomboBox->insertItem(unit->Name);
     }
 
