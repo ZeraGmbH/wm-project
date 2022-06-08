@@ -35,7 +35,7 @@ private:
     int m_nLPDisplayMode;
     bool m_dcMode;
 
-    void init(QList<eUnit *> lpUnitList);
+    void init();
     virtual void Actualize();
 
 private slots:

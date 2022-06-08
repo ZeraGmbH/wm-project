@@ -11,7 +11,8 @@ WMMeasConfigBase::WMMeasConfigBase(QWidget* parent, QList<eUnit *> lpUnitList):
     ui(new Ui::WMMeasConfigBase)
 {
     ui->setupUi(this);
-    init(lpUnitList);
+    m_lpUnitList = lpUnitList;
+    init();
 }
 
 WMMeasConfigBase::~WMMeasConfigBase()
@@ -20,7 +21,7 @@ WMMeasConfigBase::~WMMeasConfigBase()
     delete ui;
 }
 
-void WMMeasConfigBase::init(QList<eUnit *> lpUnitList)
+void WMMeasConfigBase::init()
 {
     m_lpUnitList.append(LoadpointUnit + LPProzent);
     m_lpUnitList.append(VoltageUnit + VoltV);
