@@ -81,6 +81,7 @@ int main(int argc, char *argv[])
     bool bJustage = false;
     bool bconvent = false;
     bool bdc = false;
+    bool newsamplerates = false;
 
     nrOptions = g_app->argc();
     if ( nrOptions > 1 )
@@ -94,6 +95,8 @@ int main(int argc, char *argv[])
                 bconvent = true;
             if (option == "-dc")
                 bdc = true;
+            if (option == "-newsamplerates")
+                newsamplerates = true;
         }
     }
 
@@ -107,6 +110,8 @@ int main(int argc, char *argv[])
     g_WMDevice->setDC(bdc);
     if (!bdc)
         g_WMView->configureWMwoDC();
+
+    g_WMDevice->setNewSamplerates(newsamplerates);
 
     QString machineName = "wm3000i";
 
