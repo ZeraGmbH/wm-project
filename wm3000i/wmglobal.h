@@ -16,7 +16,7 @@
 //#define FVWM 1
 
 #define TheDevice "127.0.0.1"
-//#define TheDevice "192.168.6.181"
+//#define TheDevice "192.168.6.42"
 
 // V1.00 setzt auf wm3000u V1.04
 // V1.01 zusätzliche anzeige lastpunkt relativ zu X kanal eingebaut
@@ -102,8 +102,16 @@
 //                  das interface läuft jetzt stabil bei voller geschwindigkeit.
 //                  opc? liefert fertig erst nachdem alle conf. kommandos abgearbeitet wurden.
 //                  eth kommando, query hinzugefügt um en61850:sync:strong setzen und abfragen zu können
+// v2.34 10.05.2021 es sollen die neuen sample rate für die non conventional wandler integriert werden
+//                  im groben: das konfigurations menu muss angepasst werden. es gibt verriegelungen
+//                  zwischen samplerate und signalfrequenz. die anzahl der signalperioden ist samplerate
+//                  abhängig. die anzahl der asdu's in einer apdu ist ebenfalls davon abhängig. das scpi
+//                  interface musste angepasst werden. der automatische phasenabgleich war entsprechend
+//                  zu erweitern. die neue version läuft nur mit dem leiterkarten server ab v2.09.
 
-#define WMVersion "V2.33"
+
+#define WMVersion "V2.34"
+
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000i/log/ServerComm.log"
@@ -119,7 +127,7 @@ const float TDBase = 100.0e6; // 100 mhz auflösung für td messung (pps->1. sam
 
 enum SyncSources {Intern,Extern,MaxSSource}; // sync sources
 enum SignalFreqs {F16,F50,F60,MaxFreq}; // -> feste abtastfrequenzen
-enum SampleRates {S80,S256,MaxSRate}; // abtastraten
+enum SampleRates {S80,S96,S240,S256,S288,MaxSRate}; // abtastraten
 // alt jetzt sensemode enum tsmode {sensNsensX, adcNadcX, sensNadcX, sensXadcN, adcXadcN = 5, sensXadcNECT = 11}; // testmodi innerhalb der hardware
 enum SenseMode {sensNsensX, adcNadcX, sensNadcX, sensXadcN, sensNsensX0V, anzSenseMode}; // sense modes innerhalb der hardware
 enum JustMode {sensNadcXPhase, sensXadcNPhase, sensECTadcNPhase, sensNsensXOffset, sensNOffset, sensXOffset, sensECTOffset, adcNPhase, adcXPhase}; // justage modes
