@@ -61,6 +61,7 @@ private:
     void Actualize();
     virtual const QString & baseUnitText( const QString & s );
     virtual const QString & genRatioText( QString s, QRadioButton * qrb_3, QRadioButton * qrb_w3 );
+    void SuggestASDUs();
 
 private slots:
     void ApplyDataSlot();
@@ -76,8 +77,9 @@ private slots:
     virtual void ectPrim_w3radioButtonChecked();
     virtual void ectSek_3radioButtonChecked();
     virtual void ectSek_w3radioButtonChecked();
-    virtual void S80RadioButtonChecked();
-    virtual void S256RadioButtonChecked();
+    virtual void FxRadioButtonChecked();
+    virtual void SxRadioButtonChecked();
+
 };
 
 
