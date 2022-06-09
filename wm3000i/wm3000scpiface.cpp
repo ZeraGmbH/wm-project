@@ -16,8 +16,8 @@ char* MModeName[maxMMode] = {(char*)"In/dIx",(char*)"In/ECT",(char*)"In/nConvent
 char* SModeName[maxSMode] = {(char*)"AC",(char*)"DC"};
 char* FreqName[MaxFreq] = {(char*)"16.67",(char*)"50.0",(char*)"60.0"};
 double SFrequency[MaxFreq] = {16.67, 50.0, 60.0};
-char* SRatesName[MaxSRate] = {(char*)"80",(char*)"256"}; // abtastraten
-int SRates[MaxSRate] = {80,256};
+char* SRatesName[MaxSRate] = {(char*)"80",(char*)"96",(char*)"240",(char*)"256",(char*)"288"}; // abtastraten
+int SRates[MaxSRate] = {80,96,240,256,288};
 char* SSourceName[MaxSSource] = {(char*)"intern",(char*)"extern"};
 
 
@@ -614,14 +614,76 @@ void cWM3000SCPIFace::mSetConfLogFileSize(char*)
 
 void cWM3000SCPIFace::mConfigurationApply(char*)
 {
-    // fehler fällt erst hier auf -> status byte setzen
-    if ((m_ConfDataTarget.m_nSRate == S256) && (m_ConfDataTarget.m_nMeasPeriod > nmaxS256MeasPeriod))
-        m_bAddEventError = true;
-    if ((m_ConfDataTarget.m_nSRate == S80) && (m_ConfDataTarget.m_nMeasPeriod > nmaxS80MeasPeriod))
-        m_bAddEventError = true;
+    bool SRateSigFMatch;
+    bool measPeriodOK;
 
-    emit SendConfiguration(&m_ConfDataTarget);
-    SetnoOperFlag(false); // wir warten darauf daß konfigurieren fertig wird
+    SRateSigFMatch = false;
+    measPeriodOK = false;
+
+    // erst einmal die erlaubten abtastraten, signalfrequenz kombinationen prüfen
+    switch (m_ConfDataTarget.m_nSFreq)
+    {
+    case F16:
+        switch (m_ConfDataTarget.m_nSRate)
+        {
+        case S80:
+        case S256:
+            SRateSigFMatch = true;
+        }
+        break;
+    case F50:
+        switch (m_ConfDataTarget.m_nSRate)
+        {
+        case S80:
+        case S96:
+        case S256:
+        case S288:
+            SRateSigFMatch = true;
+        }
+        break;
+    case F60:
+        switch (m_ConfDataTarget.m_nSRate)
+        {
+        case S80:
+        case S96:
+        case S240:
+        case S256:
+            SRateSigFMatch = true;
+        }
+        break;
+    }
+
+    switch (m_ConfDataTarget.m_nSRate)
+    {
+    case S80:
+        if (m_ConfDataTarget.m_nMeasMode <= nmaxS80MeasPeriod)
+            measPeriodOK = true;
+        break;
+    case S96:
+        if (m_ConfDataTarget.m_nMeasMode <= nmaxS96MeasPeriod)
+            measPeriodOK = true;
+        break;
+    case S240:
+        if (m_ConfDataTarget.m_nMeasMode <= nmaxS240MeasPeriod)
+            measPeriodOK = true;
+        break;
+    case S256:
+        if (m_ConfDataTarget.m_nMeasMode <= nmaxS256MeasPeriod)
+            measPeriodOK = true;
+        break;
+    case S288:
+        if (m_ConfDataTarget.m_nMeasMode <= nmaxS288MeasPeriod)
+            measPeriodOK = true;
+        break;
+    }
+
+    if (SRateSigFMatch && measPeriodOK)
+    {
+        emit SendConfiguration(&m_ConfDataTarget);
+        SetnoOperFlag(false); // wir warten darauf daß konfigurieren fertig wird
+    }
+    else
+        m_bAddEventError = true;
 }
 
 
@@ -938,16 +1000,12 @@ char* cWM3000SCPIFace::mGetConfMeasMPeriod()
 void cWM3000SCPIFace::mSetConfMeasMPeriod(char* s)
 {
     ushort us;
-    if (m_ConfDataTarget.m_nSRate == S256) // 256 samples/periode
-    {
-        if (GetParameter(&s, us, 1, nmaxS256MeasPeriod, 10, true)) // we set stb in case of err
-            m_ConfDataTarget.m_nMeasPeriod = us; // but send the value with apply
-	}
-    else
-    {
-        if (GetParameter(&s, us, 1, nmaxS80MeasPeriod, 10, true))
-            m_ConfDataTarget.m_nMeasPeriod = us;
-	}
+
+    if (GetParameter(&s, us, 1, 49, 10, true)) // we accept max of 49 otherwise set stb in case of err
+        m_ConfDataTarget.m_nMeasPeriod = us; // but send the value with apply
+
+    // when conf:apply we test if srate, signal frequency, measperiods, firstasdu and lastasdu fit
+
 }
 
 
@@ -963,17 +1021,24 @@ char* cWM3000SCPIFace::mGetConfMeasSRate()
 void cWM3000SCPIFace::mSetConfMeasSRate(char* s)
 {
     int src;
-    
+
     if ( SearchEntry(&s, SRates, MaxSRate, src, true) )
     {
+        if (!g_WMDevice->isNewSamplerates())
+        {
+            switch (src)
+            {
+            case S96:
+            case S240:
+            case S288:
+                AddEventError(ParameterNotAllowed);
+                break;
+            }
+
+            return;
+        }
+
         m_ConfDataTarget.m_nSRate = src;
-        // wenn die samplerate gesetzt wird werden die asdu's default gesetzt.
-        // sie lassen sich einzeln immer noch überschreiben falls nötig
-        m_ConfDataTarget.FirstASDU = 1;
-        if (m_ConfDataTarget.m_nSRate == S80)
-            m_ConfDataTarget.LastASDU = 1;
-        if (m_ConfDataTarget.m_nSRate == S256)
-            m_ConfDataTarget.LastASDU = 8;
     }
 }
 
