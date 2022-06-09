@@ -93,7 +93,7 @@ void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
 
 
             double ampl;
-            if (AmplPrimSekMode == prim)
+            if (PrimSekDispMode == prim)
             {
                 if (m_pConfData->m_bDCmeasurement)
                     ampl = m_ActValues.VekN.re();
@@ -121,7 +121,7 @@ void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
             ui->XnPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
 
             // amplitude der grundschwingung
-            if (AmplPrimSekMode == prim)
+            if (PrimSekDispMode == prim)
             {
                 if (m_pConfData->m_bDCmeasurement)
                     ampl = m_ActValues.VekX.re();
@@ -139,7 +139,7 @@ void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
             if (AmplDispMode == x1_SQRT2 && !m_pConfData->m_bDCmeasurement)
                 ampl/=1.414213562;
 
-            if ((m_pConfData->m_nMeasMode == In_ECT) && (AmplPrimSekMode == sek))
+            if ((m_pConfData->m_nMeasMode == In_ECT) && (PrimSekDispMode == sek))
                 ui->XxAmplDisp -> setText( QString("%1 V").arg(ampl,10,'f',5) );
             else
                 ui->XxAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );

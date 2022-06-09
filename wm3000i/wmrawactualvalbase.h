@@ -59,7 +59,6 @@ protected:
 
 private:
     Ui::WMRawActualValBase *ui;
-    int AmplPrimSekMode;
     cwmActValues m_ActValues;
     cWidgetGeometry m_widGeometry;
     cConfData *m_pConfData;
