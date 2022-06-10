@@ -1,4 +1,6 @@
 #include "main-unittest.h"
+#include <QApplication>
+#include <QString>
 
 static QList<QObject*> listTests;
 
@@ -16,8 +18,19 @@ int main(int argc, char *argv[])
     // Make qCritical in tests
     qputenv("QT_FATAL_CRITICALS", "1");
 
+    qputenv("TESTARGS", "-platform offscreen");
+
     while(!listTests.isEmpty()) {
-        QCoreApplication app(argc, argv);
+        /*char* args[argc+2];
+        int i;
+        for(i=0; i<argc; ++i) {
+            args[i] = argv[i];
+        }
+        args[i++] = "-platform";
+        args[i++] = "offscreen";
+        QApplication app(i, args);*/
+
+        QApplication app(argc, argv);
         QObject *test = listTests.takeLast();
         status |= QTest::qExec(test, argc, argv);
         delete test;

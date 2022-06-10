@@ -11,9 +11,11 @@ HEADERS = \
     dsp/dspvar.h \
     gui/bigletter.h \
     gui/en61850monitor.h \
+    gui/iwidgetadapter.h \
     gui/lbrowser.h \
     gui/logfileview.h \
     gui/maxrecentfiles.h \
+    gui/qwidgetadapter.h \
     gui/versionviewbase.h \
     gui/wmeditor.h \
     gui/wmmeasconfigbase.h \
@@ -65,6 +67,7 @@ HEADERS = \
     movingwindowfilter.h \
     range.h \
     releaseinfo.h \
+    settings/widgetpersitence.h \
     tcpconfig.h \
     tools.h \
     versserial.h \
@@ -113,6 +116,7 @@ SOURCES = \
     movingwindowfilter.cpp \
     range.cpp \
     releaseinfo.cpp \
+    settings/widgetpersitence.cpp \
     tcpconfig.cpp \
     tools.cpp \
     widgeom.cpp \
