@@ -55,7 +55,8 @@ cWidgetGeometry SessionReadWrite::readSession(QWidget *widget, QString session)
 QString SessionReadWrite::getSessionFileName(QWidget *widget, QString session)
 {
     QFileInfo fi(session);
-    QString name = QString("%1/%2%3").arg(m_SessionPath).arg(widget->name()).arg(fi.fileName());
+    Q_ASSERT(widget->name() == widget->objectName());
+    QString name = QString("%1/%2%3").arg(m_SessionPath).arg(widget->objectName()).arg(fi.fileName());
     return name;
 }
 
