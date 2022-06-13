@@ -1,7 +1,7 @@
 TEMPLATE = lib
 CONFIG += staticlib
 
-QT += qt3support network
+QT += widgets network qt3support
 
 HEADERS = \
     client-access/clientiodevice.h \
