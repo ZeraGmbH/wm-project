@@ -25,8 +25,6 @@ WMViewBase::~WMViewBase()
     delete ui;
 }
 
-extern QApplication *g_app;
-
 void WMViewBase::removeJustageItem()
 {
     ui->MenuBarEditor->removeAction(ui->Justage->menuAction());
@@ -602,7 +600,7 @@ void WMViewBase::SetGermanSlot()
 {
     m_ConfData.Language = de;
     emit SendConfDataSignal(&m_ConfData);
-    g_app->exit(10);
+    QCoreApplication::instance()->exit(10);
 }
 
 
@@ -610,7 +608,7 @@ void WMViewBase::SetEnglishSlot()
 {
     m_ConfData.Language = gb;
     emit SendConfDataSignal(&m_ConfData);
-    g_app->exit(10);
+    QCoreApplication::instance()->exit(10);
 }
 
 
@@ -618,7 +616,7 @@ void WMViewBase::SetPolishSlot()
 {
     m_ConfData.Language = pl;
     emit SendConfDataSignal(&m_ConfData);
-    g_app->exit(10);
+    QCoreApplication::instance()->exit(10);
 }
 
 
