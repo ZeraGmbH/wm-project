@@ -32,29 +32,28 @@
 #include "currentunits.h"
 #include "loadpointunits.h"
 
-QApplication *g_app;
 cWM3000I* g_WMDevice;
 WMViewBase *g_WMView;
 
 int main(int argc, char *argv[])
 {
     QApplication::setDesktopSettingsAware(true);
-    g_app = new QApplication (argc, argv);
-    QFont f = g_app->font();
+    QApplication app(argc, argv);
+    QFont f = app.font();
     qDebug("default font %s pitch %d\n",f.family().latin1(),f.pointSize());
 #ifdef  FVWM
     QFont f2("Sans-Serif",14);
 #else
     QFont f2("Sans-Serif",10);
 #endif
-    g_app->setFont(f2);
+    app.setFont(f2);
 
 
     g_WMDevice = new cWM3000I; //  die eigentliche Messeinrichtung wird später dynamisch je nach aufruf erzeugt
 
     QString qmPath = "/usr/share/wm3000i";
-    QTranslator* appTranslator = new QTranslator(g_app);
-    QTranslator* qtTranslator = new QTranslator(g_app);
+    QTranslator* appTranslator = new QTranslator(&app);
+    QTranslator* qtTranslator = new QTranslator(&app);
 
     switch (g_WMDevice->m_ConfData.Language)
     {
@@ -70,34 +69,29 @@ int main(int argc, char *argv[])
         break;
     }
 
-    g_app->installTranslator(qtTranslator);
-    g_app->installTranslator(appTranslator);
+    app.installTranslator(qtTranslator);
+    app.installTranslator(appTranslator);
 
     g_WMView = new WMViewBase; // erst mal hauptfenster erzeugen
-    g_app->setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
+    app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
 
     QString option ="";
-    int nrOptions;
     bool bJustage = false;
     bool bconvent = false;
     bool bdc = false;
     bool newsamplerates = false;
 
-    nrOptions = g_app->argc();
-    if ( nrOptions > 1 )
+    for (int i = 1; i < argc; i++)
     {
-        for (int i = 1; i < nrOptions; i++)
-        {
-            option = g_app->argv()[i];
-            if (option == "-justage")
-                bJustage = true;
-            if (option == "-convent")
-                bconvent = true;
-            if (option == "-dc")
-                bdc = true;
-            if (option == "-newsamplerates")
-                newsamplerates = true;
-        }
+        option = argv[i];
+        if (option == "-justage")
+            bJustage = true;
+        if (option == "-convent")
+            bconvent = true;
+        if (option == "-dc")
+            bdc = true;
+        if (option == "-newsamplerates")
+            newsamplerates = true;
     }
 
     if (!bJustage)
@@ -115,7 +109,7 @@ int main(int argc, char *argv[])
 
     QString machineName = "wm3000i";
 
-    cReleaseInfo *g_ReleaseView = new cReleaseInfo(g_app);
+    cReleaseInfo *g_ReleaseView = new cReleaseInfo(&app);
     QObject::connect(g_WMView, SIGNAL(UIhilfeReleaseInfoActionActivated()),g_ReleaseView,SLOT(show()));
 
 
@@ -216,7 +210,7 @@ int main(int argc, char *argv[])
     QObject::connect((QObject*)g_WMView,SIGNAL(JustFlashExportSignal(QString)),g_WMDevice,SLOT(JustageFlashExportSlot(QString))); // automatischer phasenabgleich wenn jumper
     QObject::connect((QObject*)g_WMView,SIGNAL(JustFlashImportSignal(QString)),g_WMDevice,SLOT(JustageFlashImportSlot(QString))); // automatischer phasenabgleich wenn jumper
 
-    QObject::connect(g_WMView,SIGNAL(UIhilfeInfo_ber_QtActionActivated()),g_app,SLOT(aboutQt())); // informationen zu Qt
+    QObject::connect(g_WMView,SIGNAL(UIhilfeInfo_ber_QtActionActivated()), &app,SLOT(aboutQt())); // informationen zu Qt
     QObject::connect(g_WMView,SIGNAL(UIhilfeInfo_ber_ZeraActionActivated()),g_WMInfo,SLOT(AboutZeraSlot())); // informationen zu Zera
     QObject::connect(g_WMView,SIGNAL(UIhilfeInfoActionActivated()),g_WMInfo,SLOT(AboutWM3000Slot())); // informationen zu WM3000
     QObject::connect(g_WMView,SIGNAL(UIhilfeSelbsttestActionActivated()),g_WMDevice,SLOT(SelfTestManuell())); // manuellen selbststest starten
@@ -227,8 +221,8 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMView,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // hauptfenster sendet neue ergebnisdatei an device
     QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMDevice,SLOT(WriteSettings(QString))); // fenster grösse und position einrichten
     QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMDevice,SLOT(LoadSettings(QString))); // fenster grösse und position einrichten
-    QObject::connect(g_WMView,SIGNAL(UIdateiBeendenActionActivated()),g_app,SLOT(quit())); // beendet das programm
-    QObject::connect(g_WMDevice,SIGNAL(AbortProgramSignal()),g_app,SLOT(quit()));
+    QObject::connect(g_WMView,SIGNAL(UIdateiBeendenActionActivated()), &app,SLOT(quit())); // beendet das programm
+    QObject::connect(g_WMDevice,SIGNAL(AbortProgramSignal()), &app,SLOT(quit()));
 
     cwm3000DeviceServer* wm3000DeviceServer = new cwm3000DeviceServer(6315); // ein wm3000 device server auf port 6315
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),wm3000DeviceServer,SLOT(ReceiveDeviceConfiguration(cConfData*))); // wm3000 sendet konfiguration ans interface
@@ -271,7 +265,7 @@ int main(int argc, char *argv[])
     g_WMDevice->InitWM3000();
     g_WMView->show();  // zeige das hauptfenster
 
-    int ret = g_app->exec();
+    int ret = app.exec();
 
     delete g_WMRangeDialog;
     delete g_WMConfDialog;
