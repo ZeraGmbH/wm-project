@@ -80,7 +80,6 @@ signals:
     void UIansichtDialogActionSet(bool);
     void UIansichtEN61850ActionToggled(bool);
     void UIansichtEN61850ActionSet(bool);
-    void UIhilfeManualActionActivated();
     void UIeinstellungenConfActionActivated();
     void UIeinstellungenBereichActionActivated();
     void UIJustageAmplitudeActionActivated();

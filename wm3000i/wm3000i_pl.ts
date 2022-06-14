@@ -1693,44 +1693,6 @@ lub mA,A,kA</translation>
     </message>
 </context>
 <context>
-    <name>cLittleBrowser</name>
-    <message>
-        <location filename="lbrowser.cpp" line="30"/>
-        <source>zum Anfang</source>
-        <translation>powrót do początku</translation>
-    </message>
-    <message utf8="true">
-        <location filename="lbrowser.cpp" line="34"/>
-        <source>zurück</source>
-        <translation>wstecz</translation>
-    </message>
-    <message utf8="true">
-        <location filename="lbrowser.cpp" line="37"/>
-        <source>vorwärts</source>
-        <translation>naprzód</translation>
-    </message>
-    <message utf8="true">
-        <location filename="lbrowser.cpp" line="39"/>
-        <source>vergrössern</source>
-        <translation>powiększ</translation>
-    </message>
-    <message>
-        <location filename="lbrowser.cpp" line="40"/>
-        <source>verkleinern</source>
-        <translation>zmniejsz</translation>
-    </message>
-    <message>
-        <location filename="lbrowser.cpp" line="41"/>
-        <source>Index</source>
-        <translation>Indeks</translation>
-    </message>
-    <message>
-        <location filename="lbrowser.cpp" line="42"/>
-        <source>Bedienungsanleitung schliessen</source>
-        <translation>Zamknij instrukcję obsługi</translation>
-    </message>
-</context>
-<context>
     <name>cOwnError</name>
     <message utf8="true">
         <location filename="ownerror.cpp" line="124"/>

@@ -370,20 +370,6 @@
     <cstring>hilfeInfo_ber_ZeraAction</cstring>
    </property>
   </action>
-  <action name="hilfeManualAction">
-   <property name="text">
-    <string>&amp;Manual</string>
-   </property>
-   <property name="iconText">
-    <string>&amp;Manual</string>
-   </property>
-   <property name="statusTip">
-    <string>Lesen Sie hier die Bedienungsanleitung</string>
-   </property>
-   <property name="name" stdset="0">
-    <cstring>hilfeManualAction</cstring>
-   </property>
-  </action>
   <action name="hilfeInfo_ber_QtAction">
    <property name="text">
     <string>Info über &amp;Qt</string>

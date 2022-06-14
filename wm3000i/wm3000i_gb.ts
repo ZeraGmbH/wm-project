@@ -1284,37 +1284,6 @@ or mA,A,kA</translation>
     </message>
 </context>
 <context>
-    <name>cLittleBrowser</name>
-    <message>
-        <source>zum Anfang</source>
-        <translation>to the beginning</translation>
-    </message>
-    <message utf8="true">
-        <source>zurück</source>
-        <translation>back</translation>
-    </message>
-    <message utf8="true">
-        <source>vorwärts</source>
-        <translation>forward</translation>
-    </message>
-    <message utf8="true">
-        <source>vergrössern</source>
-        <translation>enlarge</translation>
-    </message>
-    <message>
-        <source>verkleinern</source>
-        <translation>reduce</translation>
-    </message>
-    <message>
-        <source>Index</source>
-        <translation>Index</translation>
-    </message>
-    <message>
-        <source>Bedienungsanleitung schliessen</source>
-        <translation>Close Manual</translation>
-    </message>
-</context>
-<context>
     <name>cOwnError</name>
     <message utf8="true">
         <source>°</source>

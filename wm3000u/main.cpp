@@ -20,7 +20,6 @@
 #include "wmoffsetvalbase.h"
 #include "wmviewbase.h"
 #include "logfileview.h"
-#include "lbrowser.h"
 #include "wmglobal.h"
 #include "wm3000u.h"
 #include "en61850monitor.h"
@@ -180,9 +179,6 @@ int main(int argc, char *argv[])
   QObject::connect(g_WMDevice->DspIFace->iFaceSock,SIGNAL(SendLogData(const QString&)),g_WMSCPILogFile,SLOT(AddLogTextSlot(const QString&))); // der auch
   g_WMSCPILogFile->SendLogSlot(); // alte log daten an view
 
-  cLittleBrowser *g_WMDokuBrowser =new cLittleBrowser(QDir( "./doc/wm3000u.html" ).absPath(),".",g_WMView,QObject::tr("WM3000U Bedienungsanleitung")); // browser erzeugen
-  QObject::connect(g_WMView,SIGNAL(UIhilfeManualActionActivated()),g_WMDokuBrowser,SLOT(show())); // öffnen des html browser für die online doku
-
   ConfDialogBase *g_WMConfDialog = new ConfDialogBase(g_WMView); // confdialog erzeugen
   QObject::connect(g_WMView,SIGNAL(UIeinstellungenConfActionActivated()),g_WMConfDialog,SLOT(show())); // öffnen der konfigurations dialoges vom hauptfenster
   QObject::connect(g_WMConfDialog,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // confdialog sendet konfigurationsdaten an device
@@ -277,7 +273,6 @@ int main(int argc, char *argv[])
   delete g_WMOffsetView;
   delete g_WMRangeDialog;
   delete g_WMConfDialog;
-  delete g_WMDokuBrowser;
   delete g_WMSCPILogFile;
   delete g_WMSCPILogFileView;
   delete g_WMActValView;
