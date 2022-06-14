@@ -5,8 +5,8 @@
 #include <qstringlist.h>
 #include <q3socket.h>
 
-cZHClientSocket::cZHClientSocket(int t, QObject *parent, const char *name)
-    :Q3Socket(parent,name)
+cZHClientSocket::cZHClientSocket(int t)
+    : Q3Socket()
 {
     m_nTime = t;
     m_nError = 0;

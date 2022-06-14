@@ -17,7 +17,7 @@ class cZHClientSocket: public Q3Socket
     Q_OBJECT
     
 public:
-    cZHClientSocket(int, QObject *parent = 0, const char *name = 0);
+    cZHClientSocket(int);
     void SendCommand(QString&); // kommando an socket wenn nur ack als antwort akzeptiert wird
     void SendCommand(QString&,QStringList&); // kommando an socket mit list als mögl. antworten
     void SendQuery(QString&); // query socket intern antwortliste leer -> rückmeldung ist rückgabewert
