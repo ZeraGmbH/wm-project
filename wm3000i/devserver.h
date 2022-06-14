@@ -27,7 +27,7 @@ class cwm3000DeviceServer:  public cDeviceServer  // der wm3000 device server
     Q_OBJECT
     
 public:
-    cwm3000DeviceServer( quint16 port, int backlog = 1, QObject * parent = 0, const char * name = 0 );
+    cwm3000DeviceServer(quint16 port);
     virtual void newConnection(int); // instanziiert ein client socket device und ein wm3000 scpi interfaceund trägt das interface in die liste ein
     virtual void newConnection(cClientIODevice*); // nimmt das bereits instanziierte xxx interface, generiert noch ein wm3000 scpi interface und trägt das interface in die liste ein
     

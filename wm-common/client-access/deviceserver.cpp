@@ -1,7 +1,7 @@
 #include "deviceserver.h"
 
-cDeviceServer::cDeviceServer( quint16 port, int backlog, QObject *parent, const char *name)
-    :Q3ServerSocket(port, backlog, parent, name)
+cDeviceServer::cDeviceServer(quint16 port) :
+    Q3ServerSocket(port, 1, nullptr, nullptr)
 {
 }
 

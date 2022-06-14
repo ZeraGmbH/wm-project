@@ -12,7 +12,7 @@ class cDeviceServer:  public Q3ServerSocket // asynchroner device server pure vi
     Q_OBJECT
 
 public:
-    cDeviceServer( quint16 port, int backlog = 1, QObject * parent = 0, const char * name = 0 );
+    cDeviceServer(quint16 port);
     virtual void newConnection(int) = 0; // instanziiert ein client socket device und trägt es in liste ein
 
 signals:

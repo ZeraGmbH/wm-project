@@ -5,8 +5,8 @@
 #include "devserver.h"
 #include "clientsocketdevice.h"
 
-cwm3000DeviceServer::cwm3000DeviceServer( quint16 port, int backlog, QObject * parent, const char * name)
-    :cDeviceServer( port, backlog, parent, name)
+cwm3000DeviceServer::cwm3000DeviceServer(quint16 port) :
+    cDeviceServer(port)
 {
     m_pV = 0;
 }
