@@ -55,10 +55,10 @@ void cZHClientSocket::SendCommand(QString& cmds) { // gibt ein kommando an einem
     SendCommand(cmds, sl);
 }
 
-void cZHClientSocket::SendCommand(QString& cmds,QStringList& sl) { // kommando an socket mit liste der möglichen antwort en
-    m_sCommand = cmds;
-    m_sAnswerList = sl;
-    if ( writeLine(cmds) == -1) // wenn bei write ein fehler auftrat -> den gibts später als signal
+void cZHClientSocket::SendCommand(QString& cmd, QStringList& expectedAnswerList) {
+    m_sCommand = cmd;
+    m_expectedAnswerList = expectedAnswerList;
+    if ( writeLine(cmd) == -1) // wenn bei write ein fehler auftrat -> den gibts später als signal
         return;
     ToDataTimer.start(m_nTime,true); // wir starten den timeout timer
 }
@@ -155,7 +155,7 @@ void cZHClientSocket::ReceiveInput()
         {
             ToDataTimer.stop(); // wir haben input -> timer anhalten
             m_sAnswer = s; // antwort speichern
-            if ( !m_sAnswerList.empty() && (m_sAnswerList.findIndex(m_sAnswer) == -1) ) { //antwort  falsch
+            if ( !m_expectedAnswerList.empty() && (m_expectedAnswerList.findIndex(m_sAnswer) == -1) ) { //antwort  falsch
                 m_nError |= myErrSocketUnexpectedAnswer;
                 QString l = "Unexpected Answer !";
                 emit SendLogData (l);

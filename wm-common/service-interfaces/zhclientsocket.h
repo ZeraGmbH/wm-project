@@ -19,7 +19,7 @@ class cZHClientSocket: public Q3Socket
 public:
     cZHClientSocket(int);
     void SendCommand(QString&); // kommando an socket wenn nur ack als antwort akzeptiert wird
-    void SendCommand(QString&,QStringList&); // kommando an socket mit list als mögl. antworten
+    void SendCommand(QString& cmd, QStringList&expectedAnswerList);
     void SendQuery(QString&); // query socket intern antwortliste leer -> rückmeldung ist rückgabewert
     virtual void connectToHost (const QString&,quint16);
     QString& GetAnswer();
@@ -36,7 +36,7 @@ signals:
     
 private:
     QTimer ToDataTimer, ToConnTimer, DecoupleTimer; // timeout data timer, to connection timer, 
-    QStringList m_sAnswerList;
+    QStringList m_expectedAnswerList;
     QString m_sCommand;
     QString m_sAnswer;
    
