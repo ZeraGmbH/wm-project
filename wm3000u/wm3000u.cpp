@@ -3656,7 +3656,7 @@ void cWM3000U::WriteSettings(QString session)
 void cWM3000U::StoreResultsSlot()
 {
     if (m_ConfData.m_bRunning) { // nur wenn messung läuft speichern
-        bool ok;
+        bool ok = false;
         QDomDocument resultDoc("WM3000ResultData");
         QFile rfile(m_ConfData.m_sResultFile);
         if (rfile.open( QIODevice::ReadOnly ) ) { // ? xml file lesen
