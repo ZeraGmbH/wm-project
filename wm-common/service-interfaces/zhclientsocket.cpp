@@ -1,9 +1,4 @@
-// definition wmsocket
-
 #include "zhclientsocket.h"
-#include <qstring.h>
-#include <qstringlist.h>
-#include <q3socket.h>
 
 cZHClientSocket::cZHClientSocket(int t)
 {
@@ -112,19 +107,19 @@ void cZHClientSocket::TCPErrorHandling(int e)
     QString l;
     switch (e)
     {
-    case Q3Socket::ErrConnectionRefused:
+    case QTcpSocket::ConnectionRefusedError:
         m_nError |= myErrConnectionRefused;
         l = "Connection refused !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
         break;
-    case Q3Socket::ErrHostNotFound:
+    case QTcpSocket::HostNotFoundError:
         m_nError |= myErrHostNotFound;
         l = "Host not found !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
         break;
-    case Q3Socket::ErrSocketRead :
+    case QTcpSocket::UnknownSocketError:  // see abstractsocket.h/enum Error: ErrSocketRead = UnknownSocketError
         m_nError |= myErrSocketRead;
         l = "Socket Data read error !";
         emit SendLogData (l);
