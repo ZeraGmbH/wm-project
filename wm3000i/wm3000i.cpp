@@ -3071,7 +3071,7 @@ void cWM3000I::ServerIFaceErrorHandling(int error, QString host, int port)
     if (error & (myErrConnectionRefused | myErrHostNotFound | myErrSocketConnectionTimeOut) )
     {
         QString m = tr("Keine Verbindung zu %1:%2\n") .arg(host).arg(port);
-        if (error & ! myErrHostNotFound)
+        if (error & myErrHostNotFound || error & myErrSocketConnectionTimeOut)
             m+=tr("Host nicht gefunden.\n");
         else
             m+=tr("Host gefunden. Keine Verbindung zu Server.\n");
