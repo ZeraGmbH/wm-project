@@ -172,12 +172,11 @@ int main(int argc, char *argv[])
   QObject::connect(g_ETHMonitor,SIGNAL(InformationRequest()),(QObject*)g_WMDevice,SLOT(EN61850InfoRequestSlot())); // anforderung der eth status info
   QObject::connect(g_ETHMonitor,SIGNAL(ResetETHStatus()),(QObject*)g_WMDevice,SLOT(EN61850ResetStatusSlot())); // rücksetzen eth status info
 
-  CLogFile *g_WMSCPILogFile = new CLogFile(QDir(ServerCommLogFilePath).absPath(),g_WMDevice->m_ConfData.m_nLogFileMax); // kommunikation logfile erzeugen
-
-  QObject::connect(g_WMSCPILogFile,SIGNAL(SendLogDataSignal(const QString&)),g_WMSCPILogFileView,SLOT(AddLogTextSlot(const QString&))); // logfile sendet logdaten an logfileview
-  QObject::connect(g_WMDevice->PCBIFace->iFaceSock,SIGNAL(SendLogData(const QString&)),g_WMSCPILogFile,SLOT(AddLogTextSlot(const QString&))); // der socket sendet output/input an das logfile
-  QObject::connect(g_WMDevice->DspIFace->iFaceSock,SIGNAL(SendLogData(const QString&)),g_WMSCPILogFile,SLOT(AddLogTextSlot(const QString&))); // der auch
-  g_WMSCPILogFile->SendLogSlot(); // alte log daten an view
+  CLogFile LogFile(QDir(ServerCommLogFilePath).absPath(), g_WMDevice->m_ConfData.m_nLogFileMax); // kommunikation logfile erzeugen
+  QObject::connect(&LogFile, SIGNAL(SendLogDataSignal(const QString&)), g_WMSCPILogFileView, SLOT(AddLogTextSlot(const QString&))); // logfile sendet logdaten an logfileview
+  QObject::connect(g_WMDevice->PCBIFace->iFaceSock, SIGNAL(SendLogData(const QString&)), &LogFile, SLOT(AddLogTextSlot(const QString&))); // der socket sendet output/input an das logfile
+  QObject::connect(g_WMDevice->DspIFace->iFaceSock, SIGNAL(SendLogData(const QString&)), &LogFile, SLOT(AddLogTextSlot(const QString&))); // der auch
+  LogFile.SendLogSlot(); // alte log daten an view
 
   ConfDialogBase *g_WMConfDialog = new ConfDialogBase(g_WMView); // confdialog erzeugen
   QObject::connect(g_WMView,SIGNAL(UIeinstellungenConfActionActivated()),g_WMConfDialog,SLOT(show())); // öffnen der konfigurations dialoges vom hauptfenster
@@ -273,7 +272,6 @@ int main(int argc, char *argv[])
   delete g_WMOffsetView;
   delete g_WMRangeDialog;
   delete g_WMConfDialog;
-  delete g_WMSCPILogFile;
   delete g_WMSCPILogFileView;
   delete g_WMActValView;
   delete g_WMOeView;
