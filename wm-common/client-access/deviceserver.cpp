@@ -1,8 +1,8 @@
 #include "deviceserver.h"
 
-cDeviceServer::cDeviceServer(quint16 port) :
-    Q3ServerSocket(port, 1, nullptr, nullptr)
+cDeviceServer::cDeviceServer(quint16 port)
 {
+    listen(QHostAddress::Any, port);
 }
 
 
@@ -23,11 +23,15 @@ void cDeviceServer::CloseConnection(cClientIODevice* ciod)
     setPriority(); // alle clients werden informiert
 }
 
-
 void cDeviceServer::setPriority() // alle clients werden informiert
 {
     uint i;
     for (i = 0; i < m_SCPIFacePtrList.count(); i++)
-    m_SCPIFacePtrList.at(i)->ReceivePriority(i);
+        m_SCPIFacePtrList.at(i)->ReceivePriority(i);
+}
+
+void cDeviceServer::incomingConnection(int socketDescriptor)
+{
+    newConnection(socketDescriptor);
 }
 
