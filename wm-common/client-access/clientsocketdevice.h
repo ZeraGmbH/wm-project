@@ -11,7 +11,7 @@ class cClientSocketDevice : public cClientIODevice
     Q_OBJECT
 
 public:
-    cClientSocketDevice(int sock, QObject *parent = 0, const char*  name = 0);
+    cClientSocketDevice(int sock);
     ~cClientSocketDevice();
 
 public slots:
