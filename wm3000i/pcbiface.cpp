@@ -22,7 +22,6 @@ cPCBIFace::cPCBIFace(QString hn, int hp)
 
 cPCBIFace::~cPCBIFace()
 {
-    iFaceSock->clearPendingData() ;
     iFaceSock->close();
     delete m_ActTimer;
 }

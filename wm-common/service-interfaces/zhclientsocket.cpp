@@ -6,7 +6,6 @@
 #include <q3socket.h>
 
 cZHClientSocket::cZHClientSocket(int t)
-    : Q3Socket()
 {
     m_nTime = t;
     m_nError = 0;
@@ -23,7 +22,7 @@ cZHClientSocket::cZHClientSocket(int t)
 
 QString cZHClientSocket::readLine()
 {
-    QString s = Q3Socket::readLine();
+    QString s = QTcpSocket::readLine();
     QString l = QString ("Inp[%1:%2] : %3").arg(peerName())
             .arg(peerPort())
             .arg(s);
@@ -78,7 +77,7 @@ void cZHClientSocket::connectToHost (const QString& host,quint16 port)
 
     QString l = QString ("Connect to %1:%2") .arg(host) .arg(port);
     emit SendLogData(l); // fürs logfile
-    Q3Socket::connectToHost(host,port);
+    QTcpSocket::connectToHost(host,port);
     ToConnTimer.start(m_nTime,true);
 }
 

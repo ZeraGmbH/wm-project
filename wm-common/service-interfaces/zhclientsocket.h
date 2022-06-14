@@ -5,14 +5,14 @@
 #ifndef ZHCLIENTSOCKET_H
 #define ZHCLIENTSOCKET_H
 
-#include <q3socket.h>
-#include <qstringlist.h>
-#include <qtimer.h>
+#include <QTcpSocket>
+#include <QStringList>
+#include <QTimer>
 
 
 enum AddError { myErrConnectionRefused = 1, myErrHostNotFound = 2, myErrSocketRead = 4 , myErrSocketWrite = 4, myErrSocketUnexpectedAnswer = 8 , myErrSocketReadTimeOut = 16, myErrSocketConnectionTimeOut = 32, myErrDeviceBusy = 64};
 
-class cZHClientSocket: public Q3Socket
+class cZHClientSocket: public QTcpSocket
 {
     Q_OBJECT
     
