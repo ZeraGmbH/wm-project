@@ -111,8 +111,8 @@ cWM3000U::cWM3000U()
 
     // evt bereiche anlegen
     m_sEVTRangeList.setAutoDelete( TRUE ); // the list owns the objects
-//    m_sEVTRangeList.append( new CWMRange("SafetyRange","480V",480.0,4730418,0.03125) );
-//   safetyrange wurde entfernt da evt als gesonderter eingang realisiert wurde
+    //    m_sEVTRangeList.append( new CWMRange("SafetyRange","480V",480.0,4730418,0.03125) );
+    //   safetyrange wurde entfernt da evt als gesonderter eingang realisiert wurde
     m_sEVTRangeList.append( new CWMRange("15.0V","E15.0V",15.0,2831155,0.1, "ECT15.0V") );
     m_sEVTRangeList.append( new CWMRange("10.0V","E10.0V",10.0,4718592,0.1, "ECT10.0V") );
     m_sEVTRangeList.append( new CWMRange("5.0V","E5.0V",5.0,4718592,0.1, "ECT5.0V") );
@@ -123,8 +123,8 @@ cWM3000U::cWM3000U()
     m_sEVTRangeList.append( new CWMRange("100mV","E100mV",0.1,2995931,0.1, "ECT100mV") );
     m_sEVTRangeList.append( new CWMRange("50mV","E50mV",0.05,2995931,0.1, "ECT50mV") );
     m_sEVTRangeList.append( new CWMRange("25mV","E25mV",0.025,2995931,0.1, "ECT25mV") );
-//    m_sEVTRangeList.append( new CWMRange("10mV","E10mV",0.01,2995931,0.1), "ECT15.0V" );
-//    m_sEVTRangeList.append( new CWMRange("5mV","E5mV",0.005,2995931,0.1), "ECT15.0V" );
+    //    m_sEVTRangeList.append( new CWMRange("10mV","E10mV",0.01,2995931,0.1), "ECT15.0V" );
+    //    m_sEVTRangeList.append( new CWMRange("5mV","E5mV",0.005,2995931,0.1), "ECT15.0V" );
     m_sEVTRangeList.append( new CWMRange("Auto","Auto",-1.0,500000,0.1, "ECT15.0V") ); // sonderfall
     // ende evt bereiche anlegen
 
@@ -191,9 +191,9 @@ cWM3000U::cWM3000U()
 
     if(!QDir(QString("%1/wm3000u/log/").arg(QDir::homePath())).exists())
     {
-      //create temporary object that gets deleted when leaving the control block
-      QDir().mkdir(QString("%1/wm3000u/").arg(QDir::homePath()));
-      QDir().mkdir(QString("%1/wm3000u/log/").arg(QDir::homePath()));
+        //create temporary object that gets deleted when leaving the control block
+        QDir().mkdir(QString("%1/wm3000u/").arg(QDir::homePath()));
+        QDir().mkdir(QString("%1/wm3000u/log/").arg(QDir::homePath()));
     }
 
     m_SelftestLogfile.setName(QDir(SelftestLogFilePath).absPath());
@@ -267,36 +267,36 @@ void cWM3000U::ActionHandler(int entryAHS)
 
     if ( (entryAHS != wm3000Continue) && (entryAHS != wm3000Repeat) )
     { // wir sollen was neues starten
-    if (AHS != wm3000Idle) { // sind aber noch nicht fertig
-     if (AHSFifo.contains(entryAHS) ==0 ) // wir haben dieses event noch nicht in der liste
-        AHSFifo.push_back(entryAHS); // dann merken wir uns was starten wir sollten starten sollten
-        return; // und sind fertig
-    }
-    else // oder wir sind fertig und
-        AHS = entryAHS; // wir starten es
+        if (AHS != wm3000Idle) { // sind aber noch nicht fertig
+            if (AHSFifo.contains(entryAHS) ==0 ) // wir haben dieses event noch nicht in der liste
+                AHSFifo.push_back(entryAHS); // dann merken wir uns was starten wir sollten starten sollten
+            return; // und sind fertig
+        }
+        else // oder wir sind fertig und
+            AHS = entryAHS; // wir starten es
     }
     else // es ist continue oder repeat
     {
-    if (entryAHS == wm3000Repeat)
-        AHS--; // für repeat den state dekrementieren
+        if (entryAHS == wm3000Repeat)
+            AHS--; // für repeat den state dekrementieren
     }
 
     switch (AHS)
     {
 
     case InitializationStart:
-    StopMeasurement();
-    m_binitDone = false; // wir initialisieren !!
-    emit SendConfDataSignal(&m_ConfData);
-    emit SendRangeListSignal(m_sNRangeList,m_sEVTRangeList);
-    AHS++;
-    m_ActTimer->start(0,wm3000Continue); // wir starten uns selbst
-    break; // InitializationStart
+        StopMeasurement();
+        m_binitDone = false; // wir initialisieren !!
+        emit SendConfDataSignal(&m_ConfData);
+        emit SendRangeListSignal(m_sNRangeList,m_sEVTRangeList);
+        AHS++;
+        m_ActTimer->start(0,wm3000Continue); // wir starten uns selbst
+        break; // InitializationStart
 
     case InitializationConnect2pcbHost:
-    PCBIFace->connectYourself();
-    AHS++;
-    break; // InitializationConnect2pcbHost
+        PCBIFace->connectYourself();
+        AHS++;
+        break; // InitializationConnect2pcbHost
 
     case InitializationTestDC:
     {
@@ -341,67 +341,67 @@ void cWM3000U::ActionHandler(int entryAHS)
     }
 
     case InitializationOpenChannel0:
-    if (m_ConfData.m_bSimulation)
-    {
-        AHS = wm3000Idle;
-        m_ActTimer->start(10,RestartMeasurementStart); // falls wir simuliert gestartet sind ...
-    }
-    else
-    {
-        PCBIFace->openChannel(0); // kanal 0 öffnen
-        AHS++;
-    }
-    break; // InitializationOpenChannel0
+        if (m_ConfData.m_bSimulation)
+        {
+            AHS = wm3000Idle;
+            m_ActTimer->start(10,RestartMeasurementStart); // falls wir simuliert gestartet sind ...
+        }
+        else
+        {
+            PCBIFace->openChannel(0); // kanal 0 öffnen
+            AHS++;
+        }
+        break; // InitializationOpenChannel0
 
     case InitializationOpenChannel1:
-    if (m_ConfData.m_bSimulation)
-        AHS = wm3000Idle;
-    else
-    {
-        PCBIFace->openChannel(1); // kanal 1 öffnen
-        AHS++;
-    }
-    break; // InitializationOpenChannel1
+        if (m_ConfData.m_bSimulation)
+            AHS = wm3000Idle;
+        else
+        {
+            PCBIFace->openChannel(1); // kanal 1 öffnen
+            AHS++;
+        }
+        break; // InitializationOpenChannel1
 
     case SetRangeSetRanges:
     case ConfigurationSetRanges:
     case InitializationSetRanges:
-    // abgleich der vorgaben
-    if  ( m_ConfData.m_sRangeNVorgabe != QString("Auto") ) m_ConfData.m_sRangeNSoll = m_ConfData.m_sRangeNVorgabe;
-    if  ( m_ConfData.m_sRangeXVorgabe != QString("Auto") ) m_ConfData.m_sRangeXSoll = m_ConfData.m_sRangeXVorgabe;
-    if  ( m_ConfData.m_sRangeETVorgabe != QString("Auto") ) m_ConfData.m_sRangeETSoll = m_ConfData.m_sRangeETVorgabe;
+        // abgleich der vorgaben
+        if  ( m_ConfData.m_sRangeNVorgabe != QString("Auto") ) m_ConfData.m_sRangeNSoll = m_ConfData.m_sRangeNVorgabe;
+        if  ( m_ConfData.m_sRangeXVorgabe != QString("Auto") ) m_ConfData.m_sRangeXSoll = m_ConfData.m_sRangeXVorgabe;
+        if  ( m_ConfData.m_sRangeETVorgabe != QString("Auto") ) m_ConfData.m_sRangeETSoll = m_ConfData.m_sRangeETVorgabe;
 
-    // das hier war vorher syncrange .... jetzt angepasst auf statemachine
-    if (m_ConfData.m_bSimulation) { // wir sind durch fehler oder sonst wie in sim.
-        m_ConfData.m_sRangeN = m_ConfData.m_sRangeNSoll; // wir tun so als ob alles gesetzt worden wäre
-        m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
-        m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
-        emit SendConfDataSignal(&m_ConfData); // und teilen dies mit
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        m_ActTimer->start(0,wm3000Continue); // event, damit statemachine weiterläuft
-        AHS++;
-    }
-    break; // InitializationSetRanges
+        // das hier war vorher syncrange .... jetzt angepasst auf statemachine
+        if (m_ConfData.m_bSimulation) { // wir sind durch fehler oder sonst wie in sim.
+            m_ConfData.m_sRangeN = m_ConfData.m_sRangeNSoll; // wir tun so als ob alles gesetzt worden wäre
+            m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
+            m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
+            emit SendConfDataSignal(&m_ConfData); // und teilen dies mit
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            m_ActTimer->start(0,wm3000Continue); // event, damit statemachine weiterläuft
+            AHS++;
+        }
+        break; // InitializationSetRanges
 
     case RangeObsermaticSyncRange0:
     case SetRangeSyncRange0:
     case ConfigurationSyncRange0:
     case InitializationSyncRange0:
-    if (bOverloadMax) // nach übersteurung im grössten bereich kein bereiche schalten mehr
-    {
-        AHS+=6;
-        m_ActTimer->start(0,wm3000Continue); // event, damit statemachine weiterläuft
-    }
-    else
-    {
-        PCBIFace->readRange(0); // bereich abfrage starten
-        AHS++;
-    }
+        if (bOverloadMax) // nach übersteurung im grössten bereich kein bereiche schalten mehr
+        {
+            AHS+=6;
+            m_ActTimer->start(0,wm3000Continue); // event, damit statemachine weiterläuft
+        }
+        else
+        {
+            PCBIFace->readRange(0); // bereich abfrage starten
+            AHS++;
+        }
 
-    break; // InitializationSyncRange0
+        break; // InitializationSyncRange0
 
 
     case RangeObsermaticSyncRange01:
@@ -413,20 +413,20 @@ void cWM3000U::ActionHandler(int entryAHS)
         CWMRange* rng;
 
         if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
+            AHS = wm3000Idle;
         }
         else
         {
-        rss = PCBIFace->iFaceSock->GetAnswer(); // antwort lesen
-        rng = Range(rss,m_sNRangeList); // sucht den bereich über den selektor aus der liste
-        m_ConfData.m_sRangeN = rng->Name(); // istbereich
-        if (m_ConfData.m_sRangeN != m_ConfData.m_sRangeNSoll)  // muss was getan werden?
-        {
-            StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
-            PCBIFace->switchRange(0,Range(m_ConfData.m_sRangeNSoll,m_sNRangeList)->Selector());
-        }
-        else
-            m_ActTimer->start(0,wm3000Continue); // event, damit statemachine weiterläuft wenn wir nichts gesendet haben
+            rss = PCBIFace->iFaceSock->GetAnswer(); // antwort lesen
+            rng = Range(rss,m_sNRangeList); // sucht den bereich über den selektor aus der liste
+            m_ConfData.m_sRangeN = rng->Name(); // istbereich
+            if (m_ConfData.m_sRangeN != m_ConfData.m_sRangeNSoll)  // muss was getan werden?
+            {
+                StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
+                PCBIFace->switchRange(0,Range(m_ConfData.m_sRangeNSoll,m_sNRangeList)->Selector());
+            }
+            else
+                m_ActTimer->start(0,wm3000Continue); // event, damit statemachine weiterläuft wenn wir nichts gesendet haben
             AHS++;
         }
         break; // InitializationSwitchRange01
@@ -436,24 +436,24 @@ void cWM3000U::ActionHandler(int entryAHS)
     case SetRangeSyncRange02:
     case ConfigurationSyncRange02:
     case InitializationSyncRange02:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        m_ConfData.m_sRangeN = m_ConfData.m_sRangeNSoll; // bereiche sind jetzt gleich
-        AHS++;
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // InitializationSyncRange02
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            m_ConfData.m_sRangeN = m_ConfData.m_sRangeNSoll; // bereiche sind jetzt gleich
+            AHS++;
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // InitializationSyncRange02
 
     case RangeObsermaticSyncRange1:
     case SetRangeSyncRange1:
     case ConfigurationSyncRange1:
     case InitializationSyncRange1:
-    PCBIFace->readRange(1); // bereich abfrage starten
-    AHS++;
-    break; // InitializationSyncRange1
+        PCBIFace->readRange(1); // bereich abfrage starten
+        AHS++;
+        break; // InitializationSyncRange1
 
     case RangeObsermaticSyncRange11:
     case SetRangeSyncRange11:
@@ -464,49 +464,49 @@ void cWM3000U::ActionHandler(int entryAHS)
         CWMRange* rng;
 
         if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-        break; // InitializationSwitchRange1
+            AHS = wm3000Idle;
+            break; // InitializationSwitchRange1
         }
         else
         {
-        rss = PCBIFace->iFaceSock->GetAnswer(); // antwort lesen
-        switch (m_ConfData.m_nMeasMode)
-        {
-        case Un_UxAbs:
-            rng = Range(rss,m_sNRangeList); // sucht den bereich über den selektor aus der liste
-            m_ConfData.m_sRangeX = rng->Name(); // istbereich
-            if (m_ConfData.m_sRangeX != m_ConfData.m_sRangeXSoll)
+            rss = PCBIFace->iFaceSock->GetAnswer(); // antwort lesen
+            switch (m_ConfData.m_nMeasMode)
             {
-            StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
-            PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeXSoll,m_sNRangeList)->Selector());
-            }
-            else
-            m_ActTimer->start(0,wm3000Continue);
-            break;
-        case Un_EVT:
-            rng = Range(rss,m_sEVTRangeList);
-            m_ConfData.m_sRangeET = rng->Name();
-            if (m_ConfData.m_sRangeET != m_ConfData.m_sRangeETSoll)
-            {
-            StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
-            PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeETSoll,m_sEVTRangeList)->Selector());
-            }
-            else
-            m_ActTimer->start(0,wm3000Continue);
-            break;
-        case Un_nConvent:
-            if (rss != m_sNRangeList.first()->Selector())
-            {
-            StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
-            PCBIFace->switchRange(1,m_sNRangeList.first()->Selector());
-            }
-            else
-            m_ActTimer->start(0,wm3000Continue);
-            break;
+            case Un_UxAbs:
+                rng = Range(rss,m_sNRangeList); // sucht den bereich über den selektor aus der liste
+                m_ConfData.m_sRangeX = rng->Name(); // istbereich
+                if (m_ConfData.m_sRangeX != m_ConfData.m_sRangeXSoll)
+                {
+                    StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
+                    PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeXSoll,m_sNRangeList)->Selector());
+                }
+                else
+                    m_ActTimer->start(0,wm3000Continue);
+                break;
+            case Un_EVT:
+                rng = Range(rss,m_sEVTRangeList);
+                m_ConfData.m_sRangeET = rng->Name();
+                if (m_ConfData.m_sRangeET != m_ConfData.m_sRangeETSoll)
+                {
+                    StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
+                    PCBIFace->switchRange(1,Range(m_ConfData.m_sRangeETSoll,m_sEVTRangeList)->Selector());
+                }
+                else
+                    m_ActTimer->start(0,wm3000Continue);
+                break;
+            case Un_nConvent:
+                if (rss != m_sNRangeList.first()->Selector())
+                {
+                    StopMeasurement(); // wir stoppen die messung wenn wir bereiche schalten
+                    PCBIFace->switchRange(1,m_sNRangeList.first()->Selector());
+                }
+                else
+                    m_ActTimer->start(0,wm3000Continue);
+                break;
 
-        default :
-            m_ActTimer->start(0,wm3000Continue);
-                  }
+            default :
+                m_ActTimer->start(0,wm3000Continue);
+            }
         }
 
         AHS++;
@@ -517,54 +517,54 @@ void cWM3000U::ActionHandler(int entryAHS)
     case SetRangeSyncRange12:
     case ConfigurationSyncRange12:
     case InitializationSyncRange12:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        switch (m_ConfData.m_nMeasMode)
-        {
-        case Un_UxAbs:
-        m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
-        break;
-        case Un_EVT:
-        m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
-        break;
-        default :
-        break;
-        }
-        emit SendConfDataSignal(&m_ConfData); // wir informieren die anderen dass bereiche synchronisiert sind
-        AHS++;
-        m_ActTimer->start(0,wm3000Continue);
-    }
-
-    break; // InitializationSyncRange12
-
-    case InitializationConnectDspIFace:
-    // hier kein test auf sim nötig, weil wir nur m_ConfData sync. haben !!!
-    DspIFace->connectYourself(); // interface verbindet sich mit seinem server
-    AHS++;
-    break; // InitializationConnect2dspHost
-
-    case InitializationBootDsp:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        DspIFace->BootDsp();
-        AHS++;
-    }
-    break; // InitializationBootDsp
-
-    case InitializationBootDspPause:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
         {
+            switch (m_ConfData.m_nMeasMode)
+            {
+            case Un_UxAbs:
+                m_ConfData.m_sRangeX = m_ConfData.m_sRangeXSoll;
+                break;
+            case Un_EVT:
+                m_ConfData.m_sRangeET = m_ConfData.m_sRangeETSoll;
+                break;
+            default :
+                break;
+            }
+            emit SendConfDataSignal(&m_ConfData); // wir informieren die anderen dass bereiche synchronisiert sind
+            AHS++;
+            m_ActTimer->start(0,wm3000Continue);
+        }
+
+        break; // InitializationSyncRange12
+
+    case InitializationConnectDspIFace:
+        // hier kein test auf sim nötig, weil wir nur m_ConfData sync. haben !!!
+        DspIFace->connectYourself(); // interface verbindet sich mit seinem server
         AHS++;
-        m_ActTimer->start(50,wm3000Continue);
+        break; // InitializationConnect2dspHost
+
+    case InitializationBootDsp:
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            DspIFace->BootDsp();
+            AHS++;
+        }
+        break; // InitializationBootDsp
+
+    case InitializationBootDspPause:
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            AHS++;
+            m_ActTimer->start(50,wm3000Continue);
         }
         break; // InitializationBootDspPause
 
@@ -573,7 +573,7 @@ void cWM3000U::ActionHandler(int entryAHS)
     {
         int nSPSP, nSPMP;
         if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
+            AHS = wm3000Idle;
         }
         else
         {
@@ -587,41 +587,41 @@ void cWM3000U::ActionHandler(int entryAHS)
 
     case ConfigurationSetDspVarList:
     case InitializationSetDspVarList:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SetDspWMVarList(); // dsp user variable definieren
-        DspIFace->VarList2Dsp(); // und an den dsp senden
-        AHS++;
-    }
-    break; // InitializationSetDspVarList
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            SetDspWMVarList(); // dsp user variable definieren
+            DspIFace->VarList2Dsp(); // und an den dsp senden
+            AHS++;
+        }
+        break; // InitializationSetDspVarList
 
     case ConfigurationSetDspCmdLists:
     case InitializationSetDspCmdLists:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SetDspWMCmdList(); // dsp kommando listen defineren
-        DspIFace->CmdLists2Dsp(); // und senden
-        AHS++;
-    }
-    break; // InitializationSetDspCmdList
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            SetDspWMCmdList(); // dsp kommando listen defineren
+            DspIFace->CmdLists2Dsp(); // und senden
+            AHS++;
+        }
+        break; // InitializationSetDspCmdList
 
     case ConfigurationActivateCmdLists:
     case InitializationActivateCmdLists:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        DspIFace->ActivateInterface();
-        AHS++;
-    }
-    break; // InitializationActivateCmdLists
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            DspIFace->ActivateInterface();
+            AHS++;
+        }
+        break; // InitializationActivateCmdLists
 
     case ConfigurationSetSamplingFrequency:
     case InitializationSetSamplingFrequency:
@@ -691,15 +691,15 @@ void cWM3000U::ActionHandler(int entryAHS)
 
     case ConfigurationSetSyncTiming:
     case InitializationSetSyncTiming:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        PCBIFace->setSyncTiming(m_ConfData.m_nTSync);
-        AHS++;
-    }
-    break; // InitializationSetSyncTiming
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            PCBIFace->setSyncTiming(m_ConfData.m_nTSync);
+            AHS++;
+        }
+        break; // InitializationSetSyncTiming
 
     case ConfigurationSetDspSignalRouting:
     case InitializationSetDspSignalRouting:
@@ -707,71 +707,71 @@ void cWM3000U::ActionHandler(int entryAHS)
         ulong ethroute[16];
         int i;
         if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
+            AHS = wm3000Idle;
         }
         else
         {
-        for (i = 0; i < 16; i++) ethroute[i] = 0;
-        if (m_ConfData.m_nMeasMode == Un_nConvent) // ersetzt kanal 1 daten durch eth. daten
-        {
-            int asdu;
-            int n = m_ConfData.LastASDU - m_ConfData.FirstASDU +1;
-            for (i = 0, asdu = m_ConfData.FirstASDU; i < n; i++, asdu++ )
-                ethroute[i >> 1] |= ((1 << 8) | (asdu << 4) | m_ConfData.DataSet) << ((1-(i&1))*16);
-        }
-        DspIFace->SetSignalRouting(ethroute);
-        AHS++;
+            for (i = 0; i < 16; i++) ethroute[i] = 0;
+            if (m_ConfData.m_nMeasMode == Un_nConvent) // ersetzt kanal 1 daten durch eth. daten
+            {
+                int asdu;
+                int n = m_ConfData.LastASDU - m_ConfData.FirstASDU +1;
+                for (i = 0, asdu = m_ConfData.FirstASDU; i < n; i++, asdu++ )
+                    ethroute[i >> 1] |= ((1 << 8) | (asdu << 4) | m_ConfData.DataSet) << ((1-(i&1))*16);
+            }
+            DspIFace->SetSignalRouting(ethroute);
+            AHS++;
         }
         break; // InitializationSetDspSignalRouting
     }
 
     case ConfigurationSetDsp61850SourceAdr:
     case InitializationSetDsp61850SourceAdr:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        DspIFace->SetDsp61850SourceAdr(m_ConfData.m_MacSourceAdr);
-        AHS++;
-    }
-    break; // InitializationSetDsp61850SourceAdr
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            DspIFace->SetDsp61850SourceAdr(m_ConfData.m_MacSourceAdr);
+            AHS++;
+        }
+        break; // InitializationSetDsp61850SourceAdr
 
     case ConfigurationSetDsp61850DestAdr:
     case InitializationSetDsp61850DestAdr:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        DspIFace->SetDsp61850DestAdr(m_ConfData.m_MacDestAdr);
-        AHS++;
-    }
-    break; // InitializationSetDsp61850DestAdr
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            DspIFace->SetDsp61850DestAdr(m_ConfData.m_MacDestAdr);
+            AHS++;
+        }
+        break; // InitializationSetDsp61850DestAdr
 
     case ConfigurationSetDsp61850PriorityTagged:
     case InitializationSetDsp61850PriorityTagged:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        DspIFace->SetDsp61850PriorityTagged(m_ConfData.m_nPriorityTagged);
-        AHS++;
-    }
-    break; // InitializationSetDsp61850PriorityTagged
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            DspIFace->SetDsp61850PriorityTagged(m_ConfData.m_nPriorityTagged);
+            AHS++;
+        }
+        break; // InitializationSetDsp61850PriorityTagged
 
     case ConfigurationSetDsp61850EthTypeAppId:
     case InitializationSetDsp61850EthTypeAppId:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        DspIFace->SetDsp61850EthTypeAppId(m_ConfData.m_nEthTypeHeader);
-        AHS++;
-    }
-    break; // InitializationSetDsp61850EthTypeAppId
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            DspIFace->SetDsp61850EthTypeAppId(m_ConfData.m_nEthTypeHeader);
+            AHS++;
+        }
+        break; // InitializationSetDsp61850EthTypeAppId
 
 
     case ConfigurationSetDsp61850EthSynchronisation:
@@ -779,15 +779,15 @@ void cWM3000U::ActionHandler(int entryAHS)
     {
         ulong p = 0;
         if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
+            AHS = wm3000Idle;
         }
         else
         {
-        if ( m_ConfData.m_bStrongEthSynchronisation)
-            p = m_ConfData.FirstASDU;
+            if ( m_ConfData.m_bStrongEthSynchronisation)
+                p = m_ConfData.FirstASDU;
 
-        DspIFace->SetDsp61850EthSynchronisation(p);
-        AHS++;
+            DspIFace->SetDsp61850EthSynchronisation(p);
+            AHS++;
         }
         break;
     }
@@ -797,570 +797,570 @@ void cWM3000U::ActionHandler(int entryAHS)
     case SetRangeResetMaximum:
     case InitializationResetMaximum:
     case RestartMeasurementResetMaximum:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        MaxValues.maxRdy = 0.0; // intern maxima gelöscht
-        DspIFace->ResetMaximum();
-        AHS++;
-    }
-    break;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            MaxValues.maxRdy = 0.0; // intern maxima gelöscht
+            DspIFace->ResetMaximum();
+            AHS++;
+        }
+        break;
 
     case SenseProtectionOff:
     case InitializationProtectionOff:
 
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        PCBIFace->SetSenseProtection(0); // overloadmax -> schutzschaltung deaktivieren
-        AHS++;
-    }
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            PCBIFace->SetSenseProtection(0); // overloadmax -> schutzschaltung deaktivieren
+            AHS++;
+        }
 
-    break;
+        break;
 
 
 
     case InitializationReadPCBDeviceVersion:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        PCBIFace->ReadDeviceVersion();
-        AHS++;
-    }
-    break;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            PCBIFace->ReadDeviceVersion();
+            AHS++;
+        }
+        break;
 
     case InitializationReadPCBServerVersion:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SerialVersions.PCBVersion = PCBIFace->iFaceSock->GetAnswer();
-        PCBIFace->ReadServerVersion();
-        AHS++;
-    }
-    break;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            SerialVersions.PCBVersion = PCBIFace->iFaceSock->GetAnswer();
+            PCBIFace->ReadServerVersion();
+            AHS++;
+        }
+        break;
 
     case InitializationReadPCBSerialNr:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SerialVersions.PCBServer = PCBIFace->iFaceSock->GetAnswer();
-        PCBIFace->ReadSerialNr();
-        AHS++;
-    }
-    break;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            SerialVersions.PCBServer = PCBIFace->iFaceSock->GetAnswer();
+            PCBIFace->ReadSerialNr();
+            AHS++;
+        }
+        break;
 
     case InitializationReadDSPDeviceVersion:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SerialVersions.PCBSerialNr = PCBIFace->iFaceSock->GetAnswer();
-        DspIFace->ReadDeviceVersion();
-        AHS++;
-    }
-    break;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            SerialVersions.PCBSerialNr = PCBIFace->iFaceSock->GetAnswer();
+            DspIFace->ReadDeviceVersion();
+            AHS++;
+        }
+        break;
 
     case InitializationReadDSPServerVersion:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SerialVersions.DSPVersion = DspIFace->iFaceSock->GetAnswer();
-        DspIFace->ReadServerVersion();
-        AHS++;
-    }
-    break;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            SerialVersions.DSPVersion = DspIFace->iFaceSock->GetAnswer();
+            DspIFace->ReadServerVersion();
+            AHS++;
+        }
+        break;
 
     case  InitializationReadJustdataChksum:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SerialVersions.DSPServer = DspIFace->iFaceSock->GetAnswer();
-        PCBIFace->JustFlashGetChksum();
-        AHS++;
-    }
-    break;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            SerialVersions.DSPServer = DspIFace->iFaceSock->GetAnswer();
+            PCBIFace->JustFlashGetChksum();
+            AHS++;
+        }
+        break;
 
     case InitializationTestAdjustment:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        SerialVersions.JDataChksum = PCBIFace->iFaceSock->GetAnswer();
-        emit SendVersionInfo(&SerialVersions);
-        PCBIFace->GetAdjustmentStatus();
-        AHS++;
-    }
-    break; // InitializationTestAdjustment
-
-     case InitializationFinished:
-     {
-     QString s;
-     int stat;
-     if (m_ConfData.m_bSimulation)
-     {
-     }
-    else
-    {
-        s = PCBIFace->iFaceSock->GetAnswer();
-        stat = s.toInt();
-        if ( (stat  > 0) || m_bNoDCAdjust ) // nicht justiert
-        {
-            m_bJust = false;
-            emit JustifiedSignal(false);
-            emit AffectStatus(SetQuestStat, QuestNotJustified);
-
-            s = tr("Achtung !");
-            s+="\n";
-            if (stat & 7 || m_bNoDCAdjust)
-                s += trUtf8("Gerät ist nicht justiert !");
-            if (stat & 2)
-                s += trUtf8("\nNicht identische Versionsnummer !");
-            if (stat & 4)
-                s += trUtf8("\nNicht identische Seriennummer !");
-            if (m_bNoDCAdjust)
-                s += trUtf8("\nKeine DC Justage Daten !");
-
-            QMessageBox::critical( 0, "Justage", s);
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
         {
-            m_bJust = true;
-            emit JustifiedSignal(true);
-            emit AffectStatus(ResetQuestStat, QuestNotJustified);
+            SerialVersions.JDataChksum = PCBIFace->iFaceSock->GetAnswer();
+            emit SendVersionInfo(&SerialVersions);
+            PCBIFace->GetAdjustmentStatus();
+            AHS++;
+        }
+        break; // InitializationTestAdjustment
+
+    case InitializationFinished:
+    {
+        QString s;
+        int stat;
+        if (m_ConfData.m_bSimulation)
+        {
+        }
+        else
+        {
+            s = PCBIFace->iFaceSock->GetAnswer();
+            stat = s.toInt();
+            if ( (stat  > 0) || m_bNoDCAdjust ) // nicht justiert
+            {
+                m_bJust = false;
+                emit JustifiedSignal(false);
+                emit AffectStatus(SetQuestStat, QuestNotJustified);
+
+                s = tr("Achtung !");
+                s+="\n";
+                if (stat & 7 || m_bNoDCAdjust)
+                    s += trUtf8("Gerät ist nicht justiert !");
+                if (stat & 2)
+                    s += trUtf8("\nNicht identische Versionsnummer !");
+                if (stat & 4)
+                    s += trUtf8("\nNicht identische Seriennummer !");
+                if (m_bNoDCAdjust)
+                    s += trUtf8("\nKeine DC Justage Daten !");
+
+                QMessageBox::critical( 0, "Justage", s);
+            }
+            else
+            {
+                m_bJust = true;
+                emit JustifiedSignal(true);
+                emit AffectStatus(ResetQuestStat, QuestNotJustified);
+            }
+
+            m_binitDone = true; // wir hatten keinen fehler
+            m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
         }
 
-        m_binitDone = true; // wir hatten keinen fehler
-        m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
+        AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
+        break;
     }
+        // konfigurations änderungen und zugehörige auszuführende aktionen
+        // modus messung
+        // 	bereiche neu setzen, justierwerte im dsp aktualisieren, neues dsp programm, ethroutingtab im dsp
+        // signalfrequenz
+        //	wenn nConventional neues dsp programm, messplatine init.(signal frequenz)
+        // samples/periode
+        //	neue dsp varliste, neues dsp programm, messplatine init. (samples/per), sampling system im dsp
+        // messintervall
+        //	neue dsp varliste, neues dsp program, sampling system im dsp
+        // synchronisation
+        //	messplatine init.(syncmode bzw. synctiming)
+        // mac adressen
+        //	ethsourcedest adr im dsp setzen
+        // datensatz
+        //	asdu u. dataset im dsp setzen (ethrouting)
+        // integrationszeit
+        //	Timer neu setzen
 
-    AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
-    break;
-              }
-     // konfigurations änderungen und zugehörige auszuführende aktionen
-     // modus messung
-     // 	bereiche neu setzen, justierwerte im dsp aktualisieren, neues dsp programm, ethroutingtab im dsp
-     // signalfrequenz
-     //	wenn nConventional neues dsp programm, messplatine init.(signal frequenz)
-     // samples/periode
-     //	neue dsp varliste, neues dsp programm, messplatine init. (samples/per), sampling system im dsp
-     // messintervall
-     //	neue dsp varliste, neues dsp program, sampling system im dsp
-     // synchronisation
-     //	messplatine init.(syncmode bzw. synctiming)
-     // mac adressen
-     //	ethsourcedest adr im dsp setzen
-     // datensatz
-     //	asdu u. dataset im dsp setzen (ethrouting)
-     // integrationszeit
-     //	Timer neu setzen
-
-     // reihenfolge der aktionen wie in !!!! initWM3000 aber nicht alles und selektiv um traffic zu vermeiden
-     //	bereiche, varlisten, cmdlisten, messplatine (signalfrequenz, samples/per, syncmode, synctiming)
-     // 	signalrouting, mac adressen,
-     //	integrationszeit
+        // reihenfolge der aktionen wie in !!!! initWM3000 aber nicht alles und selektiv um traffic zu vermeiden
+        //	bereiche, varlisten, cmdlisten, messplatine (signalfrequenz, samples/per, syncmode, synctiming)
+        // 	signalrouting, mac adressen,
+        //	integrationszeit
 
 
-     case ConfigurationStart:
-     m_binitDone = false; // wir konfigurieren
-     emit AffectStatus(SetOperStat, OperConfiguring);
-     if (m_ConfDataCopy.m_bSimulation && !m_ConfData.m_bSimulation) { // wenn programmkontrolle  -> /simulation
-         InitWM3000(); // => alle Initialisierungen vornehmen
-         AHS = wm3000Idle;
-     }
-     else
-     {
-         // bereiche beim configurieren immer setzen
-         AHS++; // wir kommen in ConfigurationSetRanges !!!! die sind gleich mit Initialization !!
-         m_ActTimer->start(0,wm3000Continue);
-     }
+    case ConfigurationStart:
+        m_binitDone = false; // wir konfigurieren
+        emit AffectStatus(SetOperStat, OperConfiguring);
+        if (m_ConfDataCopy.m_bSimulation && !m_ConfData.m_bSimulation) { // wenn programmkontrolle  -> /simulation
+            InitWM3000(); // => alle Initialisierungen vornehmen
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            // bereiche beim configurieren immer setzen
+            AHS++; // wir kommen in ConfigurationSetRanges !!!! die sind gleich mit Initialization !!
+            m_ActTimer->start(0,wm3000Continue);
+        }
 
-     break; // ConfigurationStart
+        break; // ConfigurationStart
 
-     case ConfigurationTestIntegrationTime: //  gestartet wird der timer wenn config fertig
-     if (m_ConfDataCopy.m_nIntegrationTime != m_ConfData.m_nIntegrationTime)
-     {
-         StopMeasurement();
-         AHS++;
-     }
+    case ConfigurationTestIntegrationTime: //  gestartet wird der timer wenn config fertig
+        if (m_ConfDataCopy.m_nIntegrationTime != m_ConfData.m_nIntegrationTime)
+        {
+            StopMeasurement();
+            AHS++;
+        }
 
     case ConfigurationTestDspVarList:
-     if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if ( (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate) ||
-         (m_ConfDataCopy.m_nMeasPeriod != m_ConfData.m_nMeasPeriod) )
-        {
-        StopMeasurement();
-        AHS++; // dsp varlisten und sampling system im dsp
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestCmdList;
+        {
+            if ( (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate) ||
+                 (m_ConfDataCopy.m_nMeasPeriod != m_ConfData.m_nMeasPeriod) )
+            {
+                StopMeasurement();
+                AHS++; // dsp varlisten und sampling system im dsp
+            }
+            else
+                AHS = ConfigurationTestCmdList;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestDspVarList
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestDspVarList
 
     case ConfigurationTestCmdList:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if ( (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate) ||
-         (m_ConfDataCopy.m_nMeasPeriod != m_ConfData.m_nMeasPeriod) ||
-         (m_ConfDataCopy.m_nMeasMode != m_ConfData.m_nMeasMode) ||
-         (fabs(m_ConfDataCopy.m_fSFreq - m_ConfData.m_fSFreq) > 1e-6) ||
-         (m_ConfDataCopy.m_bDCmeasurement != m_ConfData.m_bDCmeasurement) )
-
-        {
-        StopMeasurement();
-        AHS++; // dsp cmdlisten setzen und übersetzen
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestSignalFrequency;
+        {
+            if ( (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate) ||
+                 (m_ConfDataCopy.m_nMeasPeriod != m_ConfData.m_nMeasPeriod) ||
+                 (m_ConfDataCopy.m_nMeasMode != m_ConfData.m_nMeasMode) ||
+                 (fabs(m_ConfDataCopy.m_fSFreq - m_ConfData.m_fSFreq) > 1e-6) ||
+                 (m_ConfDataCopy.m_bDCmeasurement != m_ConfData.m_bDCmeasurement) )
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestCmdList
+            {
+                StopMeasurement();
+                AHS++; // dsp cmdlisten setzen und übersetzen
+            }
+            else
+                AHS = ConfigurationTestSignalFrequency;
+
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestCmdList
 
     case ConfigurationTestSignalFrequency:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if (m_ConfDataCopy.m_fSFreq != m_ConfData.m_fSFreq)
-        {
-        StopMeasurement();
-        AHS++; // messplatine signalfrequenz
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestSRate;
+        {
+            if (m_ConfDataCopy.m_fSFreq != m_ConfData.m_fSFreq)
+            {
+                StopMeasurement();
+                AHS++; // messplatine signalfrequenz
+            }
+            else
+                AHS = ConfigurationTestSRate;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestSignalFrequency
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestSignalFrequency
 
     case ConfigurationTestSRate:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate)
-        {
-        StopMeasurement();
-        AHS++; // messplatine samples/periode
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestSenseMode;
-
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestSRate
-
-case ConfigurationTestSenseMode:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if (m_ConfDataCopy.m_nSenseMode != m_ConfData.m_nSenseMode)
         {
-            StopMeasurement();
-            AHS++; // messplatine test modus
+            if (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate)
+            {
+                StopMeasurement();
+                AHS++; // messplatine samples/periode
+            }
+            else
+                AHS = ConfigurationTestSenseMode;
+
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestSRate
+
+    case ConfigurationTestSenseMode:
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-            AHS = ConfigurationTestSyncMode;
+        {
+            if (m_ConfDataCopy.m_nSenseMode != m_ConfData.m_nSenseMode)
+            {
+                StopMeasurement();
+                AHS++; // messplatine test modus
+            }
+            else
+                AHS = ConfigurationTestSyncMode;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestTMode
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestTMode
 
     case ConfigurationTestSyncMode:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if (m_ConfDataCopy.m_nSyncSource != m_ConfData.m_nSyncSource)
-        {
-        StopMeasurement();
-        AHS++; // // messplatine syncmode
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestSyncTiming;
+        {
+            if (m_ConfDataCopy.m_nSyncSource != m_ConfData.m_nSyncSource)
+            {
+                StopMeasurement();
+                AHS++; // // messplatine syncmode
+            }
+            else
+                AHS = ConfigurationTestSyncTiming;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestSyncMode
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestSyncMode
 
     case ConfigurationTestSyncTiming:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if (m_ConfDataCopy.m_nTSync != m_ConfData.m_nTSync)
-        {
-        StopMeasurement();
-        AHS++; // sync timing einstellen
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestDspSignalRouting;
+        {
+            if (m_ConfDataCopy.m_nTSync != m_ConfData.m_nTSync)
+            {
+                StopMeasurement();
+                AHS++; // sync timing einstellen
+            }
+            else
+                AHS = ConfigurationTestDspSignalRouting;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestSyncTiming
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestSyncTiming
 
     case ConfigurationTestDspSignalRouting:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if ( (m_ConfDataCopy.m_nMeasMode != m_ConfData.m_nMeasMode)  ||
-             (m_ConfDataCopy.FirstASDU != m_ConfData.FirstASDU) ||
-             (m_ConfDataCopy.LastASDU != m_ConfData.LastASDU) ||
-             (m_ConfDataCopy.DataSet != m_ConfData.DataSet) )
-        {
-            StopMeasurement();
-            AHS++; // signalrouting (ethrouting tab)
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-            AHS = ConfigurationTestDsp61850SourceAdr;
+        {
+            if ( (m_ConfDataCopy.m_nMeasMode != m_ConfData.m_nMeasMode)  ||
+                 (m_ConfDataCopy.FirstASDU != m_ConfData.FirstASDU) ||
+                 (m_ConfDataCopy.LastASDU != m_ConfData.LastASDU) ||
+                 (m_ConfDataCopy.DataSet != m_ConfData.DataSet) )
+            {
+                StopMeasurement();
+                AHS++; // signalrouting (ethrouting tab)
+            }
+            else
+                AHS = ConfigurationTestDsp61850SourceAdr;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestDspSignalRouting
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestDspSignalRouting
 
     case ConfigurationTestDsp61850SourceAdr:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
-           ( m_ConfDataCopy.m_MacSourceAdr != m_ConfData.m_MacSourceAdr) )
-        {
-        StopMeasurement();
-        AHS++; // mac adressen 61850 source setzen
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestDsp61850DestAdr;
+        {
+            if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
+                   ( m_ConfDataCopy.m_MacSourceAdr != m_ConfData.m_MacSourceAdr) )
+            {
+                StopMeasurement();
+                AHS++; // mac adressen 61850 source setzen
+            }
+            else
+                AHS = ConfigurationTestDsp61850DestAdr;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestDsp61850SourceAdr
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestDsp61850SourceAdr
 
     case ConfigurationTestDsp61850DestAdr:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
-           ( m_ConfDataCopy.m_MacDestAdr != m_ConfData.m_MacDestAdr) )
-        {
-        StopMeasurement();
-        AHS++; // mac adressen 61850 dest
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestDsp61850PriorityTagged;
+        {
+            if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
+                   ( m_ConfDataCopy.m_MacDestAdr != m_ConfData.m_MacDestAdr) )
+            {
+                StopMeasurement();
+                AHS++; // mac adressen 61850 dest
+            }
+            else
+                AHS = ConfigurationTestDsp61850PriorityTagged;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestDsp61850DestAdr
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestDsp61850DestAdr
 
     case ConfigurationTestDsp61850PriorityTagged:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
-           ( m_ConfDataCopy.m_nPriorityTagged != m_ConfData.m_nPriorityTagged) )
-        {
-        StopMeasurement();
-        AHS++; // eth frame priority tagged
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestDsp61850EthTypeAppId;
+        {
+            if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
+                   ( m_ConfDataCopy.m_nPriorityTagged != m_ConfData.m_nPriorityTagged) )
+            {
+                StopMeasurement();
+                AHS++; // eth frame priority tagged
+            }
+            else
+                AHS = ConfigurationTestDsp61850EthTypeAppId;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestDsp61850PriorityTagged
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestDsp61850PriorityTagged
 
     case ConfigurationTestDsp61850EthTypeAppId:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
-           ( m_ConfDataCopy.m_nEthTypeHeader != m_ConfData.m_nEthTypeHeader) )
-        {
-        StopMeasurement();
-        AHS++; // eth frame eth type + appl. id
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationTestDsp61850EthSynchronisation;
+        {
+            if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
+                   ( m_ConfDataCopy.m_nEthTypeHeader != m_ConfData.m_nEthTypeHeader) )
+            {
+                StopMeasurement();
+                AHS++; // eth frame eth type + appl. id
+            }
+            else
+                AHS = ConfigurationTestDsp61850EthSynchronisation;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestDsp61850EthTypeAppId
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestDsp61850EthTypeAppId
 
     case ConfigurationTestDsp61850EthSynchronisation:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
-           ( m_ConfDataCopy.m_bStrongEthSynchronisation != m_ConfData.m_bStrongEthSynchronisation) )
-        {
-        StopMeasurement();
-        AHS++;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        AHS = ConfigurationFinished;
+        {
+            if   ( (m_ConfData.m_nMeasMode == Un_nConvent) &&
+                   ( m_ConfDataCopy.m_bStrongEthSynchronisation != m_ConfData.m_bStrongEthSynchronisation) )
+            {
+                StopMeasurement();
+                AHS++;
+            }
+            else
+                AHS = ConfigurationFinished;
 
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // ConfigurationTestDsp61850EthSynchronisation
+            m_ActTimer->start(0,wm3000Continue);
+        }
+        break; // ConfigurationTestDsp61850EthSynchronisation
 
     case ConfigurationFinished:
-    if (m_ConfData.m_bSimulation) {
-    }
-    else
-    {
-        // integrationszeit starten wir in jedem fall neu nach konfiguration
-        m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
-        m_binitDone = true; //
-        emit SendConfDataSignal(&m_ConfData); // andere objekte informieren
-        // wenn's keine probleme gab sind wir hier angekommen und initialisiert
-        emit ConfigReady(); // wir sync. eine ev. laufenden justage prozess
-        emit AffectStatus(ResetOperStat, OperConfiguring);
-        WriteSettings(".ses");
-    }
+        if (m_ConfData.m_bSimulation) {
+        }
+        else
+        {
+            // integrationszeit starten wir in jedem fall neu nach konfiguration
+            m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
+            m_binitDone = true; //
+            emit SendConfDataSignal(&m_ConfData); // andere objekte informieren
+            // wenn's keine probleme gab sind wir hier angekommen und initialisiert
+            emit ConfigReady(); // wir sync. eine ev. laufenden justage prozess
+            emit AffectStatus(ResetOperStat, OperConfiguring);
+            WriteSettings(".ses");
+        }
 
-    AHS = wm3000Idle;
-    break; // case ConfigurationAct
+        AHS = wm3000Idle;
+        break; // case ConfigurationAct
 
     case SetRangeStart:
-    emit AffectStatus(SetOperStat, OperRanging);
-    AHS++; // es folgen bereich setzen und maximum rücksetzen
-    m_ActTimer->start(0,wm3000Continue);
-    break; // SetRangeStart
+        emit AffectStatus(SetOperStat, OperRanging);
+        AHS++; // es folgen bereich setzen und maximum rücksetzen
+        m_ActTimer->start(0,wm3000Continue);
+        break; // SetRangeStart
 
     case SetRangeFinished:
-    if (m_ConfData.m_bSimulation) {
-    }
-    else
-    {
-        emit AffectStatus(ResetOperStat, OperRanging);
-        emit SendConfDataSignal(&m_ConfData); // andere objekte informieren
-        emit SetRangeReady(); // falls sich jemand sync. wollte
-        m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
-    }
+        if (m_ConfData.m_bSimulation) {
+        }
+        else
+        {
+            emit AffectStatus(ResetOperStat, OperRanging);
+            emit SendConfDataSignal(&m_ConfData); // andere objekte informieren
+            emit SetRangeReady(); // falls sich jemand sync. wollte
+            m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
+        }
 
-    AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
-    break; // SetRangeFinished
+        AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
+        break; // SetRangeFinished
 
     case TriggerMeasureStart:
-    m_bDspMeasureTriggerActive = true; // der trigger ist aktiviert
-    DspIFace->TriggerIntHKSK(1); // die intliste hksk = 1 triggern
-    AHS++;
-    break; // TriggerMeasureStart
+        m_bDspMeasureTriggerActive = true; // der trigger ist aktiviert
+        DspIFace->TriggerIntHKSK(1); // die intliste hksk = 1 triggern
+        AHS++;
+        break; // TriggerMeasureStart
 
     case  TriggerMeasureFinished:
-    AHS = wm3000Idle; // wir sind mit oder ohne fehler fertig
-    break;
+        AHS = wm3000Idle; // wir sind mit oder ohne fehler fertig
+        break;
 
     case MeasureDataAcquisition:
     case TriggerMeasureDataAcquisition:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        emit AffectStatus(ResetOperStat, OperMeasuring);
-        // wieso das hier ??
-        // die schnittstellenverbindung kann erst aufgebaut werden wenn das gerät läuft.
-        // das interface wird dynamisch instanziiert nach aufbau der verbindung
-        // justiert oder nicht justiert wird normalerweise nur einmal beim start emitted
-        // und kommt daher dann nicht an. isn workaround, sollte später begradigt werden
-        if (m_bJust)
-        emit AffectStatus(ResetQuestStat, QuestNotJustified);
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
         else
-        emit AffectStatus(SetQuestStat, QuestNotJustified);
+        {
+            emit AffectStatus(ResetOperStat, OperMeasuring);
+            // wieso das hier ??
+            // die schnittstellenverbindung kann erst aufgebaut werden wenn das gerät läuft.
+            // das interface wird dynamisch instanziiert nach aufbau der verbindung
+            // justiert oder nicht justiert wird normalerweise nur einmal beim start emitted
+            // und kommt daher dann nicht an. isn workaround, sollte später begradigt werden
+            if (m_bJust)
+                emit AffectStatus(ResetQuestStat, QuestNotJustified);
+            else
+                emit AffectStatus(SetQuestStat, QuestNotJustified);
 
-        DspIFace->DataAcquisition(ActValData); // holt die daten ins dsp interface
-        emit AffectStatus(SetOperStat, OperMeasuring);
-        AHS++;
-    }
+            DspIFace->DataAcquisition(ActValData); // holt die daten ins dsp interface
+            emit AffectStatus(SetOperStat, OperMeasuring);
+            AHS++;
+        }
 
-    break; // TriggerMeasureDataAcquisition
+        break; // TriggerMeasureDataAcquisition
 
     case MeasureComputation:
     case TriggerMeasureComputation:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
-    }
-    else
-    {
-        float *source = DspIFace->data(ActValData);
-        float *dest = (float*) &ActValues.dspActValues;
-        for (uint i=0; i< sizeof(ActValues.dspActValues)/sizeof(float);i++) *dest++ = *source++;
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
+        }
+        else
+        {
+            float *source = DspIFace->data(ActValData);
+            float *dest = (float*) &ActValues.dspActValues;
+            for (uint i=0; i< sizeof(ActValues.dspActValues)/sizeof(float);i++) *dest++ = *source++;
 
-        m_MovingWindowFilter.append(ActValues.dspActValues);
-        ActValues.dspActValues = m_MovingWindowFilter.getOutput();
+            m_MovingWindowFilter.append(ActValues.dspActValues);
+            ActValues.dspActValues = m_MovingWindowFilter.getOutput();
 
-        // die hanningfenster korrektur findet hier statt weil bei simulation auch cmpactvalues
-        // aufgerufen wird, die simulationsdaten aber ohne hanningfenster sind... weil einfacher
+            // die hanningfenster korrektur findet hier statt weil bei simulation auch cmpactvalues
+            // aufgerufen wird, die simulationsdaten aber ohne hanningfenster sind... weil einfacher
 
-        ActValues.dspActValues.rmsnf *= 1.63299; // hanning fenster korrektur
-        ActValues.dspActValues.rmsxf *= 1.63299; // dito
-        ActValues.dspActValues.ampl1nf *= 2.0; // dito
-        ActValues.dspActValues.ampl1xf *= 2.0; // dito
+            ActValues.dspActValues.rmsnf *= 1.63299; // hanning fenster korrektur
+            ActValues.dspActValues.rmsxf *= 1.63299; // dito
+            ActValues.dspActValues.ampl1nf *= 2.0; // dito
+            ActValues.dspActValues.ampl1xf *= 2.0; // dito
 
-        CmpActFrequency(); // die brauchen wir schon mal zum lesen der justagewerte
-        AHS++;
-        m_ActTimer->start(0,wm3000Continue);
-    }
+            CmpActFrequency(); // die brauchen wir schon mal zum lesen der justagewerte
+            AHS++;
+            m_ActTimer->start(0,wm3000Continue);
+        }
 
-    break; // TriggerMeasureComputation
+        break; // TriggerMeasureComputation
 
     case MeasureGetGainCorrCh0:
     case TriggerMeasureGetGainCorrCh0:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        PCBIFace->readGainCorrection(0, Range(m_ConfData.m_sRangeN,m_sNRangeList)->Selector(), ActValues.RMSNSek);
-        AHS++;
-    }
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            PCBIFace->readGainCorrection(0, Range(m_ConfData.m_sRangeN,m_sNRangeList)->Selector(), ActValues.RMSNSek);
+            AHS++;
+        }
 
-    break; // TriggerMeasureGetGainCorrCh0
+        break; // TriggerMeasureGetGainCorrCh0
 
     case MeasureGetGainCorrCh1:
     case TriggerMeasureGetGainCorrCh1:
@@ -1499,224 +1499,224 @@ case ConfigurationTestSenseMode:
 
 
     case RestartMeasurementStart:
-    if (m_ConfData.m_bSimulation) // im sim. modus wir der meastimer direkt gestartet
-    {
-        m_MovingWindowFilter.setFilterLength(m_ConfData.m_nIntegrationTime);
-        MeasureTimer->start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
-        MeasureLPTimer->start(500);
-        RangeTimer->start(500);
-        m_bDspMeasureTriggerActive = false;
-        m_bStopped = false;
-        AHS = wm3000Idle; // wir sind schon fertig
-    }
-    else
-    {
-        AHS++;
-        m_ActTimer->start(0,wm3000Continue);
-    }
-
-    break;
-
-    case RestartMeasurementRestart:
-    if (m_ConfData.m_bSimulation) // fehler
-        AHS = wm3000Idle;
-    else
-    {
-        // im real modus wird das filter im dsp gelöscht und darauf synchroniert der meastimer gestartet
-        if (m_bStopped) // es kann sein dass wir restart aufrufen obwohl wir gar nicht gestoppt haben
+        if (m_ConfData.m_bSimulation) // im sim. modus wir der meastimer direkt gestartet
         {
-        m_bStopped = false;
-        DspIFace->TriggerIntHKSK(3); // die intliste hksk = 3 triggern löscht das filter im dsp
-        AHS++;
+            m_MovingWindowFilter.setFilterLength(m_ConfData.m_nIntegrationTime);
+            MeasureTimer->start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
+            MeasureLPTimer->start(500);
+            RangeTimer->start(500);
+            m_bDspMeasureTriggerActive = false;
+            m_bStopped = false;
+            AHS = wm3000Idle; // wir sind schon fertig
         }
         else
-        AHS = wm3000Idle;
-    }
-    break; // RestartMeasurementRestart
+        {
+            AHS++;
+            m_ActTimer->start(0,wm3000Continue);
+        }
+
+        break;
+
+    case RestartMeasurementRestart:
+        if (m_ConfData.m_bSimulation) // fehler
+            AHS = wm3000Idle;
+        else
+        {
+            // im real modus wird das filter im dsp gelöscht und darauf synchroniert der meastimer gestartet
+            if (m_bStopped) // es kann sein dass wir restart aufrufen obwohl wir gar nicht gestoppt haben
+            {
+                m_bStopped = false;
+                DspIFace->TriggerIntHKSK(3); // die intliste hksk = 3 triggern löscht das filter im dsp
+                AHS++;
+            }
+            else
+                AHS = wm3000Idle;
+        }
+        break; // RestartMeasurementRestart
 
     case RestartMeasurementFinished:
-    AHS = wm3000Idle; // ob fehler oder nicht .... wir haben fertig
-    break;
+        AHS = wm3000Idle; // ob fehler oder nicht .... wir haben fertig
+        break;
 
     case MeasureStart:
-    if (m_bStopped)
-        AHS = wm3000Idle;
-    else
-    if (m_bDspMeasureIgnore) // falls zwischen durch was geschaltet oder konf. wurde
-    {
-        m_bDspMeasureIgnore = false; // verwerfen wir die messergebnisse
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        emit AffectStatus(SetOperStat, OperMeasuring);
-        AHS++; // es folgen measuredatacquisition,  measurecomputation
-        m_ActTimer->start(0,wm3000Continue);
-    }
-    break; // MeasureStart
+        if (m_bStopped)
+            AHS = wm3000Idle;
+        else
+            if (m_bDspMeasureIgnore) // falls zwischen durch was geschaltet oder konf. wurde
+            {
+                m_bDspMeasureIgnore = false; // verwerfen wir die messergebnisse
+                AHS = wm3000Idle;
+            }
+            else
+            {
+                emit AffectStatus(SetOperStat, OperMeasuring);
+                AHS++; // es folgen measuredatacquisition,  measurecomputation
+                m_ActTimer->start(0,wm3000Continue);
+            }
+        break; // MeasureStart
 
 
     case MeasureLPStart:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        DspIFace->DataAcquisition(RMSValData); // holt die daten ins dsp interface
-        AHS++;
-    }
-    break; // MeasureLPStart
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            DspIFace->DataAcquisition(RMSValData); // holt die daten ins dsp interface
+            AHS++;
+        }
+        break; // MeasureLPStart
 
 
     case MeasureLPComputation:
-    if (m_ConfData.m_bSimulation)
-    {
-        AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
-    }
-    else
-    {
-        float *source = DspIFace->data(RMSValData);
-        float *dest = (float*) &ActValues.dspRMSValues;
-        for (uint i=0; i< sizeof(ActValues.dspRMSValues)/sizeof(float);i++) *dest++ = *source++;
+        if (m_ConfData.m_bSimulation)
+        {
+            AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
+        }
+        else
+        {
+            float *source = DspIFace->data(RMSValData);
+            float *dest = (float*) &ActValues.dspRMSValues;
+            for (uint i=0; i< sizeof(ActValues.dspRMSValues)/sizeof(float);i++) *dest++ = *source++;
 
-        ActValues.dspRMSValues.fastRMSN *= 1.63299; // hanning fenster korrektur
-        ActValues.dspRMSValues.fastRMSN1 = ActValues.dspRMSValues.fastRMSN1 * 2.0 / 1.41421356; // korrektur einheitswurzeln, ammplitude->rms
-        ActValues.dspRMSValues.fastRMSX *= 1.63299; // hanning fenster korrektur
-        ActValues.dspRMSValues.fastRMSX1 = ActValues.dspRMSValues.fastRMSX1 * 2.0 / 1.41421356; // korrektur einheitswurzeln, ammplitude->rms
+            ActValues.dspRMSValues.fastRMSN *= 1.63299; // hanning fenster korrektur
+            ActValues.dspRMSValues.fastRMSN1 = ActValues.dspRMSValues.fastRMSN1 * 2.0 / 1.41421356; // korrektur einheitswurzeln, ammplitude->rms
+            ActValues.dspRMSValues.fastRMSX *= 1.63299; // hanning fenster korrektur
+            ActValues.dspRMSValues.fastRMSX1 = ActValues.dspRMSValues.fastRMSX1 * 2.0 / 1.41421356; // korrektur einheitswurzeln, ammplitude->rms
 
-        CorrRMSValues();
-        CmpRMSValues();
-        emit SendLPSignal(&ActValues);
+            CorrRMSValues();
+            CmpRMSValues();
+            emit SendLPSignal(&ActValues);
 
-        AHS = wm3000Idle; // fertig
-    }
+            AHS = wm3000Idle; // fertig
+        }
 
-    break; // MeasureLPComputation
+        break; // MeasureLPComputation
 
     case RangeObsermaticStart:
-    DspIFace->DataAcquisition(MaxValData); // holt die daten ins dsp interface
-    AHS++;
-    break;
+        DspIFace->DataAcquisition(MaxValData); // holt die daten ins dsp interface
+        AHS++;
+        break;
 
     case RangeObsermaticTest:
     {
         bool mustDo = false;
         if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
+            AHS = wm3000Idle;
         }
         else
         {
-        float *source = DspIFace->data(MaxValData);
-        float *dest = (float*) &MaxValues;
-        for (uint i=0; i< sizeof(MaxValues)/sizeof(float);i++) *dest++ = *source++;
-        if (MaxValues.maxRdy > 0) { // sind die aktuell ?
-            bool bOvln = false;
-            bool bOvlx = false;
+            float *source = DspIFace->data(MaxValData);
+            float *dest = (float*) &MaxValues;
+            for (uint i=0; i< sizeof(MaxValues)/sizeof(float);i++) *dest++ = *source++;
+            if (MaxValues.maxRdy > 0) { // sind die aktuell ?
+                bool bOvln = false;
+                bool bOvlx = false;
 
-            bOverloadMaxOld = bOverloadMax;
+                bOverloadMaxOld = bOverloadMax;
 
-            mustDo |= SelectRange(m_sNRangeList,m_ConfData.m_sRangeN,m_ConfData.m_sRangeNSoll,m_ConfData.m_sRangeNVorgabe,MaxValues.maxn,bOvln);
+                mustDo |= SelectRange(m_sNRangeList,m_ConfData.m_sRangeN,m_ConfData.m_sRangeNSoll,m_ConfData.m_sRangeNVorgabe,MaxValues.maxn,bOvln);
 
-            if ( bOvln && (m_ConfData.m_sRangeN == m_sNRangeList.first()->Name()) )
-            bOverloadMax = true;
+                if ( bOvln && (m_ConfData.m_sRangeN == m_sNRangeList.first()->Name()) )
+                    bOverloadMax = true;
 
-            switch (m_ConfData.m_nMeasMode)
-            {
-            case Un_UxAbs:
-            mustDo |= SelectRange(m_sNRangeList,m_ConfData.m_sRangeX,m_ConfData.m_sRangeXSoll,m_ConfData.m_sRangeXVorgabe,MaxValues.maxx, bOvlx );
-            if ( bOvlx && (m_ConfData.m_sRangeX == m_sNRangeList.first()->Name()) )
-                bOverloadMax = true;
-            break;
-            case Un_EVT:
-            mustDo |= SelectRange(m_sEVTRangeList,m_ConfData.m_sRangeET,m_ConfData.m_sRangeETSoll,m_ConfData.m_sRangeETVorgabe,MaxValues.maxx, bOvlx);
-            if ( bOvlx && (m_ConfData.m_sRangeET == m_sEVTRangeList.first()->Name()) )
-                bOverloadMax = true;
-            break;
-            default : break;
+                switch (m_ConfData.m_nMeasMode)
+                {
+                case Un_UxAbs:
+                    mustDo |= SelectRange(m_sNRangeList,m_ConfData.m_sRangeX,m_ConfData.m_sRangeXSoll,m_ConfData.m_sRangeXVorgabe,MaxValues.maxx, bOvlx );
+                    if ( bOvlx && (m_ConfData.m_sRangeX == m_sNRangeList.first()->Name()) )
+                        bOverloadMax = true;
+                    break;
+                case Un_EVT:
+                    mustDo |= SelectRange(m_sEVTRangeList,m_ConfData.m_sRangeET,m_ConfData.m_sRangeETSoll,m_ConfData.m_sRangeETVorgabe,MaxValues.maxx, bOvlx);
+                    if ( bOvlx && (m_ConfData.m_sRangeET == m_sEVTRangeList.first()->Name()) )
+                        bOverloadMax = true;
+                    break;
+                default : break;
+                }
+
+                if ((bOverload = (bOvln || bOvlx) ))
+                    emit AffectStatus(SetQuestStat, QuestOverLoad); // und an status system melden
+                else
+                    emit AffectStatus(ResetQuestStat, QuestOverLoad );
+
+                if (mustDo)
+                    AHS++; //  weiter mit bereiche synchronisieren
+                else
+                    AHS = RangeObsermaticOverload; // bzw. direkt overload behandlung
+
+                m_ActTimer->start(0,wm3000Continue);
             }
-
-                    if ((bOverload = (bOvln || bOvlx) ))
-                emit AffectStatus(SetQuestStat, QuestOverLoad); // und an status system melden
             else
-                emit AffectStatus(ResetQuestStat, QuestOverLoad );
-
-           if (mustDo)
-            AHS++; //  weiter mit bereiche synchronisieren
-            else
-            AHS = RangeObsermaticOverload; // bzw. direkt overload behandlung
-
-            m_ActTimer->start(0,wm3000Continue);
-        }
-        else
-        {
-            AHS = wm3000Idle; // keine gültigen daten -> fertig
-        }
+            {
+                AHS = wm3000Idle; // keine gültigen daten -> fertig
+            }
         }
         break; // case RangeObsermaticTest
     }
 
 
     case RangeObsermaticOverload:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        if (bOverloadMax && (!bOverloadMaxOld) ) // nur  nach positiver flanke !!!
-        {
-        m_OVLMsgBox->show();
-        emit AffectStatus(SetQuestStat, QuestOverLoadMax);
-        PCBIFace->SetSenseProtection(1); // overloadmax -> schutzschaltung aktivieren
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
         }
         else
-        m_ActTimer->start(0,wm3000Continue); // rangeobsermaticresetmaximum
+        {
+            if (bOverloadMax && (!bOverloadMaxOld) ) // nur  nach positiver flanke !!!
+            {
+                m_OVLMsgBox->show();
+                emit AffectStatus(SetQuestStat, QuestOverLoadMax);
+                PCBIFace->SetSenseProtection(1); // overloadmax -> schutzschaltung aktivieren
+            }
+            else
+                m_ActTimer->start(0,wm3000Continue); // rangeobsermaticresetmaximum
 
-        AHS++;
-    }
+            AHS++;
+        }
 
-    break;
+        break;
 
-     //  case RangeObsermaticResetMaximum: // weiter oben realisiert !!!!
+        //  case RangeObsermaticResetMaximum: // weiter oben realisiert !!!!
 
-     // RangeObsermaticResetOVL findet hier statt
+        // RangeObsermaticResetOVL findet hier statt
 
 
     case RangeObsermaticFinished:
-    m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
-    emit RangeAutomaticDone();
-    AHS = wm3000Idle; // egal ob fehler oder nicht -> obsermatic ist fertig
-    break;
+        m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
+        emit RangeAutomaticDone();
+        AHS = wm3000Idle; // egal ob fehler oder nicht -> obsermatic ist fertig
+        break;
 
 
-    // case SenseProtectionOff weiter oben realisiert (gleich wie init....)
+        // case SenseProtectionOff weiter oben realisiert (gleich wie init....)
 
     case SenseProtectionOffRM:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        StopMeasurement(); // messung stop
-        AHS++;
-        m_ActTimer->start(0,wm3000Continue); // rangeobsermaticresetmaximum
-    }
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            StopMeasurement(); // messung stop
+            AHS++;
+            m_ActTimer->start(0,wm3000Continue); // rangeobsermaticresetmaximum
+        }
 
-    break;
+        break;
 
-    // maxima rücksetzten findet hier statt //
+        // maxima rücksetzten findet hier statt //
 
     case SenseProtectionOffFinished:
-    if (m_ConfData.m_bSimulation) {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
-        bOverloadMax = false; // wir nehmen die übersteuerung zurück -> ab jetzt können wieder bereiche geschaltet werden
-        AHS = wm3000Idle;
-    }
+        if (m_ConfData.m_bSimulation) {
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
+            bOverloadMax = false; // wir nehmen die übersteuerung zurück -> ab jetzt können wieder bereiche geschaltet werden
+            AHS = wm3000Idle;
+        }
 
-    break;
+        break;
 
 
     case CmpPhaseCoeffStart:
@@ -1850,52 +1850,52 @@ case ConfigurationTestSenseMode:
         break;
 
     case CmpOffsetSetStatus:
-    if (m_ConfData.m_bSimulation) { // fehler aufgetreten -> abbruch
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        OffsetCalcInfo = m_CalcInfoList.first();
-        PCBIFace->setOffsetStatus(OffsetCalcInfo->m_sChannel, OffsetCalcInfo->m_sRange, 1); // wir setzen den status auf justiert
-        AHS++;
-    }
-    break; // CmpoffsetSetStatus
-
-    case CmpOffsetSetStatus2:
-    if (m_ConfData.m_bSimulation) { // fehler aufgetreten -> abbruch
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        m_CalcInfoList.removeFirst();
-        if (m_CalcInfoList.isEmpty())
-        {
-            AHS++; // dann sind wir fertig
+        if (m_ConfData.m_bSimulation) { // fehler aufgetreten -> abbruch
+            AHS = wm3000Idle;
         }
         else
         {
-            AHS--; // sonst zum nächsten
+            OffsetCalcInfo = m_CalcInfoList.first();
+            PCBIFace->setOffsetStatus(OffsetCalcInfo->m_sChannel, OffsetCalcInfo->m_sRange, 1); // wir setzen den status auf justiert
+            AHS++;
         }
-        m_ActTimer->start(0,wm3000Continue); // wir starten selbst damit es weiter geht
-    }
-    break; // CmpOffsetSetStatus2
+        break; // CmpoffsetSetStatus
+
+    case CmpOffsetSetStatus2:
+        if (m_ConfData.m_bSimulation) { // fehler aufgetreten -> abbruch
+            AHS = wm3000Idle;
+        }
+        else
+        {
+            m_CalcInfoList.removeFirst();
+            if (m_CalcInfoList.isEmpty())
+            {
+                AHS++; // dann sind wir fertig
+            }
+            else
+            {
+                AHS--; // sonst zum nächsten
+            }
+            m_ActTimer->start(0,wm3000Continue); // wir starten selbst damit es weiter geht
+        }
+        break; // CmpOffsetSetStatus2
 
     case PhaseNodeMeasStart:
-    m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
-    StopMeasurement(); // die kumulieren jetzt nur
-    m_pProgressDialog = new Q3ProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.count()+1, g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
+        m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
+        StopMeasurement(); // die kumulieren jetzt nur
+        m_pProgressDialog = new Q3ProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.count()+1, g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
 
-    m_pAbortButton = new QPushButton(trUtf8("Abbruch"),0,0);
-    m_pProgressDialog->setCancelButton(m_pAbortButton);
-    m_pProgressDialog->setCaption(trUtf8("Phasenkorrekturkoeffizienten"));
-    m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
-    lprogress = 0; // int. progress counter
-    m_pProgressDialog->setProgress(lprogress);
-    QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(JustAbortSlot()));
-    AHS++;
-    m_ActTimer->start(0,wm3000Continue);
-    N = 0; // durchlaufzähler
-    break; // PhaseNodeMeasStart
+        m_pAbortButton = new QPushButton(trUtf8("Abbruch"),0,0);
+        m_pProgressDialog->setCancelButton(m_pAbortButton);
+        m_pProgressDialog->setCaption(trUtf8("Phasenkorrekturkoeffizienten"));
+        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
+        lprogress = 0; // int. progress counter
+        m_pProgressDialog->setProgress(lprogress);
+        QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(JustAbortSlot()));
+        AHS++;
+        m_ActTimer->start(0,wm3000Continue);
+        N = 0; // durchlaufzähler
+        break; // PhaseNodeMeasStart
 
     case PhaseNodeMeasCoefficientClearN:
         PhaseCalcInfo = m_CalcInfoList.first();
@@ -1979,19 +1979,19 @@ case ConfigurationTestSenseMode:
 
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
-             Q3TextStream stream( &m_PhaseJustLogfile );
-             stream << QString("RangeN=%1 RangeX=%2 Mode=%3 ")
-                                .arg(PhaseNodeMeasInfo->m_srngN)
-                                .arg(PhaseNodeMeasInfo->m_srngX)
-                                .arg(MModeName[PhaseNodeMeasInfo->m_nMMode]);
-             stream << QString("SenseMode=%1 nS=").arg(SenseModeText[PhaseNodeMeasInfo->m_nSMode]);
-             if (PhaseNodeMeasInfo->m_nnS == S80)
-             stream << "80\n";
-             else
-             stream << "256\n";
+            Q3TextStream stream( &m_PhaseJustLogfile );
+            stream << QString("RangeN=%1 RangeX=%2 Mode=%3 ")
+                      .arg(PhaseNodeMeasInfo->m_srngN)
+                      .arg(PhaseNodeMeasInfo->m_srngX)
+                      .arg(MModeName[PhaseNodeMeasInfo->m_nMMode]);
+            stream << QString("SenseMode=%1 nS=").arg(SenseModeText[PhaseNodeMeasInfo->m_nSMode]);
+            if (PhaseNodeMeasInfo->m_nnS == S80)
+                stream << "80\n";
+            else
+                stream << "256\n";
 
-             m_PhaseJustLogfile.flush();
-             m_PhaseJustLogfile.close();
+            m_PhaseJustLogfile.flush();
+            m_PhaseJustLogfile.close();
         }
 
         NewConfData.m_nSenseMode = PhaseNodeMeasInfo->m_nSMode; // sense modus
@@ -2127,65 +2127,65 @@ case ConfigurationTestSenseMode:
 
     case PhaseNodeMeasExec5:
     {
-    if (m_ConfData.m_bSimulation)
-    {
-        AHS = wm3000Idle;
-    }
-    else
-    {
-        N++;
-        if (N < 4)
+        if (m_ConfData.m_bSimulation)
         {
-            AHS = PhaseNodeMeasNodeConfig;
-            m_ActTimer->start(0,wm3000Continue);
+            AHS = wm3000Idle;
         }
         else
         {
-            lprogress++;
-            m_pProgressDialog->setProgress(lprogress);
-            m_PhaseNodeMeasInfoList.removeFirst();
-            if (m_PhaseNodeMeasInfoList.isEmpty() || (! m_pAbortButton->isEnabled()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
-            { // wir sind fertig mit der ermittlung
-                if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
-                {
-                    Q3TextStream stream( &m_PhaseJustLogfile );
-                    stream << "\nTerminated ";
-                    if (bOverload)
-                        stream << "because of overload condition !\n";
-                    else
-                    {
-                        if (m_pAbortButton->isEnabled())
-                        stream << "normally\n";
-                        else
-                        stream << "by user\n";
-                    }
-
-                    m_PhaseJustLogfile.flush();
-                    m_PhaseJustLogfile.close();
-                }
-
-                m_PhaseNodeMeasState = PhaseNodeMeasFinished;
-                QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(PhaseJustSyncSlot()));
-                SetConfDataSlot(&SaveConfData); // wir setzen die konfiguration zurück
-                AHS = wm3000Idle; // statemachine kann neu gestartet werden
-            }
-            else
+            N++;
+            if (N < 4)
             {
-                if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
-                {
-                    Q3TextStream stream( &m_PhaseJustLogfile );
-                    stream << "\n"; // für jeden block eine leerzeile
-                    m_PhaseJustLogfile.flush();
-                    m_PhaseJustLogfile.close();
-                }
-
-                N = 0; // durchlaufzähler für ermittlung  der stützstellen
                 AHS = PhaseNodeMeasNodeConfig;
                 m_ActTimer->start(0,wm3000Continue);
             }
+            else
+            {
+                lprogress++;
+                m_pProgressDialog->setProgress(lprogress);
+                m_PhaseNodeMeasInfoList.removeFirst();
+                if (m_PhaseNodeMeasInfoList.isEmpty() || (! m_pAbortButton->isEnabled()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
+                { // wir sind fertig mit der ermittlung
+                    if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
+                    {
+                        Q3TextStream stream( &m_PhaseJustLogfile );
+                        stream << "\nTerminated ";
+                        if (bOverload)
+                            stream << "because of overload condition !\n";
+                        else
+                        {
+                            if (m_pAbortButton->isEnabled())
+                                stream << "normally\n";
+                            else
+                                stream << "by user\n";
+                        }
+
+                        m_PhaseJustLogfile.flush();
+                        m_PhaseJustLogfile.close();
+                    }
+
+                    m_PhaseNodeMeasState = PhaseNodeMeasFinished;
+                    QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(PhaseJustSyncSlot()));
+                    SetConfDataSlot(&SaveConfData); // wir setzen die konfiguration zurück
+                    AHS = wm3000Idle; // statemachine kann neu gestartet werden
+                }
+                else
+                {
+                    if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
+                    {
+                        Q3TextStream stream( &m_PhaseJustLogfile );
+                        stream << "\n"; // für jeden block eine leerzeile
+                        m_PhaseJustLogfile.flush();
+                        m_PhaseJustLogfile.close();
+                    }
+
+                    N = 0; // durchlaufzähler für ermittlung  der stützstellen
+                    AHS = PhaseNodeMeasNodeConfig;
+                    m_ActTimer->start(0,wm3000Continue);
+                }
+            }
         }
-    }
-    break;
+        break;
     } // PhaseNodeMeasExec5
 
     case PhaseNodeMeasFinished:
@@ -2282,37 +2282,37 @@ case ConfigurationTestSenseMode:
 
         if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
-             Q3TextStream stream( &m_OffsetJustLogfile );
+            Q3TextStream stream( &m_OffsetJustLogfile );
 
-             stream << QString("RangeN=%1 RangeX=%2 Mode=%3 ")
-                               .arg(OffsetMeasInfo->m_srngN)
-                               .arg(OffsetMeasInfo->m_srngX)
-                               .arg(MModeName[OffsetMeasInfo->m_nMMode]);
-             stream << QString("SenseMode=%1 nS=").arg(SenseModeText[OffsetMeasInfo->m_nSMode]);
-             if (OffsetMeasInfo->m_nnS == S80)
+            stream << QString("RangeN=%1 RangeX=%2 Mode=%3 ")
+                      .arg(OffsetMeasInfo->m_srngN)
+                      .arg(OffsetMeasInfo->m_srngX)
+                      .arg(MModeName[OffsetMeasInfo->m_nMMode]);
+            stream << QString("SenseMode=%1 nS=").arg(SenseModeText[OffsetMeasInfo->m_nSMode]);
+            if (OffsetMeasInfo->m_nnS == S80)
                 stream << "80\n";
-             else
+            else
                 stream << "256\n";
 
-             m_OffsetJustLogfile.flush();
-             m_OffsetJustLogfile.close();
-         }
+            m_OffsetJustLogfile.flush();
+            m_OffsetJustLogfile.close();
+        }
 
-         NewConfData.m_nSenseMode = OffsetMeasInfo->m_nSMode; // sense modus
-         NewConfData.m_nSRate = OffsetMeasInfo->m_nnS; // samples / periode
-         NewConfData.m_fSFreq = PhaseJustFreq[2]; // fix 50Hz
-         NewConfData.m_nMeasMode  =  OffsetMeasInfo->m_nMMode;
-         NewConfData.m_sRangeNVorgabe = OffsetMeasInfo->m_srngN; // bereich kanal n
-         if (OffsetMeasInfo->m_nMMode == Un_UxAbs)
+        NewConfData.m_nSenseMode = OffsetMeasInfo->m_nSMode; // sense modus
+        NewConfData.m_nSRate = OffsetMeasInfo->m_nnS; // samples / periode
+        NewConfData.m_fSFreq = PhaseJustFreq[2]; // fix 50Hz
+        NewConfData.m_nMeasMode  =  OffsetMeasInfo->m_nMMode;
+        NewConfData.m_sRangeNVorgabe = OffsetMeasInfo->m_srngN; // bereich kanal n
+        if (OffsetMeasInfo->m_nMMode == Un_UxAbs)
             NewConfData.m_sRangeXVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
-         else
+        else
             NewConfData.m_sRangeETVorgabe = OffsetMeasInfo->m_srngX; // bereich kanal x
-         m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
-         QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(OffsetJustSyncSlot()));
-         SetConfDataSlot(&NewConfData); // und die neue konfiguration
-         // die messung wird neu gestartet am ende der konfiguration
-         AHS = wm3000Idle; // wir sind erst mal fertig
-         break; // OffsetMeasBaseConfiguration OffsetMeasBaseConfigurationVar
+        m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
+        QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(OffsetJustSyncSlot()));
+        SetConfDataSlot(&NewConfData); // und die neue konfiguration
+        // die messung wird neu gestartet am ende der konfiguration
+        AHS = wm3000Idle; // wir sind erst mal fertig
+        break; // OffsetMeasBaseConfiguration OffsetMeasBaseConfigurationVar
     }
 
     case OffsetMeasWM3000Exec1: // konfiguriert ist
@@ -2506,9 +2506,9 @@ case ConfigurationTestSenseMode:
                     else
                     {
                         if (m_pAbortButton->isEnabled())
-                        stream << "normally\n";
+                            stream << "normally\n";
                         else
-                        stream << "by user\n";
+                            stream << "by user\n";
                     }
 
                     m_OffsetJustLogfile.flush();
@@ -2561,9 +2561,9 @@ case ConfigurationTestSenseMode:
                 else
                 {
                     if (m_pAbortButton->isEnabled())
-                    stream << "normally\n";
+                        stream << "normally\n";
                     else
-                    stream << "by user\n";
+                        stream << "by user\n";
                 }
 
                 m_OffsetJustLogfile.flush();
@@ -2663,210 +2663,210 @@ case ConfigurationTestSenseMode:
         break;
 
     case JustageFlashExportFinished:
-    AHS = wm3000Idle; // ob fehler oder nicht wir sind fertig
-    break;
+        AHS = wm3000Idle; // ob fehler oder nicht wir sind fertig
+        break;
 
     case JustageFlashImportStart:
-    PCBIFace->JustFlashImport(JDataFile);
-    AHS++;
-    break;
+        PCBIFace->JustFlashImport(JDataFile);
+        AHS++;
+        break;
 
     case JustageFlashImportFinished:
-    AHS = wm3000Idle; // ob fehler oder nicht wir sind fertig
-    break;
+        AHS = wm3000Idle; // ob fehler oder nicht wir sind fertig
+        break;
 
     case EN61850ReadStatusStart:
-    if (DspIFace->connected())
-    {
-        DspIFace->DspMemoryRead(ETHStatusHandle); // holt die daten ins dsp interface
-        AHS++;
-    }
-    else
-    {
-        AHS = wm3000Idle;
-    }
+        if (DspIFace->connected())
+        {
+            DspIFace->DspMemoryRead(ETHStatusHandle); // holt die daten ins dsp interface
+            AHS++;
+        }
+        else
+        {
+            AHS = wm3000Idle;
+        }
 
-    break;
+        break;
 
     case EN61850ReadStatusFinished:
-    if ( !DspIFace->IFaceError() ) // wenn kein fehler aufgetreten
-    {
-        cEN61850Info EnStat; // holen der werte
-        quint32 *source = (quint32*) DspIFace->data(ETHStatusHandle);
-        quint32 *dest = &(EnStat.ByteCount[0]);
-        for (uint i=0; i< sizeof(EnStat)/sizeof(quint32);i++) *dest++ = *source++;
-        emit EN61850StatusSignal(&EnStat); // und senden
-    }
+        if ( !DspIFace->IFaceError() ) // wenn kein fehler aufgetreten
+        {
+            cEN61850Info EnStat; // holen der werte
+            quint32 *source = (quint32*) DspIFace->data(ETHStatusHandle);
+            quint32 *dest = &(EnStat.ByteCount[0]);
+            for (uint i=0; i< sizeof(EnStat)/sizeof(quint32);i++) *dest++ = *source++;
+            emit EN61850StatusSignal(&EnStat); // und senden
+        }
 
-    AHS = wm3000Idle; // wir sind so oder so fertig
-    break; // EN61850ReadStatusFinished
+        AHS = wm3000Idle; // wir sind so oder so fertig
+        break; // EN61850ReadStatusFinished
 
     case EN61850WriteStatusStart:
-    DspIFace->DspMemoryWrite(ETHStatusResetHandle,dInt); // schreibt die daten in den dsp
-    AHS++;
-    break; // EN61850WriteStatusStart
+        DspIFace->DspMemoryWrite(ETHStatusResetHandle,dInt); // schreibt die daten in den dsp
+        AHS++;
+        break; // EN61850WriteStatusStart
 
     case EN61850WriteStatusFinished:
-    AHS = wm3000Idle; // wir sind fertig...ob fehler oder nicht
-    break; // EN61850WriteStatusFinished
+        AHS = wm3000Idle; // wir sind fertig...ob fehler oder nicht
+        break; // EN61850WriteStatusFinished
 
     case SelftestStart:
-    StopMeasurement(); // die kumulieren jetzt nur
-    m_pProgressDialog = new Q3ProgressDialog( trUtf8("Selbstest ..."), 0, m_SelftestInfoList.count(), g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht aller selbsttestpunkte
-    if ( m_pAbortButton )
-        m_pProgressDialog->setCancelButton(m_pAbortButton);
-    m_pProgressDialog->setCaption(trUtf8("Selbsttest"));
-    m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
-    lprogress = 0; // int. progress counter
-    m_pProgressDialog->setProgress(lprogress);
-    QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(SelftestAbortSlot()));
-    m_SelftestLogfile.remove(); // beim starten wird das log file gelöscht
-    AHS++;
-    m_ActTimer->start(0,wm3000Continue);
-    break; // SelftestStart
+        StopMeasurement(); // die kumulieren jetzt nur
+        m_pProgressDialog = new Q3ProgressDialog( trUtf8("Selbstest ..."), 0, m_SelftestInfoList.count(), g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht aller selbsttestpunkte
+        if ( m_pAbortButton )
+            m_pProgressDialog->setCancelButton(m_pAbortButton);
+        m_pProgressDialog->setCaption(trUtf8("Selbsttest"));
+        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
+        lprogress = 0; // int. progress counter
+        m_pProgressDialog->setProgress(lprogress);
+        QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(SelftestAbortSlot()));
+        m_SelftestLogfile.remove(); // beim starten wird das log file gelöscht
+        AHS++;
+        m_ActTimer->start(0,wm3000Continue);
+        break; // SelftestStart
 
     case SelftestBaseConfiguration:
-    NewConfData = m_ConfData; // zum umsetzen
-    SaveConfData = m_ConfData; // wir haben eine kopie der aktuellen konfiguration
-    NewConfData.m_bOECorrection = false; // nix korrigieren
-    NewConfData.m_fxPhaseShift = 0.0; // auch hier keine korrekturen
-    NewConfData.m_fxTimeShift = 0.0; // dito
-    NewConfData.m_nSyncSource = Intern; // es muss intern synchronisiert sein
-    NewConfData.m_nTSync = 1000; // 1 sec. ist ok
-    NewConfData.m_nIntegrationTime = 1; // 1 sec.
-    NewConfData.m_nMeasPeriod = 16; // wir begrenzen auf 16 signal perioden ....
-    NewConfData.m_fSFreq = 50.0; // alles bei 50 hz
-    NewConfData.m_nSRate = S80;
-    NewConfData.m_nMeasMode  =  Un_UxAbs;
-    NewConfData.m_nSenseMode = sensNadcX; // wir starten mit messen n gegen adcx
-    AHS++;
+        NewConfData = m_ConfData; // zum umsetzen
+        SaveConfData = m_ConfData; // wir haben eine kopie der aktuellen konfiguration
+        NewConfData.m_bOECorrection = false; // nix korrigieren
+        NewConfData.m_fxPhaseShift = 0.0; // auch hier keine korrekturen
+        NewConfData.m_fxTimeShift = 0.0; // dito
+        NewConfData.m_nSyncSource = Intern; // es muss intern synchronisiert sein
+        NewConfData.m_nTSync = 1000; // 1 sec. ist ok
+        NewConfData.m_nIntegrationTime = 1; // 1 sec.
+        NewConfData.m_nMeasPeriod = 16; // wir begrenzen auf 16 signal perioden ....
+        NewConfData.m_fSFreq = 50.0; // alles bei 50 hz
+        NewConfData.m_nSRate = S80;
+        NewConfData.m_nMeasMode  =  Un_UxAbs;
+        NewConfData.m_nSenseMode = sensNadcX; // wir starten mit messen n gegen adcx
+        AHS++;
 
-    // kein break wir laufen einfach drüber
+        // kein break wir laufen einfach drüber
 
     case SelftestMeasConfiguration:
-    m_pProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
-    m_SelftestState = SelftestSetRangeNX; // hier müssen wir später weitermachen
-    QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
-    SetConfDataSlot(&NewConfData); // und die neue konfiguration
-    AHS = wm3000Idle; // wir sind erst mal fertig
-    break; // SelftestMeasConfiguration
+        m_pProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
+        m_SelftestState = SelftestSetRangeNX; // hier müssen wir später weitermachen
+        QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
+        SetConfDataSlot(&NewConfData); // und die neue konfiguration
+        AHS = wm3000Idle; // wir sind erst mal fertig
+        break; // SelftestMeasConfiguration
 
 
     case SelftestSetRangeNX:
-    m_pProgressDialog->setLabelText (trUtf8("Bereiche setzen ..." ));
-    NewConfData.m_nSenseMode = sensNadcX; // wir starten mit messen n gegen adcx
-    NewConfData.m_sRangeNVorgabe = NewConfData.m_sRangeXVorgabe = m_SelftestInfoList.first();
-    m_SelftestState = SelftestMeasureNSync; // hier müssen wir später weitermachen
-    QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
-    SetConfDataSlot(&NewConfData); // und die neue konfiguration
+        m_pProgressDialog->setLabelText (trUtf8("Bereiche setzen ..." ));
+        NewConfData.m_nSenseMode = sensNadcX; // wir starten mit messen n gegen adcx
+        NewConfData.m_sRangeNVorgabe = NewConfData.m_sRangeXVorgabe = m_SelftestInfoList.first();
+        m_SelftestState = SelftestMeasureNSync; // hier müssen wir später weitermachen
+        QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
+        SetConfDataSlot(&NewConfData); // und die neue konfiguration
 
-    AHS = wm3000Idle;
-    break; // SelftestSetRangeNX
+        AHS = wm3000Idle;
+        break; // SelftestSetRangeNX
 
 
     case SelftestMeasureNSync:
-    NewConfData.m_sRangeNSoll = NewConfData.m_sRangeN =NewConfData.m_sRangeNVorgabe; // bereich kanal n
-    NewConfData.m_sRangeXSoll = NewConfData.m_sRangeX = NewConfData.m_sRangeXVorgabe; // bereich kanal x
+        NewConfData.m_sRangeNSoll = NewConfData.m_sRangeN =NewConfData.m_sRangeNVorgabe; // bereich kanal n
+        NewConfData.m_sRangeXSoll = NewConfData.m_sRangeX = NewConfData.m_sRangeXVorgabe; // bereich kanal x
 
-    m_pProgressDialog->setLabelText (trUtf8("Messung ..." ));
-    m_SelftestState = SelftestMeasureN; // hier müssen wir später weitermachen
-    QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(SelftestSyncSlot()));
+        m_pProgressDialog->setLabelText (trUtf8("Messung ..." ));
+        m_SelftestState = SelftestMeasureN; // hier müssen wir später weitermachen
+        QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(SelftestSyncSlot()));
 
-    AHS = wm3000Idle; // ob fehler odernicht wir sind fertig
-    break; // SelftestMeasureNSync
+        AHS = wm3000Idle; // ob fehler odernicht wir sind fertig
+        break; // SelftestMeasureNSync
 
     case SelftestMeasureN: // wir haben aktuelle messwerte
-    SenseVektor = ActValues.VekN;
-    ADCVektor = ActValues.VekX; //   messwerte speichern
-    m_pProgressDialog->setLabelText (trUtf8("Modus setzen ..." ));
+        SenseVektor = ActValues.VekN;
+        ADCVektor = ActValues.VekX; //   messwerte speichern
+        m_pProgressDialog->setLabelText (trUtf8("Modus setzen ..." ));
 
-    m_SelftestState = SelftestMeasureXSync; // hier müssen wir später weitermachen
-    NewConfData.m_nSenseMode = sensXadcN; // als nächstes messen wir x gegen adcn
-    QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
-    SetConfDataSlot(&NewConfData); // und die neue konfiguration
+        m_SelftestState = SelftestMeasureXSync; // hier müssen wir später weitermachen
+        NewConfData.m_nSenseMode = sensXadcN; // als nächstes messen wir x gegen adcn
+        QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
+        SetConfDataSlot(&NewConfData); // und die neue konfiguration
 
-    AHS = wm3000Idle;
-    break; // SelftestMeasureN
+        AHS = wm3000Idle;
+        break; // SelftestMeasureN
 
     case SelftestMeasureXSync:
-    m_pProgressDialog->setLabelText (trUtf8("Messung ..." ));
-    m_SelftestState = SelftestMeasureX; // hier müssen wir später weitermachen
-    QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(SelftestSyncSlot()));
+        m_pProgressDialog->setLabelText (trUtf8("Messung ..." ));
+        m_SelftestState = SelftestMeasureX; // hier müssen wir später weitermachen
+        QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(SelftestSyncSlot()));
 
-    AHS = wm3000Idle;
-    break; // SelftestMeasureXSync
+        AHS = wm3000Idle;
+        break; // SelftestMeasureXSync
 
     case SelftestMeasureX:
     {
         if (m_SelftestLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) )
         {
-        Q3TextStream stream( &m_SelftestLogfile );
-        stream << QString("Range=%1").arg(m_SelftestInfoList.first())
+            Q3TextStream stream( &m_SelftestLogfile );
+            stream << QString("Range=%1").arg(m_SelftestInfoList.first())
                    << QString("  N=(%1,%2)").arg(SenseVektor.re()).arg(SenseVektor.im())
                    << QString("  X=(%1,%2)").arg(ActValues.VekX.re()).arg(ActValues.VekX.im())
                    << QString("  ADCX=(%1,%2)").arg(ADCVektor.re()).arg(ADCVektor.im())
                    << QString("  ADCN=(%1,%2)").arg(ActValues.VekN.re()).arg(ActValues.VekN.im());
-        m_SelftestLogfile.flush();
-        m_SelftestLogfile.close();
+            m_SelftestLogfile.flush();
+            m_SelftestLogfile.close();
         }
 
-    // achtung komplexe division !!!!!!
-    if (  ((fabs (1.0 - fabs(SenseVektor/ActValues.VekX))) < 0.01) &&
-          ((fabs (1.0 - fabs(ADCVektor/ActValues.VekN))) < 0.01) )
-    {
-
-        if (m_SelftestLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) )
+        // achtung komplexe division !!!!!!
+        if (  ((fabs (1.0 - fabs(SenseVektor/ActValues.VekX))) < 0.01) &&
+              ((fabs (1.0 - fabs(ADCVektor/ActValues.VekN))) < 0.01) )
         {
-        Q3TextStream stream( &m_SelftestLogfile );
-        stream << "  good\n";
-        m_SelftestLogfile.flush();
-        m_SelftestLogfile.close();
-        }
 
-        // unjustiert lassen wir 1% abweichung zu
-        lprogress++; // int. progress counter
-        m_pProgressDialog->setProgress(lprogress);
+            if (m_SelftestLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) )
+            {
+                Q3TextStream stream( &m_SelftestLogfile );
+                stream << "  good\n";
+                m_SelftestLogfile.flush();
+                m_SelftestLogfile.close();
+            }
 
-        // loggen
+            // unjustiert lassen wir 1% abweichung zu
+            lprogress++; // int. progress counter
+            m_pProgressDialog->setProgress(lprogress);
 
-        // prüfen ob noch mehr zu testen ist
-        m_SelftestInfoList.pop_front();
-        if ( m_SelftestInfoList.empty() ) // wir sind fertig mit dem selbsttest
-        {
-        m_SelftestState = SelftestFinished;
-        QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
-        SetConfDataSlot(&SaveConfData); // wir setzen die konfiguration zurück
-        AHS = wm3000Idle; // statemachine kann neu gestartet werden
-        emit SelftestDone(0);
+            // loggen
+
+            // prüfen ob noch mehr zu testen ist
+            m_SelftestInfoList.pop_front();
+            if ( m_SelftestInfoList.empty() ) // wir sind fertig mit dem selbsttest
+            {
+                m_SelftestState = SelftestFinished;
+                QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
+                SetConfDataSlot(&SaveConfData); // wir setzen die konfiguration zurück
+                AHS = wm3000Idle; // statemachine kann neu gestartet werden
+                emit SelftestDone(0);
+            }
+            else
+            {
+                AHS = SelftestSetRangeNX; // wir machen hier weiter
+                m_ActTimer->start(0,wm3000Continue);
+            }
         }
         else
         {
-        AHS = SelftestSetRangeNX; // wir machen hier weiter
-        m_ActTimer->start(0,wm3000Continue);
+            // fehler loggen
+            // selbst test stop
+
+            if (m_SelftestLogfile.open( QIODevice::WriteOnly | QIODevice::Append) )
+            {
+                Q3TextStream stream( &m_SelftestLogfile );
+                stream << "  bad\n";
+                m_SelftestLogfile.flush();
+                m_SelftestLogfile.close();
+                SelftestDone(-1); // fehler
+            }
+
+            m_SelftestState = SelftestFinished;
+            QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
+            SetConfDataSlot(&SaveConfData); // wir setzen die konfiguration zurück
+            AHS = wm3000Idle;
         }
+
+        break; // SelftestMeasureX
     }
-    else
-    {
-        // fehler loggen
-        // selbst test stop
-
-        if (m_SelftestLogfile.open( QIODevice::WriteOnly | QIODevice::Append) )
-        {
-        Q3TextStream stream( &m_SelftestLogfile );
-        stream << "  bad\n";
-        m_SelftestLogfile.flush();
-        m_SelftestLogfile.close();
-        SelftestDone(-1); // fehler
-        }
-
-        m_SelftestState = SelftestFinished;
-        QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
-        SetConfDataSlot(&SaveConfData); // wir setzen die konfiguration zurück
-        AHS = wm3000Idle;
-    }
-
-    break; // SelftestMeasureX
-              }
     case SelftestFinished:
         delete m_pProgressDialog; // progress dialog schliessen
         m_SelftestMsgBox->show();
@@ -2878,12 +2878,12 @@ case ConfigurationTestSenseMode:
     } //  switch (AHS)
 
     if (AHS == wm3000Idle)  // wenn wir fertig sind
-    if ( !AHSFifo.empty() ) { // und das kommando fifo nicht leer ist
-    int state;
-    state = AHSFifo.first();
-    AHSFifo.pop_front();
-    m_ActTimer->start(0,state); // starten wir selbst das neue kommando
-    }
+        if ( !AHSFifo.empty() ) { // und das kommando fifo nicht leer ist
+            int state;
+            state = AHSFifo.first();
+            AHSFifo.pop_front();
+            m_ActTimer->start(0,state); // starten wir selbst das neue kommando
+        }
 }
 
 
@@ -2897,71 +2897,71 @@ void cWM3000U::ServerIFaceErrorHandling(int error, QString host, int port)
 
     if (error & (myErrConnectionRefused | myErrHostNotFound | myErrSocketConnectionTimeOut) )
     {
-    QString m = tr("Keine Verbindung zu %1:%2\n") .arg(host).arg(port);
-    if (error & ! myErrHostNotFound)
-        m+=tr("Host nicht gefunden.\n");
+        QString m = tr("Keine Verbindung zu %1:%2\n") .arg(host).arg(port);
+        if (error & ! myErrHostNotFound)
+            m+=tr("Host nicht gefunden.\n");
         else
-        m+=tr("Host gefunden. Keine Verbindung zu Server.\n");
+            m+=tr("Host gefunden. Keine Verbindung zu Server.\n");
 
         m+=tr("Das Programm kann ohne Server nur\n"
-        "im Simulations Modus betrieben werden.\n");
+              "im Simulations Modus betrieben werden.\n");
 
         userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),m,
-                              tr("Programm&Abbruch"),
-                    tr("&Wiederholen"),
-                    tr("&Simulation"),
-                    1,-1 );
+                                       tr("Programm&Abbruch"),
+                                       tr("&Wiederholen"),
+                                       tr("&Simulation"),
+                                       1,-1 );
     }
 
     else if (error & myErrSocketWrite) {
-    userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),
-                     tr("Fehler beim Schreiben von Daten\n"
-                    "für %1:%2 .\n"
-                    "Details stehen in LogFile.").arg(host) .arg(port),
-                     tr("Programm&Abbruch"),
-                     tr("&Wiederholen"),
-                     tr("&Simulation"),
-                     1,-1 );
+        userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),
+                                       tr("Fehler beim Schreiben von Daten\n"
+                                          "für %1:%2 .\n"
+                                          "Details stehen in LogFile.").arg(host) .arg(port),
+                                       tr("Programm&Abbruch"),
+                                       tr("&Wiederholen"),
+                                       tr("&Simulation"),
+                                       1,-1 );
     }
 
-     else if (error & (myErrSocketUnexpectedAnswer | myErrSocketReadTimeOut) ) {
-    userRM =  QMessageBox::warning( 0, tr("TCP-Verbindung"),
-                    tr("Unerwartete Antwort beim Lesen\n"
-                       "von %1:%2 erhalten.\n"
-                       "Details stehen in LogFile.").arg(host).arg(port),
-                    tr("Programm&Abbruch"),
-                    tr("&Wiederholen"),
-                    tr("&Simulation"),1,-1 );
+    else if (error & (myErrSocketUnexpectedAnswer | myErrSocketReadTimeOut) ) {
+        userRM =  QMessageBox::warning( 0, tr("TCP-Verbindung"),
+                                        tr("Unerwartete Antwort beim Lesen\n"
+                                           "von %1:%2 erhalten.\n"
+                                           "Details stehen in LogFile.").arg(host).arg(port),
+                                        tr("Programm&Abbruch"),
+                                        tr("&Wiederholen"),
+                                        tr("&Simulation"),1,-1 );
     }
 
     else if (error & myErrDeviceBusy) {
-    userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),
-                     tr("Device ist busy\n"
-                    "( %1:%2 ).\n"
-                    "Details stehen in LogFile.").arg(host) .arg(port),
-                     tr("Programm&Abbruch"),
-                     tr("&Wiederholen"),
-                     tr("&Simulation"),
-                     1,-1 );
+        userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),
+                                       tr("Device ist busy\n"
+                                          "( %1:%2 ).\n"
+                                          "Details stehen in LogFile.").arg(host) .arg(port),
+                                       tr("Programm&Abbruch"),
+                                       tr("&Wiederholen"),
+                                       tr("&Simulation"),
+                                       1,-1 );
     }
 
     else
     {
-    qDebug("Socket Error unknown\n");
-    return;
+        qDebug("Socket Error unknown\n");
+        return;
     }
 
     switch (userRM) {
     case 0 :
-    emit AbortProgramSignal(); // benutzer hat programm abruch gewählt
-    break;
+        emit AbortProgramSignal(); // benutzer hat programm abruch gewählt
+        break;
     case 1 :
-    m_ActTimer->start(0,wm3000Repeat); // wir wiederholen den versuch
-    m_binitDone = binitdone; // wir setzen init. zustand zurück
-    break;
+        m_ActTimer->start(0,wm3000Repeat); // wir wiederholen den versuch
+        m_binitDone = binitdone; // wir setzen init. zustand zurück
+        break;
     case 2 :
-    m_ActTimer->start(0,EnterSimulationMode);
-    break;
+        m_ActTimer->start(0,EnterSimulationMode);
+        break;
     }
 }
 
@@ -2975,10 +2975,10 @@ void cWM3000U::InitWM3000()
 
     float f;
     switch (m_ConfData.m_nSFreq) {  // wir setzen den realen frequenzwert
-      case F16: f = 50.0/3;break;
-      case F50: f = 50.0;break;
-      case F60: f = 60.0;
-      }
+    case F16: f = 50.0/3;break;
+    case F50: f = 50.0;break;
+    case F60: f = 60.0;
+    }
 
     m_ConfData.m_fSFreq = f;
     readOffsetCorrectionFile();
@@ -3195,8 +3195,8 @@ void cWM3000U::DefaultSettings(cConfData& cdata) // alle einstellungen default
 
     for(int i = 0; i < 6; i++) // default mac adressen
     {
-    cdata.m_MacSourceAdr.MacAdrByte[i] = 58;
-    cdata.m_MacDestAdr.MacAdrByte[i] = 59;
+        cdata.m_MacSourceAdr.MacAdrByte[i] = 58;
+        cdata.m_MacDestAdr.MacAdrByte[i] = 59;
     }
 
     cdata.m_nPriorityTagged = (0x8100 << 16) + 0x8000; // TPID + UserPriority + CFI + VID
@@ -3250,7 +3250,7 @@ void cWM3000U::OffsetJustSyncSlot()
 void cWM3000U::JustAbortSlot()
 {
     m_pAbortButton->setEnabled(false);
-/* abbbruch in state machine behandelt
+    /* abbbruch in state machine behandelt
     while (m_PhaseNodeMeasInfoList.count() > 1)
     m_PhaseNodeMeasInfoList.removeLast();
 */
@@ -3267,7 +3267,7 @@ void cWM3000U::SelftestAbortSlot()
 {
     m_pAbortButton->setEnabled(false);
     while (m_SelftestInfoList.count() > 1)
-    m_SelftestInfoList.pop_back();
+        m_SelftestInfoList.pop_back();
 }
 
 
@@ -3303,7 +3303,7 @@ void cWM3000U::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.60"));
 
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
-    m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
+        m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
 
     chn = "ch1";
     // in ch1 (X) gibt es die bereiche nicht mehr .... die korrekturen sind für beide gleich.
@@ -3311,10 +3311,10 @@ void cWM3000U::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
     // m_CalcInfoList.append(new cCalcInfo(chn,"adw256"));
 
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
-    m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
+        m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
 
     for (uint i = 0; i < m_sEVTRangeList.count()-1; i++)
-    m_CalcInfoList.append(new cCalcInfo(chn, m_sEVTRangeList.at(i)->Selector()));
+        m_CalcInfoList.append(new cCalcInfo(chn, m_sEVTRangeList.at(i)->Selector()));
 }
 
 
@@ -3323,7 +3323,7 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     m_PhaseNodeMeasInfoList.clear();
     m_PhaseNodeMeasInfoList.setAutoDelete( TRUE );
 
-/* wir gleichen die ad-wandler nicht mehr ab
+    /* wir gleichen die ad-wandler nicht mehr ab
     // zuerst die adwandler abgleichen
     m_PhaseNodeMeasInfoList.append(new cPhaseNodeMeasInfo( "3.75V", "3.75V", adcNadcX, Un_UxAbs, S80, 4, 10)); // bereiche optimal für hw freq messung, modus adc/adc, für 80 samples/periode und 2 messungen einschwingzeit, 6 messungen für stützstellenermittlung
     m_PhaseNodeMeasInfoList.append(new cPhaseNodeMeasInfo( "3.75V", "3.75V", adcNadcX, Un_UxAbs, S256, 4, 10));
@@ -3340,15 +3340,15 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
 
     // die liste für alle konv. bereiche in kanal n
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( m_sNRangeList.at(i)->Name(), "3.75V", m_sNRangeList.at(i)->Name(), sensNadcX, Un_UxAbs, sensNadcXPhase, S80, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( m_sNRangeList.at(i)->Name(), "3.75V", m_sNRangeList.at(i)->Name(), sensNadcX, Un_UxAbs, sensNadcXPhase, S80, 4, 20));
 
     // die liste für alle konv. bereiche in kanal x
     for (uint i = 0; i < m_sXRangeList.count()-1; i++)
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo("3.75V", m_sXRangeList.at(i)->Name(), m_sXRangeList.at(i)->Name(), sensXadcN, Un_UxAbs, sensXadcNPhase, S80, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo("3.75V", m_sXRangeList.at(i)->Name(), m_sXRangeList.at(i)->Name(), sensXadcN, Un_UxAbs, sensXadcNPhase, S80, 4, 20));
 
     // + die liste der evt bereiche in kanal x
     for (uint i = 0; i < m_sEVTRangeList.count()-1; i++) // i = 0 wäre der safety range.... jetzt nicht mehr
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo("3.75V", m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Selector(), sensXadcN, Un_EVT, sensEVTadcNPhase, S80, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo("3.75V", m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Selector(), sensXadcN, Un_EVT, sensEVTadcNPhase, S80, 4, 20));
 
 }
 
@@ -3360,12 +3360,12 @@ void cWM3000U::SetOffsetCalcInfo()
     m_CalcInfoList.setAutoDelete( TRUE );
     chn = "ch0";
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
-    m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
+        m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
     chn = "ch1";
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
-    m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
+        m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
     for (uint i = 0; i < m_sEVTRangeList.count()-1; i++)
-    m_CalcInfoList.append(new cCalcInfo(chn, m_sEVTRangeList.at(i)->Selector()));
+        m_CalcInfoList.append(new cCalcInfo(chn, m_sEVTRangeList.at(i)->Selector()));
 }
 
 
@@ -3500,8 +3500,8 @@ void cWM3000U::SetSelfTestInfo(bool remote)
     m_SelftestInfoList.clear();
     for (i = 0; i < m_sNRangeList.count()-1; i++)
     {
-    m_SelftestInfoList.append(m_sNRangeList.at(i)->Selector());
-    if (remote) break;
+        m_SelftestInfoList.append(m_sNRangeList.at(i)->Selector());
+        if (remote) break;
     }
 
     // wir testen nur die nx bereiche beim selbst test .... zu kompliziert die evt´s mit zu testen
@@ -3548,14 +3548,14 @@ void cWM3000U::MeasureSlot()
 {
     if (m_ConfData.m_bRunning)
     {
-    if (m_ConfData.m_bSimulation) {
-        SimulatedMeasurement();
-    }
-    else
-    {
-        if (m_binitDone)
-        emit StartStateMachine(TriggerMeasureStart);
-    }
+        if (m_ConfData.m_bSimulation) {
+            SimulatedMeasurement();
+        }
+        else
+        {
+            if (m_binitDone)
+                emit StartStateMachine(TriggerMeasureStart);
+        }
     }
 }
 
@@ -3564,8 +3564,8 @@ void cWM3000U::MeasureLPSlot()
 {
     if (m_ConfData.m_bRunning)
     {
-    if ( !m_ConfData.m_bSimulation && m_binitDone)
-        emit StartStateMachine(MeasureLPStart); // wir holen frmsn und berechnen den lastpunkt
+        if ( !m_ConfData.m_bSimulation && m_binitDone)
+            emit StartStateMachine(MeasureLPStart); // wir holen frmsn und berechnen den lastpunkt
     }
 }
 
@@ -3574,7 +3574,7 @@ void cWM3000U::MeasureLPSlot()
 void cWM3000U::RangeObsermaticSlot()
 {
     if (m_binitDone)
-    emit StartStateMachine(RangeObsermaticStart);
+        emit StartStateMachine(RangeObsermaticStart);
 }
 
 
@@ -3587,15 +3587,15 @@ void cWM3000U::DspIFaceAsyncDataSlot(const QString& s) // für asynchrone meldun
     switch (service)
     {
     case 1:
-      m_AsyncTimer->start(0,MeasureStart); // starten der statemachine für messwert aufnahme
-      break;
+        m_AsyncTimer->start(0,MeasureStart); // starten der statemachine für messwert aufnahme
+        break;
     case 3:
-      m_MovingWindowFilter.setFilterLength(m_ConfData.m_nIntegrationTime);
-      MeasureTimer->start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
-      MeasureLPTimer->start(500);
-      RangeTimer->start(500);
-      m_bStopped = false;
-      break;
+        m_MovingWindowFilter.setFilterLength(m_ConfData.m_nIntegrationTime);
+        MeasureTimer->start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
+        MeasureLPTimer->start(500);
+        RangeTimer->start(500);
+        m_bStopped = false;
+        break;
     }
 }
 
@@ -3629,9 +3629,9 @@ bool cWM3000U::LoadSettings(QString session)
     QString ls = QString("%1/.wm3000u/wm3000u%2").arg(QDir::homePath()).arg(fi.fileName());
     QFile file(ls);
     if ((ret = file.open( QIODevice::ReadOnly ) )) {
-    QDataStream stream(&file);
-    ret &= m_ConfData.deserialize(stream);
-    file.close();
+        QDataStream stream(&file);
+        ret &= m_ConfData.deserialize(stream);
+        file.close();
     }
     emit SendConfDataSignal(&m_ConfData); // neue conf. noch senden
     return ret;
@@ -3643,12 +3643,12 @@ void cWM3000U::WriteSettings(QString session)
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000u/wm3000u%2").arg(QDir::homePath()).arg(fi.fileName());
     QFile file(ls);
-//    file.remove();
+    //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-    file.at(0);
-    QDataStream stream(&file);
-    m_ConfData.serialize(stream);
-    file.close();
+        file.at(0);
+        QDataStream stream(&file);
+        m_ConfData.serialize(stream);
+        file.close();
     }
 }
 
@@ -3656,154 +3656,154 @@ void cWM3000U::WriteSettings(QString session)
 void cWM3000U::StoreResultsSlot()
 {
     if (m_ConfData.m_bRunning) { // nur wenn messung läuft speichern
-    bool ok;
-    QDomDocument resultDoc("WM3000ResultData");
-    QFile rfile(m_ConfData.m_sResultFile);
-    if (rfile.open( QIODevice::ReadOnly ) ) { // ? xml file lesen
-        ok = resultDoc.setContent(&rfile);
-        rfile.close();
-    }
+        bool ok;
+        QDomDocument resultDoc("WM3000ResultData");
+        QFile rfile(m_ConfData.m_sResultFile);
+        if (rfile.open( QIODevice::ReadOnly ) ) { // ? xml file lesen
+            ok = resultDoc.setContent(&rfile);
+            rfile.close();
+        }
 
-    QDomDocumentType TheDocType = resultDoc.doctype ();
+        QDomDocumentType TheDocType = resultDoc.doctype ();
 
-    if  (!ok || ( TheDocType.name() != "WM3000ResultData")) {
-        QDomDocument tmpDoc("WM3000ResultData");
+        if  (!ok || ( TheDocType.name() != "WM3000ResultData")) {
+            QDomDocument tmpDoc("WM3000ResultData");
 
-        QDomElement rootTag;
-        rootTag = tmpDoc.createElement( "RESULTEXPORT" );
-        tmpDoc.appendChild( rootTag );
+            QDomElement rootTag;
+            rootTag = tmpDoc.createElement( "RESULTEXPORT" );
+            tmpDoc.appendChild( rootTag );
 
-        QDomElement deviceTag = tmpDoc.createElement( "DEVICE" );
-        rootTag.appendChild( deviceTag );
+            QDomElement deviceTag = tmpDoc.createElement( "DEVICE" );
+            rootTag.appendChild( deviceTag );
 
-        QDomElement tag = tmpDoc.createElement( "Type" );
-        deviceTag.appendChild( tag );
-        QDomText t = tmpDoc.createTextNode( SerialVersions.DeviceName );
+            QDomElement tag = tmpDoc.createElement( "Type" );
+            deviceTag.appendChild( tag );
+            QDomText t = tmpDoc.createTextNode( SerialVersions.DeviceName );
+            tag.appendChild( t );
+
+            tag = tmpDoc.createElement( "VersionNumber" );
+            deviceTag.appendChild( tag );
+            t = tmpDoc.createTextNode(SerialVersions.DeviceVersion );
+            tag.appendChild( t );
+
+            tag = tmpDoc.createElement( "SerialNumber" );
+            deviceTag.appendChild( tag );
+            t = tmpDoc.createTextNode( SerialVersions.PCBSerialNr );
+            tag.appendChild( t );
+
+            tag = tmpDoc.createElement( "DeviceStatus" );
+            deviceTag.appendChild( tag );
+            if (m_bJust)
+                t = tmpDoc.createTextNode( "Justified" );
+            else
+                t = tmpDoc.createTextNode( "Not justified" );
+            tag.appendChild( t );
+
+            tag = tmpDoc.createElement( "RESULTLIST" );
+            rootTag.appendChild( tag );
+
+            QString s = tmpDoc.toString();
+            resultDoc.setContent(tmpDoc.toString());
+        }
+
+
+        QDomElement docElem = resultDoc.documentElement();
+        QDomNode n = docElem.lastChild();
+
+        QDomElement resultTag = resultDoc.createElement( "RESULT" );
+        n.appendChild( resultTag );
+
+        QDomElement tag = resultDoc.createElement( "LoadPointN" );
+        resultTag.appendChild( tag );
+        QDomText t = resultDoc.createTextNode( QString("%1%;%2%").arg(ActValues.LoadPoint,7,'f',3).arg(ActValues.LoadPoint1,7,'f',3) ); // lastpunkt bezogen auf rms und rms grundschwingung
         tag.appendChild( t );
 
-        tag = tmpDoc.createElement( "VersionNumber" );
-        deviceTag.appendChild( tag );
-        t = tmpDoc.createTextNode(SerialVersions.DeviceVersion );
+        tag = resultDoc.createElement( "LoadPointX" );
+        resultTag.appendChild( tag );
+        t = resultDoc.createTextNode( QString("%1%;%2%").arg(ActValues.LoadPointX,7,'f',3).arg(ActValues.LoadPoint1X,7,'f',3) ); // lastpunkt bezogen auf rms und rms grundschwingung
         tag.appendChild( t );
 
-        tag = tmpDoc.createElement( "SerialNumber" );
-        deviceTag.appendChild( tag );
-        t = tmpDoc.createTextNode( SerialVersions.PCBSerialNr );
+        tag = resultDoc.createElement( "AmplError" );
+        resultTag.appendChild( tag );
+        t = resultDoc.createTextNode( QString("%1%").arg(ActValues.AmplErrorIEC,7,'f',3) );
         tag.appendChild( t );
 
-        tag = tmpDoc.createElement( "DeviceStatus" );
-        deviceTag.appendChild( tag );
-        if (m_bJust)
-        t = tmpDoc.createTextNode( "Justified" );
-        else
-        t = tmpDoc.createTextNode( "Not justified" );
-        tag.appendChild( t );
-
-        tag = tmpDoc.createElement( "RESULTLIST" );
-        rootTag.appendChild( tag );
-
-        QString s = tmpDoc.toString();
-        resultDoc.setContent(tmpDoc.toString());
-    }
-
-
-    QDomElement docElem = resultDoc.documentElement();
-    QDomNode n = docElem.lastChild();
-
-    QDomElement resultTag = resultDoc.createElement( "RESULT" );
-    n.appendChild( resultTag );
-
-    QDomElement tag = resultDoc.createElement( "LoadPointN" );
-    resultTag.appendChild( tag );
-    QDomText t = resultDoc.createTextNode( QString("%1%;%2%").arg(ActValues.LoadPoint,7,'f',3).arg(ActValues.LoadPoint1,7,'f',3) ); // lastpunkt bezogen auf rms und rms grundschwingung
-    tag.appendChild( t );
-
-    tag = resultDoc.createElement( "LoadPointX" );
-    resultTag.appendChild( tag );
-    t = resultDoc.createTextNode( QString("%1%;%2%").arg(ActValues.LoadPointX,7,'f',3).arg(ActValues.LoadPoint1X,7,'f',3) ); // lastpunkt bezogen auf rms und rms grundschwingung
-    tag.appendChild( t );
-
-    tag = resultDoc.createElement( "AmplError" );
-    resultTag.appendChild( tag );
-    t = resultDoc.createTextNode( QString("%1%").arg(ActValues.AmplErrorIEC,7,'f',3) );
-    tag.appendChild( t );
-
-    tag = resultDoc.createElement( "AngleError" );
-    resultTag.appendChild( tag );
+        tag = resultDoc.createElement( "AngleError" );
+        resultTag.appendChild( tag );
         t = resultDoc.createTextNode( QString("%1rad").arg(ActValues.AngleError,8,'f',5));
-    tag.appendChild( t );
+        tag.appendChild( t );
 
-    tag = resultDoc.createElement( "ANSIError" );
-    resultTag.appendChild( tag );
-    t = resultDoc.createTextNode( QString("%1%").arg(ActValues.AmplErrorANSI,7,'f',3) );
-    tag.appendChild( t );
+        tag = resultDoc.createElement( "ANSIError" );
+        resultTag.appendChild( tag );
+        t = resultDoc.createTextNode( QString("%1%").arg(ActValues.AmplErrorANSI,7,'f',3) );
+        tag.appendChild( t );
 
-    tag = resultDoc.createElement( "Date" );
-    resultTag.appendChild( tag );
-    QDate d = QDate::currentDate();
-    t = resultDoc.createTextNode(d.toString(Qt::TextDate));
-    tag.appendChild( t );
+        tag = resultDoc.createElement( "Date" );
+        resultTag.appendChild( tag );
+        QDate d = QDate::currentDate();
+        t = resultDoc.createTextNode(d.toString(Qt::TextDate));
+        tag.appendChild( t );
 
-    tag = resultDoc.createElement( "Time" );
-    resultTag.appendChild( tag );
-    QTime ti = QTime::currentTime();
-    t = resultDoc.createTextNode(ti.toString(Qt::TextDate));
-    tag.appendChild( t );
+        tag = resultDoc.createElement( "Time" );
+        resultTag.appendChild( tag );
+        QTime ti = QTime::currentTime();
+        t = resultDoc.createTextNode(ti.toString(Qt::TextDate));
+        tag.appendChild( t );
 
-    QDomElement conditionsTag = resultDoc.createElement( "Conditions" );
-    resultTag.appendChild( conditionsTag );
+        QDomElement conditionsTag = resultDoc.createElement( "Conditions" );
+        resultTag.appendChild( conditionsTag );
 
-    tag = resultDoc.createElement( "Mode" );
-    conditionsTag.appendChild( tag );
+        tag = resultDoc.createElement( "Mode" );
+        conditionsTag.appendChild( tag );
         char* modeName[3] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"UN/nConvent"};
         char* simName[2] = {(char*)"real",(char*)"simulated"};
-    t = resultDoc.createTextNode(QString("%1 %2").arg(QString(simName[(int)m_ConfData.m_bSimulation]))
-                                            .arg(QString(modeName[m_ConfData.m_nMeasMode])));
-    tag.appendChild( t );
+        t = resultDoc.createTextNode(QString("%1 %2").arg(QString(simName[(int)m_ConfData.m_bSimulation]))
+                .arg(QString(modeName[m_ConfData.m_nMeasMode])));
+        tag.appendChild( t );
 
-    tag = resultDoc.createElement( "NRange" );
-    conditionsTag.appendChild( tag );
-    t = resultDoc.createTextNode(m_ConfData.m_sRangeN);
-    tag.appendChild( t );
+        tag = resultDoc.createElement( "NRange" );
+        conditionsTag.appendChild( tag );
+        t = resultDoc.createTextNode(m_ConfData.m_sRangeN);
+        tag.appendChild( t );
 
-    tag = resultDoc.createElement( "XRange" );
-    conditionsTag.appendChild( tag );
+        tag = resultDoc.createElement( "XRange" );
+        conditionsTag.appendChild( tag );
 
-    QString s;
-    switch (m_ConfData.m_nMeasMode) // für dut messart abhängig
-    {
-    case Un_UxAbs:
-        s = m_ConfData.m_sRangeX;
-        break;
-    case Un_EVT:
-        s = m_ConfData.m_sRangeET;
-        break;
-    case Un_nConvent:
-        s = "-----";
-    }
-    t = resultDoc.createTextNode(s);
-    tag.appendChild( t );
+        QString s;
+        switch (m_ConfData.m_nMeasMode) // für dut messart abhängig
+        {
+        case Un_UxAbs:
+            s = m_ConfData.m_sRangeX;
+            break;
+        case Un_EVT:
+            s = m_ConfData.m_sRangeET;
+            break;
+        case Un_nConvent:
+            s = "-----";
+        }
+        t = resultDoc.createTextNode(s);
+        tag.appendChild( t );
 
-    QDomElement uncorrTag  = resultDoc.createElement( "UNCorrection" );
-    conditionsTag.appendChild( uncorrTag );
+        QDomElement uncorrTag  = resultDoc.createElement( "UNCorrection" );
+        conditionsTag.appendChild( uncorrTag );
 
-    tag = resultDoc.createElement( "Amplitude" );
-    uncorrTag.appendChild( tag );
-    t = resultDoc.createTextNode(QString("%1").arg(fabs(ActValues.UInCorr),7,'f',3));
-    tag.appendChild( t );
+        tag = resultDoc.createElement( "Amplitude" );
+        uncorrTag.appendChild( tag );
+        t = resultDoc.createTextNode(QString("%1").arg(fabs(ActValues.UInCorr),7,'f',3));
+        tag.appendChild( t );
 
-    tag = resultDoc.createElement( "Angle" );
-    uncorrTag.appendChild( tag );
-    t = resultDoc.createTextNode(QString("%1").arg(UserAtan(ActValues.UInCorr.im(),ActValues.UInCorr.re()),7,'f',3));
-    tag.appendChild( t );
+        tag = resultDoc.createElement( "Angle" );
+        uncorrTag.appendChild( tag );
+        t = resultDoc.createTextNode(QString("%1").arg(UserAtan(ActValues.UInCorr.im(),ActValues.UInCorr.re()),7,'f',3));
+        tag.appendChild( t );
 
-    rfile.remove();
-    if (rfile.open( QIODevice::WriteOnly ) ) {
-        QString xml = resultDoc.toString();
-        Q3TextStream stream( &rfile );
-        stream << xml;
-        rfile.close();
-    }
+        rfile.remove();
+        if (rfile.open( QIODevice::WriteOnly ) ) {
+            QString xml = resultDoc.toString();
+            Q3TextStream stream( &rfile );
+            stream << xml;
+            rfile.close();
+        }
     }
 }
 
@@ -3812,23 +3812,23 @@ bool cWM3000U::SelectRange(cWMRangeList& RangeList, QString& sRange, QString& sR
 {
     CWMRange* prng = Range(sRange,RangeList); // zeiger auf akt. bereich
     if (max > (1.20 * 1.414 * prng->Rejection()) ) { // max überschritten -> größter bereich wird sollbereich
-    ovl = true; // übersteuerung eintragen
-    sRangeSoll = RangeList.first()->Name();
-    if ( sRangeVorgabe != "Auto" ) sRangeVorgabe = sRangeSoll; // wir ändern auch den vorgabe wert falls wir keine automatik haben
-    return (sRange != sRangeSoll); // muss bearbeitet werden
+        ovl = true; // übersteuerung eintragen
+        sRangeSoll = RangeList.first()->Name();
+        if ( sRangeVorgabe != "Auto" ) sRangeVorgabe = sRangeSoll; // wir ändern auch den vorgabe wert falls wir keine automatik haben
+        return (sRange != sRangeSoll); // muss bearbeitet werden
     }
 
     // const float LinearityLimit = 0.1;
     // kommt jetzt individuell aus bereichinfo
     // 10% linearitäts limit.... ist der wert oberhalb dieser grenze nehmen wir den wert, ansonsten nehmen wir die grenze
     if (sRangeVorgabe == "Auto") { // wir haben automatik
-    ovl = false; // übersteuerung eintragen
-    float minRValue = (max > (prng->LinearityLimit() * prng->Rejection()*1.414) ) ? (prng->Value() * max / (prng->Rejection() * 1.414)) : (prng->Value() * prng->LinearityLimit());
-    //  der wert für den der bereich gesucht wird ist max. die linearitätsgrenze
-    CWMRange* foundRange = Range(minRValue,RangeList);
-    if ( foundRange->Value() < prng->Value() )
-        sRangeSoll = foundRange->Name();
-    return (sRange != sRangeSoll); // dito
+        ovl = false; // übersteuerung eintragen
+        float minRValue = (max > (prng->LinearityLimit() * prng->Rejection()*1.414) ) ? (prng->Value() * max / (prng->Rejection() * 1.414)) : (prng->Value() * prng->LinearityLimit());
+        //  der wert für den der bereich gesucht wird ist max. die linearitätsgrenze
+        CWMRange* foundRange = Range(minRValue,RangeList);
+        if ( foundRange->Value() < prng->Value() )
+            sRangeSoll = foundRange->Name();
+        return (sRange != sRangeSoll); // dito
     }
 
     return false;
@@ -3841,11 +3841,11 @@ CWMRange* cWM3000U::Range(cRSelectString selector,cWMRangeList &rlist)  // sucht
     CWMRange *range;
 
     while ( (range = it.current()) != 0 ) {
-    ++it;
-    if ( selector == range->Selector() ) break;
+        ++it;
+        if ( selector == range->Selector() ) break;
     }
     if (range == 0)
-    range = DummyRange;
+        range = DummyRange;
     return range;
 }
 
@@ -3856,11 +3856,11 @@ CWMRange* cWM3000U::Range(QString name,cWMRangeList &rlist) // sucht bereich in 
     CWMRange *range;
 
     while ( (range = it.current()) != 0 ) {
-    ++it;
-    if ( name == range->Name() ) break;
+        ++it;
+        if ( name == range->Name() ) break;
     }
     if (range == 0)
-    range = DummyRange;
+        range = DummyRange;
     return range;
 }
 
@@ -3872,8 +3872,8 @@ CWMRange* cWM3000U::Range(float mw,cWMRangeList& rlist)
 
     it.toLast(); // zeigt auf den "kleinsten bereich
     while ( (range = it.current()) != 0 ) {
-    --it;
-    if ( mw <= range->Value() ) break;
+        --it;
+        if ( mw <= range->Value() ) break;
     }
     if (range == 0) range = rlist.first(); // der 1. bereich ist der grösste
     return range;
@@ -3916,7 +3916,7 @@ void cWM3000U::SetDspWMVarList() // variablen des dsp zusammenbauen
         DspIFace->addVarItem(RMSValData, new cDspVar("FAMPL1X",1,vApplication | vDspIntern));
 
         ActValData = DspIFace->GetMVHandle(""); // wir holen uns ein handle für die istwerte daten
-    //	nur dsp intern verwendete messdaten
+        //	nur dsp intern verwendete messdaten
         DspIFace->addVarItem(ActValData, new cDspVar("SINDEX",1,vDspIntern)); // index zur speicherung der sampledaten für die fehlermessung (variables messintervall);
         DspIFace->addVarItem(ActValData, new cDspVar("SINDEX2",1,vDspIntern)); // index zur speicherung der sampledaten für die schnelle lastpunktmessung (festes messintervall = 4 signalperioden);
 
@@ -3960,39 +3960,39 @@ void cWM3000U::SetDspWMVarList() // variablen des dsp zusammenbauen
 void cWM3000U::SetDspWMCmdList()
 {
     if (!m_ConfData.m_bSimulation) {
-    int nSPer = getSampleRate(m_ConfData.m_nSRate);
-    int nMP = m_ConfData.m_nMeasPeriod;
-    int nSMeas = nSPer * nMP; // anzahl samples messperiode
-    // int nSAK = nSPer * ((m_ConfData.m_nMeasPeriod - 1) >> 1); // messperiode für kreuzkorrelationsintegral
-    QString s;
-    DspIFace->ClearCmdList();
+        int nSPer = getSampleRate(m_ConfData.m_nSRate);
+        int nMP = m_ConfData.m_nMeasPeriod;
+        int nSMeas = nSPer * nMP; // anzahl samples messperiode
+        // int nSAK = nSPer * ((m_ConfData.m_nMeasPeriod - 1) >> 1); // messperiode für kreuzkorrelationsintegral
+        QString s;
+        DspIFace->ClearCmdList();
 
-    DspIFace->addCycListItem( s = "STARTCHAIN(1,1,0x0100)"); // aktiv, prozessnr. (dummy),hauptkette 1 subkette 0 start
+        DspIFace->addCycListItem( s = "STARTCHAIN(1,1,0x0100)"); // aktiv, prozessnr. (dummy),hauptkette 1 subkette 0 start
         DspIFace->addCycListItem( s = QString("CLEARN(%1,MAXN)").arg(3*nSMeas+8*nSPer+37) ); // alle variable löschen
         DspIFace->addCycListItem( s = "SETVAL(SINDEX,0)"); // index zum speichern der samples auf anfang der puffer setzen
         DspIFace->addCycListItem( s = "SETVAL(SINDEX2,0)"); // index zum speichern der samples auf anfang der puffer setzen
         DspIFace->addCycListItem( s = "RESETSYNCPPS()"); // pps sync flagge rückstellen
         DspIFace->addCycListItem( s = "SETVAL(KFKORRF,1.0)"); // vorbesetzen filterausgang
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0100)"); // ende prozessnr., hauptkette 1 subkette 0
-    DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0100)"); // ende prozessnr., hauptkette 1 subkette 0
+        DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0100)"); // ende prozessnr., hauptkette 1 subkette 0
 
-    DspIFace->addCycListItem( s = "TESTSYNCPPSSKIPEQ()"); // falls syncimpuls pps war  aktivieren wir hauptkette 2 subkette 0
-    DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0200)"); // aktivieren dieser kette
+        DspIFace->addCycListItem( s = "TESTSYNCPPSSKIPEQ()"); // falls syncimpuls pps war  aktivieren wir hauptkette 2 subkette 0
+        DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0200)"); // aktivieren dieser kette
 
-    // hier setzen wir nur das sampling system zurück
-    DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0200)"); // nicht aktiv, prozessnr. (dummy),hauptkette 2 subkette 0 start
+        // hier setzen wir nur das sampling system zurück
+        DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0200)"); // nicht aktiv, prozessnr. (dummy),hauptkette 2 subkette 0 start
         DspIFace->addCycListItem( s = "SETVAL(SINDEX,0)"); // index zum speichern der samples auf anfang der puffer setzen
         DspIFace->addCycListItem( s = "RESETSYNCPPS()"); // pps sync flagge rückstellen
         DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0300)"); // aktivieren der daten aufnahme
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0200)"); // deaktivieren dieser kette
-    DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0200)"); // ende prozessnr., hauptkette 2 subkette 0
+        DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0200)"); // ende prozessnr., hauptkette 2 subkette 0
 
-    // kopieren der maxima aus dsp workspace
-    DspIFace->addCycListItem( s = "COPYDU(2,MAXIMUMSAMPLE,MAXN)");
-    DspIFace->addCycListItem( s = "SETVAL(MAXRDY,1.0)"); // sync maxrdy setzen
+        // kopieren der maxima aus dsp workspace
+        DspIFace->addCycListItem( s = "COPYDU(2,MAXIMUMSAMPLE,MAXN)");
+        DspIFace->addCycListItem( s = "SETVAL(MAXRDY,1.0)"); // sync maxrdy setzen
 
-    // ab hier nehmen wir die daten für die nächste messperiode auf
-    DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0300)"); // nicht aktiv, prozessnr. (dummy),hauptkette 3 subkette 0 start
+        // ab hier nehmen wir die daten für die nächste messperiode auf
+        DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0300)"); // nicht aktiv, prozessnr. (dummy),hauptkette 3 subkette 0 start
         // kanal 0 (n)  samples über sindex kopieren
         DspIFace->addCycListItem( s = "COPYINDDATA(CH0,SINDEX,MESSSIGNAL0)");
         // kanal 1 (x)  samples über sindex kopieren
@@ -4001,10 +4001,10 @@ void cWM3000U::SetDspWMCmdList()
         DspIFace->addCycListItem( s = "INC(SINDEX)");
         DspIFace->addCycListItem( s = QString("TESTVCSKIPLT(SINDEX,%1)").arg(nMP)); // test ob die messperiode vollständig ist
         DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0400)"); // aktivieren der berechnung
-    DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0300)"); // ende prozessnr., hauptkette 3 subkette 0
+        DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0300)"); // ende prozessnr., hauptkette 3 subkette 0
 
 
-    DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0400)"); // nicht aktiv, prozessnr. (dummy),hauptkette 4 subkette 0 start
+        DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0400)"); // nicht aktiv, prozessnr. (dummy),hauptkette 4 subkette 0 start
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0300)"); // deaktivieren der daten aufnahme
         // kanal 0 (n) bearbeiten
         //DspIFace->addCycListItem( s = "BREAK(1)"); // breakpoint wenn /taster
@@ -4137,9 +4137,9 @@ void cWM3000U::SetDspWMCmdList()
         // ins filter übertragen.
         DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0500)"); // kette 0x0500 dient zum synchronisieren mit dem ctrl programm
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0400)"); // deaktivieren der berechnung
-    DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0400)"); // ende prozessnr., hauptkette 4 subkette 0
+        DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0400)"); // ende prozessnr., hauptkette 4 subkette 0
 
-    DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0500)"); // aktiv, prozessnr. (dummy), hauptkette 5 subkette 0 start
+        DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0500)"); // aktiv, prozessnr. (dummy), hauptkette 5 subkette 0 start
         DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0501)"); // aktiv, prozessnr. (dummy), hauptkette 5 subkette 1 start
         DspIFace->addCycListItem( s = "CMPAVERAGE1(5,FILTER,RMSNF)");
         DspIFace->addCycListItem( s = "CLEARN(11,FILTER)");
@@ -4147,19 +4147,19 @@ void cWM3000U::SetDspWMCmdList()
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0501)"); // deaktivieren der berechnung
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0500)"); // deaktivieren der synch
         DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0501)"); // ende prozessnr., hauptkette 5 subkette 1
-    DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0500)"); // ende prozessnr., hauptkette 5 subkette 0
+        DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0500)"); // ende prozessnr., hauptkette 5 subkette 0
 
-    // kanal 0 (n)  samples über sindex2 kopieren
-    DspIFace->addCycListItem( s = "COPYINDDATA(CH0,SINDEX2,MESSSIGNAL2)");
-    // kanal 1 (x)  samples über sindex2 kopieren
-    DspIFace->addCycListItem( s = "COPYINDDATA(CH1,SINDEX2,MESSSIGNAL3)");
+        // kanal 0 (n)  samples über sindex2 kopieren
+        DspIFace->addCycListItem( s = "COPYINDDATA(CH0,SINDEX2,MESSSIGNAL2)");
+        // kanal 1 (x)  samples über sindex2 kopieren
+        DspIFace->addCycListItem( s = "COPYINDDATA(CH1,SINDEX2,MESSSIGNAL3)");
 
-    // sindex2 inkrementieren
-    DspIFace->addCycListItem( s = "INC(SINDEX2)");
-    DspIFace->addCycListItem( s = QString("TESTVCSKIPLT(SINDEX2,%1)").arg(4)); // test ob die messperiode vollständig ist
-    DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0600)"); // aktivieren der berechnung
+        // sindex2 inkrementieren
+        DspIFace->addCycListItem( s = "INC(SINDEX2)");
+        DspIFace->addCycListItem( s = QString("TESTVCSKIPLT(SINDEX2,%1)").arg(4)); // test ob die messperiode vollständig ist
+        DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0600)"); // aktivieren der berechnung
 
-    DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0600)"); // nicht aktiv, prozessnr. (dummy),hauptkette 6 subkette 0 start
+        DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0600)"); // nicht aktiv, prozessnr. (dummy),hauptkette 6 subkette 0 start
         DspIFace->addCycListItem( s = "SETVAL(SINDEX2,0)"); // index 0 setzen
         DspIFace->addCycListItem( s = QString("HANNING(%1,SCHAN)").arg(4*nSPer)); // fensterfunktion über 4 signalperioden generieren
         DspIFace->addCycListItem( s = QString("MULNCC(%1,SCHAN,MESSSIGNAL2)").arg(4*nSPer)); // fenster funktion anwenden
@@ -4198,28 +4198,28 @@ void cWM3000U::SetDspWMCmdList()
         DspIFace->addCycListItem( s = "ADDVVG(TEMP1,TEMP2,FAMPL1X)"); // für schnelle lp anzeige
 
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0600)"); // deaktivieren der berechnung
-    DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0600)"); // ende prozessnr., hauptkette 4 subkette 0
+        DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0600)"); // ende prozessnr., hauptkette 4 subkette 0
 
-    // ab hier interrupt befehlskette
-    // ------------------------------
+        // ab hier interrupt befehlskette
+        // ------------------------------
 
-    // die ergebnisse werden aus der appl. heraus mittels kommando (bearbeiten int cmd list) generiert
-    DspIFace->addIntListItem( s = "STARTCHAIN(1,1,0x0001)"); // aktiv, prozessnr. (dummy), hauptkette 0 subkette 1 start
-    DspIFace->addIntListItem( s = "ACTIVATECHAIN(1,0x0501)"); // aktivieren der berechnung des filters
-    DspIFace->addIntListItem( s = "STOPCHAIN(1,0x0001)"); // ende prozessnr., hauptkette 0 subkette 1
+        // die ergebnisse werden aus der appl. heraus mittels kommando (bearbeiten int cmd list) generiert
+        DspIFace->addIntListItem( s = "STARTCHAIN(1,1,0x0001)"); // aktiv, prozessnr. (dummy), hauptkette 0 subkette 1 start
+        DspIFace->addIntListItem( s = "ACTIVATECHAIN(1,0x0501)"); // aktivieren der berechnung des filters
+        DspIFace->addIntListItem( s = "STOPCHAIN(1,0x0001)"); // ende prozessnr., hauptkette 0 subkette 1
 
-    // rücksetzen der maxima wie oben per int cmd list mit angabe der subketten nr.
-    DspIFace->addIntListItem( s = "STARTCHAIN(1,1,0x0002)"); // aktiv, prozessnr.(dummy), hauptkette 0 subkette 2 start
-    DspIFace->addIntListItem( s = "SETVAL(MAXX,0.0)");
-    DspIFace->addIntListItem( s = "SETVAL(MAXN,0.0)");
-    DspIFace->addIntListItem( s = "SETVAL(MAXRDY,0.0)");
-    //    DspIFace->addIntListItem( s = "DSPINTTRIGGER(0x0,0x0002)"); // gibt interrupt an controler
-    DspIFace->addIntListItem( s = "STOPCHAIN(1,0x0002)"); // ende prozessnr., hauptkette 0 subkette 2
+        // rücksetzen der maxima wie oben per int cmd list mit angabe der subketten nr.
+        DspIFace->addIntListItem( s = "STARTCHAIN(1,1,0x0002)"); // aktiv, prozessnr.(dummy), hauptkette 0 subkette 2 start
+        DspIFace->addIntListItem( s = "SETVAL(MAXX,0.0)");
+        DspIFace->addIntListItem( s = "SETVAL(MAXN,0.0)");
+        DspIFace->addIntListItem( s = "SETVAL(MAXRDY,0.0)");
+        //    DspIFace->addIntListItem( s = "DSPINTTRIGGER(0x0,0x0002)"); // gibt interrupt an controler
+        DspIFace->addIntListItem( s = "STOPCHAIN(1,0x0002)"); // ende prozessnr., hauptkette 0 subkette 2
 
-    DspIFace->addIntListItem( s = "STARTCHAIN(1,1,0x0003)"); // aktiv, prozessnr. (dummy), hauptkette 0 subkette 3 start
-    DspIFace->addIntListItem( s = "CLEARN(11,FILTER)");
-    DspIFace->addIntListItem( s = "DSPINTTRIGGER(0x0,0x0003)"); // gibt interrupt an controler
-    DspIFace->addIntListItem( s = "STOPCHAIN(1,0x0003)"); // ende prozessnr., hauptkette 0 subkette 3
+        DspIFace->addIntListItem( s = "STARTCHAIN(1,1,0x0003)"); // aktiv, prozessnr. (dummy), hauptkette 0 subkette 3 start
+        DspIFace->addIntListItem( s = "CLEARN(11,FILTER)");
+        DspIFace->addIntListItem( s = "DSPINTTRIGGER(0x0,0x0003)"); // gibt interrupt an controler
+        DspIFace->addIntListItem( s = "STOPCHAIN(1,0x0003)"); // ende prozessnr., hauptkette 0 subkette 3
 
     }
 }
@@ -4267,23 +4267,23 @@ void cWM3000U::SimulatedMeasurement()
     float rej,val;
     switch (m_ConfData.m_nMeasMode) // für dut messart abhängig
     {
-     case Un_UxAbs:
+    case Un_UxAbs:
         e =  m_ConfData.m_XSecondary;
         r = Range(m_ConfData.m_sRangeX,m_sNRangeList);
         val = r->Value();
         rej = r->Rejection();
-    break;
-              case Un_EVT:
+        break;
+    case Un_EVT:
         e =  m_ConfData.m_ETSecondary;
         r = Range(m_ConfData.m_sRangeET,m_sEVTRangeList);
         val = r->Value();
         rej = r->Rejection();
-    break;
-              case Un_nConvent:
+        break;
+    case Un_nConvent:
         e =  m_ConfData.m_XSecondary;
         val = 1.0;
         rej = 1e-3;
-     }
+    }
 
     ActValues.dspActValues.rmsxf = e.toDouble() * rnd;
     ActValues.dspActValues.rmsxf *= rej/val;
@@ -4316,9 +4316,9 @@ void cWM3000U::CmpActFrequency()
     {
         switch (m_ConfData.m_nSFreq)
         {
-            case F16 : fsoll = 50.0/3.0;break;
-            case F50 : fsoll = 50.0;break;
-            case F60 : fsoll = 60.0;
+        case F16 : fsoll = 50.0/3.0;break;
+        case F50 : fsoll = 50.0;break;
+        case F60 : fsoll = 60.0;
         }
     }
 
@@ -4480,11 +4480,11 @@ void cWM3000U::CmpRMSValues()
     case Un_nConvent: // wir brauchen jetzt das ü-verhältnis um die sekundär grösse zu ermitteln
         PrimX = m_ConfData.m_XPrimary;
         SekX = m_ConfData.m_XSecondary;
-    break;
+        break;
     case Un_EVT:
         PrimX = m_ConfData.m_ETPrimary;
         SekX = m_ConfData.m_ETSecondary;
-    break;
+        break;
     }
 
     kx = PrimX.toDouble() / SekX.toDouble();
@@ -4507,16 +4507,16 @@ void cWM3000U::CmpRMSValues()
         range = Range(m_ConfData.m_sRangeX,m_sNRangeList);
         val = range->Value();
         rej = range->Rejection();
-    break;
+        break;
     case Un_EVT:
         range = Range(m_ConfData.m_sRangeET,m_sEVTRangeList);
         val = range->Value();
         rej = range->Rejection();
-    break;
+        break;
     case Un_nConvent:
         val = 10e-3; // 1lsb -> 10mV
         rej = kx; // wir wollen die sekundär grösse des nConvent haben ... neue forderung dies anzuzeigen
-    break;
+        break;
     }
 
     ActValues.RMSXSek = ( val * ActValues.dspRMSValues.fastRMSX ) / rej;
