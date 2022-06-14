@@ -6,7 +6,7 @@ cZHClientSocket::cZHClientSocket(int t)
     m_nError = 0;
     m_bHostFound = false;
     
-    QObject::connect(this,SIGNAL(error(int)),this,SLOT(TCPErrorHandling(int)));
+    QObject::connect(this,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(TCPErrorHandling(QAbstractSocket::SocketError)));
     QObject::connect(this,SIGNAL(hostFound()),this,SLOT(HostFound()));
     QObject::connect(this,SIGNAL(readyRead()),this,SLOT(ReceiveInput()));
     QObject::connect(this,SIGNAL(connected()),this,SLOT(ConnectionDone()));
@@ -33,7 +33,7 @@ int cZHClientSocket::writeLine(QString &s)
     if ( (ret = this->writeBlock(s.latin1(),s.length())) == -1) {
         l = "Error while writing TCP-Block";
         emit SendLogData (l);
-        m_nError |= myErrSocketWrite;
+        m_nError |= myErrSocketAccess;
         DecoupleTimer.start(0,true); // der fehler wird später gesendet ....
     }
     else
@@ -102,7 +102,7 @@ bool cZHClientSocket::hostfound()
 }
 
 // hier sind alle slots
-void cZHClientSocket::TCPErrorHandling(int e)
+void cZHClientSocket::TCPErrorHandling(QAbstractSocket::SocketError e)
 {
     QString l;
     switch (e)
@@ -119,11 +119,13 @@ void cZHClientSocket::TCPErrorHandling(int e)
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
         break;
-    case QTcpSocket::UnknownSocketError:  // see abstractsocket.h/enum Error: ErrSocketRead = UnknownSocketError
-        m_nError |= myErrSocketRead;
-        l = "Socket Data read error !";
+    case QTcpSocket::SocketAccessError:  // see abstractsocket.h/enum Error: ErrSocketRead = UnknownSocketError
+        m_nError |= myErrSocketAccess;
+        l = "Socket access error !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
+        break;
+    default:
         break;
     }
     qDebug("TCP-Error %d\n",e);

@@ -2913,7 +2913,7 @@ void cWM3000U::ServerIFaceErrorHandling(int error, QString host, int port)
                                        1,-1 );
     }
 
-    else if (error & myErrSocketWrite) {
+    else if (error & myErrSocketAccess) {
         userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),
                                        tr("Fehler beim Schreiben von Daten\n"
                                           "für %1:%2 .\n"

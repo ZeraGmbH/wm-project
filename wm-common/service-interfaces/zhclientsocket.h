@@ -10,7 +10,7 @@
 #include <QTimer>
 
 
-enum AddError { myErrConnectionRefused = 1, myErrHostNotFound = 2, myErrSocketRead = 4 , myErrSocketWrite = 4, myErrSocketUnexpectedAnswer = 8 , myErrSocketReadTimeOut = 16, myErrSocketConnectionTimeOut = 32, myErrDeviceBusy = 64};
+enum AddError { myErrConnectionRefused = 1, myErrHostNotFound = 2, myErrSocketAccess = 4, myErrSocketUnexpectedAnswer = 8 , myErrSocketReadTimeOut = 16, myErrSocketConnectionTimeOut = 32, myErrDeviceBusy = 64};
 
 class cZHClientSocket: public QTcpSocket
 {
@@ -50,7 +50,7 @@ private:
     int m_nTime; // in ms für timeout
     
  private slots:
-    void TCPErrorHandling(int);
+    void TCPErrorHandling(QAbstractSocket::SocketError);
     void HostFound();
     void ReceiveInput();
     void DataTimerExpired();
