@@ -50,9 +50,7 @@ FORMS	= confdialogbase.ui \
 TRANSLATIONS    = wm3000i_gb.ts \
                   wm3000i_pl.ts
 
-# Input
-#The following line was inserted by qt3to4
-QT += xml  qt3support 
+QT += widgets network xml qt3support
 
 INCLUDEPATH += \
     ../wm-common \

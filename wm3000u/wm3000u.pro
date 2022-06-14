@@ -340,8 +340,7 @@ IMAGES	= images/filenew \
 TRANSLATIONS    = wm3000u_gb.ts \
                   wm3000u_pl.ts
 
-# Input
-QT += xml  qt3support dbus
+QT += widgets network xml qt3support dbus
 
 INCLUDEPATH += \
     ../wm-common \
