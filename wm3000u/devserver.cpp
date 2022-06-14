@@ -14,7 +14,7 @@ cwm3000DeviceServer::cwm3000DeviceServer(quint16 port) :
 
 void cwm3000DeviceServer::newConnection(int fd)
 {
-    cClientSocketDevice* csd = new cClientSocketDevice( fd, parent(), name() );
+    cClientSocketDevice* csd = new cClientSocketDevice(fd);
     cWM3000SCPIFace* iface = new cWM3000SCPIFace( csd, 20);
 			     
     if  (m_SCPIFacePtrList.isEmpty() )
