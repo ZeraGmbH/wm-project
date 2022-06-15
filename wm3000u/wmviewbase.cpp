@@ -162,6 +162,7 @@ void WMViewBase::ActualizeStates()
     m_pSimulationLabel->setText( QString (( m_ConfData.m_bSimulation) ? tr("Simulation") : tr("Reale Messung")));
     
     m_pStatusLabel->setText( m_bJustified ? tr("Justiert") : tr("Nicht justiert"));
+    m_pStatusLabel->setStyleSheet(m_bJustified ? "QLabel {color:black;}" : "QLabel {color:red;}");
 
     m_pFreqLabel->setText( m_bFreqQuestionable ? tr("!!SignalFrequenz!!") : tr(""));
 
@@ -301,7 +302,6 @@ void WMViewBase::CreateStatusBar()
     statusBar()->addPermanentWidget(m_pSimulationLabel,0);
     m_pStatusLabel=new QLabel("",this); // normaler ablauf oder fehlerausgaben in statuszeile
     statusBar()->addPermanentWidget(m_pStatusLabel,0);
-    m_pStatusLabel->setStyleSheet("QLabel {color:red;}");
     m_pFreqLabel=new QLabel("",this); // erstmal kein fehler
     m_pFreqLabel->setStyleSheet("QLabel {color:red;}");
     statusBar()->addPermanentWidget(m_pFreqLabel,0);
@@ -682,10 +682,6 @@ void WMViewBase::RemoteCtrlInfoSlot(bool remote )
 void WMViewBase::SetJustifiedSlot( bool b )
 {
     m_bJustified = b;
-    if (m_bJustified)
-        m_pStatusLabel->setStyleSheet("QLabel {color:black;}");
-    else
-        m_pStatusLabel->setStyleSheet("QLabel {color:red;}");
     ActualizeStates();
 }
 
