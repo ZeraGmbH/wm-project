@@ -5,10 +5,7 @@
 #include "ui_wmviewbase.h"
 #include "tcpconfig.h"
 #include <Q3MainWindow>
-#include <qlabel.h>
-#include <QFileInfo>
 #include <Q3FileDialog>
-#include <QStatusBar>
 #include <QTextEdit>
 
 WMViewBase::WMViewBase(QWidget *parent) :
