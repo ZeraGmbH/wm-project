@@ -109,7 +109,6 @@ private:
     int m_nrecentSESFileIds[nmaxRecentSESFiles];
     cWidgetGeometry m_widGeometry;
     QString SessionName;
-    QLabel* m_pResultLabel;
     QStringList recentResultFiles;
     wmEditor* wmEdit;
     QStringList recentMVFiles;

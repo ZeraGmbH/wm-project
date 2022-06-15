@@ -13,6 +13,7 @@ public:
 private:
     QStatusBar *m_statusBar;
     QLabel* m_pOwnErrTableLabel;
+    QLabel* m_pResultFileLabel;
 };
 
 #endif // STATUSLABELCONTAINER_H

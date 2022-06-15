@@ -176,9 +176,6 @@ void WMViewBase::ActualizeStates()
     m_statusLabelContainer.updateLabels(&m_ConfData);
 
     UpdateRecentFileList(recentOETFiles,m_ConfData.m_sOETFile);
-    
-    QFileInfo fi (m_ConfData.m_sResultFile);
-    m_pResultLabel->setText("MED="+((m_ConfData.m_sResultFile=="") ? tr("Keine") : fi.baseName())); // statuszeile ergebnisdatei  eintragen
     UpdateRecentFileList(recentResultFiles,m_ConfData.m_sResultFile);
     
     m_pRangeNLabel->setText(QString("ChN=%1").arg(m_ConfData.m_sRangeN)); // statuszeile bereich N eintragen
@@ -295,8 +292,6 @@ void WMViewBase::StartSlot()
 
 void WMViewBase::CreateStatusBar()
 {
-    m_pResultLabel=new QLabel("",this); // ergebnisdatei in statuszeile
-    statusBar()->addPermanentWidget(m_pResultLabel,0);
     m_pRangeNLabel=new QLabel("",this); // bereich N in statuszeile
     statusBar()->addPermanentWidget(m_pRangeNLabel,0);
     m_pRangeXLabel=new QLabel("",this); // bereich X in statuszeile
