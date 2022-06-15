@@ -156,8 +156,6 @@ void WMViewBase::ActualizeStates()
     ui->messungSimulationAction->setOn(m_ConfData.m_bSimulation);
     ui->hilfeSelbsttestAction->setDisabled(m_ConfData.m_bSimulation); // selbsttest disabled wenn simulation
     
-    m_pSimulationLabel->setText(m_ConfData.m_bSimulation ? tr("Simulation") : tr("Reale Messung"));
-    m_pSimulationLabel->setStyleSheet(m_ConfData.m_bSimulation ? "QLabel {color:red;}" : "QLabel {color:text;}");
     if(m_ConfData.m_bSimulation) {
         m_pStatusLabel->setText("");
         m_pStatusLabel->setStyleSheet("QLabel {color:text;}");
@@ -272,8 +270,6 @@ void WMViewBase::StartSlot()
 
 void WMViewBase::CreateStatusBar()
 {
-    m_pSimulationLabel=new QLabel("",this); // simulation oder reale messung in statuszeile
-    statusBar()->addPermanentWidget(m_pSimulationLabel,0);
     m_pStatusLabel=new QLabel("",this); // normaler ablauf oder fehlerausgaben in statuszeile
     statusBar()->addPermanentWidget(m_pStatusLabel,0);
     m_pFreqLabel=new QLabel("",this); // erstmal kein fehler

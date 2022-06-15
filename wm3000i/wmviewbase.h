@@ -113,7 +113,6 @@ private:
     wmEditor* wmEdit;
     QStringList recentMVFiles;
     QLabel* m_pStatusLabel;
-    QLabel* m_pSimulationLabel;
     cConfData m_ConfData;
     QLabel* m_pFreqLabel;
     QLabel* m_pIPLabel;
