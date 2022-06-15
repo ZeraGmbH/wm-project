@@ -158,11 +158,17 @@ void WMViewBase::ActualizeStates()
     ui->messungSimulationAction->setOn(m_ConfData.m_bSimulation);
     ui->hilfeSelbsttestAction->setDisabled(m_ConfData.m_bSimulation); // selbsttest disabled wenn simulation
     
-    m_pRunningLabel->setText( QString (( m_ConfData.m_bRunning) ? tr("Gestartet") : tr("Gestoppt")));
-    m_pSimulationLabel->setText( QString (( m_ConfData.m_bSimulation) ? tr("Simulation") : tr("Reale Messung")));
-    
-    m_pStatusLabel->setText( m_bJustified ? tr("Justiert") : tr("Nicht justiert"));
-    m_pStatusLabel->setStyleSheet(m_bJustified ? "QLabel {color:black;}" : "QLabel {color:red;}");
+    m_pRunningLabel->setText(m_ConfData.m_bRunning ? tr("Gestartet") : tr("Gestoppt"));
+    m_pSimulationLabel->setText(m_ConfData.m_bSimulation ? tr("Simulation") : tr("Reale Messung"));
+    m_pSimulationLabel->setStyleSheet(m_ConfData.m_bSimulation ? "QLabel {color:red;}" : "QLabel {color:text;}");
+    if(m_ConfData.m_bSimulation) {
+        m_pStatusLabel->setText("");
+        m_pStatusLabel->setStyleSheet("QLabel {color:text;}");
+    }
+    else {
+        m_pStatusLabel->setText( m_bJustified ? tr("Justiert") : tr("Nicht justiert"));
+        m_pStatusLabel->setStyleSheet(m_bJustified ? "QLabel {color:text;}" : "QLabel {color:red;}");
+    }
 
     m_pFreqLabel->setText( m_bFreqQuestionable ? tr("!!SignalFrequenz!!") : tr(""));
 
