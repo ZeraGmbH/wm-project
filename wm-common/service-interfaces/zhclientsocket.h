@@ -5,21 +5,21 @@
 #ifndef ZHCLIENTSOCKET_H
 #define ZHCLIENTSOCKET_H
 
-#include <QTcpSocket>
-#include <QStringList>
-#include <QTimer>
+#include <q3socket.h>
+#include <qstringlist.h>
+#include <qtimer.h>
 
 
-enum AddError { myErrConnectionRefused = 1, myErrHostNotFound = 2, myErrSocketAccess = 4, myErrSocketUnexpectedAnswer = 8 , myErrSocketReadTimeOut = 16, myErrSocketConnectionTimeOut = 32, myErrDeviceBusy = 64};
+enum AddError { myErrConnectionRefused = 1, myErrHostNotFound = 2, myErrSocketRead = 4 , myErrSocketWrite = 4, myErrSocketUnexpectedAnswer = 8 , myErrSocketReadTimeOut = 16, myErrSocketConnectionTimeOut = 32, myErrDeviceBusy = 64};
 
-class cZHClientSocket: public QTcpSocket
+class cZHClientSocket: public Q3Socket
 {
     Q_OBJECT
     
 public:
-    cZHClientSocket(int);
+    cZHClientSocket(int, QObject *parent = 0, const char *name = 0);
     void SendCommand(QString&); // kommando an socket wenn nur ack als antwort akzeptiert wird
-    void SendCommand(QString& cmd, QStringList&expectedAnswerList);
+    void SendCommand(QString&,QStringList&); // kommando an socket mit list als mögl. antworten
     void SendQuery(QString&); // query socket intern antwortliste leer -> rückmeldung ist rückgabewert
     virtual void connectToHost (const QString&,quint16);
     QString& GetAnswer();
@@ -36,7 +36,7 @@ signals:
     
 private:
     QTimer ToDataTimer, ToConnTimer, DecoupleTimer; // timeout data timer, to connection timer, 
-    QStringList m_expectedAnswerList;
+    QStringList m_sAnswerList;
     QString m_sCommand;
     QString m_sAnswer;
    
@@ -50,7 +50,7 @@ private:
     int m_nTime; // in ms für timeout
     
  private slots:
-    void TCPErrorHandling(QAbstractSocket::SocketError);
+    void TCPErrorHandling(int);
     void HostFound();
     void ReceiveInput();
     void DataTimerExpired();

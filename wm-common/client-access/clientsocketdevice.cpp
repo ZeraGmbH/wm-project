@@ -2,7 +2,7 @@
 
 cClientSocketDevice::cClientSocketDevice(int sock)
 {
-    m_pSock = new QTcpSocket;
+    m_pSock = new Q3Socket;
     m_pSock->setSocket(sock);
     m_pZDSWriteNotifyer = new QSocketNotifier ( sock, QSocketNotifier::Write);
     m_pZDSWriteNotifyer->setEnabled (false);

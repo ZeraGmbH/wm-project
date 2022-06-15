@@ -1,12 +1,18 @@
-#include "zhclientsocket.h"
+// definition wmsocket
 
-cZHClientSocket::cZHClientSocket(int t)
+#include "zhclientsocket.h"
+#include <qstring.h>
+#include <qstringlist.h>
+#include <q3socket.h>
+
+cZHClientSocket::cZHClientSocket(int t, QObject *parent, const char *name)
+    :Q3Socket(parent,name)
 {
     m_nTime = t;
     m_nError = 0;
     m_bHostFound = false;
     
-    QObject::connect(this,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(TCPErrorHandling(QAbstractSocket::SocketError)));
+    QObject::connect(this,SIGNAL(error(int)),this,SLOT(TCPErrorHandling(int)));
     QObject::connect(this,SIGNAL(hostFound()),this,SLOT(HostFound()));
     QObject::connect(this,SIGNAL(readyRead()),this,SLOT(ReceiveInput()));
     QObject::connect(this,SIGNAL(connected()),this,SLOT(ConnectionDone()));
@@ -17,7 +23,7 @@ cZHClientSocket::cZHClientSocket(int t)
 
 QString cZHClientSocket::readLine()
 {
-    QString s = QTcpSocket::readLine();
+    QString s = Q3Socket::readLine();
     QString l = QString ("Inp[%1:%2] : %3").arg(peerName())
             .arg(peerPort())
             .arg(s);
@@ -33,7 +39,7 @@ int cZHClientSocket::writeLine(QString &s)
     if ( (ret = this->writeBlock(s.latin1(),s.length())) == -1) {
         l = "Error while writing TCP-Block";
         emit SendLogData (l);
-        m_nError |= myErrSocketAccess;
+        m_nError |= myErrSocketWrite;
         DecoupleTimer.start(0,true); // der fehler wird später gesendet ....
     }
     else
@@ -49,10 +55,10 @@ void cZHClientSocket::SendCommand(QString& cmds) { // gibt ein kommando an einem
     SendCommand(cmds, sl);
 }
 
-void cZHClientSocket::SendCommand(QString& cmd, QStringList& expectedAnswerList) {
-    m_sCommand = cmd;
-    m_expectedAnswerList = expectedAnswerList;
-    if ( writeLine(cmd) == -1) // wenn bei write ein fehler auftrat -> den gibts später als signal
+void cZHClientSocket::SendCommand(QString& cmds,QStringList& sl) { // kommando an socket mit liste der möglichen antwort en
+    m_sCommand = cmds;
+    m_sAnswerList = sl;
+    if ( writeLine(cmds) == -1) // wenn bei write ein fehler auftrat -> den gibts später als signal
         return;
     ToDataTimer.start(m_nTime,true); // wir starten den timeout timer
 }
@@ -72,7 +78,7 @@ void cZHClientSocket::connectToHost (const QString& host,quint16 port)
 
     QString l = QString ("Connect to %1:%2") .arg(host) .arg(port);
     emit SendLogData(l); // fürs logfile
-    QTcpSocket::connectToHost(host,port);
+    Q3Socket::connectToHost(host,port);
     ToConnTimer.start(m_nTime,true);
 }
 
@@ -102,30 +108,28 @@ bool cZHClientSocket::hostfound()
 }
 
 // hier sind alle slots
-void cZHClientSocket::TCPErrorHandling(QAbstractSocket::SocketError e)
+void cZHClientSocket::TCPErrorHandling(int e)
 {
     QString l;
     switch (e)
     {
-    case QTcpSocket::ConnectionRefusedError:
+    case Q3Socket::ErrConnectionRefused:
         m_nError |= myErrConnectionRefused;
         l = "Connection refused !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
         break;
-    case QTcpSocket::HostNotFoundError:
+    case Q3Socket::ErrHostNotFound:
         m_nError |= myErrHostNotFound;
         l = "Host not found !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
         break;
-    case QTcpSocket::SocketAccessError:  // see abstractsocket.h/enum Error: ErrSocketRead = UnknownSocketError
-        m_nError |= myErrSocketAccess;
-        l = "Socket access error !";
+    case Q3Socket::ErrSocketRead :
+        m_nError |= myErrSocketRead;
+        l = "Socket Data read error !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
-        break;
-    default:
         break;
     }
     qDebug("TCP-Error %d\n",e);
@@ -151,7 +155,7 @@ void cZHClientSocket::ReceiveInput()
         {
             ToDataTimer.stop(); // wir haben input -> timer anhalten
             m_sAnswer = s; // antwort speichern
-            if ( !m_expectedAnswerList.empty() && (m_expectedAnswerList.findIndex(m_sAnswer) == -1) ) { //antwort  falsch
+            if ( !m_sAnswerList.empty() && (m_sAnswerList.findIndex(m_sAnswer) == -1) ) { //antwort  falsch
                 m_nError |= myErrSocketUnexpectedAnswer;
                 QString l = "Unexpected Answer !";
                 emit SendLogData (l);
