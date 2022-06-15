@@ -19,7 +19,7 @@ void StatusLabelContainer::updateLabels(cConfData *confData, bool adjusted, bool
     m_pRangeNLabel->setText(QString("ChN=%1").arg(confData->m_sRangeN));
     m_xRangeLabelParent->updateXRangeLabel(m_pRangeXLabel);
     m_pRunningLabel->setText(confData->m_bRunning ? QObject::tr("Gestartet") : QObject::tr("Gestoppt"));
-    m_pSimulationLabel->setText(confData->m_bSimulation ? QObject::tr("Simulation") : QObject::tr("Reale Messung"));
+    m_pSimulationLabel->setText(confData->m_bSimulation ? QObject::tr("Simulation") : "");
     m_pSimulationLabel->setStyleSheet(confData->m_bSimulation ? "QLabel {color:red;}" : "QLabel {color:text;}");
     if(confData->m_bSimulation) {
         m_pStatusLabel->setText("");
