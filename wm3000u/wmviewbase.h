@@ -15,7 +15,7 @@ namespace Ui {
     class WMViewBase;
 }
 
-class WMViewBase : public Q3MainWindow
+class WMViewBase : public Q3MainWindow, public IStatusLabelXRangeParent
 {
     Q_OBJECT
 
@@ -107,7 +107,6 @@ private:
     QLabel* m_pStatusLabel;
     QLabel* m_pSimulationLabel;
     QLabel* m_pRunningLabel;
-    QLabel* m_pRangeXLabel;
     cConfData m_ConfData;
     QLabel* m_pFreqLabel;
     QLabel* m_pIPLabel;
@@ -125,6 +124,7 @@ private:
     void init();
     void destroy();
     void UpdateRecentSESList( QString ses );
+    virtual void updateXRangeLabel(QLabel* xRangeLabel) override;
 
 private slots:
     virtual void StoreSessionSlot();

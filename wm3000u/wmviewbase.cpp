@@ -11,7 +11,7 @@
 WMViewBase::WMViewBase(QWidget *parent) :
     Q3MainWindow(parent),
     ui(new Ui::WMViewBase),
-    m_statusLabelContainer(statusBar())
+    m_statusLabelContainer(statusBar(), this)
 {
     ui->setupUi((Q3MainWindow*) this);
     init();
@@ -174,20 +174,6 @@ void WMViewBase::ActualizeStates()
 
     UpdateRecentFileList(recentOETFiles,m_ConfData.m_sOETFile);
     UpdateRecentFileList(recentResultFiles,m_ConfData.m_sResultFile);
-    
-    switch (m_ConfData.m_nMeasMode) { // statuszeile bereich x,diff,ect eintragen
-    case Un_UxAbs:
-        m_pRangeXLabel->setText(QString("ChX=%1").arg(m_ConfData.m_sRangeX));
-        m_pRangeXLabel->show();
-        break;
-    case Un_EVT:
-        m_pRangeXLabel->setText(QString("ChEVT=%1").arg(m_ConfData.m_sRangeET));
-        m_pRangeXLabel->show();
-        break;
-    case Un_nConvent:
-        m_pRangeXLabel->hide();
-        break;
-    }
 }
 
 
@@ -287,8 +273,6 @@ void WMViewBase::StartSlot()
 
 void WMViewBase::CreateStatusBar()
 {
-    m_pRangeXLabel=new QLabel("",this); // bereich X in statuszeile
-    statusBar()->addPermanentWidget(m_pRangeXLabel,0);
     m_pRunningLabel=new QLabel("",this); // gestartet bzw. gestoppt in statuszeile
     statusBar()->addPermanentWidget(m_pRunningLabel,0);
     m_pSimulationLabel=new QLabel("",this); // simulation oder reale messung in statuszeile
@@ -581,6 +565,22 @@ void WMViewBase::UpdateRecentSESList( QString ses )
     }
 }
 
+void WMViewBase::updateXRangeLabel(QLabel *xRangeLabel)
+{
+    switch (m_ConfData.m_nMeasMode) { // statuszeile bereich x,diff,ect eintragen
+    case Un_UxAbs:
+        xRangeLabel->setText(QString("ChX=%1").arg(m_ConfData.m_sRangeX));
+        xRangeLabel->show();
+        break;
+    case Un_EVT:
+        xRangeLabel->setText(QString("ChEVT=%1").arg(m_ConfData.m_sRangeET));
+        xRangeLabel->show();
+        break;
+    case Un_nConvent:
+        xRangeLabel->hide();
+        break;
+    }
+}
 
 void WMViewBase::OpenRecentSESFileSlot(int index)
 {
