@@ -7,13 +7,14 @@ StatusLabelContainer::StatusLabelContainer(QStatusBar *statusBar, IStatusLabelXR
     m_pOwnErrTableLabel(new QLabel(statusBar)),
     m_pResultFileLabel(new QLabel(statusBar)),
     m_pRangeNLabel(new QLabel(statusBar)),
-    m_pRangeXLabel(new QLabel(statusBar))
-
+    m_pRangeXLabel(new QLabel(statusBar)),
+    m_pRunningLabel(new QLabel(statusBar))
 {
     statusBar->addPermanentWidget(m_pOwnErrTableLabel, 0);
     statusBar->addPermanentWidget(m_pResultFileLabel, 0);
     statusBar->addPermanentWidget(m_pRangeNLabel, 0);
     statusBar->addPermanentWidget(m_pRangeXLabel, 0);
+    statusBar->addPermanentWidget(m_pRunningLabel, 0);
 }
 
 void StatusLabelContainer::updateLabels(cConfData *confData)
@@ -28,4 +29,5 @@ void StatusLabelContainer::updateLabels(cConfData *confData)
 
     m_pRangeNLabel->setText(QString("ChN=%1").arg(confData->m_sRangeN));
     m_xRangeLabelParent->updateXRangeLabel(m_pRangeXLabel);
+    m_pRunningLabel->setText(confData->m_bRunning ? QObject::tr("Gestartet") : QObject::tr("Gestoppt"));
 }

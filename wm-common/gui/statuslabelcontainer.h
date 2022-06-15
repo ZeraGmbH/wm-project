@@ -25,6 +25,7 @@ private:
     QLabel* m_pResultFileLabel;
     QLabel* m_pRangeNLabel;
     QLabel* m_pRangeXLabel;
+    QLabel* m_pRunningLabel;
 };
 
 #endif // STATUSLABELCONTAINER_H
