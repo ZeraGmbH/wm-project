@@ -4,11 +4,13 @@
 StatusLabelContainer::StatusLabelContainer(QStatusBar *statusBar) :
     m_statusBar(statusBar),
     m_pOwnErrTableLabel(new QLabel(statusBar)),
-    m_pResultFileLabel(new QLabel(statusBar))
+    m_pResultFileLabel(new QLabel(statusBar)),
+    m_pRangeNLabel(new QLabel(statusBar))
 
 {
     statusBar->addPermanentWidget(m_pOwnErrTableLabel, 0);
     statusBar->addPermanentWidget(m_pResultFileLabel, 0);
+    statusBar->addPermanentWidget(m_pRangeNLabel, 0);
 }
 
 void StatusLabelContainer::updateLabels(cConfData *confData)
@@ -21,4 +23,5 @@ void StatusLabelContainer::updateLabels(cConfData *confData)
     QFileInfo fiRF(confData->m_sResultFile);
     m_pResultFileLabel->setText("MED=" + (fileNameResult.isEmpty() ? QObject::tr("Keine") : fiRF.baseName()));
 
+    m_pRangeNLabel->setText(QString("ChN=%1").arg(confData->m_sRangeN));
 }

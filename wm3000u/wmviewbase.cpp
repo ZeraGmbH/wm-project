@@ -175,8 +175,6 @@ void WMViewBase::ActualizeStates()
     UpdateRecentFileList(recentOETFiles,m_ConfData.m_sOETFile);
     UpdateRecentFileList(recentResultFiles,m_ConfData.m_sResultFile);
     
-    m_pRangeNLabel->setText(QString("ChN=%1").arg(m_ConfData.m_sRangeN)); // statuszeile bereich N eintragen
-    
     switch (m_ConfData.m_nMeasMode) { // statuszeile bereich x,diff,ect eintragen
     case Un_UxAbs:
         m_pRangeXLabel->setText(QString("ChX=%1").arg(m_ConfData.m_sRangeX));
@@ -289,8 +287,6 @@ void WMViewBase::StartSlot()
 
 void WMViewBase::CreateStatusBar()
 {
-    m_pRangeNLabel=new QLabel("",this); // bereich N in statuszeile
-    statusBar()->addPermanentWidget(m_pRangeNLabel,0);
     m_pRangeXLabel=new QLabel("",this); // bereich X in statuszeile
     statusBar()->addPermanentWidget(m_pRangeXLabel,0);
     m_pRunningLabel=new QLabel("",this); // gestartet bzw. gestoppt in statuszeile

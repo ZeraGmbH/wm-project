@@ -108,7 +108,6 @@ private:
     QLabel* m_pSimulationLabel;
     QLabel* m_pRunningLabel;
     QLabel* m_pRangeXLabel;
-    QLabel* m_pRangeNLabel;
     cConfData m_ConfData;
     QLabel* m_pFreqLabel;
     QLabel* m_pIPLabel;
