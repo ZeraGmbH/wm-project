@@ -11,9 +11,6 @@
 #define WMVIEWBASE_H
 
 #include <Q3MainWindow>
-#include <QLabel>
-#include <QTimer>
-
 #include "maxrecentfiles.h"
 #include "confdata.h"
 #include "wmeditor.h"
@@ -112,11 +109,7 @@ private:
     QStringList recentResultFiles;
     wmEditor* wmEdit;
     QStringList recentMVFiles;
-    QLabel* m_pStatusLabel;
     cConfData m_ConfData;
-    QLabel* m_pFreqLabel;
-    QLabel* m_pIPLabel;
-    QLabel* m_pDummyLabel;
     int m_nrecentOEFileIds[nmaxRecentOEFiles];
     QStringList recentOETFiles;
     int m_nrecentMVFileIds[nmaxRecentMVFiles];
@@ -124,7 +117,6 @@ private:
     QStringList recentSESFiles;
     bool m_bJustified;
     bool m_bFreqQuestionable;
-    QTimer m_iPPollTimer;
     StatusLabelContainer m_statusLabelContainer;
 
     void init();
@@ -143,7 +135,6 @@ private slots:
     virtual void JustFlashExportSlot();
     virtual void JustFlashImportSlot();
     virtual void SaveDefaultSessionSlot(bool);
-    void onIpPollTimer();
 };
 
 #endif // WMVIEWBASE_H

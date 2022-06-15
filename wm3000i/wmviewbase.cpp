@@ -3,7 +3,6 @@
 #include "wmeditor.h"
 #include "widgeom.h"
 #include "ui_wmviewbase.h"
-#include "tcpconfig.h"
 #include <Q3MainWindow>
 #include <Q3FileDialog>
 #include <QTextEdit>
@@ -110,10 +109,6 @@ void WMViewBase::init()
     connect(ui->dateiBeendenAction,SIGNAL(activated()),this,SIGNAL(UIdateiBeendenActionActivated()));
     connect(ui->hilfeVersionAction,SIGNAL(activated()),this,SIGNAL(UIhilfeVersionActionActivated()));
     connect(ui->hilfeReleaseInfoAction,SIGNAL(activated()),this,SIGNAL(UIhilfeReleaseInfoActionActivated()));
-
-    connect(&m_iPPollTimer,SIGNAL(timeout()), this, SLOT(onIpPollTimer()));
-    m_iPPollTimer.setSingleShot(false);
-    m_iPPollTimer.start(3000);
 }
 
 
@@ -146,18 +141,7 @@ void WMViewBase::ActualizeStates()
     ui->messungSimulationAction->setOn(m_ConfData.m_bSimulation);
     ui->hilfeSelbsttestAction->setDisabled(m_ConfData.m_bSimulation);
 
-    if(m_ConfData.m_bSimulation) {
-        m_pStatusLabel->setText("");
-        m_pStatusLabel->setStyleSheet("QLabel {color:text;}");
-    }
-    else {
-        m_pStatusLabel->setText( m_bJustified ? tr("Justiert") : tr("Nicht justiert"));
-        m_pStatusLabel->setStyleSheet(m_bJustified ? "QLabel {color:text;}" : "QLabel {color:red;}");
-    }
-
-    m_pFreqLabel->setText( m_bFreqQuestionable ? tr("!!SignalFrequenz!!") : tr(""));
-
-    m_statusLabelContainer.updateLabels(&m_ConfData);
+    m_statusLabelContainer.updateLabels(&m_ConfData, m_bJustified, m_bFreqQuestionable);
 
     UpdateRecentFileList(recentOETFiles, m_ConfData.m_sOETFile);
     UpdateRecentFileList(recentResultFiles, m_ConfData.m_sResultFile);
@@ -260,16 +244,6 @@ void WMViewBase::StartSlot()
 
 void WMViewBase::CreateStatusBar()
 {
-    m_pStatusLabel=new QLabel("",this); // normaler ablauf oder fehlerausgaben in statuszeile
-    statusBar()->addPermanentWidget(m_pStatusLabel,0);
-    m_pFreqLabel=new QLabel("",this); // erstmal kein fehler
-    m_pFreqLabel->setStyleSheet("QLabel {color:red;}");
-    statusBar()->addPermanentWidget(m_pFreqLabel,0);
-    m_pIPLabel= new QLabel("", this);
-    statusBar()->addPermanentWidget(m_pIPLabel,0);
-
-    m_pDummyLabel=new QLabel("",this); // letztes feld ist bereich N in statuszeile
-    statusBar()->addPermanentWidget(m_pDummyLabel,1);
 }
 
 
@@ -641,11 +615,6 @@ void WMViewBase::SaveDefaultSessionSlot(bool)
 {
     SaveSession(".ses");
     emit SaveSessionSignal(".ses"); // die anderen
-}
-
-void WMViewBase::onIpPollTimer()
-{
-    m_pIPLabel->setText(QString("IP=%1").arg(getIPv4AddressList().join("/")));
 }
 
 void WMViewBase::RemoteCtrlInfoSlot(bool remote )
