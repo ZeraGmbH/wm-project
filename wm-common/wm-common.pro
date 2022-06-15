@@ -13,6 +13,7 @@ HEADERS = \
     gui/en61850monitor.h \
     gui/logfileview.h \
     gui/maxrecentfiles.h \
+    gui/statuslabelcontainer.h \
     gui/versionviewbase.h \
     gui/wmeditor.h \
     gui/wmmeasconfigbase.h \
@@ -78,6 +79,7 @@ SOURCES = \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/logfileview.cpp \
+    gui/statuslabelcontainer.cpp \
     gui/versionviewbase.cpp \
     gui/wmeditor.cpp \
     gui/wmmeasconfigbase.cpp \

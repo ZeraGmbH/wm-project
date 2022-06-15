@@ -9,6 +9,7 @@
 #include "confdata.h"
 #include "wmeditor.h"
 #include "widgeom.h"
+#include "statuslabelcontainer.h"
 
 namespace Ui {
     class WMViewBase;
@@ -113,7 +114,6 @@ private:
     QLabel* m_pFreqLabel;
     QLabel* m_pIPLabel;
     QLabel* m_pDummyLabel;
-    QLabel* m_pOETLabel;
     int m_nrecentOEFileIds[nmaxRecentOEFiles];
     QStringList recentOETFiles;
     int m_nrecentMVFileIds[nmaxRecentMVFiles];
@@ -122,6 +122,7 @@ private:
     bool m_bJustified;
     bool m_bFreqQuestionable;
     QTimer m_iPPollTimer;
+    StatusLabelContainer m_statusLabelContainer;
 
     void init();
     void destroy();

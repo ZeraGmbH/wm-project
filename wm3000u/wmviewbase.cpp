@@ -13,7 +13,8 @@
 
 WMViewBase::WMViewBase(QWidget *parent) :
     Q3MainWindow(parent),
-    ui(new Ui::WMViewBase)
+    ui(new Ui::WMViewBase),
+    m_statusLabelContainer(statusBar())
 {
     ui->setupUi((Q3MainWindow*) this);
     init();
@@ -172,11 +173,11 @@ void WMViewBase::ActualizeStates()
 
     m_pFreqLabel->setText( m_bFreqQuestionable ? tr("!!SignalFrequenz!!") : tr(""));
 
-    QFileInfo fi (m_ConfData.m_sOETFile);
-    m_pOETLabel->setText("EFT="+((m_ConfData.m_sOETFile=="") ? tr("Keine") : fi.baseName())); // statuszeile eigenfehlertabelle eintragen
+    m_statusLabelContainer.updateLabels(&m_ConfData);
+
     UpdateRecentFileList(recentOETFiles,m_ConfData.m_sOETFile);
     
-    fi.setFile(m_ConfData.m_sResultFile);
+    QFileInfo fi (m_ConfData.m_sResultFile);
     m_pResultLabel->setText("MED="+((m_ConfData.m_sResultFile=="") ? tr("Keine") : fi.baseName())); // statuszeile ergebnisdatei  eintragen
     UpdateRecentFileList(recentResultFiles,m_ConfData.m_sResultFile);
     
@@ -294,8 +295,6 @@ void WMViewBase::StartSlot()
 
 void WMViewBase::CreateStatusBar()
 {
-    m_pOETLabel=new QLabel("",this); // eigenfehlertabelle in statuszeile
-    statusBar()->addPermanentWidget(m_pOETLabel,0);
     m_pResultLabel=new QLabel("",this); // ergebnisdatei in statuszeile
     statusBar()->addPermanentWidget(m_pResultLabel,0);
     m_pRangeNLabel=new QLabel("",this); // bereich N in statuszeile
