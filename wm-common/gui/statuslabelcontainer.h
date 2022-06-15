@@ -17,22 +17,22 @@ class StatusLabelContainer : public QObject
 {
     Q_OBJECT
 public:
-    StatusLabelContainer(QStatusBar *statusBar, IStatusLabelXRangeParent* xRangeLabelParent);
+    StatusLabelContainer(IStatusLabelXRangeParent* xRangeLabelParent);
     void updateLabels(cConfData *confData, bool adjusted, bool bFreqQuestionable);
+    void CreateStatusBar(QStatusBar *statusBar, QWidget* labelParent);
 private:
-    QStatusBar *m_statusBar;
     IStatusLabelXRangeParent* m_xRangeLabelParent;
     QTimer m_iPPollTimer;
-    QLabel* m_pOwnErrTableLabel;
-    QLabel* m_pResultFileLabel;
-    QLabel* m_pRangeNLabel;
-    QLabel* m_pRangeXLabel;
-    QLabel* m_pRunningLabel;
-    QLabel* m_pSimulationLabel;
-    QLabel* m_pStatusLabel;
-    QLabel* m_pFreqLabel;
-    QLabel* m_pIPLabel;
-    QLabel* m_pDummyLabel;
+    QLabel* m_pOwnErrTableLabel = nullptr;
+    QLabel* m_pResultFileLabel = nullptr;
+    QLabel* m_pRangeNLabel = nullptr;
+    QLabel* m_pRangeXLabel = nullptr;
+    QLabel* m_pRunningLabel = nullptr;
+    QLabel* m_pSimulationLabel = nullptr;
+    QLabel* m_pStatusLabel = nullptr;
+    QLabel* m_pFreqLabel = nullptr;
+    QLabel* m_pIPLabel = nullptr;
+    QLabel* m_pDummyLabel = nullptr;
 
 private slots:
     void onIpPollTimer();

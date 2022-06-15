@@ -10,7 +10,7 @@
 WMViewBase::WMViewBase(QWidget *parent) :
     Q3MainWindow(parent),
     ui(new Ui::WMViewBase),
-    m_statusLabelContainer(statusBar(), this)
+    m_statusLabelContainer(this)
 {
     ui->setupUi((Q3MainWindow*) this);
     init();
@@ -244,6 +244,7 @@ void WMViewBase::StartSlot()
 
 void WMViewBase::CreateStatusBar()
 {
+    m_statusLabelContainer.CreateStatusBar(statusBar(), this);
 }
 
 
