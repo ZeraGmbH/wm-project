@@ -924,19 +924,6 @@ void cWM3000U::ActionHandler(int entryAHS)
                 m_bJust = false;
                 emit JustifiedSignal(false);
                 emit AffectStatus(SetQuestStat, QuestNotJustified);
-
-                s = tr("Achtung !");
-                s+="\n";
-                if (stat & 7 || m_bNoDCAdjust)
-                    s += trUtf8("Gerät ist nicht justiert !");
-                if (stat & 2)
-                    s += trUtf8("\nNicht identische Versionsnummer !");
-                if (stat & 4)
-                    s += trUtf8("\nNicht identische Seriennummer !");
-                if (m_bNoDCAdjust)
-                    s += trUtf8("\nKeine DC Justage Daten !");
-
-                QMessageBox::critical( 0, "Justage", s);
             }
             else
             {

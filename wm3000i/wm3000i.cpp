@@ -925,16 +925,6 @@ void cWM3000I::ActionHandler(int entryAHS)
                 m_bJust = false;
                 emit JustifiedSignal(false);
                 emit AffectStatus(SetQuestStat, QuestNotJustified);
-                s = tr("Achtung !");
-                s+="\n";
-                if (stat & 7)
-                    s += trUtf8("Gerät ist nicht justiert !");
-                if (stat & 2)
-                    s += trUtf8("\nNicht identische Versionsnummer !");
-                if (stat & 4)
-                    s += trUtf8("\nNicht identische Seriennummer !");
-
-                QMessageBox::critical( 0, "Justage", s);
             }
             else
             {
