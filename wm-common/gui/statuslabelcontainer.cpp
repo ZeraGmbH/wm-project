@@ -53,8 +53,8 @@ void StatusLabelContainer::CreateStatusBar(QStatusBar *statusBar, QWidget *label
     statusBar->addPermanentWidget(m_pSimulationLabel, 0);
     statusBar->addPermanentWidget(m_pStatusLabel, 0);
     statusBar->addPermanentWidget(m_pFreqLabel, 0);
-    statusBar->addPermanentWidget(m_pIPLabel, 0);
     statusBar->addPermanentWidget(m_pDummyLabel,1);
+    statusBar->addPermanentWidget(m_pIPLabel, 0);
 
     connect(&m_iPPollTimer,SIGNAL(timeout()), this, SLOT(onIpPollTimer()));
     m_iPPollTimer.setSingleShot(false);
