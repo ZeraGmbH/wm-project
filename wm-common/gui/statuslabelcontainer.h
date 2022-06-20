@@ -32,7 +32,6 @@ private:
     QLabel* m_pStatusLabel = nullptr;
     QLabel* m_pFreqLabel = nullptr;
     QLabel* m_pIPLabel = nullptr;
-    QLabel* m_pDummyLabel = nullptr;
 
 private slots:
     void onIpPollTimer();

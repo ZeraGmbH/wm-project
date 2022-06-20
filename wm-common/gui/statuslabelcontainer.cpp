@@ -43,17 +43,18 @@ void StatusLabelContainer::CreateStatusBar(QStatusBar *statusBar, QWidget *label
     m_pStatusLabel = new QLabel(labelParent);
     m_pFreqLabel = new QLabel(labelParent);
     m_pIPLabel = new QLabel(labelParent);
-    m_pDummyLabel = new QLabel(labelParent);
 
     statusBar->addPermanentWidget(m_pOwnErrTableLabel, 0);
     statusBar->addPermanentWidget(m_pResultFileLabel, 0);
+    statusBar->addPermanentWidget(new QFrame(labelParent), 1);
     statusBar->addPermanentWidget(m_pRangeNLabel, 0);
     statusBar->addPermanentWidget(m_pRangeXLabel, 0);
+    statusBar->addPermanentWidget(new QFrame(labelParent), 1);
     statusBar->addPermanentWidget(m_pRunningLabel, 0);
     statusBar->addPermanentWidget(m_pSimulationLabel, 0);
     statusBar->addPermanentWidget(m_pStatusLabel, 0);
     statusBar->addPermanentWidget(m_pFreqLabel, 0);
-    statusBar->addPermanentWidget(m_pDummyLabel,1);
+    statusBar->addPermanentWidget(new QFrame(labelParent), 1);
     statusBar->addPermanentWidget(m_pIPLabel, 0);
 
     connect(&m_iPPollTimer,SIGNAL(timeout()), this, SLOT(onIpPollTimer()));
