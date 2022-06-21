@@ -11,10 +11,13 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-
 HEADERS = \
-    main-unittest.h
+    test_sessionfilenamegen.h
 
 SOURCES = \
-    main-unittest.cpp
+    test_sessionfilenamegen.cpp
 
+INCLUDEPATH += \
+    ../../wm-common/settings
+
+LIBS += -L../../wm-common -lwm-common

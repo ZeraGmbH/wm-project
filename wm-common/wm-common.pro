@@ -48,6 +48,7 @@ HEADERS = \
     settings/confdata.h \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
+    settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
     settings/sessionappendcustom.h \
     settings/sessionappendstrategy.h \
@@ -103,6 +104,7 @@ SOURCES = \
     scpi/scpistatsyst.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
+    settings/sessionfilenamegen.cpp \
     settings/sessionreadwrite.cpp \
     service-interfaces/dspiface.cpp \
     service-interfaces/zhclientsocket.cpp \
