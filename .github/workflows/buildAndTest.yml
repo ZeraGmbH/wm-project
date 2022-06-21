@@ -26,3 +26,7 @@ jobs:
           qmake-qt4 $GITHUB_WORKSPACE/wm-project.pro
 
           make -j $(getconf _NPROCESSORS_ONLN)
+      - name: unittests
+        run: |
+          cd "$HOME/targetbuild"
+          make check
