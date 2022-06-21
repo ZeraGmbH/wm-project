@@ -1,0 +1,28 @@
+name: build and unittest
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+
+    container:
+      image: schnitzeltony/fedora-qt5:32
+    steps:
+      - uses: actions/checkout@master
+      - name: Build
+        run: |
+          echo $HOME
+          echo $GITHUB_WORKSPACE
+          cd $HOME
+          mkdir -p "$HOME/targetbuild"
+          cd "$HOME/targetbuild"
+
+          qmake-qt4 -query
+          qmake-qt4 $GITHUB_WORKSPACE/wm-project.pro
+
+          make -j $(getconf _NPROCESSORS_ONLN)
