@@ -1,6 +1,5 @@
 #include "test_sessionfilenamegen.h"
 #include "sessionfilenamegen.h"
-#include "sessionreadwrite.h"
 #include <QTest>
 #include <QDir>
 
@@ -56,28 +55,6 @@ void test_sessionfilenamegen::nameForSessionFull()
 {
     SessionFileNameGen sessNameGen(machineName);
     QString expectedName = QDir::homePath() + "/." + machineName + "/" + objName + sessionName;
-    QString genName = sessNameGen.getSessionFileName(objName, sessionName);
-    QCOMPARE(genName, expectedName);
-}
-
-void test_sessionfilenamegen::cmpOldNameSessionNameSes()
-{
-    SessionReadWrite sessReadWrite(machineName);
-    QWidget widg;
-    widg.setObjectName(objName);
-    QString expectedName = sessReadWrite.getSessionFileName(&widg, dotSes);
-    SessionFileNameGen sessNameGen(machineName);
-    QString genName = sessNameGen.getSessionFileName(objName, dotSes);
-    QCOMPARE(genName, expectedName);
-}
-
-void test_sessionfilenamegen::cmpOldNameSessionNameFull()
-{
-    SessionReadWrite sessReadWrite(machineName);
-    QWidget widg;
-    widg.setObjectName(objName);
-    QString expectedName = sessReadWrite.getSessionFileName(&widg, sessionName);
-    SessionFileNameGen sessNameGen(machineName);
     QString genName = sessNameGen.getSessionFileName(objName, sessionName);
     QCOMPARE(genName, expectedName);
 }
