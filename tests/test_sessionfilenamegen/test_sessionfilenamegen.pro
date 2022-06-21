@@ -1,5 +1,5 @@
 QT += testlib
-QT += widgets
+QT -= gui
 
 # enable make check
 CONFIG += testcase
