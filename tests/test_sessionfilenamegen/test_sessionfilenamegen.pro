@@ -1,5 +1,5 @@
 QT += testlib
-QT -= gui
+QT += widgets
 
 # enable make check
 CONFIG += testcase
@@ -18,6 +18,7 @@ SOURCES = \
     test_sessionfilenamegen.cpp
 
 INCLUDEPATH += \
+    ../../wm-common \
     ../../wm-common/settings
 
 LIBS += -L../../wm-common -lwm-common

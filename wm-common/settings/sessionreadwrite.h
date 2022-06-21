@@ -14,8 +14,8 @@ public:
     virtual ~SessionReadWrite();
     void writeSession(QWidget *widget, cWidgetGeometry geometry, QString session);
     cWidgetGeometry readSession(QWidget *widget, QString session);
-private:
     QString getSessionFileName(QWidget *widget, QString session);
+private:
     QString m_SessionPath;
     SessionAppendStrategy* m_appendStrategy;
 };

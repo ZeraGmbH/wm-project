@@ -1,13 +1,16 @@
 #include "test_sessionfilenamegen.h"
 #include "sessionfilenamegen.h"
+#include "sessionreadwrite.h"
 #include <QTest>
 #include <QDir>
 
-QTEST_APPLESS_MAIN(test_sessionfilenamegen)
+QTEST_MAIN(test_sessionfilenamegen)
 
 static const QString machineName = "foo-machine";
 static const QString customHome = "/tmp";
 static const QString objName = "testObj";
+static const QString dotSes = ".ses";
+static const QString sessionName = "session.ses";
 
 void test_sessionfilenamegen::defaultHomePath()
 {
@@ -41,12 +44,40 @@ void test_sessionfilenamegen::nameForNoSessionName()
     QCOMPARE(genName, expectedName);
 }
 
-void test_sessionfilenamegen::nameForSessionSet()
+void test_sessionfilenamegen::nameForSessionNameSes()
 {
-    // yes this is ugly but we have to remain compatible
     SessionFileNameGen sessNameGen(machineName);
-    QString sessionName = "session.ses";
+    QString expectedName = QDir::homePath() + "/." + machineName + "/" + objName + dotSes;
+    QString genName = sessNameGen.getSessionFileName(objName, dotSes);
+    QCOMPARE(genName, expectedName);
+}
+
+void test_sessionfilenamegen::nameForSessionFull()
+{
+    SessionFileNameGen sessNameGen(machineName);
     QString expectedName = QDir::homePath() + "/." + machineName + "/" + objName + sessionName;
+    QString genName = sessNameGen.getSessionFileName(objName, sessionName);
+    QCOMPARE(genName, expectedName);
+}
+
+void test_sessionfilenamegen::cmpOldNameSessionNameSes()
+{
+    SessionReadWrite sessReadWrite(machineName);
+    QWidget widg;
+    widg.setObjectName(objName);
+    QString expectedName = sessReadWrite.getSessionFileName(&widg, dotSes);
+    SessionFileNameGen sessNameGen(machineName);
+    QString genName = sessNameGen.getSessionFileName(objName, dotSes);
+    QCOMPARE(genName, expectedName);
+}
+
+void test_sessionfilenamegen::cmpOldNameSessionNameFull()
+{
+    SessionReadWrite sessReadWrite(machineName);
+    QWidget widg;
+    widg.setObjectName(objName);
+    QString expectedName = sessReadWrite.getSessionFileName(&widg, sessionName);
+    SessionFileNameGen sessNameGen(machineName);
     QString genName = sessNameGen.getSessionFileName(objName, sessionName);
     QCOMPARE(genName, expectedName);
 }

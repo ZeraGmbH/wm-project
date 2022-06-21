@@ -12,7 +12,11 @@ private slots:
     void customHomePath();
     void customHomePathTrailingSeparator();
     void nameForNoSessionName();
-    void nameForSessionSet();
+    // remain compatible for now...
+    void nameForSessionNameSes();
+    void nameForSessionFull();
+    void cmpOldNameSessionNameSes();
+    void cmpOldNameSessionNameFull();
 };
 
 #endif // TEST_SESSIONFILENAME_H
