@@ -19,7 +19,7 @@ namespace Ui {
     class WMMeasValuesBase;
 }
 
-class WMMeasValuesBase : public QDialog, public ISessionStreamHandlerHandler
+class WMMeasValuesBase : public QDialog, public ISessionStream
 {
     Q_OBJECT
 

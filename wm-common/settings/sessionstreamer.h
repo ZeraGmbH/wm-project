@@ -1,7 +1,7 @@
 #ifndef SESSIONSTREAMER_H
 #define SESSIONSTREAMER_H
 
-#include "sessionstreamzero.h"
+#include "streamnull.h"
 #include "sessionfilenamegen.h"
 #include "sessiondefaulterstrategy.h"
 #include <QString>
@@ -12,7 +12,7 @@ public:
     SessionStreamer(QString machineName,
                     ISessionDefaulterStrategyPtr sessionDefaulter,
                     QString homePath = QDir::homePath(),
-                    IStreamStrategyPtr streamStrategy = SessionStreamZeroPtr::create().staticCast<IStreamStrategy>());
+                    IStreamStrategyPtr streamStrategy = StreamNullPtr::create().staticCast<IStreamStrategy>());
     void readSession(QString sessionName = "");
     bool writeSession(QString sessionName = "");
 private:
