@@ -51,7 +51,7 @@ HEADERS = \
     settings/sessiondefaulterstrategy.h \
     settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
-    settings/sessionstreamcustom.h \
+    settings/sessionstreamhandler.h \
     settings/sessionstreamzero.h \
     settings/sessionstreamer.h \
     settings/streamstrategy.h \

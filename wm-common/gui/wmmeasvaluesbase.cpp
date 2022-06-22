@@ -16,7 +16,7 @@
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<eUnit *> lpUnitList) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionReadWrite(machineName, new SessionStreamCustom(this))
+    m_sessionReadWrite(machineName, new SessionStreamHandler(this))
 {
     ui->setupUi(this);
     init(lpUnitList);
