@@ -1,10 +1,9 @@
 #include "sessionstreamer.h"
 
 SessionStreamer::SessionStreamer(QString machineName,
-                                 ISessionDefaulterStrategyPtr sessionDefaulter, QString homePath,
-                                 IStreamStrategyPtr streamStrategy) :
-    m_streamStrategy(streamStrategy),
-    m_sessionDefaulter(sessionDefaulter),
+                                 ISessionStreamImplementor *sessionStreamImplementor,
+                                 QString homePath) :
+    m_sessionStreamImplementor(sessionStreamImplementor),
     m_sessionFileNameGen(machineName, homePath)
 {
 }
