@@ -4,13 +4,13 @@
 #include <QString>
 #include <QWidget>
 #include "streamstrategy.h"
-#include "sessionstreamzero.h"
+#include "streamnull.h"
 #include "widgeom.h"
 
 class SessionReadWrite
 {
 public:
-    SessionReadWrite(QString machineName, IStreamStrategy* streamStrategy = new SessionStreamZero);
+    SessionReadWrite(QString machineName, IStreamStrategy* streamStrategy = new StreamNull);
     virtual ~SessionReadWrite();
     void writeSession(QWidget *widget, cWidgetGeometry geometry, QString session);
     cWidgetGeometry readSession(QWidget *widget, QString session);

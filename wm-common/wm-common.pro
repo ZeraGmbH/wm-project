@@ -52,8 +52,8 @@ HEADERS = \
     settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
     settings/sessionstreamhandler.h \
-    settings/sessionstreamzero.h \
     settings/sessionstreamer.h \
+    settings/streamnull.h \
     settings/streamstrategy.h \
     service-interfaces/dspiface.h \
     service-interfaces/zhclientsocket.h \

@@ -3,7 +3,7 @@
 
 #include "streamstrategy.h"
 
-class ISessionStreamHandlerHandler
+class ISessionStream
 {
 private:
     virtual void readSession(QDataStream& stream) = 0;
@@ -14,11 +14,11 @@ private:
 class SessionStreamHandler : public IStreamStrategy
 {
 public:
-    SessionStreamHandler(ISessionStreamHandlerHandler *sessionCustomHandler) : m_sessionCustomHandler(sessionCustomHandler) {}
-    virtual void read(QDataStream& stream)  override { m_sessionCustomHandler->readSession(stream); }
-    virtual void write(QDataStream& stream) override { m_sessionCustomHandler->writeSession(stream); }
+    SessionStreamHandler(ISessionStream *sessionStream) : m_sessionStream(sessionStream) {}
+    virtual void read(QDataStream& stream)  override { m_sessionStream->readSession(stream); }
+    virtual void write(QDataStream& stream) override { m_sessionStream->writeSession(stream); }
 protected:
-    ISessionStreamHandlerHandler *m_sessionCustomHandler;
+    ISessionStream *m_sessionStream;
 };
 
 #endif // SESSIONSTREAMHANDLER_H
