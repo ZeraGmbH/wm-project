@@ -48,7 +48,8 @@ protected:
     virtual void contextMenuEvent( QContextMenuEvent * ) override;
 
 private:
-    virtual void transferSessionCustom(QDataStream& stream, bool write) override;
+    virtual void readSession(QDataStream& stream) override;
+    virtual void writeSession(QDataStream& stream) override;
 
     Ui::WMMeasValuesBase *ui;
     cWidgetGeometry m_widGeometry;

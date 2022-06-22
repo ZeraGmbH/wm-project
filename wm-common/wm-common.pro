@@ -48,11 +48,13 @@ HEADERS = \
     settings/confdata.h \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
+    settings/sessiondefaulterstrategy.h \
     settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
     settings/sessionstreamcustom.h \
-    settings/sessionstreamstrategy.h \
     settings/sessionstreamzero.h \
+    settings/sessionstreamer.h \
+    settings/streamstrategy.h \
     service-interfaces/dspiface.h \
     service-interfaces/zhclientsocket.h \
     service-interfaces/zhserveriface.h \
@@ -115,6 +117,7 @@ SOURCES = \
     movingwindowfilter.cpp \
     range.cpp \
     releaseinfo.cpp \
+    settings/sessionstreamer.cpp \
     tcpconfig.cpp \
     tools.cpp \
     widgeom.cpp \

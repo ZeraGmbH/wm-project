@@ -1,21 +1,22 @@
 #ifndef SESSIONSTREAMCUSTOM_H
 #define SESSIONSTREAMCUSTOM_H
 
-#include "sessionstreamstrategy.h"
+#include "streamstrategy.h"
 
 class ISessionStreamCustomHandler
 {
 private:
-    virtual void transferSessionCustom(QDataStream& stream, bool write) = 0;
+    virtual void readSession(QDataStream& stream) = 0;
+    virtual void writeSession(QDataStream& stream) = 0;
     friend class SessionStreamCustom;
 };
 
-class SessionStreamCustom : public SessionStreamStrategy
+class SessionStreamCustom : public IStreamStrategy
 {
 public:
     SessionStreamCustom(ISessionStreamCustomHandler *sessionCustomHandler) : m_sessionCustomHandler(sessionCustomHandler) {}
-    virtual void readSession(QDataStream& stream)  override { m_sessionCustomHandler->transferSessionCustom(stream, false); }
-    virtual void writeSession(QDataStream& stream) override { m_sessionCustomHandler->transferSessionCustom(stream, true); }
+    virtual void read(QDataStream& stream)  override { m_sessionCustomHandler->readSession(stream); }
+    virtual void write(QDataStream& stream) override { m_sessionCustomHandler->writeSession(stream); }
 protected:
     ISessionStreamCustomHandler *m_sessionCustomHandler;
 };

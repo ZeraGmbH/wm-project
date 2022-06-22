@@ -1,13 +1,15 @@
 #ifndef SESSIONHELPERSTREAMZERO_H
 #define SESSIONHELPERSTREAMZERO_H
 
-#include "sessionstreamstrategy.h"
+#include "streamstrategy.h"
 
-class SessionStreamZero : public SessionStreamStrategy
+class SessionStreamZero : public IStreamStrategy
 {
 public:
-    virtual void readSession(QDataStream& stream)  override { Q_UNUSED(stream) }
-    virtual void writeSession(QDataStream& stream) override { Q_UNUSED(stream) }
+    virtual void read(QDataStream& stream)  override { Q_UNUSED(stream) }
+    virtual void write(QDataStream& stream) override { Q_UNUSED(stream) }
 };
+
+typedef QSharedPointer<SessionStreamZero> SessionStreamZeroPtr;
 
 #endif // SESSIONHELPERSTREAMZERO_H
