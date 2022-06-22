@@ -42,7 +42,7 @@ void test_sessionstreamer::cleanup()
     removeDir(testHomePath);
 }
 
-void test_sessionstreamer::setDefaultsOnWriteFailForFileInvalid()
+void test_sessionstreamer::setDefaultsOnWriteCannotOpenFile()
 {
     SessionStreamImplementorTest streamImp;
     SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
@@ -50,7 +50,7 @@ void test_sessionstreamer::setDefaultsOnWriteFailForFileInvalid()
     QCOMPARE(streamImp.getDefaultSetCount(), 1);
 }
 
-void test_sessionstreamer::setDefaultsOnReadFailForFileInvalid()
+void test_sessionstreamer::setDefaultsOnReadCannotOpenFile()
 {
     SessionStreamImplementorTest streamImp;
     SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
