@@ -58,7 +58,7 @@ void test_sessionstreamer::setDefaultsOnReadCannotOpenFile()
     QCOMPARE(streamImp.getDefaultSetCount(), 1);
 }
 
-void test_sessionstreamer::noDefaultsOnWriteFileValid()
+void test_sessionstreamer::noDefaultsOnWriteCanOpenFile()
 {
     SessionStreamImplementorTest streamImp;
     SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
@@ -74,7 +74,7 @@ static bool genEmptySessionFile()
     return file.open(QFile::WriteOnly);
 }
 
-void test_sessionstreamer::noDefaultsOnReadFileExist()
+void test_sessionstreamer::noDefaultsOnReadCanOpenFile()
 {
     QVERIFY(genEmptySessionFile());
 

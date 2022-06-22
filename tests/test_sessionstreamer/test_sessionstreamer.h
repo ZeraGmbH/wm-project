@@ -13,8 +13,8 @@ private slots:
     void setDefaultsOnWriteCannotOpenFile();
     void setDefaultsOnReadCannotOpenFile();
 
-    void noDefaultsOnWriteFileValid();
-    void noDefaultsOnReadFileExist();
+    void noDefaultsOnWriteCanOpenFile();
+    void noDefaultsOnReadCanOpenFile();
 };
 
 #endif // TEST_SESSIONSTREAMER_H
