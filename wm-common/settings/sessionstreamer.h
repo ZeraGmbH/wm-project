@@ -3,6 +3,7 @@
 
 #include "sessionfilenamegen.h"
 #include <QString>
+#include <QFile>
 
 class ISessionStreamImplementor
 {
@@ -12,16 +13,17 @@ public:
     virtual void setDefaults() = 0;
 };
 
-
 class SessionStreamer
 {
 public:
     SessionStreamer(QString machineName,
                     ISessionStreamImplementor *sessionStreamImplementor,
                     QString homePath = QDir::homePath());
-    void readSession(QString sessionName = "");
-    bool writeSession(QString sessionName = "");
+    void readSession(QString baseName, QString sessionName = "");
+    bool writeSession(QString baseName, QString sessionName = "");
 private:
+    void createDir(QString dir);
+
     ISessionStreamImplementor* m_sessionStreamImplementor;
     SessionFileNameGen m_sessionFileNameGen;
 };

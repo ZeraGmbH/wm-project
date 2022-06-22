@@ -8,7 +8,13 @@ class test_sessionstreamer : public QObject
 {
     Q_OBJECT
 private slots:
-    void writeErrorReturnsFalse();
+    void cleanup();
+
+    void setDefaultsOnWriteFailForFileInvalid();
+    void setDefaultsOnReadFailForFileInvalid();
+
+    void noDefaultsOnWriteFileValid();
+    void noDefaultsOnReadFileExist();
 };
 
 #endif // TEST_SESSIONSTREAMER_H
