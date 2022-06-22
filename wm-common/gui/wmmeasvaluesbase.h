@@ -13,13 +13,13 @@
 #include "formatinfo.h"
 #include "wmactvalues.h"
 #include "sessionreadwrite.h"
-#include "sessionappendcustom.h"
+#include "sessionstreamcustom.h"
 
 namespace Ui {
     class WMMeasValuesBase;
 }
 
-class WMMeasValuesBase : public QDialog, public ISessionAppendCustomHandler
+class WMMeasValuesBase : public QDialog, public ISessionStreamCustomHandler
 {
     Q_OBJECT
 

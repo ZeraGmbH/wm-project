@@ -50,9 +50,9 @@ HEADERS = \
     settings/ownerrorviewdata.h \
     settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
-    settings/sessionappendcustom.h \
-    settings/sessionappendstrategy.h \
-    settings/sessionappendzero.h \
+    settings/sessionstreamcustom.h \
+    settings/sessionstreamstrategy.h \
+    settings/sessionstreamzero.h \
     service-interfaces/dspiface.h \
     service-interfaces/zhclientsocket.h \
     service-interfaces/zhserveriface.h \
