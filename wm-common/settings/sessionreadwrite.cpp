@@ -1,7 +1,7 @@
 #include "sessionreadwrite.h"
 #include <QDir>
 
-SessionReadWrite::SessionReadWrite(QString machineName, SessionStreamStrategy *streamStrategy) :
+SessionReadWrite::SessionReadWrite(QString machineName, IStreamStrategy *streamStrategy) :
     m_SessionPath(QString("%1/.%2").arg(QDir::homePath(), machineName)),
     m_streamStrategy(streamStrategy)
 {
@@ -27,7 +27,7 @@ void SessionReadWrite::writeSession(QWidget *widget, cWidgetGeometry geometry, Q
 
         QDataStream stream( &file );
         stream << geometry;
-        m_streamStrategy->writeSession(stream);
+        m_streamStrategy->write(stream);
         file.close();
     }
 }
@@ -46,7 +46,7 @@ cWidgetGeometry SessionReadWrite::readSession(QWidget *widget, QString session)
             widget->show();
         }
         widget->move(geometry.m_Point);
-        m_streamStrategy->readSession(stream);
+        m_streamStrategy->read(stream);
         file.close();
     }
     return geometry;

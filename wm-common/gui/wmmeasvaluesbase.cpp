@@ -259,24 +259,22 @@ void WMMeasValuesBase::contextMenuEvent( QContextMenuEvent * )
     m_pContextMenu->show();
 }
 
-void WMMeasValuesBase::transferSessionCustom(QDataStream &stream, bool write)
+void WMMeasValuesBase::readSession(QDataStream &stream)
 {
-    if(write) {
-        for (int i = 0; i < 4; i++)
-            stream << m_Format[i];
-
-        stream << m_nDisplayMode;
-        stream << m_nLPDisplayMode;
-    }
-    else {
-        for (int i = 0; i< 4; i++)
-            stream >> m_Format[i];
-
-        stream >> m_nDisplayMode;
-        stream >> m_nLPDisplayMode;
-    }
+    for (int i = 0; i< 4; i++)
+        stream >> m_Format[i];
+    stream >> m_nDisplayMode;
+    stream >> m_nLPDisplayMode;
 }
 
+void WMMeasValuesBase::writeSession(QDataStream &stream)
+{
+    for (int i = 0; i < 4; i++)
+        stream << m_Format[i];
+
+    stream << m_nDisplayMode;
+    stream << m_nLPDisplayMode;
+}
 
 void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* fi)
 {
