@@ -1,23 +1,28 @@
 #ifndef SESSIONSTREAMER_H
 #define SESSIONSTREAMER_H
 
-#include "streamnull.h"
 #include "sessionfilenamegen.h"
-#include "sessiondefaulterstrategy.h"
 #include <QString>
+
+class ISessionStreamImplementor
+{
+public:
+    virtual void readStream(QDataStream& stream) = 0;
+    virtual void writeStream(QDataStream& stream) = 0;
+    virtual void setDefaults() = 0;
+};
+
 
 class SessionStreamer
 {
 public:
     SessionStreamer(QString machineName,
-                    ISessionDefaulterStrategyPtr sessionDefaulter,
-                    QString homePath = QDir::homePath(),
-                    IStreamStrategyPtr streamStrategy = StreamNullPtr::create().staticCast<IStreamStrategy>());
+                    ISessionStreamImplementor *sessionStreamImplementor,
+                    QString homePath = QDir::homePath());
     void readSession(QString sessionName = "");
     bool writeSession(QString sessionName = "");
 private:
-    IStreamStrategyPtr m_streamStrategy;
-    ISessionDefaulterStrategyPtr m_sessionDefaulter;
+    ISessionStreamImplementor* m_sessionStreamImplementor;
     SessionFileNameGen m_sessionFileNameGen;
 };
 

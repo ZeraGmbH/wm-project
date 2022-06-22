@@ -48,7 +48,6 @@ HEADERS = \
     settings/confdata.h \
     settings/ethadress.h \
     settings/ownerrorviewdata.h \
-    settings/sessiondefaulterstrategy.h \
     settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
     settings/sessionstreamhandler.h \
