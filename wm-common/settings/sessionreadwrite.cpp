@@ -1,15 +1,15 @@
 #include "sessionreadwrite.h"
 #include <QDir>
 
-SessionReadWrite::SessionReadWrite(QString machineName, SessionAppendStrategy *appendStrategy) :
+SessionReadWrite::SessionReadWrite(QString machineName, SessionStreamStrategy *streamStrategy) :
     m_SessionPath(QString("%1/.%2").arg(QDir::homePath(), machineName)),
-    m_appendStrategy(appendStrategy)
+    m_streamStrategy(streamStrategy)
 {
 }
 
 SessionReadWrite::~SessionReadWrite()
 {
-    delete m_appendStrategy;
+    delete m_streamStrategy;
 }
 
 void SessionReadWrite::writeSession(QWidget *widget, cWidgetGeometry geometry, QString session)
@@ -27,7 +27,7 @@ void SessionReadWrite::writeSession(QWidget *widget, cWidgetGeometry geometry, Q
 
         QDataStream stream( &file );
         stream << geometry;
-        m_appendStrategy->writeSessionAppend(stream);
+        m_streamStrategy->writeSession(stream);
         file.close();
     }
 }
@@ -46,7 +46,7 @@ cWidgetGeometry SessionReadWrite::readSession(QWidget *widget, QString session)
             widget->show();
         }
         widget->move(geometry.m_Point);
-        m_appendStrategy->readSessionAppend(stream);
+        m_streamStrategy->readSession(stream);
         file.close();
     }
     return geometry;
