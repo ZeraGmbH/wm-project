@@ -2,6 +2,9 @@
 #include "sessionstreamer.h"
 #include <QTest>
 
+// Invalid path /dev/null based upon
+// https://stackoverflow.com/questions/1311037/are-there-any-invalid-linux-filenames
+static const QString testInvalidHomePath = "/dev/null";
 static const QString testHomePath = "/tmp/test_sessionstreamer";
 static const QString testMachineName = "test-machine";
 static const QString testSessionBaseName = "test-base";
@@ -42,7 +45,7 @@ void test_sessionstreamer::cleanup()
 void test_sessionstreamer::setDefaultsOnWriteFailForFileInvalid()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, "/home_path_that_is_not_available");
+    SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
     sessionStreamer.writeSession(testSessionBaseName);
     QCOMPARE(streamImp.getDefaultSetCount(), 1);
 }
@@ -50,7 +53,7 @@ void test_sessionstreamer::setDefaultsOnWriteFailForFileInvalid()
 void test_sessionstreamer::setDefaultsOnReadFailForFileInvalid()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, "/home_path_that_is_not_available");
+    SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
     sessionStreamer.readSession(testSessionBaseName);
     QCOMPARE(streamImp.getDefaultSetCount(), 1);
 }
