@@ -10,8 +10,8 @@ class test_sessionstreamer : public QObject
 private slots:
     void cleanup();
 
-    void setDefaultsOnWriteFailForFileInvalid();
-    void setDefaultsOnReadFailForFileInvalid();
+    void setDefaultsOnWriteCannotOpenFile();
+    void setDefaultsOnReadCannotOpenFile();
 
     void noDefaultsOnWriteFileValid();
     void noDefaultsOnReadFileExist();
