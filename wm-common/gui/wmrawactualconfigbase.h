@@ -1,12 +1,3 @@
-/****************************************************************************
-** Form interface generated from reading ui file 'wmrawactualconfigbase.ui'
-**
-** Created: Mi Sep 19 12:39:28 2012
-**      by: The User Interface Compiler ($Id: qt/main.cpp   3.3.4   edited Nov 24 2003 $)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
-
 #ifndef WMRAWACTUALCONFIGBASE_H
 #define WMRAWACTUALCONFIGBASE_H
 
