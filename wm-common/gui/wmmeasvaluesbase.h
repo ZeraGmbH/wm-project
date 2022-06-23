@@ -8,7 +8,7 @@
 
 #include "bigletter.h"
 #include "confdata.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "wmmeasconfigbase.h"
 #include "formatinfo.h"
 #include "wmactvalues.h"
@@ -52,7 +52,7 @@ private:
     virtual void writeSession(QDataStream& stream) override;
 
     Ui::WMMeasValuesBase *ui;
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
     cwmActValues m_ActValues;
     cConfData m_ConfData;
     WMMeasConfigBase* m_pContextMenu;

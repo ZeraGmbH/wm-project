@@ -16,7 +16,7 @@
 #include <QTimer>
 
 #include "ownerrorviewdata.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "sessionreadwrite.h"
 
 
@@ -48,7 +48,7 @@ protected:
 
 private:
     Ui::WMOeViewBase *ui;
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
     cOwnErrorViewData m_OwnErrorView;
     QTimer m_Timer;
     SessionReadWrite m_sessionReadWrite;

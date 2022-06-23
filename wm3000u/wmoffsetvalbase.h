@@ -6,7 +6,7 @@
 #include <QTimer>
 
 #include "wm3000u.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "confdata.h"
 #include "tools.h"
 
@@ -39,7 +39,7 @@ protected:
 private:
     Ui::WMOffsetValBase *ui;
     tJustValues m_JustValues;
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
 
     QTimer m_Timer;
 

@@ -5,15 +5,15 @@
 #include <QWidget>
 #include "streamstrategy.h"
 #include "streamnull.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 
 class SessionReadWrite
 {
 public:
     SessionReadWrite(QString machineName, IStreamStrategy* streamStrategy = new StreamNull);
     virtual ~SessionReadWrite();
-    void writeSession(QWidget *widget, cWidgetGeometry geometry, QString session);
-    cWidgetGeometry readSession(QWidget *widget, QString session);
+    void writeSession(QWidget *widget, WidgetGeometry geometry, QString session);
+    WidgetGeometry readSession(QWidget *widget, QString session);
     QString getSessionFileName(QWidget *widget, QString session);
 private:
     QString m_SessionPath;

@@ -12,7 +12,7 @@ SessionReadWrite::~SessionReadWrite()
     delete m_streamStrategy;
 }
 
-void SessionReadWrite::writeSession(QWidget *widget, cWidgetGeometry geometry, QString session)
+void SessionReadWrite::writeSession(QWidget *widget, WidgetGeometry geometry, QString session)
 {
     if(!QDir(m_SessionPath).exists()) {
         QDir().mkdir(m_SessionPath);
@@ -22,8 +22,8 @@ void SessionReadWrite::writeSession(QWidget *widget, cWidgetGeometry geometry, Q
         file.at(0);
         int vi = (widget->isVisible()) ? 1 : 0;
         if (vi)
-            geometry.SetGeometry(widget->pos(),widget->size());
-        geometry.SetVisible(vi);
+            geometry.setGeometry(widget->pos(),widget->size());
+        geometry.setVisible(vi);
 
         QDataStream stream( &file );
         stream << geometry;
@@ -32,20 +32,20 @@ void SessionReadWrite::writeSession(QWidget *widget, cWidgetGeometry geometry, Q
     }
 }
 
-cWidgetGeometry SessionReadWrite::readSession(QWidget *widget, QString session)
+WidgetGeometry SessionReadWrite::readSession(QWidget *widget, QString session)
 {
-    cWidgetGeometry geometry;
+    WidgetGeometry geometry;
     QFile file(getSessionFileName(widget, session));
     if ( file.open( QIODevice::ReadOnly ) ) {
         QDataStream stream( &file );
         stream >> geometry;
         widget->hide();
-        widget->resize(geometry.m_Size);
-        widget->move(geometry.m_Point);
-        if (geometry.vi) {
+        widget->resize(geometry.getSize());
+        widget->move(geometry.getPoint());
+        if (geometry.getVisible()) {
             widget->show();
         }
-        widget->move(geometry.m_Point);
+        widget->move(geometry.getPoint());
         m_streamStrategy->read(stream);
         file.close();
     }

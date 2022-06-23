@@ -38,7 +38,7 @@ signals:
     void isVisibleSignal(bool);    
     
 private:
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
     QTimer m_timerDelayShow;
     QStringList m_loglist;
     QTimer m_Timer;

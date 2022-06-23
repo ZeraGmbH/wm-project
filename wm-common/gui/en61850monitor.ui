@@ -489,7 +489,7 @@
  </customwidgets>
  <includes>
   <include location="local">en61850.h</include>
-  <include location="local">widgeom.h</include>
+  <include location="local">widgetgeometry.h</include>
  </includes>
  <resources/>
  <connections>

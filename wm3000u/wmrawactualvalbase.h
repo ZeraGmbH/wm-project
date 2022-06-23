@@ -6,7 +6,7 @@
 #include <QTimer>
 
 #include "wmactvalues.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "confdata.h"
 #include "wmrawactualconfigbase.h"
 #include "tools.h"
@@ -45,7 +45,7 @@ private:
     Ui::WMRawActualValBase *ui;
     int AmplPrimSekMode;
     cwmActValues m_ActValues;
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
     cConfData *m_pConfData;
     int AmplDispMode;
     int WinkelDispMode;
