@@ -18,6 +18,9 @@ private slots:
 
     void readStreamCalled();
     void writeStreamCalled();
+
+    void writeCreatesEmptyFile();
+    void writeCreatesNonEmptyFile();
 };
 
 #endif // TEST_SESSIONSTREAMER_H
