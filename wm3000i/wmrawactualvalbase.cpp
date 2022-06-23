@@ -85,97 +85,97 @@ void WMRawActualValBase::ShowHideAVSlot( bool b)
 
 void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
 {
-        m_ActValues = *ActValues;
-        // hier wird später die Anzeige bedient
-        if (isVisible()) {
-            double phi;
-            double radgrad = 57.295779; // 360/(2*PI) winkel sind im bogenmass
+    m_ActValues = *ActValues;
+    // hier wird später die Anzeige bedient
+    if (isVisible()) {
+        double phi;
+        double radgrad = 57.295779; // 360/(2*PI) winkel sind im bogenmass
 
 
-            double ampl;
-            if (PrimSekDispMode == prim)
-            {
-                if (m_pConfData->m_bDCmeasurement)
-                    ampl = m_ActValues.VekN.re();
-                else
-                    ampl = fabs(m_ActValues.VekN);
-            }
+        double ampl;
+        if (PrimSekDispMode == prim)
+        {
+            if (m_pConfData->m_bDCmeasurement)
+                ampl = m_ActValues.VekN.re();
             else
-            {
-                if (m_pConfData->m_bDCmeasurement)
-                    ampl = m_ActValues.VekNSek.re();
-                else
-                    ampl = fabs(m_ActValues.VekNSek);
-            }
-
-            if (AmplDispMode == x1_SQRT2 && !m_pConfData->m_bDCmeasurement)
-                ampl/=1.414213562;
-
-            ui->XnAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );
-
-            phi = m_ActValues.PHIN; // winkel sind zwischen 0 .. 2PI
-            if (WinkelDispMode == techpos)
-                phi = PI2 - phi;
-            phi = normWinkelrad_PIPI(phi);
-            phi *= radgrad;
-            ui->XnPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
-
-            // amplitude der grundschwingung
-            if (PrimSekDispMode == prim)
-            {
-                if (m_pConfData->m_bDCmeasurement)
-                    ampl = m_ActValues.VekX.re();
-                else
-                    ampl = fabs(m_ActValues.VekX);
-            }
-            else
-            {
-                if (m_pConfData->m_bDCmeasurement)
-                    ampl = m_ActValues.VekXSek.re();
-                else
-                    ampl = fabs(m_ActValues.VekXSek);
-            }
-
-            if (AmplDispMode == x1_SQRT2 && !m_pConfData->m_bDCmeasurement)
-                ampl/=1.414213562;
-
-            if ((m_pConfData->m_nMeasMode == In_ECT) && (PrimSekDispMode == sek))
-                ui->XxAmplDisp -> setText( QString("%1 V").arg(ampl,10,'f',5) );
-            else
-                ui->XxAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );
-
-            phi = m_ActValues.PHIX;
-            if (WinkelDispMode == techpos)
-                phi = PI2 - phi;
-            phi = normWinkelrad_PIPI(phi);
-            phi *= radgrad;
-            ui->XxPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
-
-            // amplitude der grundschwingung
-            if (PrimSekDispMode == prim)
-                if (m_pConfData->m_bDCmeasurement)
-                    ampl = m_ActValues.VekDX.re();
-                else
-                    ampl = fabs(m_ActValues.VekDX);
-            else
-                if (m_pConfData->m_bDCmeasurement)
-                    ampl = m_ActValues.VekDXSek.re();
-                else
-                    ampl = fabs(m_ActValues.VekDXSek);
-
-            if (AmplDispMode == x1_SQRT2)
-                ampl/=1.414213562;
-            ui->dXxAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );
-
-            phi = UserAtan(m_ActValues.VekDX);
-            if (WinkelDispMode == techpos)
-                phi = PI2 - phi;
-            phi = normWinkelrad_PIPI(phi);
-            phi *= radgrad;
-
-            ui->dXxPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
-            ui->FreqDisp -> setText( QString("%1 Hz").arg(ActValues->Frequenz,9,'f',5) );
+                ampl = fabs(m_ActValues.VekN);
         }
+        else
+        {
+            if (m_pConfData->m_bDCmeasurement)
+                ampl = m_ActValues.VekNSek.re();
+            else
+                ampl = fabs(m_ActValues.VekNSek);
+        }
+
+        if (AmplDispMode == x1_SQRT2 && !m_pConfData->m_bDCmeasurement)
+            ampl/=1.414213562;
+
+        ui->XnAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );
+
+        phi = m_ActValues.PHIN; // winkel sind zwischen 0 .. 2PI
+        if (WinkelDispMode == techpos)
+            phi = PI2 - phi;
+        phi = normWinkelrad_PIPI(phi);
+        phi *= radgrad;
+        ui->XnPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
+
+        // amplitude der grundschwingung
+        if (PrimSekDispMode == prim)
+        {
+            if (m_pConfData->m_bDCmeasurement)
+                ampl = m_ActValues.VekX.re();
+            else
+                ampl = fabs(m_ActValues.VekX);
+        }
+        else
+        {
+            if (m_pConfData->m_bDCmeasurement)
+                ampl = m_ActValues.VekXSek.re();
+            else
+                ampl = fabs(m_ActValues.VekXSek);
+        }
+
+        if (AmplDispMode == x1_SQRT2 && !m_pConfData->m_bDCmeasurement)
+            ampl/=1.414213562;
+
+        if ((m_pConfData->m_nMeasMode == In_ECT) && (PrimSekDispMode == sek))
+            ui->XxAmplDisp -> setText( QString("%1 V").arg(ampl,10,'f',5) );
+        else
+            ui->XxAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );
+
+        phi = m_ActValues.PHIX;
+        if (WinkelDispMode == techpos)
+            phi = PI2 - phi;
+        phi = normWinkelrad_PIPI(phi);
+        phi *= radgrad;
+        ui->XxPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
+
+        // amplitude der grundschwingung
+        if (PrimSekDispMode == prim)
+            if (m_pConfData->m_bDCmeasurement)
+                ampl = m_ActValues.VekDX.re();
+            else
+                ampl = fabs(m_ActValues.VekDX);
+        else
+            if (m_pConfData->m_bDCmeasurement)
+                ampl = m_ActValues.VekDXSek.re();
+            else
+                ampl = fabs(m_ActValues.VekDXSek);
+
+        if (AmplDispMode == x1_SQRT2)
+            ampl/=1.414213562;
+        ui->dXxAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );
+
+        phi = UserAtan(m_ActValues.VekDX);
+        if (WinkelDispMode == techpos)
+            phi = PI2 - phi;
+        phi = normWinkelrad_PIPI(phi);
+        phi *= radgrad;
+
+        ui->dXxPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
+        ui->FreqDisp -> setText( QString("%1 Hz").arg(ActValues->Frequenz,9,'f',5) );
+    }
 
 }
 
@@ -214,25 +214,25 @@ bool WMRawActualValBase::LoadSession(QString session)
     QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls);
     if ( file.open( QIODevice::ReadOnly ) ) {
-    QDataStream stream( &file );
-    stream >> m_widGeometry;
-    stream >> AmplDispMode;
-    stream >> WinkelDispMode,
-    stream >> PrimSekDispMode;
-    file.close();
-    hide();
-    resize(m_widGeometry.getSize());
-    move(m_widGeometry.getPoint());
-    if (m_widGeometry.getVisible())
-    {
-        show();
-        emit isVisibleSignal(true);
-    }
-// FVWM und Gnome verhalten sich anders
+        QDataStream stream( &file );
+        stream >> m_widGeometry;
+        stream >> AmplDispMode;
+        stream >> WinkelDispMode,
+                stream >> PrimSekDispMode;
+        file.close();
+        hide();
+        resize(m_widGeometry.getSize());
+        move(m_widGeometry.getPoint());
+        if (m_widGeometry.getVisible())
+        {
+            show();
+            emit isVisibleSignal(true);
+        }
+        // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
-    move(m_widGeometry.getPoint());
+        move(m_widGeometry.getPoint());
 #endif
-    return true;
+        return true;
     }
     return false;
 }
@@ -242,28 +242,28 @@ void WMRawActualValBase::SaveSession(QString session)
 {
     if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
     {
-      //create temporary object that gets deleted when leaving the control block
-      QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
+        //create temporary object that gets deleted when leaving the control block
+        QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
     }
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls);
-//    file.remove();
+    //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-    file.at(0);
+        file.at(0);
 
-    int vi;
-    vi = (isVisible()) ? 1 : 0;
-    if (vi)
-        m_widGeometry.setGeometry(pos(),size());
-    m_widGeometry.setVisible(vi);
+        int vi;
+        vi = (isVisible()) ? 1 : 0;
+        if (vi)
+            m_widGeometry.setGeometry(pos(),size());
+        m_widGeometry.setVisible(vi);
 
-    QDataStream stream( &file );
-    stream << m_widGeometry;
-    stream << AmplDispMode;
-    stream << WinkelDispMode;
-    stream << PrimSekDispMode;
-    file.close();
+        QDataStream stream( &file );
+        stream << m_widGeometry;
+        stream << AmplDispMode;
+        stream << WinkelDispMode;
+        stream << PrimSekDispMode;
+        file.close();
     }
 }
 
