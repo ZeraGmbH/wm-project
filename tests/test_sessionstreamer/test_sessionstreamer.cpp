@@ -13,22 +13,31 @@ class SessionStreamImplementorTest : public ISessionStreamImplementor
 {
 public:
     virtual void readStream(QDataStream& stream) override {
-        Q_UNUSED(stream)
         m_readStreamCallCount++;
+        for(QString* str : m_stringsToRead) {
+            stream >> *str;
+        }
     }
     virtual void writeStream(QDataStream& stream) override {
-        Q_UNUSED(stream)
         m_writeStreamCallCount++;
+        for(QString str : m_stringsToWrite) {
+            stream << str;
+        }
     }
     virtual void setDefaults() override { m_defaultSetCount++; }
+
 
     int getDefaultSetCount() { return m_defaultSetCount; }
     int getReadStreamCallCount() { return m_readStreamCallCount; }
     int getWriteStreamCallCount() { return m_writeStreamCallCount; }
+    void setStringsToWrite(QStringList stringsToWrite) { m_stringsToWrite = stringsToWrite; }
+    void setStringsToRead(QList<QString*> stringsToRead) { m_stringsToRead = stringsToRead; }
 private:
     int m_defaultSetCount = 0;
     int m_readStreamCallCount = 0;
     int m_writeStreamCallCount = 0;
+    QStringList m_stringsToWrite;
+    QList<QString*> m_stringsToRead;
 };
 
 // based upon https://stackoverflow.com/questions/11050977/removing-a-non-empty-folder-in-qt
@@ -111,6 +120,32 @@ void test_sessionstreamer::writeStreamCalled()
     SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
     sessionStreamer.writeSession(testSessionBaseName);
     QCOMPARE(streamImp.getWriteStreamCallCount(), 1);
+}
+
+void test_sessionstreamer::writeCreatesEmptyFile()
+{
+    SessionStreamImplementorTest streamImp;
+    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    sessionStreamer.writeSession(testSessionBaseName);
+
+    SessionFileNameGen namGen(testMachineName, testHomePath);
+    QFile file(namGen.getSessionFileName(testSessionBaseName));
+    QVERIFY(file.exists());
+    QCOMPARE(int(file.size()), 0);
+}
+
+void test_sessionstreamer::writeCreatesNonEmptyFile()
+{
+    SessionStreamImplementorTest streamImp;
+    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    QStringList strs = QStringList() << "foo";
+    streamImp.setStringsToWrite(strs);
+    sessionStreamer.writeSession(testSessionBaseName);
+
+    SessionFileNameGen namGen(testMachineName, testHomePath);
+    QFile file(namGen.getSessionFileName(testSessionBaseName));
+    QVERIFY(file.exists());
+    QVERIFY(file.size() >= 4);
 }
 
 QTEST_MAIN(test_sessionstreamer)
