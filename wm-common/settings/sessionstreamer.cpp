@@ -11,11 +11,16 @@ SessionStreamer::SessionStreamer(QString machineName,
 void SessionStreamer::readSession(QString baseName, QString sessionName)
 {
     QFile file(m_sessionFileNameGen.getSessionFileName(baseName, sessionName));
+    bool error = false;
     if(file.open(QFile::ReadOnly)) {
         QDataStream stream(&file);
         m_sessionStreamImplementor->readStream(stream);
+        if(!stream.eof() || stream.status() != QDataStream::Ok)
+            error = true;
     }
     else
+        error = true;
+    if(error)
         m_sessionStreamImplementor->setDefaults();
 }
 
