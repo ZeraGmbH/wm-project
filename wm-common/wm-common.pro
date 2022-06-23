@@ -54,6 +54,7 @@ HEADERS = \
     settings/sessionstreamer.h \
     settings/streamnull.h \
     settings/streamstrategy.h \
+    settings/widgetgeometry.h \
     service-interfaces/dspiface.h \
     service-interfaces/zhclientsocket.h \
     service-interfaces/zhserveriface.h \
@@ -70,7 +71,6 @@ HEADERS = \
     tcpconfig.h \
     tools.h \
     versserial.h \
-    widgeom.h \
     wmactvalues.h \
     wmparameter.h \
     zeraglobal.h
@@ -107,6 +107,7 @@ SOURCES = \
     settings/ethadress.cpp \
     settings/sessionfilenamegen.cpp \
     settings/sessionreadwrite.cpp \
+    settings/widgetgeometry.cpp \
     service-interfaces/dspiface.cpp \
     service-interfaces/zhclientsocket.cpp \
     service-interfaces/zhserveriface.cpp \
@@ -119,7 +120,6 @@ SOURCES = \
     settings/sessionstreamer.cpp \
     tcpconfig.cpp \
     tools.cpp \
-    widgeom.cpp \
     wmparameter.cpp
 
 FORMS = \

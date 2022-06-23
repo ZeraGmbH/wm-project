@@ -60,8 +60,8 @@ void EN61850monitor::ShowHideSlot(bool b)
 
 void EN61850monitor::closeEvent( QCloseEvent * ce )
 {
-    m_widGeometry.SetGeometry(pos(),size());
-    m_widGeometry.SetVisible(0);
+    m_widGeometry.setGeometry(pos(),size());
+    m_widGeometry.setVisible(0);
     m_Timer.start(500);
     emit isVisibleSignal(false);
     ce->accept();
@@ -147,8 +147,8 @@ void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
 
 bool EN61850monitor::LoadSession( QString session )
 {
-    cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-    if(tmpGeometry.m_Size.isValid())
+    WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
+    if(tmpGeometry.getSize().isValid())
     {
         m_widGeometry=tmpGeometry;
         return true;

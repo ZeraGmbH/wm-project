@@ -15,7 +15,7 @@
 #include <QTimer>
 
 #include "wmglobal.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "confdata.h"
 #include "wmrawactualconfigbase.h"
 #include "tools.h"
@@ -23,7 +23,7 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "wmrawactualconfigbase.h"
 #include "tools.h"
 
@@ -60,7 +60,7 @@ protected:
 private:
     Ui::WMRawActualValBase *ui;
     cwmActValues m_ActValues;
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
     cConfData *m_pConfData;
     int AmplDispMode;
     int WinkelDispMode;

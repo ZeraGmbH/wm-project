@@ -850,7 +850,7 @@
   <include location="local">maxrecentfiles.h</include>
   <include location="local">confdata.h</include>
   <include location="local">wmeditor.h</include>
-  <include location="local">widgeom.h</include>
+  <include location="local">widgetgeometry.h</include>
  </includes>
  <resources/>
  <connections>

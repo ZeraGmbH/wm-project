@@ -1,7 +1,7 @@
 #include "wmviewbase.h"
 #include "wmglobal.h"
 #include "wmeditor.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "ui_wmviewbase.h"
 #include <Q3MainWindow>
 #include <Q3FileDialog>
@@ -402,12 +402,12 @@ bool WMViewBase::LoadSession(QString session)
         ui->ansichtEN61850Action->setChecked(enA);
 
         hide();
-        resize(m_widGeometry.m_Size);
-        move(m_widGeometry.m_Point);
+        resize(m_widGeometry.getSize());
+        move(m_widGeometry.getPoint());
         show();
         // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
-        move(m_widGeometry.m_Point);
+        move(m_widGeometry.getPoint());
 #endif
 
         return true;
@@ -434,8 +434,8 @@ void WMViewBase::SaveSession(QString session)
 
         vi = (isVisible()) ? 1 : 0;
         if (vi)
-            m_widGeometry.SetGeometry(pos(),size());
-        m_widGeometry.SetVisible(vi);
+            m_widGeometry.setGeometry(pos(),size());
+        m_widGeometry.setVisible(vi);
 
         QDataStream stream( &file );
         stream << (int)ui->ansichtFehlerMessungAction->isChecked()
@@ -485,8 +485,8 @@ void WMViewBase::LoadSessionSlot()
 
 void WMViewBase::closeEvent(QCloseEvent* ce)
 {
-    m_widGeometry.SetGeometry(pos(),size());
-    m_widGeometry.SetVisible(0);
+    m_widGeometry.setGeometry(pos(),size());
+    m_widGeometry.setVisible(0);
     SaveSession(".ses");
     ce->accept();
 }

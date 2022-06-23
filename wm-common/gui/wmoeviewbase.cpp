@@ -62,8 +62,8 @@ void WMOeViewBase::ReceiveOEViewDataSlot(cOwnErrorViewData *oe)
 
 void WMOeViewBase::closeEvent( QCloseEvent* ce)
 {
-    m_widGeometry.SetGeometry(pos(),size());
-    m_widGeometry.SetVisible(0);
+    m_widGeometry.setGeometry(pos(),size());
+    m_widGeometry.setVisible(0);
     emit isVisibleSignal(false);
     m_Timer.start(500);
     ce->accept();
@@ -96,8 +96,8 @@ void WMOeViewBase::SaveSession(QString session)
 
 bool WMOeViewBase::LoadSession(QString session)
 {
-  cWidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-  if(tmpGeometry.m_Size.isValid())
+  WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
+  if(tmpGeometry.getSize().isValid())
   {
     m_widGeometry=tmpGeometry;
     return true;

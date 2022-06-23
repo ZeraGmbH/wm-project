@@ -5,7 +5,7 @@
 #include "maxrecentfiles.h"
 #include "confdata.h"
 #include "wmeditor.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "statuslabelcontainer.h"
 
 namespace Ui {
@@ -96,7 +96,7 @@ protected:
 private:
     Ui::WMViewBase *ui;
     int m_nrecentSESFileIds[nmaxRecentSESFiles];
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
     QString SessionName;
     QStringList recentResultFiles;
     wmEditor* wmEdit;

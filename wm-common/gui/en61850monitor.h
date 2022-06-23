@@ -15,7 +15,7 @@
 #include <QTimer>
 
 #include "en61850.h"
-#include "widgeom.h"
+#include "widgetgeometry.h"
 #include "sessionreadwrite.h"
 
 namespace Ui {
@@ -55,7 +55,7 @@ protected slots:
 private:
     Ui::EN61850monitor *ui;
     QTimer *m_pTimer, m_Timer;
-    cWidgetGeometry m_widGeometry;
+    WidgetGeometry m_widGeometry;
     cEN61850Info ETHStatus;
     SessionReadWrite m_sessionReadWrite;
 

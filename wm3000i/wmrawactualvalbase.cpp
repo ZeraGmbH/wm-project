@@ -58,8 +58,8 @@ void WMRawActualValBase::saveConfiguration()
 
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
-    m_widGeometry.SetGeometry(pos(),size()); // wir halten visible und geometrie nach
-    m_widGeometry.SetVisible(0);
+    m_widGeometry.setGeometry(pos(),size()); // wir halten visible und geometrie nach
+    m_widGeometry.setVisible(0);
     emit isVisibleSignal(false);
     m_Timer.start(500);
     ce->accept();
@@ -221,16 +221,16 @@ bool WMRawActualValBase::LoadSession(QString session)
     stream >> PrimSekDispMode;
     file.close();
     hide();
-    resize(m_widGeometry.m_Size);
-    move(m_widGeometry.m_Point);
-    if (m_widGeometry.vi)
+    resize(m_widGeometry.getSize());
+    move(m_widGeometry.getPoint());
+    if (m_widGeometry.getVisible())
     {
         show();
         emit isVisibleSignal(true);
     }
 // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
-    move(m_widGeometry.m_Point);
+    move(m_widGeometry.getPoint());
 #endif
     return true;
     }
@@ -255,8 +255,8 @@ void WMRawActualValBase::SaveSession(QString session)
     int vi;
     vi = (isVisible()) ? 1 : 0;
     if (vi)
-        m_widGeometry.SetGeometry(pos(),size());
-    m_widGeometry.SetVisible(vi);
+        m_widGeometry.setGeometry(pos(),size());
+    m_widGeometry.setVisible(vi);
 
     QDataStream stream( &file );
     stream << m_widGeometry;

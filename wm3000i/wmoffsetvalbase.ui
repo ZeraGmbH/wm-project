@@ -89,7 +89,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <includes>
-  <include location="local">widgeom.h</include>
+  <include location="local">widgetgeometry.h</include>
   <include location="local">wmrawactualconfigbase.h</include>
   <include location="local">tools.h</include>
  </includes>
