@@ -1,12 +1,3 @@
-/****************************************************************************
-** Form interface generated from reading ui file 'wmrawactualvalbase.ui'
-**
-** Created: Mi Sep 19 14:11:07 2012
-**      by: The User Interface Compiler ($Id: qt/main.cpp   3.3.4   edited Nov 24 2003 $)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
-
 #ifndef WMRAWACTUALVALBASE_H
 #define WMRAWACTUALVALBASE_H
 
@@ -14,16 +5,9 @@
 #include <qdialog.h>
 #include <QTimer>
 
-#include "wmglobal.h"
+#include "wmactvalues.h"
 #include "widgetgeometry.h"
 #include "confdata.h"
-#include "wmrawactualconfigbase.h"
-#include "tools.h"
-#include "wmactvalues.h"
-
-#include <qvariant.h>
-#include <qdialog.h>
-#include "widgetgeometry.h"
 #include "wmrawactualconfigbase.h"
 #include "tools.h"
 
