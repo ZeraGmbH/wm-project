@@ -42,12 +42,12 @@ void test_sessionstreamer::cleanup()
     removeDir(testHomePath);
 }
 
-void test_sessionstreamer::setDefaultsOnWriteCannotOpenFile()
+void test_sessionstreamer::noDefaultsOnWriteCannotOpenFile()
 {
     SessionStreamImplementorTest streamImp;
     SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
     sessionStreamer.writeSession(testSessionBaseName);
-    QCOMPARE(streamImp.getDefaultSetCount(), 1);
+    QCOMPARE(streamImp.getDefaultSetCount(), 0);
 }
 
 void test_sessionstreamer::setDefaultsOnReadCannotOpenFile()

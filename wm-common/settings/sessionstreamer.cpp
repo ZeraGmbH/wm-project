@@ -24,8 +24,6 @@ bool SessionStreamer::writeSession(QString baseName, QString sessionName)
     bool validFile = file.open(QFile::WriteOnly);
     if(validFile) {
     }
-    else
-        m_sessionStreamImplementor->setDefaults();
     return validFile;
 }
 
