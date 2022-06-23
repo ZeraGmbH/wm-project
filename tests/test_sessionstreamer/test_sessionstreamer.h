@@ -15,6 +15,9 @@ private slots:
 
     void noDefaultsOnWriteCanOpenFile();
     void noDefaultsOnReadCanOpenFile();
+
+    void readStreamCalled();
+    void writeStreamCalled();
 };
 
 #endif // TEST_SESSIONSTREAMER_H
