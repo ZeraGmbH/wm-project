@@ -12,12 +12,23 @@ static const QString testSessionBaseName = "test-base";
 class SessionStreamImplementorTest : public ISessionStreamImplementor
 {
 public:
-    virtual void readStream(QDataStream& stream) override { Q_UNUSED(stream) }
-    virtual void writeStream(QDataStream& stream) override { Q_UNUSED(stream) }
+    virtual void readStream(QDataStream& stream) override {
+        Q_UNUSED(stream)
+        m_readStreamCallCount++;
+    }
+    virtual void writeStream(QDataStream& stream) override {
+        Q_UNUSED(stream)
+        m_writeStreamCallCount++;
+    }
     virtual void setDefaults() override { m_defaultSetCount++; }
+
     int getDefaultSetCount() { return m_defaultSetCount; }
+    int getReadStreamCallCount() { return m_readStreamCallCount; }
+    int getWriteStreamCallCount() { return m_writeStreamCallCount; }
 private:
     int m_defaultSetCount = 0;
+    int m_readStreamCallCount = 0;
+    int m_writeStreamCallCount = 0;
 };
 
 // based upon https://stackoverflow.com/questions/11050977/removing-a-non-empty-folder-in-qt
@@ -82,6 +93,24 @@ void test_sessionstreamer::noDefaultsOnReadCanOpenFile()
     SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
     sessionStreamer.readSession(testSessionBaseName);
     QCOMPARE(streamImp.getDefaultSetCount(), 0);
+}
+
+void test_sessionstreamer::readStreamCalled()
+{
+    QVERIFY(genEmptySessionFile());
+
+    SessionStreamImplementorTest streamImp;
+    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    sessionStreamer.readSession(testSessionBaseName);
+    QCOMPARE(streamImp.getReadStreamCallCount(), 1);
+}
+
+void test_sessionstreamer::writeStreamCalled()
+{
+    SessionStreamImplementorTest streamImp;
+    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    sessionStreamer.writeSession(testSessionBaseName);
+    QCOMPARE(streamImp.getWriteStreamCallCount(), 1);
 }
 
 QTEST_MAIN(test_sessionstreamer)
