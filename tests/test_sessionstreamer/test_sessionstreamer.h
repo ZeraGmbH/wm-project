@@ -10,7 +10,7 @@ class test_sessionstreamer : public QObject
 private slots:
     void cleanup();
 
-    void setDefaultsOnWriteCannotOpenFile();
+    void noDefaultsOnWriteCannotOpenFile();
     void setDefaultsOnReadCannotOpenFile();
 
     void noDefaultsOnWriteCanOpenFile();
