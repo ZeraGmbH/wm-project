@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -24,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>185</width>
-    <height>106</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="mouseTracking">
@@ -159,9 +159,6 @@
      <property name="text">
       <string>Ix:</string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
      <property name="wordWrap">
       <bool>false</bool>
      </property>
@@ -174,9 +171,6 @@
      </property>
      <property name="text">
       <string>F:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
      <property name="wordWrap">
       <bool>false</bool>
@@ -191,9 +185,6 @@
      <property name="text">
       <string>In:</string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
      <property name="wordWrap">
       <bool>false</bool>
      </property>
@@ -203,9 +194,6 @@
     <widget class="QLabel" name="dXxLabel">
      <property name="text">
       <string>dIx:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
      <property name="wordWrap">
       <bool>false</bool>
