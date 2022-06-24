@@ -47,3 +47,11 @@ QPoint WidgetGeometry::getPoint()
 {
     return m_Point;
 }
+
+bool WidgetGeometry::operator==(const WidgetGeometry &other)
+{
+    return
+        m_Point == other.m_Point &&
+        m_Size == other.m_Size &&
+        m_visible == other.m_visible;
+}

@@ -10,11 +10,12 @@ class WidgetGeometry
 public:    
     friend QDataStream& operator << (QDataStream&, WidgetGeometry&);
     friend QDataStream& operator >> (QDataStream&, WidgetGeometry&);
-    void setGeometry(QPoint p,QSize s);
+    void setGeometry(QPoint p, QSize s);
     void setVisible(int visible);
     int getVisible();
     QSize getSize();
     QPoint getPoint();
+    bool operator==(const WidgetGeometry &other);
 private:
     QPoint m_Point;
     QSize m_Size;

@@ -47,6 +47,7 @@ HEADERS = \
     scpi/scpistatsyst.h \
     settings/confdata.h \
     settings/ethadress.h \
+    settings/geometrychangehandler.h \
     settings/ownerrorviewdata.h \
     settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
@@ -105,6 +106,7 @@ SOURCES = \
     scpi/scpistatsyst.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
+    settings/geometrychangehandler.cpp \
     settings/sessionfilenamegen.cpp \
     settings/sessionreadwrite.cpp \
     settings/widgetgeometry.cpp \
