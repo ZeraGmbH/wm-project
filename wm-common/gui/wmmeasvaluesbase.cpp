@@ -15,7 +15,7 @@
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<eUnit *> lpUnitList) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionStreamer(machineName, this)
+    m_sessionStreamer(machineName, objectName(), this)
 {
     ui->setupUi(this);
     init(lpUnitList);
@@ -225,14 +225,14 @@ void WMMeasValuesBase::ActualizeDisplay()
 
 bool WMMeasValuesBase::LoadSession(QString session)
 {
-    m_sessionStreamer.readSession(objectName(), session);
+    m_sessionStreamer.readSession(session);
     return true;
 }
 
 
 void WMMeasValuesBase::SaveSession(QString session)
 {
-    m_sessionStreamer.writeSession(objectName(), session);
+    m_sessionStreamer.writeSession(session);
 }
 
 
