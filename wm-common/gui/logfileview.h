@@ -3,9 +3,10 @@
 #ifndef LOGFILEVIEW_H
 #define LOGFILEVIEW_H
 
+#include "sessionreadwrite.h"
+#include "geometrychangehandler.h"
 #include <QTimer>
 #include <QDialog>
-#include "sessionreadwrite.h"
 #include <Q3TextEdit>
 #include <QResizeEvent>
 #include <QCloseEvent>
@@ -26,24 +27,23 @@ public:
 public slots:    
     void SaveSession(QString);
     bool LoadSession(QString);
-    void ShowHideLogFileSlot(bool); // sichtbar oder nicht
-    void AddLogTextSlot(const QString&); // wenn neue daten einlaufen
+    void ShowHideLogFileSlot(bool shw);
+    void AddLogTextSlot(const QString&);
 
 protected:
-    virtual void closeEvent ( QCloseEvent * );
-    virtual void resizeEvent ( QResizeEvent *);
-    virtual void moveEvent( QMoveEvent *);
+    virtual void closeEvent(QCloseEvent *ce ) override;
+    virtual void resizeEvent(QResizeEvent*) override;
+    virtual void moveEvent(QMoveEvent*) override;
 
 signals:
     void isVisibleSignal(bool);    
     
 private:
-    WidgetGeometry m_widGeometry;
     QTimer m_timerDelayShow;
     QStringList m_loglist;
-    QTimer m_Timer;
     SessionReadWrite m_sessionReadWrite;
-    
+    GeometryChangeHandler m_geomHandler;
+
 private slots:
     void showList();
     void saveConfiguration();
