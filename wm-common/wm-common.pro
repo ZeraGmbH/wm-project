@@ -48,6 +48,7 @@ HEADERS = \
     settings/confdata.h \
     settings/ethadress.h \
     settings/geometrychangehandler.h \
+    settings/geometrytowidget.h \
     settings/ownerrorviewdata.h \
     settings/sessionfilenamegen.h \
     settings/sessionreadwrite.h \
