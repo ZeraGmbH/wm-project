@@ -11,7 +11,6 @@ CLogFileView::CLogFileView(const QString cap,
     QDialog(parent, wname),
     m_sessionReadWrite(machineName)
 {
-    m_Timer.setSingleShot(true);
     setCaption(cap);
     m_pText = new Q3TextEdit(this);
     m_pText->setTextFormat(Qt::LogText);
@@ -20,7 +19,7 @@ CLogFileView::CLogFileView(const QString cap,
     LoadSession(".ses");
     m_timerDelayShow.start(2000);
     QObject::connect(&m_timerDelayShow,SIGNAL(timeout()),this,SLOT(showList()));
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
+    connect(&m_geomHandler, SIGNAL(sigNeedsStreamWrite()), this, SLOT(saveConfiguration()));
 }
 
 CLogFileView::~CLogFileView()
@@ -28,9 +27,10 @@ CLogFileView::~CLogFileView()
     SaveSession(".ses");
 }
 
-void CLogFileView::ShowHideLogFileSlot(bool b)
+void CLogFileView::ShowHideLogFileSlot(bool shw)
 {
-    if (b)
+    m_geomHandler.handleVisibleChange(shw);
+    if (shw)
         show();
     else
         close();
@@ -57,36 +57,33 @@ void CLogFileView::saveConfiguration()
 
 void CLogFileView::SaveSession(QString session)
 {
-    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_geomHandler.getGeometry(), session);
 }
 
 bool CLogFileView::LoadSession(QString session)
 {
     WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
     if(tmpGeometry.getSize().isValid()) {
-        m_widGeometry=tmpGeometry;
+        m_geomHandler.setGeometry(tmpGeometry);
         return true;
     }
     return false;
 }
 
-void CLogFileView::resizeEvent (QResizeEvent * ) 
+void CLogFileView::resizeEvent (QResizeEvent*)
 {
     m_pText->resize(size());
-    m_Timer.start(500);
+    m_geomHandler.handleResize(size());
 }
 
-void CLogFileView::moveEvent(QMoveEvent *)
+void CLogFileView::moveEvent(QMoveEvent*)
 {
-    m_Timer.start(500);
+    m_geomHandler.handleMove(pos());
 }
 
 void CLogFileView::closeEvent (QCloseEvent* ce)
 {
-    m_widGeometry.setPoint(pos());
-    m_widGeometry.setSize(size());
-    m_widGeometry.setVisible(0);
+    m_geomHandler.handleVisibleChange(false);
     emit isVisibleSignal(false);
-    m_Timer.start(500);
     ce->accept();
-}   
+}
