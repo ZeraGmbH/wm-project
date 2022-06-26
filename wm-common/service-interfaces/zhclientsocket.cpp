@@ -147,7 +147,7 @@ void cZHClientSocket::ReceiveInput()
 {
     QString s;
     while (canReadLine()) {
-        s = readLine().upper().stripWhiteSpace();
+        s = readLine().upper().trimmed();
         if ( s.contains("DSPINT") ) { // es ist eine asynchrone meldung .... das ändern wir noch
             emit AsyncDataReceived(s); // später "Interrupt DSPINT:1"
         }
