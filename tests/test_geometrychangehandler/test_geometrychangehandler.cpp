@@ -18,11 +18,29 @@ private:
 
 static const int changeTimerMs = 10;
 
-void test_geometrychangehandler::timerFiresOnceOnSingleChange()
+void test_geometrychangehandler::timerFiresOnceOnSingleSizeChange()
 {
     GeometryChangeHandler ghandler(changeTimerMs);
     GeomChangeHandlerTestClient tclient(&ghandler);
-    ghandler.handleGeometryChange(WidgetGeometry());
+    ghandler.handleSizeChange(QSize());
+    QTest::qWait(10*changeTimerMs);
+    QCOMPARE(tclient.getChangeTimerSigCount(), 1);
+}
+
+void test_geometrychangehandler::timerFiresOnceOnSinglePointChange()
+{
+    GeometryChangeHandler ghandler(changeTimerMs);
+    GeomChangeHandlerTestClient tclient(&ghandler);
+    ghandler.handlePointChange(QPoint());
+    QTest::qWait(10*changeTimerMs);
+    QCOMPARE(tclient.getChangeTimerSigCount(), 1);
+}
+
+void test_geometrychangehandler::timerFiresOnceOnSingleVisibleChange()
+{
+    GeometryChangeHandler ghandler(changeTimerMs);
+    GeomChangeHandlerTestClient tclient(&ghandler);
+    ghandler.handleVisibleChange(false);
     QTest::qWait(10*changeTimerMs);
     QCOMPARE(tclient.getChangeTimerSigCount(), 1);
 }
@@ -31,9 +49,11 @@ void test_geometrychangehandler::timerFiresOnceOnMultipleChangeInShortSuccession
 {
     GeometryChangeHandler ghandler(changeTimerMs);
     GeomChangeHandlerTestClient tclient(&ghandler);
-    ghandler.handleGeometryChange(WidgetGeometry());
+    ghandler.handleSizeChange(QSize());
     QTest::qWait(changeTimerMs/10);
-    ghandler.handleGeometryChange(WidgetGeometry());
+    ghandler.handlePointChange(QPoint());
+    QTest::qWait(changeTimerMs/10);
+    ghandler.handleVisibleChange(false);
     QTest::qWait(2*changeTimerMs);
     QCOMPARE(tclient.getChangeTimerSigCount(), 1);
 }
@@ -52,11 +72,15 @@ void test_geometrychangehandler::multipleChangeCheckLastGeom()
     GeometryChangeHandler ghandler(changeTimerMs);
     GeomChangeHandlerTestClient tclient(&ghandler);
     WidgetGeometry wg1 = setWidgetGeom(1, 2, 3, 4, true);
-    ghandler.handleGeometryChange(wg1);
+    ghandler.handleSizeChange(wg1.getSize());
+    ghandler.handlePointChange(wg1.getPoint());
+    ghandler.handleVisibleChange(wg1.getVisible());
     QTest::qWait(changeTimerMs/10);
     QCOMPARE(tclient.getChangeTimerSigCount(), 0);
     WidgetGeometry wg2 = setWidgetGeom(5, 6, 7, 8, false);
-    ghandler.handleGeometryChange(wg2);
+    ghandler.handleSizeChange(wg2.getSize());
+    ghandler.handlePointChange(wg2.getPoint());
+    ghandler.handleVisibleChange(wg2.getVisible());
     QTest::qWait(2*changeTimerMs);
     QVERIFY(ghandler.getGeometry() == wg2);
 }
@@ -66,7 +90,9 @@ void test_geometrychangehandler::streamOutIn()
     GeometryChangeHandler ghandlerW(changeTimerMs);
     GeomChangeHandlerTestClient tclientW(&ghandlerW);
     WidgetGeometry wg1 = setWidgetGeom(1, 2, 3, 4, true);
-    ghandlerW.handleGeometryChange(wg1);
+    ghandlerW.handleSizeChange(wg1.getSize());
+    ghandlerW.handlePointChange(wg1.getPoint());
+    ghandlerW.handleVisibleChange(wg1.getVisible());
 
     QFile file("/tmp/test_geometrychangehandler_streamOutIn");
     file.open(QFile::WriteOnly);

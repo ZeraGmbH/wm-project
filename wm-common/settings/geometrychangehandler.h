@@ -12,7 +12,9 @@ public:
     GeometryChangeHandler(int geomTimerMs = 500);
     friend QDataStream& operator << (QDataStream& stream, GeometryChangeHandler& geomChangeHandler);
     friend QDataStream& operator >> (QDataStream& stream, GeometryChangeHandler& geomChangeHandler);
-    void handleGeometryChange(WidgetGeometry geometry);
+    void handleSizeChange(QSize size);
+    void handlePointChange(QPoint pt);
+    void handleVisibleChange(bool visible);
     WidgetGeometry getGeometry();
 signals:
     void sigNeedsStreamWrite();

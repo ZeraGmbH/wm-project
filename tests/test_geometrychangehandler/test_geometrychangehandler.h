@@ -7,7 +7,9 @@ class test_geometrychangehandler : public QObject
 {
     Q_OBJECT
 private slots:
-    void timerFiresOnceOnSingleChange();
+    void timerFiresOnceOnSingleSizeChange();
+    void timerFiresOnceOnSinglePointChange();
+    void timerFiresOnceOnSingleVisibleChange();
     void timerFiresOnceOnMultipleChangeInShortSuccession();
     void multipleChangeCheckLastGeom();
     void streamOutIn();
