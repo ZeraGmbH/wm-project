@@ -80,6 +80,7 @@ HEADERS = \
 SOURCES = \
     client-access/clientsocketdevice.cpp \
     client-access/deviceserver.cpp \
+    geometrytowidget.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/logfileview.cpp \

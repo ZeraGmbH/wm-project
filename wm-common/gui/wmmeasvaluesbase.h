@@ -7,8 +7,7 @@
 #include "wmmeasconfigbase.h"
 #include "formatinfo.h"
 #include "wmactvalues.h"
-#include "sessionreadwrite.h"
-#include "sessionstreamhandler.h"
+#include "sessionstreamer.h"
 #include "geometrychangehandler.h"
 #include <QDialog>
 #include <QLabel>
@@ -17,7 +16,7 @@ namespace Ui {
     class WMMeasValuesBase;
 }
 
-class WMMeasValuesBase : public QDialog, public ISessionStream
+class WMMeasValuesBase : public QDialog, public ISessionStreamImplementor
 {
     Q_OBJECT
 
@@ -46,8 +45,10 @@ protected:
     virtual void contextMenuEvent( QContextMenuEvent * ) override;
 
 private:
-    virtual void readSession(QDataStream& stream) override;
-    virtual void writeSession(QDataStream& stream) override;
+    virtual void readStream(QDataStream& stream) override;
+    virtual void writeStream(QDataStream& stream) override;
+    virtual void setDefaults() override;
+    void setInitialDefaults();
 
     Ui::WMMeasValuesBase *ui;
     cwmActValues m_ActValues;
@@ -56,9 +57,8 @@ private:
     cFormatInfo m_Format[4];
     int m_nDisplayMode;
     int m_nLPDisplayMode;
-    GeometryChangeHandler m_geomChangeHandler;
-
-    SessionReadWrite m_sessionReadWrite;
+    GeometryChangeHandler m_geomHandler;
+    SessionStreamer m_sessionStreamer;
 
     void init(QList<eUnit *>lpUnitList);
     void destroy();

@@ -7,13 +7,13 @@ GeometryChangeHandler::GeometryChangeHandler(int geomTimerMs)
     connect(&m_geomChangeTimer, SIGNAL(timeout()), this, SLOT(OnGeomTimer()));
 }
 
-void GeometryChangeHandler::handleSizeChange(QSize size)
+void GeometryChangeHandler::handleResize(QSize size)
 {
     m_geometry.setSize(size);
     m_geomChangeTimer.start();
 }
 
-void GeometryChangeHandler::handlePointChange(QPoint pt)
+void GeometryChangeHandler::handleMove(QPoint pt)
 {
     m_geometry.setPoint(pt);
     m_geomChangeTimer.start();
