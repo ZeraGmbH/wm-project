@@ -1,4 +1,5 @@
 #include "sessionreadwrite.h"
+#include "geometrytowidget.h"
 #include <QDir>
 
 SessionReadWrite::SessionReadWrite(QString machineName, IStreamStrategy *streamStrategy) :
@@ -41,13 +42,7 @@ WidgetGeometry SessionReadWrite::readSession(QWidget *widget, QString session)
     if ( file.open( QIODevice::ReadOnly ) ) {
         QDataStream stream( &file );
         stream >> geometry;
-        widget->hide();
-        widget->resize(geometry.getSize());
-        widget->move(geometry.getPoint());
-        if (geometry.getVisible()) {
-            widget->show();
-        }
-        widget->move(geometry.getPoint());
+        geometryToWidget(geometry, widget);
         m_streamStrategy->read(stream);
         file.close();
     }
