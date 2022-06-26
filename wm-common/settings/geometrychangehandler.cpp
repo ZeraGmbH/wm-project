@@ -42,6 +42,11 @@ WidgetGeometry GeometryChangeHandler::getGeometry()
     return m_geometry;
 }
 
+void GeometryChangeHandler::setGeometry(WidgetGeometry geometry)
+{
+    m_geometry = geometry;
+}
+
 void GeometryChangeHandler::OnGeomTimer()
 {
     m_geomChangeTimer.stop();

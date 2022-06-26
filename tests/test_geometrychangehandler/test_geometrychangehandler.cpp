@@ -18,6 +18,33 @@ private:
 
 static const int changeTimerMs = 10;
 
+void test_geometrychangehandler::noTimerOnSetGeom()
+{
+    GeometryChangeHandler ghandler(changeTimerMs);
+    GeomChangeHandlerTestClient tclient(&ghandler);
+    ghandler.setGeometry(WidgetGeometry());
+    QTest::qWait(10*changeTimerMs);
+    QCOMPARE(tclient.getChangeTimerSigCount(), 0);
+}
+
+static WidgetGeometry setWidgetGeom(int x, int y, int w, int h, bool visible) // -> class?
+{
+    WidgetGeometry wg;
+    wg.setPoint(QPoint(x, y));
+    wg.setSize(QSize(w, h));
+    wg.setVisible(visible);
+    return wg;
+}
+
+void test_geometrychangehandler::setGeomSetsProperly()
+{
+    WidgetGeometry wg = setWidgetGeom(1, 2, 3, 4, false);
+    GeometryChangeHandler ghandler(changeTimerMs);
+    QVERIFY(!(wg == ghandler.getGeometry()));
+    ghandler.setGeometry(wg);
+    QVERIFY(wg == ghandler.getGeometry());
+}
+
 void test_geometrychangehandler::timerFiresOnceOnSingleSizeChange()
 {
     GeometryChangeHandler ghandler(changeTimerMs);
@@ -56,15 +83,6 @@ void test_geometrychangehandler::timerFiresOnceOnMultipleChangeInShortSuccession
     ghandler.handleVisibleChange(false);
     QTest::qWait(2*changeTimerMs);
     QCOMPARE(tclient.getChangeTimerSigCount(), 1);
-}
-
-static WidgetGeometry setWidgetGeom(int x, int y, int w, int h, bool visible) // -> class?
-{
-    WidgetGeometry wg;
-    wg.setPoint(QPoint(x, y));
-    wg.setSize(QSize(w, h));
-    wg.setVisible(visible);
-    return wg;
 }
 
 void test_geometrychangehandler::multipleChangeCheckLastGeom()
