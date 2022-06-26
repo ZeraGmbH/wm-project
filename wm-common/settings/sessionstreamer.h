@@ -18,15 +18,17 @@ class SessionStreamer
 {
 public:
     SessionStreamer(QString machineName,
+                    QString defaultBaseName,
                     ISessionStreamImplementor *sessionStreamImplementor,
                     QString homePath = QDir::homePath());
-    void readSession(QString baseName, QString sessionName = "");
-    bool writeSession(QString baseName, QString sessionName = "");
+    void readSession(QString sessionName = "");
+    bool writeSession(QString sessionName = "");
 private:
     void createDir(QString dir);
 
     ISessionStreamImplementor* m_sessionStreamImplementor;
     SessionFileNameGen m_sessionFileNameGen;
+    QString m_strDefaultBaseName;
 };
 
 #endif // SESSIONSTREAMER_H

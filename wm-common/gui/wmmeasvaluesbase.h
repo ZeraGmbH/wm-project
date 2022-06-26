@@ -30,8 +30,8 @@ public slots:
     virtual void ActualizeLPSlot( cwmActValues * av );
     virtual void SetConfInfoSlot( cConfData * cd );
     virtual void ActualizeLoadPoint();
-    bool LoadSession( QString session );
-    void SaveSession( QString session );
+    bool LoadSession(QString session);
+    void SaveSession(QString session);
     virtual void ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo * fi );
 
 signals:

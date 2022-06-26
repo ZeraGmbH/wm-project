@@ -65,24 +65,33 @@ void test_sessionstreamer::cleanup()
 void test_sessionstreamer::noDefaultsOnWriteCannotOpenFile()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
-    sessionStreamer.writeSession(testSessionBaseName);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testInvalidHomePath);
+    sessionStreamer.writeSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 0);
 }
 
 void test_sessionstreamer::setDefaultsOnReadCannotOpenFile()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
-    sessionStreamer.readSession(testSessionBaseName);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testInvalidHomePath);
+    sessionStreamer.readSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 1);
 }
 
 void test_sessionstreamer::noDefaultsOnWriteCanOpenFile()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
-    sessionStreamer.writeSession(testSessionBaseName);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
+    sessionStreamer.writeSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 0);
 }
 
@@ -99,23 +108,32 @@ void test_sessionstreamer::noDefaultsOnReadCanOpenFile()
     QVERIFY(genEmptySessionFile());
 
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
-    sessionStreamer.readSession(testSessionBaseName);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
+    sessionStreamer.readSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 0);
 }
 
 void test_sessionstreamer::returnFalseOnWriteCannotOpenFile()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testInvalidHomePath);
-    QVERIFY(!sessionStreamer.writeSession(testSessionBaseName));
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testInvalidHomePath);
+    QVERIFY(!sessionStreamer.writeSession());
 }
 
 void test_sessionstreamer::returnTrueOnWriteCanOpenFile()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
-    QVERIFY(sessionStreamer.writeSession(testSessionBaseName));
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
+    QVERIFY(sessionStreamer.writeSession());
 }
 
 void test_sessionstreamer::readStreamCalled()
@@ -123,24 +141,33 @@ void test_sessionstreamer::readStreamCalled()
     QVERIFY(genEmptySessionFile());
 
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
-    sessionStreamer.readSession(testSessionBaseName);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
+    sessionStreamer.readSession();
     QCOMPARE(streamImp.getReadStreamCallCount(), 1);
 }
 
 void test_sessionstreamer::writeStreamCalled()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
-    sessionStreamer.writeSession(testSessionBaseName);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
+    sessionStreamer.writeSession();
     QCOMPARE(streamImp.getWriteStreamCallCount(), 1);
 }
 
 void test_sessionstreamer::writeCreatesEmptyFile()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
-    sessionStreamer.writeSession(testSessionBaseName);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
+    sessionStreamer.writeSession();
 
     SessionFileNameGen namGen(testMachineName, testHomePath);
     QFile file(namGen.getSessionFileName(testSessionBaseName));
@@ -151,10 +178,13 @@ void test_sessionstreamer::writeCreatesEmptyFile()
 void test_sessionstreamer::writeCreatesNonEmptyFile()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
     QStringList strs = QStringList() << "foo";
     streamImp.setStringsToWrite(strs);
-    sessionStreamer.writeSession(testSessionBaseName);
+    sessionStreamer.writeSession();
 
     SessionFileNameGen namGen(testMachineName, testHomePath);
     QFile file(namGen.getSessionFileName(testSessionBaseName));
@@ -165,58 +195,70 @@ void test_sessionstreamer::writeCreatesNonEmptyFile()
 void test_sessionstreamer::setDefaultOnUnderRead()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
     QStringList strs = QStringList() << "foo" << "bar";
     streamImp.setStringsToWrite(strs);
     QString str1;
     QList<QString*> readList = QList<QString*>() << &str1;
     streamImp.setStringsToRead(readList);
-    sessionStreamer.writeSession(testSessionBaseName);
-    sessionStreamer.readSession(testSessionBaseName);
+    sessionStreamer.writeSession();
+    sessionStreamer.readSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 1);
 }
 
 void test_sessionstreamer::setDefaultOnOverRead()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
     QStringList strs = QStringList() << "foo";
     streamImp.setStringsToWrite(strs);
     QString str1;
     QString str2;
     QList<QString*> readList = QList<QString*>() << &str1 << &str2;
     streamImp.setStringsToRead(readList);
-    sessionStreamer.writeSession(testSessionBaseName);
-    sessionStreamer.readSession(testSessionBaseName);
+    sessionStreamer.writeSession();
+    sessionStreamer.readSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 1);
 }
 
 void test_sessionstreamer::noDefaultOnMatchingRead()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
     QStringList strs = QStringList() << "foo" << "bar";
     streamImp.setStringsToWrite(strs);
     QString str1;
     QString str2;
     QList<QString*> readList = QList<QString*>() << &str1 << &str2;
     streamImp.setStringsToRead(readList);
-    sessionStreamer.writeSession(testSessionBaseName);
-    sessionStreamer.readSession(testSessionBaseName);
+    sessionStreamer.writeSession();
+    sessionStreamer.readSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 0);
 }
 
 void test_sessionstreamer::readWriteContensOk()
 {
     SessionStreamImplementorTest streamImp;
-    SessionStreamer sessionStreamer(testMachineName, &streamImp, testHomePath);
+    SessionStreamer sessionStreamer(testMachineName,
+                                    testSessionBaseName,
+                                    &streamImp,
+                                    testHomePath);
     QStringList write = QStringList() << "foo" << "bar" << "baz";
     streamImp.setStringsToWrite(write);
     QStringList read = QStringList() << QString() << QString() << QString();
     QList<QString*> readList = QList<QString*>() << &read[0] << &read[1]  << &read[2];
     streamImp.setStringsToRead(readList);
-    sessionStreamer.writeSession(testSessionBaseName);
-    sessionStreamer.readSession(testSessionBaseName);
+    sessionStreamer.writeSession();
+    sessionStreamer.readSession();
     QCOMPARE(streamImp.getDefaultSetCount(), 0);
     QVERIFY(read == write);
 }
