@@ -72,7 +72,8 @@ void WMMeasValuesBase::adjustBoxWidths()
 
 void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
 {
-    m_widGeometry.setGeometry(pos(),size());
+    m_widGeometry.setPoint(pos());
+    m_widGeometry.setSize(size());
     m_widGeometry.setVisible(0);
     emit isVisibleSignal(false);
     m_Timer.start(500);

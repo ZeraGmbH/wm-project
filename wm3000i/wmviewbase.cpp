@@ -433,8 +433,10 @@ void WMViewBase::SaveSession(QString session)
         int vi;
 
         vi = (isVisible()) ? 1 : 0;
-        if (vi)
-            m_widGeometry.setGeometry(pos(),size());
+        if (vi) {
+            m_widGeometry.setPoint(pos());
+            m_widGeometry.setSize(size());
+        }
         m_widGeometry.setVisible(vi);
 
         QDataStream stream( &file );
@@ -485,7 +487,8 @@ void WMViewBase::LoadSessionSlot()
 
 void WMViewBase::closeEvent(QCloseEvent* ce)
 {
-    m_widGeometry.setGeometry(pos(),size());
+    m_widGeometry.setPoint(pos());
+    m_widGeometry.setSize(size());
     m_widGeometry.setVisible(0);
     SaveSession(".ses");
     ce->accept();

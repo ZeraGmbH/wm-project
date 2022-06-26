@@ -52,7 +52,8 @@ void WMRawActualValBase::destroy()
 
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
-    m_widGeometry.setGeometry(pos(),size()); // wir halten visible und geometrie nach
+    m_widGeometry.setPoint(pos());
+    m_widGeometry.setSize(size());
     m_widGeometry.setVisible(0);
     emit isVisibleSignal(false);
     m_Timer.start(500);
@@ -233,8 +234,10 @@ void WMRawActualValBase::SaveSession(QString session)
 
         int vi;
         vi = (isVisible()) ? 1 : 0;
-        if (vi)
-            m_widGeometry.setGeometry(pos(),size());
+        if (vi) {
+            m_widGeometry.setPoint(pos());
+            m_widGeometry.setSize(size());
+        }
         m_widGeometry.setVisible(vi);
 
         QDataStream stream( &file );
