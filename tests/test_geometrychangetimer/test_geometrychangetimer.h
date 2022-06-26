@@ -3,7 +3,7 @@
 
 #include <QTest>
 
-class test_geometrychangehandler : public QObject
+class test_geometrychangetimer : public QObject
 {
     Q_OBJECT
 private slots:

@@ -21,7 +21,7 @@ WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<e
     m_pContextMenu = new WMMeasConfigBase(this, lpUnitList);
     connect(this,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool,int,int,int, cFormatInfo*)));
     connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(int,int,int, cFormatInfo*)));
-    connect(&m_geomHandler, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
@@ -47,14 +47,14 @@ void WMMeasValuesBase::adjustBoxWidths()
 
 void WMMeasValuesBase::closeEvent(QCloseEvent * ce)
 {
-    m_geomHandler.handleGeomChange();
+    m_geomChangeTimer.handleGeomChange();
     emit isVisibleSignal(false);
     ce->accept();
 }
 
 void WMMeasValuesBase::onShowHide(bool shw)
 {
-    m_geomHandler.handleGeomChange();
+    m_geomChangeTimer.handleGeomChange();
     if (shw)
         show();
     else
@@ -64,12 +64,12 @@ void WMMeasValuesBase::onShowHide(bool shw)
 void WMMeasValuesBase::resizeEvent(QResizeEvent*)
 {
     adjustBoxWidths();
-    m_geomHandler.handleGeomChange();
+    m_geomChangeTimer.handleGeomChange();
 }
 
 void WMMeasValuesBase::moveEvent(QMoveEvent*)
 {
-    m_geomHandler.handleGeomChange();
+    m_geomChangeTimer.handleGeomChange();
 }
 
 void WMMeasValuesBase::SetActualValuesSlot( cwmActValues * av)
