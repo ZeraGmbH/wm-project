@@ -13,7 +13,7 @@ public:
     friend QDataStream& operator << (QDataStream& stream, GeometryChangeHandler& geomChangeHandler);
     friend QDataStream& operator >> (QDataStream& stream, GeometryChangeHandler& geomChangeHandler);
     void handleGeometryChange(WidgetGeometry geometry);
-    WidgetGeometry& getGeometry();
+    WidgetGeometry getGeometry();
 signals:
     void sigNeedsStreamWrite();
 private slots:
