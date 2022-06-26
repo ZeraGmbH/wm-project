@@ -20,25 +20,25 @@ CLogFile::CLogFile(const QString FileName,const long flen)
     {
         Q3TextStream stream( &file );
         QString line;
-	while ( !stream.atEnd() ) {
-	    line = stream.readLine(); // line of text excluding '\n'
-	    m_sLogLinesList+=line;
-	    m_nActFileLen+=line.length();
-   	}
-	file.close();
+        while ( !stream.atEnd() ) {
+            line = stream.readLine(); // line of text excluding '\n'
+            m_sLogLinesList+=line;
+            m_nActFileLen+=line.length();
+        }
+        file.close();
     }
     SetFileSizeSlot(flen); // event. nur kürzen, kann vorkommen wenn wm später mittels xml datei konfiguriert wird
 }    
 
 CLogFile::~CLogFile() 
 {
-    QFile file(m_sFileName );	
+    QFile file(m_sFileName );
     file.remove();
     if ( file.open( QIODevice::WriteOnly ) ) {
-	Q3TextStream stream( &file );
-	for ( QStringList::Iterator it = m_sLogLinesList.begin(); it != m_sLogLinesList.end(); ++it ) 
-	    stream << *it << "\n";
-	file.close();
+        Q3TextStream stream( &file );
+        for ( QStringList::Iterator it = m_sLogLinesList.begin(); it != m_sLogLinesList.end(); ++it )
+            stream << *it << "\n";
+        file.close();
     }
 }
 
@@ -49,8 +49,8 @@ void CLogFile::SetFileSizeSlot(const long fs)
     m_nMaxFileLen=fs;
     // falls länger als konfiguriert zeilen rauswerfen
     while (m_nMaxFileLen<m_nActFileLen) {
-	m_nActFileLen-=QString(*it).length();
-	it=m_sLogLinesList.remove(it);
+        m_nActFileLen-=QString(*it).length();
+        it=m_sLogLinesList.remove(it);
     }
 }
 
@@ -69,15 +69,6 @@ void CLogFile::onAddLogText(const QString& logtext) // neuer input für logfile
 
 void CLogFile::SendLogSlot() // zu initialisierungs zwecken
 {
-    QString s;
-    Q3TextStream ts( &s, QIODevice::WriteOnly );
-    int n;
-    if ( (n = m_sLogLinesList.count()) > 0 ) {
-	int i;
-	for (i = 0; i < n-1; i++)
-	    ts << m_sLogLinesList[i] << "\n";
-	ts << m_sLogLinesList[i];
-    }
-    emit SendLogDataSignal(s); // daten weitergeben
+    emit SendLogDataSignal(m_sLogLinesList.join("\n"));
 }
 
