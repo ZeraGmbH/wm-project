@@ -57,7 +57,7 @@ void CLogFile::SetFileSizeSlot(const long fs)
 
 void CLogFile::onAddLogText(const QString& logtext) // neuer input für logfile
 {
-    QString s = logtext.stripWhiteSpace();
+    QString s = logtext.trimmed();
     if(!s.isEmpty()) {
         s = QTime::currentTime().toString("HH:mm:ss:zzz") + ": " + s;
         m_sLogLinesList.append(s); // an die liste hängen
