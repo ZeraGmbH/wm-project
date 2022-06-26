@@ -41,9 +41,8 @@ void test_geometrychangehandler::timerFiresOnceOnMultipleChangeInShortSuccession
 static WidgetGeometry setWidgetGeom(int x, int y, int w, int h, bool visible) // -> class?
 {
     WidgetGeometry wg;
-    QPoint pt(x, y);
-    QSize sz(w, h);
-    wg.setGeometry(pt, sz);
+    wg.setPoint(QPoint(x, y));
+    wg.setSize(QSize(w, h));
     wg.setVisible(visible);
     return wg;
 }

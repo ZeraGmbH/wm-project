@@ -60,7 +60,8 @@ void EN61850monitor::ShowHideSlot(bool b)
 
 void EN61850monitor::closeEvent( QCloseEvent * ce )
 {
-    m_widGeometry.setGeometry(pos(),size());
+    m_widGeometry.setPoint(pos());
+    m_widGeometry.setSize(size());
     m_widGeometry.setVisible(0);
     m_Timer.start(500);
     emit isVisibleSignal(false);

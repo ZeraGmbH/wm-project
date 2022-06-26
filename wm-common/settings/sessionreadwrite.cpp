@@ -21,8 +21,10 @@ void SessionReadWrite::writeSession(QWidget *widget, WidgetGeometry geometry, QS
     if(file.open(QIODevice::Unbuffered | QIODevice::WriteOnly)) {
         file.at(0);
         int vi = (widget->isVisible()) ? 1 : 0;
-        if (vi)
-            geometry.setGeometry(widget->pos(),widget->size());
+        if (vi) {
+            geometry.setPoint(widget->pos());
+            geometry.setSize(widget->size());
+        }
         geometry.setVisible(vi);
 
         QDataStream stream( &file );

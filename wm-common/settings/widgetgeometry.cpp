@@ -22,10 +22,24 @@ QDataStream& operator >> (QDataStream& stream, WidgetGeometry& wg)
     return stream;
 }
 
-void WidgetGeometry::setGeometry(QPoint p, QSize s)
+QSize WidgetGeometry::getSize()
+{
+    return m_Size;
+}
+
+void WidgetGeometry::setSize(QSize s)
+{
+    m_Size = s;
+}
+
+QPoint WidgetGeometry::getPoint()
+{
+    return m_Point;
+}
+
+void WidgetGeometry::setPoint(QPoint p)
 {
     m_Point = p;
-    m_Size = s;
 }
 
 void WidgetGeometry::setVisible(int visible)
@@ -36,16 +50,6 @@ void WidgetGeometry::setVisible(int visible)
 int WidgetGeometry::getVisible()
 {
     return m_visible;
-}
-
-QSize WidgetGeometry::getSize()
-{
-    return m_Size;
-}
-
-QPoint WidgetGeometry::getPoint()
-{
-    return m_Point;
 }
 
 bool WidgetGeometry::operator==(const WidgetGeometry &other)
