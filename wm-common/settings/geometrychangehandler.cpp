@@ -9,13 +9,13 @@ GeometryChangeHandler::GeometryChangeHandler(int geomTimerMs)
 
 QDataStream& operator << (QDataStream& stream, GeometryChangeHandler& geomChangeHandler)
 {
-    stream << geomChangeHandler.getGeometry();
+    stream << geomChangeHandler.m_geometry;
     return stream;
 }
 
 QDataStream& operator >> (QDataStream& stream, GeometryChangeHandler& geomChangeHandler)
 {
-    stream >> geomChangeHandler.getGeometry();
+    stream >> geomChangeHandler.m_geometry;
     return stream;
 }
 
@@ -25,7 +25,7 @@ void GeometryChangeHandler::handleGeometryChange(WidgetGeometry geometry)
     m_geomChangeTimer.start();
 }
 
-WidgetGeometry &GeometryChangeHandler::getGeometry()
+WidgetGeometry GeometryChangeHandler::getGeometry()
 {
     return m_geometry;
 }
