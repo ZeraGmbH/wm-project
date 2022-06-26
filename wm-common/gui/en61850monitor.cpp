@@ -31,18 +31,18 @@ void EN61850monitor::init()
     m_Timer.setSingleShot(true);
     QObject::connect(m_pTimer,SIGNAL(timeout()),this,SLOT(TimerSlot()));
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
-    LoadSession(".ses");
+    onLoadSession(".ses");
 }
 
 
 void EN61850monitor::destroy()
 {
     delete m_pTimer;
-    SaveSession(".ses");
+    saveConfiguration();
 }
 
 
-void EN61850monitor::ShowHideSlot(bool b)
+void EN61850monitor::onShowHide(bool b)
 {
     if (b)
     {
@@ -89,7 +89,7 @@ void EN61850monitor::TimerSlot()
 
 void EN61850monitor::saveConfiguration()
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }
 
 
@@ -146,7 +146,7 @@ void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
 }
 
 
-bool EN61850monitor::LoadSession( QString session )
+bool EN61850monitor::onLoadSession(QString session)
 {
     WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
     if(tmpGeometry.getSize().isValid())
@@ -161,7 +161,7 @@ bool EN61850monitor::LoadSession( QString session )
 }
 
 
-void EN61850monitor::SaveSession( QString session )
+void EN61850monitor::onSaveSession(QString session)
 {
     m_sessionReadWrite.writeSession(this, m_widGeometry, session);
 }

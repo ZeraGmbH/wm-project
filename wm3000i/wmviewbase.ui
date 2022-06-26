@@ -969,7 +969,7 @@
    <sender>messungLaden_SitzungAction</sender>
    <signal>activated()</signal>
    <receiver>WMViewBase</receiver>
-   <slot>LoadSessionSlot()</slot>
+   <slot>onLoadSessionSlot()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

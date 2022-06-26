@@ -29,14 +29,13 @@ public:
     explicit WMViewBase( QWidget* parent = 0);
     ~WMViewBase();
     virtual QString strippedName( QString s );
-    virtual bool LoadSession( QString session );
     void removeJustageItem();
     void configureWM1000Items();
     void configureWMwoDC();
 
 public slots:
-    virtual void SetViewConfDataInfoSlot( cConfData * cd );
-    virtual void ActualizeStates();
+    void SetViewConfDataInfoSlot( cConfData * cd );
+    void ActualizeStates();
     virtual void OpenOETFileSlot();
     virtual void UpdateRecentFileList( QStringList & sl, QString f );
     virtual void OpenRecentOETFileSlot( int index );
@@ -52,15 +51,16 @@ public slots:
     virtual void CloseResultFileSlot();
     virtual void StoreResultSlot();
     virtual void OpenRecentResultFileSlot( int index );
-    void SaveSession( QString session );
+    void onSaveSession(QString session);
+    bool onLoadSession(QString session);
     virtual void RemoteCtrlInfoSlot( bool remote );
     virtual void SetJustifiedSlot( bool b );
     virtual void SetFreqStatSlot(bool b);
 
 signals:
     void SendConfDataSignal(cConfData*);
-    void SaveSessionSignal(QString);
-    void LoadSessionSignal(QString);
+    void onSaveSessionSignal(QString);
+    void onLoadSessionSignal(QString);
     void StoreResultSignal();
     void StartRangeObsermatic();
     void JustFlashProgSignal();
@@ -126,7 +126,7 @@ private:
 
 private slots:
     virtual void StoreSessionSlot();
-    virtual void LoadSessionSlot();
+    virtual void onLoadSessionSlot();
     void OpenRecentSESFileSlot( int index );
     virtual void SetGermanSlot();
     virtual void SetEnglishSlot();

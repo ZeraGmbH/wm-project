@@ -22,7 +22,7 @@ public:
     
 public slots:
     void SetFileSizeSlot(const long); // falls logfile umkonfiguriert wird
-    void AddLogTextSlot(const QString&); // wenn neue daten einlaufen
+    void onAddLogText(const QString&); // wenn neue daten einlaufen
     void SendLogSlot(); // aufforderung alle daten zu senden 
     
 signals:

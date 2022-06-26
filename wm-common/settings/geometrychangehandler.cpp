@@ -7,48 +7,13 @@ GeometryChangeHandler::GeometryChangeHandler(int geomTimerMs)
     connect(&m_geomChangeTimer, SIGNAL(timeout()), this, SLOT(onGeomTimer()));
 }
 
-void GeometryChangeHandler::handleResize(QSize size)
+void GeometryChangeHandler::handleGeomChange()
 {
-    m_geometry.setSize(size);
     m_geomChangeTimer.start();
-}
-
-void GeometryChangeHandler::handleMove(QPoint pt)
-{
-    m_geometry.setPoint(pt);
-    m_geomChangeTimer.start();
-}
-
-void GeometryChangeHandler::handleVisibleChange(bool visible)
-{
-    m_geometry.setVisible(visible);
-    m_geomChangeTimer.start();
-}
-
-QDataStream& operator << (QDataStream& stream, GeometryChangeHandler& geomChangeHandler)
-{
-    stream << geomChangeHandler.m_geometry;
-    return stream;
-}
-
-QDataStream& operator >> (QDataStream& stream, GeometryChangeHandler& geomChangeHandler)
-{
-    stream >> geomChangeHandler.m_geometry;
-    return stream;
-}
-
-WidgetGeometry GeometryChangeHandler::getGeometry()
-{
-    return m_geometry;
-}
-
-void GeometryChangeHandler::setGeometry(WidgetGeometry geometry)
-{
-    m_geometry = geometry;
 }
 
 void GeometryChangeHandler::onGeomTimer()
 {
     m_geomChangeTimer.stop();
-    emit sigNeedsStreamWrite();
+    emit sigWriteStreamForGeomChange();
 }

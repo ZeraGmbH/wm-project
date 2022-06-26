@@ -120,10 +120,10 @@ int main(int argc, char *argv[])
   lpUnitList.append(VoltageUnit + VoltV);
   lpUnitList.append(VoltageUnit + VoltkV);
   WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView, machineName, lpUnitList); // fehlermesswerte anzeige erzeugen
-  QObject::connect(g_WMView,SIGNAL(UIansichtFehlerMessungActionToggled(bool)),g_WMErrMeasValView,SLOT(ShowHideMVSlot(bool))); // öffnen der fehlermesswert anzeige
+  QObject::connect(g_WMView,SIGNAL(UIansichtFehlerMessungActionToggled(bool)),g_WMErrMeasValView,SLOT(onShowHide(bool))); // öffnen der fehlermesswert anzeige
   QObject::connect(g_WMErrMeasValView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtFehlerMessungActionSet(bool))); //schliessen der fehlermesswert anzeige
-  QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMErrMeasValView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
-  QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMErrMeasValView,SLOT(LoadSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMErrMeasValView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMErrMeasValView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
 
   QObject::connect(g_WMDevice,SIGNAL(SendActValuesSignal(cwmActValues*)),g_WMErrMeasValView,SLOT(SetActualValuesSlot( cwmActValues*))); // messwerte an fehlermesswert anzeige senden
   QObject::connect(g_WMDevice,SIGNAL(SendLPSignal(cwmActValues*)),g_WMErrMeasValView,SLOT(ActualizeLPSlot( cwmActValues*))); // neuen lastpunkt an fehlermesswert anzeige senden
@@ -131,25 +131,25 @@ int main(int argc, char *argv[])
   QObject::connect(g_WMView,SIGNAL(StoreResultSignal()),g_WMDevice,SLOT(StoreResultsSlot())); // ergebnisse in xml file speichern
   QObject::connect(g_WMView,SIGNAL(StartRangeObsermatic()),g_WMDevice,SLOT(RangeObsermaticSlot())); // für testzwecke bereichautomatik von hand triggern
   WMOeViewBase *g_WMOeView = new WMOeViewBase(g_WMView, machineName); // eigenfehleranzeige erzeugen
-  QObject::connect(g_WMView,SIGNAL(UIansichtEigenfehlerActionToggled(bool)),g_WMOeView,SLOT(ShowHideOESlot(bool))); // öffnen der eigenfehleranzeige
+  QObject::connect(g_WMView,SIGNAL(UIansichtEigenfehlerActionToggled(bool)),g_WMOeView,SLOT(onShowHide(bool))); // öffnen der eigenfehleranzeige
   QObject::connect(g_WMOeView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtEigenfehlerActionSet(bool))); //schliessen der eigenfehleranzeige
-  QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMOeView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
-  QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMOeView,SLOT(LoadSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMOeView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMOeView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMDevice->m_pOwnError,SIGNAL(SendOEViewData(cOwnErrorViewData*)),g_WMOeView,SLOT(ReceiveOEViewDataSlot(cOwnErrorViewData*)));
 
   WMRawActualValBase *g_WMActValView = new WMRawActualValBase(g_WMView);   //  istwertanzeige erzeugen
-  QObject::connect(g_WMView,SIGNAL(UIansichtIstwerteActionToggled(bool)),g_WMActValView,SLOT(ShowHideAVSlot(bool))); // öffnen der istwertanzeige
+  QObject::connect(g_WMView,SIGNAL(UIansichtIstwerteActionToggled(bool)),g_WMActValView,SLOT(onShowHide(bool))); // öffnen der istwertanzeige
   QObject::connect(g_WMActValView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtIstwerteActionSet(bool))); //schliessen der istwertanzeige
-  QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMActValView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
-  QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMActValView,SLOT(LoadSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMActValView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMActValView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMActValView,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an rawactualanzei
   QObject::connect(g_WMDevice,SIGNAL(SendActValuesSignal(cwmActValues*)),g_WMActValView,SLOT(ReceiveAVDataSlot( cwmActValues*))); // senden von istwerten
 
   WMOffsetValBase *g_WMOffsetView = new WMOffsetValBase(g_WMView);
-  QObject::connect(g_WMView,SIGNAL(UIansichtOffsetActionToggled(bool)),g_WMOffsetView,SLOT(ShowHideJustSlot(bool)));
+  QObject::connect(g_WMView,SIGNAL(UIansichtOffsetActionToggled(bool)),g_WMOffsetView,SLOT(onShowHide(bool)));
   QObject::connect(g_WMOffsetView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtOffsetActionSet(bool))); //schliessen der offsetanzeige
-  QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMOffsetView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
-  QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMOffsetView,SLOT(LoadSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMOffsetView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMOffsetView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMDevice,SIGNAL(SendJustValuesSignal(tJustValues*)),g_WMOffsetView,SLOT(ReceiveJustDataSlot(tJustValues*))); // device sendet konfigurationsdaten an rawactualanzei
 
   CLogFileView* g_WMSCPILogFileView;
@@ -160,22 +160,22 @@ int main(int argc, char *argv[])
       g_WMSCPILogFileView =
               new CLogFileView(QObject::tr("WM3000U SCPI Kommunikation"), 100, g_WMView, "WMSCPILogView", machineName);
 
-  QObject::connect(g_WMView,SIGNAL(UIansichtDialogActionToggled(bool)),g_WMSCPILogFileView,SLOT(ShowHideLogFileSlot(bool))); // öffnen der kommunikation anzeige
-  QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMSCPILogFileView,SLOT(SaveSession(QString))); // fenster grösse und position einrichten
-  QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMSCPILogFileView,SLOT(LoadSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(UIansichtDialogActionToggled(bool)),g_WMSCPILogFileView,SLOT(onShowHide(bool))); // öffnen der kommunikation anzeige
+  QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMSCPILogFileView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMSCPILogFileView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMSCPILogFileView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtDialogActionSet(bool))); //schliessen der kommunikation anzeige
 
   EN61850monitor *g_ETHMonitor = new EN61850monitor(g_WMView, machineName);
-  QObject::connect(g_WMView,SIGNAL(UIansichtEN61850ActionToggled(bool)),g_ETHMonitor,SLOT(ShowHideSlot(bool))); // öffnen der eth status anzeige
+  QObject::connect(g_WMView,SIGNAL(UIansichtEN61850ActionToggled(bool)),g_ETHMonitor,SLOT(onShowHide(bool))); // öffnen der eth status anzeige
   QObject::connect(g_ETHMonitor,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtEN61850ActionSet(bool))); //schliessen der eth status anzeige
   QObject::connect((QObject*)g_WMDevice,SIGNAL(EN61850StatusSignal(cEN61850Info*)),g_ETHMonitor,SLOT(SetETHStatusSlot( cEN61850Info*))); // setzen der eth status info
   QObject::connect(g_ETHMonitor,SIGNAL(InformationRequest()),(QObject*)g_WMDevice,SLOT(EN61850InfoRequestSlot())); // anforderung der eth status info
   QObject::connect(g_ETHMonitor,SIGNAL(ResetETHStatus()),(QObject*)g_WMDevice,SLOT(EN61850ResetStatusSlot())); // rücksetzen eth status info
 
   CLogFile LogFile(QDir(ServerCommLogFilePath).absPath(), g_WMDevice->m_ConfData.m_nLogFileMax); // kommunikation logfile erzeugen
-  QObject::connect(&LogFile, SIGNAL(SendLogDataSignal(const QString&)), g_WMSCPILogFileView, SLOT(AddLogTextSlot(const QString&))); // logfile sendet logdaten an logfileview
-  QObject::connect(g_WMDevice->PCBIFace->iFaceSock, SIGNAL(SendLogData(const QString&)), &LogFile, SLOT(AddLogTextSlot(const QString&))); // der socket sendet output/input an das logfile
-  QObject::connect(g_WMDevice->DspIFace->iFaceSock, SIGNAL(SendLogData(const QString&)), &LogFile, SLOT(AddLogTextSlot(const QString&))); // der auch
+  QObject::connect(&LogFile, SIGNAL(SendLogDataSignal(const QString&)), g_WMSCPILogFileView, SLOT(onAddLogText(const QString&))); // logfile sendet logdaten an logfileview
+  QObject::connect(g_WMDevice->PCBIFace->iFaceSock, SIGNAL(SendLogData(const QString&)), &LogFile, SLOT(onAddLogText(const QString&))); // der socket sendet output/input an das logfile
+  QObject::connect(g_WMDevice->DspIFace->iFaceSock, SIGNAL(SendLogData(const QString&)), &LogFile, SLOT(onAddLogText(const QString&))); // der auch
   LogFile.SendLogSlot(); // alte log daten an view
 
   ConfDialogBase *g_WMConfDialog = new ConfDialogBase(g_WMView); // confdialog erzeugen
@@ -214,8 +214,8 @@ int main(int argc, char *argv[])
   QObject::connect(g_WMDevice,SIGNAL(JustifiedSignal(bool)),g_WMView,SLOT(SetJustifiedSlot(bool))); //  device sendet info ob justiert oder nicht an das hauptfenster
   QObject::connect(g_WMDevice,SIGNAL(FreqQuestionable(bool)),g_WMView,SLOT(SetFreqStatSlot(bool))); //  device sendet info ob freq ok oder nicht an das hauptfenster
   QObject::connect(g_WMView,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // hauptfenster sendet neue ergebnisdatei an device
-  QObject::connect(g_WMView,SIGNAL(SaveSessionSignal(QString)),g_WMDevice,SLOT(WriteSettings(QString))); // fenster grösse und position einrichten
-  QObject::connect(g_WMView,SIGNAL(LoadSessionSignal(QString)),g_WMDevice,SLOT(LoadSettings(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMDevice,SLOT(WriteSettings(QString))); // fenster grösse und position einrichten
+  QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMDevice,SLOT(LoadSettings(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMView,SIGNAL(UIdateiBeendenActionActivated()), &app,SLOT(quit())); // beendet das programm
   QObject::connect(g_WMDevice,SIGNAL(AbortProgramSignal()), &app,SLOT(quit()));
 

@@ -23,19 +23,19 @@ void WMOeViewBase::init()
 {
     m_Timer.setSingleShot(true);
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
-    LoadSession(".ses");
+    onLoadSession(".ses");
 }
 
 
 void WMOeViewBase::destroy()
 {
-    SaveSession(".ses");
+    saveConfiguration();
 }
 
 
 void WMOeViewBase::saveConfiguration()
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }
 
 
@@ -83,19 +83,19 @@ void WMOeViewBase::moveEvent(QMoveEvent *)
 }
 
 
-void WMOeViewBase::ShowHideOESlot( bool b )
+void WMOeViewBase::onShowHide( bool b )
 {
   if (b) show();else close();
 }
 
 
-void WMOeViewBase::SaveSession(QString session)
+void WMOeViewBase::onSaveSession(QString session)
 {
     m_sessionReadWrite.writeSession(this, m_widGeometry, session);
 }
 
 
-bool WMOeViewBase::LoadSession(QString session)
+bool WMOeViewBase::onLoadSession(QString session)
 {
   WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
   if(tmpGeometry.getSize().isValid())

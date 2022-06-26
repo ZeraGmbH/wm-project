@@ -30,14 +30,14 @@ void WMOffsetValBase::init()
     actualizeDisplay();
     m_Timer.setSingleShot(true);
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
-    LoadSession(".ses");
+    onLoadSession(".ses");
 
 }
 
 
 void WMOffsetValBase::destroy()
 {
-    SaveSession(".ses");
+    saveConfiguration();
 }
 
 
@@ -77,7 +77,7 @@ void WMOffsetValBase::moveEvent( QMoveEvent *)
 }
 
 
-void WMOffsetValBase::ShowHideJustSlot( bool b)
+void WMOffsetValBase::onShowHide( bool b)
 {
     if (b) show();else close();
 }
@@ -97,7 +97,7 @@ void WMOffsetValBase::SetConfInfoSlot(cConfData *cd)
 }
 
 
-bool WMOffsetValBase::LoadSession(QString session)
+bool WMOffsetValBase::onLoadSession(QString session)
 {
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
@@ -124,7 +124,7 @@ bool WMOffsetValBase::LoadSession(QString session)
 }
 
 
-void WMOffsetValBase::SaveSession(QString session)
+void WMOffsetValBase::onSaveSession(QString session)
 {
     QFileInfo fi(session);
     if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
@@ -156,5 +156,5 @@ void WMOffsetValBase::SaveSession(QString session)
 
 void WMOffsetValBase::saveConfiguration()
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }

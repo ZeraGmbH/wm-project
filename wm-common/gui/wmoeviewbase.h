@@ -34,9 +34,9 @@ public:
 
 public slots:
     virtual void ReceiveOEViewDataSlot( cOwnErrorViewData * oe );
-    virtual void ShowHideOESlot( bool b );
-    void SaveSession( QString session );
-    bool LoadSession( QString session );
+    virtual void onShowHide( bool b );
+    void onSaveSession(QString session);
+    bool onLoadSession(QString session);
 
 signals:
     void isVisibleSignal(bool);

@@ -1,7 +1,9 @@
 #include "logfileview.h"
+#include "sessionreadwrite.h"
+#include "geometrytowidget.h"
 #include <QString>
 #include <QTime>
-#include "sessionreadwrite.h"
+
 
 CLogFileView::CLogFileView(const QString cap,
                            const long max,
@@ -9,34 +11,34 @@ CLogFileView::CLogFileView(const QString cap,
                            const char *wname,
                            QString machineName) :
     QDialog(parent, wname),
-    m_sessionReadWrite(machineName)
+    m_sessionStreamer(machineName, this)
 {
     setCaption(cap);
     m_pText = new Q3TextEdit(this);
     m_pText->setTextFormat(Qt::LogText);
     m_pText->setMaxLogLines(max);
     setMinimumSize(200,200);
-    LoadSession(".ses");
+    onLoadSession(".ses");
     m_timerDelayShow.start(2000);
     QObject::connect(&m_timerDelayShow,SIGNAL(timeout()),this,SLOT(showList()));
-    connect(&m_geomHandler, SIGNAL(sigNeedsStreamWrite()), this, SLOT(saveConfiguration()));
+    connect(&m_geomHandler, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
 }
 
 CLogFileView::~CLogFileView()
 {
-    SaveSession(".ses");
+    saveConfiguration();
 }
 
-void CLogFileView::ShowHideLogFileSlot(bool shw)
+void CLogFileView::onShowHide(bool shw)
 {
-    m_geomHandler.handleVisibleChange(shw);
+    m_geomHandler.handleGeomChange();
     if (shw)
         show();
     else
         close();
 }
 
-void CLogFileView::AddLogTextSlot(const QString& s)
+void CLogFileView::onAddLogText(const QString& s)
 {
     m_loglist.append(QTime::currentTime().toString("HH:mm:ss:zzz") + ": " + s.stripWhiteSpace()); // neue daten in die liste
 }
@@ -52,38 +54,55 @@ void CLogFileView::showList()
 
 void CLogFileView::saveConfiguration()
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }
 
-void CLogFileView::SaveSession(QString session)
+void CLogFileView::onWriteStreamForGeomChange()
 {
-    m_sessionReadWrite.writeSession(this, m_geomHandler.getGeometry(), session);
+    m_geomToFromStream = geometryFromWidget(this);
+    saveConfiguration();
 }
 
-bool CLogFileView::LoadSession(QString session)
+void CLogFileView::readStream(QDataStream &stream)
 {
-    WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-    if(tmpGeometry.getSize().isValid()) {
-        m_geomHandler.setGeometry(tmpGeometry);
-        return true;
-    }
-    return false;
+    stream >> m_geomToFromStream;
+    geometryToWidget(m_geomToFromStream, this);
+}
+
+void CLogFileView::writeStream(QDataStream &stream)
+{
+    stream << m_geomToFromStream;
+}
+
+void CLogFileView::setDefaults()
+{
+}
+
+void CLogFileView::onSaveSession(QString session)
+{
+    m_sessionStreamer.writeSession(objectName(), session);
+}
+
+bool CLogFileView::onLoadSession(QString session)
+{
+    m_sessionStreamer.readSession(objectName(), session);
+    return true;
 }
 
 void CLogFileView::resizeEvent (QResizeEvent*)
 {
     m_pText->resize(size());
-    m_geomHandler.handleResize(size());
+    m_geomHandler.handleGeomChange();
 }
 
 void CLogFileView::moveEvent(QMoveEvent*)
 {
-    m_geomHandler.handleMove(pos());
+    m_geomHandler.handleGeomChange();
 }
 
 void CLogFileView::closeEvent (QCloseEvent* ce)
 {
-    m_geomHandler.handleVisibleChange(false);
+    m_geomHandler.handleGeomChange();
     emit isVisibleSignal(false);
     ce->accept();
 }

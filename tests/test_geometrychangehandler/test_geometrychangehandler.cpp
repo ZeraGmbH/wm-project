@@ -7,7 +7,7 @@ class GeomChangeHandlerTestClient : public QObject
     Q_OBJECT
 public:
     GeomChangeHandlerTestClient(GeometryChangeHandler* handler) {
-        connect(handler, SIGNAL(sigNeedsStreamWrite()), this, SLOT(onChangeTimer()));
+        connect(handler, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onChangeTimer()));
     }
     int getChangeTimerSigCount() { return m_changeTimerCount; }
 private slots:
@@ -18,56 +18,11 @@ private:
 
 static const int changeTimerMs = 10;
 
-void test_geometrychangehandler::noTimerOnSetGeom()
+void test_geometrychangehandler::timerFiresOnceOnSingleChange()
 {
     GeometryChangeHandler ghandler(changeTimerMs);
     GeomChangeHandlerTestClient tclient(&ghandler);
-    ghandler.setGeometry(WidgetGeometry());
-    QTest::qWait(10*changeTimerMs);
-    QCOMPARE(tclient.getChangeTimerSigCount(), 0);
-}
-
-static WidgetGeometry setWidgetGeom(int x, int y, int w, int h, bool visible) // -> class?
-{
-    WidgetGeometry wg;
-    wg.setPoint(QPoint(x, y));
-    wg.setSize(QSize(w, h));
-    wg.setVisible(visible);
-    return wg;
-}
-
-void test_geometrychangehandler::setGeomSetsProperly()
-{
-    WidgetGeometry wg = setWidgetGeom(1, 2, 3, 4, false);
-    GeometryChangeHandler ghandler(changeTimerMs);
-    QVERIFY(!(wg == ghandler.getGeometry()));
-    ghandler.setGeometry(wg);
-    QVERIFY(wg == ghandler.getGeometry());
-}
-
-void test_geometrychangehandler::timerFiresOnceOnSingleSizeChange()
-{
-    GeometryChangeHandler ghandler(changeTimerMs);
-    GeomChangeHandlerTestClient tclient(&ghandler);
-    ghandler.handleResize(QSize());
-    QTest::qWait(10*changeTimerMs);
-    QCOMPARE(tclient.getChangeTimerSigCount(), 1);
-}
-
-void test_geometrychangehandler::timerFiresOnceOnSinglePointChange()
-{
-    GeometryChangeHandler ghandler(changeTimerMs);
-    GeomChangeHandlerTestClient tclient(&ghandler);
-    ghandler.handleMove(QPoint());
-    QTest::qWait(10*changeTimerMs);
-    QCOMPARE(tclient.getChangeTimerSigCount(), 1);
-}
-
-void test_geometrychangehandler::timerFiresOnceOnSingleVisibleChange()
-{
-    GeometryChangeHandler ghandler(changeTimerMs);
-    GeomChangeHandlerTestClient tclient(&ghandler);
-    ghandler.handleVisibleChange(false);
+    ghandler.handleGeomChange();
     QTest::qWait(10*changeTimerMs);
     QCOMPARE(tclient.getChangeTimerSigCount(), 1);
 }
@@ -76,59 +31,15 @@ void test_geometrychangehandler::timerFiresOnceOnMultipleChangeInShortSuccession
 {
     GeometryChangeHandler ghandler(changeTimerMs);
     GeomChangeHandlerTestClient tclient(&ghandler);
-    ghandler.handleResize(QSize());
+    ghandler.handleGeomChange();
     QTest::qWait(changeTimerMs/10);
-    ghandler.handleMove(QPoint());
+    ghandler.handleGeomChange();
     QTest::qWait(changeTimerMs/10);
-    ghandler.handleVisibleChange(false);
-    QTest::qWait(2*changeTimerMs);
-    QCOMPARE(tclient.getChangeTimerSigCount(), 1);
-}
-
-void test_geometrychangehandler::multipleChangeCheckLastGeom()
-{
-    GeometryChangeHandler ghandler(changeTimerMs);
-    GeomChangeHandlerTestClient tclient(&ghandler);
-    WidgetGeometry wg1 = setWidgetGeom(1, 2, 3, 4, true);
-    ghandler.handleResize(wg1.getSize());
-    ghandler.handleMove(wg1.getPoint());
-    ghandler.handleVisibleChange(wg1.getVisible());
+    ghandler.handleGeomChange();
     QTest::qWait(changeTimerMs/10);
     QCOMPARE(tclient.getChangeTimerSigCount(), 0);
-    WidgetGeometry wg2 = setWidgetGeom(5, 6, 7, 8, false);
-    ghandler.handleResize(wg2.getSize());
-    ghandler.handleMove(wg2.getPoint());
-    ghandler.handleVisibleChange(wg2.getVisible());
     QTest::qWait(2*changeTimerMs);
-    QVERIFY(ghandler.getGeometry() == wg2);
-}
-
-void test_geometrychangehandler::streamOutIn()
-{
-    GeometryChangeHandler ghandlerW(changeTimerMs);
-    GeomChangeHandlerTestClient tclientW(&ghandlerW);
-    WidgetGeometry wg1 = setWidgetGeom(1, 2, 3, 4, true);
-    ghandlerW.handleResize(wg1.getSize());
-    ghandlerW.handleMove(wg1.getPoint());
-    ghandlerW.handleVisibleChange(wg1.getVisible());
-
-    QFile file("/tmp/test_geometrychangehandler_streamOutIn");
-    file.open(QFile::WriteOnly);
-    QDataStream streamW(&file);
-    streamW << ghandlerW;
-    file.close();
-
-    GeometryChangeHandler ghandlerR(changeTimerMs);
-    GeomChangeHandlerTestClient tclientR(&ghandlerR);
-    file.open(QFile::ReadOnly);
-    QDataStream streamR(&file);
-    streamR >> ghandlerR;
-    file.close();
-
-    QVERIFY(ghandlerR.getGeometry() == wg1);
-
-    QTest::qWait(2*changeTimerMs);
-    QCOMPARE(tclientR.getChangeTimerSigCount(), 0);
+    QCOMPARE(tclient.getChangeTimerSigCount(), 1);
 }
 
 QTEST_MAIN(test_geometrychangehandler)
