@@ -10,19 +10,12 @@ class GeometryChangeHandler : public QObject
     Q_OBJECT
 public:
     GeometryChangeHandler(int geomTimerMs = 500);
-    friend QDataStream& operator << (QDataStream& stream, GeometryChangeHandler& geomChangeHandler);
-    friend QDataStream& operator >> (QDataStream& stream, GeometryChangeHandler& geomChangeHandler);
-    void handleResize(QSize size);
-    void handleMove(QPoint pt);
-    void handleVisibleChange(bool visible);
-    WidgetGeometry getGeometry();
-    void setGeometry(WidgetGeometry geometry);
+    void handleGeomChange();
 signals:
-    void sigNeedsStreamWrite();
+    void sigWriteStreamForGeomChange();
 private slots:
     void onGeomTimer();
 private:
-    WidgetGeometry m_geometry;
     QTimer m_geomChangeTimer;
 };
 

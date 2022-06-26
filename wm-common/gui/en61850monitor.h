@@ -31,10 +31,10 @@ public:
     ~EN61850monitor();
 
 public slots:
-    virtual void ShowHideSlot( bool b );
+    virtual void onShowHide( bool b );
     virtual void SetETHStatusSlot( cEN61850Info * ethInfo );
-    bool LoadSession( QString session );
-    void SaveSession( QString session );
+    bool onLoadSession(QString session);
+    void onSaveSession(QString session);
 
 signals:
     void InformationRequest();

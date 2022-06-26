@@ -23,10 +23,10 @@ public:
     ~WMOffsetValBase();
 
 public slots:
-    virtual void ShowHideJustSlot( bool b );
+    virtual void onShowHide( bool b );
     virtual void ReceiveJustDataSlot( tJustValues *JustValues );
-    bool LoadSession( QString session );
-    void SaveSession( QString session );
+    bool onLoadSession(QString session);
+    void onSaveSession(QString session);
 
 signals:
     void isVisibleSignal(bool);

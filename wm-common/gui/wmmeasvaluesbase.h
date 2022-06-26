@@ -25,13 +25,13 @@ public:
     ~WMMeasValuesBase();
 
 public slots:
-    virtual void ShowHideMVSlot(bool shw);
+    virtual void onShowHide(bool shw);
     virtual void SetActualValuesSlot(cwmActValues * av);
     virtual void ActualizeLPSlot(cwmActValues * av);
     virtual void SetConfInfoSlot(cConfData * cd);
     virtual void ActualizeLoadPoint();
-    bool LoadSession(QString session);
-    void SaveSession(QString session);
+    bool onLoadSession(QString session);
+    void onSaveSession(QString session);
     virtual void ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo * fi );
 
 signals:
@@ -46,6 +46,7 @@ protected:
 
 private slots:
     void saveConfiguration();
+    void onWriteStreamForGeomChange();
 private:
     virtual void readStream(QDataStream& stream) override;
     virtual void writeStream(QDataStream& stream) override;
@@ -62,6 +63,7 @@ private:
     int m_nDisplayMode;
     int m_nLPDisplayMode;
     GeometryChangeHandler m_geomHandler;
+    WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
 };
 

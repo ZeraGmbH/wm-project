@@ -10,3 +10,12 @@ void geometryToWidget(WidgetGeometry geometry, QWidget *widget)
     }
     widget->move(geometry.getPoint());
 }
+
+WidgetGeometry geometryFromWidget(QWidget *widget)
+{
+    WidgetGeometry wg;
+    wg.setPoint(widget->pos());
+    wg.setSize(widget->size());
+    wg.setVisible(widget->isVisible());
+    return wg;
+}

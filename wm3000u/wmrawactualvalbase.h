@@ -24,11 +24,11 @@ public:
     ~WMRawActualValBase();
 
 public slots:
-    virtual void ShowHideAVSlot( bool b );
+    virtual void onShowHide( bool b );
     virtual void ReceiveAVDataSlot( cwmActValues * ActValues );
     virtual void SetConfInfoSlot( cConfData * cd );
-    bool LoadSession( QString session );
-    void SaveSession( QString session );
+    bool onLoadSession(QString session);
+    void onSaveSession(QString session);
     virtual void ReceiveVektorDispFormat( int m, int m2, int m3 );
 
 signals:

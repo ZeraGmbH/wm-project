@@ -39,14 +39,14 @@ void WMRawActualValBase::init()
     connect(this,SIGNAL(SendVektorDispFormat(bool,int,int,int)),m_pContextMenu,SLOT(ReceiveDisplayConfSlot(bool,int,int,int)));
     connect(m_pContextMenu,SIGNAL(SendVektorDisplayFormat(int,int,int)),this,SLOT(ReceiveVektorDispFormat(int,int,int)));
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
-    LoadSession(".ses");
+    onLoadSession(".ses");
 
 }
 
 
 void WMRawActualValBase::destroy()
 {
-    SaveSession(".ses");
+    saveConfiguration();
 }
 
 
@@ -73,7 +73,7 @@ void WMRawActualValBase::moveEvent( QMoveEvent *)
 }
 
 
-void WMRawActualValBase::ShowHideAVSlot( bool b)
+void WMRawActualValBase::onShowHide( bool b)
 {
     if (b) show();else close();
 }
@@ -187,7 +187,7 @@ void WMRawActualValBase::SetConfInfoSlot( cConfData * cd )
 }
 
 
-bool WMRawActualValBase::LoadSession(QString session)
+bool WMRawActualValBase::onLoadSession(QString session)
 {
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
@@ -217,7 +217,7 @@ bool WMRawActualValBase::LoadSession(QString session)
 }
 
 
-void WMRawActualValBase::SaveSession(QString session)
+void WMRawActualValBase::onSaveSession(QString session)
 {
     QFileInfo fi(session);
     if(!QDir(QString("%1/.wm3000u/").arg(QDir::homePath())).exists())
@@ -267,5 +267,5 @@ void WMRawActualValBase::ReceiveVektorDispFormat( int m, int m2, int m3)
 
 void WMRawActualValBase::saveConfiguration()
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }

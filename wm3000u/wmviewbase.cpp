@@ -65,7 +65,7 @@ void WMViewBase::init()
     ui->ansichtEigenfehlerAction->setChecked(false);
     ui->ansichtEN61850Action->setChecked(false);
 
-    LoadSession(".ses");
+    onLoadSession(".ses");
 
     connect(ui->ansichtFehlerMessungAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtFehlerMessungActionToggled(bool))); // öffnen der fehlermesswert anzeige
     connect(this,SIGNAL(UIansichtFehlerMessungActionSet(bool)),ui->ansichtFehlerMessungAction,SLOT(setChecked(bool)));
@@ -113,7 +113,7 @@ void WMViewBase::init()
 
 void WMViewBase::destroy()
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }
 
 
@@ -392,7 +392,7 @@ void WMViewBase::OpenRecentResultFileSlot(int index)
 }
 
 
-bool WMViewBase::LoadSession(QString session)
+bool WMViewBase::onLoadSession(QString session)
 {
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
@@ -426,7 +426,7 @@ bool WMViewBase::LoadSession(QString session)
 }   
 
 
-void WMViewBase::SaveSession(QString session)
+void WMViewBase::onSaveSession(QString session)
 {
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
@@ -468,13 +468,13 @@ void WMViewBase::StoreSessionSlot()
     QFile file(SessionName);
     if ( file.open( IO_WriteOnly ) ) {
         file.close();
-        SaveSession(SessionName); // eigene session speichern
-        emit SaveSessionSignal(SessionName); // die anderen
+        onSaveSession(SessionName); // eigene session speichern
+        emit onSaveSessionSignal(SessionName); // die anderen
     }
 }
 
 
-void WMViewBase::LoadSessionSlot()
+void WMViewBase::onLoadSessionSlot()
 {
     Q3FileDialog *SessionFileDialog=new Q3FileDialog ( QString("%1/wm3000u").arg(QDir::homePath()),
                                                        tr("Sitzung Name (*.ses)"),
@@ -484,8 +484,8 @@ void WMViewBase::LoadSessionSlot()
     if ( SessionFileDialog->exec() == QDialog::Accepted ) {
         SessionName = SessionFileDialog->selectedFile();
         UpdateRecentSESList(SessionName);
-        LoadSession(SessionName); // eigene session laden
-        emit LoadSessionSignal(SessionName); // jetzt die anderen
+        onLoadSession(SessionName); // eigene session laden
+        emit onLoadSessionSignal(SessionName); // jetzt die anderen
     }
     delete SessionFileDialog;
 }
@@ -497,20 +497,20 @@ void WMViewBase::closeEvent(QCloseEvent* ce)
     m_widGeometry.setPoint(pos());
     m_widGeometry.setSize(size());
     m_widGeometry.setVisible(0);
-    SaveSession(".ses");
+    onSaveSession(".ses");
     ce->accept();
 }
 
 
 void WMViewBase::resizeEvent ( QResizeEvent *)
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }
 
 
 void WMViewBase::moveEvent( QMoveEvent *)
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }
 
 
@@ -559,8 +559,8 @@ void WMViewBase::OpenRecentSESFileSlot(int index)
 {
     QString s = recentSESFiles[index];
     UpdateRecentSESList(s); // liste event. kürzen und einträge ins menu
-    LoadSession(s); // eigene session laden
-    emit LoadSessionSignal(s); // jetzt die anderen
+    onLoadSession(s); // eigene session laden
+    emit onLoadSessionSignal(s); // jetzt die anderen
 }
 
 
@@ -622,7 +622,7 @@ void WMViewBase::JustFlashImportSlot()
 
 void WMViewBase::SaveDefaultSessionSlot(bool)
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
 }
 
 void WMViewBase::RemoteCtrlInfoSlot(bool remote )

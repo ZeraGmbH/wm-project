@@ -3,7 +3,7 @@
 #ifndef LOGFILEVIEW_H
 #define LOGFILEVIEW_H
 
-#include "sessionreadwrite.h"
+#include "sessionstreamer.h"
 #include "geometrychangehandler.h"
 #include <QTimer>
 #include <QDialog>
@@ -11,7 +11,7 @@
 #include <QResizeEvent>
 #include <QCloseEvent>
 
-class CLogFileView:public QDialog
+class CLogFileView : public QDialog, public ISessionStreamImplementor
 {
     Q_OBJECT
     
@@ -25,10 +25,10 @@ public:
     Q3TextEdit *m_pText;
     
 public slots:    
-    void SaveSession(QString);
-    bool LoadSession(QString);
-    void ShowHideLogFileSlot(bool shw);
-    void AddLogTextSlot(const QString&);
+    void onSaveSession(QString session);
+    bool onLoadSession(QString session);
+    void onShowHide(bool shw);
+    void onAddLogText(const QString&);
 
 protected:
     virtual void closeEvent(QCloseEvent *ce ) override;
@@ -36,17 +36,22 @@ protected:
     virtual void moveEvent(QMoveEvent*) override;
 
 signals:
-    void isVisibleSignal(bool);    
+    void isVisibleSignal(bool);
     
-private:
-    QTimer m_timerDelayShow;
-    QStringList m_loglist;
-    SessionReadWrite m_sessionReadWrite;
-    GeometryChangeHandler m_geomHandler;
-
 private slots:
     void showList();
     void saveConfiguration();
+    void onWriteStreamForGeomChange();
+private:
+    virtual void readStream(QDataStream& stream) override;
+    virtual void writeStream(QDataStream& stream) override;
+    virtual void setDefaults() override;
+
+    QTimer m_timerDelayShow;
+    QStringList m_loglist;
+    GeometryChangeHandler m_geomHandler;
+    WidgetGeometry m_geomToFromStream;
+    SessionStreamer m_sessionStreamer;
 };
 
 #endif

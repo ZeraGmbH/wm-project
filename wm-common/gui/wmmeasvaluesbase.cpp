@@ -21,8 +21,8 @@ WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<e
     m_pContextMenu = new WMMeasConfigBase(this, lpUnitList);
     connect(this,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool,int,int,int, cFormatInfo*)));
     connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(int,int,int, cFormatInfo*)));
-    connect(&m_geomHandler, SIGNAL(sigNeedsStreamWrite()), this, SLOT(saveConfiguration()));
-    LoadSession(".ses");
+    connect(&m_geomHandler, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    onLoadSession(".ses");
 }
 
 WMMeasValuesBase::~WMMeasValuesBase()
@@ -45,16 +45,16 @@ void WMMeasValuesBase::adjustBoxWidths()
     }
 }
 
-void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
+void WMMeasValuesBase::closeEvent(QCloseEvent * ce)
 {
-    m_geomHandler.handleVisibleChange(false);
+    m_geomHandler.handleGeomChange();
     emit isVisibleSignal(false);
     ce->accept();
 }
 
-void WMMeasValuesBase::ShowHideMVSlot(bool shw)
+void WMMeasValuesBase::onShowHide(bool shw)
 {
-    m_geomHandler.handleVisibleChange(shw);
+    m_geomHandler.handleGeomChange();
     if (shw)
         show();
     else
@@ -64,12 +64,12 @@ void WMMeasValuesBase::ShowHideMVSlot(bool shw)
 void WMMeasValuesBase::resizeEvent(QResizeEvent*)
 {
     adjustBoxWidths();
-    m_geomHandler.handleResize(size());
+    m_geomHandler.handleGeomChange();
 }
 
 void WMMeasValuesBase::moveEvent(QMoveEvent*)
 {
-    m_geomHandler.handleMove(pos());
+    m_geomHandler.handleGeomChange();
 }
 
 void WMMeasValuesBase::SetActualValuesSlot( cwmActValues * av)
@@ -183,21 +183,18 @@ void WMMeasValuesBase::actualizeDisplay()
     }
 }
 
-
-bool WMMeasValuesBase::LoadSession(QString session)
+bool WMMeasValuesBase::onLoadSession(QString session)
 {
     m_sessionStreamer.readSession(objectName(), session);
     return true;
 }
 
-
-void WMMeasValuesBase::SaveSession(QString session)
+void WMMeasValuesBase::onSaveSession(QString session)
 {
     m_sessionStreamer.writeSession(objectName(), session);
 }
 
-
-void WMMeasValuesBase::contextMenuEvent( QContextMenuEvent * )
+void WMMeasValuesBase::contextMenuEvent(QContextMenuEvent*)
 {
     emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
     m_pContextMenu->show();
@@ -205,17 +202,17 @@ void WMMeasValuesBase::contextMenuEvent( QContextMenuEvent * )
 
 void WMMeasValuesBase::readStream(QDataStream &stream)
 {
-    stream >> m_geomHandler;
+    stream >> m_geomToFromStream;
     for (int i = 0; i< 4; i++)
         stream >> m_Format[i];
     stream >> m_nDisplayMode;
     stream >> m_nLPDisplayMode;
-    geometryToWidget(m_geomHandler.getGeometry(), this);
+    geometryToWidget(m_geomToFromStream, this);
 }
 
 void WMMeasValuesBase::writeStream(QDataStream &stream)
 {
-    stream << m_geomHandler;
+    stream << m_geomToFromStream;
     for (int i = 0; i < 4; i++)
         stream << m_Format[i];
     stream << m_nDisplayMode;
@@ -247,5 +244,11 @@ void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* 
 
 void WMMeasValuesBase::saveConfiguration()
 {
-    SaveSession(".ses");
+    onSaveSession(".ses");
+}
+
+void WMMeasValuesBase::onWriteStreamForGeomChange()
+{
+    m_geomToFromStream = geometryFromWidget(this);
+    saveConfiguration();
 }
