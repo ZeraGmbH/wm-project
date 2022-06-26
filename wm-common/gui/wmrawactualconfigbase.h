@@ -31,7 +31,7 @@ private:
     int AmplPrimSekMode;
 
     virtual void init();
-    virtual void ActualizeDisplay();
+    virtual void actualizeDisplay();
 
 private slots:
     virtual void amplx1checkedSlot();

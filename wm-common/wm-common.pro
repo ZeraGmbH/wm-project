@@ -80,7 +80,6 @@ HEADERS = \
 SOURCES = \
     client-access/clientsocketdevice.cpp \
     client-access/deviceserver.cpp \
-    geometrytowidget.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/logfileview.cpp \
@@ -109,6 +108,7 @@ SOURCES = \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/geometrychangehandler.cpp \
+    settings/geometrytowidget.cpp \
     settings/sessionfilenamegen.cpp \
     settings/sessionreadwrite.cpp \
     settings/widgetgeometry.cpp \

@@ -3,6 +3,7 @@
 
 #include "widgetgeometry.h"
 #include <QWidget>
+#include <QTimer>
 
 void geometryToWidget(WidgetGeometry geometry, QWidget *widget);
 

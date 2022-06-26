@@ -5,7 +5,6 @@
 #include "errorunits.h"
 #include "angleunits.h"
 #include "rcfunits.h"
-#include "geometrytowidget.h"
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <Q3BoxLayout>
@@ -18,18 +17,6 @@ WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<e
     m_sessionStreamer(machineName, objectName(), this)
 {
     ui->setupUi(this);
-    init(lpUnitList);
-}
-
-WMMeasValuesBase::~WMMeasValuesBase()
-{
-    destroy();
-    delete ui;
-}
-
-
-void WMMeasValuesBase::init(QList<eUnit *>lpUnitList)
-{
     setInitialDefaults();
     m_pContextMenu = new WMMeasConfigBase(this, lpUnitList);
     connect(this,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool,int,int,int, cFormatInfo*)));
@@ -38,30 +25,25 @@ void WMMeasValuesBase::init(QList<eUnit *>lpUnitList)
     LoadSession(".ses");
 }
 
-
-void WMMeasValuesBase::destroy()
+WMMeasValuesBase::~WMMeasValuesBase()
 {
-    SaveSession(".ses");
+    saveConfiguration();
+    delete ui;
 }
-
 
 void WMMeasValuesBase::adjustBoxWidths()
 {
-    if (QLayout *lay=layout())
-    {
+    if (QLayout *lay=layout()) {
         QLayoutIterator it = lay->iterator();
         QLayoutItem *child;
-        int  w;
-        while ( (child = it.current()) != 0 )
-        {
-            Q3BoxLayout *l = (Q3BoxLayout*) child->layout();
-            w = l->minimumSize().width();
-            ((Q3BoxLayout*) lay)->setStretchFactor(l,w);
+        while ( (child = it.current()) != 0 ) {
+            QLayout *l = child->layout();
+            int w = l->minimumSize().width();
+            ((QBoxLayout*) lay)->setStretchFactor(l, w);
             ++it;
         }
     }
 }
-
 
 void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
 {
@@ -70,35 +52,31 @@ void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
     ce->accept();
 }
 
-
-void WMMeasValuesBase::ShowHideMVSlot(bool b)
+void WMMeasValuesBase::ShowHideMVSlot(bool shw)
 {
-    if (b)
+    m_geomHandler.handleVisibleChange(shw);
+    if (shw)
         show();
     else
         close();
 }
 
-
-void WMMeasValuesBase::resizeEvent(QResizeEvent *e)
+void WMMeasValuesBase::resizeEvent(QResizeEvent*)
 {
     adjustBoxWidths();
-    this->QDialog::resizeEvent(e);
-    m_geomHandler.handleResize(e->size());
+    m_geomHandler.handleResize(size());
 }
 
-void WMMeasValuesBase::moveEvent(QMoveEvent *e)
+void WMMeasValuesBase::moveEvent(QMoveEvent*)
 {
-    m_geomHandler.handleMove(e->pos());
+    m_geomHandler.handleMove(pos());
 }
-
 
 void WMMeasValuesBase::SetActualValuesSlot( cwmActValues * av)
 {
     m_ActValues = *av;
-    ActualizeDisplay(); // anzeige aktualisieren
+    actualizeDisplay(); // anzeige aktualisieren
 }
-
 
 void WMMeasValuesBase::ActualizeLPSlot( cwmActValues * av )
 {
@@ -106,20 +84,17 @@ void WMMeasValuesBase::ActualizeLPSlot( cwmActValues * av )
     ActualizeLoadPoint();
 }
 
-
 void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
 {
     m_ConfData = *cd;
-    if (m_ConfData.m_bDCmeasurement)
-    {
+    if (m_ConfData.m_bDCmeasurement) {
         ui->mBigAngleName->setVisible(false);
         ui->mBigAngleError->setVisible(false);
         ui->mBigAngleUnit->setVisible(false);
         m_nLPDisplayMode = totalRms;
         m_nDisplayMode = IEC; // wmglobal
     }
-    else
-    {
+    else {
         ui->mBigAngleName->setVisible(true);
         ui->mBigAngleError->setVisible(true);
         ui->mBigAngleUnit->setVisible(true);
@@ -127,47 +102,37 @@ void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
     repaint();
 }
 
-
 void WMMeasValuesBase::ActualizeLoadPoint()
 {
     double AnzeigeWertN, AnzeigeWertX;
 
-    if (m_nLPDisplayMode == totalRms)
-    {
-        if (m_Format[0].UnitInfo.Name == "%")
-        {
+    if (m_nLPDisplayMode == totalRms) {
+        if (m_Format[0].UnitInfo.Name == "%") {
             AnzeigeWertN = m_ActValues.LoadPoint;
             AnzeigeWertX = m_ActValues.LoadPointX;
         }
-        else
-        {
+        else {
             AnzeigeWertN = m_ActValues.RMSN / m_Format[0].UnitInfo.fak;
             AnzeigeWertX = m_ActValues.RMSX / m_Format[0].UnitInfo.fak;
         }
     }
-    else
-    {
-        if (m_Format[0].UnitInfo.Name == "%")
-        {
+    else {
+        if (m_Format[0].UnitInfo.Name == "%") {
             AnzeigeWertN = m_ActValues.LoadPoint1;
             AnzeigeWertX = m_ActValues.LoadPoint1X;
         }
-        else
-        {
+        else {
             AnzeigeWertN = m_ActValues.RMSN1 / m_Format[0].UnitInfo.fak;
             AnzeigeWertX = m_ActValues.RMSX1 / m_Format[0].UnitInfo.fak;
         }
     }
-
     ui->mBigLoadpointN->display(QString("%1").arg(AnzeigeWertN,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
     ui->mBigLPNUnit->display(m_Format[0].UnitInfo.Name);
     ui->mBigLoadpointX->display(QString("%1").arg(AnzeigeWertX,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
     ui->mBigLPXUnit->display(m_Format[0].UnitInfo.Name);
-
 }
 
-
-void WMMeasValuesBase::ActualizeDisplay()
+void WMMeasValuesBase::actualizeDisplay()
 {
     double AnzeigeWert;
     double normphi = 57.295779; // 360/(2*PI) winkel sind im bogenmass (rad)
@@ -189,21 +154,18 @@ void WMMeasValuesBase::ActualizeDisplay()
     AnzeigeWert = m_ActValues.RCF;
     ui->mBigRCF->display(QString("%1").arg(AnzeigeWert,m_Format[3].FieldWidth,'f',m_Format[3].Resolution));
 
-    if (m_nDisplayMode == ANSI || !m_ActValues.bvalid || m_ConfData.m_bDCmeasurement)
-    {
+    if (m_nDisplayMode == ANSI || !m_ActValues.bvalid || m_ConfData.m_bDCmeasurement) {
         ui->mBigAngleName->setEnabled(false);
         ui->mBigAngleError->setEnabled(false);
         ui->mBigAngleUnit->setEnabled(false);
     }
-    else
-    {
+    else {
         ui->mBigAngleName->setEnabled(true);
         ui->mBigAngleError->setEnabled(true);
         ui->mBigAngleUnit->setEnabled(true);
     }
 
-    if (m_ActValues.bvalid)
-    {
+    if (m_ActValues.bvalid) {
         ui->mBigAmplError->setEnabled(true);
         ui->mBigErrorName->setEnabled(true);
         ui->mBigErrorUnit->setEnabled(true);
@@ -211,8 +173,7 @@ void WMMeasValuesBase::ActualizeDisplay()
         ui->mBigRCFName->setEnabled(true);
         ui->mBigRCFUnit->setEnabled(true);
     }
-    else
-    {
+    else {
         ui->mBigAmplError->setEnabled(false);
         ui->mBigErrorName->setEnabled(false);
         ui->mBigErrorUnit->setEnabled(false);
@@ -274,19 +235,15 @@ void WMMeasValuesBase::setInitialDefaults()
     m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
     m_Format[2] = cFormatInfo(7,4,AngleUnit[Anglegrad]);
     m_Format[3] = cFormatInfo(6,4,RCFUnit[nix]);
-    // TODO: Window geometry
 }
 
 void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* fi)
 {
-    int i;
-    for(i = 0; i < n; i++, fi++)
+    for(int i = 0; i < n; i++, fi++)
         m_Format[i] = *fi;
-
     m_nDisplayMode = m;
     m_nLPDisplayMode = m2;
 }
-
 
 void WMMeasValuesBase::saveConfiguration()
 {
