@@ -7,10 +7,11 @@
 
 class ISessionStreamImplementor
 {
-public:
+private:
     virtual void readStream(QDataStream& stream) = 0;
     virtual void writeStream(QDataStream& stream) = 0;
     virtual void setDefaults() = 0;
+    friend class SessionStreamer;
 };
 
 class SessionStreamer
