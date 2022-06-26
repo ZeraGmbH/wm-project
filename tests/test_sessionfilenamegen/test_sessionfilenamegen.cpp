@@ -10,6 +10,7 @@ static const QString customHome = "/tmp";
 static const QString objName = "testObj";
 static const QString dotSes = ".ses";
 static const QString sessionName = "session.ses";
+static const QString sessionNameWithPath = "foo/session.ses";
 
 void test_sessionfilenamegen::defaultHomePath()
 {
@@ -56,6 +57,14 @@ void test_sessionfilenamegen::nameForSessionFull()
     SessionFileNameGen sessNameGen(machineName);
     QString expectedName = QDir::homePath() + "/." + machineName + "/" + objName + sessionName;
     QString genName = sessNameGen.getSessionFileName(objName, sessionName);
+    QCOMPARE(genName, expectedName);
+}
+
+void test_sessionfilenamegen::nameForSessionFullPath()
+{
+    SessionFileNameGen sessNameGen(machineName);
+    QString expectedName = QDir::homePath() + "/." + machineName + "/" + objName + sessionName;
+    QString genName = sessNameGen.getSessionFileName(objName, sessionNameWithPath);
     QCOMPARE(genName, expectedName);
 }
 

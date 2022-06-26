@@ -471,7 +471,9 @@ void WMViewBase::StoreSessionSlot()
 
 void WMViewBase::LoadSessionSlot()
 {
-    Q3FileDialog *SessionFileDialog=new Q3FileDialog ( QDir::homePath(),tr("Sitzung Name (*.ses)"),this);
+    Q3FileDialog *SessionFileDialog=new Q3FileDialog ( QString("%1/wm3000i").arg(QDir::homePath()),
+                                                       tr("Sitzung Name (*.ses)"),
+                                                       this);
     SessionFileDialog->setCaption(tr("Sitzung laden"));
     SessionFileDialog->setMode( Q3FileDialog::ExistingFile);
     if ( SessionFileDialog->exec() == QDialog::Accepted ) {
