@@ -1,18 +1,18 @@
-#include "geometrychangehandler.h"
+#include "geometrychangetimer.h"
 
-GeometryChangeHandler::GeometryChangeHandler(int geomTimerMs)
+GeometryChangeTimer::GeometryChangeTimer(int geomTimerMs)
 {
     m_geomChangeTimer.setInterval(geomTimerMs);
     m_geomChangeTimer.setSingleShot(false);
     connect(&m_geomChangeTimer, SIGNAL(timeout()), this, SLOT(onGeomTimer()));
 }
 
-void GeometryChangeHandler::handleGeomChange()
+void GeometryChangeTimer::handleGeomChange()
 {
     m_geomChangeTimer.start();
 }
 
-void GeometryChangeHandler::onGeomTimer()
+void GeometryChangeTimer::onGeomTimer()
 {
     m_geomChangeTimer.stop();
     emit sigWriteStreamForGeomChange();

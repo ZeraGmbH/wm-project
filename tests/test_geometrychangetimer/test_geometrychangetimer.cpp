@@ -1,12 +1,12 @@
-#include "test_geometrychangehandler.h"
-#include "geometrychangehandler.h"
+#include "test_geometrychangetimer.h"
+#include "geometrychangetimer.h"
 #include <QFile>
 
 class GeomChangeHandlerTestClient : public QObject
 {
     Q_OBJECT
 public:
-    GeomChangeHandlerTestClient(GeometryChangeHandler* handler) {
+    GeomChangeHandlerTestClient(GeometryChangeTimer* handler) {
         connect(handler, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onChangeTimer()));
     }
     int getChangeTimerSigCount() { return m_changeTimerCount; }
@@ -18,18 +18,18 @@ private:
 
 static const int changeTimerMs = 10;
 
-void test_geometrychangehandler::timerFiresOnceOnSingleChange()
+void test_geometrychangetimer::timerFiresOnceOnSingleChange()
 {
-    GeometryChangeHandler ghandler(changeTimerMs);
+    GeometryChangeTimer ghandler(changeTimerMs);
     GeomChangeHandlerTestClient tclient(&ghandler);
     ghandler.handleGeomChange();
     QTest::qWait(10*changeTimerMs);
     QCOMPARE(tclient.getChangeTimerSigCount(), 1);
 }
 
-void test_geometrychangehandler::timerFiresOnceOnMultipleChangeInShortSuccession()
+void test_geometrychangetimer::timerFiresOnceOnMultipleChangeInShortSuccession()
 {
-    GeometryChangeHandler ghandler(changeTimerMs);
+    GeometryChangeTimer ghandler(changeTimerMs);
     GeomChangeHandlerTestClient tclient(&ghandler);
     ghandler.handleGeomChange();
     QTest::qWait(changeTimerMs/10);
@@ -42,6 +42,6 @@ void test_geometrychangehandler::timerFiresOnceOnMultipleChangeInShortSuccession
     QCOMPARE(tclient.getChangeTimerSigCount(), 1);
 }
 
-QTEST_MAIN(test_geometrychangehandler)
+QTEST_MAIN(test_geometrychangetimer)
 
-#include "test_geometrychangehandler.moc"
+#include "test_geometrychangetimer.moc"
