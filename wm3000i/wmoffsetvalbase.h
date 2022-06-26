@@ -47,7 +47,7 @@ private:
 
     void init();
     void destroy();
-    void ActualizeDisplay();
+    void actualizeDisplay();
 
 private slots:
     void saveConfiguration();

@@ -30,11 +30,11 @@ void WMRawActualConfigBase::ReceiveDisplayConfSlot(bool dc, int m, int m2, int m
     AmplDisplayMode = m;
     WinkelDisplayMode = m2;
     AmplPrimSekMode = m3;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 
-void WMRawActualConfigBase::ActualizeDisplay()
+void WMRawActualConfigBase::actualizeDisplay()
 {
     bool isx1 = (AmplDisplayMode == x1);
 
@@ -70,28 +70,28 @@ void WMRawActualConfigBase::ActualizeDisplay()
 void WMRawActualConfigBase::amplx1checkedSlot()
 {
     AmplDisplayMode = x1;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 
 void WMRawActualConfigBase::amplx1_sq2checkedSlot()
 {
     AmplDisplayMode = x1_SQRT2;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 
 void WMRawActualConfigBase::winkelmathcheckedSlot()
 {
     WinkelDisplayMode = mathpos;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 
 void WMRawActualConfigBase::winkeltechcheckedSlot()
 {
     WinkelDisplayMode = techpos;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 
@@ -104,12 +104,12 @@ void WMRawActualConfigBase::SendData2AppSlot()
 void WMRawActualConfigBase::primCheckedSlot()
 {
     AmplPrimSekMode = prim;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 
 void WMRawActualConfigBase::sekCheckedSlot()
 {
     AmplPrimSekMode = sek;
-    ActualizeDisplay();
+    actualizeDisplay();
 }

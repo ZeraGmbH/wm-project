@@ -27,7 +27,7 @@ void WMOffsetValBase::init()
 {
     m_JustValues.OffsetCorrDevN = 0.0;
     m_JustValues.OffsetCorrDevX = 0.0;
-    ActualizeDisplay();
+    actualizeDisplay();
     m_Timer.setSingleShot(true);
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
     LoadSession(".ses");
@@ -41,7 +41,7 @@ void WMOffsetValBase::destroy()
 }
 
 
-void WMOffsetValBase::ActualizeDisplay()
+void WMOffsetValBase::actualizeDisplay()
 {
     if (isVisible())
     {
@@ -86,14 +86,14 @@ void WMOffsetValBase::ShowHideJustSlot( bool b)
 void WMOffsetValBase::ReceiveJustDataSlot( tJustValues *JustValues )
 {
     m_JustValues = *JustValues;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 
 void WMOffsetValBase::SetConfInfoSlot(cConfData *cd)
 {
     m_ConfData = *cd;
-    ActualizeDisplay();
+    actualizeDisplay();
 }
 
 

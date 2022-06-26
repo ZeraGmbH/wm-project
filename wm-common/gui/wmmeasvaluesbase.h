@@ -9,6 +9,7 @@
 #include "wmactvalues.h"
 #include "sessionstreamer.h"
 #include "geometrychangehandler.h"
+#include "geometrytowidget.h"
 #include <QDialog>
 #include <QLabel>
 
@@ -19,16 +20,15 @@ namespace Ui {
 class WMMeasValuesBase : public QDialog, public ISessionStreamImplementor
 {
     Q_OBJECT
-
 public:
     explicit WMMeasValuesBase(QWidget* parent, QString machineName, QList<eUnit *> lpUnitList);
     ~WMMeasValuesBase();
 
 public slots:
-    virtual void ShowHideMVSlot( bool b );
-    virtual void SetActualValuesSlot( cwmActValues * av );
-    virtual void ActualizeLPSlot( cwmActValues * av );
-    virtual void SetConfInfoSlot( cConfData * cd );
+    virtual void ShowHideMVSlot(bool shw);
+    virtual void SetActualValuesSlot(cwmActValues * av);
+    virtual void ActualizeLPSlot(cwmActValues * av);
+    virtual void SetConfInfoSlot(cConfData * cd);
     virtual void ActualizeLoadPoint();
     bool LoadSession(QString session);
     void SaveSession(QString session);
@@ -39,16 +39,20 @@ signals:
     void SendFormatInfoSignal(bool, int, int, int, cFormatInfo*);
 
 protected:
-    virtual void closeEvent( QCloseEvent * ce ) override;
-    virtual void resizeEvent( QResizeEvent * e ) override;
-    virtual void moveEvent( QMoveEvent *) override;
+    virtual void closeEvent(QCloseEvent *ce ) override;
+    virtual void resizeEvent(QResizeEvent*) override;
+    virtual void moveEvent(QMoveEvent*) override;
     virtual void contextMenuEvent( QContextMenuEvent * ) override;
 
+private slots:
+    void saveConfiguration();
 private:
     virtual void readStream(QDataStream& stream) override;
     virtual void writeStream(QDataStream& stream) override;
     virtual void setDefaults() override;
     void setInitialDefaults();
+    void actualizeDisplay();
+    void adjustBoxWidths();
 
     Ui::WMMeasValuesBase *ui;
     cwmActValues m_ActValues;
@@ -59,14 +63,6 @@ private:
     int m_nLPDisplayMode;
     GeometryChangeHandler m_geomHandler;
     SessionStreamer m_sessionStreamer;
-
-    void init(QList<eUnit *>lpUnitList);
-    void destroy();
-    void ActualizeDisplay();
-    void adjustBoxWidths();
-
-private slots:
-    void saveConfiguration();
 };
 
 #endif // WMMEASVALUESBASE_H

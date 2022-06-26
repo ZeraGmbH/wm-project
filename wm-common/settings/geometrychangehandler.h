@@ -20,7 +20,7 @@ public:
 signals:
     void sigNeedsStreamWrite();
 private slots:
-    void OnGeomTimer();
+    void onGeomTimer();
 private:
     WidgetGeometry m_geometry;
     QTimer m_geomChangeTimer;
