@@ -6,15 +6,10 @@
 
 #include "logfile.h"
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qfile.h>
-#include <q3textstream.h>
-#include <q3textedit.h>
-#include <qdialog.h>
-#include <qwidget.h>
-#include <qevent.h>
-
+#include <QString>
+#include <QFile>
+#include <Q3TextStream>
+#include <QTime>
 
 CLogFile::CLogFile(const QString FileName,const long flen) 
 {
@@ -63,10 +58,13 @@ void CLogFile::SetFileSizeSlot(const long fs)
 void CLogFile::onAddLogText(const QString& logtext) // neuer input für logfile
 {
     QString s = logtext.stripWhiteSpace();
-    m_sLogLinesList.append(s); // an die liste hängen
-    m_nActFileLen+=s.length(); // länge aktualisieren
-    emit SendLogDataSignal(logtext); // daten weitergeben
-    SetFileSizeSlot(m_nMaxFileLen); // tu so als ob wir die grösse neu gesetzt hätten
+    if(!s.isEmpty()) {
+        s = QTime::currentTime().toString("HH:mm:ss:zzz") + ": " + s;
+        m_sLogLinesList.append(s); // an die liste hängen
+        m_nActFileLen+=s.length(); // länge aktualisieren
+        emit SendLogDataSignal(s); // daten weitergeben
+        SetFileSizeSlot(m_nMaxFileLen); // tu so als ob wir die grösse neu gesetzt hätten
+    }
 }
 
 void CLogFile::SendLogSlot() // zu initialisierungs zwecken
