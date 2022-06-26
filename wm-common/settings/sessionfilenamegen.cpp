@@ -12,6 +12,12 @@ QString SessionFileNameGen::getSessionPath()
 
 QString SessionFileNameGen::getSessionFileName(QString baseName, QString sessionName)
 {
-    QString filename = sessionName.isEmpty() ? baseName + ".ses" : baseName + sessionName;
+    QString filename;
+    if(sessionName.isEmpty())
+        filename = baseName + ".ses";
+    else {
+        QFileInfo fi(sessionName);
+        filename = baseName + fi.fileName();
+    }
     return m_sessionPath + "/" + filename;
 }
