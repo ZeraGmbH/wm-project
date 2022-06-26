@@ -1,22 +1,21 @@
 #include "wmmeasvaluesbase.h"
-#include <QContextMenuEvent>
-#include <QCloseEvent>
-#include <Q3BoxLayout>
-#include <QResizeEvent>
-#include <QShowEvent>
-#include <QFileInfo>
-#include <QDir>
 #include "ui_wmmeasvaluesbase.h"
 #include "common-modes.h"
 #include "loadpointunits.h"
 #include "errorunits.h"
 #include "angleunits.h"
 #include "rcfunits.h"
+#include "geometrytowidget.h"
+#include <QContextMenuEvent>
+#include <QCloseEvent>
+#include <Q3BoxLayout>
+#include <QResizeEvent>
+#include <QDir>
 
 WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<eUnit *> lpUnitList) :
     QDialog(parent),
     ui(new Ui::WMMeasValuesBase),
-    m_sessionReadWrite(machineName, new SessionStreamHandler(this))
+    m_sessionStreamer(machineName, this)
 {
     ui->setupUi(this);
     init(lpUnitList);
@@ -31,16 +30,11 @@ WMMeasValuesBase::~WMMeasValuesBase()
 
 void WMMeasValuesBase::init(QList<eUnit *>lpUnitList)
 {
-    m_nDisplayMode = IEC; // wmglobal
-    m_nLPDisplayMode = totalRms;
+    setInitialDefaults();
     m_pContextMenu = new WMMeasConfigBase(this, lpUnitList);
-    m_Format[0] = cFormatInfo(7,3,LoadpointUnit[LPProzent]); // defaults
-    m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
-    m_Format[2] = cFormatInfo(7,4,AngleUnit[Anglegrad]);
-    m_Format[3] = cFormatInfo(6,4,RCFUnit[nix]);
     connect(this,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool,int,int,int, cFormatInfo*)));
     connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(int,int,int, cFormatInfo*)));
-    connect(&m_geomChangeHandler, SIGNAL(sigNeedsStreamWrite()), this, SLOT(saveConfiguration()));
+    connect(&m_geomHandler, SIGNAL(sigNeedsStreamWrite()), this, SLOT(saveConfiguration()));
     LoadSession(".ses");
 }
 
@@ -71,9 +65,7 @@ void WMMeasValuesBase::adjustBoxWidths()
 
 void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
 {
-    m_geomChangeHandler.handlePointChange(pos());
-    m_geomChangeHandler.handleSizeChange(size());
-    m_geomChangeHandler.handleVisibleChange(false);
+    m_geomHandler.handleVisibleChange(false);
     emit isVisibleSignal(false);
     ce->accept();
 }
@@ -92,12 +84,12 @@ void WMMeasValuesBase::resizeEvent(QResizeEvent *e)
 {
     adjustBoxWidths();
     this->QDialog::resizeEvent(e);
-    m_geomChangeHandler.handleSizeChange(e->size());
+    m_geomHandler.handleResize(e->size());
 }
 
 void WMMeasValuesBase::moveEvent(QMoveEvent *e)
 {
-    m_geomChangeHandler.handlePointChange(e->pos());
+    m_geomHandler.handleMove(e->pos());
 }
 
 
@@ -233,22 +225,14 @@ void WMMeasValuesBase::ActualizeDisplay()
 
 bool WMMeasValuesBase::LoadSession(QString session)
 {
-    WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-    if(tmpGeometry.getSize().isValid())
-    {
-        m_geomChangeHandler.setGeometry(tmpGeometry);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    m_sessionStreamer.readSession(objectName(), session);
+    return true;
 }
 
 
 void WMMeasValuesBase::SaveSession(QString session)
 {
-    m_sessionReadWrite.writeSession(this, m_geomChangeHandler.getGeometry(), session);
+    m_sessionStreamer.writeSession(objectName(), session);
 }
 
 
@@ -258,21 +242,39 @@ void WMMeasValuesBase::contextMenuEvent( QContextMenuEvent * )
     m_pContextMenu->show();
 }
 
-void WMMeasValuesBase::readSession(QDataStream &stream)
+void WMMeasValuesBase::readStream(QDataStream &stream)
 {
+    stream >> m_geomHandler;
     for (int i = 0; i< 4; i++)
         stream >> m_Format[i];
     stream >> m_nDisplayMode;
     stream >> m_nLPDisplayMode;
+    geometryToWidget(m_geomHandler.getGeometry(), this);
 }
 
-void WMMeasValuesBase::writeSession(QDataStream &stream)
+void WMMeasValuesBase::writeStream(QDataStream &stream)
 {
+    stream << m_geomHandler;
     for (int i = 0; i < 4; i++)
         stream << m_Format[i];
-
     stream << m_nDisplayMode;
     stream << m_nLPDisplayMode;
+}
+
+void WMMeasValuesBase::setDefaults()
+{
+    setInitialDefaults();
+}
+
+void WMMeasValuesBase::setInitialDefaults()
+{
+    m_nDisplayMode = IEC; // wmglobal
+    m_nLPDisplayMode = totalRms;
+    m_Format[0] = cFormatInfo(7,3,LoadpointUnit[LPProzent]); // defaults
+    m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
+    m_Format[2] = cFormatInfo(7,4,AngleUnit[Anglegrad]);
+    m_Format[3] = cFormatInfo(6,4,RCFUnit[nix]);
+    // TODO: Window geometry
 }
 
 void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* fi)

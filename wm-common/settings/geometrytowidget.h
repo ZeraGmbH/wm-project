@@ -4,15 +4,6 @@
 #include "widgetgeometry.h"
 #include <QWidget>
 
-void geometryToWidget(WidgetGeometry geometry, QWidget *widget)
-{
-    widget->hide();
-    widget->resize(geometry.getSize());
-    widget->move(geometry.getPoint());
-    if (geometry.getVisible()) {
-        widget->show();
-    }
-    widget->move(geometry.getPoint());
-}
+void geometryToWidget(WidgetGeometry geometry, QWidget *widget);
 
 #endif // GEOMETRYTOWIDGET_H
