@@ -16,6 +16,7 @@ public:
     void handlePointChange(QPoint pt);
     void handleVisibleChange(bool visible);
     WidgetGeometry getGeometry();
+    void setGeometry(WidgetGeometry geometry);
 signals:
     void sigNeedsStreamWrite();
 private slots:

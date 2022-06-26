@@ -1,11 +1,6 @@
 #ifndef WMMEASVALUESBASE_H
 #define WMMEASVALUESBASE_H
 
-#include <qvariant.h>
-#include <qdialog.h>
-#include <qlabel.h>
-#include <QTimer>
-
 #include "bigletter.h"
 #include "confdata.h"
 #include "widgetgeometry.h"
@@ -14,6 +9,9 @@
 #include "wmactvalues.h"
 #include "sessionreadwrite.h"
 #include "sessionstreamhandler.h"
+#include "geometrychangehandler.h"
+#include <QDialog>
+#include <QLabel>
 
 namespace Ui {
     class WMMeasValuesBase;
@@ -52,15 +50,14 @@ private:
     virtual void writeSession(QDataStream& stream) override;
 
     Ui::WMMeasValuesBase *ui;
-    WidgetGeometry m_widGeometry;
     cwmActValues m_ActValues;
     cConfData m_ConfData;
     WMMeasConfigBase* m_pContextMenu;
     cFormatInfo m_Format[4];
     int m_nDisplayMode;
     int m_nLPDisplayMode;
+    GeometryChangeHandler m_geomChangeHandler;
 
-    QTimer m_Timer;
     SessionReadWrite m_sessionReadWrite;
 
     void init(QList<eUnit *>lpUnitList);

@@ -38,10 +38,9 @@ void WMMeasValuesBase::init(QList<eUnit *>lpUnitList)
     m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
     m_Format[2] = cFormatInfo(7,4,AngleUnit[Anglegrad]);
     m_Format[3] = cFormatInfo(6,4,RCFUnit[nix]);
-    m_Timer.setSingleShot(true);
     connect(this,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool,int,int,int, cFormatInfo*)));
     connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(int,int,int, cFormatInfo*)));
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
+    connect(&m_geomChangeHandler, SIGNAL(sigNeedsStreamWrite()), this, SLOT(saveConfiguration()));
     LoadSession(".ses");
 }
 
@@ -72,11 +71,10 @@ void WMMeasValuesBase::adjustBoxWidths()
 
 void WMMeasValuesBase::closeEvent( QCloseEvent * ce)
 {
-    m_widGeometry.setPoint(pos());
-    m_widGeometry.setSize(size());
-    m_widGeometry.setVisible(0);
+    m_geomChangeHandler.handlePointChange(pos());
+    m_geomChangeHandler.handleSizeChange(size());
+    m_geomChangeHandler.handleVisibleChange(false);
     emit isVisibleSignal(false);
-    m_Timer.start(500);
     ce->accept();
 }
 
@@ -90,16 +88,16 @@ void WMMeasValuesBase::ShowHideMVSlot(bool b)
 }
 
 
-void WMMeasValuesBase::resizeEvent(QResizeEvent * e)
+void WMMeasValuesBase::resizeEvent(QResizeEvent *e)
 {
     adjustBoxWidths();
     this->QDialog::resizeEvent(e);
-    m_Timer.start(500);
+    m_geomChangeHandler.handleSizeChange(e->size());
 }
 
-void WMMeasValuesBase::moveEvent(QMoveEvent *)
+void WMMeasValuesBase::moveEvent(QMoveEvent *e)
 {
-    m_Timer.start(500);
+    m_geomChangeHandler.handlePointChange(e->pos());
 }
 
 
@@ -238,7 +236,7 @@ bool WMMeasValuesBase::LoadSession(QString session)
     WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
     if(tmpGeometry.getSize().isValid())
     {
-        m_widGeometry = tmpGeometry;
+        m_geomChangeHandler.setGeometry(tmpGeometry);
         return true;
     }
     else
@@ -250,7 +248,7 @@ bool WMMeasValuesBase::LoadSession(QString session)
 
 void WMMeasValuesBase::SaveSession(QString session)
 {
-    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_geomChangeHandler.getGeometry(), session);
 }
 
 
