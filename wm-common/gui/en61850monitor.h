@@ -10,13 +10,12 @@
 #ifndef EN61850MONBASE_H
 #define EN61850MONBASE_H
 
-#include <qvariant.h>
-#include <qdialog.h>
-#include <QTimer>
-
 #include "en61850.h"
 #include "widgetgeometry.h"
 #include "sessionreadwrite.h"
+#include "geometrychangetimer.h"
+#include <QDialog>
+#include <QTimer>
 
 namespace Ui {
     class EN61850monitor;
@@ -25,7 +24,6 @@ namespace Ui {
 class EN61850monitor : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit EN61850monitor(QWidget* parent, QString machineName);
     ~EN61850monitor();
@@ -51,21 +49,21 @@ protected slots:
     virtual void accept();
     virtual void reject();
 
-
 private:
-    Ui::EN61850monitor *ui;
-    QTimer *m_pTimer, m_Timer;
-    WidgetGeometry m_widGeometry;
-    cEN61850Info ETHStatus;
-    SessionReadWrite m_sessionReadWrite;
-
     void init();
     void destroy();
+
+    Ui::EN61850monitor *ui;
+    QTimer *m_pTimer;
+    GeometryChangeTimer m_geomChangeTimer;
+    WidgetGeometry m_geomToFromStream;
+    cEN61850Info ETHStatus;
+    SessionReadWrite m_sessionReadWrite;
 
 private slots:
     void TimerSlot();
     void saveConfiguration();
-
+    void onWriteStreamForGeomChange();
 };
 
 #endif // EN61850MONBASE_H

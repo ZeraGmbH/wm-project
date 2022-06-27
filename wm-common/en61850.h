@@ -3,6 +3,8 @@
 #ifndef EN61850_H
 #define EN61850_H
 
+#include <QtGlobal>
+
 enum ETHErrorType {    savPdu = 0x00000001, // asn tag errors
 		        noASDU = 0x00000002,
 		        seqASDU = 0x00000004,
