@@ -16,6 +16,7 @@ EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
     ETHStatus.ETHErrors = 0;
 
     QObject::connect(&m_PollTimer, SIGNAL(timeout()), this, SLOT(onPollTimer()));
+    m_PollTimer.setSingleShot(true);
     connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
@@ -32,7 +33,6 @@ void EN61850monitor::onShowHide(bool shw)
     if (shw) {
         show();
         emit sigRequestInformation(); // anfrage an wm3000 die status infos zu besorgen
-        m_PollTimer.start(2000); // wenn sichtbar -> timer läuft
     }
     else {
         close();
@@ -40,19 +40,19 @@ void EN61850monitor::onShowHide(bool shw)
     }
 }
 
-void EN61850monitor::closeEvent( QCloseEvent * ce )
+void EN61850monitor::closeEvent( QCloseEvent *ce )
 {
     m_geomChangeTimer.handleGeomChange();
     emit sigIsVisible(false);
     ce->accept();
 }
 
-void EN61850monitor::resizeEvent(QResizeEvent *)
+void EN61850monitor::resizeEvent(QResizeEvent*)
 {
     m_geomChangeTimer.handleGeomChange();
 }
 
-void EN61850monitor::moveEvent(QMoveEvent *)
+void EN61850monitor::moveEvent(QMoveEvent*)
 {
     m_geomChangeTimer.handleGeomChange();
 }
@@ -88,15 +88,17 @@ void EN61850monitor::setDefaults()
 {
 }
 
-void EN61850monitor::onETHStatus( cEN61850Info *ethInfo )
+void EN61850monitor::prepareNextPoll()
 {
-    QString s;
-    double count;
-    ulong stat;
+    m_PollTimer.setSingleShot(true);
+    m_PollTimer.start(1000);
+}
 
+void EN61850monitor::onETHStatus(cEN61850Info *ethInfo)
+{
     ETHStatus = *ethInfo;
-    count = ETHStatus.ByteCount[0]*4294967296.0+ethInfo->ByteCount[1];
-    s = QString("%1").arg( count, 0, 'f', 0 ); // keine nachkommastellen
+    double count = ETHStatus.ByteCount[0]*4294967296.0+ethInfo->ByteCount[1];
+    QString s = QString("%1").arg( count, 0, 'f', 0 ); // keine nachkommastellen
     uint i,p,l;
     p = l = s.length();
     i = 1;
@@ -112,7 +114,7 @@ void EN61850monitor::onETHStatus( cEN61850Info *ethInfo )
     s = QString("%1").arg( count, 0, 'f', 0 ); // keine nachkommastellen
     ui->LostSyncValLabel->setText(s);
 
-    stat = ETHStatus.ETHErrors;
+    ulong stat = ETHStatus.ETHErrors;
 
     ui->savPducheckBox->setChecked(stat & savPdu);
     ui->ASDUcheckBox->setChecked(stat & noASDU);
@@ -138,6 +140,8 @@ void EN61850monitor::onETHStatus( cEN61850Info *ethInfo )
     ui->RWTOcheckBox->setChecked(stat & ReceiveWDogTimeout);
     ui->LateCollisioncheckBox->setChecked(stat & LateCollisionSeen);
     ui->RUNTFramecheckBox->setChecked(stat & RuntFrame);
+
+    prepareNextPoll();
 }
 
 bool EN61850monitor::onLoadSession(QString session)
