@@ -34,7 +34,7 @@ class cOwnError:public QObject
     Q_OBJECT
     
 public:
-    cOwnError(QObject* parent, IOwnErrorParamUISpecific* uiSpecificParamCheck);
+    cOwnError(IOwnErrorParamUISpecific* uiSpecificParamCheck);
     virtual ~cOwnError();
     
     complex GetOECorrVector();
@@ -50,6 +50,9 @@ signals:
     void SendAnalizeDone(void);
     
 private:
+    complex CmpOECorrVector();
+    bool isValidEntry(QString);
+    QString strippedName(QString);
     complex OEVector;
     cOwnErrorViewData *m_pViewData;
     cConfData m_ConfData;
@@ -57,12 +60,8 @@ private:
     QString m_sOEFileName; // name der geladenen eigenfehler datei
     QStringList m_sNPrimList,m_sNSekList;
     QStringList m_sOEEntriesList; // liste aller eigenfehler einträge -> wir brauchen datei nur 1x lesen
-    complex CmpOECorrVector();
-    bool isValidEntry(QString);
-    QString strippedName(QString);
     double m_OEAmplitude; // eigenfehler amplitude
     double m_OEPhase; // eigenfehler phase
-    QObject* pa;
     IOwnErrorParamUISpecific* m_uiSpecificParamCheck;
 };
 

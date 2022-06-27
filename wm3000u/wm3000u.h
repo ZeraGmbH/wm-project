@@ -327,7 +327,7 @@ public:
     virtual ~cWM3000U();
        
     cConfData m_ConfData; // konfigurationsdaten 
-    cOwnError *m_pOwnError; // eigenfehler 
+    cOwnError m_ownError; // eigenfehler
     cDspIFace* DspIFace;
     cPCBIFace* PCBIFace;
     void InitWM3000(); // einmal komplett initialisieren

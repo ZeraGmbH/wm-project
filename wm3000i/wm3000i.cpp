@@ -63,7 +63,8 @@ void cWMessageBox::done(int r)
 }
 
 
-cWM3000I::cWM3000I()
+cWM3000I::cWM3000I() :
+    m_ownError(new Wm3000iOwnErrorParamChecker)
 {
 
     SerialVersions.DeviceVersion = WMVersion;
@@ -73,12 +74,11 @@ cWM3000I::cWM3000I()
     SerialVersions.DSPVersion = "Unknown";
     SerialVersions.DSPServer = "Unknown";
     SerialVersions.JDataChksum = "Unknown";
-    m_pOwnError = new cOwnError(this, new Wm3000iOwnErrorParamChecker); // eigenfehler klasse erzeugen
 
     // wenn device confdata sendet -> auch  an eigenfehler klasse
-    connect(this,SIGNAL(SendConfDataSignal(cConfData*)),m_pOwnError,SLOT(SetConfInfoSlot(cConfData*)));
-    connect(this,SIGNAL(SendActValuesSignal(cwmActValues*)),m_pOwnError,SLOT(SetActualValuesSlot(cwmActValues*)));
-    connect(m_pOwnError,SIGNAL(SendAnalizeDone(void)),this,SLOT(GetOETAnalizeDone(void)));
+    connect(this,SIGNAL(SendConfDataSignal(cConfData*)), &m_ownError,SLOT(SetConfInfoSlot(cConfData*)));
+    connect(this,SIGNAL(SendActValuesSignal(cwmActValues*)), &m_ownError,SLOT(SetActualValuesSlot(cwmActValues*)));
+    connect(&m_ownError,SIGNAL(SendAnalizeDone(void)),this,SLOT(GetOETAnalizeDone(void)));
     m_sNRangeList.setAutoDelete( TRUE ); // the list owns the objects
     m_sNRangeList.append( new CWMRange("15.0A","15.0A",15.0,3595118,0.1,"N15.0A") ); //name,selectname,wert,aussteuerung, linearitätslimit 0.1 = 10%, Offsetkorr. key
     m_sNRangeList.append( new CWMRange("10.0A","10.0A",10.0,4793490,0.1,"N10.0A") );
@@ -3189,7 +3189,7 @@ bool cWM3000I::isNewSamplerates()
 void cWM3000I::GetOETAnalizeDone(void)
 {
     m_ConfData.m_bOENewLoad = false;
-    emit SendConfDialogInfoSignal(m_pOwnError->GetNPrimList(),m_pOwnError->GetNSekList());
+    emit SendConfDialogInfoSignal(m_ownError.GetNPrimList(), m_ownError.GetNSekList());
     // daten werden von cOwnError gelesen, gehalten, zur verfügung gestellt
 }
 
@@ -4620,7 +4620,7 @@ void cWM3000I::CmpActValues() {  // here we will do all the necessary computatio
 
     // eigenfehler korrektur des normwandlers
 
-    ActValues.UInCorr = m_pOwnError->GetOECorrVector(); // achtung complex !!!!!
+    ActValues.UInCorr = m_ownError.GetOECorrVector(); // achtung complex !!!!!
     ActValues.VekNSek *= ActValues.UInCorr;
 
     // umrechnen auf primärgrößen
@@ -4729,7 +4729,7 @@ void cWM3000I::CmpRMSValues()
 
     // eigenfehler korrektur des normwandlers
 
-    ActValues.UInCorr = m_pOwnError->GetOECorrVector(); // achtung complex !!!!!
+    ActValues.UInCorr = m_ownError.GetOECorrVector(); // achtung complex !!!!!
     ActValues.RMSNSek *= fabs(ActValues.UInCorr);
     ActValues.RMSN1Sek *= fabs(ActValues.UInCorr);
 
