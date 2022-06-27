@@ -1,12 +1,3 @@
-/****************************************************************************
-** Form interface generated from reading ui file 'en61850monitor.ui'
-**
-** Created: Mi Sep 19 12:39:27 2012
-**      by: The User Interface Compiler ($Id: qt/main.cpp   3.3.4   edited Nov 24 2003 $)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
-
 #ifndef EN61850MONBASE_H
 #define EN61850MONBASE_H
 
@@ -15,7 +6,6 @@
 #include "sessionstreamer.h"
 #include "geometrychangetimer.h"
 #include <QDialog>
-#include <QTimer>
 
 namespace Ui {
     class EN61850monitor;
