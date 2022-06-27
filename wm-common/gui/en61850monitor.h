@@ -50,6 +50,7 @@ private:
     virtual void readStream(QDataStream& stream) override;
     virtual void writeStream(QDataStream& stream) override;
     virtual void setDefaults() override;
+    void prepareNextPoll();
     Ui::EN61850monitor *ui;
     QTimer m_PollTimer;
     cEN61850Info ETHStatus;
