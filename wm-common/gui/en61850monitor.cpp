@@ -1,9 +1,8 @@
-//Added by qt3to4:
-#include <QCloseEvent>
-#include <QTimer>
-#include <QFileInfo>
 #include "en61850monitor.h"
 #include "ui_en61850monitor.h"
+#include "geometrytowidget.h"
+#include <QCloseEvent>
+#include <QTimer>
 
 EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
     QDialog(parent),
@@ -28,19 +27,16 @@ void EN61850monitor::init()
     ETHStatus.ETHErrors = 0;
 
     m_pTimer = new QTimer();
-    m_Timer.setSingleShot(true);
     QObject::connect(m_pTimer,SIGNAL(timeout()),this,SLOT(TimerSlot()));
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
+    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
-
 
 void EN61850monitor::destroy()
 {
     delete m_pTimer;
     saveConfiguration();
 }
-
 
 void EN61850monitor::onShowHide(bool b)
 {
@@ -57,41 +53,38 @@ void EN61850monitor::onShowHide(bool b)
     }
 }
 
-
 void EN61850monitor::closeEvent( QCloseEvent * ce )
 {
-    m_widGeometry.setPoint(pos());
-    m_widGeometry.setSize(size());
-    m_widGeometry.setVisible(0);
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
     emit isVisibleSignal(false);
     ce->accept();
 }
 
-
 void EN61850monitor::resizeEvent(QResizeEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
-
 
 void EN61850monitor::moveEvent(QMoveEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
-
 
 void EN61850monitor::TimerSlot()
 {
     emit InformationRequest(); // anfrage an wm3000 die status infos zu besorgen
 }
 
-
 void EN61850monitor::saveConfiguration()
 {
     onSaveSession(".ses");
 }
 
+void EN61850monitor::onWriteStreamForGeomChange()
+{
+    m_geomToFromStream = geometryFromWidget(this);
+    saveConfiguration();
+}
 
 void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
 {
@@ -151,7 +144,7 @@ bool EN61850monitor::onLoadSession(QString session)
     WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
     if(tmpGeometry.getSize().isValid())
     {
-        m_widGeometry=tmpGeometry;
+        m_geomToFromStream=tmpGeometry;
         return true;
     }
     else
@@ -163,7 +156,7 @@ bool EN61850monitor::onLoadSession(QString session)
 
 void EN61850monitor::onSaveSession(QString session)
 {
-    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_geomToFromStream, session);
 }
 
 
