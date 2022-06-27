@@ -8,10 +8,9 @@
 
 const double PI_180 = 1.74532925e-2;
 
-cOwnError::cOwnError(QObject *parent, IOwnErrorParamUISpecific *uiSpecificParamCheck) :
+cOwnError::cOwnError(IOwnErrorParamUISpecific *uiSpecificParamCheck) :
     m_uiSpecificParamCheck(uiSpecificParamCheck)
 {
-    pa = parent;
     m_pViewData = new cOwnErrorViewData();
     m_pViewData->m_bValid = false;
     m_sOEFileName = "";
