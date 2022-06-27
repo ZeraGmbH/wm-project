@@ -7,20 +7,9 @@
 EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
     QDialog(parent),
     ui(new Ui::EN61850monitor),
-    m_sessionReadWrite(machineName)
+    m_sessionStreamer(machineName, this)
 {
     ui->setupUi(this);
-    init();
-}
-
-EN61850monitor::~EN61850monitor()
-{
-    destroy();
-    delete ui;
-}
-
-void EN61850monitor::init()
-{
     ETHStatus.ByteCount[0] = 0;
     ETHStatus.ByteCount[1] = 0;
     ETHStatus.SyncLostCount = 0;
@@ -32,22 +21,22 @@ void EN61850monitor::init()
     onLoadSession(".ses");
 }
 
-void EN61850monitor::destroy()
+EN61850monitor::~EN61850monitor()
 {
-    delete m_pTimer;
     saveConfiguration();
+    delete m_pTimer;
+    delete ui;
 }
 
-void EN61850monitor::onShowHide(bool b)
+void EN61850monitor::onShowHide(bool shw)
 {
-    if (b)
-    {
+    m_geomChangeTimer.handleGeomChange();
+    if (shw) {
         show();
         emit InformationRequest(); // anfrage an wm3000 die status infos zu besorgen
         m_pTimer->start(2000); // wenn sichtbar -> timer läuft
     }
-    else
-    {
+    else {
         close();
         m_pTimer->stop();
     }
@@ -84,6 +73,21 @@ void EN61850monitor::onWriteStreamForGeomChange()
 {
     m_geomToFromStream = geometryFromWidget(this);
     saveConfiguration();
+}
+
+void EN61850monitor::readStream(QDataStream &stream)
+{
+    stream >> m_geomToFromStream;
+    geometryToWidget(m_geomToFromStream, this);
+}
+
+void EN61850monitor::writeStream(QDataStream &stream)
+{
+    stream << m_geomToFromStream;
+}
+
+void EN61850monitor::setDefaults()
+{
 }
 
 void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
@@ -138,34 +142,22 @@ void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
     ui->RUNTFramecheckBox->setChecked(stat & RuntFrame);
 }
 
-
 bool EN61850monitor::onLoadSession(QString session)
 {
-    WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-    if(tmpGeometry.getSize().isValid())
-    {
-        m_geomToFromStream=tmpGeometry;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    m_sessionStreamer.readSession(objectName(), session);
+    return true;
 }
-
 
 void EN61850monitor::onSaveSession(QString session)
 {
-    m_sessionReadWrite.writeSession(this, m_geomToFromStream, session);
+    m_sessionStreamer.writeSession(objectName(), session);
 }
-
 
 void EN61850monitor::accept()
 {
     emit isVisibleSignal(false);
     QDialog::accept();
 }
-
 
 void EN61850monitor::reject()
 {
