@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
   lpUnitList.append(VoltageUnit + VoltkV);
   WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView, machineName, lpUnitList); // fehlermesswerte anzeige erzeugen
   QObject::connect(g_WMView,SIGNAL(UIansichtFehlerMessungActionToggled(bool)),g_WMErrMeasValView,SLOT(onShowHide(bool))); // öffnen der fehlermesswert anzeige
-  QObject::connect(g_WMErrMeasValView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtFehlerMessungActionSet(bool))); //schliessen der fehlermesswert anzeige
+  QObject::connect(g_WMErrMeasValView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtFehlerMessungActionSet(bool))); //schliessen der fehlermesswert anzeige
   QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMErrMeasValView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMErrMeasValView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
 
@@ -132,14 +132,14 @@ int main(int argc, char *argv[])
   QObject::connect(g_WMView,SIGNAL(StartRangeObsermatic()),g_WMDevice,SLOT(RangeObsermaticSlot())); // für testzwecke bereichautomatik von hand triggern
   WMOeViewBase *g_WMOeView = new WMOeViewBase(g_WMView, machineName); // eigenfehleranzeige erzeugen
   QObject::connect(g_WMView,SIGNAL(UIansichtEigenfehlerActionToggled(bool)),g_WMOeView,SLOT(onShowHide(bool))); // öffnen der eigenfehleranzeige
-  QObject::connect(g_WMOeView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtEigenfehlerActionSet(bool))); //schliessen der eigenfehleranzeige
+  QObject::connect(g_WMOeView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtEigenfehlerActionSet(bool))); //schliessen der eigenfehleranzeige
   QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMOeView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMOeView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(&g_WMDevice->m_ownError,SIGNAL(SendOEViewData(cOwnErrorViewData*)),g_WMOeView,SLOT(ReceiveOEViewDataSlot(cOwnErrorViewData*)));
 
   WMRawActualValBase *g_WMActValView = new WMRawActualValBase(g_WMView);   //  istwertanzeige erzeugen
   QObject::connect(g_WMView,SIGNAL(UIansichtIstwerteActionToggled(bool)),g_WMActValView,SLOT(onShowHide(bool))); // öffnen der istwertanzeige
-  QObject::connect(g_WMActValView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtIstwerteActionSet(bool))); //schliessen der istwertanzeige
+  QObject::connect(g_WMActValView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtIstwerteActionSet(bool))); //schliessen der istwertanzeige
   QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMActValView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMActValView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMActValView,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an rawactualanzei
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 
   WMOffsetValBase *g_WMOffsetView = new WMOffsetValBase(g_WMView);
   QObject::connect(g_WMView,SIGNAL(UIansichtOffsetActionToggled(bool)),g_WMOffsetView,SLOT(onShowHide(bool)));
-  QObject::connect(g_WMOffsetView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtOffsetActionSet(bool))); //schliessen der offsetanzeige
+  QObject::connect(g_WMOffsetView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtOffsetActionSet(bool))); //schliessen der offsetanzeige
   QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMOffsetView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMOffsetView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMDevice,SIGNAL(SendJustValuesSignal(tJustValues*)),g_WMOffsetView,SLOT(ReceiveJustDataSlot(tJustValues*))); // device sendet konfigurationsdaten an rawactualanzei
@@ -163,14 +163,14 @@ int main(int argc, char *argv[])
   QObject::connect(g_WMView,SIGNAL(UIansichtDialogActionToggled(bool)),g_WMSCPILogFileView,SLOT(onShowHide(bool))); // öffnen der kommunikation anzeige
   QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMSCPILogFileView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
   QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMSCPILogFileView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
-  QObject::connect(g_WMSCPILogFileView,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtDialogActionSet(bool))); //schliessen der kommunikation anzeige
+  QObject::connect(g_WMSCPILogFileView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtDialogActionSet(bool))); //schliessen der kommunikation anzeige
 
   EN61850monitor *g_ETHMonitor = new EN61850monitor(g_WMView, machineName);
   QObject::connect(g_WMView,SIGNAL(UIansichtEN61850ActionToggled(bool)),g_ETHMonitor,SLOT(onShowHide(bool))); // öffnen der eth status anzeige
-  QObject::connect(g_ETHMonitor,SIGNAL(isVisibleSignal(bool)),g_WMView,SIGNAL(UIansichtEN61850ActionSet(bool))); //schliessen der eth status anzeige
-  QObject::connect((QObject*)g_WMDevice,SIGNAL(EN61850StatusSignal(cEN61850Info*)),g_ETHMonitor,SLOT(SetETHStatusSlot( cEN61850Info*))); // setzen der eth status info
-  QObject::connect(g_ETHMonitor,SIGNAL(InformationRequest()),(QObject*)g_WMDevice,SLOT(EN61850InfoRequestSlot())); // anforderung der eth status info
-  QObject::connect(g_ETHMonitor,SIGNAL(ResetETHStatus()),(QObject*)g_WMDevice,SLOT(EN61850ResetStatusSlot())); // rücksetzen eth status info
+  QObject::connect(g_ETHMonitor,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtEN61850ActionSet(bool))); //schliessen der eth status anzeige
+  QObject::connect((QObject*)g_WMDevice,SIGNAL(EN61850StatusSignal(cEN61850Info*)),g_ETHMonitor,SLOT(onETHStatus( cEN61850Info*))); // setzen der eth status info
+  QObject::connect(g_ETHMonitor,SIGNAL(sigRequestInformation()),(QObject*)g_WMDevice,SLOT(EN61850InfoRequestSlot())); // anforderung der eth status info
+  QObject::connect(g_ETHMonitor,SIGNAL(sigResetETHStatus()),(QObject*)g_WMDevice,SLOT(EN61850ResetStatusSlot())); // rücksetzen eth status info
 
   CLogFile LogFile(QDir(ServerCommLogFilePath).absPath(), g_WMDevice->m_ConfData.m_nLogFileMax); // kommunikation logfile erzeugen
   QObject::connect(&LogFile, SIGNAL(SendLogDataSignal(const QString&)), g_WMSCPILogFileView, SLOT(onAddLogText(const QString&))); // logfile sendet logdaten an logfileview
@@ -237,7 +237,7 @@ int main(int argc, char *argv[])
 
   QObject::connect((QObject*)g_WMDevice,SIGNAL(AffectStatus(uchar, ushort)),wm3000DeviceServer,SLOT(ReceiveAffectStatus(uchar, ushort))); // setzen des selbsttest ergebnisses
 
-  QObject::connect(wm3000DeviceServer,SIGNAL(ResetETHStatus()),(QObject*)g_WMDevice,SLOT(EN61850ResetStatusSlot())); // rücksetzen eth status info
+  QObject::connect(wm3000DeviceServer,SIGNAL(sigResetETHStatus()),(QObject*)g_WMDevice,SLOT(EN61850ResetStatusSlot())); // rücksetzen eth status info
   QObject::connect(wm3000DeviceServer,SIGNAL(SendRangeCommand(cConfData*)),(QObject*)g_WMDevice,SLOT(SetRangeSlot(cConfData*))); // bereiche setzen
   QObject::connect((QObject*)g_WMDevice,SIGNAL(SendRangeListSignal(cWMRangeList&,cWMRangeList&)),wm3000DeviceServer,SLOT(SetRangeListSlot( cWMRangeList&,  cWMRangeList&))); // bereichlisten übertragen
   QObject::connect((QObject*)g_WMDevice,SIGNAL(SendVersionInfo(tVersSerial*)),wm3000DeviceServer,SLOT(ReceiveVersionInfo(tVersSerial*))); // version info übertragen

@@ -27,7 +27,7 @@ WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<e
 
 WMMeasValuesBase::~WMMeasValuesBase()
 {
-    saveConfiguration();
+    onSaveConfig();
     delete ui;
 }
 
@@ -48,7 +48,7 @@ void WMMeasValuesBase::adjustBoxWidths()
 void WMMeasValuesBase::closeEvent(QCloseEvent * ce)
 {
     m_geomChangeTimer.handleGeomChange();
-    emit isVisibleSignal(false);
+    emit sigIsVisible(false);
     ce->accept();
 }
 
@@ -242,7 +242,7 @@ void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* 
     m_nLPDisplayMode = m2;
 }
 
-void WMMeasValuesBase::saveConfiguration()
+void WMMeasValuesBase::onSaveConfig()
 {
     onSaveSession(".ses");
 }
@@ -250,5 +250,5 @@ void WMMeasValuesBase::saveConfiguration()
 void WMMeasValuesBase::onWriteStreamForGeomChange()
 {
     m_geomToFromStream = geometryFromWidget(this);
-    saveConfiguration();
+    onSaveConfig();
 }

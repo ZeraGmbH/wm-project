@@ -32,7 +32,7 @@ public slots:
     virtual void ReceiveVektorDispFormat( int m, int m2, int m3 );
 
 signals:
-    void isVisibleSignal(bool);
+    void sigIsVisible(bool);
     void SendVektorDispFormat(bool,int,int,int);
 
 protected:
@@ -56,7 +56,7 @@ private:
     void destroy();
 
 private slots:
-    void saveConfiguration();
+    void onSaveConfig();
 
 };
 

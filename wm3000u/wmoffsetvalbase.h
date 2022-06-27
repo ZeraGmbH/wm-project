@@ -29,7 +29,7 @@ public slots:
     void onSaveSession(QString session);
 
 signals:
-    void isVisibleSignal(bool);
+    void sigIsVisible(bool);
 
 protected:
     virtual void closeEvent( QCloseEvent * ce );
@@ -47,7 +47,7 @@ private:
     void destroy();
 
 private slots:
-    void saveConfiguration();
+    void onSaveConfig();
 
 };
 
