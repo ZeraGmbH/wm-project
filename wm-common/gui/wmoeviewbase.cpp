@@ -6,7 +6,7 @@
 WMOeViewBase::WMOeViewBase(QWidget* parent, QString machineName):
     QDialog(parent),
     ui(new Ui::WMOeViewBase),
-    m_sessionReadWrite(machineName)
+    m_sessionStreamer(machineName, this)
 {
     ui->setupUi(this);
     connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
@@ -30,17 +30,30 @@ void WMOeViewBase::onWriteStreamForGeomChange()
     onSaveConfig();
 }
 
+void WMOeViewBase::readStream(QDataStream &stream)
+{
+    stream >> m_geomToFromStream;
+    geometryToWidget(m_geomToFromStream, this);
+}
+
+void WMOeViewBase::writeStream(QDataStream &stream)
+{
+    stream << m_geomToFromStream;
+}
+
+void WMOeViewBase::setDefaults()
+{
+}
+
 void WMOeViewBase::ReceiveOEViewDataSlot(cOwnErrorViewData *oe)
 {
-    m_OwnErrorView=*oe;
-    ui->WandlerName->setText(m_OwnErrorView.m_sTrName);
-    ui->PrimDisp->setText(m_OwnErrorView.m_sPrim);
-    ui->SekDisp->setText(m_OwnErrorView.m_sSec);
-    ui->LoadpointDisp->setText(m_OwnErrorView.m_sLoad);
-
-    if (m_OwnErrorView.m_bValid) {
-        ui->AmplDisp->setText(m_OwnErrorView.m_sAmpl);
-        ui->PhaseDisp->setText(m_OwnErrorView.m_sPhase);
+    ui->WandlerName->setText(oe->m_sTrName);
+    ui->PrimDisp->setText(oe->m_sPrim);
+    ui->SekDisp->setText(oe->m_sSec);
+    ui->LoadpointDisp->setText(oe->m_sLoad);
+    if (oe->m_bValid) {
+        ui->AmplDisp->setText(oe->m_sAmpl);
+        ui->PhaseDisp->setText(oe->m_sPhase);
     }
     else {
         ui->AmplDisp->setText("--------");
@@ -76,19 +89,11 @@ void WMOeViewBase::onShowHide(bool shw )
 
 void WMOeViewBase::onSaveSession(QString session)
 {
-    m_sessionReadWrite.writeSession(this, m_geomToFromStream, session);
+    m_sessionStreamer.writeSession(objectName(), session);
 }
 
 bool WMOeViewBase::onLoadSession(QString session)
 {
-    WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-    if(tmpGeometry.getSize().isValid()) {
-        m_geomToFromStream=tmpGeometry;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    m_sessionStreamer.readSession(objectName(), session);
+    return true;
 }
-

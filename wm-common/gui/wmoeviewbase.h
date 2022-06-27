@@ -3,19 +3,17 @@
 
 #include "ownerrorviewdata.h"
 #include "widgetgeometry.h"
+#include "sessionstreamer.h"
 #include "geometrychangetimer.h"
-#include "sessionreadwrite.h"
 #include <QDialog>
-#include <QTimer>
 
 namespace Ui {
     class WMOeViewBase;
 }
 
-class WMOeViewBase : public QDialog
+class WMOeViewBase : public QDialog, public ISessionStreamImplementor
 {
     Q_OBJECT
-
 public:
     explicit WMOeViewBase(QWidget* parent, QString machineName);
     ~WMOeViewBase();
@@ -34,11 +32,13 @@ private slots:
     void onSaveConfig();
     void onWriteStreamForGeomChange();
 private:
+    virtual void readStream(QDataStream& stream) override;
+    virtual void writeStream(QDataStream& stream) override;
+    virtual void setDefaults() override;
     Ui::WMOeViewBase *ui;
-    cOwnErrorViewData m_OwnErrorView;
     GeometryChangeTimer m_geomChangeTimer;
     WidgetGeometry m_geomToFromStream;
-    SessionReadWrite m_sessionReadWrite;
+    SessionStreamer m_sessionStreamer;
 };
 
 #endif // WMOEVIEWBASE_H
