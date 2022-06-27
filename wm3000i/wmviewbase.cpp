@@ -269,7 +269,7 @@ void WMViewBase::EditOETFileSlot()
         wmEdit->setTextFormat(Qt::PlainText);
         QString text = stream.read();
         if (text.isEmpty())
-            text = "100V;100V;100%;0.01%;0.0grad";
+            text = "15A;15A;100%;0.01%;0.0grad";
         wmEdit->setText( text );
         file.close();
         wmEdit->show();
