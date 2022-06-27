@@ -29,7 +29,7 @@ void cwm3000DeviceServer::newConnection(int fd)
     iface->setConfiguration(&m_ConfData); // neue interfaces werden 1x expl. informiert
     connect( iface, SIGNAL(EN61850StatusRequest()), this, SLOT(ReceiveENInfoReguest())); 
     connect( this, SIGNAL(SendIFaceETHStatus(cEN61850Info*)), iface, SLOT( ReceiveEN61850Status(cEN61850Info*)));
-    connect( iface, SIGNAL(ResetETHStatus()), this, SLOT(ReceiveResetETHStatusCommand())); 
+    connect( iface, SIGNAL(sigResetETHStatus()), this, SLOT(ReceiveResetETHStatusCommand())); 
     connect( iface, SIGNAL(SendRange(cConfData*)), this, SLOT(ReceiveIFaceRangeCommand(cConfData*))); 
     iface->SetRangeListSlot(m_sNXRangeList, m_sECTRangeList); // wir setzen die liste 1x
     connect( iface, SIGNAL(SetDefaultMeasConfig()), this, SLOT(ReceiveIFaceDefaultConfig())); 
@@ -113,7 +113,7 @@ void cwm3000DeviceServer::ReceiveChannelXOffsetMeasureRequest()
 
 void cwm3000DeviceServer::ReceiveResetETHStatusCommand()
 {
-    emit ResetETHStatus();
+    emit sigResetETHStatus();
 }
 
 

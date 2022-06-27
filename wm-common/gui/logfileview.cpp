@@ -26,7 +26,7 @@ CLogFileView::CLogFileView(const QString cap,
 
 CLogFileView::~CLogFileView()
 {
-    saveConfiguration();
+    onSaveConfig();
 }
 
 void CLogFileView::onShowHide(bool shw)
@@ -52,7 +52,7 @@ void CLogFileView::showList()
     }
 }
 
-void CLogFileView::saveConfiguration()
+void CLogFileView::onSaveConfig()
 {
     onSaveSession(".ses");
 }
@@ -60,7 +60,7 @@ void CLogFileView::saveConfiguration()
 void CLogFileView::onWriteStreamForGeomChange()
 {
     m_geomToFromStream = geometryFromWidget(this);
-    saveConfiguration();
+    onSaveConfig();
 }
 
 void CLogFileView::readStream(QDataStream &stream)
@@ -103,6 +103,6 @@ void CLogFileView::moveEvent(QMoveEvent*)
 void CLogFileView::closeEvent (QCloseEvent* ce)
 {
     m_geomChangeTimer.handleGeomChange();
-    emit isVisibleSignal(false);
+    emit sigIsVisible(false);
     ce->accept();
 }

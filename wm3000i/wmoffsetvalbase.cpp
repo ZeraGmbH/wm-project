@@ -29,7 +29,7 @@ void WMOffsetValBase::init()
     m_JustValues.OffsetCorrDevX = 0.0;
     actualizeDisplay();
     m_Timer.setSingleShot(true);
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
+    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
     onLoadSession(".ses");
 
 }
@@ -37,7 +37,7 @@ void WMOffsetValBase::init()
 
 void WMOffsetValBase::destroy()
 {
-    saveConfiguration();
+    onSaveConfig();
 }
 
 
@@ -59,7 +59,7 @@ void WMOffsetValBase::closeEvent(QCloseEvent* ce)
     m_widGeometry.setPoint(pos());
     m_widGeometry.setSize(size());
     m_widGeometry.setVisible(0);
-    emit isVisibleSignal(false);
+    emit sigIsVisible(false);
     m_Timer.start(500);
     ce->accept();
 }
@@ -112,7 +112,7 @@ bool WMOffsetValBase::onLoadSession(QString session)
     if (m_widGeometry.getVisible())
     {
         show();
-        emit isVisibleSignal(true);
+        emit sigIsVisible(true);
     }
 // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
@@ -154,7 +154,7 @@ void WMOffsetValBase::onSaveSession(QString session)
 }
 
 
-void WMOffsetValBase::saveConfiguration()
+void WMOffsetValBase::onSaveConfig()
 {
     onSaveSession(".ses");
 }

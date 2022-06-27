@@ -35,7 +35,7 @@ public slots:
     virtual void ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo * fi );
 
 signals:
-    void isVisibleSignal(bool);
+    void sigIsVisible(bool);
     void SendFormatInfoSignal(bool, int, int, int, cFormatInfo*);
 
 protected:
@@ -45,7 +45,7 @@ protected:
     virtual void contextMenuEvent( QContextMenuEvent * ) override;
 
 private slots:
-    void saveConfiguration();
+    void onSaveConfig();
     void onWriteStreamForGeomChange();
 private:
     virtual void readStream(QDataStream& stream) override;

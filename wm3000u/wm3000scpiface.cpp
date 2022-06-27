@@ -188,7 +188,7 @@ char* cWM3000SCPIFace::mGetDeviceVersion()
 // status modell routinen
 void cWM3000SCPIFace::mSetStatusEN61850Clear(char*)
 {
-    emit ResetETHStatus();
+    emit sigResetETHStatus();
 }
 
 

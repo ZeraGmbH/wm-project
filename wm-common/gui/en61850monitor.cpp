@@ -15,16 +15,14 @@ EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
     ETHStatus.SyncLostCount = 0;
     ETHStatus.ETHErrors = 0;
 
-    m_pTimer = new QTimer();
-    QObject::connect(m_pTimer,SIGNAL(timeout()),this,SLOT(TimerSlot()));
+    QObject::connect(&m_PollTimer, SIGNAL(timeout()), this, SLOT(onPollTimer()));
     connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
 EN61850monitor::~EN61850monitor()
 {
-    saveConfiguration();
-    delete m_pTimer;
+    onSaveConfig();
     delete ui;
 }
 
@@ -33,19 +31,19 @@ void EN61850monitor::onShowHide(bool shw)
     m_geomChangeTimer.handleGeomChange();
     if (shw) {
         show();
-        emit InformationRequest(); // anfrage an wm3000 die status infos zu besorgen
-        m_pTimer->start(2000); // wenn sichtbar -> timer läuft
+        emit sigRequestInformation(); // anfrage an wm3000 die status infos zu besorgen
+        m_PollTimer.start(2000); // wenn sichtbar -> timer läuft
     }
     else {
         close();
-        m_pTimer->stop();
+        m_PollTimer.stop();
     }
 }
 
 void EN61850monitor::closeEvent( QCloseEvent * ce )
 {
     m_geomChangeTimer.handleGeomChange();
-    emit isVisibleSignal(false);
+    emit sigIsVisible(false);
     ce->accept();
 }
 
@@ -59,12 +57,12 @@ void EN61850monitor::moveEvent(QMoveEvent *)
     m_geomChangeTimer.handleGeomChange();
 }
 
-void EN61850monitor::TimerSlot()
+void EN61850monitor::onPollTimer()
 {
-    emit InformationRequest(); // anfrage an wm3000 die status infos zu besorgen
+    emit sigRequestInformation(); // anfrage an wm3000 die status infos zu besorgen
 }
 
-void EN61850monitor::saveConfiguration()
+void EN61850monitor::onSaveConfig()
 {
     onSaveSession(".ses");
 }
@@ -72,7 +70,7 @@ void EN61850monitor::saveConfiguration()
 void EN61850monitor::onWriteStreamForGeomChange()
 {
     m_geomToFromStream = geometryFromWidget(this);
-    saveConfiguration();
+    onSaveConfig();
 }
 
 void EN61850monitor::readStream(QDataStream &stream)
@@ -90,7 +88,7 @@ void EN61850monitor::setDefaults()
 {
 }
 
-void EN61850monitor::SetETHStatusSlot( cEN61850Info *ethInfo )
+void EN61850monitor::onETHStatus( cEN61850Info *ethInfo )
 {
     QString s;
     double count;
@@ -155,11 +153,11 @@ void EN61850monitor::onSaveSession(QString session)
 
 void EN61850monitor::accept()
 {
-    emit isVisibleSignal(false);
+    emit sigIsVisible(false);
     QDialog::accept();
 }
 
 void EN61850monitor::reject()
 {
-    emit ResetETHStatus();
+    emit sigResetETHStatus();
 }

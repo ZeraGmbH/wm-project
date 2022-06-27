@@ -235,7 +235,7 @@ signals:
     void SendConfiguration(cConfData*);
     void SendRange(cConfData*);
     void EN61850StatusRequest();
-    void ResetETHStatus();
+    void sigResetETHStatus();
     void SetDefaultMeasConfig();
     void SelftestRequest();
     void ChannelNOffsetMeasureRequest();

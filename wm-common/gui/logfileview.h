@@ -37,11 +37,11 @@ protected:
     virtual void moveEvent(QMoveEvent*) override;
 
 signals:
-    void isVisibleSignal(bool);
+    void sigIsVisible(bool);
     
 private slots:
     void showList();
-    void saveConfiguration();
+    void onSaveConfig();
     void onWriteStreamForGeomChange();
 private:
     virtual void readStream(QDataStream& stream) override;

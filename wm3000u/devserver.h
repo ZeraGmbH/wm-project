@@ -63,7 +63,7 @@ signals:
     void RequestSelftest(); // der server lässt den selbsttest durchführen
     void RequestChannelNOffsetMeasure(); // der server lässt die n kanal offsetmessung durchführen
     void RequestChannelXOffsetMeasure(); // der server lässt die x kanal offsetmessung durchführen
-    void ResetETHStatus(); // der server leitet das reset kommando weiter
+    void sigResetETHStatus(); // der server leitet das reset kommando weiter
     void SendRangeCommand(cConfData*); // ebenso den bereich setzen befehl
     void SendDefaultConfigCommand(); // der server leitet kommando zum setzen default konfig. weiter
     void ConfirmRangeAutoRdy();

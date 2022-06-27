@@ -27,36 +27,31 @@ class EN61850monitor : public QDialog, public ISessionStreamImplementor
 public:
     explicit EN61850monitor(QWidget* parent, QString machineName);
     ~EN61850monitor();
-
 public slots:
     virtual void onShowHide(bool shw);
-    virtual void SetETHStatusSlot(cEN61850Info *ethInfo);
+    virtual void onETHStatus(cEN61850Info *ethInfo);
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
-
 signals:
-    void InformationRequest();
-    void isVisibleSignal(bool);
-    void ResetETHStatus();
-
+    void sigRequestInformation();
+    void sigIsVisible(bool);
+    void sigResetETHStatus();
 protected:
-    int newVariable;
     virtual void closeEvent(QCloseEvent * ce) override;
     virtual void resizeEvent(QResizeEvent *) override;
     virtual void moveEvent(QMoveEvent*) override;
     virtual void accept() override;
     virtual void reject() override;
-
 private slots:
-    void TimerSlot();
-    void saveConfiguration();
+    void onPollTimer();
+    void onSaveConfig();
     void onWriteStreamForGeomChange();
 private:
     virtual void readStream(QDataStream& stream) override;
     virtual void writeStream(QDataStream& stream) override;
     virtual void setDefaults() override;
     Ui::EN61850monitor *ui;
-    QTimer *m_pTimer;
+    QTimer m_PollTimer;
     cEN61850Info ETHStatus;
     GeometryChangeTimer m_geomChangeTimer;
     WidgetGeometry m_geomToFromStream;

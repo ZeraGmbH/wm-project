@@ -39,18 +39,18 @@ void WMRawActualValBase::init()
     m_Timer.setSingleShot(true);
     connect(this,SIGNAL(SendVektorDispFormat(bool,int,int,int)),m_pContextMenu,SLOT(ReceiveDisplayConfSlot(bool,int,int,int)));
     connect(m_pContextMenu,SIGNAL(SendVektorDisplayFormat(int,int,int)),this,SLOT(ReceiveVektorDispFormat(int,int,int)));
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(saveConfiguration()));
+    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
     onLoadSession(".ses");
 }
 
 
 void WMRawActualValBase::destroy()
 {
-    saveConfiguration();
+    onSaveConfig();
 }
 
 
-void WMRawActualValBase::saveConfiguration()
+void WMRawActualValBase::onSaveConfig()
 {
     onSaveSession(".ses");
 }
@@ -61,7 +61,7 @@ void WMRawActualValBase::closeEvent(QCloseEvent* ce)
     m_widGeometry.setPoint(pos());
     m_widGeometry.setSize(size());
     m_widGeometry.setVisible(0);
-    emit isVisibleSignal(false);
+    emit sigIsVisible(false);
     m_Timer.start(500);
     ce->accept();
 }
@@ -227,7 +227,7 @@ bool WMRawActualValBase::onLoadSession(QString session)
         if (m_widGeometry.getVisible())
         {
             show();
-            emit isVisibleSignal(true);
+            emit sigIsVisible(true);
         }
         // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
