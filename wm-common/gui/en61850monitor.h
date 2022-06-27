@@ -51,9 +51,10 @@ private:
     virtual void writeStream(QDataStream& stream) override;
     virtual void setDefaults() override;
     void prepareNextPoll();
+    void actualizeByteCount(cEN61850Info *ethInfo);
+    void actualizeSyncLostCount(cEN61850Info *ethInfo);
     Ui::EN61850monitor *ui;
     QTimer m_PollTimer;
-    cEN61850Info ETHStatus;
     GeometryChangeTimer m_geomChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;

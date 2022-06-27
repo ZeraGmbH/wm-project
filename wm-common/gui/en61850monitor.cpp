@@ -10,13 +10,7 @@ EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
     m_sessionStreamer(machineName, this)
 {
     ui->setupUi(this);
-    ETHStatus.ByteCount[0] = 0;
-    ETHStatus.ByteCount[1] = 0;
-    ETHStatus.SyncLostCount = 0;
-    ETHStatus.ETHErrors = 0;
-
     QObject::connect(&m_PollTimer, SIGNAL(timeout()), this, SLOT(onPollTimer()));
-    m_PollTimer.setSingleShot(true);
     connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
@@ -94,10 +88,9 @@ void EN61850monitor::prepareNextPoll()
     m_PollTimer.start(1000);
 }
 
-void EN61850monitor::onETHStatus(cEN61850Info *ethInfo)
+void EN61850monitor::actualizeByteCount(cEN61850Info *ethInfo)
 {
-    ETHStatus = *ethInfo;
-    double count = ETHStatus.ByteCount[0]*4294967296.0+ethInfo->ByteCount[1];
+    double count = ethInfo->ByteCount[0]*4294967296.0+ethInfo->ByteCount[1];
     QString s = QString("%1").arg( count, 0, 'f', 0 ); // keine nachkommastellen
     uint i,p,l;
     p = l = s.length();
@@ -107,15 +100,21 @@ void EN61850monitor::onETHStatus(cEN61850Info *ethInfo)
         i++;
         p -= 3;
     }
-
     ui->ByteCountValLabel->setText(s);
+}
 
-    count = ETHStatus.SyncLostCount;
-    s = QString("%1").arg( count, 0, 'f', 0 ); // keine nachkommastellen
+void EN61850monitor::actualizeSyncLostCount(cEN61850Info *ethInfo)
+{
+    QString s = QString("%1").arg(ethInfo->SyncLostCount);
     ui->LostSyncValLabel->setText(s);
+}
 
-    ulong stat = ETHStatus.ETHErrors;
+void EN61850monitor::onETHStatus(cEN61850Info *ethInfo)
+{
+    actualizeByteCount(ethInfo);
+    actualizeSyncLostCount(ethInfo);
 
+    ulong stat = ethInfo->ETHErrors;
     ui->savPducheckBox->setChecked(stat & savPdu);
     ui->ASDUcheckBox->setChecked(stat & noASDU);
     ui->seqASDUcheckBox->setChecked(stat & seqASDU);
