@@ -71,7 +71,7 @@ cWM3000U::cWM3000U()
     SerialVersions.DSPVersion = "Unknown";
     SerialVersions.DSPServer = "Unknown";
     SerialVersions.JDataChksum = "Unknown";
-    m_pOwnError = new cOwnError(this); // eigenfehler klasse erzeugen
+    m_pOwnError = new cOwnError(this, new Wm3000uOwnErrorParamChecker); // eigenfehler klasse erzeugen
 
     // wenn device confdata sendet -> auch  an eigenfehler klasse
     connect(this,SIGNAL(SendConfDataSignal(cConfData*)),m_pOwnError,SLOT(SetConfInfoSlot(cConfData*)));

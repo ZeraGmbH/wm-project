@@ -18,17 +18,23 @@
 
 #include "ownerrorviewdata.h"
 #include "wmactvalues.h"
+#include "wmparameter.h"
 #include "confdata.h"
 #include "complex.h"
 
-
+class IOwnErrorParamUISpecific
+{
+public:
+    virtual ~IOwnErrorParamUISpecific() { }
+    virtual bool checkUISpecificInvalidParam(WmParameter* param) = 0;
+};
 
 class cOwnError:public QObject
 {
     Q_OBJECT
     
 public:
-    cOwnError(QObject* parent = 0);
+    cOwnError(QObject* parent, IOwnErrorParamUISpecific* uiSpecificParamCheck);
     virtual ~cOwnError();
     
     complex GetOECorrVector();
@@ -57,6 +63,7 @@ private:
     double m_OEAmplitude; // eigenfehler amplitude
     double m_OEPhase; // eigenfehler phase
     QObject* pa;
+    IOwnErrorParamUISpecific* m_uiSpecificParamCheck;
 };
 
 

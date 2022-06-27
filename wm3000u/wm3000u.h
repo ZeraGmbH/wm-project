@@ -308,6 +308,14 @@ signals:
     void WMBoxClosed();
 };
 
+class Wm3000uOwnErrorParamChecker : public IOwnErrorParamUISpecific
+{
+public:
+    bool checkUISpecificInvalidParam(WmParameter* param) override
+    {
+        return !param->isVoltage() || param->withoutUnit();
+    }
+};
 
 class cWM3000U: public QObject
 {
