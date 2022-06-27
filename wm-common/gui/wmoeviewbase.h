@@ -1,24 +1,12 @@
-/****************************************************************************
-** Form interface generated from reading ui file 'wmoeviewbase.ui'
-**
-** Created: Mi Sep 19 14:11:07 2012
-**      by: The User Interface Compiler ($Id: qt/main.cpp   3.3.4   edited Nov 24 2003 $)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
-
 #ifndef WMOEVIEWBASE_H
 #define WMOEVIEWBASE_H
 
-
-#include <qvariant.h>
-#include <qdialog.h>
-#include <QTimer>
-
 #include "ownerrorviewdata.h"
 #include "widgetgeometry.h"
+#include "geometrychangetimer.h"
 #include "sessionreadwrite.h"
-
+#include <QDialog>
+#include <QTimer>
 
 namespace Ui {
     class WMOeViewBase;
@@ -31,33 +19,26 @@ class WMOeViewBase : public QDialog
 public:
     explicit WMOeViewBase(QWidget* parent, QString machineName);
     ~WMOeViewBase();
-
 public slots:
-    virtual void ReceiveOEViewDataSlot( cOwnErrorViewData * oe );
-    virtual void onShowHide( bool b );
+    virtual void ReceiveOEViewDataSlot(cOwnErrorViewData *oe);
+    virtual void onShowHide(bool shw);
     void onSaveSession(QString session);
     bool onLoadSession(QString session);
-
 signals:
     void sigIsVisible(bool);
-
 protected:
-    virtual void closeEvent( QCloseEvent * ce );
-    virtual void resizeEvent ( QResizeEvent *);
-    virtual void moveEvent( QMoveEvent *);
-
-private:
-    Ui::WMOeViewBase *ui;
-    WidgetGeometry m_widGeometry;
-    cOwnErrorViewData m_OwnErrorView;
-    QTimer m_Timer;
-    SessionReadWrite m_sessionReadWrite;
-    void init();
-    void destroy();
-
+    virtual void closeEvent(QCloseEvent *ce) override;
+    virtual void resizeEvent (QResizeEvent*) override;
+    virtual void moveEvent(QMoveEvent*) override;
 private slots:
     void onSaveConfig();
-
+    void onWriteStreamForGeomChange();
+private:
+    Ui::WMOeViewBase *ui;
+    cOwnErrorViewData m_OwnErrorView;
+    GeometryChangeTimer m_geomChangeTimer;
+    WidgetGeometry m_geomToFromStream;
+    SessionReadWrite m_sessionReadWrite;
 };
 
 #endif // WMOEVIEWBASE_H

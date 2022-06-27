@@ -1,7 +1,7 @@
-#include <QCloseEvent>
-#include <QFileInfo>
 #include "wmoeviewbase.h"
 #include "ui_wmoeviewbase.h"
+#include "geometrytowidget.h"
+#include <QCloseEvent>
 
 WMOeViewBase::WMOeViewBase(QWidget* parent, QString machineName):
     QDialog(parent),
@@ -9,35 +9,26 @@ WMOeViewBase::WMOeViewBase(QWidget* parent, QString machineName):
     m_sessionReadWrite(machineName)
 {
     ui->setupUi(this);
-    init();
+    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    onLoadSession(".ses");
 }
 
 WMOeViewBase::~WMOeViewBase()
 {
-    destroy();
+    onSaveConfig();
     delete ui;
 }
-
-
-void WMOeViewBase::init()
-{
-    m_Timer.setSingleShot(true);
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
-    onLoadSession(".ses");
-}
-
-
-void WMOeViewBase::destroy()
-{
-    onSaveConfig();
-}
-
 
 void WMOeViewBase::onSaveConfig()
 {
     onSaveSession(".ses");
 }
 
+void WMOeViewBase::onWriteStreamForGeomChange()
+{
+    m_geomToFromStream = geometryFromWidget(this);
+    onSaveConfig();
+}
 
 void WMOeViewBase::ReceiveOEViewDataSlot(cOwnErrorViewData *oe)
 {
@@ -47,66 +38,57 @@ void WMOeViewBase::ReceiveOEViewDataSlot(cOwnErrorViewData *oe)
     ui->SekDisp->setText(m_OwnErrorView.m_sSec);
     ui->LoadpointDisp->setText(m_OwnErrorView.m_sLoad);
 
-    if (m_OwnErrorView.m_bValid)
-    {
+    if (m_OwnErrorView.m_bValid) {
         ui->AmplDisp->setText(m_OwnErrorView.m_sAmpl);
         ui->PhaseDisp->setText(m_OwnErrorView.m_sPhase);
     }
-    else
-    {
+    else {
         ui->AmplDisp->setText("--------");
         ui->PhaseDisp->setText("--------");
     }
 }
 
-
 void WMOeViewBase::closeEvent( QCloseEvent* ce)
 {
-    m_widGeometry.setPoint(pos());
-    m_widGeometry.setSize(size());
-    m_widGeometry.setVisible(0);
+    m_geomChangeTimer.handleGeomChange();
     emit sigIsVisible(false);
-    m_Timer.start(500);
     ce->accept();
 }
 
-
 void WMOeViewBase::resizeEvent(QResizeEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
-
 
 void WMOeViewBase::moveEvent(QMoveEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
 
-
-void WMOeViewBase::onShowHide( bool b )
+void WMOeViewBase::onShowHide(bool shw )
 {
-  if (b) show();else close();
+    m_geomChangeTimer.handleGeomChange();
+    if (shw)
+        show();
+    else
+        close();
 }
-
 
 void WMOeViewBase::onSaveSession(QString session)
 {
-    m_sessionReadWrite.writeSession(this, m_widGeometry, session);
+    m_sessionReadWrite.writeSession(this, m_geomToFromStream, session);
 }
-
 
 bool WMOeViewBase::onLoadSession(QString session)
 {
-  WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
-  if(tmpGeometry.getSize().isValid())
-  {
-    m_widGeometry=tmpGeometry;
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+    WidgetGeometry tmpGeometry = m_sessionReadWrite.readSession(this, session);
+    if(tmpGeometry.getSize().isValid()) {
+        m_geomToFromStream=tmpGeometry;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-
 
