@@ -8,7 +8,7 @@
 
 const double PI_180 = 1.74532925e-2;
 
-cOwnError::cOwnError(QObject* parent, IOwnErrorParamUISpecific *uiSpecificParamCheck) :
+cOwnError::cOwnError(QObject *parent, IOwnErrorParamUISpecific *uiSpecificParamCheck) :
     m_uiSpecificParamCheck(uiSpecificParamCheck)
 {
     pa = parent;
@@ -204,12 +204,12 @@ bool cOwnError::isValidEntry(QString s)
 
     eP = words.first();
     if(m_uiSpecificParamCheck->checkUISpecificInvalidParam(&eP))
-        return false; // der 1. eintrag muss ein strom sein
+        return false; // 1st U/I specific
     words.pop_front();
 
     eP = words.first();
     if(m_uiSpecificParamCheck->checkUISpecificInvalidParam(&eP))
-        return false; // der 2. auch
+        return false; // 2nd U/I specific
     words.pop_front();
 
     eP = words.first();

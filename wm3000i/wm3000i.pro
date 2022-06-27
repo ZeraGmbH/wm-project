@@ -8,7 +8,6 @@ INCLUDEPATH	+= .
 
 HEADERS	+= \
 	devserver.h \
-	ownerror.h \
 	pcbiface.h \
 	wmglobal.h \
 	wm3000i.h \
@@ -23,7 +22,6 @@ HEADERS	+= \
 SOURCES	+= \
 	devserver.cpp \
 	main.cpp \
-	ownerror.cpp \
 	pcbiface.cpp \
 	wm3000i.cpp \
 	zerainfo.cpp \
