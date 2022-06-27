@@ -5,55 +5,46 @@
 // ein Fifo mit der Länge MaxLen. 
 
 #include "logfile.h"
-
 #include <QString>
 #include <QFile>
-#include <Q3TextStream>
 #include <QTime>
 
-CLogFile::CLogFile(const QString FileName,const long flen) 
+CLogFile::CLogFile(const QString FileName, const long flen)
 {
-    m_sFileName=FileName;
-    QFile file( FileName );
+    m_sFileName = FileName;
+    QFile file(FileName);
     m_nActFileLen = 0;
-    if ( file.open( QIODevice::ReadOnly ) ) // beim öffnen stringliste lesen und aktuelle länge bestimmen
-    {
-        Q3TextStream stream( &file );
-        QString line;
-        while ( !stream.atEnd() ) {
-            line = stream.readLine(); // line of text excluding '\n'
-            m_sLogLinesList+=line;
+    if ( file.open( QIODevice::ReadOnly ) ) { // beim öffnen stringliste lesen und aktuelle länge bestimmen
+        while(!file.atEnd()) {
+            QString line = file.readLine().replace("\n", "");
+            m_sLogLinesList.append(line);
             m_nActFileLen+=line.length();
         }
         file.close();
     }
     SetFileSizeSlot(flen); // event. nur kürzen, kann vorkommen wenn wm später mittels xml datei konfiguriert wird
-}    
+}
 
 CLogFile::~CLogFile() 
 {
     QFile file(m_sFileName );
     file.remove();
     if ( file.open( QIODevice::WriteOnly ) ) {
-        Q3TextStream stream( &file );
-        for ( QStringList::Iterator it = m_sLogLinesList.begin(); it != m_sLogLinesList.end(); ++it )
-            stream << *it << "\n";
+        file.write(m_sLogLinesList.join("\n"));
         file.close();
     }
 }
 
-
 void CLogFile::SetFileSizeSlot(const long fs)
 {
-    QStringList::Iterator it=m_sLogLinesList.begin();
-    m_nMaxFileLen=fs;
+    QStringList::Iterator it = m_sLogLinesList.begin();
+    m_nMaxFileLen = fs;
     // falls länger als konfiguriert zeilen rauswerfen
-    while (m_nMaxFileLen<m_nActFileLen) {
-        m_nActFileLen-=QString(*it).length();
-        it=m_sLogLinesList.remove(it);
+    while (m_nMaxFileLen < m_nActFileLen) {
+        m_nActFileLen -= QString(*it).length();
+        it = m_sLogLinesList.remove(it);
     }
 }
-
 
 void CLogFile::onAddLogText(const QString& logtext) // neuer input für logfile
 {
@@ -71,4 +62,3 @@ void CLogFile::SendLogSlot() // zu initialisierungs zwecken
 {
     emit SendLogDataSignal(m_sLogLinesList.join("\n"));
 }
-
