@@ -68,6 +68,7 @@ HEADERS = \
     logfile.h \
     maxperiods.h \
     movingwindowfilter.h \
+    ownerror.h \
     range.h \
     releaseinfo.h \
     tcpconfig.h \
@@ -119,6 +120,7 @@ SOURCES = \
     formatinfo.cpp \
     logfile.cpp \
     movingwindowfilter.cpp \
+    ownerror.cpp \
     range.cpp \
     releaseinfo.cpp \
     settings/sessionstreamer.cpp \
