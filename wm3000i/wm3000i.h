@@ -319,6 +319,15 @@ signals:
 };
     
 
+class Wm3000iOwnErrorParamChecker : public IOwnErrorParamUISpecific
+{
+public:
+    bool checkUISpecificInvalidParam(WmParameter* param) override
+    {
+        return !param->isCurrent() || param->withoutUnit();
+    }
+};
+
 class cWM3000I: public QObject
 {
     Q_OBJECT

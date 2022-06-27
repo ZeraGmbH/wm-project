@@ -1,5 +1,4 @@
 #include "ownerror.h"
-#include "wmparameter.h"
 #include "complex.h"
 #include <QMessageBox>
 #include <QFileInfo>
@@ -9,7 +8,8 @@
 
 const double PI_180 = 1.74532925e-2;
 
-cOwnError::cOwnError(QObject* parent)
+cOwnError::cOwnError(QObject* parent, IOwnErrorParamUISpecific *uiSpecificParamCheck) :
+    m_uiSpecificParamCheck(uiSpecificParamCheck)
 {
     pa = parent;
     m_pViewData = new cOwnErrorViewData();
@@ -20,6 +20,7 @@ cOwnError::cOwnError(QObject* parent)
 cOwnError::~cOwnError()
 {
     delete m_pViewData;
+    delete m_uiSpecificParamCheck;
 }
 
 struct tepOEEntry {
@@ -202,12 +203,12 @@ bool cOwnError::isValidEntry(QString s)
         return false; // 5 einträge erforderlich
 
     eP = words.first();
-    if ( !(eP.isCurrent() || eP.withoutUnit()) )
+    if(m_uiSpecificParamCheck->checkUISpecificInvalidParam(&eP))
         return false; // der 1. eintrag muss ein strom sein
     words.pop_front();
 
     eP = words.first();
-    if ( !(eP.isCurrent() || eP.withoutUnit()) )
+    if(m_uiSpecificParamCheck->checkUISpecificInvalidParam(&eP))
         return false; // der 2. auch
     words.pop_front();
 
