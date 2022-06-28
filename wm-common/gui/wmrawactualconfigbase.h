@@ -28,7 +28,7 @@ private:
     bool m_dcMode;
     int AmplDisplayMode;
     int WinkelDisplayMode;
-    int AmplPrimSekMode;
+    int PrimSekDispMode;
 
     virtual void init();
     virtual void actualizeDisplay();
