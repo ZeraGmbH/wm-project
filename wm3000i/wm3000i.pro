@@ -18,7 +18,6 @@ HEADERS	+= \
     wmrawactualvalbase.h \
     confdialogbase.h \
     rangedialogbase.h \
-    wmoffsetvalbase.h \
 
 SOURCES	+= \
 	devserver.cpp \
@@ -31,14 +30,12 @@ SOURCES	+= \
     wmviewbase.cpp \
     wmrawactualvalbase.cpp \
     rangedialogbase.cpp \
-    wmoffsetvalbase.cpp \
     confdialogbase.cpp
 
 
 FORMS	= confdialogbase.ui \
 	rangedialogbase.ui \
 	wmrawactualvalbase.ui \
-        wmoffsetvalbase.ui \
 	wmviewbase.ui
 
 
