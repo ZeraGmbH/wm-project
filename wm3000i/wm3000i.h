@@ -1,9 +1,6 @@
-//  headerdatei wm3000i.h
-
 #ifndef WM3000I_H
 #define WM3000I_H
 
-#include <qobject.h>
 #include <q3ptrlist.h>
 #include <qstring.h>
 #include <qstringlist.h>
@@ -13,7 +10,6 @@
 #include <q3progressdialog.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
-//Added by qt3to4:
 #include <Q3ValueList>
 
 #include "zhclientsocket.h"
@@ -28,6 +24,7 @@
 #include "wm3000scpiface.h"
 #include "movingwindowfilter.h"
 #include "calcinfo.h"
+#include <justValues.h>
 
 
 class cRSelectString: public QString {
@@ -285,22 +282,6 @@ enum wm3000ActionHandlerState {
     wm3000Continue,
     wm3000Repeat,
 };
-
-
-class tJustValues
-{
-public:
-    tJustValues(){ GainCorrCh0 = 1; GainCorrCh1 = 1; PhaseCorrCh0 = 0; PhaseCorrCh1 = 0; OffsetCorrCh0 = 0; OffsetCorrCh1 = 0; OffsetCorrDevN = 0; OffsetCorrDevX = 0;}
-    float GainCorrCh0;
-    float GainCorrCh1;
-    float PhaseCorrCh0;
-    float PhaseCorrCh1;
-    float OffsetCorrCh0;
-    float OffsetCorrCh1;
-    float OffsetCorrDevN;
-    float OffsetCorrDevX;
-};
-
 
 class cWMessageBox: public QMessageBox
 {
