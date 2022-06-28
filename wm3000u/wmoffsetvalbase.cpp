@@ -1,18 +1,17 @@
-//Added by qt3to4:
-
-#include <QFileInfo>
-#include <QCloseEvent>
 #include "wmoffsetvalbase.h"
 #include "ui_wmoffsetvalbase.h"
+#include <QFileInfo>
+#include <QCloseEvent>
 
 WMOffsetValBase::WMOffsetValBase( QWidget* parent):
     QDialog(parent),
     ui(new Ui::WMOffsetValBase)
 {
     ui->setupUi(this);
-    ui->XnOffsDisp -> setText( QString("%1 V").arg(0.0,10,'f',5) );
-    ui->XxOffsDisp -> setText( QString("%1 V").arg(0.0,10,'f',5) );
-
+    m_JustValues.OffsetCorrDevN = 0.0;
+    m_JustValues.OffsetCorrDevX = 0.0;
+    setUiTexts(ui);
+    actualizeDisplay(ui, &m_ConfData, &m_JustValues);
     m_Timer.setSingleShot(true);
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
     onLoadSession(".ses");
@@ -33,7 +32,6 @@ void WMOffsetValBase::closeEvent(QCloseEvent* ce)
     m_Timer.start(500);
     ce->accept();
 }
-
 
 void WMOffsetValBase::resizeEvent ( QResizeEvent *)
 {
@@ -56,11 +54,7 @@ void WMOffsetValBase::onShowHide(bool shw)
 void WMOffsetValBase::ReceiveJustDataSlot(tJustValues *JustValues)
 {
     m_JustValues = *JustValues;
-    // hier wird später die Anzeige bedient
-    if (isVisible()) {
-        ui->XnOffsDisp -> setText( QString("%1 V").arg(m_JustValues.OffsetCorrDevN,10,'f',5) );
-        ui->XxOffsDisp -> setText( QString("%1 V").arg(m_JustValues.OffsetCorrDevX,10,'f',5) );
-    }
+    actualizeDisplay(ui, &m_ConfData, &m_JustValues);
 }
 
 bool WMOffsetValBase::onLoadSession(QString session)
@@ -119,4 +113,17 @@ void WMOffsetValBase::onSaveSession(QString session)
 void WMOffsetValBase::onSaveConfig()
 {
     onSaveSession(".ses");
+}
+
+void WMOffsetValBase::setUiTexts(Ui::WMOffsetValBase *ui)
+{
+    ui->XnLabel->setText("Un:");
+    ui->XxLabel->setText("Ux:");
+}
+
+void WMOffsetValBase::actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just)
+{
+    Q_UNUSED(conf)
+    ui->XnOffsDisp -> setText(QString("%1 V").arg(just->OffsetCorrDevN,10, 'f', 5));
+    ui->XxOffsDisp -> setText(QString("%1 V").arg(just->OffsetCorrDevX,10, 'f', 5));
 }
