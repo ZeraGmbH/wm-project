@@ -23,36 +23,28 @@ public:
     ~WMOffsetValBase();
 
 public slots:
-    virtual void onShowHide( bool b );
-    virtual void ReceiveJustDataSlot( tJustValues *JustValues );
-    virtual void SetConfInfoSlot( cConfData * cd );
+    virtual void onShowHide(bool shw);
+    virtual void ReceiveJustDataSlot(tJustValues *JustValues);
+    virtual void SetConfInfoSlot(cConfData *cd);
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
-
 signals:
     void sigIsVisible(bool);
 
 protected:
-    virtual void closeEvent( QCloseEvent * ce );
-    virtual void resizeEvent ( QResizeEvent *);
-    virtual void moveEvent( QMoveEvent *);
+    virtual void closeEvent(QCloseEvent *ce) override;
+    virtual void resizeEvent (QResizeEvent *) override;
+    virtual void moveEvent(QMoveEvent *) override;
 
+private slots:
+    void onSaveConfig();
 private:
+    void actualizeDisplay();
     Ui::WMOffsetValBase *ui;
     tJustValues m_JustValues;
     WidgetGeometry m_widGeometry;
     cConfData m_ConfData;
-
     QTimer m_Timer;
-
-    void init();
-    void destroy();
-    void actualizeDisplay();
-
-private slots:
-    void onSaveConfig();
-
 };
-
 
 #endif // WMOFFSETVALBASE_H
