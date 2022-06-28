@@ -20,6 +20,7 @@ HEADERS = \
     gui/wmmeasvaluesbase.h \
     gui/wmoeviewbase.h \
     gui/wmrawactualconfigbase.h \
+    just/justValues.h \
     scales-and-units/angleunits.h \
     scales-and-units/currentunits.h \
     scales-and-units/errorunits.h \
@@ -140,6 +141,7 @@ INCLUDEPATH += \
     client-access \
     dsp \
     gui \
+    just \
     scales-and-units \
     scpi \
     scpi/definitions \

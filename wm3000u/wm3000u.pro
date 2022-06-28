@@ -345,6 +345,7 @@ INCLUDEPATH += \
     ../wm-common/client-access \
     ../wm-common/dsp \
     ../wm-common/gui \
+    ../wm-common/just \
     ../wm-common/scales-and-units \
     ../wm-common/scpi/definitions \
     ../wm-common/scpi \
