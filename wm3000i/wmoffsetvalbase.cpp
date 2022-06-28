@@ -2,15 +2,17 @@
 #include "ui_wmoffsetvalbase.h"
 #include <QFileInfo>
 #include <QCloseEvent>
+#include <QDir>
 
-WMOffsetValBase::WMOffsetValBase( QWidget* parent):
+WMOffsetValBase::WMOffsetValBase(IWmOffsetCustomLabels *customLabels, QWidget* parent):
     QDialog(parent),
-    ui(new Ui::WMOffsetValBase)
+    ui(new Ui::WMOffsetValBase),
+    m_customLabels(customLabels)
 {
     ui->setupUi(this);
     m_JustValues.OffsetCorrDevN = 0.0;
     m_JustValues.OffsetCorrDevX = 0.0;
-    setUiTexts(ui);
+    m_customLabels->setUiTexts(ui->XnLabel, ui->XxLabel);
     actualizeDisplay(ui, &m_ConfData, &m_JustValues);
     m_Timer.setSingleShot(true);
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
@@ -21,6 +23,7 @@ WMOffsetValBase::~WMOffsetValBase()
 {
     onSaveConfig();
     delete ui;
+    delete m_customLabels;
 }
 
 void WMOffsetValBase::closeEvent(QCloseEvent* ce)
@@ -75,8 +78,7 @@ bool WMOffsetValBase::onLoadSession(QString session)
         hide();
         resize(m_widGeometry.getSize());
         move(m_widGeometry.getPoint());
-        if (m_widGeometry.getVisible())
-        {
+        if (m_widGeometry.getVisible()) {
             show();
             emit sigIsVisible(true);
         }
@@ -92,8 +94,7 @@ bool WMOffsetValBase::onLoadSession(QString session)
 void WMOffsetValBase::onSaveSession(QString session)
 {
     QFileInfo fi(session);
-    if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
-    {
+    if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists()) {
         //create temporary object that gets deleted when leaving the control block
         QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
     }
@@ -123,17 +124,7 @@ void WMOffsetValBase::onSaveConfig()
     onSaveSession(".ses");
 }
 
-void WMOffsetValBase::setUiTexts(Ui::WMOffsetValBase *ui)
-{
-    ui->XnLabel->setText("In:");
-    ui->XxLabel->setText("Ix:");
-}
-
 void WMOffsetValBase::actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just)
 {
-    ui->XnOffsDisp->setText(QString("%1 A").arg(just->OffsetCorrDevN,10,'f',5));
-    if (conf->m_nMeasMode == In_ECT)
-        ui->XxOffsDisp->setText(QString("%1 V").arg(just->OffsetCorrDevX,10,'f',5));
-    else
-        ui->XxOffsDisp->setText(QString("%1 A").arg(just->OffsetCorrDevX,10,'f',5));
+    m_customLabels->updateValues(ui->XnOffsDisp, ui->XxOffsDisp, conf, just);
 }

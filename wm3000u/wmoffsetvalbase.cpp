@@ -1,16 +1,19 @@
 #include "wmoffsetvalbase.h"
 #include "ui_wmoffsetvalbase.h"
+#include "wmglobal.h"
 #include <QFileInfo>
 #include <QCloseEvent>
+#include <QDir>
 
-WMOffsetValBase::WMOffsetValBase( QWidget* parent):
+WMOffsetValBase::WMOffsetValBase(IWmOffsetCustomLabels *customLabels, QWidget* parent):
     QDialog(parent),
-    ui(new Ui::WMOffsetValBase)
+    ui(new Ui::WMOffsetValBase),
+    m_customLabels(customLabels)
 {
     ui->setupUi(this);
     m_JustValues.OffsetCorrDevN = 0.0;
     m_JustValues.OffsetCorrDevX = 0.0;
-    setUiTexts(ui);
+    m_customLabels->setUiTexts(ui->XnLabel, ui->XxLabel);
     actualizeDisplay(ui, &m_ConfData, &m_JustValues);
     m_Timer.setSingleShot(true);
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
@@ -21,6 +24,7 @@ WMOffsetValBase::~WMOffsetValBase()
 {
     onSaveConfig();
     delete ui;
+    delete m_customLabels;
 }
 
 void WMOffsetValBase::closeEvent(QCloseEvent* ce)
@@ -33,7 +37,7 @@ void WMOffsetValBase::closeEvent(QCloseEvent* ce)
     ce->accept();
 }
 
-void WMOffsetValBase::resizeEvent ( QResizeEvent *)
+void WMOffsetValBase::resizeEvent (QResizeEvent *)
 {
     m_Timer.start(500);
 }
@@ -54,6 +58,12 @@ void WMOffsetValBase::onShowHide(bool shw)
 void WMOffsetValBase::ReceiveJustDataSlot(tJustValues *JustValues)
 {
     m_JustValues = *JustValues;
+    actualizeDisplay(ui, &m_ConfData, &m_JustValues);
+}
+
+void WMOffsetValBase::SetConfInfoSlot(cConfData *cd)
+{
+    m_ConfData = *cd;
     actualizeDisplay(ui, &m_ConfData, &m_JustValues);
 }
 
@@ -115,15 +125,7 @@ void WMOffsetValBase::onSaveConfig()
     onSaveSession(".ses");
 }
 
-void WMOffsetValBase::setUiTexts(Ui::WMOffsetValBase *ui)
-{
-    ui->XnLabel->setText("Un:");
-    ui->XxLabel->setText("Ux:");
-}
-
 void WMOffsetValBase::actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just)
 {
-    Q_UNUSED(conf)
-    ui->XnOffsDisp -> setText(QString("%1 V").arg(just->OffsetCorrDevN,10, 'f', 5));
-    ui->XxOffsDisp -> setText(QString("%1 V").arg(just->OffsetCorrDevX,10, 'f', 5));
+    m_customLabels->updateValues(ui->XnOffsDisp, ui->XxOffsDisp, conf, just);
 }

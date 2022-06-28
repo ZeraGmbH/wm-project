@@ -19,6 +19,7 @@ HEADERS = \
     gui/wmmeasconfigbase.h \
     gui/wmmeasvaluesbase.h \
     gui/wmoeviewbase.h \
+    gui/wmoffsetcustomlabels.h \
     gui/wmrawactualconfigbase.h \
     just/justValues.h \
     scales-and-units/angleunits.h \
