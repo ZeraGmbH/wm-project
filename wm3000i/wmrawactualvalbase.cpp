@@ -1,4 +1,3 @@
-//Added by qt3to4:
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <QFileInfo>
@@ -6,27 +5,13 @@
 #include "ui_wmrawactualvalbase.h"
 #include "common-modes.h"
 
-
 const double PI2 = 6.283185307;
-
 
 WMRawActualValBase::WMRawActualValBase( QWidget* parent):
     QDialog(parent),
     ui(new Ui::WMRawActualValBase)
 {
     ui->setupUi(this);
-    init();
-}
-
-
-WMRawActualValBase::~WMRawActualValBase()
-{
-    destroy();
-    delete ui;
-}
-
-void WMRawActualValBase::init()
-{
     ui->XnAmplDisp -> setText( QString("%1 A").arg(0.0,10,'f',5) );
     ui->XnPhaseDisp -> setText( QString("%1 %2").arg(0.0,8,'f',4).arg( trUtf8("°")) );
     ui->XxAmplDisp -> setText( QString("%1 A").arg(0.0,10,'f',5) );
@@ -43,18 +28,11 @@ void WMRawActualValBase::init()
     onLoadSession(".ses");
 }
 
-
-void WMRawActualValBase::destroy()
+WMRawActualValBase::~WMRawActualValBase()
 {
     onSaveConfig();
+    delete ui;
 }
-
-
-void WMRawActualValBase::onSaveConfig()
-{
-    onSaveSession(".ses");
-}
-
 
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
@@ -66,7 +44,6 @@ void WMRawActualValBase::closeEvent(QCloseEvent* ce)
     ce->accept();
 }
 
-
 void WMRawActualValBase::resizeEvent(QResizeEvent *)
 {
     m_Timer.start(500);
@@ -77,7 +54,6 @@ void WMRawActualValBase::moveEvent(QMoveEvent *)
     m_Timer.start(500);
 }
 
-
 void WMRawActualValBase::onShowHide(bool shw)
 {
     if (shw)
@@ -86,38 +62,30 @@ void WMRawActualValBase::onShowHide(bool shw)
         close();
 }
 
-
 void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
 {
     m_ActValues = *ActValues;
     // hier wird später die Anzeige bedient
     if (isVisible()) {
-        double phi;
         double radgrad = 57.295779; // 360/(2*PI) winkel sind im bogenmass
-
-
         double ampl;
-        if (PrimSekDispMode == prim)
-        {
+        if (PrimSekDispMode == prim) {
             if (m_pConfData->m_bDCmeasurement)
                 ampl = m_ActValues.VekN.re();
             else
                 ampl = fabs(m_ActValues.VekN);
         }
-        else
-        {
+        else {
             if (m_pConfData->m_bDCmeasurement)
                 ampl = m_ActValues.VekNSek.re();
             else
                 ampl = fabs(m_ActValues.VekNSek);
         }
-
         if (AmplDispMode == x1_SQRT2 && !m_pConfData->m_bDCmeasurement)
             ampl/=1.414213562;
-
         ui->XnAmplDisp -> setText( QString("%1 A").arg(ampl,10,'f',5) );
 
-        phi = m_ActValues.PHIN; // winkel sind zwischen 0 .. 2PI
+        double phi = m_ActValues.PHIN; // winkel sind zwischen 0 .. 2PI
         if (WinkelDispMode == techpos)
             phi = PI2 - phi;
         phi = normWinkelrad_PIPI(phi);
@@ -125,15 +93,13 @@ void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
         ui->XnPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
 
         // amplitude der grundschwingung
-        if (PrimSekDispMode == prim)
-        {
+        if (PrimSekDispMode == prim) {
             if (m_pConfData->m_bDCmeasurement)
                 ampl = m_ActValues.VekX.re();
             else
                 ampl = fabs(m_ActValues.VekX);
         }
-        else
-        {
+        else {
             if (m_pConfData->m_bDCmeasurement)
                 ampl = m_ActValues.VekXSek.re();
             else
@@ -156,16 +122,18 @@ void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
         ui->XxPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
 
         // amplitude der grundschwingung
-        if (PrimSekDispMode == prim)
+        if (PrimSekDispMode == prim) {
             if (m_pConfData->m_bDCmeasurement)
                 ampl = m_ActValues.VekDX.re();
             else
                 ampl = fabs(m_ActValues.VekDX);
-        else
+        }
+        else {
             if (m_pConfData->m_bDCmeasurement)
                 ampl = m_ActValues.VekDXSek.re();
             else
                 ampl = fabs(m_ActValues.VekDXSek);
+        }
 
         if (AmplDispMode == x1_SQRT2)
             ampl/=1.414213562;
@@ -180,15 +148,12 @@ void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
         ui->dXxPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
         ui->FreqDisp -> setText( QString("%1 Hz").arg(ActValues->Frequenz,9,'f',5) );
     }
-
 }
-
 
 void WMRawActualValBase::SetConfInfoSlot(cConfData *cd)
 {
     m_pConfData = cd;
-    if (m_pConfData->m_bDCmeasurement)
-    {
+    if (m_pConfData->m_bDCmeasurement) {
         ui->XnPhaseDisp->setVisible(false);
         ui->XxPhaseDisp->setVisible(false);
         ui->dXxPhaseDisp->setVisible(false);
@@ -198,8 +163,7 @@ void WMRawActualValBase::SetConfInfoSlot(cConfData *cd)
         ui->dXxLabel->setVisible(false);
         AmplDispMode = x1;  // im fall von dc messung lassen wir nur x1 zu !!!
     }
-    else
-    {
+    else {
         ui->XnPhaseDisp->setVisible(true);
         ui->XxPhaseDisp->setVisible(true);
         ui->dXxPhaseDisp->setVisible(true);
@@ -211,13 +175,12 @@ void WMRawActualValBase::SetConfInfoSlot(cConfData *cd)
     resize(ui->gridLayout->minimumSize());
 }
 
-
 bool WMRawActualValBase::onLoadSession(QString session)
 {
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls);
-    if ( file.open( QIODevice::ReadOnly ) ) {
+    if (file.open(QIODevice::ReadOnly)) {
         QDataStream stream( &file );
         stream >> m_widGeometry;
         stream >> AmplDispMode;
@@ -241,7 +204,6 @@ bool WMRawActualValBase::onLoadSession(QString session)
     return false;
 }
 
-
 void WMRawActualValBase::onSaveSession(QString session)
 {
     if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
@@ -252,7 +214,6 @@ void WMRawActualValBase::onSaveSession(QString session)
     QFileInfo fi(session);
     QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
     QFile file(ls);
-    //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
         file.at(0);
 
@@ -273,19 +234,20 @@ void WMRawActualValBase::onSaveSession(QString session)
     }
 }
 
-
-void WMRawActualValBase::contextMenuEvent( QContextMenuEvent * )
+void WMRawActualValBase::contextMenuEvent(QContextMenuEvent *)
 {
     emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
     m_pContextMenu->show();
 }
 
-
-void WMRawActualValBase::ReceiveVektorDispFormat( int m, int m2, int m3)
+void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
 {
     AmplDispMode = m;
     WinkelDispMode = m2;
     PrimSekDispMode = m3;
 }
 
-
+void WMRawActualValBase::onSaveConfig()
+{
+    onSaveSession(".ses");
+}

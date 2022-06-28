@@ -19,7 +19,7 @@ WMRawActualConfigBase::~WMRawActualConfigBase()
 void WMRawActualConfigBase::init()
 {
     AmplDisplayMode = x1;
-    AmplPrimSekMode=prim;
+    PrimSekDispMode=prim;
     WinkelDisplayMode = mathpos; 
 }
 
@@ -29,7 +29,7 @@ void WMRawActualConfigBase::ReceiveDisplayConfSlot(bool dc, int m, int m2, int m
     m_dcMode = dc;
     AmplDisplayMode = m;
     WinkelDisplayMode = m2;
-    AmplPrimSekMode = m3;
+    PrimSekDispMode = m3;
     actualizeDisplay();
 }
 
@@ -59,7 +59,7 @@ void WMRawActualConfigBase::actualizeDisplay()
         ui->TechradioButton->setEnabled(true);
     }
 
-    bool isPrim = (AmplPrimSekMode == prim);
+    bool isPrim = (PrimSekDispMode == prim);
 
     ui->PrimradioButton->setChecked(isPrim);
     ui->SekradioButton->setChecked(!isPrim);
@@ -97,19 +97,19 @@ void WMRawActualConfigBase::winkeltechcheckedSlot()
 
 void WMRawActualConfigBase::SendData2AppSlot()
 {
-    emit SendVektorDisplayFormat(AmplDisplayMode, WinkelDisplayMode, AmplPrimSekMode);
+    emit SendVektorDisplayFormat(AmplDisplayMode, WinkelDisplayMode, PrimSekDispMode);
 }
 
 
 void WMRawActualConfigBase::primCheckedSlot()
 {
-    AmplPrimSekMode = prim;
+    PrimSekDispMode = prim;
     actualizeDisplay();
 }
 
 
 void WMRawActualConfigBase::sekCheckedSlot()
 {
-    AmplPrimSekMode = sek;
+    PrimSekDispMode = sek;
     actualizeDisplay();
 }
