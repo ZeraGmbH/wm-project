@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMActValView,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an rawactualanzeige
     QObject::connect(g_WMDevice,SIGNAL(SendActValuesSignal(cwmActValues*)),g_WMActValView,SLOT(ReceiveAVDataSlot( cwmActValues*))); // senden von istwerten
 
-    WMOffsetValBase *g_WMOffsetView = new WMOffsetValBase(new WmiOffsetCustomLabels, g_WMView);
+    WMOffsetValBase *g_WMOffsetView = new WMOffsetValBase(machineName, new WmiOffsetCustomLabels, g_WMView);
     QObject::connect(g_WMView,SIGNAL(UIansichtOffsetActionToggled(bool)),g_WMOffsetView,SLOT(onShowHide(bool)));
     QObject::connect(g_WMOffsetView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtOffsetActionSet(bool))); //schliessen der offsetanzeige
     QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMOffsetView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten

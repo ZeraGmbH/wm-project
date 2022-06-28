@@ -5,10 +5,11 @@
 #include <QCloseEvent>
 #include <QDir>
 
-WMOffsetValBase::WMOffsetValBase(IWmOffsetCustomLabels *customLabels, QWidget* parent):
+WMOffsetValBase::WMOffsetValBase(QString machineName, IWmOffsetCustomLabels *customLabels, QWidget* parent):
     QDialog(parent),
     ui(new Ui::WMOffsetValBase),
-    m_customLabels(customLabels)
+    m_customLabels(customLabels),
+    m_sessionStreamer(machineName, this)
 {
     ui->setupUi(this);
     m_JustValues.OffsetCorrDevN = 0.0;
@@ -66,55 +67,13 @@ void WMOffsetValBase::SetConfInfoSlot(cConfData *cd)
 
 bool WMOffsetValBase::onLoadSession(QString session)
 {
-    QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    if ( file.open( QIODevice::ReadOnly ) ) {
-        QDataStream stream( &file );
-        stream >> m_geomToFromStream;
-        file.close();
-        hide();
-        resize(m_geomToFromStream.getSize());
-        move(m_geomToFromStream.getPoint());
-        if (m_geomToFromStream.getVisible()) {
-            show();
-            emit sigIsVisible(true);
-        }
-        // FVWM und Gnome verhalten sich anders
-#ifndef FVWM
-        move(m_geomToFromStream.getPoint());
-#endif
-        return true;
-    }
-    return false;
+    m_sessionStreamer.readSession(objectName(), session);
+    return true;
 }
 
 void WMOffsetValBase::onSaveSession(QString session)
 {
-    QFileInfo fi(session);
-    if(!QDir(QString("%1/.wm3000u/").arg(QDir::homePath())).exists()) {
-        //create temporary object that gets deleted when leaving the control block
-        QDir().mkdir(QString("%1/.wm3000u/").arg(QDir::homePath()));
-    }
-
-    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    //    file.remove();
-    if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-        file.at(0);
-
-        int vi;
-        vi = (isVisible()) ? 1 : 0;
-        if (vi) {
-            m_geomToFromStream.setPoint(pos());
-            m_geomToFromStream.setSize(size());
-        }
-        m_geomToFromStream.setVisible(vi);
-
-        QDataStream stream( &file );
-        stream << m_geomToFromStream;
-        file.close();
-    }
+    m_sessionStreamer.writeSession(objectName(), session);
 }
 
 void WMOffsetValBase::onSaveConfig()
@@ -126,6 +85,21 @@ void WMOffsetValBase::onWriteStreamForGeomChange()
 {
     m_geomToFromStream = geometryFromWidget(this);
     onSaveConfig();
+}
+
+void WMOffsetValBase::readStream(QDataStream &stream)
+{
+    stream >> m_geomToFromStream;
+    geometryToWidget(m_geomToFromStream, this);
+}
+
+void WMOffsetValBase::writeStream(QDataStream &stream)
+{
+    stream << m_geomToFromStream;
+}
+
+void WMOffsetValBase::setDefaults()
+{
 }
 
 void WMOffsetValBase::actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just)
