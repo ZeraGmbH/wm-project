@@ -4,6 +4,7 @@
 #include "widgetgeometry.h"
 #include "confdata.h"
 #include "geometrychangetimer.h"
+#include "sessionstreamer.h"
 #include <wmoffsetcustomlabels.h>
 #include <justValues.h>
 #include <QDialog>
@@ -13,11 +14,11 @@ namespace Ui {
     class WMOffsetValBase;
 }
 
-class WMOffsetValBase : public QDialog
+class WMOffsetValBase : public QDialog, public ISessionStreamImplementor
 {
     Q_OBJECT
 public:
-    explicit WMOffsetValBase(IWmOffsetCustomLabels *customLabels, QWidget* parent = 0);
+    explicit WMOffsetValBase(QString machineName, IWmOffsetCustomLabels *customLabels, QWidget* parent = 0);
     ~WMOffsetValBase();
 public slots:
     virtual void onShowHide(bool shw);
@@ -35,6 +36,9 @@ private slots:
     void onSaveConfig();
     void onWriteStreamForGeomChange();
 private:
+    virtual void readStream(QDataStream& stream) override;
+    virtual void writeStream(QDataStream& stream) override;
+    virtual void setDefaults() override;
     void actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just);
     Ui::WMOffsetValBase *ui;
     tJustValues m_JustValues;
@@ -42,6 +46,7 @@ private:
     cConfData m_ConfData;
     IWmOffsetCustomLabels *m_customLabels;
     GeometryChangeTimer m_geomChangeTimer;
+    SessionStreamer m_sessionStreamer;
 };
 
 #endif // WMOFFSETVALBASE_H
