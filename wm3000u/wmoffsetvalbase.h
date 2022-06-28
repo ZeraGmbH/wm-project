@@ -17,11 +17,9 @@ namespace Ui {
 class WMOffsetValBase : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit WMOffsetValBase( QWidget* parent = 0);
     ~WMOffsetValBase();
-
 public slots:
     virtual void onShowHide(bool shw);
     virtual void ReceiveJustDataSlot( tJustValues *JustValues );
@@ -29,18 +27,19 @@ public slots:
     void onSaveSession(QString session);
 signals:
     void sigIsVisible(bool);
-
 protected:
     virtual void closeEvent(QCloseEvent *ce) override;
     virtual void resizeEvent(QResizeEvent *) override;
     virtual void moveEvent(QMoveEvent *) override;
-
 private slots:
     void onSaveConfig();
 private:
+    void setUiTexts(Ui::WMOffsetValBase* ui);
+    void actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just);
     Ui::WMOffsetValBase *ui;
     tJustValues m_JustValues;
     WidgetGeometry m_widGeometry;
+    cConfData m_ConfData;
     QTimer m_Timer;
 };
 

@@ -10,28 +10,17 @@ WMOffsetValBase::WMOffsetValBase( QWidget* parent):
     ui->setupUi(this);
     m_JustValues.OffsetCorrDevN = 0.0;
     m_JustValues.OffsetCorrDevX = 0.0;
-    actualizeDisplay();
+    setUiTexts(ui);
+    actualizeDisplay(ui, &m_ConfData, &m_JustValues);
     m_Timer.setSingleShot(true);
     connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
     onLoadSession(".ses");
 }
 
-
 WMOffsetValBase::~WMOffsetValBase()
 {
     onSaveConfig();
     delete ui;
-}
-
-void WMOffsetValBase::actualizeDisplay()
-{
-    if (isVisible()) {
-        ui->XnOffsDisp -> setText( QString("%1 A").arg(m_JustValues.OffsetCorrDevN,10,'f',5) );
-        if (m_ConfData.m_nMeasMode == In_ECT)
-            ui->XxOffsDisp -> setText( QString("%1 V").arg(m_JustValues.OffsetCorrDevX,10,'f',5) );
-        else
-            ui->XxOffsDisp -> setText( QString("%1 A").arg(m_JustValues.OffsetCorrDevX,10,'f',5) );
-    }
 }
 
 void WMOffsetValBase::closeEvent(QCloseEvent* ce)
@@ -65,13 +54,13 @@ void WMOffsetValBase::onShowHide(bool shw)
 void WMOffsetValBase::ReceiveJustDataSlot(tJustValues *JustValues)
 {
     m_JustValues = *JustValues;
-    actualizeDisplay();
+    actualizeDisplay(ui, &m_ConfData, &m_JustValues);
 }
 
 void WMOffsetValBase::SetConfInfoSlot(cConfData *cd)
 {
     m_ConfData = *cd;
-    actualizeDisplay();
+    actualizeDisplay(ui, &m_ConfData, &m_JustValues);
 }
 
 bool WMOffsetValBase::onLoadSession(QString session)
@@ -132,4 +121,19 @@ void WMOffsetValBase::onSaveSession(QString session)
 void WMOffsetValBase::onSaveConfig()
 {
     onSaveSession(".ses");
+}
+
+void WMOffsetValBase::setUiTexts(Ui::WMOffsetValBase *ui)
+{
+    ui->XnLabel->setText("In:");
+    ui->XxLabel->setText("Ix:");
+}
+
+void WMOffsetValBase::actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just)
+{
+    ui->XnOffsDisp->setText(QString("%1 A").arg(just->OffsetCorrDevN,10,'f',5));
+    if (conf->m_nMeasMode == In_ECT)
+        ui->XxOffsDisp->setText(QString("%1 V").arg(just->OffsetCorrDevX,10,'f',5));
+    else
+        ui->XxOffsDisp->setText(QString("%1 A").arg(just->OffsetCorrDevX,10,'f',5));
 }
