@@ -11,6 +11,7 @@ HEADERS	+= \
 	pcbiface.h \
 	wmglobal.h \
 	wm3000i.h \
+    wmioffsetcustomlabels.h \
 	zerainfo.h \
 	wm3000scpiface.h \
     wmviewbase.h \
@@ -24,6 +25,7 @@ SOURCES	+= \
 	main.cpp \
 	pcbiface.cpp \
 	wm3000i.cpp \
+    wmioffsetcustomlabels.cpp \
 	zerainfo.cpp \
 	wm3000scpiface.cpp \
     wmviewbase.cpp \
