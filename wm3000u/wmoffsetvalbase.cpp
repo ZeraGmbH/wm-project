@@ -1,6 +1,5 @@
 #include "wmoffsetvalbase.h"
 #include "ui_wmoffsetvalbase.h"
-#include "wmglobal.h"
 #include <QFileInfo>
 #include <QCloseEvent>
 #include <QDir>
