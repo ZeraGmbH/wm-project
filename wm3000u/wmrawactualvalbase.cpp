@@ -67,15 +67,18 @@ void WMRawActualValBase::resizeEvent ( QResizeEvent *)
 }
 
 
-void WMRawActualValBase::moveEvent( QMoveEvent *)
+void WMRawActualValBase::moveEvent(QMoveEvent *)
 {
     m_Timer.start(500);
 }
 
 
-void WMRawActualValBase::onShowHide( bool b)
+void WMRawActualValBase::onShowHide(bool shw)
 {
-    if (b) show();else close();
+    if (shw)
+        show();
+    else
+        close();
 }
 
 

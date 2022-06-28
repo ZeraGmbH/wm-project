@@ -24,22 +24,22 @@ public:
     ~WMRawActualValBase();
 
 public slots:
-    virtual void onShowHide( bool b );
-    virtual void ReceiveAVDataSlot( cwmActValues * ActValues );
-    virtual void SetConfInfoSlot( cConfData * cd );
+    virtual void onShowHide(bool shw);
+    virtual void ReceiveAVDataSlot(cwmActValues *ActValues);
+    virtual void SetConfInfoSlot(cConfData *cd);
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
-    virtual void ReceiveVektorDispFormat( int m, int m2, int m3 );
+    virtual void ReceiveVektorDispFormat(int m, int m2, int m3);
 
 signals:
     void sigIsVisible(bool);
     void SendVektorDispFormat(bool,int,int,int);
 
 protected:
-    virtual void closeEvent( QCloseEvent * ce );
-    virtual void resizeEvent ( QResizeEvent *);
-    virtual void moveEvent( QMoveEvent *);
-    virtual void contextMenuEvent( QContextMenuEvent * );
+    virtual void closeEvent(QCloseEvent * ce) override;
+    virtual void resizeEvent(QResizeEvent *) override;
+    virtual void moveEvent(QMoveEvent *) override;
+    virtual void contextMenuEvent(QContextMenuEvent *) override;
 
 private:
     Ui::WMRawActualValBase *ui;

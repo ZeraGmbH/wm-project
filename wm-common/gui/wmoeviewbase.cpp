@@ -78,7 +78,7 @@ void WMOeViewBase::moveEvent(QMoveEvent *)
     m_geomChangeTimer.handleGeomChange();
 }
 
-void WMOeViewBase::onShowHide(bool shw )
+void WMOeViewBase::onShowHide(bool shw)
 {
     m_geomChangeTimer.handleGeomChange();
     if (shw)

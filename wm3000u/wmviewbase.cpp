@@ -502,19 +502,19 @@ void WMViewBase::closeEvent(QCloseEvent* ce)
 }
 
 
-void WMViewBase::resizeEvent ( QResizeEvent *)
+void WMViewBase::resizeEvent (QResizeEvent *)
 {
     onSaveSession(".ses");
 }
 
 
-void WMViewBase::moveEvent( QMoveEvent *)
+void WMViewBase::moveEvent(QMoveEvent *)
 {
     onSaveSession(".ses");
 }
 
 
-void WMViewBase::UpdateRecentSESList( QString ses )
+void WMViewBase::UpdateRecentSESList(QString ses)
 {
     recentSESFiles.remove(ses); // wenn es den eintrag schon gibt -> löschen
     recentSESFiles.push_front(ses); // dann neuen an den anfang der liste setzen

@@ -78,9 +78,12 @@ void WMRawActualValBase::moveEvent(QMoveEvent *)
 }
 
 
-void WMRawActualValBase::onShowHide( bool b)
+void WMRawActualValBase::onShowHide(bool shw)
 {
-    if (b) show();else close();
+    if (shw)
+        show();
+    else
+        close();
 }
 
 
