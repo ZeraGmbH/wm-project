@@ -3,10 +3,10 @@
 
 #include "widgetgeometry.h"
 #include "confdata.h"
-#include "wmuoffsetcustomlabels.h"
+#include "geometrychangetimer.h"
+#include <wmoffsetcustomlabels.h>
 #include <justValues.h>
 #include <QDialog>
-#include <QTimer>
 #include <QLabel>
 
 namespace Ui {
@@ -33,14 +33,15 @@ protected:
     virtual void moveEvent(QMoveEvent *) override;
 private slots:
     void onSaveConfig();
+    void onWriteStreamForGeomChange();
 private:
     void actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just);
     Ui::WMOffsetValBase *ui;
     tJustValues m_JustValues;
-    WidgetGeometry m_widGeometry;
+    WidgetGeometry m_geomToFromStream;
     cConfData m_ConfData;
-    QTimer m_Timer;
     IWmOffsetCustomLabels *m_customLabels;
+    GeometryChangeTimer m_geomChangeTimer;
 };
 
 #endif // WMOFFSETVALBASE_H
