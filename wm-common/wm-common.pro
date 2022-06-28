@@ -53,11 +53,7 @@ HEADERS = \
     settings/geometrytowidget.h \
     settings/ownerrorviewdata.h \
     settings/sessionfilenamegen.h \
-    settings/sessionreadwrite.h \
-    settings/sessionstreamhandler.h \
     settings/sessionstreamer.h \
-    settings/streamnull.h \
-    settings/streamstrategy.h \
     settings/widgetgeometry.h \
     service-interfaces/dspiface.h \
     service-interfaces/zhclientsocket.h \
@@ -113,7 +109,6 @@ SOURCES = \
     settings/geometrychangetimer.cpp \
     settings/geometrytowidget.cpp \
     settings/sessionfilenamegen.cpp \
-    settings/sessionreadwrite.cpp \
     settings/widgetgeometry.cpp \
     service-interfaces/dspiface.cpp \
     service-interfaces/zhclientsocket.cpp \

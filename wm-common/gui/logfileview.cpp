@@ -1,5 +1,4 @@
 #include "logfileview.h"
-#include "sessionreadwrite.h"
 #include "geometrytowidget.h"
 #include <QString>
 #include <QTime>
