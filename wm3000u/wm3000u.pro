@@ -19,7 +19,6 @@ HEADERS	+=  \
     wmviewbase.h \
     dbushelper.h \
     dbushelperadapter.h \
-    wmoffsetvalbase.h
 
 SOURCES	+=  \
 	main.cpp \
@@ -35,14 +34,12 @@ SOURCES	+=  \
     rangedialogbase.cpp \
     dbushelper.cpp \
     dbushelperadapter.cpp \
-    wmglobal.cpp \
-    wmoffsetvalbase.cpp
+    wmglobal.cpp
 
 FORMS	= wmviewbase.ui \
 	rangedialogbase.ui \
 	wmrawactualvalbase.ui \
-    confdialogbase.ui \
-    wmoffsetvalbase.ui
+    confdialogbase.ui
 
 IMAGES	= images/filenew \
 	images/fileopen \

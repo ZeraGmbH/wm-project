@@ -17,7 +17,6 @@
 #include "wmmeasvaluesbase.h"
 #include "wmoeviewbase.h"
 #include "wmrawactualvalbase.h"
-#include "wmoffsetvalbase.h"
 #include "wmviewbase.h"
 #include "logfileview.h"
 #include "wmglobal.h"
@@ -31,6 +30,7 @@
 #include "voltageunits.h"
 #include "loadpointunits.h"
 #include "wmuoffsetcustomlabels.h"
+#include <wmoffsetvalbase.h>
 
 cWM3000U* g_WMDevice;
 WMViewBase *g_WMView; 

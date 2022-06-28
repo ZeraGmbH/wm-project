@@ -20,6 +20,7 @@ HEADERS = \
     gui/wmmeasvaluesbase.h \
     gui/wmoeviewbase.h \
     gui/wmoffsetcustomlabels.h \
+    gui/wmoffsetvalbase.h \
     gui/wmrawactualconfigbase.h \
     just/justValues.h \
     scales-and-units/angleunits.h \
@@ -87,6 +88,7 @@ SOURCES = \
     gui/wmeditor.cpp \
     gui/wmmeasconfigbase.cpp \
     gui/wmmeasvaluesbase.cpp \
+    gui/wmoffsetvalbase.cpp \
     gui/wmoeviewbase.cpp \
     gui/wmrawactualconfigbase.cpp \
     scales-and-units/angleunits.cpp \
@@ -131,6 +133,7 @@ FORMS = \
     gui/wmmeasconfigbase.ui \
     gui/wmmeasvaluesbase.ui \
     gui/wmoeviewbase.ui \
+    gui/wmoffsetvalbase.ui \
     gui/wmrawactualconfigbase.ui
 
 INCLUDEPATH += \
