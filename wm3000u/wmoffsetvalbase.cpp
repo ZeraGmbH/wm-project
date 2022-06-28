@@ -1,5 +1,6 @@
 #include "wmoffsetvalbase.h"
 #include "ui_wmoffsetvalbase.h"
+#include <geometrytowidget.h>
 #include <QFileInfo>
 #include <QCloseEvent>
 #include <QDir>
@@ -14,8 +15,7 @@ WMOffsetValBase::WMOffsetValBase(IWmOffsetCustomLabels *customLabels, QWidget* p
     m_JustValues.OffsetCorrDevX = 0.0;
     m_customLabels->setUiTexts(ui->XnLabel, ui->XxLabel);
     actualizeDisplay(ui, &m_ConfData, &m_JustValues);
-    m_Timer.setSingleShot(true);
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
+    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
@@ -28,26 +28,24 @@ WMOffsetValBase::~WMOffsetValBase()
 
 void WMOffsetValBase::closeEvent(QCloseEvent* ce)
 {
-    m_widGeometry.setPoint(pos());
-    m_widGeometry.setSize(size());
-    m_widGeometry.setVisible(0);
+    m_geomChangeTimer.handleGeomChange();
     emit sigIsVisible(false);
-    m_Timer.start(500);
     ce->accept();
 }
 
 void WMOffsetValBase::resizeEvent (QResizeEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
 
 void WMOffsetValBase::moveEvent(QMoveEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
 
 void WMOffsetValBase::onShowHide(bool shw)
 {
+    m_geomChangeTimer.handleGeomChange();
     if (shw)
         show();
     else
@@ -73,18 +71,18 @@ bool WMOffsetValBase::onLoadSession(QString session)
     QFile file(ls);
     if ( file.open( QIODevice::ReadOnly ) ) {
         QDataStream stream( &file );
-        stream >> m_widGeometry;
+        stream >> m_geomToFromStream;
         file.close();
         hide();
-        resize(m_widGeometry.getSize());
-        move(m_widGeometry.getPoint());
-        if (m_widGeometry.getVisible()) {
+        resize(m_geomToFromStream.getSize());
+        move(m_geomToFromStream.getPoint());
+        if (m_geomToFromStream.getVisible()) {
             show();
             emit sigIsVisible(true);
         }
         // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
-        move(m_widGeometry.getPoint());
+        move(m_geomToFromStream.getPoint());
 #endif
         return true;
     }
@@ -108,13 +106,13 @@ void WMOffsetValBase::onSaveSession(QString session)
         int vi;
         vi = (isVisible()) ? 1 : 0;
         if (vi) {
-            m_widGeometry.setPoint(pos());
-            m_widGeometry.setSize(size());
+            m_geomToFromStream.setPoint(pos());
+            m_geomToFromStream.setSize(size());
         }
-        m_widGeometry.setVisible(vi);
+        m_geomToFromStream.setVisible(vi);
 
         QDataStream stream( &file );
-        stream << m_widGeometry;
+        stream << m_geomToFromStream;
         file.close();
     }
 }
@@ -122,6 +120,12 @@ void WMOffsetValBase::onSaveSession(QString session)
 void WMOffsetValBase::onSaveConfig()
 {
     onSaveSession(".ses");
+}
+
+void WMOffsetValBase::onWriteStreamForGeomChange()
+{
+    m_geomToFromStream = geometryFromWidget(this);
+    onSaveConfig();
 }
 
 void WMOffsetValBase::actualizeDisplay(Ui::WMOffsetValBase* ui, cConfData* conf, tJustValues* just)
