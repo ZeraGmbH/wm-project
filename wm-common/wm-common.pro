@@ -146,3 +146,6 @@ INCLUDEPATH += \
     scpi/definitions \
     settings \
     service-interfaces
+
+# Qt4.8's QString  on modern env causes loads of warnings
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
