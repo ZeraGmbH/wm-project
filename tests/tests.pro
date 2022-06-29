@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS = \
-    test_geometrychangetimer \
+    test_settingschangetimer \
     test_sessionfilenamegen \
     test_sessionstreamer

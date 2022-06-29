@@ -4,7 +4,7 @@
 #define LOGFILEVIEW_H
 
 #include "sessionstreamer.h"
-#include "geometrychangetimer.h"
+#include "settingschangetimer.h"
 #include "widgetgeometry.h"
 #include <QTimer>
 #include <QDialog>
@@ -49,7 +49,7 @@ private:
 
     QTimer m_timerDelayShow;
     QStringList m_loglist;
-    GeometryChangeTimer m_geomChangeTimer;
+    SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
 };

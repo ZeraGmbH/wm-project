@@ -9,7 +9,7 @@ WMOeViewBase::WMOeViewBase(QWidget* parent, QString machineName):
     m_sessionStreamer(machineName, this)
 {
     ui->setupUi(this);
-    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
@@ -62,24 +62,24 @@ void WMOeViewBase::ReceiveOEViewDataSlot(cOwnErrorViewData *oe)
 
 void WMOeViewBase::closeEvent( QCloseEvent* ce)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     emit sigIsVisible(false);
     ce->accept();
 }
 
 void WMOeViewBase::resizeEvent(QResizeEvent *)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void WMOeViewBase::moveEvent(QMoveEvent *)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void WMOeViewBase::onShowHide(bool shw)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     if (shw)
         show();
     else

@@ -6,7 +6,7 @@
 #include "widgetgeometry.h"
 #include "confdata.h"
 #include "wmrawactualconfigbase.h"
-#include "geometrychangetimer.h"
+#include "settingschangetimer.h"
 #include "sessionstreamer.h"
 #include <QDialog>
 
@@ -46,7 +46,7 @@ private:
     int PrimSekDispMode;
     int WinkelDispMode;
     WMRawActualConfigBase* m_pContextMenu;
-    GeometryChangeTimer m_geomChangeTimer;
+    SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
 };

@@ -16,7 +16,7 @@ WMOffsetValBase::WMOffsetValBase(QString machineName, IWmOffsetCustomLabels *cus
     m_JustValues.OffsetCorrDevX = 0.0;
     m_customLabels->setUiTexts(ui->XnLabel, ui->XxLabel);
     actualizeDisplay(ui, &m_ConfData, &m_JustValues);
-    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
@@ -28,24 +28,24 @@ WMOffsetValBase::~WMOffsetValBase()
 
 void WMOffsetValBase::closeEvent(QCloseEvent* ce)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     emit sigIsVisible(false);
     ce->accept();
 }
 
 void WMOffsetValBase::resizeEvent (QResizeEvent *)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void WMOffsetValBase::moveEvent(QMoveEvent *)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void WMOffsetValBase::onShowHide(bool shw)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     if (shw)
         show();
     else

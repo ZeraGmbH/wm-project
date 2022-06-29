@@ -50,7 +50,7 @@ HEADERS = \
     scpi/scpistatsyst.h \
     settings/confdata.h \
     settings/ethadress.h \
-    settings/geometrychangetimer.h \
+    settings/settingschangetimer.h \
     settings/geometrytowidget.h \
     settings/ownerrorviewdata.h \
     settings/sessionfilenamegen.h \
@@ -108,7 +108,7 @@ SOURCES = \
     scpi/scpistatsyst.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
-    settings/geometrychangetimer.cpp \
+    settings/settingschangetimer.cpp \
     settings/geometrytowidget.cpp \
     settings/sessionfilenamegen.cpp \
     settings/widgetgeometry.cpp \

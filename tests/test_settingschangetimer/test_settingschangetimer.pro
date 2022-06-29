@@ -12,10 +12,10 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 HEADERS = \
-    test_geometrychangetimer.h
+    test_settingschangetimer.h
 
 SOURCES = \
-    test_geometrychangetimer.cpp
+    test_settingschangetimer.cpp
 
 INCLUDEPATH += \
     ../../wm-common \
