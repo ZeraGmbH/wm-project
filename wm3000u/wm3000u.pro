@@ -351,6 +351,9 @@ INCLUDEPATH += \
     ../wm-common/settings \
     ../wm-common/service-interfaces
 
+# Qt4.8's QString  on modern env causes loads of warnings
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
+
 LIBS += -L../wm-common -lwm-common
 
 target.path = /usr/bin
