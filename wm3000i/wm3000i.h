@@ -329,6 +329,7 @@ public:
     bool isDC();
     void setNewSamplerates(bool b);
     bool isNewSamplerates();
+    void setIpAddress(QString address);
 
 public slots:
      // slots, die vom hauptfenster aus aktiviert werden
@@ -497,6 +498,7 @@ private:
     bool m_bDC;
     bool m_bNewSamplerates;
     bool m_bNoDCAdjust;
+    QString m_IpAddress = "127.0.0.1";
 };
 
 #endif    

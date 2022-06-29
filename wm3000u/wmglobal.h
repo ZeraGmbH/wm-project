@@ -20,9 +20,6 @@
 
 //#define FVWM 1
 
-#define TheDevice "127.0.0.1"
-//#define TheDevice "192.168.2.119"
-//#define TheDevice "192.168.6.162"
 
 // V1.01 erste lauffähige version
 // V1.02 wm3000scpiface geändert -> konfiguration abfrage, setzen besser synchronisiert

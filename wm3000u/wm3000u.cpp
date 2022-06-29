@@ -135,7 +135,7 @@ cWM3000U::cWM3000U() :
     m_binitDone = false; // system ist noch nicht initisalisiert
 
     // default TCP connection
-    TCPConfig.pcbHost = TCPConfig.dspHost = TheDevice; // localhost
+    TCPConfig.pcbHost = TCPConfig.dspHost = m_IpAddress;
     TCPConfig.pcbPort = 6305;
     TCPConfig.dspPort = 6310;
     // ende default TCP connection
@@ -3008,6 +3008,11 @@ void cWM3000U::setNewSamplerates(bool b)
 bool cWM3000U::isNewSamplerates()
 {
     return m_bNewSamplerates;
+}
+
+void cWM3000U::setIpAddress(QString address)
+{
+    m_IpAddress = address;
 }
 
 //------------------------------------------- ab hier stehen alle SLOTs--------------------------------------------------------

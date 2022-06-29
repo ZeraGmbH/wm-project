@@ -92,7 +92,10 @@ int main(int argc, char *argv[])
             bdc = true;
         if (option == "-newsamplerates")
             newsamplerates = true;
-
+        if(option.startsWith("-ip")) {
+            QString address = option.replace("-ip", "").trimmed();
+            g_WMDevice->setIpAddress(address);
+        }
     }
 
     if (!bJustage)
