@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMOeView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
     QObject::connect(&g_WMDevice->m_ownError,SIGNAL(SendOEViewData(cOwnErrorViewData*)),g_WMOeView,SLOT(ReceiveOEViewDataSlot(cOwnErrorViewData*)));
 
-    WMRawActualValBase *g_WMActValView = new WMRawActualValBase(g_WMView);   //  istwertanzeige erzeugen
+    WMRawActualValBase *g_WMActValView = new WMRawActualValBase(g_WMView, machineName);   //  istwertanzeige erzeugen
     QObject::connect(g_WMView,SIGNAL(UIansichtIstwerteActionToggled(bool)),g_WMActValView,SLOT(onShowHide(bool))); // öffnen der istwertanzeige
     QObject::connect(g_WMActValView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtIstwerteActionSet(bool))); //schliessen der istwertanzeige
     QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMActValView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
