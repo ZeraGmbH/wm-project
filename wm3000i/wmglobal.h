@@ -15,9 +15,6 @@
 
 //#define FVWM 1
 
-#define TheDevice "127.0.0.1"
-//#define TheDevice "192.168.6.42"
-
 // V1.00 setzt auf wm3000u V1.04
 // V1.01 zusätzliche anzeige lastpunkt relativ zu X kanal eingebaut
 //             andere kette an dsp übertragen um die benötigten werte zu erhalten
