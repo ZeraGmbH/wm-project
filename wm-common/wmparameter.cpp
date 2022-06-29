@@ -72,7 +72,7 @@ double WmParameter::toDouble(bool* ok) {
     QString s = eP;
     if (Unit != 0) {
         s.remove(Unit->Name);
-        s.trimmed();
+        s = s.trimmed();
         return (s.toDouble(ok)*(Unit->fak));
     }
     else
