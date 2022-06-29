@@ -15,7 +15,6 @@ WMOeViewBase::WMOeViewBase(QWidget* parent, QString machineName):
 
 WMOeViewBase::~WMOeViewBase()
 {
-    onSaveConfig();
     delete ui;
 }
 
