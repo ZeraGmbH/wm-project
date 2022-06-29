@@ -1,9 +1,12 @@
+#include "wmrawactualvalbase.h"
+#include "ui_wmrawactualvalbase.h"
+#include "wmglobal.h"
+#include "common-modes.h"
+#include <tools.h>
+#include <geometrytowidget.h>
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <QFileInfo>
-#include "wmrawactualvalbase.h"
-#include "ui_wmrawactualvalbase.h"
-#include "common-modes.h"
 
 const double PI2 = 6.283185307;
 
@@ -21,10 +24,9 @@ WMRawActualValBase::WMRawActualValBase( QWidget* parent):
     PrimSekDispMode = prim;
     WinkelDispMode = mathpos;
     m_pContextMenu = new WMRawActualConfigBase(this);
-    m_Timer.setSingleShot(true);
     connect(this,SIGNAL(SendVektorDispFormat(bool,int,int,int)),m_pContextMenu,SLOT(ReceiveDisplayConfSlot(bool,int,int,int)));
     connect(m_pContextMenu,SIGNAL(SendVektorDisplayFormat(int,int,int)),this,SLOT(ReceiveVektorDispFormat(int,int,int)));
-    connect(&m_Timer, SIGNAL(timeout()), this, SLOT(onSaveConfig()));
+    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
@@ -36,26 +38,24 @@ WMRawActualValBase::~WMRawActualValBase()
 
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
-    m_widGeometry.setPoint(pos());
-    m_widGeometry.setSize(size());
-    m_widGeometry.setVisible(0);
+    m_geomChangeTimer.handleGeomChange();
     emit sigIsVisible(false);
-    m_Timer.start(500);
     ce->accept();
 }
 
 void WMRawActualValBase::resizeEvent(QResizeEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
 
 void WMRawActualValBase::moveEvent(QMoveEvent *)
 {
-    m_Timer.start(500);
+    m_geomChangeTimer.handleGeomChange();
 }
 
 void WMRawActualValBase::onShowHide(bool shw)
 {
+    m_geomChangeTimer.handleGeomChange();
     if (shw)
         show();
     else
@@ -182,22 +182,22 @@ bool WMRawActualValBase::onLoadSession(QString session)
     QFile file(ls);
     if (file.open(QIODevice::ReadOnly)) {
         QDataStream stream( &file );
-        stream >> m_widGeometry;
+        stream >> m_geomToFromStream;
         stream >> AmplDispMode;
         stream >> WinkelDispMode,
                 stream >> PrimSekDispMode;
         file.close();
         hide();
-        resize(m_widGeometry.getSize());
-        move(m_widGeometry.getPoint());
-        if (m_widGeometry.getVisible())
+        resize(m_geomToFromStream.getSize());
+        move(m_geomToFromStream.getPoint());
+        if (m_geomToFromStream.getVisible())
         {
             show();
             emit sigIsVisible(true);
         }
         // FVWM und Gnome verhalten sich anders
 #ifndef FVWM
-        move(m_widGeometry.getPoint());
+        move(m_geomToFromStream.getPoint());
 #endif
         return true;
     }
@@ -220,13 +220,13 @@ void WMRawActualValBase::onSaveSession(QString session)
         int vi;
         vi = (isVisible()) ? 1 : 0;
         if (vi) {
-            m_widGeometry.setPoint(pos());
-            m_widGeometry.setSize(size());
+            m_geomToFromStream.setPoint(pos());
+            m_geomToFromStream.setSize(size());
         }
-        m_widGeometry.setVisible(vi);
+        m_geomToFromStream.setVisible(vi);
 
         QDataStream stream( &file );
-        stream << m_widGeometry;
+        stream << m_geomToFromStream;
         stream << AmplDispMode;
         stream << WinkelDispMode;
         stream << PrimSekDispMode;
@@ -250,4 +250,10 @@ void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
 void WMRawActualValBase::onSaveConfig()
 {
     onSaveSession(".ses");
+}
+
+void WMRawActualValBase::onWriteStreamForGeomChange()
+{
+    m_geomToFromStream = geometryFromWidget(this);
+    onSaveConfig();
 }

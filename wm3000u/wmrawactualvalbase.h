@@ -1,16 +1,13 @@
 #ifndef WMRAWACTUALVALBASE_H
 #define WMRAWACTUALVALBASE_H
 
+#include "ui_wmrawactualvalbase.h"
 #include "wmactvalues.h"
 #include "widgetgeometry.h"
 #include "confdata.h"
 #include "wmrawactualconfigbase.h"
+#include <geometrychangetimer.h>
 #include <QDialog>
-#include <QTimer>
-
-namespace Ui {
-    class WMRawActualValBase;
-}
 
 class WMRawActualValBase : public QDialog
 {
@@ -35,16 +32,17 @@ protected:
     virtual void contextMenuEvent(QContextMenuEvent *) override;
 private slots:
     void onSaveConfig();
+    void onWriteStreamForGeomChange();
 private:
     Ui::WMRawActualValBase *ui;
     cwmActValues m_ActValues;
-    WidgetGeometry m_widGeometry;
     cConfData *m_pConfData;
     int AmplDispMode;
     int PrimSekDispMode;
     int WinkelDispMode;
     WMRawActualConfigBase* m_pContextMenu;
-    QTimer m_Timer;
+    GeometryChangeTimer m_geomChangeTimer;
+    WidgetGeometry m_geomToFromStream;
 };
 
 #endif // WMRAWACTUALVALBASE_H
