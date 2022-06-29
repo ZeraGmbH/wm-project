@@ -10,9 +10,10 @@
 
 const double PI2 = 6.283185307;
 
-WMRawActualValBase::WMRawActualValBase( QWidget* parent):
+WMRawActualValBase::WMRawActualValBase(QWidget* parent, QString machineName):
     QDialog(parent),
-    ui(new Ui::WMRawActualValBase)
+    ui(new Ui::WMRawActualValBase),
+    m_sessionStreamer(machineName, this)
 {
     ui->setupUi(this);
     ui->XnAmplDisp -> setText( QString("%1 A").arg(0.0,10,'f',5) );
@@ -20,9 +21,7 @@ WMRawActualValBase::WMRawActualValBase( QWidget* parent):
     ui->XxAmplDisp -> setText( QString("%1 A").arg(0.0,10,'f',5) );
     ui->XxPhaseDisp -> setText( QString("%1 %2").arg(0.0,8,'f',4).arg( trUtf8("°")) );
 
-    AmplDispMode = x1;
-    PrimSekDispMode = prim;
-    WinkelDispMode = mathpos;
+    setInitialDefaults();
     m_pContextMenu = new WMRawActualConfigBase(this);
     connect(this,SIGNAL(SendVektorDispFormat(bool,int,int,int)),m_pContextMenu,SLOT(ReceiveDisplayConfSlot(bool,int,int,int)));
     connect(m_pContextMenu,SIGNAL(SendVektorDisplayFormat(int,int,int)),this,SLOT(ReceiveVektorDispFormat(int,int,int)));
@@ -177,61 +176,13 @@ void WMRawActualValBase::SetConfInfoSlot(cConfData *cd)
 
 bool WMRawActualValBase::onLoadSession(QString session)
 {
-    QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    if (file.open(QIODevice::ReadOnly)) {
-        QDataStream stream( &file );
-        stream >> m_geomToFromStream;
-        stream >> AmplDispMode;
-        stream >> WinkelDispMode,
-                stream >> PrimSekDispMode;
-        file.close();
-        hide();
-        resize(m_geomToFromStream.getSize());
-        move(m_geomToFromStream.getPoint());
-        if (m_geomToFromStream.getVisible())
-        {
-            show();
-            emit sigIsVisible(true);
-        }
-        // FVWM und Gnome verhalten sich anders
-#ifndef FVWM
-        move(m_geomToFromStream.getPoint());
-#endif
-        return true;
-    }
-    return false;
+    m_sessionStreamer.readSession(objectName(), session);
+    return true;
 }
 
 void WMRawActualValBase::onSaveSession(QString session)
 {
-    if(!QDir(QString("%1/.wm3000i/").arg(QDir::homePath())).exists())
-    {
-        //create temporary object that gets deleted when leaving the control block
-        QDir().mkdir(QString("%1/.wm3000i/").arg(QDir::homePath()));
-    }
-    QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000i/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
-    QFile file(ls);
-    if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
-        file.at(0);
-
-        int vi;
-        vi = (isVisible()) ? 1 : 0;
-        if (vi) {
-            m_geomToFromStream.setPoint(pos());
-            m_geomToFromStream.setSize(size());
-        }
-        m_geomToFromStream.setVisible(vi);
-
-        QDataStream stream( &file );
-        stream << m_geomToFromStream;
-        stream << AmplDispMode;
-        stream << WinkelDispMode;
-        stream << PrimSekDispMode;
-        file.close();
-    }
+    m_sessionStreamer.writeSession(objectName(), session);
 }
 
 void WMRawActualValBase::contextMenuEvent(QContextMenuEvent *)
@@ -256,4 +207,33 @@ void WMRawActualValBase::onWriteStreamForGeomChange()
 {
     m_geomToFromStream = geometryFromWidget(this);
     onSaveConfig();
+}
+
+void WMRawActualValBase::readStream(QDataStream &stream)
+{
+    stream >> m_geomToFromStream;
+    stream >> AmplDispMode;
+    stream >> WinkelDispMode;
+    stream >> PrimSekDispMode;
+    geometryToWidget(m_geomToFromStream, this);
+}
+
+void WMRawActualValBase::writeStream(QDataStream &stream)
+{
+    stream << m_geomToFromStream;
+    stream << AmplDispMode;
+    stream << WinkelDispMode;
+    stream << PrimSekDispMode;
+}
+
+void WMRawActualValBase::setInitialDefaults()
+{
+    AmplDispMode = x1;
+    PrimSekDispMode = prim;
+    WinkelDispMode = mathpos;
+}
+
+void WMRawActualValBase::setDefaults()
+{
+    setInitialDefaults();
 }

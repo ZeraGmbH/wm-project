@@ -6,14 +6,15 @@
 #include "widgetgeometry.h"
 #include "confdata.h"
 #include "wmrawactualconfigbase.h"
-#include <geometrychangetimer.h>
+#include "geometrychangetimer.h"
+#include "sessionstreamer.h"
 #include <QDialog>
 
-class WMRawActualValBase : public QDialog
+class WMRawActualValBase : public QDialog, public ISessionStreamImplementor
 {
     Q_OBJECT
 public:
-    explicit WMRawActualValBase( QWidget* parent = 0);
+    explicit WMRawActualValBase(QWidget* parent, QString machineName);
     ~WMRawActualValBase();
 public slots:
     void onShowHide(bool shw);
@@ -34,6 +35,10 @@ private slots:
     void onSaveConfig();
     void onWriteStreamForGeomChange();
 private:
+    virtual void readStream(QDataStream& stream) override;
+    virtual void writeStream(QDataStream& stream) override;
+    virtual void setDefaults() override;
+    void setInitialDefaults();
     Ui::WMRawActualValBase *ui;
     cwmActValues m_ActValues;
     cConfData *m_pConfData;
@@ -43,6 +48,7 @@ private:
     WMRawActualConfigBase* m_pContextMenu;
     GeometryChangeTimer m_geomChangeTimer;
     WidgetGeometry m_geomToFromStream;
+    SessionStreamer m_sessionStreamer;
 };
 
 #endif // WMRAWACTUALVALBASE_H
