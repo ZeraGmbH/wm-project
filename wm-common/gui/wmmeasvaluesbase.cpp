@@ -27,7 +27,6 @@ WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<e
 
 WMMeasValuesBase::~WMMeasValuesBase()
 {
-    onSaveConfig();
     delete ui;
 }
 
@@ -99,6 +98,7 @@ void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
         ui->mBigAngleError->setVisible(true);
         ui->mBigAngleUnit->setVisible(true);
     }
+    m_geomChangeTimer.handleGeomChange();
     repaint();
 }
 

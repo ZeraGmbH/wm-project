@@ -31,7 +31,6 @@ WMRawActualValBase::WMRawActualValBase(QWidget* parent, QString machineName):
 
 WMRawActualValBase::~WMRawActualValBase()
 {
-    onSaveConfig();
     delete ui;
 }
 
@@ -137,6 +136,7 @@ void WMRawActualValBase::SetConfInfoSlot(cConfData * cd)
         ui->FreqDisp->setVisible(true);
         ui->FreqLabel->setVisible(true);
     }
+    m_geomChangeTimer.handleGeomChange();
     resize(ui->gridLayout->minimumSize());
 }
 

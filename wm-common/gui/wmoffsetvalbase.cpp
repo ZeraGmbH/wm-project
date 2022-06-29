@@ -22,7 +22,6 @@ WMOffsetValBase::WMOffsetValBase(QString machineName, IWmOffsetCustomLabels *cus
 
 WMOffsetValBase::~WMOffsetValBase()
 {
-    onSaveConfig();
     delete ui;
     delete m_customLabels;
 }

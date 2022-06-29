@@ -22,7 +22,6 @@ public:
                  QWidget *parent,
                  const char *wname,
                  QString machineName);
-    virtual ~CLogFileView();
     Q3TextEdit *m_pText;
     
 public slots:    

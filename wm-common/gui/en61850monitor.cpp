@@ -17,7 +17,6 @@ EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
 
 EN61850monitor::~EN61850monitor()
 {
-    onSaveConfig();
     delete ui;
 }
 

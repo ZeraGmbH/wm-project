@@ -23,11 +23,6 @@ CLogFileView::CLogFileView(const QString cap,
     connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
 }
 
-CLogFileView::~CLogFileView()
-{
-    onSaveConfig();
-}
-
 void CLogFileView::onShowHide(bool shw)
 {
     m_geomChangeTimer.handleGeomChange();
