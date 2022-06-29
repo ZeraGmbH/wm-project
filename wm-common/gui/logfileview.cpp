@@ -20,12 +20,12 @@ CLogFileView::CLogFileView(const QString cap,
     onLoadSession(".ses");
     m_timerDelayShow.start(2000);
     QObject::connect(&m_timerDelayShow,SIGNAL(timeout()),this,SLOT(showList()));
-    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
 }
 
 void CLogFileView::onShowHide(bool shw)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     if (shw)
         show();
     else
@@ -86,17 +86,17 @@ bool CLogFileView::onLoadSession(QString session)
 void CLogFileView::resizeEvent (QResizeEvent*)
 {
     m_pText->resize(size());
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void CLogFileView::moveEvent(QMoveEvent*)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void CLogFileView::closeEvent (QCloseEvent* ce)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     emit sigIsVisible(false);
     ce->accept();
 }

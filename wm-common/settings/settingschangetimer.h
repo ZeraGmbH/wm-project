@@ -3,18 +3,18 @@
 
 #include <QTimer>
 
-class GeometryChangeTimer : public QObject
+class SettingsChangeTimer : public QObject
 {
     Q_OBJECT
 public:
-    GeometryChangeTimer(int geomTimerMs = 500);
-    void handleGeomChange();
+    SettingsChangeTimer(int geomTimerMs = 500);
+    void startDelayed();
 signals:
     void sigWriteStreamForGeomChange();
 private slots:
     void onGeomTimer();
 private:
-    QTimer m_geomChangeTimer;
+    QTimer m_settingsChangeTimer;
 };
 
 #endif // GEOMETRYCHANGEHANDLER_H

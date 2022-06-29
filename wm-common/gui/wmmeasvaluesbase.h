@@ -8,7 +8,7 @@
 #include "formatinfo.h"
 #include "wmactvalues.h"
 #include "sessionstreamer.h"
-#include "geometrychangetimer.h"
+#include "settingschangetimer.h"
 #include "geometrytowidget.h"
 #include <QDialog>
 #include <QLabel>
@@ -62,7 +62,7 @@ private:
     cFormatInfo m_Format[4];
     int m_nDisplayMode;
     int m_nLPDisplayMode;
-    GeometryChangeTimer m_geomChangeTimer;
+    SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
 };

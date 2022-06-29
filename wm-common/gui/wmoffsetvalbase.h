@@ -3,7 +3,7 @@
 
 #include "widgetgeometry.h"
 #include "confdata.h"
-#include "geometrychangetimer.h"
+#include "settingschangetimer.h"
 #include "sessionstreamer.h"
 #include <wmoffsetcustomlabels.h>
 #include <justValues.h>
@@ -45,7 +45,7 @@ private:
     WidgetGeometry m_geomToFromStream;
     cConfData m_ConfData;
     IWmOffsetCustomLabels *m_customLabels;
-    GeometryChangeTimer m_geomChangeTimer;
+    SettingsChangeTimer m_settingsChangeTimer;
     SessionStreamer m_sessionStreamer;
 };
 

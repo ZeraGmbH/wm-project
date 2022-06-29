@@ -25,7 +25,7 @@ WMRawActualValBase::WMRawActualValBase(QWidget* parent, QString machineName):
     m_pContextMenu = new WMRawActualConfigBase(this);
     connect(this,SIGNAL(SendVektorDispFormat(bool,int,int,int)),m_pContextMenu,SLOT(ReceiveDisplayConfSlot(bool,int,int,int)));
     connect(m_pContextMenu,SIGNAL(SendVektorDisplayFormat(int,int,int)),this,SLOT(ReceiveVektorDispFormat(int,int,int)));
-    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
@@ -36,24 +36,24 @@ WMRawActualValBase::~WMRawActualValBase()
 
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     emit sigIsVisible(false);
     ce->accept();
 }
 
 void WMRawActualValBase::resizeEvent(QResizeEvent *)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void WMRawActualValBase::moveEvent(QMoveEvent *)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void WMRawActualValBase::onShowHide(bool shw)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     if (shw)
         show();
     else
@@ -170,7 +170,7 @@ void WMRawActualValBase::SetConfInfoSlot(cConfData *cd)
         ui->dXxAmplDisp->setVisible(true);
         ui->dXxLabel->setVisible(true);
     }
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     resize(ui->gridLayout->minimumSize());
 }
 

@@ -11,7 +11,7 @@ EN61850monitor::EN61850monitor(QWidget* parent, QString machineName):
 {
     ui->setupUi(this);
     QObject::connect(&m_PollTimer, SIGNAL(timeout()), this, SLOT(onPollTimer()));
-    connect(&m_geomChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
 }
 
@@ -22,7 +22,7 @@ EN61850monitor::~EN61850monitor()
 
 void EN61850monitor::onShowHide(bool shw)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     if (shw) {
         show();
         emit sigRequestInformation(); // anfrage an wm3000 die status infos zu besorgen
@@ -35,19 +35,19 @@ void EN61850monitor::onShowHide(bool shw)
 
 void EN61850monitor::closeEvent( QCloseEvent *ce )
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
     emit sigIsVisible(false);
     ce->accept();
 }
 
 void EN61850monitor::resizeEvent(QResizeEvent*)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void EN61850monitor::moveEvent(QMoveEvent*)
 {
-    m_geomChangeTimer.handleGeomChange();
+    m_settingsChangeTimer.startDelayed();
 }
 
 void EN61850monitor::onPollTimer()

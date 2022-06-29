@@ -4,7 +4,7 @@
 #include "en61850.h"
 #include "widgetgeometry.h"
 #include "sessionstreamer.h"
-#include "geometrychangetimer.h"
+#include "settingschangetimer.h"
 #include <QDialog>
 
 namespace Ui {
@@ -45,7 +45,7 @@ private:
     void actualizeSyncLostCount(cEN61850Info *ethInfo);
     Ui::EN61850monitor *ui;
     QTimer m_PollTimer;
-    GeometryChangeTimer m_geomChangeTimer;
+    SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
 };

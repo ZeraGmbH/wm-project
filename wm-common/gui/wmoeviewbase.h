@@ -4,7 +4,7 @@
 #include "ownerrorviewdata.h"
 #include "widgetgeometry.h"
 #include "sessionstreamer.h"
-#include "geometrychangetimer.h"
+#include "settingschangetimer.h"
 #include <QDialog>
 
 namespace Ui {
@@ -36,7 +36,7 @@ private:
     virtual void writeStream(QDataStream& stream) override;
     virtual void setDefaults() override;
     Ui::WMOeViewBase *ui;
-    GeometryChangeTimer m_geomChangeTimer;
+    SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
 };
