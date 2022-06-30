@@ -32,14 +32,13 @@ WMMeasValuesBase::~WMMeasValuesBase()
 
 void WMMeasValuesBase::adjustBoxWidths()
 {
-    if (QLayout *lay=layout()) {
-        QLayoutIterator it = lay->iterator();
-        QLayoutItem *child;
-        while ( (child = it.current()) != 0 ) {
-            QLayout *l = child->layout();
-            int w = l->minimumSize().width();
-            ((QBoxLayout*) lay)->setStretchFactor(l, w);
-            ++it;
+    QBoxLayout *bLayout = qobject_cast<QBoxLayout *>(layout());
+    if(bLayout) {
+        for(int i=0; i<bLayout->count(); ++i) {
+            QLayoutItem *child = bLayout->itemAt(i);
+            QLayout *childLayout = child->layout();
+            int width = childLayout->minimumSize().width();
+            bLayout->setStretchFactor(childLayout, width);
         }
     }
 }
