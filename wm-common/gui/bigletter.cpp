@@ -10,7 +10,6 @@ CBigLetter::CBigLetter(int s, QString d, QWidget *parent, const char* name, Qt::
     actFontSize(m_nStartSize);
     m_sDisplay = d;
     setFrame(frame);
-    formatChanged = false;
 }
 
 CBigLetter::CBigLetter(QWidget *parent, const char* name, Qt::WFlags f)
@@ -31,7 +30,6 @@ void CBigLetter::drawContents(QPainter* p)
 
 void CBigLetter::display(QString s)
 {
-    formatChanged = (m_sDisplay.length() != s.length());
     m_sDisplay = s;
     this->repaint();
 }
@@ -74,11 +72,6 @@ void CBigLetter::setFrame(cFrame f)
 cFrame CBigLetter::getFrame() const
 {
     return(m_nFrame);
-}
-
-bool CBigLetter::isFormatChanged()
-{
-    return formatChanged;
 }
 
 void CBigLetter::resizeEvent (QResizeEvent* r)
