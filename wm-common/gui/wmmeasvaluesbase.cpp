@@ -79,7 +79,9 @@ void WMMeasValuesBase::SetActualValuesSlot( cwmActValues * av)
 void WMMeasValuesBase::ActualizeLPSlot( cwmActValues * av )
 {
     m_ActValues = *av;
-    ActualizeLoadPoint();
+    actualizeLoadPoint();
+    setLayoutSize();
+    adjustBoxWidths();
 }
 
 void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
@@ -101,7 +103,7 @@ void WMMeasValuesBase::SetConfInfoSlot( cConfData * cd)
     repaint();
 }
 
-void WMMeasValuesBase::ActualizeLoadPoint()
+void WMMeasValuesBase::actualizeLoadPoint()
 {
     double AnzeigeWertN, AnzeigeWertX;
 
@@ -129,6 +131,17 @@ void WMMeasValuesBase::ActualizeLoadPoint()
     ui->mBigLPNUnit->display(m_Format[0].UnitInfo.Name);
     ui->mBigLoadpointX->display(QString("%1").arg(AnzeigeWertX,m_Format[0].FieldWidth,'f',m_Format[0].Resolution));
     ui->mBigLPXUnit->display(m_Format[0].UnitInfo.Name);
+}
+
+void WMMeasValuesBase::setLayoutSize()
+{
+    QBoxLayout *bLayout = qobject_cast<QBoxLayout *>(layout());
+    if(bLayout) {
+        QRect layoutGeom = bLayout->geometry();
+        QRect childRect = childrenRect();
+        if(layoutGeom.size() != childRect.size())
+            bLayout->setGeometry(childRect);
+    }
 }
 
 void WMMeasValuesBase::actualizeDisplay()

@@ -29,7 +29,6 @@ public slots:
     virtual void SetActualValuesSlot(cwmActValues * av);
     virtual void ActualizeLPSlot(cwmActValues * av);
     virtual void SetConfInfoSlot(cConfData * cd);
-    virtual void ActualizeLoadPoint();
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
     virtual void ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo * fi );
@@ -54,7 +53,8 @@ private:
     void setInitialDefaults();
     void actualizeDisplay();
     void adjustBoxWidths();
-
+    void actualizeLoadPoint();
+    void setLayoutSize();
     Ui::WMMeasValuesBase *ui;
     cwmActValues m_ActValues;
     cConfData m_ConfData;
