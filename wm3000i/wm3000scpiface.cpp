@@ -490,7 +490,7 @@ void cWM3000SCPIFace::mSetRange(char* s)
     if ( isAuthorized())
     {
         QString range;
-        QString* nrange;
+        QString* nrange = nullptr;
         QString dedicatedChannel = m_pCmdInterpreter->dedicatedList.first();
         QStringList sl;
         int n = mMeasChannelList.findIndex( dedicatedChannel);
@@ -505,8 +505,7 @@ void cWM3000SCPIFace::mSetRange(char* s)
 
         if (GetParameter(&s, range, true))
         {
-            if ( sl.contains(range) )
-            {
+            if(nrange && sl.contains(range)) {
                 *nrange = range;
                 emit SendRange(&m_ConfDataTarget);
             }
