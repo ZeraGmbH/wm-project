@@ -46,7 +46,7 @@ char* cWM3000SCPIFace::GetDeviceIdentification()
 
 char* cWM3000SCPIFace::DeviceSelfTest()
 {
-    m_pSMachineTimer->start(0, ifSelftestStart);
+    m_stateMachineTimer.start(0, ifSelftestStart);
     return 0;
 }
 
@@ -70,14 +70,14 @@ void cWM3000SCPIFace::ResetDevice()
 
 char *cWM3000SCPIFace::GetChannelNOffset()
 {
-    m_pSMachineTimer->start(0, ifChannelNOffsetStart);
+    m_stateMachineTimer.start(0, ifChannelNOffsetStart);
     return 0;
 }
 
 
 char *cWM3000SCPIFace::GetChannelXOffset()
 {
-    m_pSMachineTimer->start(0, ifChannelXOffsetStart);
+    m_stateMachineTimer.start(0, ifChannelXOffsetStart);
     return 0;
 }
 
@@ -194,21 +194,21 @@ void cWM3000SCPIFace::mSetStatusEN61850Clear(char*)
 
 char*  cWM3000SCPIFace::mGetStatusEN61850SynclostCount()
 {
-    m_pSMachineTimer->start(0, EN61850SynclostCountStart); // wir starten die statemachine weil
+    m_stateMachineTimer.start(0, EN61850SynclostCountStart); // wir starten die statemachine weil
     return 0; // der en61850 status erst noch gelesen werden muss
 }
 
 
 char* cWM3000SCPIFace::mGetStatusEN61850Error()
 {
-    m_pSMachineTimer->start(0, EN61850ErrorStart);
+    m_stateMachineTimer.start(0, EN61850ErrorStart);
     return 0;
 }
  
 
 char* cWM3000SCPIFace::mGetStatusEN61850DataCount()
 {
-     m_pSMachineTimer->start(0, EN61850DataCountStart);
+     m_stateMachineTimer.start(0, EN61850DataCountStart);
      return 0;
 }
 
@@ -219,7 +219,7 @@ void cWM3000SCPIFace::ReceiveEN61850Status(cEN61850Info* eni)
     {
 	m_nWait4What = wait4Nothing;
 	m_EN61850Info = *eni; // wir haben die angeforderte info
-	m_pSMachineTimer->start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }
 }    
     
@@ -230,7 +230,7 @@ void cWM3000SCPIFace::ReceiveSelftestResult(int r)
     {
         m_nWait4What = wait4Nothing;
         SelftestResult = r;
-        m_pSMachineTimer->start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+        m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }
 }
 
@@ -241,7 +241,7 @@ void cWM3000SCPIFace::ReceiveNXOffset(double offs)
     {
         m_nWait4What = wait4Nothing;
         OffsetResult = offs;
-        m_pSMachineTimer->start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+        m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }
 }
 
@@ -256,7 +256,7 @@ void cWM3000SCPIFace::CmdExecution(QString& s)
     if ( !ok) // ok bedeutet kommando interpreter hat kommando dekodiert  
     {
 	AddEventError(CommandError); // wenn nicht ok fehler eintragen
-	m_pSMachineTimer->start(0, ExecCmdFinished); // kommen wir von hier zurück zur statemachine und beenden die bearbeitung 
+    m_stateMachineTimer.start(0, ExecCmdFinished); // kommen wir von hier zurück zur statemachine und beenden die bearbeitung
     }
 }
  
@@ -280,7 +280,7 @@ void cWM3000SCPIFace::ReceiveRangeAutomaticRdy()
     if (m_nWait4What == wait4RangeAutomatic) // wir machen nur was draus wenn wir drauf warten
     {
 	m_nWait4What = wait4Nothing;
-	m_pSMachineTimer->start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }    
 }
 
@@ -291,7 +291,7 @@ void cWM3000SCPIFace::ReceiveActValues(cwmActValues* av)
     {
 	m_nWait4What = wait4Nothing;
 	mActValues = *av;
-	m_pSMachineTimer->start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }    
 }
 
@@ -305,7 +305,7 @@ void cWM3000SCPIFace::ReceiveLPValue(cwmActValues* av)
 	mActValues.LoadPoint1 = av->LoadPoint1;
     mActValues.LoadPointX = av->LoadPointX;
     mActValues.LoadPoint1X = av->LoadPoint1X;
-	m_pSMachineTimer->start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }    
 }
 
@@ -557,40 +557,40 @@ char* cWM3000SCPIFace::mOutChannelCatalog()
 // implementiertes measure model 
 char* cWM3000SCPIFace::mMeasurementRead()
 {
-    m_pSMachineTimer->start(0, ReadStart);
+    m_stateMachineTimer.start(0, ReadStart);
     return 0;
 }
 
 
 char* cWM3000SCPIFace::mMeasurementReadLoadpoint()
 {
-    m_pSMachineTimer->start(0, ReadLPStart);
+    m_stateMachineTimer.start(0, ReadLPStart);
     return 0;
 }
 
 
 void cWM3000SCPIFace::mMeasurementConfigure(char*)
 {
-    m_pSMachineTimer->start(0, ConfigStart);
+    m_stateMachineTimer.start(0, ConfigStart);
 }
 
 
 char* cWM3000SCPIFace::mMeasurementFetch()
 {
-    m_pSMachineTimer->start(0, FetchStart);
+    m_stateMachineTimer.start(0, FetchStart);
     return 0;
 }
 
 
 void cWM3000SCPIFace::mMeasurementInitiate(char*)
 {
-        m_pSMachineTimer->start(0, InitiateStart); // wir gehen auf die statemachine weil wir synch. müssen
+        m_stateMachineTimer.start(0, InitiateStart); // wir gehen auf die statemachine weil wir synch. müssen
 }
 
 
 char* cWM3000SCPIFace::mMeasurement()
 { 	
-    m_pSMachineTimer->start(0, MeasStart); // wir gehen auf die statemachine weil wir synch. müssen
+    m_stateMachineTimer.start(0, MeasStart); // wir gehen auf die statemachine weil wir synch. müssen
     return 0;
 }
 
@@ -1653,7 +1653,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
             m_cmdTimer.start(0, cmd);
         }
         else
-            m_pSMachineTimer->start(0, ExecCmdFinished); // kommando fertig
+            m_stateMachineTimer.start(0, ExecCmdFinished); // kommando fertig
 
         break;
     }
@@ -1669,9 +1669,9 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     }
 
     if ( m_bCmdError ) // ist ein fehler aufgetreten ?
-        m_pSMachineTimer->start(0, ExecCmdFinished); // dann ->kommando fertig
+        m_stateMachineTimer.start(0, ExecCmdFinished); // dann ->kommando fertig
     else
-    m_pSMachineTimer->start(0, ExecCmdPart); // wir bearbeiten das kommando weiter
+    m_stateMachineTimer.start(0, ExecCmdPart); // wir bearbeiten das kommando weiter
 
     break;
 
@@ -1701,13 +1701,13 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     case EN61850SynclostCountFinished:
 	s = QString("%1").arg(m_EN61850Info.SyncLostCount);
 	answ = sAlloc(s);
-	m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
 	break;
 	
     case EN61850ErrorFinished:
 	s = QString("%1").arg(m_EN61850Info.ETHErrors);
 	answ = sAlloc(s);
-	m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
 	break;
 	
     case EN61850DataCountFinished:
@@ -1716,7 +1716,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
 	    n = m_EN61850Info.ByteCount[0] * 4294967296.0 + m_EN61850Info.ByteCount[1];
 	    s = QString("%1").arg(n);
 	    answ = sAlloc(s);
-	    m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
 	    break;
 	}
 	
@@ -1727,7 +1727,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
 	else
 	{
 	    AddEventError(CommandProtected);
-	    m_pSMachineTimer->start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
 	}
     
     case MeasConfiguration:
@@ -1778,7 +1778,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
             .arg(mActValues.AmplErrorANSI);
         s += QString(";%1;%2").arg(mActValues.AngleError).arg(mActValues.RCF);
         answ = sAlloc(s);
-        m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
     }
 	
@@ -1790,23 +1790,23 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     case ReadLPRead:	
     s = QString("%1,%2").arg(mActValues.LoadPointX).arg(mActValues.LoadPoint1X);
 	answ = sAlloc(s);
-	m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
 	break;	 
 	
     case ConfigFinished:	
     case InitiateFinished:	
-	m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
 	break;	
 	
     case ReadRead:
-	m_pSMachineTimer->start(0, FetchStart);
+    m_stateMachineTimer.start(0, FetchStart);
 	break;
 	
     case ifSelftestStart:
 	if ( !isAuthorized())
 	{
 	    AddEventError(CommandProtected); // wir dürfen nicht !!!
-	    m_pSMachineTimer->start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
 	}
 	else
 	{
@@ -1820,14 +1820,14 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     case ifSelftestFinished:
     s = QString("+%1").arg(SelftestResult);
 	answ = sAlloc(s);
-	m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
 	break;
 
     case ifChannelNOffsetStart:
     if ( !isAuthorized())
     {
         AddEventError(CommandProtected); // wir dürfen nicht !!!
-        m_pSMachineTimer->start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
     }
     else
     {
@@ -1841,14 +1841,14 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     case ifChannelNOffsetFinished:
     s = QString("%1").arg(OffsetResult); // wir benutzen das selftest resultat auch für hier
     answ = sAlloc(s);
-    m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
     break;
 
     case ifChannelXOffsetStart:
     if ( !isAuthorized())
     {
         AddEventError(CommandProtected); // wir dürfen nicht !!!
-        m_pSMachineTimer->start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
     }
     else
     {
@@ -1862,7 +1862,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     case ifChannelXOffsetFinished:
     s = QString("%1").arg(OffsetResult); // wir benutzen das selftest resultat auch für hier
     answ = sAlloc(s);
-    m_pSMachineTimer->start(0, ExecCmdPartFinished); // teil kommando fertig
+    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
     break;
 
     }
@@ -1936,7 +1936,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
 	      else
 	      {
               AddEventError(CommandProtected);
-              m_pSMachineTimer->start(0, ExecCmdFinished);
+              m_stateMachineTimer.start(0, ExecCmdFinished);
 	      }
 	  }
 	
@@ -1987,7 +1987,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetConfCompOffskX:
 	case SetConfOperMode: 
     case SetConfOperSignal:
-	    m_pSMachineTimer->start(0, ExecCmdPartFinished);
+        m_stateMachineTimer.start(0, ExecCmdPartFinished);
 	default: 
 	    break;
 	}
@@ -2135,7 +2135,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
 	case GetConfOperMode:
     case GetConfOperSignalCatalog:
     case GetConfOperSignal:
-	    m_pSMachineTimer->start(0, ExecCmdPartFinished);	    
+        m_stateMachineTimer.start(0, ExecCmdPartFinished);
 	default:	
 	    break;
 	}
@@ -2146,7 +2146,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
     else
     {
 	AddEventError(ParameterNotAllowed);
-	m_pSMachineTimer->start(0, ExecCmdFinished);
+    m_stateMachineTimer.start(0, ExecCmdFinished);
     }	
     
     return 0;
