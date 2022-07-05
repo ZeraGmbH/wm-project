@@ -1659,7 +1659,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
         cmd = CmdInProgress.section(';',CmdPart,CmdPart); // ein teil kommando ... falls es mehrere sind
 	    if ( cmd.length() > 0 ) // wir haben ein kommando
         {
-            m_pCmdTimer->start(0, cmd);
+            m_cmdTimer.start(0, cmd);
         }
 	    else
             m_pSMachineTimer->start(0, ExecCmdFinished); // kommando fertig

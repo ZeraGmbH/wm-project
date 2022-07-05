@@ -66,7 +66,7 @@ protected slots:
 
 protected:
     char* answ;
-    cCmdTimer* m_pCmdTimer;
+    cCmdTimer m_cmdTimer;
     cSMTimer* m_pSMachineTimer;
     bool isAuthorized();
     cNode* m_pCommands;
