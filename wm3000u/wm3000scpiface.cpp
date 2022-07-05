@@ -36,9 +36,9 @@ char* cWM3000SCPIFace::GetDeviceIdentification()
 {
     QString s;
     if (m_pVersion)
-	s = "ZERA Gmbh," + m_pVersion->DeviceName + ","+m_pVersion->PCBSerialNr + "," +		m_pVersion->DeviceVersion;
+        s = "ZERA Gmbh," + m_pVersion->DeviceName + ","+m_pVersion->PCBSerialNr + "," +		m_pVersion->DeviceVersion;
     else
-	s = "UnKnown";
+        s = "UnKnown";
 
     return sAlloc(s);
 }
@@ -59,7 +59,7 @@ void cWM3000SCPIFace::ResetDevice()
     m_ConfDataTarget.m_sRangeXVorgabe = "480V";
     m_ConfDataTarget.m_sRangeETVorgabe = "15.0V";
     m_ConfDataTarget.m_bSimulation = false; // reset schaltet auf normalen messbetrieb
-    m_ConfDataTarget.m_bRunning = true; // läuft 
+    m_ConfDataTarget.m_bRunning = true; // läuft
     
     emit SendRange(&m_ConfDataTarget); // bereich automatik einstellen
     
@@ -95,24 +95,24 @@ void cWM3000SCPIFace::ReceiveConfiguration(cConfData* cd)
 
 
 // system modell routinen
- 
+
 char* cWM3000SCPIFace::mGetScpiErrorAll()
 {
     
     int n = m_ErrEventQueue.size();
     if (n == 0)
-	return mGetScpiError();
+        return mGetScpiError();
     else
     {
-	QString rm;
-	rm = mGetScpiError();
-	if (n > 1)
-	    for (int i = 1;i < n; i++)
-	    {
-            rm += ";";
-            rm += mGetScpiError();
-	    }
-	return sAlloc(rm);
+        QString rm;
+        rm = mGetScpiError();
+        if (n > 1)
+            for (int i = 1;i < n; i++)
+            {
+                rm += ";";
+                rm += mGetScpiError();
+            }
+        return sAlloc(rm);
     }
 }
 
@@ -129,15 +129,15 @@ char* cWM3000SCPIFace::mGetScpiError()
 {
     QString rm;
     if ( m_ErrEventQueue.empty() )
-	rm = QString("+%1,%2").arg(SCPIError[0].ErrNum).arg(SCPIError[0].ErrTxt);
+        rm = QString("+%1,%2").arg(SCPIError[0].ErrNum).arg(SCPIError[0].ErrTxt);
     else
     {
-	int e = m_ErrEventQueue.first(); // fifo
-	m_ErrEventQueue.pop_front(); //  eintrag löschen wenn gelesen
-	if ( m_ErrEventQueue.empty() )
-	    ResetSTB(STBeeQueueNotEmpty);
-	rm = QString("%1,%2").arg(SCPIError[e].ErrNum).arg(SCPIError[e].ErrTxt);
-	
+        int e = m_ErrEventQueue.first(); // fifo
+        m_ErrEventQueue.pop_front(); //  eintrag löschen wenn gelesen
+        if ( m_ErrEventQueue.empty() )
+            ResetSTB(STBeeQueueNotEmpty);
+        rm = QString("%1,%2").arg(SCPIError[e].ErrNum).arg(SCPIError[e].ErrTxt);
+
     }
     
     return sAlloc(rm);
@@ -148,10 +148,10 @@ char* cWM3000SCPIFace::mGetSerialNumber()
 {
     QString s;
     if (m_pVersion)
-	s = m_pVersion->PCBSerialNr;
+        s = m_pVersion->PCBSerialNr;
     else
-	s = "UnKnown";
-	
+        s = "UnKnown";
+
     return sAlloc(s);
 }
 
@@ -160,9 +160,9 @@ char* cWM3000SCPIFace::mGetDSPVersion()
 {
     QString s;
     if (m_pVersion)
-	s = m_pVersion->DSPVersion;
+        s = m_pVersion->DSPVersion;
     else
-	s = "UnKnown";
+        s = "UnKnown";
 
     return sAlloc(s);
 }
@@ -172,19 +172,19 @@ char* cWM3000SCPIFace::mGetPCBVersion()
 {
     QString s;
     if (m_pVersion)
-	s = m_pVersion->PCBVersion;
+        s = m_pVersion->PCBVersion;
     else
-	s = "UnKnown";
+        s = "UnKnown";
 
     return sAlloc(s);
 }
- 
+
 
 char* cWM3000SCPIFace::mGetDeviceVersion()
 {
     return sAlloc(m_pVersion->DeviceVersion);
 }
-  
+
 // status modell routinen
 void cWM3000SCPIFace::mSetStatusEN61850Clear(char*)
 {
@@ -204,12 +204,12 @@ char* cWM3000SCPIFace::mGetStatusEN61850Error()
     m_stateMachineTimer.start(0, EN61850ErrorStart);
     return 0;
 }
- 
+
 
 char* cWM3000SCPIFace::mGetStatusEN61850DataCount()
 {
-     m_stateMachineTimer.start(0, EN61850DataCountStart);
-     return 0;
+    m_stateMachineTimer.start(0, EN61850DataCountStart);
+    return 0;
 }
 
 
@@ -217,12 +217,12 @@ void cWM3000SCPIFace::ReceiveEN61850Status(cEN61850Info* eni)
 {
     if (m_nWait4What == wait4ENStatus) // wir machen nur was draus wenn wir drauf warten
     {
-	m_nWait4What = wait4Nothing;
-	m_EN61850Info = *eni; // wir haben die angeforderte info
-    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+        m_nWait4What = wait4Nothing;
+        m_EN61850Info = *eni; // wir haben die angeforderte info
+        m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }
 }    
-    
+
 
 void cWM3000SCPIFace::ReceiveSelftestResult(int r) 
 {
@@ -245,33 +245,33 @@ void cWM3000SCPIFace::ReceiveNXOffset(double offs)
     }
 }
 
-    
+
 void cWM3000SCPIFace::CmdExecution(QString& s)
 {
-    char* lcmd = (char*) malloc (s.length()+1); 
+    char* lcmd = (char*) malloc (s.length()+1);
     strcpy(lcmd, s.latin1());
     answ = 0;
     bool ok = m_pCmdInterpreter->CmdExecute(m_pCommands, this, lcmd, answ);
-    free(lcmd);    
-    if ( !ok) // ok bedeutet kommando interpreter hat kommando dekodiert  
+    free(lcmd);
+    if ( !ok) // ok bedeutet kommando interpreter hat kommando dekodiert
     {
-	AddEventError(CommandError); // wenn nicht ok fehler eintragen
-    m_stateMachineTimer.start(0, ExecCmdFinished); // kommen wir von hier zurück zur statemachine und beenden die bearbeitung
+        AddEventError(CommandError); // wenn nicht ok fehler eintragen
+        m_stateMachineTimer.start(0, ExecCmdFinished); // kommen wir von hier zurück zur statemachine und beenden die bearbeitung
     }
 }
- 
+
 
 void cWM3000SCPIFace::SetRangeListSlot( cWMRangeList& nx,  cWMRangeList& evt)
 {
     CWMRange *Range;
     Q3PtrListIterator<CWMRange> it(nx);
-   
-   m_sNXItemList.clear(); // liste erst mal leeren
-   for(Range=it.toFirst();Range;Range=++it) m_sNXItemList.append(Range->Name());
-      
-   it=evt;
-   m_sEVTItemList.clear(); // liste erst mal leeren   
-   for(Range=it.toFirst();Range;Range=++it) m_sEVTItemList.append(Range->Name());
+
+    m_sNXItemList.clear(); // liste erst mal leeren
+    for(Range=it.toFirst();Range;Range=++it) m_sNXItemList.append(Range->Name());
+
+    it=evt;
+    m_sEVTItemList.clear(); // liste erst mal leeren
+    for(Range=it.toFirst();Range;Range=++it) m_sEVTItemList.append(Range->Name());
 }
 
 
@@ -279,9 +279,9 @@ void cWM3000SCPIFace::ReceiveRangeAutomaticRdy()
 {
     if (m_nWait4What == wait4RangeAutomatic) // wir machen nur was draus wenn wir drauf warten
     {
-	m_nWait4What = wait4Nothing;
-    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
-    }    
+        m_nWait4What = wait4Nothing;
+        m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+    }
 }
 
 
@@ -289,10 +289,10 @@ void cWM3000SCPIFace::ReceiveActValues(cwmActValues* av)
 {
     if (m_nWait4What == wait4MeasurementData) // wir machen nur was draus wenn wir drauf warten
     {
-	m_nWait4What = wait4Nothing;
-	mActValues = *av;
-    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
-    }    
+        m_nWait4What = wait4Nothing;
+        mActValues = *av;
+        m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+    }
 }
 
 
@@ -300,13 +300,13 @@ void cWM3000SCPIFace::ReceiveLPValue(cwmActValues* av)
 {
     if (m_nWait4What == wait4LoadpointData) // wir machen nur was draus wenn wir drauf warten
     {
-	m_nWait4What = wait4Nothing;
-	mActValues.LoadPoint = av->LoadPoint;
-	mActValues.LoadPoint1 = av->LoadPoint1;
-    mActValues.LoadPointX = av->LoadPointX;
-    mActValues.LoadPoint1X = av->LoadPoint1X;
-    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
-    }    
+        m_nWait4What = wait4Nothing;
+        mActValues.LoadPoint = av->LoadPoint;
+        mActValues.LoadPoint1 = av->LoadPoint1;
+        mActValues.LoadPointX = av->LoadPointX;
+        mActValues.LoadPoint1X = av->LoadPoint1X;
+        m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+    }
 }
 
 
@@ -319,10 +319,10 @@ void cWM3000SCPIFace::mSetStatusQuestionablePTrans(char* s)
 {
     ushort us;
     if (GetParameter(&s, us,true))
-	m_pQuestionableStat->SetPTransition(us);        
+        m_pQuestionableStat->SetPTransition(us);
 }
-    
- 
+
+
 char* cWM3000SCPIFace::mGetStatusQuestionablePTrans()
 {
     QString rs;
@@ -335,10 +335,10 @@ void cWM3000SCPIFace::mSetStatusQuestionableNTrans(char* s)
 {
     ushort us;
     if (GetParameter(&s, us,true))
-	m_pQuestionableStat->SetNTransition(us);        
+        m_pQuestionableStat->SetNTransition(us);
 }
-    
- 
+
+
 char* cWM3000SCPIFace::mGetStatusQuestionableNTrans()
 {
     QString rs;
@@ -351,10 +351,10 @@ void cWM3000SCPIFace::mSetStatusQuestionableEnable(char* s)
 {
     ushort us;
     if (GetParameter(&s, us,true))
-	m_pQuestionableStat->SetEnable(us);    
+        m_pQuestionableStat->SetEnable(us);
 }
-    
- 
+
+
 char* cWM3000SCPIFace::mGetStatusQuestionableEnable()
 {
     QString rs;
@@ -367,7 +367,7 @@ void cWM3000SCPIFace::mSetStatusQuestionableCondition(char* s)
 {
     ushort ns;
     if (GetParameter(&s, ns,true))
-	m_pQuestionableStat->SetCondition(ns);
+        m_pQuestionableStat->SetCondition(ns);
 }
 
 
@@ -386,14 +386,14 @@ char* cWM3000SCPIFace::mGetStatusQuestionableEvent()
     return sAlloc(rs);
 }
 
- 
+
 void cWM3000SCPIFace::mSetStatusOperationPTrans(char* s)
 {
     ushort us;
     if (GetParameter(&s, us,true))
-	m_pOperationStat->SetPTransition(us);
+        m_pOperationStat->SetPTransition(us);
 }
- 
+
 
 char* cWM3000SCPIFace::mGetStatusOperationPTrans()
 {
@@ -407,9 +407,9 @@ void cWM3000SCPIFace::mSetStatusOperationNTrans(char* s)
 {
     ushort us;
     if (GetParameter(&s, us,true))
-	m_pOperationStat->SetNTransition(us);
+        m_pOperationStat->SetNTransition(us);
 }
- 
+
 
 char* cWM3000SCPIFace::mGetStatusOperationNTrans()
 {
@@ -423,9 +423,9 @@ void cWM3000SCPIFace::mSetStatusOperationEnable(char* s)
 {
     ushort us;
     if (GetParameter(&s, us,true))
-	m_pOperationStat->SetEnable(us);
+        m_pOperationStat->SetEnable(us);
 }
- 
+
 
 char* cWM3000SCPIFace::mGetStatusOperationEnable()
 {
@@ -439,7 +439,7 @@ void cWM3000SCPIFace::mSetStatusOperationCondition(char* s)
 {
     ushort us;
     if (GetParameter(&s, us,true))
-	m_pOperationStat->SetCondition(us);
+        m_pOperationStat->SetCondition(us);
 }
 
 
@@ -463,7 +463,7 @@ char* cWM3000SCPIFace::mGetStatusStandard()
 {
     return  GetDeviceSTB();
 }
-			  
+
 // sense model routinen    
 char* cWM3000SCPIFace::mOutRangeCatalog()
 {
@@ -482,7 +482,7 @@ char* cWM3000SCPIFace::mOutRangeCatalog()
     }
     
     for (i = 0; i < sl->count()-1; i++)
-	s = s + (*sl)[i] +";";
+        s = s + (*sl)[i] +";";
     
     s += (*sl)[i];
     return sAlloc(s);
@@ -493,37 +493,37 @@ void cWM3000SCPIFace::mSetRange(char* s)
 {
     if ( isAuthorized())
     {
-	QString range;
-	QString* nrange;
-	QString dedicatedChannel = m_pCmdInterpreter->dedicatedList.first();
-	QStringList* sl;
-	int n = mMeasChannelList.findIndex( dedicatedChannel);
-    
-	switch (n)
-	{
-	case 0: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeNVorgabe;break;
-	case 1: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeXVorgabe;break;
-	case 2: sl = &m_sEVTItemList; nrange = &m_ConfDataTarget.m_sRangeETVorgabe;break;
-	default: break;
-	}
-    
-	if (GetParameter(&s, range, true))
-	{
-	    if ( sl->contains(range) )
-	    {
-		*nrange = range;
-		emit SendRange(&m_ConfDataTarget);
-	    }
-	    else
-		AddEventError(ParameterNotAllowed);
-	 }
-	else
-	    AddEventError(InvalidSeparator);
+        QString range;
+        QString* nrange;
+        QString dedicatedChannel = m_pCmdInterpreter->dedicatedList.first();
+        QStringList* sl;
+        int n = mMeasChannelList.findIndex( dedicatedChannel);
+
+        switch (n)
+        {
+        case 0: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeNVorgabe;break;
+        case 1: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeXVorgabe;break;
+        case 2: sl = &m_sEVTItemList; nrange = &m_ConfDataTarget.m_sRangeETVorgabe;break;
+        default: break;
+        }
+
+        if (GetParameter(&s, range, true))
+        {
+            if ( sl->contains(range) )
+            {
+                *nrange = range;
+                emit SendRange(&m_ConfDataTarget);
+            }
+            else
+                AddEventError(ParameterNotAllowed);
+        }
+        else
+            AddEventError(InvalidSeparator);
     }
     else
-	AddEventError(CommandProtected);
+        AddEventError(CommandProtected);
 }
- 
+
 
 char* cWM3000SCPIFace::mGetRange()
 {
@@ -542,14 +542,14 @@ char* cWM3000SCPIFace::mGetRange()
     
     return sAlloc(s);
 }
-    
+
 
 char* cWM3000SCPIFace::mOutChannelCatalog()
 {
     int i;
     QString s = "";
     for (i = 0; i < mMeasChannelList.size()-1; i++)
-	s = s+ mMeasChannelList[i] + ";";
+        s = s+ mMeasChannelList[i] + ";";
     s = s+ mMeasChannelList[i];
     return sAlloc(s);
 }
@@ -584,7 +584,7 @@ char* cWM3000SCPIFace::mMeasurementFetch()
 
 void cWM3000SCPIFace::mMeasurementInitiate(char*)
 {
-        m_stateMachineTimer.start(0, InitiateStart); // wir gehen auf die statemachine weil wir synch. müssen
+    m_stateMachineTimer.start(0, InitiateStart); // wir gehen auf die statemachine weil wir synch. müssen
 }
 
 
@@ -594,7 +594,7 @@ char* cWM3000SCPIFace::mMeasurement()
     return 0;
 }
 
-     
+
 // implementiertes configuration model 
 /*
 char* cWM3000SCPIFace::mGetConfLogFileSize()
@@ -850,7 +850,7 @@ char* cWM3000SCPIFace::mGetConfRatioEvt()
 
 void cWM3000SCPIFace::mSetConfRatioEvt(char* s)
 {
-    QString sprim, ssek; 
+    QString sprim, ssek;
     if ( GetTransformerRatio(&s, sprim, ssek,true) )
     {
         m_ConfDataTarget.m_ETPrimary = sprim;
@@ -863,14 +863,14 @@ char* cWM3000SCPIFace::mGetConfRatioChx()
 {
     QString rs;
 
-    rs = QString("%1:%2").arg(m_ConfDataActual.m_XPrimary).arg(m_ConfDataActual.m_XSecondary); 
+    rs = QString("%1:%2").arg(m_ConfDataActual.m_XPrimary).arg(m_ConfDataActual.m_XSecondary);
     return sAlloc(rs);
 }
 
 
 void cWM3000SCPIFace::mSetConfRatioChx(char* s)
 {
-    QString sprim, ssek; 
+    QString sprim, ssek;
 
     if ( GetTransformerRatio(&s, sprim, ssek,true) )
     {
@@ -891,7 +891,7 @@ char* cWM3000SCPIFace::mGetConfRatioChn()
 
 void cWM3000SCPIFace::mSetConfRatioChn(char* s)
 {
-    QString sprim, ssek; 
+    QString sprim, ssek;
 
     if ( GetTransformerRatio(&s, sprim, ssek, true) )
     {
@@ -947,10 +947,10 @@ void cWM3000SCPIFace::mSetConfSyncPeriod(char* s)
 
 char* cWM3000SCPIFace::mGetConfSyncSource()
 {
-   QString rs;
+    QString rs;
 
-   rs = QString("%1,%2").arg(m_ConfDataActual.m_nSyncSource).arg(SSourceName[m_ConfDataActual.m_nSyncSource]);
-   return sAlloc(rs);
+    rs = QString("%1,%2").arg(m_ConfDataActual.m_nSyncSource).arg(SSourceName[m_ConfDataActual.m_nSyncSource]);
+    return sAlloc(rs);
 }
 
 
@@ -961,7 +961,7 @@ void cWM3000SCPIFace::mSetConfSyncSource(char* s)
     if ( SearchEntry(&s, SSourceName, MaxSSource, ss, true) )
     {
         m_ConfDataTarget.m_nSyncSource = ss;
-    }	
+    }
 }
 
 
@@ -999,7 +999,7 @@ void cWM3000SCPIFace::mSetConfMeasMPeriod(char* s)
     ushort us;
 
     if (GetParameter(&s, us, 1, 49, 10, true)) // we accept max of 49 otherwise set stb in case of err
-    m_ConfDataTarget.m_nMeasPeriod = us; // but send the value with apply
+        m_ConfDataTarget.m_nMeasPeriod = us; // but send the value with apply
 
     // when conf:apply we test if srate, signal frequency, measperiods, firstasdu and lastasdu fit
 
@@ -1042,10 +1042,10 @@ void cWM3000SCPIFace::mSetConfMeasSRate(char* s)
 
 char* cWM3000SCPIFace::mGetConfMeasSFreq()
 {
-     QString rs;
+    QString rs;
 
-     rs = QString("%1Hz").arg(FreqName[m_ConfDataActual.m_nSFreq]);
-     return sAlloc(rs);
+    rs = QString("%1Hz").arg(FreqName[m_ConfDataActual.m_nSFreq]);
+    return sAlloc(rs);
 }
 
 
@@ -1059,7 +1059,7 @@ void cWM3000SCPIFace::mSetConfMeasSFreq(char* s)
         m_ConfDataTarget.m_fSFreq = SFrequency[fc];
     }
 }
- 
+
 
 char* cWM3000SCPIFace::mGetConfCompPhcTime()
 {
@@ -1120,7 +1120,7 @@ void cWM3000SCPIFace::mSetConfCompOecFile(char* s)
 char* cWM3000SCPIFace::mGetConfCompOecOn()
 {
     QString rs;
- 
+
     if (m_ConfDataActual.m_bOECorrection)
         rs = "1";
     else
@@ -1160,7 +1160,7 @@ void cWM3000SCPIFace::mSetConfCompOecOn(char* s)
 {
     ushort us;
 
-    if ( GetParameter(&s, us, 0, 1, 10, true) )	    
+    if ( GetParameter(&s, us, 0, 1, 10, true) )
     {
         m_ConfDataTarget.m_bOECorrection = ( us ==1 );
     }
@@ -1197,7 +1197,7 @@ char* cWM3000SCPIFace::mGetConfOperModeCatalog()
     if (!g_WMDevice->isConventional())
         for (int i = Un_UxAbs+1; i < maxMMode; i++)
             rs = rs + ";" + QString("%1,%2").arg(i).arg(MModeName[i]);
-     
+
     return sAlloc(rs);
 }
 
@@ -1239,7 +1239,7 @@ char *cWM3000SCPIFace::mGetConfOperSignalCatalog()
     QString rs;
 
     rs = QString("%1,%2;%3,%4").arg(AC).arg(SModeName[AC])
-                               .arg(DC).arg(SModeName[DC]);
+            .arg(DC).arg(SModeName[DC]);
     return sAlloc(rs);
 }
 
@@ -1259,7 +1259,7 @@ void cWM3000SCPIFace::mSetConfOperSignal(char *s)
         {
             m_ConfDataTarget.m_bDCmeasurement = false;
             if (m != AC)
-               AddEventError(ParameterNotAllowed);
+                AddEventError(ParameterNotAllowed);
             return;
         }
     }
@@ -1346,7 +1346,7 @@ bool cWM3000SCPIFace::SearchEntry(char** s, double* pdval, int max, int& n, bool
     double d;
     d = inp.toDouble(&ok); // erst mal testen ob es der index ist
     
-    if ( !ok ) 
+    if ( !ok )
     {
         AddEventError(NumericDataError);
         return ok;
@@ -1354,10 +1354,10 @@ bool cWM3000SCPIFace::SearchEntry(char** s, double* pdval, int max, int& n, bool
     
     int i;
     for ( i = 0; i < max; i++, pdval++)
-	if (fabs(d - *pdval) < 1e-4)
-	    break;
+        if (fabs(d - *pdval) < 1e-4)
+            break;
     
-    if (i == max) 
+    if (i == max)
     {
         AddEventError(ParameterNotAllowed); // wir haben den wert nicht gefunden
         return false;
@@ -1386,7 +1386,7 @@ bool cWM3000SCPIFace::SearchEntry(char** s, int* pival, int max, int& n, bool ch
     int id;
     id = inp.toInt(&ok); // erst mal testen ob es der index ist
     
-    if ( !ok ) 
+    if ( !ok )
     {
         AddEventError(NumericDataError);
         return ok;
@@ -1394,10 +1394,10 @@ bool cWM3000SCPIFace::SearchEntry(char** s, int* pival, int max, int& n, bool ch
     
     int i;
     for ( i = 0; i < max; i++, pival++)
-	if (id == *pival)
-	    break;
+        if (id == *pival)
+            break;
     
-    if (i == max) 
+    if (i == max)
     {
         AddEventError(ParameterNotAllowed); // wir haben den wert nicht gefunden
         return false;
@@ -1412,7 +1412,7 @@ bool cWM3000SCPIFace::SearchFile(char* s, bool chkEnd)
 {
     QString inp =  m_pParser->GetKeyword(&s); // wir holen den Input
     if (inp.isEmpty()) // wenn nicht input -> file = "" -> close file
-	return true;
+        return true;
     if (chkEnd)
     {
         QString par = m_pParser->GetKeyword(&s);
@@ -1434,17 +1434,17 @@ bool cWM3000SCPIFace::SearchFile(char* s, bool chkEnd)
 
 bool cWM3000SCPIFace::GetParameter(char** s, ushort& us, bool chkEnd) // zeiger auf input,  der gefundene wert
 {
-    bool ok; 
+    bool ok;
     QString par = m_pParser->GetKeyword(s); // holt den parameter aus dem kommando
     ushort nPar = par.toUShort(&ok);
-    if ( ok)  
+    if ( ok)
     {
         us = nPar;
         if (chkEnd)
         {
             par = m_pParser->GetKeyword(s);
             if ( par.isEmpty() )
-            return ok;
+                return ok;
             else
             {
                 AddEventError(InvalidSeparator); // macht agilent auch so
@@ -1454,7 +1454,7 @@ bool cWM3000SCPIFace::GetParameter(char** s, ushort& us, bool chkEnd) // zeiger 
         else
             return ok;
     }
-    else 
+    else
         AddEventError(NumericDataError);
 
     return ok;
@@ -1463,10 +1463,10 @@ bool cWM3000SCPIFace::GetParameter(char** s, ushort& us, bool chkEnd) // zeiger 
 
 bool cWM3000SCPIFace::GetParameter(char** s, ushort& us, int min, int max, int base, bool chkEnd) // zeiger auf input,  der gefundene wert
 {
-    bool ok; 
+    bool ok;
     QString par = m_pParser->GetKeyword(s); // holt den parameter aus dem kommando
     ushort nPar = par.toUShort(&ok,base);
-    if ( ok)  
+    if ( ok)
     {
         us = nPar;
         if (chkEnd)
@@ -1487,7 +1487,7 @@ bool cWM3000SCPIFace::GetParameter(char** s, ushort& us, int min, int max, int b
 
         return ok;
     }
-    else 
+    else
         AddEventError(NumericDataError);
 
     return ok;
@@ -1495,10 +1495,10 @@ bool cWM3000SCPIFace::GetParameter(char** s, ushort& us, int min, int max, int b
 
 bool cWM3000SCPIFace::GetParameter(char** s, double& d, double min, double max, bool chkEnd) // zeiger auf input,  der gefundene wert
 {
-    bool ok; 
+    bool ok;
     QString par = m_pParser->GetKeyword(s); // holt den parameter aus dem kommando
     double Par = par.toDouble(&ok);
-    if ( ok)  
+    if ( ok)
     {
         if (chkEnd)
         {
@@ -1519,8 +1519,8 @@ bool cWM3000SCPIFace::GetParameter(char** s, double& d, double min, double max, 
         d = Par;
         return ok;
     }
-    else 
-	AddEventError(NumericDataError);
+    else
+        AddEventError(NumericDataError);
     
     return ok;
 }   
@@ -1529,7 +1529,7 @@ bool cWM3000SCPIFace::GetParameter(char** s, double& d, double min, double max, 
 bool cWM3000SCPIFace::GetParameter(char** s, QString& par,bool chkEnd) // zeiger auf input, der gefundene string, test auf blank?
 {
     par = m_pParser->GetKeyword(s); // holt den parameter aus dem kommando
-    if (chkEnd) 
+    if (chkEnd)
     {
         if (!(m_pParser->GetKeyword(s)).isEmpty())
         {
@@ -1544,7 +1544,7 @@ bool cWM3000SCPIFace::GetParameter(char** s, QString& par,bool chkEnd) // zeiger
 
 bool cWM3000SCPIFace::GetTransformerRatio(char** s, QString& ps, QString& ss, bool chkEnd)
 {
-    bool ok = true ; 
+    bool ok = true ;
     int i;
     QString par[2];
     WmParameter ep[2];
@@ -1552,7 +1552,7 @@ bool cWM3000SCPIFace::GetTransformerRatio(char** s, QString& ps, QString& ss, bo
     QString ws = m_pParser->SetWhiteSpace(" :"); // wir definieren whitespace um
     
     for ( i = 0; i < 2; i++)
-	par[i] = m_pParser->GetKeyword(s); //  2  parameter lesen
+        par[i] = m_pParser->GetKeyword(s); //  2  parameter lesen
     
     m_pParser->SetWhiteSpace(ws); // jetzt wieder zurück
     
@@ -1560,8 +1560,8 @@ bool cWM3000SCPIFace::GetTransformerRatio(char** s, QString& ps, QString& ss, bo
     {
         AddEventError(InvalidSeparator);
         return false;
-    }	
-	
+    }
+
     if ( par[0].isEmpty() || par[1].isEmpty() )
     {
         AddEventError(MissingParameter);
@@ -1632,17 +1632,17 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
 
     else
 
-    if (entryState != 	ExecCmdContinue)
-        EXS = entryState; // wenns dann nicht continue ist gehen wir  dahin, wo die bearbeiten routine uns hinhaben will
-        
-    switch (EXS)    
+        if (entryState != 	ExecCmdContinue)
+            EXS = entryState; // wenns dann nicht continue ist gehen wir  dahin, wo die bearbeiten routine uns hinhaben will
+
+    switch (EXS)
     {
-	
+
     case ExecCmdStart:
-    CmdPart = 0;
-    m_sAnswer = "";
-    m_bCmdError = false;
-    EXS++; // wir gehen direkt zum nächsten state
+        CmdPart = 0;
+        m_sAnswer = "";
+        m_bCmdError = false;
+        EXS++; // wir gehen direkt zum nächsten state
 
     case ExecCmdPart:
     {
@@ -1659,21 +1659,21 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     }
 
     case ExecCmdPartFinished:
-    CmdPart++; // nächstes teilkommando
+        CmdPart++; // nächstes teilkommando
 
-    if (answ) { // wenn wir eine antwort des teilkommandos haben, kleben wir sie an die gesamt antwort
-        if (m_sAnswer.length() > 0)
-        m_sAnswer += ";";
-        m_sAnswer += answ;
-        free(answ);
-    }
+        if (answ) { // wenn wir eine antwort des teilkommandos haben, kleben wir sie an die gesamt antwort
+            if (m_sAnswer.length() > 0)
+                m_sAnswer += ";";
+            m_sAnswer += answ;
+            free(answ);
+        }
 
-    if ( m_bCmdError ) // ist ein fehler aufgetreten ?
-        m_stateMachineTimer.start(0, ExecCmdFinished); // dann ->kommando fertig
-    else
-    m_stateMachineTimer.start(0, ExecCmdPart); // wir bearbeiten das kommando weiter
+        if ( m_bCmdError ) // ist ein fehler aufgetreten ?
+            m_stateMachineTimer.start(0, ExecCmdFinished); // dann ->kommando fertig
+        else
+            m_stateMachineTimer.start(0, ExecCmdPart); // wir bearbeiten das kommando weiter
 
-    break;
+        break;
 
     case ExecCmdFinished:
     {
@@ -1683,76 +1683,76 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
             AddEventError(ParameterNotAllowed);
         }
         if (m_sAnswer.length() > 0)
-        emit SendAnswer(m_sAnswer);
+            emit SendAnswer(m_sAnswer);
 
         EXS = ExecCmdIdle;
         break;
     }
-	
+
     case EN61850SynclostCountStart:
     case EN61850ErrorStart:
     case EN61850DataCountStart:
-	emit EN61850StatusRequest(); // für jedes der 3 kommandos erst mal aktuelle info anfordern
-	m_nWait4What = wait4ENStatus;
-	EXS++;
-	break;
-	
-	
+        emit EN61850StatusRequest(); // für jedes der 3 kommandos erst mal aktuelle info anfordern
+        m_nWait4What = wait4ENStatus;
+        EXS++;
+        break;
+
+
     case EN61850SynclostCountFinished:
-	s = QString("%1").arg(m_EN61850Info.SyncLostCount);
-	answ = sAlloc(s);
-    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-	break;
-	
-    case EN61850ErrorFinished:
-	s = QString("%1").arg(m_EN61850Info.ETHErrors);
-	answ = sAlloc(s);
-    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-	break;
-	
-    case EN61850DataCountFinished:
-	{
-	    double n;
-	    n = m_EN61850Info.ByteCount[0] * 4294967296.0 + m_EN61850Info.ByteCount[1];
-	    s = QString("%1").arg(n);
-	    answ = sAlloc(s);
+        s = QString("%1").arg(m_EN61850Info.SyncLostCount);
+        answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-	    break;
-	}
-	
+        break;
+
+    case EN61850ErrorFinished:
+        s = QString("%1").arg(m_EN61850Info.ETHErrors);
+        answ = sAlloc(s);
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
+        break;
+
+    case EN61850DataCountFinished:
+    {
+        double n;
+        n = m_EN61850Info.ByteCount[0] * 4294967296.0 + m_EN61850Info.ByteCount[1];
+        s = QString("%1").arg(n);
+        answ = sAlloc(s);
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
+        break;
+    }
+
     case MeasStart:
     case ConfigStart:
-	if ( isAuthorized())
-	    EXS++; // wenn wir dürfen gehts direkt weiter
-	else
-	{
-	    AddEventError(CommandProtected);
-        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
-	}
-    
+        if ( isAuthorized())
+            EXS++; // wenn wir dürfen gehts direkt weiter
+        else
+        {
+            AddEventError(CommandProtected);
+            m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        }
+
     case MeasConfiguration:
     case ConfigConfiguration:
-	// erst mal defaults setzen
-	emit SetDefaultMeasConfig(); // die messeinrichtung stellt defaults ein
-    
-	m_ConfDataTarget.m_sRangeNVorgabe = "Auto";
-	m_ConfDataTarget.m_sRangeXVorgabe = "Auto";
-	m_ConfDataTarget.m_sRangeETVorgabe = "Auto";
-    
-	emit SendRange(&m_ConfDataTarget); // bereich automatik einstellen
-	m_nWait4What = wait4RangeAutomatic; 
-	EXS++;
-	break;
-	
+        // erst mal defaults setzen
+        emit SetDefaultMeasConfig(); // die messeinrichtung stellt defaults ein
+
+        m_ConfDataTarget.m_sRangeNVorgabe = "Auto";
+        m_ConfDataTarget.m_sRangeXVorgabe = "Auto";
+        m_ConfDataTarget.m_sRangeETVorgabe = "Auto";
+
+        emit SendRange(&m_ConfDataTarget); // bereich automatik einstellen
+        m_nWait4What = wait4RangeAutomatic;
+        EXS++;
+        break;
+
     case MeasInitiate:
     case InitiateStart:
-    case ReadStart:	
-	EXS++;
-	m_nWait4What = wait4MeasurementData;
-	break;
-	
+    case ReadStart:
+        EXS++;
+        m_nWait4What = wait4MeasurementData;
+        break;
+
     case MeasFetch:
-    case FetchStart:	
+    case FetchStart:
     {
         double ampln, amplx;
 
@@ -1767,387 +1767,387 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
             amplx = fabs(mActValues.VekX);
         }
         s = QString("%1;%2;%3;%4;%5;%6;%7;%8;%9")
-            .arg(mActValues.Frequenz)
-            .arg(ampln)
-            .arg(mActValues.PHIN)
-            .arg(amplx)
-            .arg(mActValues.PHIX)
-            .arg(mActValues.LoadPointX)
-            .arg(mActValues.LoadPoint1X)
-            .arg(mActValues.AmplErrorIEC)
-            .arg(mActValues.AmplErrorANSI);
+                .arg(mActValues.Frequenz)
+                .arg(ampln)
+                .arg(mActValues.PHIN)
+                .arg(amplx)
+                .arg(mActValues.PHIX)
+                .arg(mActValues.LoadPointX)
+                .arg(mActValues.LoadPoint1X)
+                .arg(mActValues.AmplErrorIEC)
+                .arg(mActValues.AmplErrorANSI);
         s += QString(";%1;%2").arg(mActValues.AngleError).arg(mActValues.RCF);
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
     }
-	
+
     case ReadLPStart:
-	EXS++;
-	m_nWait4What = wait4LoadpointData;
-	break;
-	
-    case ReadLPRead:	
-    s = QString("%1,%2").arg(mActValues.LoadPointX).arg(mActValues.LoadPoint1X);
-	answ = sAlloc(s);
-    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-	break;	 
-	
-    case ConfigFinished:	
-    case InitiateFinished:	
-    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-	break;	
-	
+        EXS++;
+        m_nWait4What = wait4LoadpointData;
+        break;
+
+    case ReadLPRead:
+        s = QString("%1,%2").arg(mActValues.LoadPointX).arg(mActValues.LoadPoint1X);
+        answ = sAlloc(s);
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
+        break;
+
+    case ConfigFinished:
+    case InitiateFinished:
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
+        break;
+
     case ReadRead:
-    m_stateMachineTimer.start(0, FetchStart);
-	break;
-	
+        m_stateMachineTimer.start(0, FetchStart);
+        break;
+
     case ifSelftestStart:
-	if ( !isAuthorized())
-	{
-	    AddEventError(CommandProtected); // wir dürfen nicht !!!
-        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
-	}
-	else
-	{
-	    emit SelftestRequest(); // selbsttest anstossen
-	    m_nWait4What =  wait4SelftestResult;
-	    EXS++;
-	}
-	
-	break;
-	
+        if ( !isAuthorized())
+        {
+            AddEventError(CommandProtected); // wir dürfen nicht !!!
+            m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        }
+        else
+        {
+            emit SelftestRequest(); // selbsttest anstossen
+            m_nWait4What =  wait4SelftestResult;
+            EXS++;
+        }
+
+        break;
+
     case ifSelftestFinished:
-    s = QString("+%1").arg(SelftestResult);
-	answ = sAlloc(s);
-    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-	break;
+        s = QString("+%1").arg(SelftestResult);
+        answ = sAlloc(s);
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
+        break;
 
     case ifChannelNOffsetStart:
-    if ( !isAuthorized())
-    {
-        AddEventError(CommandProtected); // wir dürfen nicht !!!
-        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
-    }
-    else
-    {
-        emit ChannelNOffsetMeasureRequest(); // selbsttest anstossen
-        m_nWait4What =  wait4Offsetresult;
-        EXS++;
-    }
+        if ( !isAuthorized())
+        {
+            AddEventError(CommandProtected); // wir dürfen nicht !!!
+            m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        }
+        else
+        {
+            emit ChannelNOffsetMeasureRequest(); // selbsttest anstossen
+            m_nWait4What =  wait4Offsetresult;
+            EXS++;
+        }
 
-    break;
-	
+        break;
+
     case ifChannelNOffsetFinished:
-    s = QString("%1").arg(OffsetResult); // wir benutzen das selftest resultat auch für hier
-    answ = sAlloc(s);
-    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-    break;
+        s = QString("%1").arg(OffsetResult); // wir benutzen das selftest resultat auch für hier
+        answ = sAlloc(s);
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
+        break;
 
     case ifChannelXOffsetStart:
-    if ( !isAuthorized())
-    {
-        AddEventError(CommandProtected); // wir dürfen nicht !!!
-        m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
-    }
-    else
-    {
-        emit ChannelXOffsetMeasureRequest(); // selbsttest anstossen
-        m_nWait4What =  wait4Offsetresult;
-        EXS++;
-    }
+        if ( !isAuthorized())
+        {
+            AddEventError(CommandProtected); // wir dürfen nicht !!!
+            m_stateMachineTimer.start(0, ExecCmdFinished); // bei fehlern sind wir direkt fertig
+        }
+        else
+        {
+            emit ChannelXOffsetMeasureRequest(); // selbsttest anstossen
+            m_nWait4What =  wait4Offsetresult;
+            EXS++;
+        }
 
-    break;
+        break;
 
     case ifChannelXOffsetFinished:
-    s = QString("%1").arg(OffsetResult); // wir benutzen das selftest resultat auch für hier
-    answ = sAlloc(s);
-    m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
-    break;
+        s = QString("%1").arg(OffsetResult); // wir benutzen das selftest resultat auch für hier
+        answ = sAlloc(s);
+        m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
+        break;
 
     }
     
-		
+
     if (EXS == ExecCmdIdle)  // wenn wir fertig sind
-	if ( !EXSFifo.empty() )  // und das kommando fifo nicht leer ist
-	{
-	QString cmd;
-	cmd = EXSFifo.first();
-	EXSFifo.pop_front();
-	ReceiveCommand(cmd);
-    }	
+        if ( !EXSFifo.empty() )  // und das kommando fifo nicht leer ist
+        {
+            QString cmd;
+            cmd = EXSFifo.first();
+            EXSFifo.pop_front();
+            ReceiveCommand(cmd);
+        }
 }
 
 
 void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     switch (cmd)
     {
-	case MeasurementInitiate: mMeasurementInitiate(s);break;
-              if ( isAuthorized() )
-	    {
-		  case ResetCmd: DeviceReset(s);break; // *RST
-		  case OperationCompleteCmd: SetDeviceOPC(s);break; // *OPC
-		  case ClearStatusCmd: DeviceClearStatus(s); break; // *CLS
-		  case StdEventStatEnableCmd: SetDeviceESE(s); break; // *ESE
-		  case ServiceRequestEnableCmd: SetDeviceSRE(s); break; // *SRE	
-		      
-		  case SetStatusEN61850Clear: mSetStatusEN61850Clear(s);break;
-		  case SetStatusQuestionablePTrans: mSetStatusQuestionablePTrans(s);break;
-		  case SetStatusQuestionableNTrans: mSetStatusQuestionableNTrans(s);break;
-		  case SetStatusQuestionableEnable: mSetStatusQuestionableEnable(s);break;
-		  case SetStatusQuestionableCondition: mSetStatusQuestionableCondition(s);break;
-		  case SetStatusOperationPTrans: mSetStatusOperationPTrans(s);break;
-		  case SetStatusOperationNTrans: mSetStatusOperationNTrans(s);break;
-		  case SetStatusOperationEnable: mSetStatusOperationEnable(s);break;
-		  case SetStatusOperationCondition: mSetStatusOperationCondition(s);break;
-		  case SetRange: mSetRange(s);break;
-		  case MeasurementConfigure: mMeasurementConfigure(s);break;
-		  case ConfApply: mConfigurationApply(s);break;    
-//		  case SetConfLogFileSize: mSetConfLogFileSize(s);break;
-		  case SetConfEnAppid: mSetConfEnAppid(s);break;
-		  case SetConfEnVid: mSetConfEnVid(s);break;
-		  case SetConfEnCfi: mSetConfEnCfi(s);break;
-		  case SetConfEnUPriority: mSetConfEnUPriority(s);break;
-          case SetConfENFAsdu: mSetConfENFAsdu(s);break;
-          case SetConfENLAsdu: mSetConfENLAsdu(s);break;
-		  case SetConfEnDSet: mSetConfEnDSet(s);break;
-		  case SetConfENMAdrWM3000: mSetConfENMAdrWM3000(s);break;
-		  case SetConfENMAdrMU: mSetConfENMAdrMU(s);break;
-		  case SetConfRatioEvt: mSetConfRatioEvt(s);break;
-		  case SetConfRatioChx: mSetConfRatioChx(s);break;
-		  case SetConfRatioChn: mSetConfRatioChn(s);break;
-          case SetConfSyncStrong: mSetConfSyncStrong(s);break;
-		  case SetConfSyncPeriod: mSetConfSyncPeriod(s);break;
-		  case SetConfSyncSource: mSetConfSyncSource(s);break;
-		  case SetConfMeasTInt: mSetConfMeasTInt(s);break;
-		  case SetConfMeasMPeriod: mSetConfMeasMPeriod(s);break;
-		  case SetConfMeasSRate: mSetConfMeasSRate(s);break;
-		  case SetConfMeasSFreq: mSetConfMeasSFreq(s);break;
-		  case SetConfCompPhcTime: mSetConfCompPhcTime(s);break;
-		  case SetConfCompPhcPhase: mSetConfCompPhcPhase(s);break;
-		  case SetConfCompOecFile: mSetConfCompOecFile(s);break;
-		  case SetConfCompOecOn: mSetConfCompOecOn(s);break;
-          case SetConfCompOffskN: mSetConfCompOffskN(s);break;
-          case SetConfCompOffskX: mSetConfCompOffskX(s);break;
-		  case SetConfOperMode: mSetConfOperMode(s);break;
-          case SetConfOperSignal: mSetConfOperSignal(s);break;
-		  default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
-		  }
-	      else
-	      {
-              AddEventError(CommandProtected);
-              m_stateMachineTimer.start(0, ExecCmdFinished);
-	      }
-	  }
-	
-	switch (cmd) // hier alle kommandos die keine synchr. benötigen und deshalb sofort in die statemachine zurückkehren 
-	{
-	case ResetCmd:
-	case OperationCompleteCmd:
-	case ClearStatusCmd: 
-	case StdEventStatEnableCmd:
-	case ServiceRequestEnableCmd:
-	    
-	case SetStatusEN61850Clear: 
-	case SetStatusQuestionablePTrans: 
-	case SetStatusQuestionableNTrans: 
-	case SetStatusQuestionableEnable: 
-	case SetStatusQuestionableCondition: 
-	case SetStatusOperationPTrans: 
-	case SetStatusOperationNTrans: 
-	case SetStatusOperationEnable: 
-	case SetStatusOperationCondition: 
-	case SetRange: 
-	case ConfApply:    
-//	case SetConfLogFileSize: 
-	case SetConfEnAppid: 
-	case SetConfEnVid: 
-	case SetConfEnCfi: 
-	case SetConfEnUPriority: 
+    case MeasurementInitiate: mMeasurementInitiate(s);break;
+        if ( isAuthorized() )
+        {
+    case ResetCmd: DeviceReset(s);break; // *RST
+            case OperationCompleteCmd: SetDeviceOPC(s);break; // *OPC
+            case ClearStatusCmd: DeviceClearStatus(s); break; // *CLS
+            case StdEventStatEnableCmd: SetDeviceESE(s); break; // *ESE
+            case ServiceRequestEnableCmd: SetDeviceSRE(s); break; // *SRE
+
+            case SetStatusEN61850Clear: mSetStatusEN61850Clear(s);break;
+            case SetStatusQuestionablePTrans: mSetStatusQuestionablePTrans(s);break;
+            case SetStatusQuestionableNTrans: mSetStatusQuestionableNTrans(s);break;
+            case SetStatusQuestionableEnable: mSetStatusQuestionableEnable(s);break;
+            case SetStatusQuestionableCondition: mSetStatusQuestionableCondition(s);break;
+            case SetStatusOperationPTrans: mSetStatusOperationPTrans(s);break;
+            case SetStatusOperationNTrans: mSetStatusOperationNTrans(s);break;
+            case SetStatusOperationEnable: mSetStatusOperationEnable(s);break;
+            case SetStatusOperationCondition: mSetStatusOperationCondition(s);break;
+            case SetRange: mSetRange(s);break;
+            case MeasurementConfigure: mMeasurementConfigure(s);break;
+            case ConfApply: mConfigurationApply(s);break;
+                //		  case SetConfLogFileSize: mSetConfLogFileSize(s);break;
+            case SetConfEnAppid: mSetConfEnAppid(s);break;
+            case SetConfEnVid: mSetConfEnVid(s);break;
+            case SetConfEnCfi: mSetConfEnCfi(s);break;
+            case SetConfEnUPriority: mSetConfEnUPriority(s);break;
+            case SetConfENFAsdu: mSetConfENFAsdu(s);break;
+            case SetConfENLAsdu: mSetConfENLAsdu(s);break;
+            case SetConfEnDSet: mSetConfEnDSet(s);break;
+            case SetConfENMAdrWM3000: mSetConfENMAdrWM3000(s);break;
+            case SetConfENMAdrMU: mSetConfENMAdrMU(s);break;
+            case SetConfRatioEvt: mSetConfRatioEvt(s);break;
+            case SetConfRatioChx: mSetConfRatioChx(s);break;
+            case SetConfRatioChn: mSetConfRatioChn(s);break;
+            case SetConfSyncStrong: mSetConfSyncStrong(s);break;
+            case SetConfSyncPeriod: mSetConfSyncPeriod(s);break;
+            case SetConfSyncSource: mSetConfSyncSource(s);break;
+            case SetConfMeasTInt: mSetConfMeasTInt(s);break;
+            case SetConfMeasMPeriod: mSetConfMeasMPeriod(s);break;
+            case SetConfMeasSRate: mSetConfMeasSRate(s);break;
+            case SetConfMeasSFreq: mSetConfMeasSFreq(s);break;
+            case SetConfCompPhcTime: mSetConfCompPhcTime(s);break;
+            case SetConfCompPhcPhase: mSetConfCompPhcPhase(s);break;
+            case SetConfCompOecFile: mSetConfCompOecFile(s);break;
+            case SetConfCompOecOn: mSetConfCompOecOn(s);break;
+            case SetConfCompOffskN: mSetConfCompOffskN(s);break;
+            case SetConfCompOffskX: mSetConfCompOffskX(s);break;
+            case SetConfOperMode: mSetConfOperMode(s);break;
+            case SetConfOperSignal: mSetConfOperSignal(s);break;
+            default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
+        }
+        else
+        {
+            AddEventError(CommandProtected);
+            m_stateMachineTimer.start(0, ExecCmdFinished);
+        }
+    }
+
+    switch (cmd) // hier alle kommandos die keine synchr. benötigen und deshalb sofort in die statemachine zurückkehren
+    {
+    case ResetCmd:
+    case OperationCompleteCmd:
+    case ClearStatusCmd:
+    case StdEventStatEnableCmd:
+    case ServiceRequestEnableCmd:
+
+    case SetStatusEN61850Clear:
+    case SetStatusQuestionablePTrans:
+    case SetStatusQuestionableNTrans:
+    case SetStatusQuestionableEnable:
+    case SetStatusQuestionableCondition:
+    case SetStatusOperationPTrans:
+    case SetStatusOperationNTrans:
+    case SetStatusOperationEnable:
+    case SetStatusOperationCondition:
+    case SetRange:
+    case ConfApply:
+        //	case SetConfLogFileSize:
+    case SetConfEnAppid:
+    case SetConfEnVid:
+    case SetConfEnCfi:
+    case SetConfEnUPriority:
     case SetConfENLAsdu:
     case SetConfENFAsdu:
-	case SetConfEnDSet: 
-	case SetConfENMAdrWM3000: 
-	case SetConfENMAdrMU: 
-	case SetConfRatioEvt: 
-	case SetConfRatioChx:
-	case SetConfRatioChn: 
+    case SetConfEnDSet:
+    case SetConfENMAdrWM3000:
+    case SetConfENMAdrMU:
+    case SetConfRatioEvt:
+    case SetConfRatioChx:
+    case SetConfRatioChn:
     case SetConfSyncStrong:
-	case SetConfSyncPeriod: 
-	case SetConfSyncSource:
-	case SetConfMeasTInt: 
-	case SetConfMeasMPeriod:
-	case SetConfMeasSRate: 
-	case SetConfMeasSFreq: 
-	case SetConfCompPhcTime:
-	case SetConfCompPhcPhase:
-	case SetConfCompOecFile: 
-	case SetConfCompOecOn: 
+    case SetConfSyncPeriod:
+    case SetConfSyncSource:
+    case SetConfMeasTInt:
+    case SetConfMeasMPeriod:
+    case SetConfMeasSRate:
+    case SetConfMeasSFreq:
+    case SetConfCompPhcTime:
+    case SetConfCompPhcPhase:
+    case SetConfCompOecFile:
+    case SetConfCompOecOn:
     case SetConfCompOffskN:
     case SetConfCompOffskX:
-	case SetConfOperMode: 
+    case SetConfOperMode:
     case SetConfOperSignal:
         m_stateMachineTimer.start(0, ExecCmdPartFinished);
-	default: 
-	    break;
-	}
+    default:
+        break;
+    }
 }
 
 
 char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
     QString keyw = m_pParser->GetKeyword(&s);
-    if ( keyw.isEmpty() ) // hier darf nichts stehen 
+    if ( keyw.isEmpty() ) // hier darf nichts stehen
     {
-	char * an;
-	switch (cmd)
-	{
-	case IdentQuery: an = GetDeviceIdentification();break; // *IDN?
-	case SelfTestQuery: an = DeviceSelfTest();break; // *TST?
-	case OperationCompleteQuery: an = GetDeviceOPC();break; // *OPC?
-	case StdEventStatEnableQuery: an = GetDeviceESE();break; // *ESE?
-	case StdEventStatRegQuery: an = GetDeviceESR();break; // *ESR?
-	case ServiceRequestEnableQuery: an = GetDeviceSRE();break; // *SRE?
-	case StatusByteQuery: an = GetDeviceSTB();break; // *STB?
-	    
-    case GetChannelNOffsetCmd: an = GetChannelNOffset();break;
-    case GetChannelXOffsetCmd: an = GetChannelXOffset();break;
+        char * an;
+        switch (cmd)
+        {
+        case IdentQuery: an = GetDeviceIdentification();break; // *IDN?
+        case SelfTestQuery: an = DeviceSelfTest();break; // *TST?
+        case OperationCompleteQuery: an = GetDeviceOPC();break; // *OPC?
+        case StdEventStatEnableQuery: an = GetDeviceESE();break; // *ESE?
+        case StdEventStatRegQuery: an = GetDeviceESR();break; // *ESR?
+        case ServiceRequestEnableQuery: an = GetDeviceSRE();break; // *SRE?
+        case StatusByteQuery: an = GetDeviceSTB();break; // *STB?
 
-	case GetScpiErrorAll: an = mGetScpiErrorAll();break;
-	case GetScpiErrorCount: an = mGetScpiErrorCount();break;
-	case GetScpiError: an = mGetScpiError();break;
-	case GetSerialNumber: an = mGetSerialNumber();break;
-	case GetDSPVersion: an = mGetDSPVersion();break;
-	case GetPCBVersion: an = mGetPCBVersion();break;
-	case GetDeviceVersion: an = mGetDeviceVersion();break;
-	case GetStatusEN61850SynclostCount: an = mGetStatusEN61850SynclostCount();break;
-	case GetStatusEN61850Error: an =mGetStatusEN61850Error();break;
-	case GetStatusEN61850DataCount: an = mGetStatusEN61850DataCount();break;
-	case GetStatusQuestionablePTrans: an = mGetStatusQuestionablePTrans();break;
-	case GetStatusQuestionableNTrans: an = mGetStatusQuestionableNTrans();break;    
-	case GetStatusQuestionableEnable: an = mGetStatusQuestionableEnable();break;
-	case GetStatusQuestionableCondition: an = mGetStatusQuestionableCondition();break;
-	case GetStatusQuestionableEvent: an = mGetStatusQuestionableEvent();break;
-	case GetStatusOperationPTrans: an = mGetStatusOperationPTrans();break;
-	case GetStatusOperationNTrans: an = mGetStatusOperationNTrans();break;
-	case GetStatusOperationEnable: an = mGetStatusOperationEnable();break;
-	case GetStatusOperationCondition: an = mGetStatusOperationCondition();break;
-	case GetStatusOperationEvent: an = mGetStatusOperationEvent();break;
-	case GetStatusStandard: an = mGetStatusStandard();break;
-	case OutRangeCatalog: an = mOutRangeCatalog();break;
-	case GetRange: an = mGetRange();break;
-	case OutChannelCatalog: an = mOutChannelCatalog();break;
-	case MeasurementRead: an = mMeasurementRead();break;
-	case MeasurementReadLoadpoint: an = mMeasurementReadLoadpoint();break;
-	case MeasurementFetch: an = mMeasurementFetch();break;	         
-	case Measurement: an = mMeasurement();break;
-//	case GetConfLogFileSize: an = mGetConfLogFileSize();break;
-	case GetConfEnAppid: an = mGetConfEnAppid();break;
-	case GetConfEnVid: an = mGetConfEnVid();break;
-	case GetConfEnCfi: an = mGetConfEnCfi();break;
-	case GetConfEnUPriority: an = mGetConfEnUPriority();break;
-    case GetConfENFAsdu: an = mGetConfENFAsdu();break;
-    case GetConfENLAsdu: an = mGetConfENLAsdu();break;
-	case GetConfEnDSet: an = mGetConfEnDSet();break;
-	case GetConfENMAdrWM3000: an = mGetConfENMAdrWM3000();break;
-	case GetConfENMAdrMU: an = mGetConfENMAdrMU();break;
-	case GetConfRatioEvt: an = mGetConfRatioEvt();break;
-	case GetConfRatioChx: an = mGetConfRatioChx();break;
-	case GetConfRatioChn: an = mGetConfRatioChn();break;
-    case GetConfSyncStrong: an = mGetConfSyncStrong();break;
-	case GetConfSyncPeriod: an = mGetConfSyncPeriod();break;
-	case GetConfSyncSource: an = mGetConfSyncSource();break;
-    case GetConfMeasTInt: an = mGetConfMeasTInt();break;
-	case GetConfMeasMPeriod: an = mGetConfMeasMPeriod();break;
-	case GetConfMeasSRate: an = mGetConfMeasSRate();break;
-	case GetConfMeasSFreq: an = mGetConfMeasSFreq();break;
-	case GetConfCompPhcTime: an = mGetConfCompPhcTime();break;
-	case GetConfCompPhcPhase: an = mGetConfCompPhcPhase();break;
-	case GetConfCompOecFile: an = mGetConfCompOecFile();break;
-	case GetConfCompOecOn: an = mGetConfCompOecOn();break;
-    case GetConfCompOffskN: an = mGetConfCompOffskN();break;
-    case GetConfCompOffskX: an = mGetConfCompOffskX();break;
-	case GetConfOperModeCatalog: an = mGetConfOperModeCatalog();break;
-	case GetConfOperMode: an = mGetConfOperMode();break;
-    case GetConfOperSignalCatalog: an = mGetConfOperSignalCatalog();break;
-    case GetConfOperSignal: an = mGetConfOperSignal();break;
+        case GetChannelNOffsetCmd: an = GetChannelNOffset();break;
+        case GetChannelXOffsetCmd: an = GetChannelXOffset();break;
 
-	default:	qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen     
-	}
-	
-	switch (cmd)
-	{
-	case IdentQuery:
-	case OperationCompleteQuery:
-	case StdEventStatEnableQuery:
-	case StdEventStatRegQuery:
-	case ServiceRequestEnableQuery:
-	case StatusByteQuery:
-	    
-	case GetScpiErrorAll:
-	case GetScpiErrorCount:
-	case GetScpiError:
-	case GetSerialNumber:
-	case GetDSPVersion:
-	case GetPCBVersion:
-	case GetDeviceVersion:
-	
-	case GetStatusQuestionablePTrans:
-	case GetStatusQuestionableNTrans:
-	case GetStatusQuestionableEnable:
-	case GetStatusQuestionableCondition:
-	case GetStatusQuestionableEvent:
-	case GetStatusOperationPTrans:
-	case GetStatusOperationNTrans:
-	case GetStatusOperationEnable:
-	case GetStatusOperationCondition:
-	case GetStatusOperationEvent:
-	case GetStatusStandard:
-	case OutRangeCatalog:
-	case GetRange:
-	case OutChannelCatalog:
-//	case GetConfLogFileSize:
-	case GetConfEnAppid:
-	case GetConfEnVid:
-	case GetConfEnCfi:
-	case GetConfEnUPriority:
-    case GetConfENFAsdu:
-    case GetConfENLAsdu:
-	case GetConfEnDSet:
-	case GetConfENMAdrWM3000:
-	case GetConfENMAdrMU:
-	case GetConfRatioEvt:
-	case GetConfRatioChx:
-	case GetConfRatioChn:
-    case GetConfSyncStrong:
-	case GetConfSyncPeriod:
-	case GetConfSyncSource:
-    case GetConfMeasTInt:
-	case GetConfMeasMPeriod:
-	case GetConfMeasSRate:
-	case GetConfMeasSFreq:
-	case GetConfCompPhcTime:
-	case GetConfCompPhcPhase:
-	case GetConfCompOecFile:
-	case GetConfCompOecOn:
-    case GetConfCompOffskN:
-    case GetConfCompOffskX:
-	case GetConfOperModeCatalog:
-	case GetConfOperMode:
-    case GetConfOperSignalCatalog:
-    case GetConfOperSignal:
-        m_stateMachineTimer.start(0, ExecCmdPartFinished);
-	default:	
-	    break;
-	}
-	
-	
-	return an;
+        case GetScpiErrorAll: an = mGetScpiErrorAll();break;
+        case GetScpiErrorCount: an = mGetScpiErrorCount();break;
+        case GetScpiError: an = mGetScpiError();break;
+        case GetSerialNumber: an = mGetSerialNumber();break;
+        case GetDSPVersion: an = mGetDSPVersion();break;
+        case GetPCBVersion: an = mGetPCBVersion();break;
+        case GetDeviceVersion: an = mGetDeviceVersion();break;
+        case GetStatusEN61850SynclostCount: an = mGetStatusEN61850SynclostCount();break;
+        case GetStatusEN61850Error: an =mGetStatusEN61850Error();break;
+        case GetStatusEN61850DataCount: an = mGetStatusEN61850DataCount();break;
+        case GetStatusQuestionablePTrans: an = mGetStatusQuestionablePTrans();break;
+        case GetStatusQuestionableNTrans: an = mGetStatusQuestionableNTrans();break;
+        case GetStatusQuestionableEnable: an = mGetStatusQuestionableEnable();break;
+        case GetStatusQuestionableCondition: an = mGetStatusQuestionableCondition();break;
+        case GetStatusQuestionableEvent: an = mGetStatusQuestionableEvent();break;
+        case GetStatusOperationPTrans: an = mGetStatusOperationPTrans();break;
+        case GetStatusOperationNTrans: an = mGetStatusOperationNTrans();break;
+        case GetStatusOperationEnable: an = mGetStatusOperationEnable();break;
+        case GetStatusOperationCondition: an = mGetStatusOperationCondition();break;
+        case GetStatusOperationEvent: an = mGetStatusOperationEvent();break;
+        case GetStatusStandard: an = mGetStatusStandard();break;
+        case OutRangeCatalog: an = mOutRangeCatalog();break;
+        case GetRange: an = mGetRange();break;
+        case OutChannelCatalog: an = mOutChannelCatalog();break;
+        case MeasurementRead: an = mMeasurementRead();break;
+        case MeasurementReadLoadpoint: an = mMeasurementReadLoadpoint();break;
+        case MeasurementFetch: an = mMeasurementFetch();break;
+        case Measurement: an = mMeasurement();break;
+            //	case GetConfLogFileSize: an = mGetConfLogFileSize();break;
+        case GetConfEnAppid: an = mGetConfEnAppid();break;
+        case GetConfEnVid: an = mGetConfEnVid();break;
+        case GetConfEnCfi: an = mGetConfEnCfi();break;
+        case GetConfEnUPriority: an = mGetConfEnUPriority();break;
+        case GetConfENFAsdu: an = mGetConfENFAsdu();break;
+        case GetConfENLAsdu: an = mGetConfENLAsdu();break;
+        case GetConfEnDSet: an = mGetConfEnDSet();break;
+        case GetConfENMAdrWM3000: an = mGetConfENMAdrWM3000();break;
+        case GetConfENMAdrMU: an = mGetConfENMAdrMU();break;
+        case GetConfRatioEvt: an = mGetConfRatioEvt();break;
+        case GetConfRatioChx: an = mGetConfRatioChx();break;
+        case GetConfRatioChn: an = mGetConfRatioChn();break;
+        case GetConfSyncStrong: an = mGetConfSyncStrong();break;
+        case GetConfSyncPeriod: an = mGetConfSyncPeriod();break;
+        case GetConfSyncSource: an = mGetConfSyncSource();break;
+        case GetConfMeasTInt: an = mGetConfMeasTInt();break;
+        case GetConfMeasMPeriod: an = mGetConfMeasMPeriod();break;
+        case GetConfMeasSRate: an = mGetConfMeasSRate();break;
+        case GetConfMeasSFreq: an = mGetConfMeasSFreq();break;
+        case GetConfCompPhcTime: an = mGetConfCompPhcTime();break;
+        case GetConfCompPhcPhase: an = mGetConfCompPhcPhase();break;
+        case GetConfCompOecFile: an = mGetConfCompOecFile();break;
+        case GetConfCompOecOn: an = mGetConfCompOecOn();break;
+        case GetConfCompOffskN: an = mGetConfCompOffskN();break;
+        case GetConfCompOffskX: an = mGetConfCompOffskX();break;
+        case GetConfOperModeCatalog: an = mGetConfOperModeCatalog();break;
+        case GetConfOperMode: an = mGetConfOperMode();break;
+        case GetConfOperSignalCatalog: an = mGetConfOperSignalCatalog();break;
+        case GetConfOperSignal: an = mGetConfOperSignal();break;
+
+        default:	qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
+        }
+
+        switch (cmd)
+        {
+        case IdentQuery:
+        case OperationCompleteQuery:
+        case StdEventStatEnableQuery:
+        case StdEventStatRegQuery:
+        case ServiceRequestEnableQuery:
+        case StatusByteQuery:
+
+        case GetScpiErrorAll:
+        case GetScpiErrorCount:
+        case GetScpiError:
+        case GetSerialNumber:
+        case GetDSPVersion:
+        case GetPCBVersion:
+        case GetDeviceVersion:
+
+        case GetStatusQuestionablePTrans:
+        case GetStatusQuestionableNTrans:
+        case GetStatusQuestionableEnable:
+        case GetStatusQuestionableCondition:
+        case GetStatusQuestionableEvent:
+        case GetStatusOperationPTrans:
+        case GetStatusOperationNTrans:
+        case GetStatusOperationEnable:
+        case GetStatusOperationCondition:
+        case GetStatusOperationEvent:
+        case GetStatusStandard:
+        case OutRangeCatalog:
+        case GetRange:
+        case OutChannelCatalog:
+            //	case GetConfLogFileSize:
+        case GetConfEnAppid:
+        case GetConfEnVid:
+        case GetConfEnCfi:
+        case GetConfEnUPriority:
+        case GetConfENFAsdu:
+        case GetConfENLAsdu:
+        case GetConfEnDSet:
+        case GetConfENMAdrWM3000:
+        case GetConfENMAdrMU:
+        case GetConfRatioEvt:
+        case GetConfRatioChx:
+        case GetConfRatioChn:
+        case GetConfSyncStrong:
+        case GetConfSyncPeriod:
+        case GetConfSyncSource:
+        case GetConfMeasTInt:
+        case GetConfMeasMPeriod:
+        case GetConfMeasSRate:
+        case GetConfMeasSFreq:
+        case GetConfCompPhcTime:
+        case GetConfCompPhcPhase:
+        case GetConfCompOecFile:
+        case GetConfCompOecOn:
+        case GetConfCompOffskN:
+        case GetConfCompOffskX:
+        case GetConfOperModeCatalog:
+        case GetConfOperMode:
+        case GetConfOperSignalCatalog:
+        case GetConfOperSignal:
+            m_stateMachineTimer.start(0, ExecCmdPartFinished);
+        default:
+            break;
+        }
+
+
+        return an;
     }
     else
     {
-	AddEventError(ParameterNotAllowed);
-    m_stateMachineTimer.start(0, ExecCmdFinished);
-    }	
+        AddEventError(ParameterNotAllowed);
+        m_stateMachineTimer.start(0, ExecCmdFinished);
+    }
     
     return 0;
 }
@@ -2156,109 +2156,109 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
 // die vollständige scpi kommando liste
 
 cNodeSCPI* Configuration;
-    cNodeSCPI* ConfigurationOperation;
-        cNodeSCPI* ConfigurationOperationMode;
-            cNodeSCPI* ConfigurationOperationModeCatalog;
-        cNodeSCPI* ConfigurationOperationSignal;
-            cNodeSCPI* ConfigurationOperationSignalCatalog;
-    cNodeSCPI* ConfigurationComputation;
-        cNodeSCPI* ConfigurationComputationMode;
-            cNodeSCPI* ConfigurationComputationModeCatalog;
-        cNodeSCPI* ConfigurationComputationOECorrection;
-            cNodeSCPI* ConfigurationComputationOECorrectionOn;
-        cNodeSCPI* ConfigurationComputationXOffset;
-        cNodeSCPI* ConfigurationComputationNOffset;
-        cNodeSCPI* ConfigurationComputationOECorrectionFile;
-        cNodeSCPI* ConfigurationComputationPHCorrection;
-            cNodeSCPI* ConfigurationComputationPHCorrectionPhase;
-            cNodeSCPI* ConfigurationComputationPHCorrectionTime;
-    cNodeSCPI* ConfigurationMeasure;
-        cNodeSCPI* ConfigurationMeasureSigFrequency;
-        cNodeSCPI* ConfigurationMeasureSRate;
-        cNodeSCPI* ConfigurationMeasureMPeriod;
-        cNodeSCPI* ConfigurationMeasureIntegrationTime;
-    cNodeSCPI* ConfigurationSynchronization;
-        cNodeSCPI* ConfigurationSynchronizationSource;
-        cNodeSCPI* ConfigurationSynchronizationPeriod;
-        cNodeSCPI* ConfigurationSynchronizationStrong;
-    cNodeSCPI* ConfigurationRatio;
-        cNodeSCPI* ConfigurationRatioN;
-        cNodeSCPI* ConfigurationRatioX;
-        cNodeSCPI* ConfigurationRatioEVT;
-    cNodeSCPI* ConfigurationEN61850; 					   		                                                      cNodeSCPI* ConfigurationEN61850MacAdress;
-        cNodeSCPI* ConfigurationEN61850MacAdressMergingUnit;
-        cNodeSCPI* ConfigurationEN61850MacAdressWM3000;
-        cNodeSCPI* ConfigurationEN61850DataSet;
-        cNodeSCPI* ConfigurationEN61850LAsdu;
-        cNodeSCPI* ConfigurationEN61850FAsdu;
-        cNodeSCPI* ConfigurationEN61850UserPriority;
-        cNodeSCPI* ConfigurationEN61850Cfi;
-        cNodeSCPI* ConfigurationEN61850Vid;
-        cNodeSCPI* ConfigurationEN61850Appid;
-			    			    
+cNodeSCPI* ConfigurationOperation;
+cNodeSCPI* ConfigurationOperationMode;
+cNodeSCPI* ConfigurationOperationModeCatalog;
+cNodeSCPI* ConfigurationOperationSignal;
+cNodeSCPI* ConfigurationOperationSignalCatalog;
+cNodeSCPI* ConfigurationComputation;
+cNodeSCPI* ConfigurationComputationMode;
+cNodeSCPI* ConfigurationComputationModeCatalog;
+cNodeSCPI* ConfigurationComputationOECorrection;
+cNodeSCPI* ConfigurationComputationOECorrectionOn;
+cNodeSCPI* ConfigurationComputationXOffset;
+cNodeSCPI* ConfigurationComputationNOffset;
+cNodeSCPI* ConfigurationComputationOECorrectionFile;
+cNodeSCPI* ConfigurationComputationPHCorrection;
+cNodeSCPI* ConfigurationComputationPHCorrectionPhase;
+cNodeSCPI* ConfigurationComputationPHCorrectionTime;
+cNodeSCPI* ConfigurationMeasure;
+cNodeSCPI* ConfigurationMeasureSigFrequency;
+cNodeSCPI* ConfigurationMeasureSRate;
+cNodeSCPI* ConfigurationMeasureMPeriod;
+cNodeSCPI* ConfigurationMeasureIntegrationTime;
+cNodeSCPI* ConfigurationSynchronization;
+cNodeSCPI* ConfigurationSynchronizationSource;
+cNodeSCPI* ConfigurationSynchronizationPeriod;
+cNodeSCPI* ConfigurationSynchronizationStrong;
+cNodeSCPI* ConfigurationRatio;
+cNodeSCPI* ConfigurationRatioN;
+cNodeSCPI* ConfigurationRatioX;
+cNodeSCPI* ConfigurationRatioEVT;
+cNodeSCPI* ConfigurationEN61850; 					   		                                                      cNodeSCPI* ConfigurationEN61850MacAdress;
+cNodeSCPI* ConfigurationEN61850MacAdressMergingUnit;
+cNodeSCPI* ConfigurationEN61850MacAdressWM3000;
+cNodeSCPI* ConfigurationEN61850DataSet;
+cNodeSCPI* ConfigurationEN61850LAsdu;
+cNodeSCPI* ConfigurationEN61850FAsdu;
+cNodeSCPI* ConfigurationEN61850UserPriority;
+cNodeSCPI* ConfigurationEN61850Cfi;
+cNodeSCPI* ConfigurationEN61850Vid;
+cNodeSCPI* ConfigurationEN61850Appid;
+
 //	      cNodeSCPI* ConfigurationLogFile;				  
 //			    cNodeSCPI* ConfigurationLogFileSize;	
-			 
-        cNodeSCPI* ConfigurationApply;
-			    
-		    
+
+cNodeSCPI* ConfigurationApply;
+
+
 cNodeSCPI* Measure;
 cNodeSCPI* Initiate;
 cNodeSCPI* Fetch;
 cNodeSCPI* Read;
 cNodeSCPI* ReadLoadpoint;
-	      
-	     
+
+
 cNodeSCPI* Sense;
-    cNodeSCPI* SenseChannel;
-        cNodeSCPI* SenseChannelCatalog;
-    cNodeSCPIVar* SenseCName;
-        cNodeSCPI* SenseCNameRange;
-            cNodeSCPI* SenseCNameRangeCatalog;
-	
+cNodeSCPI* SenseChannel;
+cNodeSCPI* SenseChannelCatalog;
+cNodeSCPIVar* SenseCName;
+cNodeSCPI* SenseCNameRange;
+cNodeSCPI* SenseCNameRangeCatalog;
+
 cNodeSCPI* Store;
-    cNodeSCPI* StoreChannelNOffset;
-    cNodeSCPI* StoreChannelXOffset;
+cNodeSCPI* StoreChannelNOffset;
+cNodeSCPI* StoreChannelXOffset;
 
-				       
+
 cNodeSCPI* Status;
-    cNodeSCPI* StatusStandard;
-    cNodeSCPI* StatusOperation;
-        cNodeSCPI* StatusOperationEvent;
-        cNodeSCPI* StatusOperationCondition;
-        cNodeSCPI* StatusOperationEnable;
-        cNodeSCPI* StatusOperationNTransition;
-        cNodeSCPI* StatusOperationPTransition;
-    cNodeSCPI* StatusQuestionable;
-        cNodeSCPI* StatusQuestionableEvent;
-        cNodeSCPI* StatusQuestionableCondition;
-        cNodeSCPI* StatusQuestionableEnable;
-        cNodeSCPI* StatusQuestionableNTransition;
-        cNodeSCPI* StatusQuestionablePTransition;
-			  
-        cNodeSCPI* StatusEN61850;
-            cNodeSCPI* StatusEN61850DataCount;
-            cNodeSCPI* StatusEN61850Error;
-            cNodeSCPI* StatusEN61850SynclostCount;
-            cNodeSCPI* StatusEN61850Clear;
+cNodeSCPI* StatusStandard;
+cNodeSCPI* StatusOperation;
+cNodeSCPI* StatusOperationEvent;
+cNodeSCPI* StatusOperationCondition;
+cNodeSCPI* StatusOperationEnable;
+cNodeSCPI* StatusOperationNTransition;
+cNodeSCPI* StatusOperationPTransition;
+cNodeSCPI* StatusQuestionable;
+cNodeSCPI* StatusQuestionableEvent;
+cNodeSCPI* StatusQuestionableCondition;
+cNodeSCPI* StatusQuestionableEnable;
+cNodeSCPI* StatusQuestionableNTransition;
+cNodeSCPI* StatusQuestionablePTransition;
 
-			  
+cNodeSCPI* StatusEN61850;
+cNodeSCPI* StatusEN61850DataCount;
+cNodeSCPI* StatusEN61850Error;
+cNodeSCPI* StatusEN61850SynclostCount;
+cNodeSCPI* StatusEN61850Clear;
+
+
 cNodeSCPI* System;
-    cNodeSCPI* SystemVersion;
-        cNodeSCPI* SystemVersionDevice;
-        cNodeSCPI* SystemVersionPCB;
-        cNodeSCPI* SystemVersionDSP;
-    cNodeSCPI* SystemSerial;
-    cNodeSCPI* SystemError;
-        cNodeSCPI* SystemErrorCount;
-        cNodeSCPI* SystemErrorAll;
-		          		   
+cNodeSCPI* SystemVersion;
+cNodeSCPI* SystemVersionDevice;
+cNodeSCPI* SystemVersionPCB;
+cNodeSCPI* SystemVersionDSP;
+cNodeSCPI* SystemSerial;
+cNodeSCPI* SystemError;
+cNodeSCPI* SystemErrorCount;
+cNodeSCPI* SystemErrorAll;
+
 // cNodeScpi (QString,tNodeSpec,cNode*,cNode*,SCPICmdType,SCPICmdType); 
 // konstruktor, sNodeName, nNodedef, pNextNode, pNewLevelNode, Cmd, Query				
 // konstruktor, psNodeNames,psNode2Set, nNodedef, pNextNode, pNewLevelNode, Cmd, Query
 //cNodeZHServer::cNodeZHServer(QStringList* sl,QString* s,tNodeSpec ns,cNode* n1,cNode* n2,SCPICmdType,SCPICmdType)
-					
-					
+
+
 cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     
     // implementiertes system modell
@@ -2271,20 +2271,20 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     SystemVersionPCB=new cNodeSCPI("PCB",isQuery,SystemVersionDSP,NULL,nixCmd,GetPCBVersion);
     SystemVersionDevice=new cNodeSCPI("DEVICE",isQuery,SystemVersionPCB,NULL,nixCmd,GetDeviceVersion);
     SystemVersion=new cNodeSCPI("VERSION",isNode,SystemSerial,SystemVersionDevice,nixCmd,nixCmd);
-    System=new cNodeSCPI("SYSTEM",isNode,cn,SystemVersion,nixCmd,nixCmd);	       
+    System=new cNodeSCPI("SYSTEM",isNode,cn,SystemVersion,nixCmd,nixCmd);
     // implementiertes status modell
     
-    StatusEN61850Clear=new cNodeSCPI("CLEAR",isCommand,NULL,NULL,SetStatusEN61850Clear,nixCmd);			  			  
-    StatusEN61850SynclostCount=new cNodeSCPI("SLCOUNT",isQuery,StatusEN61850Clear,NULL,nixCmd,GetStatusEN61850SynclostCount);			  
+    StatusEN61850Clear=new cNodeSCPI("CLEAR",isCommand,NULL,NULL,SetStatusEN61850Clear,nixCmd);
+    StatusEN61850SynclostCount=new cNodeSCPI("SLCOUNT",isQuery,StatusEN61850Clear,NULL,nixCmd,GetStatusEN61850SynclostCount);
     StatusEN61850Error=new cNodeSCPI("ERROR",isQuery,StatusEN61850SynclostCount,NULL,nixCmd,GetStatusEN61850Error);
-    StatusEN61850DataCount=new cNodeSCPI("DATCOUNT",isQuery,StatusEN61850Error,NULL,nixCmd,GetStatusEN61850DataCount);			  			  
-    StatusEN61850=new cNodeSCPI("EN61850",isNode,NULL,StatusEN61850DataCount,nixCmd,nixCmd);			  
-    StatusQuestionablePTransition=new cNodeSCPI("PTRANSITION",isQuery | isCommand,NULL,NULL,SetStatusQuestionablePTrans,GetStatusQuestionablePTrans);			  
+    StatusEN61850DataCount=new cNodeSCPI("DATCOUNT",isQuery,StatusEN61850Error,NULL,nixCmd,GetStatusEN61850DataCount);
+    StatusEN61850=new cNodeSCPI("EN61850",isNode,NULL,StatusEN61850DataCount,nixCmd,nixCmd);
+    StatusQuestionablePTransition=new cNodeSCPI("PTRANSITION",isQuery | isCommand,NULL,NULL,SetStatusQuestionablePTrans,GetStatusQuestionablePTrans);
     StatusQuestionableNTransition=new cNodeSCPI("NTRANSITION",isQuery | isCommand,StatusQuestionablePTransition,NULL,SetStatusQuestionableNTrans,GetStatusQuestionableNTrans);
     StatusQuestionableEnable=new cNodeSCPI("ENABLE",isQuery | isCommand,StatusQuestionableNTransition,NULL,SetStatusQuestionableEnable,GetStatusQuestionableEnable);
     StatusQuestionableCondition=new cNodeSCPI("CONDITION",isQuery | isCommand,StatusQuestionableEnable,NULL,SetStatusQuestionableCondition,GetStatusQuestionableCondition);
     StatusQuestionableEvent=new cNodeSCPI("EVENT",isQuery,StatusQuestionableCondition,NULL,nixCmd,GetStatusQuestionableEvent);
-    StatusQuestionable=new cNodeSCPI("QUESTIONABLE",isNode | isQuery,StatusEN61850,StatusQuestionableEvent,nixCmd,GetStatusQuestionableEvent);	
+    StatusQuestionable=new cNodeSCPI("QUESTIONABLE",isNode | isQuery,StatusEN61850,StatusQuestionableEvent,nixCmd,GetStatusQuestionableEvent);
     
     StatusOperationPTransition=new cNodeSCPI("PTRANSITION",isQuery | isCommand,NULL,NULL,SetStatusOperationPTrans,GetStatusOperationPTrans);
     StatusOperationNTransition=new cNodeSCPI("NTRANSITION",isQuery | isCommand,StatusOperationPTransition,NULL,SetStatusOperationNTrans,GetStatusOperationNTrans);
@@ -2297,7 +2297,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     
 
     // implementiertes store model
-   
+
     StoreChannelNOffset=new cNodeSCPI("NOFFSET",isQuery,NULL,NULL,nixCmd,GetChannelNOffsetCmd);
     StoreChannelXOffset=new cNodeSCPI("XOFFSET",isQuery,StoreChannelNOffset,NULL,nixCmd,GetChannelXOffsetCmd);
     Store=new cNodeSCPI("STORE",isNode,Status,StoreChannelXOffset,nixCmd,nixCmd);
@@ -2312,20 +2312,20 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     Sense=new cNodeSCPI("SENSE",isNode,Store,SenseChannel,nixCmd,nixCmd);
     
     
-    // implementiertes measure model 
+    // implementiertes measure model
     
-    ReadLoadpoint=new cNodeSCPI("LOADPOINT",isQuery,NULL,NULL,nixCmd,MeasurementReadLoadpoint); 
+    ReadLoadpoint=new cNodeSCPI("LOADPOINT",isQuery,NULL,NULL,nixCmd,MeasurementReadLoadpoint);
     Read=new cNodeSCPI("READ",isNode | isQuery,Sense,ReadLoadpoint,nixCmd,MeasurementRead);
     Fetch=new cNodeSCPI("FETCH",isNode | isQuery,Read,NULL,nixCmd,MeasurementFetch);
-    Initiate=new cNodeSCPI("INITIATE",isNode | isCommand,Fetch,NULL,MeasurementInitiate,nixCmd);	     
+    Initiate=new cNodeSCPI("INITIATE",isNode | isCommand,Fetch,NULL,MeasurementInitiate,nixCmd);
     Measure=new cNodeSCPI("MEASURE",isNode | isQuery,Initiate,Initiate,nixCmd,Measurement);
- 
-     // implementiertes configuration model 
+
+    // implementiertes configuration model
     
     ConfigurationApply=new cNodeSCPI("APPLY",isCommand,NULL,NULL,ConfApply,nixCmd);
     
-//    ConfigurationLogFileSize=new cNodeSCPI("SIZE",isQuery | isCommand,NULL,NULL,SetConfLogFileSize,GetConfLogFileSize);
-//    ConfigurationLogFile=new cNodeSCPI("LOGFILE",isNode,ConfigurationApply,ConfigurationLogFileSize,nixCmd,nixCmd);
+    //    ConfigurationLogFileSize=new cNodeSCPI("SIZE",isQuery | isCommand,NULL,NULL,SetConfLogFileSize,GetConfLogFileSize);
+    //    ConfigurationLogFile=new cNodeSCPI("LOGFILE",isNode,ConfigurationApply,ConfigurationLogFileSize,nixCmd,nixCmd);
     ConfigurationEN61850Appid=new cNodeSCPI("APPID",isQuery | isCommand,NULL,NULL,SetConfEnAppid,GetConfEnAppid);
     ConfigurationEN61850Vid=new cNodeSCPI("VID",isQuery | isCommand,ConfigurationEN61850Appid,NULL,SetConfEnVid,GetConfEnVid);
     ConfigurationEN61850Cfi=new cNodeSCPI("CFI",isQuery | isCommand,ConfigurationEN61850Vid,NULL,SetConfEnCfi,GetConfEnCfi);
@@ -2368,7 +2368,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationOperationModeCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,GetConfOperModeCatalog);
     ConfigurationOperationMode=new cNodeSCPI("MODE",isNode | isQuery | isCommand,ConfigurationOperationSignal,ConfigurationOperationModeCatalog,SetConfOperMode,GetConfOperMode);
     ConfigurationOperation=new cNodeSCPI("OPERATION",isNode,ConfigurationComputation,ConfigurationOperationMode,nixCmd,nixCmd);
-    Configuration=new cNodeSCPI("CONFIGURATION",isNode | isCommand,Measure,ConfigurationOperation,MeasurementConfigure,nixCmd);  
+    Configuration=new cNodeSCPI("CONFIGURATION",isNode | isCommand,Measure,ConfigurationOperation,MeasurementConfigure,nixCmd);
     
     return (Configuration);
 }
