@@ -14,7 +14,6 @@ cSCPIFace::cSCPIFace(cClientIODevice* ciod,short l) { // länge für die eventqu
     m_nPriority = 0; // falls nix anderes mehr kommt haben wir die höchste
     m_pCIOD = ciod; // unser io device
     m_nQueueLen = l;
-    m_pSMachineTimer = new(cSMTimer);
     m_pParser = new cParse(); // default parser
     m_pCmdInterpreter = new cCmdInterpreter(m_pParser);
     m_pOperationStat = new cSCPIStatSyst(this ,STBoper); // events landen in bit7 d. statusbytes
@@ -31,15 +30,14 @@ cSCPIFace::cSCPIFace(cClientIODevice* ciod,short l) { // länge für die eventqu
 
     connect(m_pCIOD,SIGNAL(SendCommand( QString&)),SLOT(ReceiveCommand(QString&)));
     connect(this, SIGNAL(SendAnswer(QString&)), m_pCIOD, SLOT(ReceiveAnswer( QString&)) );
-    connect(&m_cmdTimer,SIGNAL(Command2Execute(QString&)),this, SLOT(CmdExecution(QString&)));
-    connect(m_pSMachineTimer,SIGNAL(timeout(int)),this, SLOT(ExecuteCommand(int)));
+    connect(&m_cmdTimer, SIGNAL(Command2Execute(QString&)), this, SLOT(CmdExecution(QString&)));
+    connect(&m_stateMachineTimer, SIGNAL(timeout(int)), this, SLOT(ExecuteCommand(int)));
 }
 
 
 cSCPIFace::~cSCPIFace()
 {
     delete m_pCIOD;
-    delete m_pSMachineTimer;
     delete m_pParser;
     delete m_pCmdInterpreter;
     delete m_pOperationStat;
