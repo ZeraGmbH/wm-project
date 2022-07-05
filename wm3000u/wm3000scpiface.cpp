@@ -489,20 +489,20 @@ void cWM3000SCPIFace::mSetRange(char* s)
         QString range;
         QString* nrange;
         QString dedicatedChannel = m_pCmdInterpreter->dedicatedList.first();
-        QStringList* sl;
+        QStringList sl;
         int n = mMeasChannelList.findIndex( dedicatedChannel);
 
         switch (n)
         {
-        case 0: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeNVorgabe;break;
-        case 1: sl = &m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeXVorgabe;break;
-        case 2: sl = &m_sEVTItemList; nrange = &m_ConfDataTarget.m_sRangeETVorgabe;break;
+        case 0: sl = m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeNVorgabe;break;
+        case 1: sl = m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeXVorgabe;break;
+        case 2: sl = m_sEVTItemList; nrange = &m_ConfDataTarget.m_sRangeETVorgabe;break;
         default: break;
         }
 
         if (GetParameter(&s, range, true))
         {
-            if ( sl->contains(range) )
+            if ( sl.contains(range) )
             {
                 *nrange = range;
                 emit SendRange(&m_ConfDataTarget);
