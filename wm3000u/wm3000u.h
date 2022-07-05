@@ -444,10 +444,10 @@ private:
     int signum(double value);
     
     cMovingWindowFilter m_MovingWindowFilter;
-    QTimer *MeasureTimer;
-    QTimer *MeasureLPTimer; 
-    QTimer *RangeTimer;
-    
+    QTimer m_measureTimer;
+    QTimer m_measureLPTimer;
+    QTimer m_rangeTimer;
+
     void StopMeasurement();
 
     void SimulatedMeasurement();
