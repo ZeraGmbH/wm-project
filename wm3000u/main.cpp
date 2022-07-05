@@ -113,8 +113,8 @@ int main(int argc, char *argv[])
 
     QString machineName = "wm3000u";
 
-    cReleaseInfo *g_ReleaseView = new cReleaseInfo(&app);
-    QObject::connect(g_WMView, SIGNAL(UIhilfeReleaseInfoActionActivated()),g_ReleaseView,SLOT(show()));
+    cReleaseInfo releaseInfo;
+    QObject::connect(g_WMView, SIGNAL(UIhilfeReleaseInfoActionActivated()), &releaseInfo, SLOT(show()));
 
     cZeraInfo *g_WMInfo = new cZeraInfo; // info slots
 
