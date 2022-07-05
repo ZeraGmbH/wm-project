@@ -155,19 +155,16 @@ cWM3000I::cWM3000I() :
     connect(PCBIFace,SIGNAL(iFaceDone()),this,SLOT(XIFaceDoneSlot()));
     connect(PCBIFace,SIGNAL(iFaceError()),this,SLOT(pcbIFaceErrorSlot()));
     
-    MeasureTimer = new QTimer(this);
-    connect(MeasureTimer,SIGNAL(timeout()),this,SLOT(MeasureSlot())); // aktivieren messung über timer
-    RangeTimer = new QTimer(this);
-    connect(RangeTimer,SIGNAL(timeout()),this,SLOT(RangeObsermaticSlot())); // aktivieren range observation + automatic über timer
-    MeasureLPTimer = new QTimer(this);
-    connect(MeasureLPTimer,SIGNAL(timeout()),this,SLOT(MeasureLPSlot())); // aktivieren messung über timer
+    connect(&m_measureTimer, SIGNAL(timeout()), this, SLOT(MeasureSlot())); // aktivieren messung über timer
+    connect(&m_rangeTimer, SIGNAL(timeout()),this, SLOT(RangeObsermaticSlot())); // aktivieren range observation + automatic über timer
+    connect(&m_measureLPTimer, SIGNAL(timeout()), this, SLOT(MeasureLPSlot())); // aktivieren messung über timer
     
     // wir starten die timer erst nach erfolgreicher initialisierung ...oder doch nicht ?
     
     m_MovingWindowFilter.setFilterLength(m_ConfData.m_nIntegrationTime); // volle sekunden
-    MeasureTimer->start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
-    RangeTimer->start(500); // 1000 ms
-    MeasureLPTimer->start(500);
+    m_measureTimer.start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
+    m_rangeTimer.start(500);
+    m_measureLPTimer.start(500);
     
     m_bStopped = false;
 
@@ -1523,9 +1520,9 @@ void cWM3000I::ActionHandler(int entryAHS)
         if (m_ConfData.m_bSimulation) // im sim. modus wir der meastimer direkt gestartet
         {
             m_MovingWindowFilter.setFilterLength(m_ConfData.m_nIntegrationTime);
-            MeasureTimer->start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
-            MeasureLPTimer->start(500);
-            RangeTimer->start(500);
+            m_measureTimer.start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
+            m_measureLPTimer.start(500);
+            m_rangeTimer.start(500);
             m_bDspMeasureTriggerActive = false;
             m_bStopped = false;
             AHS = wm3000Idle; // wir sind schon fertig
@@ -3761,9 +3758,9 @@ void cWM3000I::DspIFaceAsyncDataSlot(const QString& s) // für asynchrone meldun
     case 1:  m_AsyncTimer->start(0,MeasureStart); // starten der statemachine für messwert aufnahme
         break;
     case 3:  m_MovingWindowFilter.setFilterLength(m_ConfData.m_nIntegrationTime);
-        MeasureTimer->start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
-        MeasureLPTimer->start(500);
-        RangeTimer->start(500);
+        m_measureTimer.start(1*1000); //  ab movingwindowfilter immer 1*1000 msec
+        m_measureLPTimer.start(500);
+        m_rangeTimer.start(500);
         m_bStopped = false;
         break;
     }
@@ -4405,9 +4402,9 @@ void cWM3000I::SetDspWMCmdList()
 
 void cWM3000I::StopMeasurement()
 {
-    RangeTimer->stop();
-    MeasureTimer->stop();
-    MeasureLPTimer->stop();
+    m_rangeTimer.stop();
+    m_measureTimer.stop();
+    m_measureLPTimer.stop();
     AHSFifo.remove(TriggerMeasureStart); // alle trigger measure event löschen
     AHSFifo.remove(MeasureStart); // alle measure event löschen
     AHSFifo.remove(MeasureLPStart);
