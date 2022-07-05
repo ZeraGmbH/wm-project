@@ -470,24 +470,17 @@ char* cWM3000SCPIFace::mGetStatusStandard()
 // sense model routinen    
 char* cWM3000SCPIFace::mOutRangeCatalog()
 {
-    int i;
     QString dedicatedChannel = m_pCmdInterpreter->dedicatedList.first();
-    QString s = "";
-    QStringList* sl;
-    int n = mMeasChannelList.findIndex( dedicatedChannel);
-    
-    switch (n)
-    {
+    QString s;
+    QStringList sl;
+    int n = mMeasChannelList.findIndex(dedicatedChannel);
+    switch (n) {
     case 0:
-    case 1: sl = &m_sNXItemList; break;
-    case 2: sl = &m_sECTItemList; break;
+    case 1: sl = m_sNXItemList; break;
+    case 2: sl = m_sECTItemList; break;
     default: break;
     }
-    
-    for (i = 0; i < sl->count()-1; i++)
-        s = s + (*sl)[i] +";";
-    
-    s += (*sl)[i];
+    s = sl.join(";");
     return sAlloc(s);
 }
 
