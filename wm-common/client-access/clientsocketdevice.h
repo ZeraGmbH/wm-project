@@ -23,7 +23,7 @@ private slots:
     void CloseConnection();
 
 private:
-    Q3Socket* m_pSock;
+    Q3Socket m_socket;
     QSocketNotifier* m_pZDSWriteNotifyer;
     QString m_sInput;
     QString m_sOutput;
