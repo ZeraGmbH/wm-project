@@ -1890,62 +1890,62 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     switch (cmd)
     {
     case MeasurementInitiate: mMeasurementInitiate(s);break;
-        if ( isAuthorized() )
-        {
-    case ResetCmd: DeviceReset(s);break; // *RST
-            case OperationCompleteCmd: SetDeviceOPC(s);break; // *OPC
-            case ClearStatusCmd: DeviceClearStatus(s); break; // *CLS
-            case StdEventStatEnableCmd: SetDeviceESE(s); break; // *ESE
-            case ServiceRequestEnableCmd: SetDeviceSRE(s); break; // *SRE
+    if ( isAuthorized() )
+    {
+        case ResetCmd: DeviceReset(s);break; // *RST
+        case OperationCompleteCmd: SetDeviceOPC(s);break; // *OPC
+        case ClearStatusCmd: DeviceClearStatus(s); break; // *CLS
+        case StdEventStatEnableCmd: SetDeviceESE(s); break; // *ESE
+        case ServiceRequestEnableCmd: SetDeviceSRE(s); break; // *SRE
 
-            case SetStatusEN61850Clear: mSetStatusEN61850Clear(s);break;
-            case SetStatusQuestionablePTrans: mSetStatusQuestionablePTrans(s);break;
-            case SetStatusQuestionableNTrans: mSetStatusQuestionableNTrans(s);break;
-            case SetStatusQuestionableEnable: mSetStatusQuestionableEnable(s);break;
-            case SetStatusQuestionableCondition: mSetStatusQuestionableCondition(s);break;
-            case SetStatusOperationPTrans: mSetStatusOperationPTrans(s);break;
-            case SetStatusOperationNTrans: mSetStatusOperationNTrans(s);break;
-            case SetStatusOperationEnable: mSetStatusOperationEnable(s);break;
-            case SetStatusOperationCondition: mSetStatusOperationCondition(s);break;
-            case SetRange: mSetRange(s);break;
-            case MeasurementConfigure: mMeasurementConfigure(s);break;
-            case ConfApply: mConfigurationApply(s);break;
-                //		  case SetConfLogFileSize: mSetConfLogFileSize(s);break;
-            case SetConfEnAppid: mSetConfEnAppid(s);break;
-            case SetConfEnVid: mSetConfEnVid(s);break;
-            case SetConfEnCfi: mSetConfEnCfi(s);break;
-            case SetConfEnUPriority: mSetConfEnUPriority(s);break;
-            case SetConfENFAsdu: mSetConfENFAsdu(s);break;
-            case SetConfENLAsdu: mSetConfENLAsdu(s);break;
-            case SetConfEnDSet: mSetConfEnDSet(s);break;
-            case SetConfENMAdrWM3000: mSetConfENMAdrWM3000(s);break;
-            case SetConfENMAdrMU: mSetConfENMAdrMU(s);break;
-            case SetConfRatioEct: mSetConfRatioEct(s);break;
-            case SetConfRatioChx: mSetConfRatioChx(s);break;
-            case SetConfRatioChn: mSetConfRatioChn(s);break;
-            case SetConfSyncStrong: mSetConfSyncStrong(s);break;
-            case SetConfSyncPeriod: mSetConfSyncPeriod(s);break;
-            case SetConfSyncSource: mSetConfSyncSource(s);break;
-            case SetConfMeasTInt: mSetConfMeasTInt(s);break;
-            case SetConfMeasMPeriod: mSetConfMeasMPeriod(s);break;
-            case SetConfMeasSRate: mSetConfMeasSRate(s);break;
-            case SetConfMeasSFreq: mSetConfMeasSFreq(s);break;
-            case SetConfCompPhcTime: mSetConfCompPhcTime(s);break;
-            case SetConfCompPhcPhase: mSetConfCompPhcPhase(s);break;
-            case SetConfCompOecFile: mSetConfCompOecFile(s);break;
-            case SetConfCompOecOn: mSetConfCompOecOn(s);break;
-            case SetConfCompOffskN: mSetConfCompOffskN(s);break;
-            case SetConfCompOffskX: mSetConfCompOffskX(s);break;
-                //		  case SetConfCompMode: mSetConfCompMode(s);break;
-            case SetConfOperMode: mSetConfOperMode(s);break;
-            case SetConfOperSignal: mSetConfOperSignal(s);break;
-            default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
-        }
-        else
-        {
-            AddEventError(CommandProtected);
-            m_stateMachineTimer.start(0, ExecCmdFinished);
-        }
+        case SetStatusEN61850Clear: mSetStatusEN61850Clear(s);break;
+        case SetStatusQuestionablePTrans: mSetStatusQuestionablePTrans(s);break;
+        case SetStatusQuestionableNTrans: mSetStatusQuestionableNTrans(s);break;
+        case SetStatusQuestionableEnable: mSetStatusQuestionableEnable(s);break;
+        case SetStatusQuestionableCondition: mSetStatusQuestionableCondition(s);break;
+        case SetStatusOperationPTrans: mSetStatusOperationPTrans(s);break;
+        case SetStatusOperationNTrans: mSetStatusOperationNTrans(s);break;
+        case SetStatusOperationEnable: mSetStatusOperationEnable(s);break;
+        case SetStatusOperationCondition: mSetStatusOperationCondition(s);break;
+        case SetRange: mSetRange(s);break;
+        case MeasurementConfigure: mMeasurementConfigure(s);break;
+        case ConfApply: mConfigurationApply(s);break;
+        //case SetConfLogFileSize: mSetConfLogFileSize(s);break;
+        case SetConfEnAppid: mSetConfEnAppid(s);break;
+        case SetConfEnVid: mSetConfEnVid(s);break;
+        case SetConfEnCfi: mSetConfEnCfi(s);break;
+        case SetConfEnUPriority: mSetConfEnUPriority(s);break;
+        case SetConfENFAsdu: mSetConfENFAsdu(s);break;
+        case SetConfENLAsdu: mSetConfENLAsdu(s);break;
+        case SetConfEnDSet: mSetConfEnDSet(s);break;
+        case SetConfENMAdrWM3000: mSetConfENMAdrWM3000(s);break;
+        case SetConfENMAdrMU: mSetConfENMAdrMU(s);break;
+        case SetConfRatioEct: mSetConfRatioEct(s);break;
+        case SetConfRatioChx: mSetConfRatioChx(s);break;
+        case SetConfRatioChn: mSetConfRatioChn(s);break;
+        case SetConfSyncStrong: mSetConfSyncStrong(s);break;
+        case SetConfSyncPeriod: mSetConfSyncPeriod(s);break;
+        case SetConfSyncSource: mSetConfSyncSource(s);break;
+        case SetConfMeasTInt: mSetConfMeasTInt(s);break;
+        case SetConfMeasMPeriod: mSetConfMeasMPeriod(s);break;
+        case SetConfMeasSRate: mSetConfMeasSRate(s);break;
+        case SetConfMeasSFreq: mSetConfMeasSFreq(s);break;
+        case SetConfCompPhcTime: mSetConfCompPhcTime(s);break;
+        case SetConfCompPhcPhase: mSetConfCompPhcPhase(s);break;
+        case SetConfCompOecFile: mSetConfCompOecFile(s);break;
+        case SetConfCompOecOn: mSetConfCompOecOn(s);break;
+        case SetConfCompOffskN: mSetConfCompOffskN(s);break;
+        case SetConfCompOffskX: mSetConfCompOffskX(s);break;
+        //case SetConfCompMode: mSetConfCompMode(s);break;
+        case SetConfOperMode: mSetConfOperMode(s);break;
+        case SetConfOperSignal: mSetConfOperSignal(s);break;
+        default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
+    }
+    else
+    {
+        AddEventError(CommandProtected);
+        m_stateMachineTimer.start(0, ExecCmdFinished);
+    }
     }
 
     switch (cmd) // hier alle kommandos die keine synchr. benötigen und deshalb sofort in die statemachine zurückkehren
@@ -1967,7 +1967,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetStatusOperationCondition:
     case SetRange:
     case ConfApply:
-        //	case SetConfLogFileSize:
+    //case SetConfLogFileSize:
     case SetConfEnAppid:
     case SetConfEnVid:
     case SetConfEnCfi:
@@ -1993,7 +1993,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetConfCompOecOn:
     case SetConfCompOffskN:
     case SetConfCompOffskX:
-        //	case SetConfCompMode:
+    //case SetConfCompMode:
     case SetConfOperMode:
     case SetConfOperSignal:
         m_stateMachineTimer.start(0, ExecCmdPartFinished);
@@ -2049,7 +2049,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case MeasurementReadLoadpoint: an = mMeasurementReadLoadpoint();break;
         case MeasurementFetch: an = mMeasurementFetch();break;
         case Measurement: an = mMeasurement();break;
-            //	case GetConfLogFileSize: an = mGetConfLogFileSize();break;
+        //case GetConfLogFileSize: an = mGetConfLogFileSize();break;
         case GetConfEnAppid: an = mGetConfEnAppid();break;
         case GetConfEnVid: an = mGetConfEnVid();break;
         case GetConfEnCfi: an = mGetConfEnCfi();break;
@@ -2075,13 +2075,13 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfCompOecOn: an = mGetConfCompOecOn();break;
         case GetConfCompOffskN: an = mGetConfCompOffskN();break;
         case GetConfCompOffskX: an = mGetConfCompOffskX();break;
-            //	case GetConfCompModeCatalog: an = mGetConfCompModeCatalog();break;
-            //	case GetConfCompMode: an = mGetConfCompMode();break;
+        //case GetConfCompModeCatalog: an = mGetConfCompModeCatalog();break;
+        //case GetConfCompMode: an = mGetConfCompMode();break;
         case GetConfOperModeCatalog: an = mGetConfOperModeCatalog();break;
         case GetConfOperMode: an = mGetConfOperMode();break;
         case GetConfOperSignalCatalog: an = mGetConfOperSignalCatalog();break;
         case GetConfOperSignal: an = mGetConfOperSignal();break;
-        default:	qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
+        default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
         }
 
         switch (cmd)
@@ -2115,7 +2115,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case OutRangeCatalog:
         case GetRange:
         case OutChannelCatalog:
-            //	case GetConfLogFileSize:
+        //case GetConfLogFileSize:
         case GetConfEnAppid:
         case GetConfEnVid:
         case GetConfEnCfi:
@@ -2141,8 +2141,8 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfCompOecOn:
         case GetConfCompOffskN:
         case GetConfCompOffskX:
-            //	case GetConfCompModeCatalog:
-            //	case GetConfCompMode:
+        //case GetConfCompModeCatalog:
+        //case GetConfCompMode:
         case GetConfOperModeCatalog:
         case GetConfOperMode:
         case GetConfOperSignalCatalog:
