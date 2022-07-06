@@ -12,25 +12,25 @@ bool cCmdInterpreter::CmdExecute(cNode* RootCmd,cbIFace* callback, char* CmdStri
     m_pcbIFace = callback; // wir merken uns das callback
     dedicatedList.clear();
     if (*CmdString) { // leeres kommando ist nichts falsches -> also richtig
-//	char* CmdString=s; // der input string
-	cNode* actNode = RootCmd; // startknoten setzen
-	cNode* prevNode;
-	do {
-	    prevNode = actNode;
-	} while ( (actNode = actNode->TestNode(this,&CmdString)) );
-	switch ( prevNode->m_nNodeStat ) {
-/*	  case (isKnown) : 
-	      ret = true; // es war ein bekanntes kommando    
-	      break; */
-	  case (isKnown | isCommand) : 
-	      ret=true;
-	      callback->SCPICmd(prevNode->m_nCmd,CmdString);
-	      break;
-	  case (isKnown | isQuery) : 
-	      ret = true;
-	      outp = callback->SCPIQuery(prevNode->m_nQuery,CmdString);
-	      break; // nur queries setzen den output
-	  };
+        //	char* CmdString=s; // der input string
+        cNode* actNode = RootCmd; // startknoten setzen
+        cNode* prevNode;
+        do {
+            prevNode = actNode;
+        } while ( (actNode = actNode->TestNode(this,&CmdString)) );
+        switch ( prevNode->m_nNodeStat ) {
+        /*	  case (isKnown) :
+          ret = true; // es war ein bekanntes kommando
+          break; */
+        case (isKnown | isCommand) :
+            ret=true;
+            callback->SCPICmd(prevNode->m_nCmd,CmdString);
+            break;
+        case (isKnown | isQuery) :
+            ret = true;
+            outp = callback->SCPIQuery(prevNode->m_nQuery,CmdString);
+            break; // nur queries setzen den output
+        };
     }
     
     return (ret);
