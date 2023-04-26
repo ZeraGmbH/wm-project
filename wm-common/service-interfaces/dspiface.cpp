@@ -77,7 +77,7 @@ cDspIFace::cDspIFace(QString bp, QString hn, int hp)
 
 cDspIFace::~cDspIFace()
 {
-    iFaceSock->clearPendingData() ;
+ //   iFaceSock->clearPendingData() ;
     iFaceSock->close();
     delete m_ActTimer;
 }
