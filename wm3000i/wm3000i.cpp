@@ -16,7 +16,6 @@
 #include <q3textbrowser.h>
 #include <q3dockwindow.h>
 #include <qdir.h>
-#include <q3socket.h>
 #include <qmessagebox.h>
 #include <math.h>
 #include <stdlib.h>

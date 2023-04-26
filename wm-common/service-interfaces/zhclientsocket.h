@@ -5,7 +5,6 @@
 #ifndef ZHCLIENTSOCKET_H
 #define ZHCLIENTSOCKET_H
 
-#include <q3socket.h>
 #include <qstringlist.h>
 #include <qtimer.h>
 #include <QTcpSocket>

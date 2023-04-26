@@ -3,7 +3,7 @@
 
 #include "clientiodevice.h"
 #include <QObject>
-#include <Q3Socket>
+#include <QTcpSocket>
 #include <QSocketNotifier>
 
 class cClientSocketDevice : public cClientIODevice
@@ -23,7 +23,7 @@ private slots:
     void CloseConnection();
 
 private:
-    Q3Socket m_socket;
+    QTcpSocket m_socket;
     QSocketNotifier* m_pZDSWriteNotifyer;
     QString m_sInput;
     QString m_sOutput;
