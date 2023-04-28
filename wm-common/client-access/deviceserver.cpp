@@ -12,13 +12,11 @@ void cDeviceServer::CloseConnection(cClientIODevice* ciod)
     {
         if (delIFace->GetClientIODevice() == ciod){
             m_SCPIFacePtrList.remove(delIFace);
-            delete delIFace;
-            if ( m_SCPIFacePtrList.isEmpty() ){ // wenn wir keinen mehr haben
-            emit RemoteCtrlInfo( false); // wird der remote betrieb aufgehoben
-            setPriority(); // alle clients werden informiert
-            }
         }
     }
+    if ( m_SCPIFacePtrList.isEmpty() ) // wenn wir keinen mehr haben
+    emit RemoteCtrlInfo( false); // wird der remote betrieb aufgehoben
+    setPriority(); // alle clients werden informiert
 }
 
 void cDeviceServer::setPriority() // alle clients werden informiert
