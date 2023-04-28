@@ -21,7 +21,7 @@ private slots:
     void CloseConnection(cClientIODevice*); // clients melden sich hierüber ab
 
 protected:
-    Q3PtrList<cSCPIFace> m_SCPIFacePtrList; // die liste aller angelegten interfaces
+    QList<cSCPIFace*> m_SCPIFacePtrList; // die liste aller angelegten interfaces
     void setPriority(); // alle clients werden informiert
     void incomingConnection(int socketDescriptor) override;
 };
