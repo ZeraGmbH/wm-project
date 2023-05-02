@@ -8,7 +8,7 @@
 #include "widgetgeometry.h"
 #include <QTimer>
 #include <QDialog>
-#include <Q3TextEdit>
+#include <QPlainTextEdit>
 #include <QResizeEvent>
 #include <QCloseEvent>
 
@@ -22,7 +22,7 @@ public:
                  QWidget *parent,
                  const char *wname,
                  QString machineName);
-    Q3TextEdit *m_pText;
+    QPlainTextEdit *m_pText;
     
 public slots:    
     void onSaveSession(QString session);

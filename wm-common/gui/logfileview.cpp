@@ -13,10 +13,8 @@ CLogFileView::CLogFileView(const QString cap,
     m_sessionStreamer(machineName, this)
 {
     setCaption(cap);
-    m_pText = new Q3TextEdit(this);
-    m_pText->setTextFormat(Qt::LogText);
-    m_pText->setMaxLogLines(max);
-    setMinimumSize(200,200);
+    m_pText = new QPlainTextEdit(this);
+    m_pText->setMaximumBlockCount(max);
     onLoadSession(".ses");
     m_timerDelayShow.start(2000);
     QObject::connect(&m_timerDelayShow,SIGNAL(timeout()),this,SLOT(showList()));
@@ -42,7 +40,7 @@ void CLogFileView::showList()
     if (m_loglist.count()) {
         QString s = m_loglist.join("\n");
         m_loglist.clear();
-        m_pText->append(s);
+        m_pText->appendPlainText(s);
     }
 }
 
