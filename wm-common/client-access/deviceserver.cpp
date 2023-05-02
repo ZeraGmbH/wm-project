@@ -11,6 +11,9 @@ void cDeviceServer::CloseConnection(cClientIODevice* ciod)
     for(auto *delIFace :m_SCPIFacePtrList) {
         if (delIFace->GetClientIODevice() == ciod){
             m_SCPIFacePtrList.remove(delIFace);
+            // delete crashes
+            delIFace->deleteLater();
+            break;
         }
     }
     if ( m_SCPIFacePtrList.isEmpty() ) // wenn wir keinen mehr haben
