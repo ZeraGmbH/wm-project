@@ -8,14 +8,13 @@ cDeviceServer::cDeviceServer(quint16 port)
 
 void cDeviceServer::CloseConnection(cClientIODevice* ciod)
 {
-    for(auto *delIFace :m_SCPIFacePtrList)
-    {
+    for(auto *delIFace :m_SCPIFacePtrList) {
         if (delIFace->GetClientIODevice() == ciod){
             m_SCPIFacePtrList.remove(delIFace);
         }
     }
     if ( m_SCPIFacePtrList.isEmpty() ) // wenn wir keinen mehr haben
-    emit RemoteCtrlInfo( false); // wird der remote betrieb aufgehoben
+        emit RemoteCtrlInfo( false); // wird der remote betrieb aufgehoben
     setPriority(); // alle clients werden informiert
 }
 
