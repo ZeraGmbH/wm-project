@@ -402,6 +402,7 @@ signals:
     void OffsetValue(double);
     void JustifiedSignal(bool);
     void FreqQuestionable(bool);
+    void AHSstateForLog(const QString&);
     
 protected:
     tVersSerial SerialVersions; // serien nummer und version
@@ -425,7 +426,7 @@ private:
     void ServerIFaceErrorHandling(int, QString, int);
     cSMTimer* m_ActTimer; // für actionhandler ablaufsteuerung
     cSMTimer* m_AsyncTimer; // für actionhandler ablaufsteuerung
-    Q3ValueList<int> AHSFifo;
+    QList<int> AHSFifo;
      
     cConfData m_ConfDataCopy; // kopie der konfigurationsdaten 
     cConfData SaveConfData; // retten der konfiguration während des justageablaufes

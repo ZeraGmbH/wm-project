@@ -112,6 +112,7 @@
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000i/log/ServerComm.log"
+#define AHSFilePath QDir::homePath()+"/wm3000i/log/AHS.log"
 //#define SelftestLogFilePath "/usr/share/wm3000i/log/Selftest.log"
 #define SelftestLogFilePath QDir::homePath()+"/wm3000i/log/Selftest.log"
 //#define PhaseJustLogFilePath "/usr/share/wm3000u/log/PhaseJust.log"

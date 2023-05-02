@@ -165,6 +165,14 @@ int main(int argc, char *argv[])
         g_WMSCPILogFileView =
                 new CLogFileView(QObject::tr("WM3000I SCPI Kommunikation"), 100, g_WMView, "WMSCPILogView", machineName);
 
+    //AHS Testlogausgabe
+    CLogFileView * g_WMAHSLogFileView;
+        g_WMAHSLogFileView = new CLogFileView(QObject::tr("AHS Nummern"),100,g_WMView,"WMAHSLogView",machineName);
+        g_WMAHSLogFileView->onShowHide(true);
+    CLogFile AHSLogFile(QDir(AHSFilePath).absPath());
+    QObject::connect(&AHSLogFile,SIGNAL(SendLogDataSignal(const QString &)),g_WMAHSLogFileView,SLOT(onAddLogText(const QString&)));
+    QObject::connect(g_WMDevice, SIGNAL(AHSstateForLog(const QString&)),g_WMAHSLogFileView,SLOT(onAddLogText(const QString&)));
+
 
     QObject::connect(g_WMView,SIGNAL(UIansichtDialogActionToggled(bool)),g_WMSCPILogFileView,SLOT(onShowHide(bool))); // öffnen der kommunikation anzeige
     QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMSCPILogFileView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
