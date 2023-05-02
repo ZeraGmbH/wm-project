@@ -4,7 +4,6 @@
 #ifndef WM3000SCPIFACE_H
 #define WM3000SCPIFACE_H
 
-#include <qstringlist.h>
 
 #include "tools.h"
 #include "versserial.h"
@@ -16,6 +15,8 @@
 #include "scpiface.h"
 #include "scpicommoncmdtype.h"
 #include "scpiexecutecommandstates.h"
+#include <QStringList>
+#include <QTimer>
 
 enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
 			
@@ -230,7 +231,8 @@ public slots:
 protected slots:    
     virtual void ExecuteCommand(int); // ausführen kommandos statemachine
     virtual void CmdExecution(QString&);    
-        
+    void onMeasWaitTimeout();
+
 signals:
     void SendConfiguration(cConfData*);
     void SendRange(cConfData*);
@@ -250,10 +252,13 @@ private:
     QStringList m_sECTItemList;
     QStringList mMeasChannelList; // liste aller messkanäle
     int m_nWait4What;
+    QTimer m_waitForMeasTimeoutTimer;
     bool m_bAddEventError;
     cEN61850Info m_EN61850Info;
     QStringList EXSFifo;
     cNode* InitScpiCmdTree(cNode*);
+    void startMeasWaitTimeout();
+    void stopMeasWaitTimeout();
     cConfData m_ConfDataActual, m_ConfDataTarget;
     bool GetParameter(char**, ushort&, bool); // zeiger auf input ,  der gefundene wert, test auf blank?
     bool GetParameter(char**, ushort&, int, int, int, bool); // zeiger auf input ,  der gefundene wert, min, max, base, test auf blank?
