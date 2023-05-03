@@ -229,6 +229,7 @@ public slots:
 protected slots:    
     virtual void ExecuteCommand(int); // ausführen kommandos statemachine
     virtual void CmdExecution(QString&);    
+    void onMeasWaitTimeout();
         
 signals:
     void SendConfiguration(cConfData*);
@@ -249,10 +250,13 @@ private:
     QStringList m_sEVTItemList;
     QStringList mMeasChannelList; // liste aller messkanäle
     int m_nWait4What;
+    QTimer m_waitForMeasTimeoutTimer;
     bool m_bAddEventError;
     cEN61850Info m_EN61850Info;
     QStringList EXSFifo;
     cNode* InitScpiCmdTree(cNode*);
+    void startMeasWaitTimeout();
+    void stopMeasWaitTimeout();
     cConfData m_ConfDataActual, m_ConfDataTarget;
     bool GetParameter(char**, ushort&, bool); // zeiger auf input ,  der gefundene wert, test auf blank?
     bool GetParameter(char**, ushort&, int, int, int, bool); // zeiger auf input ,  der gefundene wert, min, max, base, test auf blank?
