@@ -490,7 +490,8 @@ private:
     bool m_bDC;
     bool m_bNewSamplerates;
     bool m_bNoDCAdjust;
-    QString m_IpAddress = "127.0.0.1";
+    QString m_IpAddress;
+    void setupServers();
 };
 
 #endif    
