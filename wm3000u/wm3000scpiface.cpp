@@ -261,6 +261,14 @@ void cWM3000SCPIFace::CmdExecution(QString& s)
 }
 
 
+void cWM3000SCPIFace::onMeasWaitTimeout()
+{
+    stopMeasWaitTimeout();
+    m_nWait4What = wait4Nothing;
+    m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
+}
+
+
 void cWM3000SCPIFace::SetRangeListSlot( cWMRangeList& nx,  cWMRangeList& evt)
 {
     CWMRange *Range;
@@ -289,6 +297,7 @@ void cWM3000SCPIFace::ReceiveActValues(cwmActValues* av)
 {
     if (m_nWait4What == wait4MeasurementData) // wir machen nur was draus wenn wir drauf warten
     {
+        stopMeasWaitTimeout();
         m_nWait4What = wait4Nothing;
         mActValues = *av;
         m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
@@ -1741,6 +1750,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     case ReadStart:
         EXS++;
         m_nWait4What = wait4MeasurementData;
+        startMeasWaitTimeout();
         break;
 
     case MeasFetch:
@@ -2365,3 +2375,16 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     return (Configuration);
 }
 
+void cWM3000SCPIFace::startMeasWaitTimeout()
+{
+    stopMeasWaitTimeout();
+    connect(&m_waitForMeasTimeoutTimer, SIGNAL(timeout()), this, SLOT(onMeasWaitTimeout()));
+    m_waitForMeasTimeoutTimer.setSingleShot(true);
+    m_waitForMeasTimeoutTimer.start(3000);
+}
+
+void cWM3000SCPIFace::stopMeasWaitTimeout()
+{
+    disconnect(&m_waitForMeasTimeoutTimer, SIGNAL(timeout()), this, SLOT(onMeasWaitTimeout()));
+    m_waitForMeasTimeoutTimer.stop();
+}
