@@ -12,7 +12,7 @@ cZHClientSocket::cZHClientSocket(int t, QObject *parent, const char *name)
     m_bHostFound = false;
     setPeerName(name);
 
-    QObject::connect(this,SIGNAL(error(int)),this,SLOT(TCPErrorHandling(int)));
+    QObject::connect(this,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(TCPErrorHandling(QAbstractSocket::SocketError)));
     QObject::connect(this,SIGNAL(hostFound()),this,SLOT(HostFound()));
     QObject::connect(this,SIGNAL(readyRead()),this,SLOT(ReceiveInput()));
     QObject::connect(this,SIGNAL(connected()),this,SLOT(ConnectionDone()));
@@ -108,28 +108,33 @@ bool cZHClientSocket::hostfound()
 }
 
 // hier sind alle slots
-void cZHClientSocket::TCPErrorHandling(int e)
+void cZHClientSocket::TCPErrorHandling(QAbstractSocket::SocketError e)
 {
     QString l;
     switch (e)
     {
-    case QTcpSocket::ErrConnectionRefused:
+    case QTcpSocket::ConnectionRefusedError:
         m_nError |= myErrConnectionRefused;
         l = "Connection refused !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
         break;
-    case QTcpSocket::ErrHostNotFound:
+    case QTcpSocket::HostNotFoundError:
         m_nError |= myErrHostNotFound;
         l = "Host not found !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
         break;
-    case QTcpSocket::ErrSocketRead :
+    case QTcpSocket::UnknownSocketError :
         m_nError |= myErrSocketRead;
-        l = "Socket Data read error !";
+        l = "Unkown Socket error !";
         emit SendLogData (l);
         ToConnTimer.stop(); // fehler schon diagn.
+        break;
+    default :
+        m_nError |= myErrOther;
+        l = errorString();
+        emit SendLogData (l);
         break;
     }
     qDebug("TCP-Error %d\n",e);
