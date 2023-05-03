@@ -48,8 +48,31 @@ int main(int argc, char *argv[])
 #endif
     app.setFont(f2);
 
+    QString option ="";
+    QString address = "127.0.0.1";
+    bool bJustage = false;
+    bool bconvent = false;
+    bool bdc = false;
+    bool newsamplerates = false;
+
+    for (int i = 1; i < argc; i++)
+    {
+        option = argv[i];
+        if (option == "-justage")
+            bJustage = true;
+        if (option == "-convent")
+            bconvent = true;
+        if (option == "-dc")
+            bdc = true;
+        if (option == "-newsamplerates")
+            newsamplerates = true;
+        if(option.startsWith("-ip")) {
+            address = option.replace("-ip", "").trimmed();
+        }
+    }
 
     g_WMDevice = new cWM3000I; //  die eigentliche Messeinrichtung wird später dynamisch je nach aufruf erzeugt
+    g_WMDevice->setIpAddress(address);
 
     QString qmPath = "/usr/share/wm3000i";
     QTranslator* appTranslator = new QTranslator(&app);
@@ -74,29 +97,6 @@ int main(int argc, char *argv[])
 
     g_WMView = new WMViewBase; // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
-
-    QString option ="";
-    bool bJustage = false;
-    bool bconvent = false;
-    bool bdc = false;
-    bool newsamplerates = false;
-
-    for (int i = 1; i < argc; i++)
-    {
-        option = argv[i];
-        if (option == "-justage")
-            bJustage = true;
-        if (option == "-convent")
-            bconvent = true;
-        if (option == "-dc")
-            bdc = true;
-        if (option == "-newsamplerates")
-            newsamplerates = true;
-        if(option.startsWith("-ip")) {
-            QString address = option.replace("-ip", "").trimmed();
-            g_WMDevice->setIpAddress(address);
-        }
-    }
 
     if (!bJustage)
         g_WMView->removeJustageItem();

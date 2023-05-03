@@ -133,26 +133,11 @@ cWM3000I::cWM3000I() :
     DefaultSettings(m_ConfData);
     m_binitDone = false; // system ist noch nicht initisalisiert
 
-    // default TCP connection
-    TCPConfig.pcbHost = TCPConfig.dspHost = m_IpAddress;
-    TCPConfig.pcbPort = 6300;
-    TCPConfig.dspPort = 6310;
-    // ende default TCP connection
-    
     LoadSettings(".ses"); // liess ev. mal die einstellungen
     
     m_ConfData.m_sRangeNVorgabe = "Auto";
     m_ConfData.m_sRangeXVorgabe = "Auto";
     m_ConfData.m_sRangeETVorgabe = "Auto";
-    
-    DspIFace = new cDspIFace (m_ConfData.m_sADSPFile, TCPConfig.dspHost, TCPConfig.dspPort);
-    connect(DspIFace,SIGNAL(iFaceAsync(const QString&)),this,SLOT(DspIFaceAsyncDataSlot(const QString&)));
-    connect(DspIFace,SIGNAL(iFaceDone()),this,SLOT(XIFaceDoneSlot()));
-    connect(DspIFace,SIGNAL(iFaceError()),this,SLOT(DspIFaceErrorSlot()));
-
-    PCBIFace = new cPCBIFace(TCPConfig.pcbHost, TCPConfig.pcbPort);
-    connect(PCBIFace,SIGNAL(iFaceDone()),this,SLOT(XIFaceDoneSlot()));
-    connect(PCBIFace,SIGNAL(iFaceError()),this,SLOT(pcbIFaceErrorSlot()));
     
     connect(&m_measureTimer, SIGNAL(timeout()), this, SLOT(MeasureSlot())); // aktivieren messung über timer
     connect(&m_rangeTimer, SIGNAL(timeout()),this, SLOT(RangeObsermaticSlot())); // aktivieren range observation + automatic über timer
@@ -176,16 +161,6 @@ cWM3000I::cWM3000I() :
     connect(m_AsyncTimer,SIGNAL(timeout(int)),this,SLOT(ActionHandler(int)));
     connect(this,SIGNAL(StartStateMachine(int)),this,SLOT(ActionHandler(int)));
     
-    DspIFace->ClearMemLists();
-    ETHStatusHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHDATACOUNT",2,vMemory));
-    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
-    
-    ETHStatusResetHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
-
     if(!QDir(QString("%1/wm3000i/log/").arg(QDir::homePath())).exists())
     {
         //create temporary object that gets deleted when leaving the control block
@@ -197,12 +172,7 @@ cWM3000I::cWM3000I() :
     m_PhaseJustLogfile.setName(QDir(PhaseJustLogFilePath).absPath());
     m_OffsetJustLogfile.setName(QDir(OffsetJustLogFilePath).absPath());
 
-    ulong* pdata = (ulong*) ETHStatusResetHandle->data();
-    *pdata = 0;
-    pdata++;
-    *pdata = 0;
-    m_pProgressDialog = 0; // dat muss
-    
+
     ActValues.RMSNSek = 0.0;  // wir benötigen definierte istwerte, damit wir die korrekturwerte
     ActValues.RMSXSek = 0.0; // lesen können
     ActValues.VekN = 0.0;
@@ -228,6 +198,40 @@ cWM3000I::~cWM3000I()
     delete PCBIFace;
 }
 
+void cWM3000I::setupServers(){
+
+    // default TCP connection
+    TCPConfig.pcbHost = TCPConfig.dspHost = m_IpAddress;
+    TCPConfig.pcbPort = 6300;
+    TCPConfig.dspPort = 6310;
+    // ende default TCP connection
+
+    DspIFace = new cDspIFace (m_ConfData.m_sADSPFile, TCPConfig.dspHost, TCPConfig.dspPort);
+    connect(DspIFace,SIGNAL(iFaceAsync(const QString&)),this,SLOT(DspIFaceAsyncDataSlot(const QString&)));
+    connect(DspIFace,SIGNAL(iFaceDone()),this,SLOT(XIFaceDoneSlot()));
+    connect(DspIFace,SIGNAL(iFaceError()),this,SLOT(DspIFaceErrorSlot()));
+
+    PCBIFace = new cPCBIFace(TCPConfig.pcbHost, TCPConfig.pcbPort);
+    connect(PCBIFace,SIGNAL(iFaceDone()),this,SLOT(XIFaceDoneSlot()));
+    connect(PCBIFace,SIGNAL(iFaceError()),this,SLOT(pcbIFaceErrorSlot()));
+
+    DspIFace->ClearMemLists();
+    ETHStatusHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
+    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHDATACOUNT",2,vMemory));
+    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHERRORS",1,vMemory));
+    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+
+    ETHStatusResetHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
+    DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHERRORS",1,vMemory));
+    DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+
+    ulong* pdata = (ulong*) ETHStatusResetHandle->data();
+    *pdata = 0;
+    pdata++;
+    *pdata = 0;
+    m_pProgressDialog = 0; // dat muss
+
+}
 
 void cWM3000I::ActionHandler(int entryAHS)
 {
@@ -3184,6 +3188,7 @@ bool cWM3000I::isNewSamplerates()
 void cWM3000I::setIpAddress(QString address)
 {
     m_IpAddress = address;
+    setupServers();
 }
 
 
