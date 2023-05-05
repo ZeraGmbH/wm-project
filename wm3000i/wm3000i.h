@@ -402,7 +402,6 @@ signals:
     void OffsetValue(double);
     void JustifiedSignal(bool);
     void FreqQuestionable(bool);
-    void AHSstateForLog(const QString&);
     
 protected:
     tVersSerial SerialVersions; // serien nummer und version

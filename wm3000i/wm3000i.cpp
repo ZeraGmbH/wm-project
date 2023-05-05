@@ -284,7 +284,6 @@ void cWM3000I::ActionHandler(int entryAHS)
             AHS--; // für repeat den state dekrementieren
     }
 
-    emit AHSstateForLog(QString::number(AHS));
     switch (AHS)
     {
 
