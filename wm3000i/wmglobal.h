@@ -105,9 +105,11 @@
 //                  abhängig. die anzahl der asdu's in einer apdu ist ebenfalls davon abhängig. das scpi
 //                  interface musste angepasst werden. der automatische phasenabgleich war entsprechend
 //                  zu erweitern. die neue version läuft nur mit dem leiterkarten server ab v2.09.
+// V2.35 05.05.2023 changes see git@github.com:ZeraGmbH/wm-project.git
+//                  WM got stuck on INIT Command when sync was set to extern
 
 
-#define WMVersion "V2.34"
+#define WMVersion "V2.35"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
