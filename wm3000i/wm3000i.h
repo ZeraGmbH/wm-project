@@ -7,7 +7,6 @@
 #include <q3mainwindow.h>
 #include <q3textbrowser.h>
 #include <qtimer.h>
-#include <q3progressdialog.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
 #include <Q3ValueList>
@@ -25,6 +24,7 @@
 #include "movingwindowfilter.h"
 #include "calcinfo.h"
 #include <justValues.h>
+#include <QProgressDialog>
 
 
 class cRSelectString: public QString {
@@ -477,7 +477,7 @@ private:
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
-    Q3ProgressDialog *m_pProgressDialog;
+    QProgressDialog *m_pProgressDialog;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_OffsetMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_SelftestState; // hier merken wir uns wo´s weiter geht
