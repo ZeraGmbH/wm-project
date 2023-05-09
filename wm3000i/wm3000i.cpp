@@ -3506,7 +3506,8 @@ void cWM3000I::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
 void cWM3000I::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemachine weiß was zu tun ist
 {
     m_PhaseNodeMeasInfoList.clear();
-    m_PhaseNodeMeasInfoList.setAutoDelete( TRUE );
+  //  qDeleteAll(m_PhaseNodeMeasInfoList);
+    //m_PhaseNodeMeasInfoList.setAutoDelete( TRUE );
 
     /* wir gleichen die ad-wandler nicht mehr ab
         // zuerst die adwandler abgleichen
@@ -3564,7 +3565,7 @@ void cWM3000I::SetOffsetMeasInfo(int te, int tm)
     QString key;
 
     m_OffsetMeasInfoList.clear();
-    m_OffsetMeasInfoList.setAutoDelete(true);
+    //qDeleteAll(m_OffsetMeasInfoList);
 
     adjOffsetCorrectionHash.clear();
     measOffsetCorrectionHash.clear();
