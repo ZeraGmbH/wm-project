@@ -2116,7 +2116,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
-            Q3TextStream stream( &m_PhaseJustLogfile );
+            QTextStream stream( &m_PhaseJustLogfile );
             stream << QString("RangeN=%1 RangeX=%2 Mode=").arg(PhaseNodeMeasInfo->m_srngN).arg(PhaseNodeMeasInfo->m_srngX);
             switch (PhaseNodeMeasInfo->m_nMMode)
             {
@@ -2290,13 +2290,13 @@ void cWM3000I::ActionHandler(int entryAHS)
             else
             {
                 lprogress++;
-                m_pProgressDialog->setProgress(lprogress);
+                m_pProgressDialog->setValue(lprogress);
                 m_PhaseNodeMeasInfoList.removeFirst();
                 if (m_PhaseNodeMeasInfoList.isEmpty() || (! m_pAbortButton->isEnabled()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
                 { // wir sind fertig mit der ermittlung
                     if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                     {
-                        Q3TextStream stream( &m_PhaseJustLogfile );
+                        QTextStream stream( &m_PhaseJustLogfile );
                         stream << "\nTerminated ";
                         if (bOverload)
                             stream << "because of overload condition !\n";
@@ -2321,7 +2321,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                 {
                     if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                     {
-                        Q3TextStream stream( &m_PhaseJustLogfile );
+                        QTextStream stream( &m_PhaseJustLogfile );
                         stream << "\n"; // für jeden block eine leerzeile
                         m_PhaseJustLogfile.flush();
                         m_PhaseJustLogfile.close();
@@ -2437,7 +2437,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
         if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
-            Q3TextStream stream( &m_OffsetJustLogfile );
+            QTextStream stream( &m_OffsetJustLogfile );
 
             stream << QString("RangeN=%1 RangeX=%2 Mode=%3 ")
                       .arg(OffsetMeasInfo->m_srngN)
@@ -2654,7 +2654,7 @@ void cWM3000I::ActionHandler(int entryAHS)
             { // wir sind fertig mit der ermittlung
                 if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                 {
-                    Q3TextStream stream( &m_OffsetJustLogfile );
+                    QTextStream stream( &m_OffsetJustLogfile );
                     stream << "\nTerminated ";
                     if (bOverload)
                         stream << "because of overload condition !\n";
@@ -2679,7 +2679,7 @@ void cWM3000I::ActionHandler(int entryAHS)
             {
                 if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                 {
-                    Q3TextStream stream( &m_OffsetJustLogfile );
+                    QTextStream stream( &m_OffsetJustLogfile );
                     stream << "\n"; // für jeden block eine leerzeile
                     m_OffsetJustLogfile.flush();
                     m_OffsetJustLogfile.close();
@@ -2709,7 +2709,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         { // wir sind fertig mit der ermittlung
             if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
             {
-                Q3TextStream stream( &m_OffsetJustLogfile );
+                QTextStream stream( &m_OffsetJustLogfile );
                 stream << "\nTerminated ";
                 if (bOverload)
                     stream << "because of overload condition !\n";
@@ -2734,7 +2734,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         {
             if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
             {
-                Q3TextStream stream( &m_OffsetJustLogfile );
+                QTextStream stream( &m_OffsetJustLogfile );
                 stream << "\n"; // für jeden block eine leerzeile
                 m_OffsetJustLogfile.flush();
                 m_OffsetJustLogfile.close();
@@ -2955,7 +2955,7 @@ void cWM3000I::ActionHandler(int entryAHS)
     {
         if (m_SelftestLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) )
         {
-            Q3TextStream stream( &m_SelftestLogfile );
+            QTextStream stream( &m_SelftestLogfile );
             stream << QString("Range=%1").arg(m_SelftestInfoList.first())
                    << QString("  N=(%1,%2)").arg(SenseNVektor.re()).arg(SenseNVektor.im())
                    << QString("  X=(%1,%2)").arg(ActValues.VekXSek.re()).arg(ActValues.VekXSek.im())
@@ -2980,7 +2980,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
             if (m_SelftestLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) )
             {
-                Q3TextStream stream( &m_SelftestLogfile );
+                QTextStream stream( &m_SelftestLogfile );
                 stream << "  good\n";
                 m_SelftestLogfile.flush();
                 m_SelftestLogfile.close();
@@ -3015,7 +3015,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
             if (m_SelftestLogfile.open( QIODevice::WriteOnly | QIODevice::Append) )
             {
-                Q3TextStream stream( &m_SelftestLogfile );
+                QTextStream stream( &m_SelftestLogfile );
                 stream << "  bad\n";
                 m_SelftestLogfile.flush();
                 m_SelftestLogfile.close();
@@ -3972,7 +3972,7 @@ void cWM3000I::StoreResultsSlot()
         rfile.remove();
         if (rfile.open( QIODevice::WriteOnly ) ) {
             QString xml = resultDoc.toString();
-            Q3TextStream stream( &rfile );
+            QTextStream stream( &rfile );
             stream << xml;
             rfile.close();
         }
