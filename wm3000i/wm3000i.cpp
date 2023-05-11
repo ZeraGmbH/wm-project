@@ -2016,15 +2016,15 @@ void cWM3000I::ActionHandler(int entryAHS)
         m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
         StopMeasurement(); // die kumulieren jetzt nur
         //m_pProgressDialog = new QProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.count()+1, g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
-        m_pProgressDialog = new QProgressDialog( trUtf8("Koeffizienten 0 setzen ..."),trUtf8("Abbruch"),0, m_PhaseNodeMeasInfoList.count()+1,g_WMView);
+        mWmProgressDialog = new wmProgressDialog(g_WMView);
+        mWmProgressDialog->setLabelText( trUtf8("Koeffizienten 0 setzen ..."));
+        mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
+        mWmProgressDialog->setMinMaxValue(0, m_PhaseNodeMeasInfoList.count()+1,0,4,0,4);
+        mWmProgressDialog->setTitel(trUtf8("Phasenkorrekturkoeffizienten"));
 
-        m_pAbortButton = new QPushButton(trUtf8("Abbruch"),0,0);
-        m_pProgressDialog->setCancelButton(m_pAbortButton);
-        m_pProgressDialog->setCaption(trUtf8("Phasenkorrekturkoeffizienten"));
-        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
         lprogress = 0; // int. progress counter
-        m_pProgressDialog->setValue(lprogress);
-        QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(JustAbortSlot()));
+        mWmProgressDialog->setValue(lprogress);
+        //QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(JustAbortSlot()));
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
         N = 0; // durchlaufzähler
@@ -2052,7 +2052,7 @@ void cWM3000I::ActionHandler(int entryAHS)
             m_CalcInfoList.removeFirst();
             if (m_CalcInfoList.isEmpty())
             {
-                if (m_pAbortButton->isEnabled())
+                if (!mWmProgressDialog->isAbort()) //  m_pAbortButton->isEnabled())
                 {
                     PCBIFace->cmpPhaseCoefficient("ch0"); // berechnung der koeffizienten
                     AHS++;
@@ -2061,7 +2061,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                 {
                     m_ActTimer->start(0,RestartMeasurementStart); // die hatten wir gestoppt
                     AHS = wm3000Idle;
-                    delete m_pProgressDialog;
+                    delete mWmProgressDialog;
                     m_ActTimer->start(0,wm3000Continue); // wir starten selbst damit es weiter geht
                 }
 
@@ -2096,7 +2096,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             lprogress++;
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
             NewConfData = m_ConfData; // zum umsetzen
             SaveConfData = m_ConfData; // wir haben eine kopie der aktuellen konfiguration
             NewConfData.m_bOECorrection = false; // nix korrigieren
@@ -2114,7 +2114,7 @@ void cWM3000I::ActionHandler(int entryAHS)
     case PhaseNodeMeasNodeConfig:
     {
         StopMeasurement(); // das kumuliert nur ....
-        m_pProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
+        mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
         PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.first(); // info was zu tun ist
 
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
@@ -2168,17 +2168,23 @@ void cWM3000I::ActionHandler(int entryAHS)
         m_PhaseNodeMeasState = PhaseNodeMeasExec2; // hier müssen wir später weitermachen
         mCount = PhaseNodeMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
         m_sJustText = trUtf8("Einschwingzeit läuft" );
-        m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setMinMax2nd(0,4);
+        mWmProgressDialog->setMinMax3rd(0,4);
+        mWmProgressDialog->setValue3(mCount);
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(PhaseJustSyncSlot()));
         AHS = wm3000Idle; // wir sind erst mal fertig
         break; // PhaseNodeMeasExec1
 
     case PhaseNodeMeasExec2:
         mCount--;
-        m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setValue3(mCount);
+
         if (mCount == 0) { // eingeschwungen
             m_PhaseNodeMeasState = PhaseNodeMeasExec3; // ab jetzt messen wir wirklich
             mCount = PhaseNodeMeasInfo->m_nnMeas; // und setzen den zähler dafür
+            mWmProgressDialog->setMinMax3rd(0,mCount);
             switch (PhaseNodeMeasInfo->m_nJMode)
             { // geht anders .... aber ist so übersichtlicher
             case adcNPhase:
@@ -2197,7 +2203,9 @@ void cWM3000I::ActionHandler(int entryAHS)
             default:
                 break;
             }
-            m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+            mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+            mWmProgressDialog->setValue3(mCount);
+
             JustValueList.clear(); // phasenwinkel werte liste leeren, zur aufnahme der neuen messwerte
         }
 
@@ -2235,13 +2243,30 @@ void cWM3000I::ActionHandler(int entryAHS)
         JustValueList.append(ph0); // wir schreiben den winkel wert in die liste
 
         mCount--;
-        m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setValue3(mCount);
         if (mCount == 0)
         {
-            m_pProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));			ph0 = 0.0;
-            for (i = 0; i < JustValueList.count(); i++)
-                ph0 -= JustValueList[i];
-
+            qreal min(359.99), max(0.0), diff(0.0), value(0.0);
+            mWmProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));
+            mWmProgressDialog->set2ndDisabled();
+            mWmProgressDialog->set3rdDisabled();
+            ph0 = 0.0;
+            if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
+            {
+                QTextStream stream( &m_PhaseJustLogfile );
+                for (i = 0; i < JustValueList.count(); i++){
+                    value = JustValueList[i];
+                    stream << "Ph0: " << value << "\n" ;
+                    if( min > value) min = value;
+                    if (max < value) max = value;
+                    ph0 -= value;
+                }
+                diff = (max - min) * 360.0;
+                stream << "Diff: " << diff << " Minuten \n";
+                m_PhaseJustLogfile.flush();
+                m_PhaseJustLogfile.close();
+            }
             ph0 /= JustValueList.count(); // der mittelwert aus den messungen
             AHS = PhaseNodeMeasExec4;
             m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
@@ -2285,6 +2310,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             N++;
+            mWmProgressDialog->setValue2(N);
             if (N < 4)
             {
                 AHS = PhaseNodeMeasNodeConfig;
@@ -2293,9 +2319,10 @@ void cWM3000I::ActionHandler(int entryAHS)
             else
             {
                 lprogress++;
-                m_pProgressDialog->setValue(lprogress);
+                mWmProgressDialog->setValue(lprogress);
+
                 m_PhaseNodeMeasInfoList.removeFirst();
-                if (m_PhaseNodeMeasInfoList.isEmpty() || (! m_pAbortButton->isEnabled()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
+                if (m_PhaseNodeMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
                 { // wir sind fertig mit der ermittlung
                     if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                     {
@@ -2305,7 +2332,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                             stream << "because of overload condition !\n";
                         else
                         {
-                            if (m_pAbortButton->isEnabled())
+                            if (!mWmProgressDialog->isAbort())// m_pAbortButton->isEnabled())
                                 stream << "normally\n";
                             else
                                 stream << "by user\n";
@@ -2340,7 +2367,7 @@ void cWM3000I::ActionHandler(int entryAHS)
     } // PhaseNodeMeasExec5
 
     case PhaseNodeMeasFinished:
-        delete m_pProgressDialog;
+        delete mWmProgressDialog;
         JustagePhaseBerechnungSlot(); // berechnung noch starten
         AHS = wm3000Idle;
         break;
