@@ -11,6 +11,7 @@
 #include <qmessagebox.h>
 #include <Q3ValueList>
 
+#include "wmprogressdialog.h"
 #include "zhclientsocket.h"
 #include "tcpconfig.h"
 #include "logfile.h"
@@ -478,6 +479,7 @@ private:
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
     QProgressDialog *m_pProgressDialog;
+    wmProgressDialog *mWmProgressDialog;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_OffsetMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_SelftestState; // hier merken wir uns wo´s weiter geht
