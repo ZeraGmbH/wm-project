@@ -31,6 +31,8 @@ public:
     void setMessageStr(QString str);
     void set2ndDisabled();
     void set3rdDisabled();
+signals:
+    void aborted();
 
 public slots:
 
