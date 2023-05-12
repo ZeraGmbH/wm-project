@@ -188,6 +188,7 @@ cWM3000I::cWM3000I() :
     m_OVLMsgBox = new cWMessageBox ( trUtf8("Übersteuerung"), trUtf8("Es ist eine Übersteuerung im grössten Bereich\naufgetreten. Bitte überprüfen Sie die Messgrössen"), QMessageBox::Critical, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, 0, 0, false ) ;
     connect(m_OVLMsgBox,SIGNAL(WMBoxClosed()),this,SLOT(OverLoadMaxQuitSlot()));
     m_SelftestMsgBox = new cWMessageBox ( trUtf8("Selbstest"), trUtf8("Test beendet\nDetails stehen im Logfile"), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, 0, 0, false ) ;
+    mWmProgressDialog = nullptr;
 }
 
 
@@ -229,8 +230,6 @@ void cWM3000I::setupServers(){
     *pdata = 0;
     pdata++;
     *pdata = 0;
-    m_pProgressDialog = 0; // dat muss
-
 }
 
 void cWM3000I::ActionHandler(int entryAHS)
@@ -262,8 +261,8 @@ void cWM3000I::ActionHandler(int entryAHS)
         m_ConfData.m_bSimulation = true;
         emit SendConfDataSignal(&m_ConfData);
         AHSFifo.clear();
-        if (m_pProgressDialog)
-            delete m_pProgressDialog;
+        if (mWmProgressDialog)
+            delete mWmProgressDialog;
         m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
         AHS = wm3000Idle;
         return;
@@ -1846,10 +1845,9 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case CmpPhaseCoeffStart:
         StopMeasurement(); // die kumulieren jetzt nur
-        //m_pProgressDialog = new QProgressDialog( trUtf8("Berechnung läuft ..."), 0, 4/*m_PhaseCalcInfoList.count()*/, g_WMView, 0, FALSE, 0 ); // ein progress dialog
-        m_pProgressDialog = new QProgressDialog( trUtf8("Berechnung läuft ..."),trUtf8("Abbruch"), 0, 4/*m_PhaseCalcInfoList.count()*/, g_WMView); // ein progress dialog
-        m_pProgressDialog->setCaption("Phasenkorrekturkoeffizienten"); //überschrift
-        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Berechnung läuft ..."), 0, 4/*m_PhaseCalcInfoList.count()*/, g_WMView); // ein progress dialog
+        mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
+        mWmProgressDialog->setCaption("Phasenkorrekturkoeffizienten"); //überschrift
         lprogress = 0; // int. progress counter
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
@@ -1858,7 +1856,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case CmpPhaseCoeffCh0:
         lprogress++;
-        m_pProgressDialog->setValue(lprogress);
+        mWmProgressDialog->setValue(lprogress);
         AHS++;
         m_ActTimer->start(3000,wm3000Continue);
         break;
@@ -1870,7 +1868,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             lprogress++;
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
             PCBIFace->cmpPhaseCoefficient("ch0"); // phasenkorrektur koeffizienten berechnen lassen
             AHS++;
         }
@@ -1883,7 +1881,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             lprogress++;
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
             PCBIFace->cmpPhaseCoefficient("ch1"); // phasenkorrektur koeffizienten berechnen lassen
             AHS++;
         }
@@ -1928,9 +1926,9 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             lprogress++;
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
             m_ActTimer->start(0,RestartMeasurementStart); // messung reaktivieren
-            delete m_pProgressDialog;
+            delete mWmProgressDialog;
             AHS = wm3000Idle;
         }
         break; // CmpPhCoeffFinished
@@ -1938,9 +1936,9 @@ void cWM3000I::ActionHandler(int entryAHS)
     case CmpOffsetCoeffStart:
         StopMeasurement(); // die kumulieren jetzt nur
         //m_pProgressDialog = new QProgressDialog( trUtf8("Berechnung läuft ..."), 0, 4, g_WMView, 0, FALSE, 0 ); // ein progress dialog
-        m_pProgressDialog = new QProgressDialog( trUtf8("Berechnung läuft ..."),trUtf8("Abbruch"), 0, 4, g_WMView); // ein progress dialog
-        m_pProgressDialog->setCaption("Offsetkorrekturkoeffizienten"); //überschrift
-        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Berechnung läuft ..."), 0, 4, g_WMView); // ein progress dialog
+        mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
+        mWmProgressDialog->setCaption("Offsetkorrekturkoeffizienten"); //überschrift
         lprogress = 0; // int. progress counter
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
@@ -1948,7 +1946,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case CmpOffsetCoeffCh0:
         lprogress++;
-        m_pProgressDialog->setValue(lprogress);
+        mWmProgressDialog->setValue(lprogress);
         AHS++;
         m_ActTimer->start(3000,wm3000Continue);
         break;
@@ -1960,7 +1958,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             lprogress++;
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
             PCBIFace->cmpOffsetCoefficient("ch0"); // offsetkorrektur koeffizienten berechnen lassen
             AHS++;
         }
@@ -1974,7 +1972,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             lprogress++;
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
             PCBIFace->cmpOffsetCoefficient("ch1"); // offsetkorrektur koeffizienten berechnen lassen
             AHS++;
         }
@@ -2015,7 +2013,6 @@ void cWM3000I::ActionHandler(int entryAHS)
     case PhaseNodeMeasStart:
         m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
         StopMeasurement(); // die kumulieren jetzt nur
-        //m_pProgressDialog = new QProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.count()+1, g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
         mWmProgressDialog = new wmProgressDialog(g_WMView);
         mWmProgressDialog->setLabelText( trUtf8("Koeffizienten 0 setzen ..."));
         mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
@@ -2024,7 +2021,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
         lprogress = 0; // int. progress counter
         mWmProgressDialog->setValue(lprogress);
-        //QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(JustAbortSlot()));
+        QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
         N = 0; // durchlaufzähler
@@ -2376,15 +2373,12 @@ void cWM3000I::ActionHandler(int entryAHS)
     case OffsetMeasWM3000StartVar:
         m_OffsetJustLogfile.remove(); // beim starten wird das log file gelöscht
         StopMeasurement(); // die kumulieren jetzt nur
-        //m_pProgressDialog = new QProgressDialog( trUtf8("Initialisierung..."), 0, m_OffsetMeasInfoList.count(), g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
-        m_pProgressDialog = new QProgressDialog( trUtf8("Initialisierung..."),trUtf8("Abbruch"), 0, m_OffsetMeasInfoList.count(), g_WMView);
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Initialisierung..."), 0, m_OffsetMeasInfoList.count(), g_WMView);
+        mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
+        mWmProgressDialog->setCaption(trUtf8("Offsetkorrekturen"));
 
-        m_pAbortButton = new QPushButton(trUtf8("Abbruch"),0,0);
-        m_pProgressDialog->setCancelButton(m_pAbortButton);
-        m_pProgressDialog->setCaption(trUtf8("Offsetkorrekturen"));
-        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
         lprogress = 0; // int. progress counter
-        QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(JustAbortSlot()));
+        QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
 
         NewConfData = m_ConfData; // zum umsetzen
         SaveConfData = m_ConfData; // wir haben eine kopie der aktuellen konfiguration
@@ -2423,7 +2417,7 @@ void cWM3000I::ActionHandler(int entryAHS)
             m_CalcInfoList.removeFirst();
             if (m_CalcInfoList.isEmpty())
             {
-                if (m_pAbortButton->isEnabled())
+                if (!mWmProgressDialog->isAbort()) //m_pAbortButton->isEnabled())
                 {
                     PCBIFace->cmpOffsetCoefficient("ch0"); // berechnung der koeffizienten
                     AHS++;
@@ -2432,7 +2426,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                 {
                     m_ActTimer->start(0,RestartMeasurementStart); // die hatten wir gestoppt
                     AHS = wm3000Idle;
-                    delete m_pProgressDialog;
+                    delete mWmProgressDialog;
                     m_ActTimer->start(0,wm3000Continue); // wir starten selbst damit es weiter geht
                 }
             }
@@ -2462,8 +2456,8 @@ void cWM3000I::ActionHandler(int entryAHS)
     case OffsetMeasWM3000BaseConfigurationVar:
     {
         StopMeasurement(); // das kumuliert nur ....
-        m_pProgressDialog->setValue(lprogress); // progess bar setzen
-        m_pProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
+        mWmProgressDialog->setValue(lprogress); // progess bar setzen
+        mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
         OffsetMeasInfo = m_OffsetMeasInfoList.first(); // info was zu tun ist
 
         if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
@@ -2509,7 +2503,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
         mCount = OffsetMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
         m_sJustText = trUtf8("Einschwingzeit läuft" );
-        m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(OffsetJustSyncSlot()));
         AHS = wm3000Idle; // wir sind erst mal fertig
         break; // OffsetMeasExec1 OffsetMeasExec1Var
@@ -2517,7 +2511,7 @@ void cWM3000I::ActionHandler(int entryAHS)
     case OffsetMeasWM3000Exec2:
     case OffsetMeasWM3000Exec2Var:
         mCount--;
-        m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
         if (mCount == 0)
         { // eingeschwungen
             m_OffsetMeasState = AHS + 1; // ab jetzt messen wir wirklich
@@ -2539,7 +2533,7 @@ void cWM3000I::ActionHandler(int entryAHS)
             default:
                 break;
             }
-            m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+            mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
             JustValueList.clear(); // offset werte liste leeren, zur aufnahme der neuen messwerte
         }
 
@@ -2556,10 +2550,10 @@ void cWM3000I::ActionHandler(int entryAHS)
         JustValueList.append(ActValues.dspActValues.ampl1xf); // dito
 
         mCount--;
-        m_pProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
         if (mCount == 0)
         {
-            m_pProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));
+            mWmProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));
             offs0 = 0.0;
             offs1 = 0.0;
             int n;
@@ -2678,10 +2672,10 @@ void cWM3000I::ActionHandler(int entryAHS)
         else
         {
             lprogress++;
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
             m_OffsetMeasInfoList.removeFirst();
 
-            if (m_OffsetMeasInfoList.isEmpty() || (! m_pAbortButton->isEnabled()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
+            if (m_OffsetMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
             { // wir sind fertig mit der ermittlung
                 if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                 {
@@ -2691,7 +2685,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                         stream << "because of overload condition !\n";
                     else
                     {
-                        if (m_pAbortButton->isEnabled())
+                        if (!mWmProgressDialog->isAbort()) //  m_pAbortButton->isEnabled())
                             stream << "normally\n";
                         else
                             stream << "by user\n";
@@ -2725,7 +2719,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
 
     case OffsetMeasWM3000Finished:
-        delete m_pProgressDialog;
+        delete mWmProgressDialog;
         JustageOffsetBerechnungSlot(); // berechnung noch starten
         AHS = wm3000Idle;
         break;
@@ -2733,10 +2727,10 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case OffsetMeasWM3000Exec5Var:
         lprogress++;
-        m_pProgressDialog->setValue(lprogress);
+        mWmProgressDialog->setValue(lprogress);
         m_OffsetMeasInfoList.removeFirst();
 
-        if (m_OffsetMeasInfoList.isEmpty() || (! m_pAbortButton->isEnabled()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
+        if (m_OffsetMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
         { // wir sind fertig mit der ermittlung
             if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
             {
@@ -2746,7 +2740,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                     stream << "because of overload condition !\n";
                 else
                 {
-                    if (m_pAbortButton->isEnabled())
+                    if (!mWmProgressDialog->isAbort())  //m_pAbortButton->isEnabled())
                         stream << "normally\n";
                     else
                         stream << "by user\n";
@@ -2778,7 +2772,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         break;
 
     case OffsetMeasWM3000FinishedVar:
-        delete m_pProgressDialog;
+        delete mWmProgressDialog;
         measOffsetCorrectionHash = adjOffsetCorrectionHash;
         offsetCorrectionHash2File();
         AHS = wm3000Idle;
@@ -2786,11 +2780,10 @@ void cWM3000I::ActionHandler(int entryAHS)
 
 
     case OffsetMeasChannelNStart:
-        //m_pProgressDialog = new QProgressDialog( trUtf8("Messung..."), 0, 2, g_WMView, 0, FALSE, 0 );
-        m_pProgressDialog = new QProgressDialog( trUtf8("Messung..."),trUtf8("Abbruch"),0,2,g_WMView);
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Messung..."),0,2,g_WMView);
+        mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
+        mWmProgressDialog->setCaption(trUtf8("Offsetmessung Kanal N"));
 
-        m_pProgressDialog->setCaption(trUtf8("Offsetmessung Kanal N"));
-        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
         m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(OffsetJustSyncSlot()));
         AHS = wm3000Idle;
@@ -2798,43 +2791,42 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case OffsetMeasChannelNSync:
     case OffsetMeasChannelXSync:
-        m_pProgressDialog->setValue(1);
+        mWmProgressDialog->setValue(1);
         m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(OffsetJustSyncSlot()));
         AHS = wm3000Idle;
         break;
 
     case OffsetMeasChannelNFinished:
-        m_pProgressDialog->setValue(2);
+        mWmProgressDialog->setValue(2);
         offs0 = ActValues.VekNSek.re();
         if (m_ConfData.m_bOffsetCorrectionN)
             offs0 += m_JustValues.OffsetCorrDevN;
         m_JustValues.OffsetCorrDevN = offs0;
         emit OffsetValue(offs0);
-        delete m_pProgressDialog;
+        delete mWmProgressDialog;
         emit SendJustValuesSignal(&m_JustValues);
         AHS = wm3000Idle;
         break;
 
     case OffsetMeasChannelXStart:
-        //m_pProgressDialog = new QProgressDialog( trUtf8("Messung..."), 0, 2, g_WMView, 0, FALSE, 0 );
-        m_pProgressDialog = new QProgressDialog( trUtf8("Messung..."),trUtf8("Abbruch"), 0, 2, g_WMView);
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Messung..."), 0, 2, g_WMView);
+        mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
 
-        m_pProgressDialog->setCaption(trUtf8("Offsetmessung Kanal X"));
-        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
+        mWmProgressDialog->setCaption(trUtf8("Offsetmessung Kanal X"));
         m_OffsetMeasState = AHS + 1; // hier müssen wir später weitermachen
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(OffsetJustSyncSlot()));
         AHS = wm3000Idle;
         break;
 
     case OffsetMeasChannelXFinished:
-        m_pProgressDialog->setValue(2);
+        mWmProgressDialog->setValue(2);
         offs0 = ActValues.VekXSek.re();
         if (m_ConfData.m_bOffsetCorrectionX)
             offs0 += m_JustValues.OffsetCorrDevX;
         m_JustValues.OffsetCorrDevX = offs0;
         emit OffsetValue(offs0);
-        delete m_pProgressDialog;
+        delete mWmProgressDialog;
         emit SendJustValuesSignal(&m_JustValues);
         AHS = wm3000Idle;
         break;
@@ -2903,16 +2895,12 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case SelftestStart:
         StopMeasurement(); // die kumulieren jetzt nur
-        //m_pProgressDialog = new QProgressDialog( trUtf8("Selbstest ..."), 0, m_SelftestInfoList.count(), g_WMView, 0, FALSE, 0 ); // ein progress dialog 100% entspricht aller selbsttestpunkte
-        m_pProgressDialog = new QProgressDialog( trUtf8("Selbstest ..."),trUtf8("Abbruch"), 0, m_SelftestInfoList.count(), g_WMView);
-
-        if ( m_pAbortButton )
-            m_pProgressDialog->setCancelButton(m_pAbortButton);
-        m_pProgressDialog->setCaption(trUtf8("Selbsttest"));
-        m_pProgressDialog->setMinimumDuration(0); // sofort sichtbar
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Selbstest ..."), 0, m_SelftestInfoList.count(), g_WMView);
+        mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
+        mWmProgressDialog->setCaption(trUtf8("Selbsttest"));
         lprogress = 0; // int. progress counter
-        m_pProgressDialog->setValue(lprogress);
-        QObject::connect(m_pAbortButton,SIGNAL(pressed()),this,SLOT(SelftestAbortSlot()));
+        mWmProgressDialog->setValue(lprogress);
+        QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(SelftestAbortSlot()));
         m_SelftestLogfile.remove(); // beim starten wird das log file gelöscht
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
@@ -2937,7 +2925,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         // kein break wir laufen einfach drüber
 
     case SelftestMeasConfiguration:
-        m_pProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
+        mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
         m_SelftestState = SelftestSetRangeNX; // hier müssen wir später weitermachen
         QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(SelftestSyncSlot()));
         SetConfDataSlot(&NewConfData); // und die neue konfiguration
@@ -2946,7 +2934,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
 
     case SelftestSetRangeNX:
-        m_pProgressDialog->setLabelText (trUtf8("Bereiche setzen ..." ));
+        mWmProgressDialog->setLabelText (trUtf8("Bereiche setzen ..." ));
         NewConfData.m_nSenseMode = sensNadcX; // wir starten mit messen n gegen adcx
         NewConfData.m_sRangeNVorgabe = NewConfData.m_sRangeXVorgabe = m_SelftestInfoList.first();
         m_SelftestState = SelftestMeasureNSync; // hier müssen wir später weitermachen
@@ -2960,7 +2948,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         NewConfData.m_sRangeNSoll = NewConfData.m_sRangeN =NewConfData.m_sRangeNVorgabe; // bereich kanal n
         NewConfData.m_sRangeXSoll = NewConfData.m_sRangeX = NewConfData.m_sRangeXVorgabe; // bereich kanal x
 
-        m_pProgressDialog->setLabelText (trUtf8("Messung ..." ));
+        mWmProgressDialog->setLabelText (trUtf8("Messung ..." ));
         m_SelftestState = SelftestMeasureN; // hier müssen wir später weitermachen
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(SelftestSyncSlot()));
 
@@ -2970,7 +2958,7 @@ void cWM3000I::ActionHandler(int entryAHS)
     case SelftestMeasureN: // wir haben aktuelle messwerte
         SenseNVektor = ActValues.VekNSek;
         ADCXVektor = ActValues.VekXSek; //   messwerte speichern
-        m_pProgressDialog->setLabelText (trUtf8("Modus setzen ..." ));
+        mWmProgressDialog->setLabelText (trUtf8("Modus setzen ..." ));
 
         m_SelftestState = SelftestMeasureXSync; // hier müssen wir später weitermachen
         NewConfData.m_nSenseMode = sensXadcN; // als nächstes messen wir x gegen adcn
@@ -2981,7 +2969,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         break; // SelftestMeasureN
 
     case SelftestMeasureXSync:
-        m_pProgressDialog->setLabelText (trUtf8("Messung ..." ));
+        mWmProgressDialog->setLabelText (trUtf8("Messung ..." ));
         m_SelftestState = SelftestMeasureX; // hier müssen wir später weitermachen
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(SelftestSyncSlot()));
 
@@ -3025,7 +3013,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
             // unjustiert lassen wir 1% abweichung zu
             lprogress++; // int. progress counter
-            m_pProgressDialog->setValue(lprogress);
+            mWmProgressDialog->setValue(lprogress);
 
             // loggen
 
@@ -3068,7 +3056,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         break; // SelftestMeasureX
     }
     case SelftestFinished:
-        delete m_pProgressDialog; // progress dialog schliessen
+        delete mWmProgressDialog; // progress dialog schliessen
         m_SelftestMsgBox->show();
         AHS = wm3000Idle;
         break; // SelftestFinished
@@ -3321,7 +3309,7 @@ void cWM3000I::OffsetMessungChannelXSlot()
 void cWM3000I::SelfTestManuell()
 {
     SetSelfTestInfo(false);
-    m_pAbortButton = new QPushButton(trUtf8("Abbruch"),0,0);
+///    m_pAbortButton = new QPushButton(trUtf8("Abbruch"),0,0);
     emit StartStateMachine(SelftestStart);
 }
 
@@ -3329,7 +3317,7 @@ void cWM3000I::SelfTestManuell()
 void cWM3000I::SelfTestRemote(void)
 {
     SetSelfTestInfo(true);
-    m_pAbortButton = 0; // kein abbruch möglich
+//    m_pAbortButton = 0; // kein abbruch möglich
     emit StartStateMachine(SelftestStart);
 }
 
@@ -3455,7 +3443,7 @@ void cWM3000I::OffsetJustSyncSlot()
 
 void cWM3000I::JustAbortSlot()
 {
-    m_pAbortButton->setEnabled(false);
+//    m_pAbortButton->setEnabled(false);
     /* abbbruch in state machine behandelt
     while (m_PhaseNodeMeasInfoList.count() > 1)
     m_PhaseNodeMeasInfoList.removeLast();
@@ -3470,7 +3458,7 @@ void cWM3000I::SelftestSyncSlot()
 
 void cWM3000I::SelftestAbortSlot()
 {
-    m_pAbortButton->setEnabled(false);
+//    m_pAbortButton->setEnabled(false);
     while (m_SelftestInfoList.count() > 1)
         m_SelftestInfoList.pop_back();
 }

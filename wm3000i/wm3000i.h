@@ -478,7 +478,6 @@ private:
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
-    QProgressDialog *m_pProgressDialog;
     wmProgressDialog *mWmProgressDialog;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_OffsetMeasState; // hier merken wir uns wo´s weiter geht
@@ -487,7 +486,7 @@ private:
     QHash<QString, double> adjOffsetCorrectionHash; // offset korrektur in lsb hier sammeln wir während des abgleiches
     QHash<QString, double> measOffsetCorrectionHash; // wenn abgleich durchgelaufen ist werden die werte hierhin kopiert
     QString m_sJustText;
-    QPushButton* m_pAbortButton;
+   // QPushButton* m_pAbortButton;
     QString JDataFile;
     QFile m_SelftestLogfile;
     QFile m_PhaseJustLogfile;
