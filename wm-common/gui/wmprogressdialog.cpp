@@ -3,32 +3,15 @@
 wmProgressDialog::wmProgressDialog(QWidget *parent)
     : QDialog{parent}
 {
-    mvLay = new QVBoxLayout;
-    mAbort = new QPushButton;
-    mProgressFirst = new QProgressBar;
-    mProgressSecond = new QProgressBar;
-    mProgressThird = new QProgressBar;
-    mMessage = new QPlainTextEdit;
-    mPrompt = new QLabel;
-    mState = new QLabel;
-    mvLay->addWidget(mPrompt);
-    mvLay->addWidget(mProgressFirst);
-    mvLay->addWidget(mProgressSecond);
-    mvLay->addWidget(mProgressThird);
-    mvLay->addWidget(mMessage);
-    mhLay = new QHBoxLayout;
-    mhLay->addWidget(mState);
-    mhLay->addWidget(mAbort);
-    mvLay->addItem(mhLay);
-    setLayout(mvLay);
-    mbAbort = false;
-    mProgressSecond->hide();
-    mProgressThird->hide();
-    mAbort->hide();
-    mMessage->hide();
+    seuptGui();
+}
 
-    connect(mAbort,SIGNAL(clicked()),this,SLOT(abort()));
-    this->show();
+wmProgressDialog::wmProgressDialog(QString strTitle, int minValue, int maxValue, QWidget *parent)
+    : QDialog{parent}
+{
+    setTitel(strTitle);
+    setMinMaxValue(minValue,maxValue);
+    seuptGui();
 }
 
 wmProgressDialog::~wmProgressDialog()
@@ -144,4 +127,35 @@ void wmProgressDialog::set2ndDisabled()
 void wmProgressDialog::set3rdDisabled()
 {
     mProgressThird->hide();
+}
+
+void wmProgressDialog::seuptGui()
+{
+    mvLay = new QVBoxLayout;
+    mAbort = new QPushButton;
+    mProgressFirst = new QProgressBar;
+    mProgressSecond = new QProgressBar;
+    mProgressThird = new QProgressBar;
+    mMessage = new QPlainTextEdit;
+    mPrompt = new QLabel;
+    mState = new QLabel;
+    mvLay->addWidget(mPrompt);
+    mvLay->addWidget(mProgressFirst);
+    mvLay->addWidget(mProgressSecond);
+    mvLay->addWidget(mProgressThird);
+    mvLay->addWidget(mMessage);
+    mhLay = new QHBoxLayout;
+    mhLay->addWidget(mState);
+    mhLay->addWidget(mAbort);
+    mvLay->addItem(mhLay);
+    setLayout(mvLay);
+    mbAbort = false;
+    mProgressSecond->hide();
+    mProgressThird->hide();
+    mAbort->hide();
+    mMessage->hide();
+
+    connect(mAbort,SIGNAL(clicked()),this,SLOT(abort()));
+    this->show();
+
 }

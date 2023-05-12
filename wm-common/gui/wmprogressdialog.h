@@ -14,6 +14,7 @@ class wmProgressDialog : public QDialog
     Q_OBJECT
 public:
     explicit wmProgressDialog(QWidget *parent = nullptr);
+    explicit wmProgressDialog(QString strTitle,int minValue, int maxValue, QWidget *parent = nullptr);
     ~wmProgressDialog();
     bool isAbort() {return mbAbort;};
     void setMinMaxValue(int min1, int max1, int min2 = 0, int max2 = 0, int min3 = 0, int max3 = 0);
@@ -46,6 +47,8 @@ private:
     QVBoxLayout *mvLay;
     QHBoxLayout *mhLay;
     bool mbAbort;
+
+    void seuptGui();
 
 private slots:
     void abort();
