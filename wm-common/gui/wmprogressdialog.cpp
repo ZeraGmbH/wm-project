@@ -9,9 +9,10 @@ wmProgressDialog::wmProgressDialog(QWidget *parent)
 wmProgressDialog::wmProgressDialog(QString strTitle, int minValue, int maxValue, QWidget *parent)
     : QDialog{parent}
 {
+    seuptGui();
     setTitel(strTitle);
     setMinMaxValue(minValue,maxValue);
-    seuptGui();
+
 }
 
 wmProgressDialog::~wmProgressDialog()
