@@ -96,6 +96,7 @@ void wmProgressDialog::abort()
 {
     mAbort->setDisabled(true);
     mbAbort = true;
+    emit aborted();
 }
 
 void wmProgressDialog::setMinMax1st(int min, int max)
