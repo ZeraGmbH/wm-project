@@ -45,8 +45,13 @@ void cPCBIFace::ActionHandler(int entryAHS)
     switch (AHS)
     {
     case pcbIFaceConnectYourselfStart:
-	iFaceSock->connectToHost(m_sHost,m_nPort); // verbindung zum leiterkarten server herstellen
-	AHS++;
+        AHS++;
+        if(iFaceSock->state() == QAbstractSocket::UnconnectedState) {
+        iFaceSock->connectToHost(m_sHost,m_nPort); // verbindung zum leiterkarten server herstellen
+        }
+        else {
+            SocketDoneSlot();
+        }
 	break; // pcbIFaceConnectYourselfStart
 	
     case JustFlashProgFinished:
