@@ -99,8 +99,13 @@ void cDspIFace::ActionHandler(int entryAHS)
     switch (AHS)
     {
     case dspIFaceConnectYourselfStart:
-        iFaceSock->connectToHost(m_sHost,m_nPort); // verbindung zum dspserver herstellen
         AHS++;
+        if(iFaceSock->state() == QAbstractSocket::UnconnectedState) {
+        iFaceSock->connectToHost(m_sHost,m_nPort); // verbindung zum dspserver herstellen
+        }
+        else {
+            SocketDoneSlot();
+        }
         break; // dspIFaceConnectYourselfStart
 
     case ReadDeviceVersionFinished:
