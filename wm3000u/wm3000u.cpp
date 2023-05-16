@@ -3975,7 +3975,7 @@ void cWM3000U::SetDspWMCmdList()
         DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0200)"); // nicht aktiv, prozessnr. (dummy),hauptkette 2 subkette 0 start
         DspIFace->addCycListItem( s = "SETVAL(SINDEX,0)"); // index zum speichern der samples auf anfang der puffer setzen
         DspIFace->addCycListItem( s = "RESETSYNCPPS()"); // pps sync flagge rückstellen
-        DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0300)"); // aktivieren der daten aufnahme
+        //DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0300)"); // aktivieren der daten aufnahme
         DspIFace->addCycListItem( s = "DEACTIVATECHAIN(1,0x0200)"); // deaktivieren dieser kette
         DspIFace->addCycListItem( s = "STOPCHAIN(1,0x0200)"); // ende prozessnr., hauptkette 2 subkette 0
 
@@ -3984,6 +3984,7 @@ void cWM3000U::SetDspWMCmdList()
         DspIFace->addCycListItem( s = "SETVAL(MAXRDY,1.0)"); // sync maxrdy setzen
 
         // ab hier nehmen wir die daten für die nächste messperiode auf
+        DspIFace->addCycListItem( s = "ACTIVATECHAIN(1,0x0300)"); // aktivieren der daten aufnahme // wis hinzu wm2023wip
         DspIFace->addCycListItem( s = "STARTCHAIN(0,1,0x0300)"); // nicht aktiv, prozessnr. (dummy),hauptkette 3 subkette 0 start
         // kanal 0 (n)  samples über sindex kopieren
         DspIFace->addCycListItem( s = "COPYINDDATA(CH0,SINDEX,MESSSIGNAL0)");
