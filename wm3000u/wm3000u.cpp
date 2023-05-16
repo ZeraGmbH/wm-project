@@ -2038,13 +2038,26 @@ void cWM3000U::ActionHandler(int entryAHS)
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
         if (mCount == 0)
         {
+            qreal min(359.99), max(0.0), diff(0.0), value(0.0);
             mWmProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));
             mWmProgressDialog->set2ndDisabled();
             mWmProgressDialog->set3rdDisabled();
             ph0 = 0.0;
-            for (i = 0; i < JustValueList.count(); i++)
-                ph0 -= JustValueList[i];
-
+            if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
+            {
+                QTextStream stream( &m_PhaseJustLogfile );
+                for (i = 0; i < JustValueList.count(); i++){
+                    value = JustValueList[i];
+                    stream << "Ph0: " << value << "\n" ;
+                    if( min > value) min = value;
+                    if (max < value) max = value;
+                    ph0 -= value;
+                    }
+                diff = (max - min) * 360.0;
+                stream << "Diff: " << diff << " Minuten \n";
+                m_PhaseJustLogfile.flush();
+                m_PhaseJustLogfile.close();
+            }
             ph0 /= JustValueList.count(); // der mittelwert aus den messungen
             AHS = PhaseNodeMeasExec4;
             m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
