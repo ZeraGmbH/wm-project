@@ -6,7 +6,6 @@
 #include <qstringlist.h>
 #include <qobject.h>
 #include <qfile.h>
-#include <q3textstream.h>
 #include <qpixmap.h>
 #include <qpushbutton.h>
 #include <qaction.h>
