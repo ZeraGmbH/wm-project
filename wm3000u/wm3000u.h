@@ -10,8 +10,8 @@
 #include <q3progressdialog.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
-#include <Q3ValueList>
 #include <QHash>
+#include <QList>
 
 #include "zhclientsocket.h"
 #include "tcpconfig.h"
@@ -419,7 +419,7 @@ private:
     void ServerIFaceErrorHandling(int, QString, int);
     cSMTimer* m_ActTimer; // für actionhandler ablaufsteuerung
     cSMTimer* m_AsyncTimer; // für actionhandler ablaufsteuerung
-    Q3ValueList<int> AHSFifo;
+    QList<int> AHSFifo;
      
     cConfData m_ConfDataCopy; // kopie der konfigurationsdaten 
     cConfData SaveConfData; // retten der konfiguration während des justageablaufes
@@ -473,7 +473,7 @@ private:
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_OffsetMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_SelftestState; // hier merken wir uns wo´s weiter geht
-    Q3ValueList<float> JustValueList;
+    QList<float> JustValueList;
     QHash<QString, double> adjOffsetCorrectionHash; // offset correction is in lsb !!!!!
     QHash<QString, double> measOffsetCorrectionHash; // this hash is filled from file ... i think
     QString m_sJustText;
