@@ -7,12 +7,12 @@
 #include <q3mainwindow.h>
 #include <q3textbrowser.h>
 #include <qtimer.h>
-#include <q3progressdialog.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
 #include <QHash>
 #include <QList>
 
+#include "wmprogressdialog.h"
 #include "zhclientsocket.h"
 #include "tcpconfig.h"
 #include "logfile.h"
@@ -469,7 +469,7 @@ private:
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
-    Q3ProgressDialog *m_pProgressDialog;
+    wmProgressDialog *mWmProgressDialog;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_OffsetMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_SelftestState; // hier merken wir uns wo´s weiter geht
@@ -477,7 +477,6 @@ private:
     QHash<QString, double> adjOffsetCorrectionHash; // offset correction is in lsb !!!!!
     QHash<QString, double> measOffsetCorrectionHash; // this hash is filled from file ... i think
     QString m_sJustText;
-    QPushButton* m_pAbortButton;
     QString JDataFile;
     QFile m_SelftestLogfile;
     QFile m_PhaseJustLogfile;
