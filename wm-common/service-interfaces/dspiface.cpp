@@ -672,26 +672,26 @@ void cDspIFace::SetOffsetCorrection(int chn, float val) // setzt für kanal (int
 void cDspIFace::GetInterfaceData()
 {
     QString list;
-    // werte zuorden
+    QStringList DataEntryList, DataList; // werte zuorden 
     QString s;
     bool ok;
     
     list = iFaceSock->GetAnswer();
-    QStringList DataEntryList = list.split(";"); // wir haben jetzt eine stringliste mit allen werten
+    DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit allen werten
     float *val = m_pMeasData->data();
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
-        s = *it;
-        s = s.section(":",1,1);
-        QStringList DataList = s.split(",");
-        for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2,val++ ) {
-            s = *it2;
-            s.remove(';');
-            ulong vul = s.toULong(&ok); // test auf ulong
-            if (ok)
-                *((ulong*) val) = vul;
-            else
-                *val = s.toFloat();
-        }
+    s = *it;
+	s = s.section(":",1,1);
+	DataList = QStringList::split(",",s);
+	for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2,val++ ) {
+	    s = *it2;
+	    s.remove(';');
+	    ulong vul = s.toULong(&ok); // test auf ulong
+	    if (ok) 
+		*((ulong*) val) = vul;
+	    else 
+		*val = s.toFloat();
+	}
     }
 }
 
@@ -880,6 +880,7 @@ void cDspIFace::SendDspMemoryReadCommand()
 void cDspIFace::SendDspMemoryWriteCommand()
 {
     QString list;
+    QStringList DataEntryList; 
     QString s, Cmd;
     QTextStream ts( &Cmd, QIODevice::WriteOnly );
     
@@ -888,7 +889,7 @@ void cDspIFace::SendDspMemoryWriteCommand()
     list = m_pMeasData->VarList(); // liste mit allen variablen und deren länge
     float* fval = m_pMeasData->data();
     ulong* lval = (ulong*) fval;
-    QStringList DataEntryList = list.split(";"); // wir haben jetzt eine stringliste mit je variable, länge
+    DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit je variable, länge
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
         s = *it; // einen eintrag variable, länge
         ts << s.section(",",0,0); // den namen,
