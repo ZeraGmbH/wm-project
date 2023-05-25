@@ -3487,11 +3487,12 @@ void cWM3000I::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.16"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.60"));
+    if (m_bNewSamplerates) {
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.60"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.60"));
-
+    }
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
         m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
 
@@ -3504,11 +3505,12 @@ void cWM3000I::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.16"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.60"));
+    if (m_bNewSamplerates) {
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.60"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.60"));
-
+    }
     for (uint i = 0; i < m_sXRangeList.count()-1; i++)
         m_CalcInfoList.append(new cCalcInfo(chn, m_sXRangeList.at(i)->Selector()));
 
@@ -3535,14 +3537,14 @@ void cWM3000I::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW256.50", adcNadcX, In_IxAbs, adcNPhase, S256, 4, 20));
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW80.50", adcNadcX, In_IxAbs, adcXPhase, S80, 4, 20));
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW256.50", adcNadcX, In_IxAbs, adcXPhase, S256, 4, 20));
-if (false) {     // new sample rates
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcNPhase, S96, 4, 20));
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcXPhase, S96, 4, 20));
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcNPhase, S288, 4, 20));
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcXPhase, S288, 4, 20));
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW240.60", adcNadcX, In_IxAbs, adcNPhase, S240, 4, 20));
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW240.60", adcNadcX, In_IxAbs, adcXPhase, S240, 4, 20));
-}
+    if (m_bNewSamplerates) {         // new sample rates
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcNPhase, S96, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcXPhase, S96, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcNPhase, S288, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcXPhase, S288, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW240.60", adcNadcX, In_IxAbs, adcNPhase, S240, 4, 20));
+        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "5mA", "5mA", "ADW240.60", adcNadcX, In_IxAbs, adcXPhase, S240, 4, 20));
+    }
 
     // die liste für alle konv. bereiche in kanal n
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
