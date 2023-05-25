@@ -3296,17 +3296,19 @@ void cWM3000U::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
 
     // jetzt doch wieder .....
     // wir benötigen phasenkorrekturwerte in abhängigkeit von der adwandler samplerate
+
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW80.16"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW80.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW80.60"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.16"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.60"));
-    m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.50"));
-    m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.60"));
-    m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
-    m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.60"));
-
+    if (m_bNewSamplerates) {
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.50"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.60"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.60"));
+    }
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
         m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
 
@@ -3337,12 +3339,14 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
 */
     // jetzt doch wieder
     // aber nur für kanal ch0 bzw. N
+
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW80.50", adcNadcX, Un_UxAbs, adcNPhase, S80, 4, 20)); // bereiche optimal für hw freq messung, modus adc/adc, für 80 samples/periode und 4 messungen einschwingzeit, 10 messungen für stützstellenermittlung
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW256.50", adcNadcX, Un_UxAbs, adcNPhase, S256, 4, 20));
+    if (m_bNewSamplerates) {
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW96.50", adcNadcX, Un_UxAbs, adcNPhase, S96, 4, 20));
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW288.50", adcNadcX, Un_UxAbs, adcNPhase, S288, 4, 20));
     m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW240.60", adcNadcX, Un_UxAbs, adcNPhase, S240, 4, 20));
-
+    }
     // die liste für alle konv. bereiche in kanal n
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
         m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( m_sNRangeList.at(i)->Name(), "3.75V", m_sNRangeList.at(i)->Name(), sensNadcX, Un_UxAbs, sensNadcXPhase, S80, 4, 20));
