@@ -212,7 +212,8 @@ void cWM3000U::ActionHandler(int entryAHS)
     static int mCount;
     static cCalcInfo *PhaseCalcInfo;
     static cCalcInfo *OffsetCalcInfo;
-    static cJustMeasInfo *PhaseNodeMeasInfo;
+    //static cJustMeasInfo *PhaseNodeMeasInfo;
+    std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
     static cJustMeasInfo *OffsetMeasInfo;
     static float ph0,ph1;
     static float offs0, offs1;
@@ -1837,7 +1838,7 @@ void cWM3000U::ActionHandler(int entryAHS)
     case PhaseNodeMeasStart:
         m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
         StopMeasurement(); // die kumulieren jetzt nur
-        mWmProgressDialog = new wmProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.count()+1, g_WMView );//, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.size()+1, g_WMView );//, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
         mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
         mWmProgressDialog->setCaption(trUtf8("Phasenkorrekturkoeffizienten"));
 
@@ -1928,7 +1929,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         StopMeasurement(); // das kumuliert nur ....
         mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
         //PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.first(); // info was zu tun ist
-        PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.at(lprogress-1); // info was zu tun ist
+        PhaseNodeMeasInfo = std::move(m_PhaseNodeMeasInfoList.front()); // info was zu tun ist
 
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
@@ -2123,7 +2124,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                 mWmProgressDialog->setValue(lprogress);
                 //m_PhaseNodeMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
                 //m_PhaseNodeMeasInfoList.removeFirst();
-                if ((m_PhaseNodeMeasInfoList.count() <= lprogress ) || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
+                if ((m_PhaseNodeMeasInfoList.size() <= lprogress ) || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
                 { // wir sind fertig mit der ermittlung
                     if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                     {
@@ -3354,24 +3355,25 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     // jetzt doch wieder
     // aber nur für kanal ch0 bzw. N
 
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW80.50", adcNadcX, Un_UxAbs, adcNPhase, S80, 4, 20)); // bereiche optimal für hw freq messung, modus adc/adc, für 80 samples/periode und 4 messungen einschwingzeit, 10 messungen für stützstellenermittlung
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW256.50", adcNadcX, Un_UxAbs, adcNPhase, S256, 4, 20));
+    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW80.50", adcNadcX, Un_UxAbs, adcNPhase, S80, 4, 20))));
+    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW80.50", adcNadcX, Un_UxAbs, adcNPhase, S80, 4, 20)))); // bereiche optimal für hw freq messung, modus adc/adc, für 80 samples/periode und 4 messungen einschwingzeit, 10 messungen für stützstellenermittlung
+    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW256.50", adcNadcX, Un_UxAbs, adcNPhase, S256, 4, 20))));
     if (m_bNewSamplerates) {
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW96.50", adcNadcX, Un_UxAbs, adcNPhase, S96, 4, 20));
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW288.50", adcNadcX, Un_UxAbs, adcNPhase, S288, 4, 20));
-    m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( "3.75V", "3.75V", "ADW240.60", adcNadcX, Un_UxAbs, adcNPhase, S240, 4, 20));
+    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW96.50", adcNadcX, Un_UxAbs, adcNPhase, S96, 4, 20))));
+    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW288.50", adcNadcX, Un_UxAbs, adcNPhase, S288, 4, 20))));
+    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW240.60", adcNadcX, Un_UxAbs, adcNPhase, S240, 4, 20))));
     }
     // die liste für alle konv. bereiche in kanal n
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
-        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo( m_sNRangeList.at(i)->Name(), "3.75V", m_sNRangeList.at(i)->Name(), sensNadcX, Un_UxAbs, sensNadcXPhase, S80, 4, 20));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( m_sNRangeList.at(i)->Name(), "3.75V", m_sNRangeList.at(i)->Name(), sensNadcX, Un_UxAbs, sensNadcXPhase, S80, 4, 20))));
 
     // die liste für alle konv. bereiche in kanal x
     for (uint i = 0; i < m_sXRangeList.count()-1; i++)
-        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo("3.75V", m_sXRangeList.at(i)->Name(), m_sXRangeList.at(i)->Name(), sensXadcN, Un_UxAbs, sensXadcNPhase, S80, 4, 20));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo("3.75V", m_sXRangeList.at(i)->Name(), m_sXRangeList.at(i)->Name(), sensXadcN, Un_UxAbs, sensXadcNPhase, S80, 4, 20))));
 
     // + die liste der evt bereiche in kanal x
     for (uint i = 0; i < m_sEVTRangeList.count()-1; i++) // i = 0 wäre der safety range.... jetzt nicht mehr
-        m_PhaseNodeMeasInfoList.append(new cJustMeasInfo("3.75V", m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Selector(), sensXadcN, Un_EVT, sensEVTadcNPhase, S80, 4, 20));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo("3.75V", m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Selector(), sensXadcN, Un_EVT, sensEVTadcNPhase, S80, 4, 20))));
 
 }
 

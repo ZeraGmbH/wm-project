@@ -176,7 +176,7 @@ public:
     int m_nnMeas; // anzahl messungen zur messwertbestimmung
 };
 
-typedef QList<cJustMeasInfo*> cPhaseNodeMeasInfoList;
+typedef std::vector<std::unique_ptr<cJustMeasInfo>> cPhaseNodeMeasInfoList;
 typedef QList<cJustMeasInfo*> cOffsetMeasInfoList;
 
 #endif

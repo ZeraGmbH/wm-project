@@ -3,6 +3,8 @@
 #ifndef WMGLOBAL_H
 #define WMGLOBAL_H
 
+#include <memory>
+
 #include <QDir>
 #include <qstring.h>
 
