@@ -3,7 +3,8 @@
 #ifndef WMGLOBAL_H
 #define WMGLOBAL_H
 
-#include <q3ptrlist.h>
+#include <memory>
+
 #include <qstring.h>
 //Added by qt3to4:
 #include <Q3MemArray>
@@ -175,7 +176,7 @@ public:
     int m_nnMeas; // anzahl messungen zur messwertbestimmung
 };
 
-typedef Q3PtrList<cJustMeasInfo> cPhaseNodeMeasInfoList;
-typedef Q3PtrList<cJustMeasInfo> cOffsetMeasInfoList;
+typedef QList<cJustMeasInfo*> cPhaseNodeMeasInfoList;
+typedef QList<cJustMeasInfo*> cOffsetMeasInfoList;
 
 #endif
