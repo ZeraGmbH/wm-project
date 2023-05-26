@@ -1971,6 +1971,9 @@ void cWM3000U::ActionHandler(int entryAHS)
         mCount = PhaseNodeMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
         m_sJustText = trUtf8("Einschwingzeit läuft" );
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setMinMax2nd(0,4);
+        mWmProgressDialog->setMinMax3rd(0,4);
+        mWmProgressDialog->setValue3(mCount);
         QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(PhaseJustSyncSlot()));
         AHS = wm3000Idle; // wir sind erst mal fertig
         break; // PhaseNodeMeasExec1
@@ -1978,10 +1981,13 @@ void cWM3000U::ActionHandler(int entryAHS)
     case PhaseNodeMeasExec2:
         mCount--;
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setValue3(mCount);
+
         if (mCount == 0)
         { // eingeschwungen
             m_PhaseNodeMeasState = PhaseNodeMeasExec3; // ab jetzt messen wir wirklich
             mCount = PhaseNodeMeasInfo->m_nnMeas; // und setzen den zähler dafür
+            mWmProgressDialog->setMinMax3rd(0,mCount);
             switch (PhaseNodeMeasInfo->m_nJMode)
             { // geht anders .... aber ist so übersichtlicher
             case adcNPhase:
@@ -2001,6 +2007,8 @@ void cWM3000U::ActionHandler(int entryAHS)
                 break;
             }
             mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+            mWmProgressDialog->setValue3(mCount);
+
             JustValueList.clear(); // phasenwinkel werte liste leeren, zur aufnahme der neuen messwerte
         }
 
@@ -2036,6 +2044,7 @@ void cWM3000U::ActionHandler(int entryAHS)
 
         mCount--;
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        mWmProgressDialog->setValue3(mCount);
         if (mCount == 0)
         {
             qreal min(359.99), max(0.0), diff(0.0), value(0.0);
