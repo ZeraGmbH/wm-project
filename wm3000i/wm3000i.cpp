@@ -2258,7 +2258,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                     if (max < value) max = value;
                     ph0 -= value;
                 }
-                diff = (max - min) * 360.0;
+                diff = (max - min) * 60.0;
                 stream << "Diff: " << diff << " Minuten \n";
                 m_PhaseJustLogfile.flush();
                 m_PhaseJustLogfile.close();

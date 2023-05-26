@@ -2053,7 +2053,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                     if (max < value) max = value;
                     ph0 -= value;
                     }
-                diff = (max - min) * 360.0;
+                diff = (max - min) * 60.0;  // 1,6858° -> 1° 41' 9" -> 41,1516'
                 stream << "Diff: " << diff << " Minuten \n";
                 m_PhaseJustLogfile.flush();
                 m_PhaseJustLogfile.close();
