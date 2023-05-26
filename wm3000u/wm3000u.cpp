@@ -1927,7 +1927,8 @@ void cWM3000U::ActionHandler(int entryAHS)
     {
         StopMeasurement(); // das kumuliert nur ....
         mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
-        PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.first(); // info was zu tun ist
+        //PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.first(); // info was zu tun ist
+        PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.at(lprogress-1); // info was zu tun ist
 
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
@@ -2120,8 +2121,9 @@ void cWM3000U::ActionHandler(int entryAHS)
             {
                 lprogress++;
                 mWmProgressDialog->setValue(lprogress);
-                m_PhaseNodeMeasInfoList.removeFirst();
-                if (m_PhaseNodeMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
+                //m_PhaseNodeMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
+                //m_PhaseNodeMeasInfoList.removeFirst();
+                if ((m_PhaseNodeMeasInfoList.count() <= lprogress ) || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
                 { // wir sind fertig mit der ermittlung
                     if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                     {
@@ -2140,6 +2142,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                         m_PhaseJustLogfile.flush();
                         m_PhaseJustLogfile.close();
                     }
+                    m_PhaseNodeMeasInfoList.clear();
 
                     m_PhaseNodeMeasState = PhaseNodeMeasFinished;
                     QObject::connect(this,SIGNAL(ConfigReady()),this,SLOT(PhaseJustSyncSlot()));
@@ -2468,7 +2471,8 @@ void cWM3000U::ActionHandler(int entryAHS)
         {
             lprogress++;
             mWmProgressDialog->setValue(lprogress);
-            m_OffsetMeasInfoList.removeFirst();
+            m_OffsetMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
+            //m_OffsetMeasInfoList.removeFirst();
 
             if (m_OffsetMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
             { // wir sind fertig mit der ermittlung
@@ -2523,7 +2527,8 @@ void cWM3000U::ActionHandler(int entryAHS)
     case OffsetMeasWM3000Exec5Var:
         lprogress++;
         mWmProgressDialog->setValue(lprogress);
-        m_OffsetMeasInfoList.removeFirst();
+        m_OffsetMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
+        //m_OffsetMeasInfoList.removeFirst();
 
         if (m_OffsetMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
         { // wir sind fertig mit der ermittlung
@@ -3337,7 +3342,7 @@ void cWM3000U::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
 void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemachine weiß was zu tun ist
 {
     m_PhaseNodeMeasInfoList.clear();
-    m_PhaseNodeMeasInfoList.setAutoDelete( TRUE );
+    //m_PhaseNodeMeasInfoList.setAutoDelete( TRUE ); // wis how to delete the containing elements ?
 
     /* wir gleichen die ad-wandler nicht mehr ab
     // zuerst die adwandler abgleichen
@@ -3392,7 +3397,7 @@ void cWM3000U::SetOffsetMeasInfo(int te, int tm)
     QString key;
 
     m_OffsetMeasInfoList.clear();
-    m_OffsetMeasInfoList.setAutoDelete(true);
+    //m_OffsetMeasInfoList.setAutoDelete(true); // wis how to delete the containing elements?
 
     adjOffsetCorrectionHash.clear();
     measOffsetCorrectionHash.clear();
