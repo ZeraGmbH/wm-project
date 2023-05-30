@@ -51,6 +51,7 @@ void wmProgressDialog::setMinMaxValue(int min1, int max1, int min2, int max2,int
 
 void wmProgressDialog::setValue(int value)
 {
+    calcTimes(value);
     mProgressFirst->setValue(value);
 }
 
@@ -64,6 +65,12 @@ void wmProgressDialog::setValue3(int value)
     int val;
     val = mProgressThird->maximum();
     mProgressThird->setValue(val-value);
+    if (mShow){
+    mState->setText("Restzeit :" + mCalcRest.toString("hh:mm:ss") +"\nEndzeit" + mEndZeit.toString("hh:mm:ss") );
+    mCalcRest = mCalcRest.addSecs(-1);
+    }
+    else
+        mState->clear();
 }
 
 void wmProgressDialog::setTitel(QString str)
@@ -160,4 +167,31 @@ void wmProgressDialog::seuptGui()
     connect(mAbort,SIGNAL(clicked()),this,SLOT(abort()));
     this->show();
 
+}
+
+void wmProgressDialog::calcTimes(int val)
+{
+    int a,b,c;
+    if (val == 0) {
+        mStart0 = QTime::currentTime();
+        mShow = false;
+        mLastNumber = 0;
+    }
+    else {
+        if (mLastNumber != val) {
+                mNext = QTime::currentTime();
+                QTime time;
+                time.setHMS(0,0,0);
+                a = mStart0.secsTo(mNext);
+                if (val > 1){
+                    b= a / (val-1);
+                    c= (b * mProgressFirst->maximum()) - ((val-1)*b);
+                    mCalcRest = time.addSecs(c);
+                    time = QTime::currentTime();
+                    mEndZeit = time.addSecs(c);
+                    mShow = true;
+                }
+                mLastNumber = val;
+            }
+        }
 }

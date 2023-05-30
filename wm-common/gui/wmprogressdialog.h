@@ -7,7 +7,7 @@
 #include <QLabel>
 #include <QPlainTextEdit>
 #include <QHBoxLayout>
-
+#include <QTime>
 
 class wmProgressDialog : public QDialog
 {
@@ -49,8 +49,12 @@ private:
     QVBoxLayout *mvLay;
     QHBoxLayout *mhLay;
     bool mbAbort;
+    QTime mStart0, mNext, mCalcRest, mEndZeit;
+    bool mShow;
+    int mLastNumber;
 
     void seuptGui();
+    void calcTimes(int val);
 
 private slots:
     void abort();
