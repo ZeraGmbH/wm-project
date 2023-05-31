@@ -1,7 +1,8 @@
 #ifndef WM3000U_H
 #define WM3000U_H
 
-#include <q3ptrlist.h>
+#include <memory>
+
 #include <qstring.h>
 #include <qstringlist.h>
 #include <q3mainwindow.h>
@@ -470,6 +471,7 @@ private:
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
     wmProgressDialog *mWmProgressDialog;
+    std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_OffsetMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_SelftestState; // hier merken wir uns wo´s weiter geht
