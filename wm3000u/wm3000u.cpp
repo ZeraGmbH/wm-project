@@ -1,7 +1,6 @@
 // definition wm3000u
 
 #include <qapplication.h>
-#include <q3ptrlist.h>
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qobject.h>
@@ -207,13 +206,11 @@ void cWM3000U::ActionHandler(int entryAHS)
     static bool bOverloadMax = false;
     static bool bOverloadMaxOld = false;
     static bool bOverload = false;
-    static int lprogress;
+    static unsigned long lprogress;
     static int N;
     static int mCount;
     static cCalcInfo *PhaseCalcInfo;
     static cCalcInfo *OffsetCalcInfo;
-    //static cJustMeasInfo *PhaseNodeMeasInfo;
-    std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
     static cJustMeasInfo *OffsetMeasInfo;
     static float ph0,ph1;
     static float offs0, offs1;
@@ -1838,7 +1835,7 @@ void cWM3000U::ActionHandler(int entryAHS)
     case PhaseNodeMeasStart:
         m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
         StopMeasurement(); // die kumulieren jetzt nur
-        mWmProgressDialog = new wmProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.size()+1, g_WMView );//, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
+        mWmProgressDialog = new wmProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.size(), g_WMView );//, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
         mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
         mWmProgressDialog->setCaption(trUtf8("Phasenkorrekturkoeffizienten"));
 
@@ -1929,7 +1926,9 @@ void cWM3000U::ActionHandler(int entryAHS)
         StopMeasurement(); // das kumuliert nur ....
         mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
         //PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.first(); // info was zu tun ist
-        PhaseNodeMeasInfo = std::move(m_PhaseNodeMeasInfoList.front()); // info was zu tun ist
+        mWmProgressDialog->setValue2(N);
+        mWmProgressDialog->setValue(lprogress);
+        if (N == 0)PhaseNodeMeasInfo = std::move(m_PhaseNodeMeasInfoList.at(lprogress-1)); // info was zu tun ist
 
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
@@ -2112,7 +2111,6 @@ void cWM3000U::ActionHandler(int entryAHS)
         else
         {
             N++;
-            mWmProgressDialog->setValue2(N);
             if (N < 4)
             {
                 AHS = PhaseNodeMeasNodeConfig;
@@ -2121,10 +2119,9 @@ void cWM3000U::ActionHandler(int entryAHS)
             else
             {
                 lprogress++;
-                mWmProgressDialog->setValue(lprogress);
                 //m_PhaseNodeMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
                 //m_PhaseNodeMeasInfoList.removeFirst();
-                if ((m_PhaseNodeMeasInfoList.size() <= lprogress ) || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
+                if ((m_PhaseNodeMeasInfoList.size() <= lprogress-1 ) || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
                 { // wir sind fertig mit der ermittlung
                     if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
                     {

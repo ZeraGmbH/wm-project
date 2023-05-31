@@ -4,6 +4,7 @@
 #define WMGLOBAL_H
 
 #include <memory>
+#include <vector>
 
 #include <qstring.h>
 //Added by qt3to4:
