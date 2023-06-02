@@ -3971,11 +3971,16 @@ void cWM3000U::SetDspWMVarList() // variablen des dsp zusammenbauen
         DspIFace->addVarItem(ActValData, new cDspVar("PHIN",1,vApplication | vDspIntern));
         DspIFace->addVarItem(ActValData, new cDspVar("PHIX",1,vApplication | vDspIntern));
 
-        DspIFace->addVarItem(ActValData, new cDspVar("MESSSIGNAL0",nS,vDspIntern));
-        DspIFace->addVarItem(ActValData, new cDspVar("MESSSIGNAL1",nS,vDspIntern));
-        DspIFace->addVarItem(ActValData, new cDspVar("SCHAN",schanLen,vDspIntern)); // sinus, cosinus, hanning abwechselnd
-        DspIFace->addVarItem(ActValData, new cDspVar("MESSSIGNAL2",4*nSp,vDspIntern));
-        DspIFace->addVarItem(ActValData, new cDspVar("MESSSIGNAL3",4*nSp,vDspIntern));
+        RawValData0 = DspIFace->GetMVHandle("");
+        DspIFace->addVarItem(RawValData0, new cDspVar("MESSSIGNAL0",nS,vApplication | vDspIntern));
+        RawValData1 = DspIFace->GetMVHandle("");
+        DspIFace->addVarItem(RawValData1, new cDspVar("MESSSIGNAL1",nS,vApplication | vDspIntern));
+        RawValDataS = DspIFace->GetMVHandle("");
+        DspIFace->addVarItem(RawValDataS, new cDspVar("SCHAN",schanLen,vApplication | vDspIntern)); // sinus, cosinus, hanning abwechselnd
+        RawValData2 = DspIFace->GetMVHandle("");
+        DspIFace->addVarItem(RawValData2, new cDspVar("MESSSIGNAL2",4*nSp,vApplication | vDspIntern));
+        RawValData3 = DspIFace->GetMVHandle("");
+        DspIFace->addVarItem(RawValData3, new cDspVar("MESSSIGNAL3",4*nSp,vApplication | vDspIntern));
     }
 }
 

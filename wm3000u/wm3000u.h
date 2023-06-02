@@ -27,6 +27,7 @@
 #include "movingwindowfilter.h"
 #include "calcinfo.h"
 #include <justValues.h>
+#include "wmsampledialog.h"
 
 class cRSelectString: public QString {
 public:    
@@ -464,12 +465,19 @@ private:
     bool m_bDspMeasureIgnore;
     tJustValues m_JustValues;
     cDspMeasData* ActValData;
+    cDspMeasData* RawValData0;
+    cDspMeasData* RawValData1;
+    cDspMeasData* RawValDataS;
+    cDspMeasData* RawValData2;
+    cDspMeasData* RawValData3;
     cDspMeasData* MaxValData;
     cDspMeasData* RMSValData; // schnelle rms messung (4..26 * 20ms @ 50hz)
     cDspMeasData* ETHStatusHandle;
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
+    wmSampleDialog *mSampleDialog0;
+    wmSampleDialog *mSampleDialog1;
     wmProgressDialog *mWmProgressDialog;
     std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
