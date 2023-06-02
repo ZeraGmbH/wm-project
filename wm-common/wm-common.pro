@@ -23,6 +23,7 @@ HEADERS = \
     gui/wmoffsetvalbase.h \
     gui/wmprogressdialog.h \
     gui/wmrawactualconfigbase.h \
+    gui/wmsampledialog.h \
     just/justValues.h \
     scales-and-units/angleunits.h \
     scales-and-units/currentunits.h \
@@ -93,6 +94,7 @@ SOURCES = \
     gui/wmoeviewbase.cpp \
     gui/wmprogressdialog.cpp \
     gui/wmrawactualconfigbase.cpp \
+    gui/wmsampledialog.cpp \
     scales-and-units/angleunits.cpp \
     scales-and-units/currentunits.cpp \
     scales-and-units/errorunits.cpp \
