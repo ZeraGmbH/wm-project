@@ -110,8 +110,8 @@ void wmSampleDialog::paintLines(QPainter *qp)
     qp->setPen(pen);
 
     for ( int i(0); i< number;i++){
-        if (i!=0){
             akty = mDisplayValues.at(i);
+        if (i!=0){
             qp->drawLine(lastx,lasty,i,akty);
         }
     lastx = i;
