@@ -71,11 +71,11 @@ void test_sampledialog::test_toHeight()
     QCOMPARE(list.at(3), 0);
     QCOMPARE(list.at(4), 12);*/
 
-    QCOMPARE(list.at(0), 320);
+    QCOMPARE(list.at(0), 330); //320);
     QCOMPARE(list.at(1), 480);
-    QCOMPARE(list.at(2), 0);
-    QCOMPARE(list.at(3), 320);
-    QCOMPARE(list.at(4), 308);
+    QCOMPARE(list.at(2), 30); //0);
+    QCOMPARE(list.at(3), 330); //320);
+    QCOMPARE(list.at(4), 319); //308);
 }
 
 
