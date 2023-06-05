@@ -61,15 +61,16 @@ void wmSampleDialog::setMinMaxToMember()
 
 QList<int> wmSampleDialog::scaleFloatMemberValuesToHight()
 {
+    const int offset = 30;
     QList<int> list;
     float factor(1.0);
     int height = this->geometry().height();
     if (height != 0) {
-        factor = (std::fabs(mMinMax.first) + std::fabs(mMinMax.second)) / height;
+        factor = (std::fabs(mMinMax.first) + std::fabs(mMinMax.second)) / (height-offset);
         int correction = static_cast<int>(mMinMax.second / factor);
-        mNullLinie = correction;
+        mNullLinie = correction+offset;
         for (auto value : mCurveValues){
-            list.append(static_cast<int>((value/factor)*-1)+correction);
+            list.append(static_cast<int>((value/factor)*-1)+correction+offset);
         }
     }
     return list;
@@ -94,32 +95,48 @@ void wmSampleDialog::paintLines(QPainter *qp)
     QPen pen (Qt::black,1,Qt::SolidLine);
     qp->setPen(pen);
     qp->drawLine(0,mNullLinie,width,mNullLinie);
-    qp->drawText(20,20,mSignalName);
-    qp->drawText(20,40,"min: " + QString::number(mMinMax.first));
-    qp->drawText(20,60,"max: " + QString::number(mMinMax.second));
-    qp->drawText(20,80,"n :" + QString::number(mSamples));
-    qp->drawText(20,100,"w: " + QString::number(width));
+    qp->drawText(10,20,mSignalName);
+    qp->drawText(150,20,"min: " + QString::number(mMinMax.first));
+    qp->drawText(300,20,"max: " + QString::number(mMinMax.second));
+    qp->drawText(450,20,"n :" + QString::number(mSamples));
+    qp->drawText(500,20,"w: " + QString::number(width));
+
+    int horiVal;
+    int lastx, lasty, akty;
+    int number = mDisplayValues.count();
+
+    pen.setWidth(1);
+    pen.setColor(Qt::yellow);
+    qp->setPen(pen);
+
+    for ( int i(0); i< number;i++){
+        if (i!=0){
+            akty = mDisplayValues.at(i);
+            qp->drawLine(lastx,lasty,i,akty);
+        }
+    lastx = i;
+    lasty = akty;
+    }
 
     pen.setWidth(2);
     pen.setColor(Qt::blue);
     qp->setPen(pen);
 
-    int horiVal;
-    int number = mDisplayValues.count();
-
-    if (number > width) {
-        horiVal = (number / width)+1;
+//    if (number > width) {
+//        horiVal = (number / width)+1;
         horiVal = 1;
         for ( int i(0); i< number;i++){
             qp->drawPoint(i*horiVal,mDisplayValues.at(i));
         }
-    }
-    if (number < width) {
+
+
+//    }
+/*    if (number < width) {
         horiVal = (width / number)+1;
         horiVal = 1;
         for ( int i(0); i< number;){
             qp->drawPoint(i/horiVal,mDisplayValues.at(i));
             i = i + horiVal;
         }
-    }
+    }*/
 }
