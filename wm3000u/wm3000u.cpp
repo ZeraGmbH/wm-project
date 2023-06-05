@@ -187,12 +187,16 @@ cWM3000U::cWM3000U() :
     connect(m_OVLMsgBox,SIGNAL(WMBoxClosed()),this,SLOT(OverLoadMaxQuitSlot()));
     m_SelftestMsgBox = new cWMessageBox ( trUtf8("Selbstest"), trUtf8("Test beendet\nDetails stehen im Logfile"), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, 0, 0, false ) ;
     mWmProgressDialog = nullptr;
+    mSampleDialog0 = new wmSampleDialog(g_WMView);
+    mSampleDialog1 = new wmSampleDialog(g_WMView);
 }
 
 
 cWM3000U::~cWM3000U()
 {
     WriteSettings(".ses");
+    delete mSampleDialog0;
+    delete mSampleDialog1;
     delete DspIFace;
     delete PCBIFace;
 }
@@ -1444,9 +1448,48 @@ void cWM3000U::ActionHandler(int entryAHS)
             emit MeasureReady();
         }
 
-        AHS = wm3000Idle; // wir sind so oder so fertig
+        AHS = MeasureAllDataSampleRequest;
+        m_ActTimer->start(0,wm3000Continue);
+        //AHS = wm3000Idle; // wir sind so oder so fertig
         break; // TriggerMeasureCorrection
     }
+
+    case    MeasureAllDataSampleRequest :
+        DspIFace->DspMemoryRead(RawValData0);
+        AHS++;
+        break;
+
+    case    MeasureAllDataSample :
+    {
+        float *val;
+        QString str;
+        str = RawValData0->VarList();
+        mSampleDialog0->setSingalProperties(str);
+        val = DspIFace->data(RawValData0);
+        mSampleDialog0->setSampleValues(val);
+        mSampleDialog0->show();
+        AHS++;
+        m_ActTimer->start(0,wm3000Continue);
+        break;
+    }
+
+    case    MeasureAllDataSampleRequest2ndCh :
+        DspIFace->DspMemoryRead(RawValData1);
+        AHS++;
+        break;
+
+    case    MeasureAllDataSample2ndCh :
+    {
+        float *val;
+        QString str;
+        str = RawValData1->VarList();
+        mSampleDialog1->setSingalProperties(str);
+        val = DspIFace->data(RawValData1);
+        mSampleDialog1->setSampleValues(val);
+        mSampleDialog1->show();
+        AHS = wm3000Idle;
+        break;
+     }
 
 
     case RestartMeasurementStart:
