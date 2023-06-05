@@ -161,6 +161,11 @@ enum wm3000ActionHandlerState {
     MeasureGetOffsetCorrCh0,
     MeasureGetOffsetCorrCh1,
     MeasureCorrection, // hier ist messung zu ende
+    MeasureAllDataSampleRequest,
+    MeasureAllDataSample,
+    MeasureAllDataSampleRequest2ndCh,
+    MeasureAllDataSample2ndCh,
+
     
     MeasureLPStart, // 110
     MeasureLPComputation,
