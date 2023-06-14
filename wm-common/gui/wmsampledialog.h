@@ -11,34 +11,55 @@
 #include <QDialog>
 #include <QObject>
 
+class wmSampleData : public QObject
+{
+    Q_OBJECT
+public:
+    int mOffset;
+    int mSamples;
+    QString mSignalName;
+    QList<int> mDisplayValues;
+    QPair<float,float> mMinMax;
+    QList<float> mCurveValues;
+};
+
 class wmSampleDialog : public QDialog
 {
     Q_OBJECT
 public:
     explicit wmSampleDialog(QWidget *parent = nullptr);
-    void setSingalProperties(QString &str);
-    void setSampleValues(float *val);
+    void setChannelProperties(QString str);
+    void setSingalProperties(QString &str, int chan);
+    void setSignalNameCh0(QString str);
+    void setSignalNameCh1(QString str);
+    void setSampleValues(float *val, int chan = 0);
     QString getSignalName() {return mSignalName; };
     int getSignalSamples() {return mSamples;};
     QList<float> copyValuesToList(float *val);
-    void copyValuesToMemberList(float *val);
-    QPair<float,float> getMinMax();
-    void setMinMaxToMember();
-    QList<int> scaleFloatMemberValuesToHight();
-    void scaleToMemberIntValuesToHeight();
+
+    QPair<float,float> getMinMax(wmSampleData &values);
+    QList<int> scaleFloatMemberValuesToHight(wmSampleData &values);
+    void copyValuesToMemberList(float *val , wmSampleData &values);
+    void setMinMaxToMember(wmSampleData &values);
+    void nastyCorrectioApproach(wmSampleData &values);
+
+    QPair<float,float> getMinMaxFromValues(wmSampleData &data0, wmSampleData &data1);
+    void getMinMaxFromValuesToMember(QPair<float,float> value);
+
+    void scaleToMemberIntValuesToHeight(wmSampleData &values);
 
 protected:
     void paintEvent(QPaintEvent *e);
 private:
-    QString mSignalName;
-    int mSamples;
-    QList<int> mDisplayValues;
-    QList<float> mCurveValues;
+    wmSampleData mDataCh0, mDataCh1;
     QPair<float,float> mMinMax;
-    int mNullLinie;
 
-    void paintLines(QPainter *qp);
+    QString mSignalName;
+    int mNullLinie, mSamples ;
 
+    void paintLegend(QPainter *qp, QColor color, wmSampleData &values);
+    void paintCurve(QPainter *qp, QColor color, wmSampleData &values);
+    void paintNullinie(QPainter *qp);
 
 signals:
 

@@ -2,6 +2,7 @@
 #define TEST_SAMPLEDIALOG_H
 
 #include <QtTest>
+#include <QtGlobal>
 #include <wmsampledialog.h>
 
 // add necessary includes here
@@ -19,6 +20,7 @@ private slots:
     void test_copyFloats();
     void test_minMax();
     void test_toHeight();
+    void test_MinMaxFromData();
 };
 
 #endif // TEST_

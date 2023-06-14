@@ -24,6 +24,7 @@ HEADERS = \
     gui/wmprogressdialog.h \
     gui/wmrawactualconfigbase.h \
     gui/wmsampledialog.h \
+    gui/wmscopedialog.h \
     just/justValues.h \
     scales-and-units/angleunits.h \
     scales-and-units/currentunits.h \
@@ -95,6 +96,7 @@ SOURCES = \
     gui/wmprogressdialog.cpp \
     gui/wmrawactualconfigbase.cpp \
     gui/wmsampledialog.cpp \
+    gui/wmscopedialog.cpp \
     scales-and-units/angleunits.cpp \
     scales-and-units/currentunits.cpp \
     scales-and-units/errorunits.cpp \

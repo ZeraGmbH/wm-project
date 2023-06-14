@@ -2011,6 +2011,7 @@ void cWM3000I::ActionHandler(int entryAHS)
     case PhaseNodeMeasStart:
         m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
         StopMeasurement(); // die kumulieren jetzt nur
+        mSampleDialog0 = new wmScopeDialog(g_WMView);
         mWmProgressDialog = new wmProgressDialog(g_WMView);
         mWmProgressDialog->setLabelText( trUtf8("Koeffizienten 0 setzen ..."));
         mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
