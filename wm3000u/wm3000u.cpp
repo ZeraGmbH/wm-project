@@ -1464,7 +1464,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         float *val;
         QString str;
         str = RawValData0->VarList();
-        mSampleDialog0->setSingalProperties(str);
+        mSampleDialog0->setSingalProperties(str,0);
         val = DspIFace->data(RawValData0);
         mSampleDialog0->setSampleValues(val);
         mSampleDialog0->show();
@@ -1483,11 +1483,13 @@ void cWM3000U::ActionHandler(int entryAHS)
         float *val;
         QString str;
         str = RawValData1->VarList();
-        mSampleDialog1->setSingalProperties(str);
+        mSampleDialog1->setSingalProperties(str,1);
         val = DspIFace->data(RawValData1);
         mSampleDialog1->setSampleValues(val);
         mSampleDialog1->show();
-        AHS = wm3000Idle;
+        AHS = TriggerMeasureStart;
+        m_bwaitForCurveValuestoaraive = false;
+        m_ActTimer->start(0,wm3000Continue);
         break;
      }
 
@@ -3619,7 +3621,7 @@ void cWM3000U::MeasureSlot()
         else
         {
             if (m_binitDone)
-                emit StartStateMachine(TriggerMeasureStart);
+                emit StartStateMachine(MeasureAllDataSampleRequest); //was: TriggerMeasureStart);
         }
     }
 }
