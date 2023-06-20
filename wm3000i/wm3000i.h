@@ -26,7 +26,7 @@
 #include "movingwindowfilter.h"
 #include "calcinfo.h"
 #include <justValues.h>
-#include "wmsampledialog.h"
+#include "wmscopedialog.h"
 
 class cRSelectString: public QString {
 public:    
@@ -83,8 +83,10 @@ enum wm3000ActionHandlerState {
     InitializationReadDSPServerVersion,
     InitializationReadJustdataChksum,
     InitializationTestAdjustment,
+
     InitializationFinished,
-      
+    InitSampleDialog,
+
     ConfigurationStart,
     
     ConfigurationSetRanges, // block wie bei Initialization...also nicht neu realisiert
@@ -219,6 +221,10 @@ enum wm3000ActionHandlerState {
     PhaseNodeMeasNodeConfig, // für jeden knoten muss etwas umkonfiguriert werden
     PhaseNodeMeasExec1,
     PhaseNodeMeasExec2,
+    PhaseNodeGetAllDataRequest,
+    PhaseNodeGetAllData,
+    PhaseNodeGetAllDataRequest2ndCh,
+    PhaseNodeGetAllData2ndCh,
     PhaseNodeMeasExec3,
     PhaseNodeMeasExec4,            
     PhaseNodeMeasExec5,
@@ -483,8 +489,7 @@ private:
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
-    wmSampleDialog *mSampleDialog0;
-    wmSampleDialog *mSampleDialog1;
+    wmScopeDialog *mSampleDialog0;
     wmProgressDialog *mWmProgressDialog;
     std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
