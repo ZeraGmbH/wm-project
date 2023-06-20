@@ -1448,9 +1448,9 @@ void cWM3000U::ActionHandler(int entryAHS)
             emit MeasureReady();
         }
 
-        AHS = MeasureAllDataSampleRequest;
+        //
         m_ActTimer->start(0,wm3000Continue);
-        //AHS = wm3000Idle; // wir sind so oder so fertig
+        AHS = wm3000Idle; // wir sind so oder so fertig
         break; // TriggerMeasureCorrection
     }
 
