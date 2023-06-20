@@ -65,6 +65,7 @@ void WMViewBase::init()
     ui->ansichtDialogAction->setChecked(false);
     ui->ansichtEigenfehlerAction->setChecked(false);
     ui->ansichtEN61850Action->setChecked(false);
+    ui->ansichtScopeAction->setChecked(false);
 
     onLoadSession(".ses");
 
