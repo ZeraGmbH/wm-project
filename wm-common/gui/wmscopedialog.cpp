@@ -26,6 +26,12 @@ void wmScopeDialog::setComboBoxItems(int Channel, QStringList list)
 
 }
 
+void wmScopeDialog::setSampleValues(int Channel, float *val, QString name)
+{
+    mSample->setSingalProperties(name,Channel);
+    mSample->setSampleValues(val,Channel);
+}
+
 void wmScopeDialog::channel0Changed()
 {
     emit newCha0SelText(mChannel0->currentText());
