@@ -41,12 +41,12 @@ void wmSampleDialog::setSampleValues(float *val, int chan)
     if (chan == 0) {
         copyValuesToMemberList(val, mDataCh0);
         setMinMaxToMember(mDataCh0);
-        nastyCorrectioApproach(mDataCh0);
+        //nastyCorrectioApproach(mDataCh0);
     }
     if (chan == 1){
         copyValuesToMemberList(val, mDataCh1);
         setMinMaxToMember(mDataCh1);
-        nastyCorrectioApproach(mDataCh1);
+        //nastyCorrectioApproach(mDataCh1);
     }
     getMinMaxFromValuesToMember(getMinMaxFromValues(mDataCh0,mDataCh1));
 
