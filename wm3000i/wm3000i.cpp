@@ -2336,8 +2336,11 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
-            QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(PhaseJustSyncSlot()));
-            AHS = wm3000Idle; // wir werden von der nächsten messung getriggert
+            AHS = PhaseNodeGetAllDataRequest;
+            m_ActTimer->start(0,wm3000Continue);
+
+//            QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(PhaseJustSyncSlot()));
+//            AHS = wm3000Idle; // wir werden von der nächsten messung getriggert
         }
 
         break; // PhaseNodeMeasExec3
