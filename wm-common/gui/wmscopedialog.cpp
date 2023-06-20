@@ -3,12 +3,12 @@
 wmScopeDialog::wmScopeDialog(QWidget *parent)
     : QDialog{parent}
 {
-    mvlay = new QVBoxLayout;
+    mvlay = new QHBoxLayout;
     mChannel0 = new QComboBox;
     mChannel1 = new QComboBox;
     mvlay->addWidget(mChannel0);
     mvlay->addWidget(mChannel1);
-    mhlay = new QHBoxLayout;
+    mhlay = new QVBoxLayout;
     mhlay->addItem(mvlay);
     mSample = new wmSampleDialog;
     mhlay->addWidget(mSample);
