@@ -15,12 +15,13 @@ class wmScopeDialog : public QDialog
 public:
     wmScopeDialog(QWidget *parent);
     void setComboBoxItems(int Channel, QStringList list);
+    void setSampleValues(int Channel, float *val, QString name);
 signals:
     void newCha0SelText(QString str);
     void newCha1SelText(QString str);
 private:
-    QVBoxLayout *mvlay;
-    QHBoxLayout *mhlay;
+    QHBoxLayout *mvlay;
+    QVBoxLayout *mhlay;
     QComboBox *mChannel0, *mChannel1;
     wmSampleDialog *mSample;
 private slots:
