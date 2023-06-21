@@ -8,6 +8,7 @@ wmSampleDialog::wmSampleDialog(QWidget *parent)
 {
     mDataCh0.mOffset = 10;
     mDataCh1.mOffset = 20;
+    setMinimumSize(640,240);
 }
 
 void wmSampleDialog::setSingalProperties(QString &str,  int chan)
@@ -157,7 +158,7 @@ void wmSampleDialog::paintEvent(QPaintEvent *e)
     paintNullinie(&qp);
     paintLegend(&qp,Qt::blue,mDataCh0);
     paintLegend(&qp,Qt::red,mDataCh1);
-    paintCurve(&qp,Qt::black,mDataCh0);
+    paintCurve(&qp,Qt::blue,mDataCh0);
     paintCurve(&qp,Qt::red,mDataCh1);
 }
 

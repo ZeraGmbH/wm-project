@@ -17,30 +17,54 @@ wmScopeDialog::wmScopeDialog(QWidget *parent)
     connect(mChannel1,SIGNAL(currentIndexChanged()),this,SLOT(channel1Changed()));
 }
 
-void wmScopeDialog::setComboBoxItems(int Channel, QStringList list)
-{
-    if (Channel == 0 )
-        mChannel0->insertItems(0,list);
-    if (Channel == 1 )
-        mChannel1->insertItems(0,list);
-
-}
-
 void wmScopeDialog::setSampleValues(int Channel, float *val, QString name)
 {
     mSample->setSingalProperties(name,Channel);
     mSample->setSampleValues(val,Channel);
 }
 
+void wmScopeDialog::clearChannelPointerList()
+{
+    mDspMeasDataList.clear();
+}
+
+void wmScopeDialog::setChannelPointer(cDspMeasData *dspMeasData)
+{
+    mDspMeasDataList.append(dspMeasData);
+}
+
+void wmScopeDialog::updateBoxItems()
+{
+    mChannel0->clear();
+    mChannel1->clear();
+    foreach (cDspMeasData* poi, mDspMeasDataList ) {
+        mChannel0->insertItem(poi->VarList());
+        mChannel1->insertItem(poi->VarList());
+    }
+}
+
+cDspMeasData *wmScopeDialog::getSelectedChannelPointer(int channel)
+{
+    cDspMeasData * poi;
+
+    if (channel == 0 ) {
+        poi = mDspMeasDataList.at(mChannel0->currentItem());
+        mSample->setSignalNameCh0(poi->MeasVarList());
+    }
+    if (channel == 1 ) {
+        poi = mDspMeasDataList.at(mChannel1->currentItem());
+        mSample->setSignalNameCh1(poi->MeasVarList());
+    }
+   return poi;
+}
+
 void wmScopeDialog::channel0Changed()
 {
     emit newCha0SelText(mChannel0->currentText());
-    mSample->setSignalNameCh0(mChannel0->currentText());
 }
 
 void wmScopeDialog::channel1Changed()
 {
     emit newCha1SelText(mChannel1->currentText());
-    mSample->setSignalNameCh1(mChannel1->currentText());
 }
 

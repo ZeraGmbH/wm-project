@@ -84,8 +84,8 @@ enum wm3000ActionHandlerState {
     InitializationReadJustdataChksum,
     InitializationTestAdjustment,
 
-    InitializationFinished,
     InitSampleDialog,
+    InitializationFinished,
 
     ConfigurationStart,
     
@@ -514,6 +514,7 @@ private:
     bool m_bNoDCAdjust;
     QString m_IpAddress;
     void setupServers();
+    void setupSampleDialog();
 };
 
 #endif    
