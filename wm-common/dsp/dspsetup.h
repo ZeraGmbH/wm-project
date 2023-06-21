@@ -7,7 +7,7 @@
 struct MeasDataStruct
 {
     cDspMeasData* MaxValData;
-    cDspMeasData* RMSValData;
+    cDspMeasData* RMSValData; // schnelle rms messung (4..26 * 20ms @ 50hz)
     cDspMeasData* ActValData;
     cDspMeasData* RawValData0;
     cDspMeasData* RawValData1;
@@ -19,7 +19,10 @@ struct MeasDataStruct
 class DspSetup
 {
 public:
-    static void SetDspVarList(cConfData* confData, cDspIFace* DspIFace, MeasDataStruct &dspMeasData, int sampleCount);
+    void setDspVarList(cConfData* confData, cDspIFace* DspIFace, int sampleCount);
+    MeasDataStruct* getMeasData();
+private:
+    MeasDataStruct m_measData;
 };
 
 #endif // DSPSETUP_H
