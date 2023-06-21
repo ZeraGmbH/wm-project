@@ -472,7 +472,7 @@ private:
     cDspMeasData* ActValData;
     cDspMeasData* RawValData0;
     cDspMeasData* RawValData1;
-    cDspMeasData* RawValDataS;
+    cDspMeasData* RawValDataSinConHanning;
     cDspMeasData* RawValData2;
     cDspMeasData* RawValData3;
     cDspMeasData* MaxValData;
