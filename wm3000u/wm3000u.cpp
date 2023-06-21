@@ -188,7 +188,6 @@ cWM3000U::cWM3000U() :
     m_SelftestMsgBox = new cWMessageBox ( trUtf8("Selbstest"), trUtf8("Test beendet\nDetails stehen im Logfile"), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, 0, 0, false ) ;
     mWmProgressDialog = nullptr;
     mSampleDialog0 = new wmSampleDialog(g_WMView);
-    mSampleDialog1 = new wmSampleDialog(g_WMView);
 }
 
 
@@ -1488,7 +1487,6 @@ void cWM3000U::ActionHandler(int entryAHS)
         mSampleDialog1->setSampleValues(val);
         mSampleDialog1->show();
         AHS = TriggerMeasureStart;
-        m_bwaitForCurveValuestoaraive = false;
         m_ActTimer->start(0,wm3000Continue);
         break;
      }

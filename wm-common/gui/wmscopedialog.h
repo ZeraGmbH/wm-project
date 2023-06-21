@@ -8,18 +8,23 @@
 #include <QComboBox>
 
 #include <wmsampledialog.h>
+#include <dspiface.h>
 
 class wmScopeDialog : public QDialog
 {
     Q_OBJECT
 public:
     wmScopeDialog(QWidget *parent);
-    void setComboBoxItems(int Channel, QStringList list);
     void setSampleValues(int Channel, float *val, QString name);
+    void clearChannelPointerList();
+    void setChannelPointer(cDspMeasData *dspMeasData);
+    void updateBoxItems();
+    cDspMeasData *getSelectedChannelPointer(int channel);
 signals:
     void newCha0SelText(QString str);
     void newCha1SelText(QString str);
 private:
+    QList<cDspMeasData*> mDspMeasDataList;
     QHBoxLayout *mvlay;
     QVBoxLayout *mhlay;
     QComboBox *mChannel0, *mChannel1;
