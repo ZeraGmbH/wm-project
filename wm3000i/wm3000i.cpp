@@ -33,7 +33,6 @@
 #include "scpiaffectatatuscode.h"
 #include "scpioperationstates.h"
 #include "scpiquestionstates.h"
-#include "dspsetup.h"
 
 
 extern WMViewBase *g_WMView;
@@ -235,11 +234,11 @@ void cWM3000I::setupServers(){
 void cWM3000I::setupSampleDialog()
 {
     mSampleDialog0->clearChannelPointerList();
-    mSampleDialog0->setChannelPointer(RawValData0);
-    mSampleDialog0->setChannelPointer(RawValData1);
-    mSampleDialog0->setChannelPointer(RawValDataSinConHanning);
-    mSampleDialog0->setChannelPointer(RawValData2);
-    mSampleDialog0->setChannelPointer(RawValData3);
+    mSampleDialog0->setChannelPointer(m_dspSetup.getMeasData()->RawValData0);
+    mSampleDialog0->setChannelPointer(m_dspSetup.getMeasData()->RawValData1);
+    mSampleDialog0->setChannelPointer(m_dspSetup.getMeasData()->RawValDataSinConHanning);
+    mSampleDialog0->setChannelPointer(m_dspSetup.getMeasData()->RawValData2);
+    mSampleDialog0->setChannelPointer(m_dspSetup.getMeasData()->RawValData3);
     mSampleDialog0->updateBoxItems();
 }
 
@@ -1330,7 +1329,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                 emit AffectStatus(SetQuestStat, QuestNotJustified);
 
             emit AffectStatus(ResetOperStat, OperMeasuring);
-            DspIFace->DataAcquisition(ActValData); // holt die daten ins dsp interface
+            DspIFace->DataAcquisition(m_dspSetup.getMeasData()->ActValData); // holt die daten ins dsp interface
             emit AffectStatus(SetOperStat, OperMeasuring);
             AHS++;
         }
@@ -1344,7 +1343,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
-            float *source = DspIFace->data(ActValData);
+            float *source = DspIFace->data(m_dspSetup.getMeasData()->ActValData);
             float *dest = (float*) &ActValues.dspActValues;
             for (uint i=0; i< sizeof(ActValues.dspActValues)/sizeof(float);i++) *dest++ = *source++;
 
@@ -1592,7 +1591,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
-            DspIFace->DataAcquisition(RMSValData); // holt die daten ins dsp interface
+            DspIFace->DataAcquisition(m_dspSetup.getMeasData()->RMSValData); // holt die daten ins dsp interface
             AHS++;
         }
         break; // MeasureLPStart
@@ -1604,7 +1603,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
-            float *source = DspIFace->data(RMSValData);
+            float *source = DspIFace->data(m_dspSetup.getMeasData()->RMSValData);
             float *dest = (float*) &ActValues.dspRMSValues;
             for (uint i=0; i< sizeof(ActValues.dspRMSValues)/sizeof(float);i++) *dest++ = *source++;
 
@@ -1647,7 +1646,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         qDebug("RangeObsermatic Get MaxData");
 #endif
 
-        DspIFace->DataAcquisition(MaxValData); // holt die daten ins dsp interface
+        DspIFace->DataAcquisition(m_dspSetup.getMeasData()->MaxValData); // holt die daten ins dsp interface
         AHS++;
         break;
 
@@ -1659,7 +1658,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
-            float *source = DspIFace->data(MaxValData);
+            float *source = DspIFace->data(m_dspSetup.getMeasData()->MaxValData);
             float *dest = (float*) &MaxValues;
             for (uint i=0; i< sizeof(MaxValues)/sizeof(float);i++) *dest++ = *source++;
             AHS++;
@@ -4170,20 +4169,9 @@ int cWM3000I::getSampleRate(int sr)
 // alternative wäre gewesen generell das programm
 void cWM3000I::SetDspWMVarList() // variablen des dsp zusammenbauen 
 {
-    if (!m_ConfData.m_bSimulation)
-    {
+    if (!m_ConfData.m_bSimulation) {
         int sampleCount = getSampleRate(m_ConfData.m_nSRate);
-        MeasDataStruct measData = {
-            MaxValData,
-            RMSValData,
-            ActValData,
-            RawValData0,
-            RawValData1,
-            RawValDataSinConHanning,
-            RawValData2,
-            RawValData3
-        };
-        DspSetup::SetDspVarList(&m_ConfData, DspIFace, measData, sampleCount);
+        m_dspSetup.setDspVarList(&m_ConfData, DspIFace, sampleCount);
         if (mSampleDialog0)
             setupSampleDialog();
     }

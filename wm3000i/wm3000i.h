@@ -27,6 +27,7 @@
 #include "calcinfo.h"
 #include <justValues.h>
 #include "wmscopedialog.h"
+#include "dspsetup.h"
 
 class cRSelectString: public QString {
 public:    
@@ -477,14 +478,6 @@ private:
     bool m_bDspMeasureTriggerActive;
     bool m_bDspMeasureIgnore;
     tJustValues m_JustValues;
-    cDspMeasData* ActValData;
-    cDspMeasData* RawValData0;
-    cDspMeasData* RawValData1;
-    cDspMeasData* RawValDataSinConHanning;
-    cDspMeasData* RawValData2;
-    cDspMeasData* RawValData3;
-    cDspMeasData* MaxValData;
-    cDspMeasData* RMSValData; // schnelle rms messung (4..26 * 20ms @ 50hz)
     cDspMeasData* ETHStatusHandle;
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
@@ -513,6 +506,7 @@ private:
     bool m_bNewSamplerates;
     bool m_bNoDCAdjust;
     QString m_IpAddress;
+    DspSetup m_dspSetup;
     void setupServers();
     void setupSampleDialog();
 };
