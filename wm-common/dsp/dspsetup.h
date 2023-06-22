@@ -20,6 +20,7 @@ class DspSetup
 {
 public:
     void setDspVarList(cConfData* confData, cDspIFace* DspIFace, int sampleCount);
+    void SetDspWMCmdList(cConfData* confData, cDspIFace* DspIFace, int sampleCount, bool bnConventional);
     MeasDataStruct* getMeasData();
 private:
     MeasDataStruct m_measData;
