@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
     WMMeasValuesBase *g_WMErrMeasValView = new WMMeasValuesBase(g_WMView, machineName, lpUnitList); // fehlermesswerte anzeige erzeugen
     QObject::connect(g_WMView,SIGNAL(UIansichtFehlerMessungActionToggled(bool)),g_WMErrMeasValView,SLOT(onShowHide(bool))); // öffnen der fehlermesswert anzeige
     QObject::connect(g_WMErrMeasValView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtFehlerMessungActionSet(bool))); //schliessen der fehlermesswert anzeige
+    QObject::connect(g_WMView,SIGNAL(UIansichtScopeViewToggled(bool)),g_WMDevice,SLOT(wmScopeViewEnabled(bool)));
     QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMErrMeasValView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
     QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMErrMeasValView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
 

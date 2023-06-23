@@ -3463,6 +3463,12 @@ void cWM3000I::DefaultSettingsMeasurementSlot() // wird nach *rst aufgerufen
     m_OVLMsgBox->hide(); // falls die überlast message box offen ist schliessen wir sie
 }
 
+void cWM3000I::wmScopeViewEnabled(bool bshow)
+{
+    if(mScopeDialog)
+        mScopeDialog->setViewEnabled(bshow);
+}
+
 
 void cWM3000I::DefaultSettings(cConfData& cdata) // alle einstellungen default
 {
