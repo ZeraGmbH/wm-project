@@ -27,7 +27,7 @@
 #include "movingwindowfilter.h"
 #include "calcinfo.h"
 #include <justValues.h>
-#include "wmsampledialog.h"
+#include "wmscopedialog.h"
 #include "dspsetup.h"
 
 class cRSelectString: public QString {
@@ -84,6 +84,8 @@ enum wm3000ActionHandlerState {
     InitializationReadDSPServerVersion,
     InitializationReadJustdataChksum,
     InitializationTestAdjustment,
+
+    InitScopeDialog,
     InitializationFinished,// 40
       
     ConfigurationStart,
@@ -476,7 +478,7 @@ private:
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
-    wmSampleDialog *mSampleDialog0;
+    wmScopeDialog *mScopeDialog;
     wmSampleDialog *mSampleDialog1;
     wmProgressDialog *mWmProgressDialog;
     std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
