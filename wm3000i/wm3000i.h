@@ -370,6 +370,7 @@ public slots:
     void EN61850InfoRequestSlot(); 
     void DefaultSettingsSlot();
     void DefaultSettingsMeasurementSlot();
+    void wmScopeViewEnabled(bool bshow);
     
 private slots:
     void ActionHandler(int); // zur serialisierung von actions , arbeitet die actions hintereinander ab
