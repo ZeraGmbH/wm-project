@@ -2189,6 +2189,12 @@ void cWM3000I::ActionHandler(int entryAHS)
         mCount--;
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
         mWmProgressDialog->setValue3(mCount);
+        if (mWmProgressDialog->isAbort()) {
+            AHS = PhaseNodeMeasExec5;
+            N=4;
+            m_ActTimer->start(0,wm3000Continue);
+            break;
+        }
 
         if (mCount == 0) { // eingeschwungen
             m_PhaseNodeMeasState = PhaseNodeMeasExec3; // ab jetzt messen wir wirklich
@@ -2282,6 +2288,12 @@ void cWM3000I::ActionHandler(int entryAHS)
         int i;
         ph0 = ActValues.PHIN;
         ph1 = ActValues.PHIX;
+        if (mWmProgressDialog->isAbort()) {
+            AHS = PhaseNodeMeasExec5;
+            N=4;
+            m_ActTimer->start(0,wm3000Continue);
+            break;
+        }
 
         switch (PhaseNodeMeasInfo->m_nJMode)
         {
@@ -2350,6 +2362,13 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case PhaseNodeMeasExec4:
     {
+        if (mWmProgressDialog->isAbort()) {
+            AHS = PhaseNodeMeasExec5;
+            N=4;
+            m_ActTimer->start(0,wm3000Continue);
+            break;
+        }
+
         switch (PhaseNodeMeasInfo->m_nJMode)
         {
         case adcNPhase:
