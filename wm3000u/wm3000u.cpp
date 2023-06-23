@@ -187,15 +187,14 @@ cWM3000U::cWM3000U() :
     connect(m_OVLMsgBox,SIGNAL(WMBoxClosed()),this,SLOT(OverLoadMaxQuitSlot()));
     m_SelftestMsgBox = new cWMessageBox ( trUtf8("Selbstest"), trUtf8("Test beendet\nDetails stehen im Logfile"), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, 0, 0, false ) ;
     mWmProgressDialog = nullptr;
-    mSampleDialog0 = new wmSampleDialog(g_WMView);
+
 }
 
 
 cWM3000U::~cWM3000U()
 {
     WriteSettings(".ses");
-    delete mSampleDialog0;
-    delete mSampleDialog1;
+    delete mScopeDialog;
     delete DspIFace;
     delete PCBIFace;
 }
@@ -1453,39 +1452,57 @@ void cWM3000U::ActionHandler(int entryAHS)
         break; // TriggerMeasureCorrection
     }
 
+
+    case InitScopeDialog:
+    {
+        mScopeDialog = new wmScopeDialog(g_WMView);
+        setupSampleDialog();
+        AHS++;
+        m_ActTimer->start(0,wm3000Continue); // otherwise we must do something to continue
+        break;
+    }
+
+
     case    MeasureAllDataSampleRequest :
-        DspIFace->DspMemoryRead(m_dspSetup.getMeasData()->RawValData0);
+        if(mScopeDialog->isShowEnabled()){
+            if(mScopeDialog->isVisible()) mScopeDialog->hide();
+            AHS = TriggerMeasureStart;
+            m_ActTimer->start(0,wm3000Continue);
+            break;
+        }
+        DspIFace->DspMemoryRead(mScopeDialog->getSelectedChannelPointer(0));
         AHS++;
         break;
+
 
     case    MeasureAllDataSample :
     {
         float *val;
         QString str;
-        str = m_dspSetup.getMeasData()->RawValData0->VarList();
-        mSampleDialog0->setSingalProperties(str,0);
-        val = DspIFace->data(m_dspSetup.getMeasData()->RawValData0);
-        mSampleDialog0->setSampleValues(val);
-        mSampleDialog0->show();
+        str = mScopeDialog->getSelectedChannelPointer(0)->VarList();
+        val = DspIFace->data(mScopeDialog->getSelectedChannelPointer(0));
+        mScopeDialog->setSampleValues(0,val,str);
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
         break;
     }
 
+
     case    MeasureAllDataSampleRequest2ndCh :
-        DspIFace->DspMemoryRead(m_dspSetup.getMeasData()->RawValData1);
+        DspIFace->DspMemoryRead(mScopeDialog->getSelectedChannelPointer(1));
         AHS++;
         break;
+
 
     case    MeasureAllDataSample2ndCh :
     {
         float *val;
         QString str;
-        str = m_dspSetup.getMeasData()->RawValData1->VarList();
-        mSampleDialog1->setSingalProperties(str,1);
-        val = DspIFace->data(m_dspSetup.getMeasData()->RawValData1);
-        mSampleDialog1->setSampleValues(val);
-        mSampleDialog1->show();
+        str = mScopeDialog->getSelectedChannelPointer(1)->VarList();
+        val = DspIFace->data(mScopeDialog->getSelectedChannelPointer(1));
+        mScopeDialog->setSampleValues(1,val,str);
+        mScopeDialog->show();
+
         AHS = TriggerMeasureStart;
         m_ActTimer->start(0,wm3000Continue);
         break;
@@ -3083,6 +3100,18 @@ void cWM3000U::setupServers()
     *pdata = 0;
 }
 
+
+void cWM3000U::setupSampleDialog()
+{
+    mScopeDialog->clearChannelPointerList();
+    mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValData0);
+    mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValData1);
+    mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValDataSinConHanning);
+    mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValData2);
+    mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValData3);
+    mScopeDialog->updateBoxItems();
+}
+
 //------------------------------------------- ab hier stehen alle SLOTs--------------------------------------------------------
 
 void cWM3000U::GetOETAnalizeDone(void)
@@ -3960,8 +3989,8 @@ void cWM3000U::SetDspWMVarList() // variablen des dsp zusammenbauen
     if (!m_ConfData.m_bSimulation) {
         int sampleCount = getSampleRate(m_ConfData.m_nSRate);
         m_dspSetup.setDspVarList(&m_ConfData, DspIFace, sampleCount);
-        /*if (mSampleDialog0)
-            setupSampleDialog();*/
+        if (mScopeDialog)
+            setupSampleDialog();
     }
 }
 
