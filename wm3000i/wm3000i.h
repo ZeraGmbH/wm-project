@@ -85,7 +85,7 @@ enum wm3000ActionHandlerState {
     InitializationReadJustdataChksum,
     InitializationTestAdjustment,
 
-    InitSampleDialog,
+    InitScopeDialog,
     InitializationFinished,
 
     ConfigurationStart,
@@ -168,6 +168,11 @@ enum wm3000ActionHandlerState {
     MeasureGetOffsetCorrCh0,
     MeasureGetOffsetCorrCh1,
     MeasureCorrection, // hier ist messung zu ende
+    MeasureAllDataSampleRequest,
+    MeasureAllDataSample,
+    MeasureAllDataSampleRequest2ndCh,
+    MeasureAllDataSample2ndCh,
+
     
     MeasureLPStart,
     MeasureLPComputation,
@@ -222,10 +227,6 @@ enum wm3000ActionHandlerState {
     PhaseNodeMeasNodeConfig, // für jeden knoten muss etwas umkonfiguriert werden
     PhaseNodeMeasExec1,
     PhaseNodeMeasExec2,
-    PhaseNodeGetAllDataRequest,
-    PhaseNodeGetAllData,
-    PhaseNodeGetAllDataRequest2ndCh,
-    PhaseNodeGetAllData2ndCh,
     PhaseNodeMeasExec3,
     PhaseNodeMeasExec4,            
     PhaseNodeMeasExec5,
@@ -482,7 +483,7 @@ private:
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
-    wmScopeDialog *mSampleDialog0;
+    wmScopeDialog *mScopeDialog;
     wmProgressDialog *mWmProgressDialog;
     std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
