@@ -19,6 +19,8 @@ public:
     void clearChannelPointerList();
     void setChannelPointer(cDspMeasData *dspMeasData);
     void updateBoxItems();
+    void setViewEnabled(bool bshow);
+    bool isShowEnabled();
     cDspMeasData *getSelectedChannelPointer(int channel);
 signals:
     void newCha0SelText(QString str);
@@ -29,9 +31,8 @@ private:
     QVBoxLayout *mhlay;
     QComboBox *mChannel0, *mChannel1;
     wmSampleDialog *mSample;
+    bool m_bShow;
 private slots:
-    void channel0Changed();
-    void channel1Changed();
 };
 
 #endif // WMSCOPEDIALOG_H

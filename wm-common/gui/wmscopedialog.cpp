@@ -13,8 +13,7 @@ wmScopeDialog::wmScopeDialog(QWidget *parent)
     mSample = new wmSampleDialog;
     mhlay->addWidget(mSample);
     setLayout(mhlay);
-    connect(mChannel0,SIGNAL(currentIndexChanged()),this,SLOT(channel0Changed()));
-    connect(mChannel1,SIGNAL(currentIndexChanged()),this,SLOT(channel1Changed()));
+    m_bShow = false;
 }
 
 void wmScopeDialog::setSampleValues(int Channel, float *val, QString name)
@@ -43,6 +42,16 @@ void wmScopeDialog::updateBoxItems()
     }
 }
 
+void wmScopeDialog::setViewEnabled(bool bshow)
+{
+    m_bShow = bshow;
+}
+
+bool wmScopeDialog::isShowEnabled()
+{
+    return !m_bShow;
+}
+
 cDspMeasData *wmScopeDialog::getSelectedChannelPointer(int channel)
 {
     cDspMeasData * poi;
@@ -56,15 +65,5 @@ cDspMeasData *wmScopeDialog::getSelectedChannelPointer(int channel)
         mSample->setSignalNameCh1(poi->MeasVarList());
     }
    return poi;
-}
-
-void wmScopeDialog::channel0Changed()
-{
-    emit newCha0SelText(mChannel0->currentText());
-}
-
-void wmScopeDialog::channel1Changed()
-{
-    emit newCha1SelText(mChannel1->currentText());
 }
 
