@@ -680,18 +680,14 @@ void cDspIFace::GetInterfaceData()
     DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit allen werten
     float *val = m_pMeasData->data();
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
-    s = *it;
-	s = s.section(":",1,1);
-	DataList = QStringList::split(",",s);
-	for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2,val++ ) {
-	    s = *it2;
-	    s.remove(';');
-	    ulong vul = s.toULong(&ok); // test auf ulong
-	    if (ok) 
-		*((ulong*) val) = vul;
-	    else 
-		*val = s.toFloat();
-	}
+        s = *it;
+        s = s.section(":",1,1);
+        DataList = QStringList::split(",",s);
+        for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2,val++ ) {
+            s = *it2;
+            s.remove(';');
+            *val = s.toFloat();
+        }
     }
 }
 
