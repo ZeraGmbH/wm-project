@@ -133,6 +133,7 @@
     <addaction name="ansichtEigenfehlerAction"/>
     <addaction name="ansichtDialogAction"/>
     <addaction name="ansichtEN61850Action"/>
+    <addaction name="ansichtScopeAction"/>
    </widget>
    <widget class="QMenu" name="Einstellungen">
     <property name="title">
@@ -832,6 +833,17 @@
    </property>
    <property name="text">
     <string>&amp;Offset</string>
+   </property>
+  </action>
+  <action name="ansichtScopeAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Kurve</string>
+   </property>
+   <property name="ansichtScopeAction" stdset="0">
+    <string/>
    </property>
   </action>
  </widget>
