@@ -677,7 +677,13 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
-            sm = (m_ConfData.m_nSyncSource == Intern) ? 1 : 0;
+            if (m_ConfData.m_nSyncSource == Intern){
+                sm = 1;
+            }
+            else {
+                sm = 0;
+                emit PPSQuestionable(false); // reset PPS Status indicator on external Trigger setting
+            }
             PCBIFace->setSyncSource(sm);
             AHS++;
         }
@@ -3587,6 +3593,7 @@ void cWM3000I::externalTriggerTimeoutTriggerd()
     if (m_ConfData.m_nSyncSource == Extern) {
         m_ConfData.m_nSyncSource = Intern;
         m_ActTimer->start(0,ConfigurationSetSyncSource);
+        emit PPSQuestionable(true);
     }
 }
 
