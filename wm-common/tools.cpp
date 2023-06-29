@@ -119,3 +119,20 @@ void cSMTimer::TimeExpiredSlot()
     }
 }
 
+
+WmWatchDogTimer::WmWatchDogTimer()
+{
+    m_wdtState = wmwdt_idle;
+    setInterval(3000);
+    setSingleShot(true);
+    connect(this,SIGNAL(timeout()),this,SLOT(timeoutSlot()));
+}
+
+void WmWatchDogTimer::setState(int state)
+{
+    if (state > m_wdtState){
+        m_wdtState = state;
+        start();
+    }
+    if (m_wdtState == wmwdt_compu) m_wdtState = wmwdt_idle;
+}

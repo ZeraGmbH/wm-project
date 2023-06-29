@@ -16,6 +16,23 @@ double UserAtan(complex);
 double sign(double);
 char* sAlloc(QString&); // allokiert speicher für inhalt von qstring
 
+enum WdtStates
+{
+    wmwdt_idle = 0,
+    wmwdt_start,
+    wmwdt_meas,
+    wmwdt_compu
+};
+
+class WmWatchDogTimer : public QTimer
+{
+    Q_OBJECT
+public:
+    WmWatchDogTimer();
+    void setState(int state);
+private:
+    int m_wdtState;
+};
 
 struct SMTimerData
 {
