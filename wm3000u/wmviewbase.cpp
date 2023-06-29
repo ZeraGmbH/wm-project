@@ -50,6 +50,7 @@ void WMViewBase::init()
 {
     m_bJustified = false;
     m_bFreqQuestionable = false;
+    m_bPPSQuestionable = false;
     for (int i =0 ; i < nmaxRecentOEFiles; i++) m_nrecentOEFileIds[i] = -1;
     for (int i =0 ; i < nmaxRecentMVFiles; i++) m_nrecentMVFileIds[i] = -1;
     for (int i =0 ; i < nmaxRecentSESFiles; i++) m_nrecentSESFileIds[i] = -1;
@@ -151,7 +152,7 @@ void WMViewBase::ActualizeStates()
     ui->messungSimulationAction->setOn(m_ConfData.m_bSimulation);
     ui->hilfeSelbsttestAction->setDisabled(m_ConfData.m_bSimulation); // selbsttest disabled wenn simulation
     
-    m_statusLabelContainer.updateLabels(&m_ConfData, m_bJustified, m_bFreqQuestionable);
+    m_statusLabelContainer.updateLabels(&m_ConfData, m_bJustified, m_bFreqQuestionable, m_bPPSQuestionable);
 
     UpdateRecentFileList(recentOETFiles,m_ConfData.m_sOETFile);
     UpdateRecentFileList(recentResultFiles,m_ConfData.m_sResultFile);
@@ -652,3 +653,9 @@ void WMViewBase::SetFreqStatSlot(bool b)
     ActualizeStates();
 }
 
+
+void WMViewBase::SetPPSStatSlot(bool b)
+{
+    m_bPPSQuestionable = b;
+    ActualizeStates();
+}
