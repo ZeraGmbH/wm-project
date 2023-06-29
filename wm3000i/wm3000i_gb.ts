@@ -35,7 +35,7 @@
         <source>Alt+I</source>
         <translation>Alt+I</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Phasenfehler Prüfling</source>
         <translation>Phase error DUT</translation>
     </message>
@@ -43,7 +43,7 @@
         <source>&amp;Totzeit[ms]:</source>
         <translation>&amp;Delay[ms]:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&amp;Phasenlage[°]:</source>
         <translation>&amp;Phase angle[°]:</translation>
     </message>
@@ -127,7 +127,7 @@
         <source>Strenge EN61850 Synchronisation</source>
         <translation>Strong EN61850 Synchronisation</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Teilerverhältnisse</source>
         <translation>Transformer ratios</translation>
     </message>
@@ -220,14 +220,10 @@
         <translation>Set:</translation>
     </message>
     <message>
-        <source>Log</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Logfile</source>
         <translation>LogFile</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Grösse</source>
         <translation>Size
 </translation>
@@ -245,14 +241,6 @@
         <translation>C&amp;ancel</translation>
     </message>
     <message>
-        <source>/3</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>/sqrt(3)</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>In/&amp;ECT</source>
         <translation>In/&amp;ECT</translation>
     </message>
@@ -264,7 +252,7 @@
         <source>ECT</source>
         <translation>ECT</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Bitte überprüfen! 
 Erlaubt mV,V,kV
  oder mA,A,kA</source>
@@ -273,36 +261,12 @@ Allowed mV,V,kV
 or mA,A,kA</translation>
     </message>
     <message>
-        <source>In/&amp;Ix</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>8100</source>
         <translation>8100</translation>
     </message>
     <message>
-        <source>88BA</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>First ASDU:</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>1</source>
         <translation>1</translation>
-    </message>
-    <message>
-        <source>Last ASDU:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Source:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Destination: </source>
-        <translation></translation>
     </message>
     <message>
         <source>Signal</source>
@@ -327,6 +291,18 @@ or mA,A,kA</translation>
     <message>
         <source>Kanal X</source>
         <translation>Channel X</translation>
+    </message>
+    <message>
+        <source>  96 / Periode</source>
+        <translation type="obsolete">80 / period {96 ?}</translation>
+    </message>
+    <message>
+        <source>240 / Periode</source>
+        <translation type="obsolete">256 / period {240 ?}</translation>
+    </message>
+    <message>
+        <source>288 / Periode</source>
+        <translation type="obsolete">256 / period {288 ?}</translation>
     </message>
 </context>
 <context>
@@ -478,6 +454,38 @@ or mA,A,kA</translation>
         <source>Wandlermesseinrichtung WM1000I</source>
         <translation>Transformer measuring device WM1000I</translation>
     </message>
+    <message>
+        <source>Keine</source>
+        <translation>None</translation>
+    </message>
+    <message>
+        <source>Gestartet</source>
+        <translation>Started</translation>
+    </message>
+    <message>
+        <source>Gestoppt</source>
+        <translation>Stopped</translation>
+    </message>
+    <message>
+        <source>Simulation</source>
+        <translation>Simulation</translation>
+    </message>
+    <message>
+        <source>Justiert</source>
+        <translation>Justified</translation>
+    </message>
+    <message>
+        <source>Nicht justiert</source>
+        <translation>Not justified</translation>
+    </message>
+    <message>
+        <source>!!SignalFrequenz!!</source>
+        <translation>!!Signalfrequency!!</translation>
+    </message>
+    <message>
+        <source>kein PPS</source>
+        <translation>No PPS</translation>
+    </message>
 </context>
 <context>
     <name>RangeDialogBase</name>
@@ -500,10 +508,6 @@ or mA,A,kA</translation>
 </context>
 <context>
     <name>VersionViewBase</name>
-    <message>
-        <source>Versions</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Device:</source>
         <translation>Device:</translation>
@@ -537,8 +541,12 @@ or mA,A,kA</translation>
         <translation>DSP Server:</translation>
     </message>
     <message>
+        <source>Versions</source>
+        <translation>Versions</translation>
+    </message>
+    <message>
         <source>----------</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -551,7 +559,7 @@ or mA,A,kA</translation>
         <source>Feldbreite:</source>
         <translation>Fieldwidth:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Auflösung:</source>
         <translation>Resolution:</translation>
     </message>
@@ -564,24 +572,8 @@ or mA,A,kA</translation>
         <translation>Loadpoint</translation>
     </message>
     <message>
-        <source>Total RMS</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>1. Harm. RMS</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Fehler</source>
         <translation>Error</translation>
-    </message>
-    <message>
-        <source>IEC</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>ANSI</source>
-        <translation></translation>
     </message>
     <message>
         <source>Winkel</source>
@@ -598,6 +590,22 @@ or mA,A,kA</translation>
     <message>
         <source>RCF</source>
         <translation>RCF</translation>
+    </message>
+    <message>
+        <source>Total RMS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1. Harm. RMS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IEC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ANSI</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -618,17 +626,9 @@ or mA,A,kA</translation>
         <source>%</source>
         <translation>%</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>°</source>
         <translation>°</translation>
-    </message>
-    <message>
-        <source>---.---</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>-.-</source>
-        <translation></translation>
     </message>
     <message>
         <source>LP(X):</source>
@@ -642,6 +642,14 @@ or mA,A,kA</translation>
         <source>RCF:</source>
         <translation>RCF:</translation>
     </message>
+    <message>
+        <source>---.---</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-.-</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WMOeViewBase</name>
@@ -653,11 +661,11 @@ or mA,A,kA</translation>
         <source>Wandler:</source>
         <translation>Transformer:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Primär:</source>
         <translation>Primary:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Sekundär:</source>
         <translation>Secondary:</translation>
     </message>
@@ -696,6 +704,14 @@ or mA,A,kA</translation>
         <source>Ix:</source>
         <translation>Ix:</translation>
     </message>
+    <message>
+        <source>Xn:</source>
+        <translation>Xn:</translation>
+    </message>
+    <message>
+        <source>Xx:</source>
+        <translation>Xx:</translation>
+    </message>
 </context>
 <context>
     <name>WMRawActualConfigBase</name>
@@ -708,24 +724,8 @@ or mA,A,kA</translation>
         <translation>Amplitude</translation>
     </message>
     <message>
-        <source>x 1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>x 1/SQRT(2)</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Winkel</source>
         <translation>Angle</translation>
-    </message>
-    <message>
-        <source>math. positiv</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>techn. positiv</source>
-        <translation></translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -739,14 +739,30 @@ or mA,A,kA</translation>
         <source>prim/sek</source>
         <translation>prim/sec</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>primär</source>
         <translation>primary</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>sekundär</source>
         <translation>secondary
 </translation>
+    </message>
+    <message>
+        <source>x 1</source>
+        <translation>x 1</translation>
+    </message>
+    <message>
+        <source>x 1/SQRT(2)</source>
+        <translation>x 1/SQRT(2)</translation>
+    </message>
+    <message>
+        <source>math. positiv</source>
+        <translation>math. positive</translation>
+    </message>
+    <message>
+        <source>techn. positiv</source>
+        <translation>tec. positive</translation>
     </message>
 </context>
 <context>
@@ -771,7 +787,7 @@ or mA,A,kA</translation>
         <source>--------- </source>
         <translation>---------</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -842,7 +858,7 @@ or mA,A,kA</translation>
         <source>&amp;Bereich</source>
         <translation>&amp;Range</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Bereiche auswählen</source>
         <translation>Select Ranges</translation>
     </message>
@@ -882,7 +898,7 @@ or mA,A,kA</translation>
         <source>S&amp;imulation</source>
         <translation>S&amp;imulation</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Simulierte Messung durchführen</source>
         <translation>Running simulated measurement</translation>
     </message>
@@ -934,7 +950,7 @@ or mA,A,kA</translation>
         <source>Informationen zu Zera</source>
         <translation>Information concerning Zera</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Info über &amp;Zera</source>
         <translation>Info about &amp;Zera</translation>
     </message>
@@ -954,7 +970,7 @@ or mA,A,kA</translation>
         <source>Informationen zu Qt</source>
         <translation>Information concerning Qt</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Info über &amp;Qt</source>
         <translation>Info about &amp;Qt</translation>
     </message>
@@ -974,11 +990,11 @@ or mA,A,kA</translation>
         <source>Istwerte Fenster</source>
         <translation>Actual values window</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>&amp;Öffnen</source>
         <translation>&amp;Open</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Öffnen einer Eigenfehlertabelle</source>
         <translation>Open reference transformer file</translation>
     </message>
@@ -1018,7 +1034,7 @@ or mA,A,kA</translation>
         <source>F5</source>
         <translation>F5</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Öffnen der Ergebnisdatei</source>
         <translation>Open result file</translation>
     </message>
@@ -1030,7 +1046,7 @@ or mA,A,kA</translation>
         <source>&amp;Bereiche</source>
         <translation>&amp;Ranges</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Bereiche anwählen</source>
         <translation>Select ranges</translation>
     </message>
@@ -1183,10 +1199,6 @@ or mA,A,kA</translation>
         <translation>English</translation>
     </message>
     <message>
-        <source>new item</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>F&amp;lash programmieren</source>
         <translation>F&amp;lash programming</translation>
     </message>
@@ -1202,13 +1214,9 @@ or mA,A,kA</translation>
         <source>&amp;Version</source>
         <translation>&amp;Version</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Übersicht Versionen</source>
         <translation>Overview versions</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation></translation>
     </message>
     <message>
         <source>&amp;Selbsttest</source>
@@ -1255,10 +1263,6 @@ or mA,A,kA</translation>
         <translation>!!Signalfrequency!!</translation>
     </message>
     <message>
-        <source>&amp;Release Info</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Polnisch</source>
         <translation>Polish</translation>
     </message>
@@ -1285,7 +1289,7 @@ or mA,A,kA</translation>
 </context>
 <context>
     <name>cOwnError</name>
-    <message utf8="true">
+    <message>
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -1322,7 +1326,7 @@ Nicht identische Versionsnummer !</source>
 Nicht identische Seriennummer !</source>
         <translation>Not identical serial number !</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Berechnung läuft ...</source>
         <translation>Computation running ...</translation>
     </message>
@@ -1342,27 +1346,27 @@ Nicht identische Seriennummer !</source>
         <source>Konfiguration setzen ...</source>
         <translation>Setting Configuration ...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Einschwingzeit läuft</source>
         <translation>settling time</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Messung Kanal N, adc läuft</source>
         <translation type="obsolete">Measurement channel N, adc running</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Messung Kanal N, %1 läuft</source>
         <translation>Measurement channel N, %1 running</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Messung Kanal X, adc läuft</source>
         <translation type="obsolete">Measurement channel X, adc running</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Messung Kanal X, %1 läuft</source>
         <translation>Measurement channel X, %1 running</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Berechnung und Datenübertragung ...</source>
         <translation>Computation and data setting ...</translation>
     </message>
@@ -1460,11 +1464,11 @@ See logfile for details.</translation>
         <source>Noch nicht implementiert</source>
         <translation>Not yet implemented</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Übersteuerung</source>
         <translation>Overload</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Es ist eine Übersteuerung im grössten Bereich
 aufgetreten. Bitte überprüfen Sie die Messgrössen</source>
         <translation>An overload condition has occured in maximum range.
@@ -1487,60 +1491,13 @@ Please examine load conditions</translation>
 Details stehen im Logfile</source>
         <translation>Test finished, see logfile for details</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Gerät ist nicht justiert !</source>
         <translation>Device is not justified !</translation>
     </message>
-    <message utf8="true">
+    <message>
         <source>Messung Kanal X(ECT), %1 läuft</source>
         <translation type="obsolete">Measurement X(EXT), %1 active</translation>
-    </message>
-    <message>
-        <source>Initialisierung...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Offsetkorrekturen</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <source>Messung Kanal N %1, X %2 läuft</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <source>Messung Kanal N %1 läuft</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <source>Messung Kanal X %1 läuft</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Messung...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Offsetmessung Kanal N</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Offsetmessung Kanal X</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
-    <name>cZeraInfo</name>
-    <message>
-        <source>&lt;h3&gt;About ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA was founded in 1920.&lt;/p&gt;&lt;p&gt;It is a developer and manufactor of high precision&lt;br&gt;measurement systems for the energy market.&lt;/p&gt;&lt;p&gt;We provide powerful solutions for meter testing&lt;br&gt;as well as transformer testing.&lt;/p&gt;&lt;p&gt;For further information please visit &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About WM3000I&lt;/h3&gt;&lt;p&gt;WM3000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;&lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, ECT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About WM1000I&lt;/h3&gt;&lt;p&gt;WM1000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;&lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</source>
-        <translation></translation>
     </message>
 </context>
 </TS>
