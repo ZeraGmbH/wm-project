@@ -413,6 +413,7 @@ signals:
     void OffsetValue(double);
     void JustifiedSignal(bool);
     void FreqQuestionable(bool);
+    void PPSQuestionable(bool);
     
 protected:
     tVersSerial SerialVersions; // serien nummer und version
