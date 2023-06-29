@@ -7,7 +7,7 @@ StatusLabelContainer::StatusLabelContainer(IStatusLabelXRangeParent *xRangeLabel
 {
 }
 
-void StatusLabelContainer::updateLabels(cConfData *confData, bool adjusted, bool bFreqQuestionable)
+void StatusLabelContainer::updateLabels(cConfData *confData, bool adjusted, bool bFreqQuestionable, bool bextTriggerInvalid)
 {
     QString fileNameErrTable = confData->m_sOETFile;
     QFileInfo fiOETF(fileNameErrTable);
@@ -30,6 +30,8 @@ void StatusLabelContainer::updateLabels(cConfData *confData, bool adjusted, bool
         m_pStatusLabel->setStyleSheet(adjusted ? "QLabel {color:text;}" : "QLabel {color:red;}");
     }
     m_pFreqLabel->setText( bFreqQuestionable ? QObject::tr("!!SignalFrequenz!!") : "");
+    m_pExternTriggerLabel->setText(bextTriggerInvalid ? QObject::tr("kein PPS") : "" );
+    m_pExternTriggerLabel->setStyleSheet(bextTriggerInvalid ? "QLabel {color:red;}" : "QLabel {color:text;}");
 }
 
 void StatusLabelContainer::CreateStatusBar(QStatusBar *statusBar, QWidget *labelParent)
@@ -42,6 +44,7 @@ void StatusLabelContainer::CreateStatusBar(QStatusBar *statusBar, QWidget *label
     m_pSimulationLabel = new QLabel(labelParent);
     m_pStatusLabel = new QLabel(labelParent);
     m_pFreqLabel = new QLabel(labelParent);
+    m_pExternTriggerLabel = new QLabel(labelParent);
     m_pIPLabel = new QLabel(labelParent);
 
     statusBar->addPermanentWidget(m_pOwnErrTableLabel, 0);
@@ -54,6 +57,7 @@ void StatusLabelContainer::CreateStatusBar(QStatusBar *statusBar, QWidget *label
     statusBar->addPermanentWidget(m_pSimulationLabel, 0);
     statusBar->addPermanentWidget(m_pStatusLabel, 0);
     statusBar->addPermanentWidget(m_pFreqLabel, 0);
+    statusBar->addPermanentWidget(m_pExternTriggerLabel, 0);
     statusBar->addPermanentWidget(new QFrame(labelParent), 1);
     statusBar->addPermanentWidget(m_pIPLabel, 0);
 
