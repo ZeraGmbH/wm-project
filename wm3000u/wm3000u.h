@@ -405,6 +405,7 @@ signals:
     void SelftestDone(int); // 0 ok  -1 fehler
     void OffsetValue(double);
     void FreqQuestionable(bool);
+    void PPSQuestionable(bool);
 
 protected:
     tVersSerial SerialVersions; // serien nummer und version
