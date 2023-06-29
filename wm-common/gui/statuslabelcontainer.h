@@ -18,7 +18,7 @@ class StatusLabelContainer : public QObject
     Q_OBJECT
 public:
     StatusLabelContainer(IStatusLabelXRangeParent* xRangeLabelParent);
-    void updateLabels(cConfData *confData, bool adjusted, bool bFreqQuestionable);
+    void updateLabels(cConfData *confData, bool adjusted, bool bFreqQuestionable, bool bextTriggerInvalid);
     void CreateStatusBar(QStatusBar *statusBar, QWidget* labelParent);
 private:
     IStatusLabelXRangeParent* m_xRangeLabelParent;
@@ -31,6 +31,7 @@ private:
     QLabel* m_pSimulationLabel = nullptr;
     QLabel* m_pStatusLabel = nullptr;
     QLabel* m_pFreqLabel = nullptr;
+    QLabel* m_pExternTriggerLabel = nullptr;
     QLabel* m_pIPLabel = nullptr;
 
 private slots:
