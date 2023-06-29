@@ -47,6 +47,7 @@ public slots:
     virtual void RemoteCtrlInfoSlot( bool remote );
     virtual void SetJustifiedSlot( bool b );
     virtual void SetFreqStatSlot(bool b);
+    virtual void SetPPSStatSlot(bool b);
 
 signals:
     void SendConfDataSignal(cConfData*);
@@ -110,6 +111,7 @@ private:
     QStringList recentSESFiles;
     bool m_bJustified;
     bool m_bFreqQuestionable;
+    bool m_bPPSQuestionable;
     StatusLabelContainer m_statusLabelContainer;
 
     void init();
