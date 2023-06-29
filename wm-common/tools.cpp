@@ -125,7 +125,6 @@ WmWatchDogTimer::WmWatchDogTimer()
     m_wdtState = wmwdt_idle;
     setInterval(3000);
     setSingleShot(true);
-    connect(this,SIGNAL(timeout()),this,SLOT(timeoutSlot()));
 }
 
 void WmWatchDogTimer::setState(int state)
