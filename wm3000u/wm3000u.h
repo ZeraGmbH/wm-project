@@ -379,6 +379,7 @@ private slots:
     void SelftestSyncSlot(); // zur synchronisation des selbsttest ablaufes mit configuration und messung
     void SelftestAbortSlot();
     void OverLoadMaxQuitSlot();
+    void externalTriggerTimeoutTriggerd();
     
     
 signals:    
@@ -504,6 +505,7 @@ private:
     bool m_bNoDCAdjust;
     QString m_IpAddress;
     DspSetup m_dspSetup;
+    WmWatchDogTimer m_wmwdt;
     void setupServers();
     void setupSampleDialog();
 };
