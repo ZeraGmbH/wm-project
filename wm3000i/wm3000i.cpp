@@ -188,6 +188,7 @@ cWM3000I::cWM3000I() :
     connect(m_OVLMsgBox,SIGNAL(WMBoxClosed()),this,SLOT(OverLoadMaxQuitSlot()));
     m_SelftestMsgBox = new cWMessageBox ( trUtf8("Selbstest"), trUtf8("Test beendet\nDetails stehen im Logfile"), QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, 0, 0, false ) ;
     mWmProgressDialog = nullptr;
+    connect(&m_wmwdt,SIGNAL(timeout()),this,SLOT(externalTriggerTimeoutTriggerd()));
 }
 
 
@@ -1265,6 +1266,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         break; // ConfigurationTestDsp61850EthSynchronisation
 
     case ConfigurationFinished:
+        m_wmwdt.setState(wmwdt_idle);
         if (m_ConfData.m_bSimulation) {
         }
         else
@@ -1303,6 +1305,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         break; // SetRangeFinished
 
     case TriggerMeasureStart:
+        m_wmwdt.setState(wmwdt_start);
         m_bDspMeasureTriggerActive = true; // der trigger ist aktiviert
         DspIFace->TriggerIntHKSK(1); // die intliste hksk = 1 triggern
         AHS++;
@@ -1314,6 +1317,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case MeasureDataAcquisition:
     case TriggerMeasureDataAcquisition:
+        m_wmwdt.setState(wmwdt_meas);
         if (m_ConfData.m_bSimulation) {
             AHS = wm3000Idle;
         }
@@ -1339,6 +1343,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case MeasureComputation:
     case TriggerMeasureComputation:
+        m_wmwdt.setState(wmwdt_compu);
         if (m_ConfData.m_bSimulation) {
             AHS = wm3000Idle; // wenn fehler war sind wir idle -> ok
         }
@@ -3575,6 +3580,16 @@ void cWM3000I::OverLoadMaxQuitSlot()
     emit StartStateMachine(SenseProtectionOff);
     AHSFifo.remove(RangeObsermaticStart); // alle events zur bereichüberwachung löschen
 }
+
+
+void cWM3000I::externalTriggerTimeoutTriggerd()
+{
+    if (m_ConfData.m_nSyncSource == Extern) {
+        m_ConfData.m_nSyncSource = Intern;
+        m_ActTimer->start(0,ConfigurationSetSyncSource);
+    }
+}
+
 
 void cWM3000I::SetPhaseCalcInfo() // wir init. die liste damit die statemachine weiß was zu tun ist
 {
