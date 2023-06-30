@@ -2415,6 +2415,7 @@ void cWM3000I::ActionHandler(int entryAHS)
     case InitScopeDialog:
     {
         mScopeDialog = new wmScopeDialog(g_WMView);
+        connect(mScopeDialog,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtScopeViewSet(bool)));
         setupSampleDialog();
         AHS++;
         m_ActTimer->start(0,wm3000Continue); // otherwise we must do something to continue

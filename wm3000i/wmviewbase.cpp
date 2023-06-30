@@ -70,6 +70,8 @@ void WMViewBase::init()
 
     onLoadSession(".ses");
     connect(ui->ansichtScopeAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtScopeViewToggled(bool)));
+    connect(this,SIGNAL(UIansichtScopeViewSet(bool)),ui->ansichtScopeAction,SLOT(setChecked(bool)));
+
     connect(ui->ansichtFehlerMessungAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtFehlerMessungActionToggled(bool))); // öffnen der fehlermesswert anzeige
     connect(ui->ansichtFehlerMessungAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // wir speichern die laufende sitzung immer
     connect(this,SIGNAL(UIansichtFehlerMessungActionSet(bool)),ui->ansichtFehlerMessungAction,SLOT(setChecked(bool)));
