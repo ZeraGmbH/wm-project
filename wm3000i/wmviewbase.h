@@ -68,6 +68,7 @@ signals:
     void JustFlashImportSignal(QString);
     void JustFlashExportSignal(QString);
     void UIansichtScopeViewToggled(bool);
+    void UIansichtScopeViewSet(bool);
     void UIansichtFehlerMessungActionToggled(bool);
     void UIansichtFehlerMessungActionSet(bool);
     void UIansichtEigenfehlerActionToggled(bool);
