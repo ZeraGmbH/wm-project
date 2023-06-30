@@ -24,14 +24,17 @@ enum WdtStates
     wmwdt_compu
 };
 
-class WmWatchDogTimer : public QTimer
+class WmWatchDogTimer : public QObject
 {
     Q_OBJECT
 public:
     WmWatchDogTimer();
     void setState(int state);
+signals:
+    void timeout();
 private:
     int m_wdtState;
+    int m_count;
 };
 
 struct SMTimerData

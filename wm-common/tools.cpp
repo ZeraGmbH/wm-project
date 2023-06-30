@@ -123,15 +123,17 @@ void cSMTimer::TimeExpiredSlot()
 WmWatchDogTimer::WmWatchDogTimer()
 {
     m_wdtState = wmwdt_idle;
-    setInterval(3000);
-    setSingleShot(true);
+    m_count = 0;
 }
 
 void WmWatchDogTimer::setState(int state)
 {
-    if (state > m_wdtState){
-        m_wdtState = state;
-        start();
+    if (state == m_wdtState){
+        m_count = m_count+1;
     }
-    if (m_wdtState == wmwdt_compu) m_wdtState = wmwdt_idle;
+    else {
+        m_count = 0;
+        m_wdtState = state;
+    }
+    if (m_count > 4 ) emit timeout();
 }
