@@ -22,10 +22,13 @@ public:
     void setViewEnabled(bool bshow);
     bool isShowEnabled();
     cDspMeasData *getSelectedChannelPointer(int channel);
+
 signals:
     void newCha0SelText(QString str);
     void newCha1SelText(QString str);
+    void sigIsVisible(bool);
 private:
+    virtual void 	closeEvent ( QCloseEvent * ce ) override;
     QList<cDspMeasData*> mDspMeasDataList;
     QHBoxLayout *mvlay;
     QVBoxLayout *mhlay;
