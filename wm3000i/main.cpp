@@ -12,6 +12,7 @@
 #include <QString>
 
 #include "zerainfo.h"
+#include "infostrings.h"
 #include "confdialogbase.h"
 #include "rangedialogbase.h"
 #include "wmmeasvaluesbase.h"
@@ -116,8 +117,11 @@ int main(int argc, char *argv[])
     cReleaseInfo releaseInfo;
     QObject::connect(g_WMView, SIGNAL(UIhilfeReleaseInfoActionActivated()), &releaseInfo, SLOT(show()));
 
-
-    cZeraInfo *g_WMInfo = new cZeraInfo; // info slots
+    cZeraInfo *g_WMInfo;
+    if(g_WMDevice->isConventional())
+        g_WMInfo = new cZeraInfo(wm1000iInfoTitle, wm1000iInfo);
+    else
+        g_WMInfo = new cZeraInfo(wm3000iInfoTitle, wm3000iInfo);
 
     QList<eUnit *>lpUnitList;
     lpUnitList.append(LoadpointUnit + LPProzent);
