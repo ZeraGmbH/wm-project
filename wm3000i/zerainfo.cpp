@@ -9,6 +9,11 @@
 
 extern cWM3000I* g_WMDevice;
 
+cZeraInfo::cZeraInfo(QString machineInfoTitle, QString machineInfo) :
+    m_machineInfoTitle(machineInfoTitle), m_machineInfo(machineInfo)
+{
+}
+
 void cZeraInfo::AboutZeraSlot()
 {
     QMessageBox *pAboutZera=new QMessageBox(QString("About ZERA"),
@@ -31,25 +36,13 @@ void cZeraInfo::AboutWM3000Slot()
 {
     QMessageBox *pAboutWM;
 
-    if (g_WMDevice->isConventional())
-        pAboutWM=new QMessageBox(QString("About WM1000I"),
-                     tr("<h3>About WM1000I</h3>"
-                        "<p>WM1000I is the new current transformer test<br>device developed by ZERA.</p>"
-                        "<p>It provides abilities of testing conventional<br>transformers.</p>"),
-                        QMessageBox::NoIcon,
-                        QMessageBox::NoButton,
-                        QMessageBox::NoButton,
-                        QMessageBox::NoButton);
-    else
-        pAboutWM=new QMessageBox(QString("About WM3000I"),
-                     tr("<h3>About WM3000I</h3>"
-                        "<p>WM3000I is the new current transformer test<br>device developed by ZERA.</p>"
-                        "<p>It provides abilities of testing conventional<br>transformers, ECT as well as nonconventional<br>transformers using IEC 61850-9-2.</p>"),
-                        QMessageBox::NoIcon,
-                        QMessageBox::NoButton,
-                        QMessageBox::NoButton,
-                        QMessageBox::NoButton);
-    
-     pAboutWM->show();
+    pAboutWM=new QMessageBox(m_machineInfoTitle,
+                 tr(m_machineInfo),
+                    QMessageBox::NoIcon,
+                    QMessageBox::NoButton,
+                    QMessageBox::NoButton,
+                    QMessageBox::NoButton);
+
+    pAboutWM->show();
 }
 
