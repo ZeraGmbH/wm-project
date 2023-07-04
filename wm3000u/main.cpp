@@ -11,6 +11,7 @@
 #include <qmenubar.h>
 
 #include "zerainfo.h"
+#include "infostrings.h"
 #include "confdialogbase.h"
 #include "dbushelper.h"
 #include "rangedialogbase.h"
@@ -116,7 +117,11 @@ int main(int argc, char *argv[])
     cReleaseInfo releaseInfo;
     QObject::connect(g_WMView, SIGNAL(UIhilfeReleaseInfoActionActivated()), &releaseInfo, SLOT(show()));
 
-    cZeraInfo *g_WMInfo = new cZeraInfo; // info slots
+    cZeraInfo *g_WMInfo;
+    if(g_WMDevice->isConventional())
+        g_WMInfo = new cZeraInfo(wm1000uInfoTitle, wm1000uInfo);
+    else
+        g_WMInfo = new cZeraInfo(wm3000uInfoTitle, wm3000uInfo);
 
     QList<eUnit *>lpUnitList;
     lpUnitList.append(LoadpointUnit + LPProzent);

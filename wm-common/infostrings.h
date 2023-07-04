@@ -11,4 +11,16 @@
                     <p>WM3000I is the new current transformer test<br>device developed by ZERA.</p> \
                     <p>It provides abilities of testing conventional<br>transformers, ECT as well as nonconventional<br>transformers using IEC 61850-9-2.</p>"
 
+#define wm1000uInfoTitle "About WM1000U"
+#define wm1000uInfo "<h3>About WM1000U</h3> \
+                    <p>WM1000U is the new voltage transformer test<br>device developed by ZERA.</p> \
+                    <p>It provides abilities of testing conventional<br>transformers.</p>"
+
+#define wm3000uInfoTitle "About WM3000U"
+#define wm3000uInfo "<h3>About WM3000U</h3> \
+                    <p>WM3000U is the new voltage transformer test<br>device developed by ZERA.</p> \
+                    <p>It provides abilities of testing conventional<br>transformers.</p>"
+
+
+
 #endif // INFOSTRINGS_H

@@ -80,7 +80,8 @@ HEADERS = \
     versserial.h \
     wmactvalues.h \
     wmparameter.h \
-    zeraglobal.h
+    zeraglobal.h \
+    zerainfo.h
 
 SOURCES = \
     client-access/clientsocketdevice.cpp \
@@ -134,7 +135,8 @@ SOURCES = \
     settings/sessionstreamer.cpp \
     tcpconfig.cpp \
     tools.cpp \
-    wmparameter.cpp
+    wmparameter.cpp \
+    zerainfo.cpp
 
 FORMS = \
     gui/en61850monitor.ui \
