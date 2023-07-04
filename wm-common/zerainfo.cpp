@@ -5,9 +5,6 @@
 #include <qpixmap.h>
 
 #include "zerainfo.h"
-#include "wm3000i.h"
-
-extern cWM3000I* g_WMDevice;
 
 cZeraInfo::cZeraInfo(QString machineInfoTitle, QString machineInfo) :
     m_machineInfoTitle(machineInfoTitle), m_machineInfo(machineInfo)

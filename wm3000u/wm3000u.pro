@@ -8,7 +8,6 @@ INCLUDEPATH	+= .
 HEADERS	+=  \
 	wmglobal.h \
     wmuoffsetcustomlabels.h \
-	zerainfo.h \
 	wm3000u.h \
 	pcbiface.h \
 	wm3000scpiface.h \
@@ -23,7 +22,6 @@ HEADERS	+=  \
 SOURCES	+=  \
 	main.cpp \
     wmuoffsetcustomlabels.cpp \
-	zerainfo.cpp \
 	wm3000u.cpp \
 	pcbiface.cpp \
 	wm3000scpiface.cpp \
