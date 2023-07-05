@@ -590,12 +590,12 @@ Dozwolone mV,V,kV</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="162"/>
+        <location filename="main.cpp" line="169"/>
         <source>WM1000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM1000U</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="165"/>
+        <location filename="main.cpp" line="172"/>
         <source>WM3000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM3000U</translation>
     </message>
@@ -1043,7 +1043,7 @@ Dozwolone mV,V,kV</translation>
     </message>
     <message>
         <location filename="wmviewbase.ui" line="279"/>
-        <location filename="wmviewbase.cpp" line="149"/>
+        <location filename="wmviewbase.cpp" line="151"/>
         <source>Messung starten</source>
         <translation>Uruchomienie pomiaru</translation>
     </message>
@@ -1467,17 +1467,17 @@ Dozwolone mV,V,kV</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="143"/>
+        <location filename="wmviewbase.cpp" line="145"/>
         <source>S&amp;top</source>
         <translation>S&amp;top</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="144"/>
+        <location filename="wmviewbase.cpp" line="146"/>
         <source>Messung anhalten</source>
         <translation>Zatrzymanie pomiaru</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="148"/>
+        <location filename="wmviewbase.cpp" line="150"/>
         <source>S&amp;tart</source>
         <translation>S&amp;tart</translation>
     </message>
@@ -1514,64 +1514,64 @@ Dozwolone mV,V,kV</translation>
         <translation type="vanished">brak</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="164"/>
+        <location filename="wmviewbase.cpp" line="166"/>
         <source>Eigenfehlertabellen (*.oet)</source>
         <translation>Tabele błędów wzorca (*.oet)</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="165"/>
+        <location filename="wmviewbase.cpp" line="167"/>
         <source>Eigenfehlertabellen</source>
         <translation>Tabele błędów wzorca</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="296"/>
+        <location filename="wmviewbase.cpp" line="298"/>
         <source>Eigenfehlertabelle (*oet)</source>
         <translation>Tabela błędów wzorca (*.oet)</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="299"/>
+        <location filename="wmviewbase.cpp" line="301"/>
         <source>Speichern unter</source>
         <translation>Zapisz jako</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="316"/>
+        <location filename="wmviewbase.cpp" line="318"/>
         <source>Ergebnisdateien (*.xml)</source>
         <translation>Pliki wyników (*.xml)</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="318"/>
+        <location filename="wmviewbase.cpp" line="320"/>
         <source>Ergebnisdateien</source>
         <translation>Pliki wyników</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="464"/>
-        <location filename="wmviewbase.cpp" line="481"/>
+        <location filename="wmviewbase.cpp" line="466"/>
+        <location filename="wmviewbase.cpp" line="483"/>
         <source>Sitzung Name (*.ses)</source>
         <translation>Nazwa sesji (*.ses)</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="467"/>
+        <location filename="wmviewbase.cpp" line="469"/>
         <source>Sitzung speichern</source>
         <translation>Zapisz sesję</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="483"/>
+        <location filename="wmviewbase.cpp" line="485"/>
         <source>Sitzung laden</source>
         <translation>Załaduj sesję</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="601"/>
-        <location filename="wmviewbase.cpp" line="614"/>
+        <location filename="wmviewbase.cpp" line="603"/>
+        <location filename="wmviewbase.cpp" line="616"/>
         <source>Datei Name (*.xml)</source>
         <translation>Nazwa pliku (*.xml)</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="604"/>
+        <location filename="wmviewbase.cpp" line="606"/>
         <source>Justagedaten exportieren</source>
         <translation>Export danych adiustacji</translation>
     </message>
     <message>
-        <location filename="wmviewbase.cpp" line="617"/>
+        <location filename="wmviewbase.cpp" line="619"/>
         <source>Justagedaten importieren</source>
         <translation>Import danych adiustacji</translation>
     </message>
@@ -1644,42 +1644,42 @@ Keine DC Justage Daten !</source>
         <translation type="vanished">Brak danych ustawienia DC !</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="1751"/>
-        <location filename="wm3000u.cpp" line="1845"/>
+        <location filename="wm3000u.cpp" line="1747"/>
+        <location filename="wm3000u.cpp" line="1841"/>
         <source>Berechnung läuft ...</source>
         <translation>Obliczanie w toku...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="1914"/>
+        <location filename="wm3000u.cpp" line="1910"/>
         <source>Koeffizienten 0 setzen ...</source>
         <translation>Resetowanie współczynników...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="1752"/>
-        <location filename="wm3000u.cpp" line="1846"/>
-        <location filename="wm3000u.cpp" line="1915"/>
-        <location filename="wm3000u.cpp" line="2256"/>
-        <location filename="wm3000u.cpp" line="2657"/>
-        <location filename="wm3000u.cpp" line="2687"/>
-        <location filename="wm3000u.cpp" line="2772"/>
+        <location filename="wm3000u.cpp" line="1748"/>
+        <location filename="wm3000u.cpp" line="1842"/>
+        <location filename="wm3000u.cpp" line="1911"/>
+        <location filename="wm3000u.cpp" line="2252"/>
+        <location filename="wm3000u.cpp" line="2653"/>
+        <location filename="wm3000u.cpp" line="2683"/>
+        <location filename="wm3000u.cpp" line="2768"/>
         <source>Abbruch</source>
         <translation>Przerwij</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="1916"/>
+        <location filename="wm3000u.cpp" line="1912"/>
         <source>Phasenkorrekturkoeffizienten</source>
         <translation>Współczynniki korekty fazy</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2003"/>
-        <location filename="wm3000u.cpp" line="2332"/>
-        <location filename="wm3000u.cpp" line="2801"/>
+        <location filename="wm3000u.cpp" line="1999"/>
+        <location filename="wm3000u.cpp" line="2328"/>
+        <location filename="wm3000u.cpp" line="2797"/>
         <source>Konfiguration setzen ...</source>
         <translation>Ustawianie konfiguracji...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2049"/>
-        <location filename="wm3000u.cpp" line="2377"/>
+        <location filename="wm3000u.cpp" line="2045"/>
+        <location filename="wm3000u.cpp" line="2373"/>
         <source>Einschwingzeit läuft</source>
         <translation>Czas ustalania się</translation>
     </message>
@@ -1688,8 +1688,8 @@ Keine DC Justage Daten !</source>
         <translation type="obsolete">Pomiar kanał N, ADC uruchomiony</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2071"/>
-        <location filename="wm3000u.cpp" line="2077"/>
+        <location filename="wm3000u.cpp" line="2067"/>
+        <location filename="wm3000u.cpp" line="2073"/>
         <source>Messung Kanal N, %1 läuft</source>
         <translation>Pomiar kanał N, %1 uruchomiony</translation>
     </message>
@@ -1698,104 +1698,104 @@ Keine DC Justage Daten !</source>
         <translation type="obsolete">Pomiar kanał X, ADC uruchomiony</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2074"/>
-        <location filename="wm3000u.cpp" line="2081"/>
+        <location filename="wm3000u.cpp" line="2070"/>
+        <location filename="wm3000u.cpp" line="2077"/>
         <source>Messung Kanal X, %1 läuft</source>
         <translation>Pomiar kanał X, %1 uruchomiony</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2128"/>
-        <location filename="wm3000u.cpp" line="2428"/>
+        <location filename="wm3000u.cpp" line="2124"/>
+        <location filename="wm3000u.cpp" line="2424"/>
         <source>Berechnung und Datenübertragung ...</source>
         <translation>Obliczanie i transmisja danych...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2255"/>
+        <location filename="wm3000u.cpp" line="2251"/>
         <source>Initialisierung...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2257"/>
+        <location filename="wm3000u.cpp" line="2253"/>
         <source>Offsetkorrekturen</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2394"/>
+        <location filename="wm3000u.cpp" line="2390"/>
         <source>Messung Kanal N %1, X %2 läuft</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2398"/>
+        <location filename="wm3000u.cpp" line="2394"/>
         <source>Messung Kanal N %1 läuft</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2403"/>
+        <location filename="wm3000u.cpp" line="2399"/>
         <source>Messung Kanal X %1 läuft</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2656"/>
-        <location filename="wm3000u.cpp" line="2686"/>
+        <location filename="wm3000u.cpp" line="2652"/>
+        <location filename="wm3000u.cpp" line="2682"/>
         <source>Messung...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2658"/>
+        <location filename="wm3000u.cpp" line="2654"/>
         <source>Offsetmessung Kanal N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2688"/>
+        <location filename="wm3000u.cpp" line="2684"/>
         <source>Offsetmessung Kanal X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2771"/>
+        <location filename="wm3000u.cpp" line="2767"/>
         <source>Selbstest ...</source>
         <translation>Autotest ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2773"/>
+        <location filename="wm3000u.cpp" line="2769"/>
         <source>Selbsttest</source>
         <translation>Autotest</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2810"/>
+        <location filename="wm3000u.cpp" line="2806"/>
         <source>Bereiche setzen ...</source>
         <translation>Ustawianie zakresów ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2825"/>
-        <location filename="wm3000u.cpp" line="2846"/>
+        <location filename="wm3000u.cpp" line="2821"/>
+        <location filename="wm3000u.cpp" line="2842"/>
         <source>Messung ...</source>
         <translation>Pomiar ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2835"/>
+        <location filename="wm3000u.cpp" line="2831"/>
         <source>Modus setzen ...</source>
         <translation>Ustawianie trybu ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2954"/>
+        <location filename="wm3000u.cpp" line="2950"/>
         <source>Keine Verbindung zu %1:%2
 </source>
         <translation>Brak połączenia z %1:%2</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2956"/>
+        <location filename="wm3000u.cpp" line="2952"/>
         <source>Host nicht gefunden.
 </source>
         <translation>Host nie znaleziony.</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2958"/>
+        <location filename="wm3000u.cpp" line="2954"/>
         <source>Host gefunden. Keine Verbindung zu Server.
 </source>
         <translation>Host znaleziony. Brak połączenia z serwerem.</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2960"/>
+        <location filename="wm3000u.cpp" line="2956"/>
         <source>Das Programm kann ohne Server nur
 im Simulations Modus betrieben werden.
 </source>
@@ -1803,39 +1803,39 @@ im Simulations Modus betrieben werden.
 jedynie w trybie symulacji.</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2963"/>
-        <location filename="wm3000u.cpp" line="2971"/>
-        <location filename="wm3000u.cpp" line="2982"/>
-        <location filename="wm3000u.cpp" line="2992"/>
+        <location filename="wm3000u.cpp" line="2959"/>
+        <location filename="wm3000u.cpp" line="2967"/>
+        <location filename="wm3000u.cpp" line="2978"/>
+        <location filename="wm3000u.cpp" line="2988"/>
         <source>TCP-Verbindung</source>
         <translation>Połączenie TCP</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2964"/>
-        <location filename="wm3000u.cpp" line="2975"/>
-        <location filename="wm3000u.cpp" line="2986"/>
-        <location filename="wm3000u.cpp" line="2996"/>
+        <location filename="wm3000u.cpp" line="2960"/>
+        <location filename="wm3000u.cpp" line="2971"/>
+        <location filename="wm3000u.cpp" line="2982"/>
+        <location filename="wm3000u.cpp" line="2992"/>
         <source>Programm&amp;Abbruch</source>
         <translation>&amp;Przerwij program</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2965"/>
-        <location filename="wm3000u.cpp" line="2976"/>
-        <location filename="wm3000u.cpp" line="2987"/>
-        <location filename="wm3000u.cpp" line="2997"/>
+        <location filename="wm3000u.cpp" line="2961"/>
+        <location filename="wm3000u.cpp" line="2972"/>
+        <location filename="wm3000u.cpp" line="2983"/>
+        <location filename="wm3000u.cpp" line="2993"/>
         <source>&amp;Wiederholen</source>
         <translation>&amp;Powtórzenie</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2966"/>
-        <location filename="wm3000u.cpp" line="2977"/>
-        <location filename="wm3000u.cpp" line="2988"/>
-        <location filename="wm3000u.cpp" line="2998"/>
+        <location filename="wm3000u.cpp" line="2962"/>
+        <location filename="wm3000u.cpp" line="2973"/>
+        <location filename="wm3000u.cpp" line="2984"/>
+        <location filename="wm3000u.cpp" line="2994"/>
         <source>&amp;Simulation</source>
         <translation>&amp;Symulacja</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2972"/>
+        <location filename="wm3000u.cpp" line="2968"/>
         <source>Fehler beim Schreiben von Daten
 für %1:%2 .
 Details stehen in LogFile.</source>
@@ -1853,7 +1853,7 @@ dla %1:%2 .
 Szczegóły w LogFile.</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2983"/>
+        <location filename="wm3000u.cpp" line="2979"/>
         <source>Unerwartete Antwort beim Lesen
 von %1:%2 erhalten.
 Details stehen in LogFile.</source>
@@ -1862,7 +1862,7 @@ podczas odczytu z %1:%2.
 Szczegóły w LogFile.</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2993"/>
+        <location filename="wm3000u.cpp" line="2989"/>
         <source>Device ist busy
 ( %1:%2 ).
 Details stehen in LogFile.</source>
@@ -1871,22 +1871,22 @@ Details stehen in LogFile.</source>
 Szczegóły w LogFile.</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3026"/>
+        <location filename="wm3000u.cpp" line="3022"/>
         <source>Wandlermesseinrichtung WM1000U</source>
         <translation>Urządzenie pomiarowe przekładników WM1000U</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3028"/>
+        <location filename="wm3000u.cpp" line="3024"/>
         <source>Wandlermesseinrichtung WM3000U</source>
         <translation>Urządzenie pomiarowe przekładników WM3000U</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3143"/>
+        <location filename="wm3000u.cpp" line="3139"/>
         <source>Amplituden Justage</source>
         <translation>Adiustacja amplitudy</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3143"/>
+        <location filename="wm3000u.cpp" line="3139"/>
         <source>Noch nicht implementiert</source>
         <translation>Nie wprowadzono jeszcze</translation>
     </message>
@@ -1894,19 +1894,16 @@ Szczegóły w LogFile.</translation>
 <context>
     <name>cZeraInfo</name>
     <message>
-        <location filename="zerainfo.cpp" line="15"/>
         <source>&lt;h3&gt;About ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA was founded in 1920.&lt;/p&gt;&lt;p&gt;It is a developer and manufactor of high precision&lt;br&gt;measurement systems for the energy market.&lt;/p&gt;&lt;p&gt;We provide powerful solutions for meter testing&lt;br&gt;as well as transformer testing.&lt;/p&gt;&lt;p&gt;For further information please visit &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;O ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA została założona w 1920.&lt;/p&gt;&lt;p&gt;Jest twórcą i producentem wysokiej dokładności&lt;br&gt;systemów pomiarowych dla rynku energetyki.&lt;/p&gt;&lt;p&gt;Dostarcza skuteczne rozwiązania do testowania&lt;br&gt;przyrządów pomiarowych oraz badania transformatorów.&lt;/p&gt;&lt;p&gt;W celu uzyskania dalszych informacji odwiedź&lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;O ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA została założona w 1920.&lt;/p&gt;&lt;p&gt;Jest twórcą i producentem wysokiej dokładności&lt;br&gt;systemów pomiarowych dla rynku energetyki.&lt;/p&gt;&lt;p&gt;Dostarcza skuteczne rozwiązania do testowania&lt;br&gt;przyrządów pomiarowych oraz badania transformatorów.&lt;/p&gt;&lt;p&gt;W celu uzyskania dalszych informacji odwiedź&lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="35"/>
         <source>&lt;h3&gt;About WM1000U&lt;/h3&gt;&lt;p&gt;WM1000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;&lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;O WM1000U&lt;/h3&gt;&lt;p&gt;WM1000U jest nowym urządzeniem pomiarowym&lt;br&gt;przekładników napięciowych stworzonym przez ZERA.&lt;/p&gt;&lt;p&gt;Zapewnia możliwość badania&lt;br&gt;przekładników konwencjonalnych.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;O WM1000U&lt;/h3&gt;&lt;p&gt;WM1000U jest nowym urządzeniem pomiarowym&lt;br&gt;przekładników napięciowych stworzonym przez ZERA.&lt;/p&gt;&lt;p&gt;Zapewnia możliwość badania&lt;br&gt;przekładników konwencjonalnych.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="46"/>
         <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;&lt;p&gt;WM3000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;&lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, EVT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;O WM3000U&lt;/h3&gt;&lt;p&gt;WM3000U jest nowym urządzeniem pomiarowym&lt;br&gt;przekładników napięciowych stworzonym przez ZERA.&lt;/p&gt;&lt;p&gt;Zapewnia możliwość badania przekładników&lt;br&gt;konwencjonalnych, EVT jak również niekonwencjonalnych&lt;br&gt;wykorzystujących IEC 61850-9-2.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;O WM3000U&lt;/h3&gt;&lt;p&gt;WM3000U jest nowym urządzeniem pomiarowym&lt;br&gt;przekładników napięciowych stworzonym przez ZERA.&lt;/p&gt;&lt;p&gt;Zapewnia możliwość badania przekładników&lt;br&gt;konwencjonalnych, EVT jak również niekonwencjonalnych&lt;br&gt;wykorzystujących IEC 61850-9-2.&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

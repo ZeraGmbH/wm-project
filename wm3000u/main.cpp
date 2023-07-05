@@ -82,6 +82,8 @@ int main(int argc, char *argv[])
     switch (g_WMDevice->m_ConfData.Language)
     {
     case de:
+        appTranslator->load("wm-common_de.qm",qmPath);
+        qtTranslator->load("wm-common_de.qm",qmPath);
         break;
     case gb:
         appTranslator->load("wm3000u_gb.qm",qmPath);
