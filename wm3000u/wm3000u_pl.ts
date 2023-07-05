@@ -590,12 +590,12 @@ Dozwolone mV,V,kV</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="169"/>
+        <location filename="main.cpp" line="171"/>
         <source>WM1000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM1000U</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="172"/>
+        <location filename="main.cpp" line="174"/>
         <source>WM3000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM3000U</translation>
     </message>

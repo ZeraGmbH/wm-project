@@ -11,7 +11,6 @@
 #include <qmenubar.h>
 
 #include "zerainfo.h"
-#include "infostrings.h"
 #include "confdialogbase.h"
 #include "dbushelper.h"
 #include "rangedialogbase.h"
@@ -82,8 +81,8 @@ int main(int argc, char *argv[])
     switch (g_WMDevice->m_ConfData.Language)
     {
     case de:
-        appTranslator->load("wm-common_de.qm",qmPath);
-        qtTranslator->load("wm-common_de.qm",qmPath);
+        if (!appTranslator->load("wm-common_de.qm",qmPath)) qWarning("translation file not found (de)");
+        if (!qtTranslator->load("wm-common_de.qm",qmPath))  qWarning("translation file not found (pl)");
         break;
     case gb:
         appTranslator->load("wm3000u_gb.qm",qmPath);
@@ -121,9 +120,9 @@ int main(int argc, char *argv[])
 
     cZeraInfo *g_WMInfo;
     if(g_WMDevice->isConventional())
-        g_WMInfo = new cZeraInfo(wm1000uInfoTitle, wm1000uInfo);
+        g_WMInfo = new cZeraInfo(wmInfoWm1000U);
     else
-        g_WMInfo = new cZeraInfo(wm3000uInfoTitle, wm3000uInfo);
+        g_WMInfo = new cZeraInfo(wmInfoWm3000U);
 
     QList<eUnit *>lpUnitList;
     lpUnitList.append(LoadpointUnit + LPProzent);

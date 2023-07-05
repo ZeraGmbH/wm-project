@@ -6,15 +6,15 @@
 
 #include "zerainfo.h"
 
-cZeraInfo::cZeraInfo(QString machineInfoTitle, QString machineInfo) :
-    m_machineInfoTitle(machineInfoTitle), m_machineInfo(machineInfo)
+cZeraInfo::cZeraInfo(int nr)
 {
+    setInfoStrings(nr);
 }
 
 void cZeraInfo::AboutZeraSlot()
 {
     QMessageBox *pAboutZera=new QMessageBox(QString("About ZERA"),
-					       tr("<h3>About ZERA</h3>"
+                              tr("<h3>About ZERA</h3>"
 					          "<p><br>ZERA was founded in 1920.</p>"
 					          "<p>It is a developer and manufactor of high precision<br>measurement systems for the energy market.</p>"
 					          "<p>We provide powerful solutions for meter testing<br>as well as transformer testing.</p>"
@@ -29,17 +29,55 @@ void cZeraInfo::AboutZeraSlot()
 }					    
 
 
+
 void cZeraInfo::AboutWM3000Slot()
 {
     QMessageBox *pAboutWM;
 
     pAboutWM=new QMessageBox(m_machineInfoTitle,
-                 tr(m_machineInfo),
+                 m_machineInfo,
                     QMessageBox::NoIcon,
                     QMessageBox::NoButton,
                     QMessageBox::NoButton,
                     QMessageBox::NoButton);
 
     pAboutWM->show();
+    qWarning("%s",qPrintable(tr(m_machineInfoTitle)));
+}
+
+void cZeraInfo::setInfoStrings(int nr)
+{
+    switch (nr)
+    {
+    case 0 :
+        m_machineInfoTitle = tr("About WM1000I");
+        m_machineInfo = tr ("<h3>About WM1000I</h3> \
+                            <p>WM1000I is the new current transformer test<br>device developed by ZERA.</p> \
+                            <p>It provides abilities of testing conventional<br>transformers.</p>");
+        break;
+    case 1 :
+        m_machineInfoTitle = tr("About WM3000I");
+        m_machineInfo = tr ("<h3>About WM3000I</h3> \
+                            <p>WM3000I is the new current transformer test<br>device developed by ZERA.</p> \
+                            <p>It provides abilities of testing conventional<br>transformers, ECT as well as nonconventional<br>transformers using IEC 61850-9-2.</p>");
+        break;
+    case 2 :
+        m_machineInfoTitle = tr("About WM1000U");
+        m_machineInfo = tr ("<h3>About WM1000U</h3> \
+                            <p>WM1000U is the new voltage transformer test<br>device developed by ZERA.</p> \
+                            <p>It provides abilities of testing conventional<br>transformers.</p>");
+        break;
+    case 3 :
+        m_machineInfoTitle = tr("About WM3000U");
+        m_machineInfo = tr ("<h3>About WM3000U</h3> \
+                            <p>WM3000U is the new voltage transformer test<br>device developed by ZERA.</p> \
+                            <p>It provides abilities of testing conventional<br>transformers, EVT as well as nonconventional<br>transformers using IEC 61850-9-2.</p>");
+        break;
+    default :
+        m_machineInfoTitle = tr("unknown");
+        m_machineInfo = tr("unknown");
+        break;
+
+    }
 }
 
