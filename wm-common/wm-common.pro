@@ -29,7 +29,6 @@ HEADERS = \
     gui/wmrawactualconfigbase.h \
     gui/wmsampledialog.h \
     gui/wmscopedialog.h \
-    infostrings.h \
     just/justValues.h \
     scales-and-units/angleunits.h \
     scales-and-units/currentunits.h \

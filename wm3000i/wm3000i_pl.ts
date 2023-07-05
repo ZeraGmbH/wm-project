@@ -591,12 +591,12 @@ lub mA,A,kA</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="170"/>
+        <location filename="main.cpp" line="171"/>
         <source>WM1000I SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM1000I</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="173"/>
+        <location filename="main.cpp" line="174"/>
         <source>WM3000I SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM3000I</translation>
     </message>

@@ -12,7 +12,6 @@
 #include <QString>
 
 #include "zerainfo.h"
-#include "infostrings.h"
 #include "confdialogbase.h"
 #include "rangedialogbase.h"
 #include "wmmeasvaluesbase.h"
@@ -121,9 +120,9 @@ int main(int argc, char *argv[])
 
     cZeraInfo *g_WMInfo;
     if(g_WMDevice->isConventional())
-        g_WMInfo = new cZeraInfo(wm1000iInfoTitle, wm1000iInfo);
+        g_WMInfo = new cZeraInfo(wmInfoWm1000I);
     else
-        g_WMInfo = new cZeraInfo(wm3000iInfoTitle, wm3000iInfo);
+        g_WMInfo = new cZeraInfo(wmInfoWm3000I);
 
     QList<eUnit *>lpUnitList;
     lpUnitList.append(LoadpointUnit + LPProzent);
