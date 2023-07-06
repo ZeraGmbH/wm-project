@@ -26,7 +26,7 @@
    <font/>
   </property>
   <property name="windowTitle">
-   <string>Eigenfehler</string>
+   <string>Ref. transformer error</string>
   </property>
   <property name="modal">
    <bool>false</bool>
@@ -46,7 +46,7 @@
         <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
-        <string>Wandler:</string>
+        <string>Transformer:</string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -65,7 +65,7 @@
         <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
-        <string>Primär:</string>
+        <string>Primary:</string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -87,7 +87,7 @@
         <enum>QFrame::Plain</enum>
        </property>
        <property name="text">
-        <string>Sekundär:</string>
+        <string>Secondary:</string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -106,7 +106,7 @@
         <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
-        <string>Lastpunkt:</string>
+        <string>Loadpoint:</string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -125,7 +125,7 @@
         <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
-        <string>Betrag:</string>
+        <string>Gain:</string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -144,7 +144,7 @@
         <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
-        <string>Winkel:</string>
+        <string>Angle:</string>
        </property>
        <property name="wordWrap">
         <bool>false</bool>

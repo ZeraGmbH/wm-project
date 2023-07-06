@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>EN61850monitor</name>
     <message>
@@ -218,47 +218,47 @@
     <message>
         <location filename="gui/versionviewbase.ui" line="20"/>
         <source>Versions</source>
-        <translation type="unfinished"></translation>
+        <translation>Versionen</translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="31"/>
         <source>Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät:</translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="41"/>
         <source>Device Version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geräte Version:</translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="51"/>
         <source>Serial Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seriennummer:</translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="61"/>
         <source>AdjustmentData:</source>
-        <translation type="unfinished"></translation>
+        <translation>Justagedaten:</translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="71"/>
         <source>PCB Version:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="81"/>
         <source>PCB Server:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="91"/>
         <source>DSP Version:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="101"/>
         <source>DSP Server:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="128"/>
@@ -270,65 +270,67 @@
         <location filename="gui/versionviewbase.ui" line="170"/>
         <location filename="gui/versionviewbase.ui" line="177"/>
         <source>----------</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>WMMeasConfigBase</name>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="20"/>
-        <source>Messwert Formatsteuerung</source>
-        <translation type="unfinished"></translation>
+        <source>Actual values format control</source>
+        <oldsource>Messwert Formatsteuerung</oldsource>
+        <translation>Messwert Formatsteuerung</translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="62"/>
-        <source>Feldbreite:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="94"/>
-        <source>Auflösung:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="126"/>
-        <source>Einheit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="155"/>
-        <source>Lastpunkt</source>
-        <translation type="unfinished"></translation>
+        <source>Fieldwith:</source>
+        <oldsource>Feldbreite:</oldsource>
+        <translation>Feldbreite:</translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="197"/>
         <source>Total RMS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="204"/>
         <source>1. Harm. RMS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="214"/>
-        <source>Fehler</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="253"/>
         <source>IEC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="263"/>
         <source>ANSI</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="94"/>
+        <source>Resolution:</source>
+        <translation>Auflösung:</translation>
+    </message>
+    <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="126"/>
+        <source>Unit:</source>
+        <translation>Einheit:</translation>
+    </message>
+    <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="155"/>
+        <source>Loadpoint</source>
+        <translation>Lastpunkt</translation>
+    </message>
+    <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="214"/>
+        <source>Error</source>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="273"/>
-        <source>Winkel</source>
-        <translation type="unfinished"></translation>
+        <source>Angle</source>
+        <translation>Winkel</translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="331"/>
@@ -408,38 +410,40 @@
     <name>WMOeViewBase</name>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="29"/>
-        <source>Eigenfehler</source>
-        <translation type="unfinished"></translation>
+        <source>Ref. transformer error</source>
+        <translation>Eigenfehler</translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="49"/>
-        <source>Wandler:</source>
-        <translation type="unfinished"></translation>
+        <source>Transformer:</source>
+        <translation>Wandler:</translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="68"/>
-        <source>Primär:</source>
-        <translation type="unfinished"></translation>
+        <source>Primary:</source>
+        <oldsource>Primär:</oldsource>
+        <translation>Primär:</translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="90"/>
-        <source>Sekundär:</source>
-        <translation type="unfinished"></translation>
+        <source>Secondary:</source>
+        <oldsource>Sekundär:</oldsource>
+        <translation>Sekundär:</translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="109"/>
-        <source>Lastpunkt:</source>
-        <translation type="unfinished"></translation>
+        <source>Loadpoint:</source>
+        <translation>Lastpunkt:</translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="128"/>
-        <source>Betrag:</source>
-        <translation type="unfinished"></translation>
+        <source>Gain:</source>
+        <translation>Betrag:</translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="147"/>
-        <source>Winkel:</source>
-        <translation type="unfinished"></translation>
+        <source>Angle:</source>
+        <translation>Winkel:</translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="186"/>
@@ -566,7 +570,7 @@ Zeile : %2
     <name>cZeraInfo</name>
     <message>
         <source>&lt;h3&gt;About ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA was founded in 1920.&lt;/p&gt;&lt;p&gt;It is a developer and manufactor of high precision&lt;br&gt;measurement systems for the energy market.&lt;/p&gt;&lt;p&gt;We provide powerful solutions for meter testing&lt;br&gt;as well as transformer testing.&lt;/p&gt;&lt;p&gt;For further information please visit &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;ZERA ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;auml;tepr&amp;uumlfung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
+        <translation>&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;ZERA ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;auml;tepr&amp;uumlfung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="53"/>
@@ -618,7 +622,7 @@ Zeile : %2
     </message>
     <message>
         <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, EVT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;h3&gt;&amp;Uuml;ber WM3000U&lt;/h3&gt;                     &lt;p&gt;WM3000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler, EVT und nicht konventioneller &lt;br&gt;Wandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
+        <translation>&lt;h3&gt;&amp;Uuml;ber WM3000U&lt;/h3&gt;                     &lt;p&gt;WM3000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler, EVT und nicht konventioneller &lt;br&gt;Wandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="77"/>
