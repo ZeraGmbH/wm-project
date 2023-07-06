@@ -569,19 +569,14 @@ Zeile : %2
 <context>
     <name>cZeraInfo</name>
     <message>
-        <source>&lt;h3&gt;About ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA was founded in 1920.&lt;/p&gt;&lt;p&gt;It is a developer and manufactor of high precision&lt;br&gt;measurement systems for the energy market.&lt;/p&gt;&lt;p&gt;We provide powerful solutions for meter testing&lt;br&gt;as well as transformer testing.&lt;/p&gt;&lt;p&gt;For further information please visit &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;ZERA ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;auml;tepr&amp;uumlfung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
-    </message>
-    <message>
         <location filename="zerainfo.cpp" line="53"/>
         <source>About WM1000I</source>
         <translation>WM1000I</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="60"/>
-        <source>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, ECT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</oldsource>
-        <translation>&lt;h3&gt;&amp;Uuml;ber WM1000I&lt;/h3&gt;                     &lt;p&gt;WM1000I ist die neue Stromwandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Stromwandler.&lt;/p&gt;</translation>
+        <source>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, ECT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;&amp;Uuml;ber WM3000I&lt;/h3&gt;                     &lt;p&gt;WM3000I ist die neue Stromwandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Stromwandler, ECT und nicht konventionelle &lt;br&gt;Stromwandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="59"/>
@@ -589,20 +584,24 @@ Zeile : %2
         <translation>WM3000I</translation>
     </message>
     <message>
+        <location filename="zerainfo.cpp" line="16"/>
+        <source>About ZERA</source>
+        <translation>ZERA</translation>
+    </message>
+    <message>
         <location filename="zerainfo.cpp" line="17"/>
         <source>&lt;h3&gt;About ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA was founded in 1920.&lt;/p&gt;&lt;p&gt;It is a developer and manufactor of high precision&lt;br&gt;measurement systems for the energy market.&lt;/p&gt;&lt;p&gt;We provide powerful solutions for meter testing&lt;br&gt;as well as transducer testing.&lt;/p&gt;&lt;p&gt;For further information please visit &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;Es ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;aum;ltepr&amp;uuml;fung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
+        <translation>&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;ZERA ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;auml;tepr&amp;uuml;fung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="54"/>
-        <source>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
+        <source>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;&amp;Uuml;ber WM1000I&lt;/h3&gt;                     &lt;p&gt;WM1000I ist die neue Stromwandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Stromwandler.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="66"/>
-        <source>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, ECT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</oldsource>
-        <translation>&lt;h3&gt;&amp;Uuml;ber WM3000I&lt;/h3&gt;                     &lt;p&gt;WM3000I ist die neue Stromwandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Stromwandler, ECT und nicht konventioneller &lt;br&gt;Wandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
+        <source>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;&amp;Uuml;ber WM1000U&lt;/h3&gt;                     &lt;p&gt;WM1000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="65"/>
@@ -611,9 +610,8 @@ Zeile : %2
     </message>
     <message>
         <location filename="zerainfo.cpp" line="72"/>
-        <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, EVT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</oldsource>
-        <translation>&lt;h3&gt;&amp;Uuml;ber WM1000U&lt;/h3&gt;                     &lt;p&gt;WM1000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler.&lt;/p&gt;</translation>
+        <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, EVT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;&amp;Uuml;ber WM3000U&lt;/h3&gt;                     &lt;p&gt;WM3000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler, EVT und nicht konventionelle &lt;br&gt;Spannungswandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="71"/>
