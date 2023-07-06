@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>452</width>
-    <height>228</height>
+    <width>541</width>
+    <height>251</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Messwert Formatsteuerung</string>
+   <string>Actual values format control</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
@@ -30,7 +30,7 @@
        <property name="title">
         <string/>
        </property>
-       <property name="lineWidth">
+       <property name="lineWidth" stdset="0">
         <number>0</number>
        </property>
        <layout class="QVBoxLayout">
@@ -59,7 +59,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Feldbreite:</string>
+           <string>Fieldwith:</string>
           </property>
           <property name="wordWrap">
            <bool>false</bool>
@@ -91,7 +91,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Auflösung:</string>
+           <string>Resolution:</string>
           </property>
           <property name="wordWrap">
            <bool>false</bool>
@@ -123,7 +123,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Einheit:</string>
+           <string>Unit:</string>
           </property>
           <property name="wordWrap">
            <bool>false</bool>
@@ -152,7 +152,7 @@
      <item>
       <widget class="Q3GroupBox" name="LPgroupBox">
        <property name="title">
-        <string>Lastpunkt</string>
+        <string>Loadpoint</string>
        </property>
        <layout class="QVBoxLayout">
         <item>
@@ -211,7 +211,7 @@
      <item>
       <widget class="Q3GroupBox" name="ErrgroupBox">
        <property name="title">
-        <string>Fehler</string>
+        <string>Error</string>
        </property>
        <layout class="QVBoxLayout">
         <item>
@@ -270,7 +270,7 @@
      <item>
       <widget class="Q3GroupBox" name="WgroupBox">
        <property name="title">
-        <string>Winkel</string>
+        <string>Angle</string>
        </property>
        <layout class="QVBoxLayout">
         <item>

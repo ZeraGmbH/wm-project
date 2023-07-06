@@ -277,27 +277,14 @@
     <name>WMMeasConfigBase</name>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="20"/>
-        <source>Messwert Formatsteuerung</source>
+        <source>Actual values format control</source>
+        <oldsource>Messwert Formatsteuerung</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="62"/>
-        <source>Feldbreite:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="94"/>
-        <source>Auflösung:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="126"/>
-        <source>Einheit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="155"/>
-        <source>Lastpunkt</source>
+        <source>Fieldwith:</source>
+        <oldsource>Feldbreite:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -311,11 +298,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmmeasconfigbase.ui" line="214"/>
-        <source>Fehler</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="gui/wmmeasconfigbase.ui" line="253"/>
         <source>IEC</source>
         <translation type="unfinished"></translation>
@@ -326,8 +308,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="94"/>
+        <source>Resolution:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="126"/>
+        <source>Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="155"/>
+        <source>Loadpoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmeasconfigbase.ui" line="214"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="gui/wmmeasconfigbase.ui" line="273"/>
-        <source>Winkel</source>
+        <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -408,37 +410,39 @@
     <name>WMOeViewBase</name>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="29"/>
-        <source>Eigenfehler</source>
+        <source>Ref. transformer error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="49"/>
-        <source>Wandler:</source>
+        <source>Transformer:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="68"/>
-        <source>Primär:</source>
+        <source>Primary:</source>
+        <oldsource>Primär:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="90"/>
-        <source>Sekundär:</source>
+        <source>Secondary:</source>
+        <oldsource>Sekundär:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="109"/>
-        <source>Lastpunkt:</source>
+        <source>Loadpoint:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="128"/>
-        <source>Betrag:</source>
+        <source>Gain:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui/wmoeviewbase.ui" line="147"/>
-        <source>Winkel:</source>
+        <source>Angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
