@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>EN61850monitor</name>
     <message>
@@ -168,45 +168,49 @@
 <context>
     <name>QObject</name>
     <message>
+        <location filename="gui/statuslabelcontainer.cpp" line="21"/>
+        <source>Started</source>
+        <oldsource>Gestartet</oldsource>
+        <translation>Gestartet</translation>
+    </message>
+    <message>
         <location filename="gui/statuslabelcontainer.cpp" line="14"/>
         <location filename="gui/statuslabelcontainer.cpp" line="18"/>
-        <source>Keine</source>
-        <translation type="unfinished"></translation>
+        <source>None</source>
+        <translation>Keine</translation>
     </message>
     <message>
         <location filename="gui/statuslabelcontainer.cpp" line="21"/>
-        <source>Gestartet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/statuslabelcontainer.cpp" line="21"/>
-        <source>Gestoppt</source>
-        <translation type="unfinished"></translation>
+        <source>Stopped</source>
+        <translation>Gestoppt</translation>
     </message>
     <message>
         <location filename="gui/statuslabelcontainer.cpp" line="22"/>
         <source>Simulation</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="gui/statuslabelcontainer.cpp" line="29"/>
-        <source>Justiert</source>
-        <translation type="unfinished"></translation>
+        <source>justified</source>
+        <oldsource>ustified</oldsource>
+        <translation>Justiert</translation>
     </message>
     <message>
         <location filename="gui/statuslabelcontainer.cpp" line="29"/>
-        <source>Nicht justiert</source>
-        <translation type="unfinished"></translation>
+        <source>Not justified</source>
+        <translation>Nicht justiert</translation>
     </message>
     <message>
         <location filename="gui/statuslabelcontainer.cpp" line="32"/>
-        <source>!!SignalFrequenz!!</source>
-        <translation type="unfinished"></translation>
+        <source>!!Signalfrequency!!</source>
+        <oldsource>!!SignalFrequenz!!</oldsource>
+        <translation>!!Signal Frequenz!!</translation>
     </message>
     <message>
         <location filename="gui/statuslabelcontainer.cpp" line="33"/>
-        <source>kein PPS</source>
-        <translation type="unfinished"></translation>
+        <source>No PPS</source>
+        <oldsource>kein PPS</oldsource>
+        <translation>Kein PPS</translation>
     </message>
 </context>
 <context>
@@ -540,71 +544,85 @@
     <message>
         <location filename="ownerror.cpp" line="117"/>
         <source>°</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="ownerror.cpp" line="170"/>
-        <source>Eigenfehlertabelle</source>
-        <translation type="unfinished"></translation>
+        <source>Ref. Transformer file</source>
+        <translation>Eigenfehlertabelle</translation>
     </message>
     <message>
         <location filename="ownerror.cpp" line="171"/>
-        <source>Fehler in %1
-Zeile : %2
+        <source>Error in %1
+Line : %2
 </source>
-        <translation type="unfinished"></translation>
+        <oldsource>Fehler in %1
+Zeile : %2
+</oldsource>
+        <translation>Fehler in %1 Zeile : %2</translation>
     </message>
 </context>
 <context>
     <name>cZeraInfo</name>
     <message>
-        <location filename="zerainfo.cpp" line="23"/>
         <source>&lt;h3&gt;About ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA was founded in 1920.&lt;/p&gt;&lt;p&gt;It is a developer and manufactor of high precision&lt;br&gt;measurement systems for the energy market.&lt;/p&gt;&lt;p&gt;We provide powerful solutions for meter testing&lt;br&gt;as well as transformer testing.&lt;/p&gt;&lt;p&gt;For further information please visit &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;ZERA ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;auml;tepr&amp;uumlfung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;ZERA ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;auml;tepr&amp;uumlfung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="59"/>
+        <location filename="zerainfo.cpp" line="53"/>
         <source>About WM1000I</source>
         <translation>WM1000I</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="60"/>
-        <source>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</source>
+        <source>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, ECT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
+        <oldsource>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;&amp;Uuml;ber WM1000I&lt;/h3&gt;                     &lt;p&gt;WM1000I ist die neue Stromwandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Stromwandler.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="65"/>
+        <location filename="zerainfo.cpp" line="59"/>
         <source>About WM3000I</source>
         <translation>WM3000I</translation>
     </message>
     <message>
+        <location filename="zerainfo.cpp" line="17"/>
+        <source>&lt;h3&gt;About ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA was founded in 1920.&lt;/p&gt;&lt;p&gt;It is a developer and manufactor of high precision&lt;br&gt;measurement systems for the energy market.&lt;/p&gt;&lt;p&gt;We provide powerful solutions for meter testing&lt;br&gt;as well as transducer testing.&lt;/p&gt;&lt;p&gt;For further information please visit &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;&amp;Uuml;ber ZERA&lt;/h3&gt;&lt;p&gt;&lt;br&gt;ZERA wurde 1920 gegr&amp;uuml;ndet.&lt;/p&gt;&lt;p&gt;Es ist ein Entwickler und Hersteller hochpr&amp;auml;ziser&lt;br&gt;Messsysteme für den Energiemarkt.&lt;/p &gt;&lt;p&gt;Wir bieten leistungsstarke L&amp;ouml;sungen für die Messger&amp;aum;ltepr&amp;uuml;fung&lt;br&gt;sowie die Wandlerpr&amp;uuml;fung.&lt;/p&gt;&lt;p&gt;Weitere Informationen finden Sie unter &lt;tt&gt;http://www.zera.de&lt;/tt&gt;&lt;/ p&gt;</translation>
+    </message>
+    <message>
+        <location filename="zerainfo.cpp" line="54"/>
+        <source>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;&amp;Uuml;ber WM1000I&lt;/h3&gt;                     &lt;p&gt;WM1000I ist die neue Stromwandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Stromwandler.&lt;/p&gt;</translation>
+    </message>
+    <message>
         <location filename="zerainfo.cpp" line="66"/>
-        <source>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, ECT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</source>
+        <source>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
+        <oldsource>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, ECT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;&amp;Uuml;ber WM3000I&lt;/h3&gt;                     &lt;p&gt;WM3000I ist die neue Stromwandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Stromwandler, ECT und nicht konventioneller &lt;br&gt;Wandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="71"/>
+        <location filename="zerainfo.cpp" line="65"/>
         <source>About WM1000U</source>
         <translation>WM1000U</translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="72"/>
-        <source>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</source>
+        <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, EVT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
+        <oldsource>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers.&lt;/p&gt;</oldsource>
         <translation>&lt;h3&gt;&amp;Uuml;ber WM1000U&lt;/h3&gt;                     &lt;p&gt;WM1000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="77"/>
+        <location filename="zerainfo.cpp" line="71"/>
         <source>About WM3000U</source>
         <translation>WM3000U</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="78"/>
         <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, EVT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;&amp;Uuml;ber WM3000U&lt;/h3&gt;                     &lt;p&gt;WM3000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler, EVT und nicht konventioneller &lt;br&gt;Wandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;&amp;Uuml;ber WM3000U&lt;/h3&gt;                     &lt;p&gt;WM3000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler, EVT und nicht konventioneller &lt;br&gt;Wandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="zerainfo.cpp" line="83"/>
-        <location filename="zerainfo.cpp" line="84"/>
+        <location filename="zerainfo.cpp" line="77"/>
+        <location filename="zerainfo.cpp" line="78"/>
         <source>unknown</source>
         <translation>unbekannt</translation>
     </message>
