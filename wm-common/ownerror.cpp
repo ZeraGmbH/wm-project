@@ -167,9 +167,9 @@ void cOwnError::SetConfInfoSlot(cConfData *cd)
                     else
                     {
                         // fehlerbehandlung (nur benutzer hinweis)
-                        QMessageBox::warning( 0, tr("Eigenfehlertabelle"),
-                                              tr("Fehler in %1\n"
-                                              "Zeile : %2\n").arg(strippedName(m_ConfData.m_sOETFile)).arg(line),
+                        QMessageBox::warning( 0, tr("Ref. Transformer file"),
+                                              tr("Error in %1\n"
+                                              "Line : %2\n").arg(strippedName(m_ConfData.m_sOETFile)).arg(line),
                                               QMessageBox::Ok,
                                               QMessageBox::NoButton,
                                               QMessageBox::NoButton);

@@ -11,14 +11,14 @@ void StatusLabelContainer::updateLabels(cConfData *confData, bool adjusted, bool
 {
     QString fileNameErrTable = confData->m_sOETFile;
     QFileInfo fiOETF(fileNameErrTable);
-    m_pOwnErrTableLabel->setText("EFT=" + (fileNameErrTable.isEmpty() ? QObject::tr("Keine") : fiOETF.baseName()));
+    m_pOwnErrTableLabel->setText("EFT=" + (fileNameErrTable.isEmpty() ? QObject::tr("None") : fiOETF.baseName()));
     QString fileNameResult = confData->m_sResultFile;
     QFileInfo fiRF(confData->m_sResultFile);
 
-    m_pResultFileLabel->setText("MED=" + (fileNameResult.isEmpty() ? QObject::tr("Keine") : fiRF.baseName()));
+    m_pResultFileLabel->setText("MED=" + (fileNameResult.isEmpty() ? QObject::tr("None") : fiRF.baseName()));
     m_pRangeNLabel->setText(QString("ChN=%1").arg(confData->m_sRangeN));
     m_xRangeLabelParent->updateXRangeLabel(m_pRangeXLabel);
-    m_pRunningLabel->setText(confData->m_bRunning ? QObject::tr("Gestartet") : QObject::tr("Gestoppt"));
+    m_pRunningLabel->setText(confData->m_bRunning ? QObject::tr("Started") : QObject::tr("Stopped"));
     m_pSimulationLabel->setText(confData->m_bSimulation ? QObject::tr("Simulation") : "");
     m_pSimulationLabel->setStyleSheet(confData->m_bSimulation ? "QLabel {color:red;}" : "QLabel {color:text;}");
     if(confData->m_bSimulation) {
@@ -26,11 +26,11 @@ void StatusLabelContainer::updateLabels(cConfData *confData, bool adjusted, bool
         m_pStatusLabel->setStyleSheet("QLabel {color:text;}");
     }
     else {
-        m_pStatusLabel->setText(adjusted ? QObject::tr("Justiert") : QObject::tr("Nicht justiert"));
+        m_pStatusLabel->setText(adjusted ? QObject::tr("justified") : QObject::tr("Not justified"));
         m_pStatusLabel->setStyleSheet(adjusted ? "QLabel {color:text;}" : "QLabel {color:red;}");
     }
-    m_pFreqLabel->setText( bFreqQuestionable ? QObject::tr("!!SignalFrequenz!!") : "");
-    m_pExternTriggerLabel->setText(bextTriggerInvalid ? QObject::tr("kein PPS") : "" );
+    m_pFreqLabel->setText( bFreqQuestionable ? QObject::tr("!!Signalfrequency!!") : "");
+    m_pExternTriggerLabel->setText(bextTriggerInvalid ? QObject::tr("No PPS") : "" );
     m_pExternTriggerLabel->setStyleSheet(bextTriggerInvalid ? "QLabel {color:red;}" : "QLabel {color:text;}");
 }
 
