@@ -52,25 +52,25 @@ void cZeraInfo::setInfoStrings(int nr)
     case 0 :
         m_machineInfoTitle = tr("About WM1000I");
         m_machineInfo = tr ("<h3>About WM1000I</h3> \
-                            <p>WM1000I is the new current transducer test bridge<br>device developed by ZERA.</p> \
+                            <p>WM1000I is the new current transducer test <br>device developed by ZERA.</p> \
                             <p>It provides abilities of testing conventional<br>transducer.</p>");
         break;
     case 1 :
         m_machineInfoTitle = tr("About WM3000I");
         m_machineInfo = tr ("<h3>About WM3000I</h3> \
-                            <p>WM3000I is the new current transducer test bridge<br>device developed by ZERA.</p> \
+                            <p>WM3000I is the new current transducer test <br>device developed by ZERA.</p> \
                             <p>It provides abilities of testing conventional<br>transducer, ECT as well as nonconventional<br>transducer using IEC 61850-9-2.</p>");
         break;
     case 2 :
         m_machineInfoTitle = tr("About WM1000U");
         m_machineInfo = tr ("<h3>About WM1000U</h3> \
-                            <p>WM1000U is the new voltage transducer test bridge<br>device developed by ZERA.</p> \
+                            <p>WM1000U is the new voltage transducer test <br>device developed by ZERA.</p> \
                             <p>It provides abilities of testing conventional<br>transducer.</p>");
         break;
     case 3 :
         m_machineInfoTitle = tr("About WM3000U");
         m_machineInfo = tr ("<h3>About WM3000U</h3> \
-                            <p>WM3000U is the new voltage transducer test bridge<br>device developed by ZERA.</p> \
+                            <p>WM3000U is the new voltage transducer test <br>device developed by ZERA.</p> \
                             <p>It provides abilities of testing conventional<br>transducer, EVT as well as nonconventional<br>transducer using IEC 61850-9-2.</p>");
         break;
     default :
