@@ -195,7 +195,7 @@ cWM3000U::cWM3000U() :
 cWM3000U::~cWM3000U()
 {
     WriteSettings(".ses");
-    delete mScopeDialog;
+    if (mScopeDialog) delete mScopeDialog;
     delete DspIFace;
     delete PCBIFace;
 }

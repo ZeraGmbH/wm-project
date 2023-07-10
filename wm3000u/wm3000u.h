@@ -481,7 +481,7 @@ private:
     cDspMeasData* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
-    wmScopeDialog *mScopeDialog;
+    wmScopeDialog *mScopeDialog = nullptr;
     wmSampleDialog *mSampleDialog1;
     wmProgressDialog *mWmProgressDialog;
     std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
