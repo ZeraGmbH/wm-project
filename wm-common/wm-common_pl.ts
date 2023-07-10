@@ -575,8 +575,8 @@ Zeile : %2
     </message>
     <message>
         <location filename="zerainfo.cpp" line="60"/>
-        <source>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, ECT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transducer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, ECT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</oldsource>
+        <source>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transducer test &lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, ECT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
+        <oldsource>&lt;h3&gt;About WM3000I&lt;/h3&gt;                             &lt;p&gt;WM3000I is the new current transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, ECT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -596,14 +596,14 @@ Zeile : %2
     </message>
     <message>
         <location filename="zerainfo.cpp" line="54"/>
-        <source>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transducer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</oldsource>
+        <source>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transducer test &lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
+        <oldsource>&lt;h3&gt;About WM1000I&lt;/h3&gt;                             &lt;p&gt;WM1000I is the new current transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="zerainfo.cpp" line="66"/>
-        <source>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transducer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</oldsource>
+        <source>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transducer test &lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</source>
+        <oldsource>&lt;h3&gt;About WM1000U&lt;/h3&gt;                             &lt;p&gt;WM1000U is the new voltage transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer.&lt;/p&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -613,8 +613,8 @@ Zeile : %2
     </message>
     <message>
         <location filename="zerainfo.cpp" line="72"/>
-        <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, EVT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
-        <oldsource>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transducer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, EVT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</oldsource>
+        <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transducer test &lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, EVT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</source>
+        <oldsource>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transducer test bridge&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transducer, EVT as well as nonconventional&lt;br&gt;transducer using IEC 61850-9-2.&lt;/p&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
