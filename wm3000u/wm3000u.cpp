@@ -1907,13 +1907,15 @@ void cWM3000U::ActionHandler(int entryAHS)
     case PhaseNodeMeasStart:
         m_PhaseJustLogfile.remove(); // beim starten wird das log file gelöscht
         StopMeasurement(); // die kumulieren jetzt nur
-        mWmProgressDialog = new wmProgressDialog( trUtf8("Koeffizienten 0 setzen ..."), 0, m_PhaseNodeMeasInfoList.size(), g_WMView );//, 0, FALSE, 0 ); // ein progress dialog 100% entspricht alle justierpunkte +1 für das 0 setzen der koeffizienten
+        mWmProgressDialog = new wmProgressDialog(g_WMView);
+        mWmProgressDialog->setLabelText( trUtf8("Koeffizienten 0 setzen ..."));
         mWmProgressDialog->setAbortButtonText(trUtf8("Abbruch"));
-        mWmProgressDialog->setCaption(trUtf8("Phasenkorrekturkoeffizienten"));
+        mWmProgressDialog->setMinMaxValue(0, m_PhaseNodeMeasInfoList.size(),0,4,0,4);
+        mWmProgressDialog->setTitel(trUtf8("Phasenkorrekturkoeffizienten"));
 
         lprogress = 0; // int. progress counter
         mWmProgressDialog->setValue(lprogress);
-        QObject::connect(mWmProgressDialog ,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
+        QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
         N = 0; // durchlaufzähler
@@ -2000,7 +2002,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         //PhaseNodeMeasInfo = m_PhaseNodeMeasInfoList.first(); // info was zu tun ist
         mWmProgressDialog->setValue2(N);
         mWmProgressDialog->setValue(lprogress);
-        if (N == 0)PhaseNodeMeasInfo = std::move(m_PhaseNodeMeasInfoList.at(lprogress-1)); // info was zu tun ist
+        if (N == 0) PhaseNodeMeasInfo = std::move(m_PhaseNodeMeasInfoList.at(lprogress-1)); // info was zu tun ist
 
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
