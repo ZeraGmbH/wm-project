@@ -3454,7 +3454,6 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     // jetzt doch wieder
     // aber nur für kanal ch0 bzw. N
 
-    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW80.50", adcNadcX, Un_UxAbs, adcNPhase, S80, 4, 20))));
     m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW80.50", adcNadcX, Un_UxAbs, adcNPhase, S80, 4, 20)))); // bereiche optimal für hw freq messung, modus adc/adc, für 80 samples/periode und 4 messungen einschwingzeit, 10 messungen für stützstellenermittlung
     m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW256.50", adcNadcX, Un_UxAbs, adcNPhase, S256, 4, 20))));
     if (m_bNewSamplerates) {
