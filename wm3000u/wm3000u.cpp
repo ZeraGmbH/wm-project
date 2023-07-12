@@ -1927,7 +1927,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         AHS++;
         break; // PhaseNodeMeasCoefficientClearN
 
-    case PhaseNodeMeasCoefficientClearN2:
+    case PhaseNodeMeasCoefficientClearNStatus:
         if (m_ConfData.m_bSimulation)  // fehler oder abbruch
         {
             AHS = wm3000Idle;

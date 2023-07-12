@@ -213,7 +213,7 @@ enum wm3000ActionHandlerState {
    
     PhaseNodeMeasStart,
     PhaseNodeMeasCoefficientClearN,
-    PhaseNodeMeasCoefficientClearN2,
+    PhaseNodeMeasCoefficientClearNStatus,
     PhaseNodeMeasCoefficientClearNFinished,
     PhaseNodeMeasBaseConfiguration,
     PhaseNodeMeasNodeConfig, // für jeden knoten muss etwas umkonfiguriert werden
