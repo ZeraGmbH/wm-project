@@ -43,7 +43,7 @@ void cPCBIFace::ActionHandler(int entryAHS)
             AHS = entryAHS; // wir starten es
         }
     }
-    
+    qDebug ("pcbIFace ActionHandlerState: %i",(AHS));
     switch (AHS)
     {
     case pcbIFaceConnectYourselfStart:

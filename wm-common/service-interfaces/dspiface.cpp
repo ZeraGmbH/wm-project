@@ -95,7 +95,7 @@ void cDspIFace::ActionHandler(int entryAHS)
             AHS = entryAHS; // wir starten es
         }
     }
-    
+    qDebug ("DspIFace ActionHandlerState: %i",(AHS));
     switch (AHS)
     {
     case dspIFaceConnectYourselfStart:

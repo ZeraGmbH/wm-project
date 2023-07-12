@@ -247,7 +247,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         if (entryAHS == wm3000Repeat)
             AHS--; // für repeat den state dekrementieren
     }
-
+    qDebug ("WM3000u ActionHandlerState: %i",(AHS));
     switch (AHS)
     {
 
@@ -2116,6 +2116,7 @@ void cWM3000U::ActionHandler(int entryAHS)
 
         ph0*=57.295779;
         JustValueList.append(ph0); // wir schreiben den winkel wert in die liste
+        qDebug ("ph0: %f",(ph0));
 
         mCount--;
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
