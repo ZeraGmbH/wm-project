@@ -497,7 +497,10 @@ void cDspIFace::ClearCmdList() // löscht alle cmdlisten
 
 void cDspIFace::ClearVarLists() // löscht alle varlisten
 {
-    while ( DspMeasDataList.removeFirst() );
+    qDebug("About to clear DspMeasDataList");
+    DspMeasDataList.clear();
+    qDebug("DspMeasDataList count %i",DspMeasDataList.count());
+    //while ( DspMeasDataList.removeFirst() );
 }
 
 
