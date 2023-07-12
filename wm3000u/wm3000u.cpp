@@ -4017,10 +4017,16 @@ int cWM3000U::getSampleRate(int sr)
 void cWM3000U::SetDspWMVarList() // variablen des dsp zusammenbauen
 {
     if (!m_ConfData.m_bSimulation) {
+        qDebug ("SetDspWMVarList entered");
         int sampleCount = getSampleRate(m_ConfData.m_nSRate);
+        qDebug ("sampleCount %i",sampleCount);
         m_dspSetup.setDspVarList(&m_ConfData, DspIFace, sampleCount);
-        if (mScopeDialog)
+        qDebug ("DspVarList setup");
+        if (mScopeDialog){
+            qDebug ("mScopeDialog");
             setupSampleDialog();
+            qDebug ("mScopeDialog setup");
+        }
     }
 }
 
