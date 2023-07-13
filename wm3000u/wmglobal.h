@@ -165,7 +165,7 @@ class cJustMeasInfo
 {
 public:
     cJustMeasInfo(const QString rngN, const QString rngX, const QString rngStore, SenseMode sm, MeasMode mm, JustMode jm, int nS, int nIgn, int nMeas )
-        :m_srngN(rngN), m_srngX(rngX), m_srngStore(rngStore), m_nSMode(sm), m_nMMode(mm), m_nJMode(jm), m_nnS(nS), m_nIgnore(nIgn), m_nnMeas(nMeas){}
+        :m_srngN(rngN), m_srngX(rngX), m_srngStore(rngStore), m_nSMode(sm), m_nMMode(mm), m_nJMode(jm), m_nnS(nS), m_nIgnore(nIgn), m_nnMeas(4){}
     QString m_srngN; // bereich kanal n der angewählt wird
     QString m_srngX; // bereich kanal x ......
     QString m_srngStore; // der bereich auf dem die justage daten gespeichert werden
