@@ -11,7 +11,7 @@ void DspSetup::setDspVarList(cConfData *confData, cDspIFace *DspIFace, int sampl
     qDebug("clearedVarLists");
 
     // maxima
-    m_measData.MaxValData = DspIFace->GetMVHandle(""); // wir holen uns ein handle für den maximumsucher
+    m_measData.MaxValData = DspIFace->GetMVHandle("MaxValData"); // wir holen uns ein handle für den maximumsucher
     DspIFace->addVarItem(m_measData.MaxValData, new cDspVar("MAXN",1,vApplication | vDspIntern));
     DspIFace->addVarItem(m_measData.MaxValData, new cDspVar("MAXX",1,vApplication | vDspIntern));
     DspIFace->addVarItem(m_measData.MaxValData, new cDspVar("MAXRDY",1,vApplication | vDspIntern));
@@ -19,14 +19,14 @@ void DspSetup::setDspVarList(cConfData *confData, cDspIFace *DspIFace, int sampl
 
     // schnelle rms messung zur lastpunkt bestimmung 1x rms gesamtsignal 1x ampl 1. grundwelle
     // erweitert jetzt auch für kanal x
-    m_measData.RMSValData = DspIFace->GetMVHandle("");
+    m_measData.RMSValData = DspIFace->GetMVHandle("RMSValData");
     DspIFace->addVarItem(m_measData.RMSValData, new cDspVar("FRMSN",1,vApplication | vDspIntern));
     DspIFace->addVarItem(m_measData.RMSValData, new cDspVar("FAMPL1N",1,vApplication | vDspIntern));
     DspIFace->addVarItem(m_measData.RMSValData, new cDspVar("FRMSX",1,vApplication | vDspIntern));
     DspIFace->addVarItem(m_measData.RMSValData, new cDspVar("FAMPL1X",1,vApplication | vDspIntern));
     qDebug("adds RmsValData");
 
-    m_measData.ActValData = DspIFace->GetMVHandle(""); // wir holen uns ein handle für die istwerte daten
+    m_measData.ActValData = DspIFace->GetMVHandle("ActValData"); // wir holen uns ein handle für die istwerte daten
     //	nur dsp intern verwendete messdaten
     DspIFace->addVarItem(m_measData.ActValData, new cDspVar("SINDEX",1,vDspIntern)); // index zur speicherung der sampledaten für die fehlermessung (variables messintervall);
     DspIFace->addVarItem(m_measData.ActValData, new cDspVar("SINDEX2",1,vDspIntern)); // index zur speicherung der sampledaten für die schnelle lastpunktmessung (festes messintervall = 4 signalperioden);
@@ -65,15 +65,15 @@ void DspSetup::setDspVarList(cConfData *confData, cDspIFace *DspIFace, int sampl
     DspIFace->addVarItem(m_measData.ActValData, new cDspVar("PHIX",1,vApplication | vDspIntern));
     qDebug("adds ActValData nicht gefilterte messergebnisse");
 
-    m_measData.RawValData0 = DspIFace->GetMVHandle("");
+    m_measData.RawValData0 = DspIFace->GetMVHandle("RawValData0");
     DspIFace->addVarItem(m_measData.RawValData0, new cDspVar("MESSSIGNAL0",nS,vApplication | vDspIntern));
-    m_measData.RawValData1 = DspIFace->GetMVHandle("");
+    m_measData.RawValData1 = DspIFace->GetMVHandle("RawValData1");
     DspIFace->addVarItem(m_measData.RawValData1, new cDspVar("MESSSIGNAL1",nS,vApplication | vDspIntern));
-    m_measData.RawValDataSinConHanning = DspIFace->GetMVHandle("");
+    m_measData.RawValDataSinConHanning = DspIFace->GetMVHandle("RawValDataSinConHanning");
     DspIFace->addVarItem(m_measData.RawValDataSinConHanning, new cDspVar("SCHAN",schanLen,vApplication | vDspIntern)); // sinus, cosinus, hanning abwechselnd
-    m_measData.RawValData2 = DspIFace->GetMVHandle("");
+    m_measData.RawValData2 = DspIFace->GetMVHandle("RawValData2");
     DspIFace->addVarItem(m_measData.RawValData2, new cDspVar("MESSSIGNAL2",4*sampleCount,vApplication | vDspIntern));
-    m_measData.RawValData3 = DspIFace->GetMVHandle("");
+    m_measData.RawValData3 = DspIFace->GetMVHandle("RawValData3");
     DspIFace->addVarItem(m_measData.RawValData3, new cDspVar("MESSSIGNAL3",4*sampleCount,vApplication | vDspIntern));
     qDebug("adds RawValData");
 }

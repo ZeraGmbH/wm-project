@@ -499,9 +499,13 @@ void cDspIFace::ClearVarLists() // löscht alle varlisten
 {
     qDebug("About to clear DspMeasDataList");
     qDebug("DspMeasDataList count %i",DspMeasDataList.count());
-    while ( DspMeasDataList.removeFirst() ) {
-            qDebug("DspMeasDataList count %i",DspMeasDataList.count());
+
+    do {
+        qDebug("DspMeasDataList count %i",DspMeasDataList.count());
+        if(!DspMeasDataList.isEmpty())
+            qDebug("DspMeasData to be deleted %s",DspMeasDataList.first()->name().latin1());
     }
+    while ( DspMeasDataList.removeFirst() );
 }
 
 
