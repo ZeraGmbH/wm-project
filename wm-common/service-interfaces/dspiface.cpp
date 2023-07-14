@@ -9,6 +9,13 @@ cDspMeasData::cDspMeasData(QString s)
     //DspVarList.setAutoDelete(true);
 }
 
+cDspMeasData::~cDspMeasData()
+{
+    foreach (cDspVar *poi, DspVarList) {
+        delete poi;
+    }
+}
+
 
 float* cDspMeasData::data() // gibt einen zeiger zurück auf die var daten vom typ vapplication
 {
