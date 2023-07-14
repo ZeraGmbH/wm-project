@@ -559,8 +559,10 @@ void cWM3000U::ActionHandler(int entryAHS)
         }
         else
         {
+            mScopeDialog->clearChannelPointerList();
             SetDspWMVarList(); // dsp user variable definieren
             DspIFace->VarList2Dsp(); // und an den dsp senden
+            setupSampleDialog();
             AHS++;
         }
         break; // InitializationSetDspVarList
@@ -1468,7 +1470,6 @@ void cWM3000U::ActionHandler(int entryAHS)
     {
         mScopeDialog = new wmScopeDialog(g_WMView);
         connect(mScopeDialog,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtScopeViewSet(bool)));
-        setupSampleDialog();
         AHS++;
         m_ActTimer->start(0,wm3000Continue); // otherwise we must do something to continue
         break;
@@ -3117,7 +3118,6 @@ void cWM3000U::setupServers()
 
 void cWM3000U::setupSampleDialog()
 {
-    mScopeDialog->clearChannelPointerList();
     mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValData0);
     mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValData1);
     mScopeDialog->setChannelPointer(m_dspSetup.getMeasData()->RawValDataSinConHanning);
@@ -4018,8 +4018,6 @@ void cWM3000U::SetDspWMVarList() // variablen des dsp zusammenbauen
     if (!m_ConfData.m_bSimulation) {
         int sampleCount = getSampleRate(m_ConfData.m_nSRate);
         m_dspSetup.setDspVarList(&m_ConfData, DspIFace, sampleCount);
-        if (mScopeDialog)
-            setupSampleDialog();
     }
 }
 
