@@ -64,7 +64,7 @@ cDspIFace::cDspIFace(QString bp, QString hn, int hp)
     dspBootPath = bp;
     m_sHost = hn;
     m_nPort = hp;
-    DspMeasDataList.setAutoDelete( true ); // the list owns the objects
+    //DspMeasDataList.setAutoDelete( true ); // the list owns the objects
     DspMemoryDataList.setAutoDelete( true ); // the list owns the objects
     m_ActTimer = new cSMTimer();
     QObject::connect(m_ActTimer,SIGNAL(timeout(int)),this,SLOT(ActionHandler(int)));
@@ -731,8 +731,8 @@ void cDspIFace::SendVarListCommand() // die komplette varliste bestehend aus n t
 {
     QString plist;
     QTextStream ts( &plist, QIODevice::WriteOnly );
-    cDspMeasData* pDspMeasData;
-    for ( pDspMeasData = DspMeasDataList.first(); pDspMeasData; pDspMeasData = DspMeasDataList.next() )
+
+    foreach ( cDspMeasData* pDspMeasData, DspMeasDataList )
         ts << pDspMeasData->VarList();
     QString cmd = QString ("measure:list:ravlist %1\n").arg(plist);
     iFaceSock->SendCommand(cmd);
