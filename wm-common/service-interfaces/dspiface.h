@@ -177,7 +177,7 @@ private:
     QString m_sHost; // host name
     int m_nPort; // host port
     QStringList CycCmdList, IntCmdList;
-    Q3PtrList<cDspMeasData> DspMeasDataList; // eine liste mit zeigern auf "programmdaten"
+    QList<cDspMeasData*> DspMeasDataList; // eine liste mit zeigern auf "programmdaten"
     Q3PtrList<cDspMeasData> DspMemoryDataList; // eine liste mit zeigern auf  dsp speicher allgemein
     cSMTimer* m_ActTimer;
     void GetInterfaceData();
