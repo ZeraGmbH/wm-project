@@ -35,7 +35,7 @@ public:
     QString& name();
     
 private:
-    Q3PtrList<cDspVar> DspVarList;
+    QList<cDspVar*> DspVarList;
     Q3MemArray<float> DspVarData;
     QString m_sname;
     QString m_slist;
