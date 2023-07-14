@@ -28,6 +28,7 @@ class cDspMeasData
 {
 public:
     cDspMeasData(QString); // name des messdaten satzes
+    ~cDspMeasData();
     float* data();
     void addVarItem(cDspVar*);
     QString& VarList(); // liste mit allen variablen mit längenangaben
