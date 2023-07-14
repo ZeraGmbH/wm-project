@@ -61,6 +61,7 @@ enum wm3000ActionHandlerState {
     InitializationBootDsp,
     InitializationBootDspPause,
     InitializationSetSamplingSystem,
+    InitScopeDialog,
     InitializationSetDspVarList,
     InitializationSetDspCmdLists,
     InitializationActivateCmdLists,
@@ -85,7 +86,6 @@ enum wm3000ActionHandlerState {
     InitializationReadJustdataChksum,
     InitializationTestAdjustment,
 
-    InitScopeDialog,
     InitializationFinished,// 40
       
     ConfigurationStart,
