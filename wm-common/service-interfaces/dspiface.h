@@ -13,34 +13,13 @@
 #include "tools.h"
 #include "ethadress.h"
 #include "dspvar.h"
+#include "dspmeasdata.h"
 
 #include "zhserveriface.h"
 #include "zhclientsocket.h"
 
 
 enum dType {dInt, dFloat};
-
-enum AVType {vApplication = 1, vDspIntern = 2, vMemory = 4}; // application variable type
-
-
-
-class cDspMeasData
-{
-public:
-    cDspMeasData(QString); // name des messdaten satzes
-    ~cDspMeasData();
-    float* data();
-    void addVarItem(cDspVar*);
-    QString& VarList(); // liste mit allen variablen mit längenangaben
-    QString& MeasVarList(); // liste aller namen vom typ vapplikation bzw. vmemory
-    QString& name();
-    
-private:
-    QList<cDspVar*> DspVarList;
-    Q3MemArray<float> DspVarData;
-    QString m_sname;
-    QString m_slist;
-};
 
 
 enum dspIFaceActionHandlerState {

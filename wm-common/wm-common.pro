@@ -11,6 +11,7 @@ HEADERS = \
     client-access/clientsocketdevice.h \
     client-access/deviceserver.h \
     dsp/dspactvalues.h \
+    dsp/dspmeasdata.h \
     dsp/dspsetup.h \
     dsp/dspvar.h \
     gui/bigletter.h \
@@ -88,6 +89,7 @@ HEADERS = \
 SOURCES = \
     client-access/clientsocketdevice.cpp \
     client-access/deviceserver.cpp \
+    dsp/dspmeasdata.cpp \
     dsp/dspsetup.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
