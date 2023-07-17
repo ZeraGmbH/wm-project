@@ -965,15 +965,17 @@ void cWM3000U::ActionHandler(int entryAHS)
         }
         else
         {
-            if ( (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate) ||
-                 (m_ConfDataCopy.m_nMeasPeriod != m_ConfData.m_nMeasPeriod) )
-            {
-                StopMeasurement();
-                AHS++; // dsp varlisten und sampling system im dsp
-            }
-            else
-                AHS = ConfigurationTestCmdList;
+//            if ( (m_ConfDataCopy.m_nSRate != m_ConfData.m_nSRate) ||
+//                 (m_ConfDataCopy.m_nMeasPeriod != m_ConfData.m_nMeasPeriod) )
+//            {
+//                StopMeasurement();
+//                AHS++; // dsp varlisten und sampling system im dsp
+//            }
+//            else
+//                AHS = ConfigurationTestCmdList;
 
+            StopMeasurement();
+            AHS++; // dsp varlisten und sampling system im dsp
             m_ActTimer->start(0,wm3000Continue);
         }
         break; // ConfigurationTestDspVarList
