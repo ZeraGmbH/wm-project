@@ -446,19 +446,15 @@ void cDspIFace::ClearCmdList() // löscht alle cmdlisten
 
 void cDspIFace::ClearVarLists() // löscht alle varlisten
 {
-    while ( DspMeasDataList.removeFirst() );
+    qDeleteAll(DspMeasDataList);
+    DspMeasDataList.clear();
 }
 
 
 void cDspIFace::ClearMemLists() // löscht alle memorylisten
 {
-    cDspMeasData* poiDspMeasData = nullptr;
-    while ( !DspMemoryDataList.isEmpty() ){
-        poiDspMeasData= DspMemoryDataList.first();
-        delete poiDspMeasData;
-        DspMemoryDataList.removeFirst();
-    //while ( DspMemoryDataList.removeFirst() );
-    }
+    qDeleteAll(DspMemoryDataList);
+    DspMemoryDataList.clear();
 }
 
 
