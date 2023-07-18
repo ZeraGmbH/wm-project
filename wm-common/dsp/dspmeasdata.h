@@ -14,16 +14,15 @@ class cDspMeasData
 {
 public:
     cDspMeasData(QString); // name des messdaten satzes
-    ~cDspMeasData();
     float* data();
-    void addVarItem(cDspVar*);
+    void addVarItem(cDspVar);
     QString& VarList(); // liste mit allen variablen mit längenangaben
     QString& MeasVarList(); // liste aller namen vom typ vapplikation bzw. vmemory
     QString& name();
     uint getDataLenght();
 
 private:
-    QList<cDspVar*> DspVarList;
+    QList<cDspVar> DspVarList;
     QVector<float> DspVarData;
     // Q3MemArray has been replaced by QVector https://fiona.dmcs.pl/po/qt-tutorial/docs/qt/porting4.html#qmemarray-t
     QString m_sname;
