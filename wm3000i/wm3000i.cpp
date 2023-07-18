@@ -293,7 +293,6 @@ void cWM3000I::ActionHandler(int entryAHS)
             AHS--; // für repeat den state dekrementieren
     }
 
-    qDebug("AHS: %i",AHS);
     switch (AHS)
     {
 
