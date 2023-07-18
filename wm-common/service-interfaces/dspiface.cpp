@@ -541,7 +541,7 @@ cDspMeasData* cDspIFace::GetMemHandle(QString s)
     return pdmd; // handle rückgabe
 }
 
-void cDspIFace::addVarItem(cDspMeasData* pMData, cDspVar* var) // eine neue dsp variable
+void cDspIFace::addVarItem(cDspMeasData* pMData, cDspVar var) // eine neue dsp variable
 {
     pMData->addVarItem(var);
 }

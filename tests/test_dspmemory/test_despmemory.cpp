@@ -21,7 +21,7 @@ private slots:
 void test_despmemory::test_measVarListSingle()
 {
     cDspMeasData test("test");
-    test.addVarItem(new cDspVar("MAXN",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
     QString strActual, strExpected;
     strActual = test.MeasVarList();
     strExpected = "MAXN;";
@@ -31,9 +31,9 @@ void test_despmemory::test_measVarListSingle()
 void test_despmemory::test_measVarListMultiple()
 {
     cDspMeasData test("test");
-    test.addVarItem(new cDspVar("MAXN",1,vApplication | vDspIntern));
-    test.addVarItem(new cDspVar("Hallo",1,vApplication | vDspIntern));
-    test.addVarItem(new cDspVar("Fuzzy",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("Hallo",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("Fuzzy",1,vApplication | vDspIntern));
     QString strActual, strExpected;
     strActual = test.MeasVarList();
     strExpected = "MAXN;Hallo;Fuzzy;";
@@ -43,7 +43,7 @@ void test_despmemory::test_measVarListMultiple()
 void test_despmemory::test_getFloatPointer()
 {
     cDspMeasData test("test");
-    test.addVarItem(new cDspVar("MAXN",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
     float* fpoi = nullptr;
     fpoi = test.data();
     if(fpoi == nullptr) QCOMPARE(1,2);
@@ -52,12 +52,12 @@ void test_despmemory::test_getFloatPointer()
 void test_despmemory::test_getDataLenght()
 {
     cDspMeasData test("test");
-    test.addVarItem(new cDspVar("MAXN",1,vApplication | vDspIntern));
-    test.addVarItem(new cDspVar("MAXX",1,vApplication | vDspIntern));
-    test.addVarItem(new cDspVar("MAXG",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXX",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXG",1,vApplication | vDspIntern));
     uint i = test.getDataLenght();
     QCOMPARE(i,(uint)3);
-    test.addVarItem(new cDspVar("MAXI",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXI",1,vApplication | vDspIntern));
     i = test.getDataLenght();
     QCOMPARE(i,(uint)4);
 
@@ -66,7 +66,7 @@ void test_despmemory::test_getDataLenght()
 void test_despmemory::test_getDataLenght1024()
 {
     cDspMeasData test("test");
-    test.addVarItem(new cDspVar("MAXG",1024,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXG",1024,vApplication | vDspIntern));
     uint i = test.getDataLenght();
     QCOMPARE(i,(uint)1024);
 }
@@ -83,8 +83,8 @@ void test_despmemory::test_getMeasDataName()
 void test_despmemory::test_varlist()
 {
     cDspMeasData test("test");
-    test.addVarItem(new cDspVar("MAXN",1,vApplication | vDspIntern));
-    test.addVarItem(new cDspVar("MAXG",1024,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
+    test.addVarItem(cDspVar("MAXG",1024,vApplication | vDspIntern));
     QString str = test.VarList();
     QString strExpected = "MAXN,1;MAXG,1024;";
     QCOMPARE(str,strExpected);

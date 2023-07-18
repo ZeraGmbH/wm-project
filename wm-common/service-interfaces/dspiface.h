@@ -130,8 +130,8 @@ public:
     void addCycListItem(QString&); // ein neues Kommando ans ende der cyc. liste
     void addIntListItem(QString&); // dito für intliste
     cDspMeasData* GetMVHandle(QString); // legt eine neue messwerte gruppe an 
-    cDspMeasData* GetMemHandle(QString); // legt eine neue memory gruppe an 
-    void addVarItem(cDspMeasData*,cDspVar*); // eine neue dsp variable
+    cDspMeasData* GetMemHandle(QString); // legt eine neue memory gruppe an
+    void addVarItem(cDspMeasData*, cDspVar); // eine neue dsp variable
     void ActivateInterface(); // aktiviert die var- und cmd-listen im dsp
     void DeactivateInterface(); // nur anders rum
     void DataAcquisition(cDspMeasData*); // liest alle daten dieser messwertegruppe vom type vapplication

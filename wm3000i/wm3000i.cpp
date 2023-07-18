@@ -219,13 +219,13 @@ void cWM3000I::setupServers(){
 
     DspIFace->ClearMemLists();
     ETHStatusHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHDATACOUNT",2,vMemory));
-    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(ETHStatusHandle, new cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+    DspIFace->addVarItem(ETHStatusHandle, cDspVar("ETHDATACOUNT",2,vMemory));
+    DspIFace->addVarItem(ETHStatusHandle, cDspVar("ETHERRORS",1,vMemory));
+    DspIFace->addVarItem(ETHStatusHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
 
     ETHStatusResetHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(ETHStatusResetHandle, new cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+    DspIFace->addVarItem(ETHStatusResetHandle, cDspVar("ETHERRORS",1,vMemory));
+    DspIFace->addVarItem(ETHStatusResetHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
 
     ulong* pdata = (ulong*) ETHStatusResetHandle->data();
     *pdata = 0;
