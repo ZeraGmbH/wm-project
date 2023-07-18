@@ -57,6 +57,10 @@ void test_despmemory::test_getDataLenght()
     test.addVarItem(new cDspVar("MAXG",1,vApplication | vDspIntern));
     uint i = test.getDataLenght();
     QCOMPARE(i,(uint)3);
+    test.addVarItem(new cDspVar("MAXI",1,vApplication | vDspIntern));
+    i = test.getDataLenght();
+    QCOMPARE(i,(uint)4);
+
 }
 
 void test_despmemory::test_getDataLenght1024()
