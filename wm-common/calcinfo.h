@@ -12,6 +12,6 @@ public:
     QString m_sRange;
 };
 
-typedef Q3PtrList<cCalcInfo> cCalcInfoList;
+typedef QList<cCalcInfo*> cCalcInfoList;
 
 #endif // CALCINFO_H
