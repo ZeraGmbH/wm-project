@@ -1928,6 +1928,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
+            delete m_CalcInfoList.first();
             m_CalcInfoList.removeFirst();
             if (m_CalcInfoList.isEmpty())
             {
@@ -2019,6 +2020,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
+            delete m_CalcInfoList.first();
             m_CalcInfoList.removeFirst();
             if (m_CalcInfoList.isEmpty())
             {
@@ -2069,6 +2071,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
+            delete m_CalcInfoList.first();
             m_CalcInfoList.removeFirst();
             if (m_CalcInfoList.isEmpty())
             {
@@ -2527,6 +2530,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
+            delete m_CalcInfoList.first();
             m_CalcInfoList.removeFirst();
             if (m_CalcInfoList.isEmpty())
             {
@@ -3604,7 +3608,7 @@ void cWM3000I::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
 {
     QString chn;
     m_CalcInfoList.clear();
-    m_CalcInfoList.setAutoDelete( TRUE );
+    //m_CalcInfoList.setAutoDelete( TRUE );
     chn = "ch0";
     // ad-wandler abgleich findet nicht mehr statt
     // m_CalcInfoList.append(new cCalcInfo(chn,"adw80"));
@@ -3696,7 +3700,7 @@ void cWM3000I::SetOffsetCalcInfo()
 {
     QString chn;
     m_CalcInfoList.clear();
-    m_CalcInfoList.setAutoDelete( TRUE );
+    //m_CalcInfoList.setAutoDelete( TRUE );
     chn = "ch0";
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
         m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));

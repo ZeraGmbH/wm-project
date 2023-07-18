@@ -16,7 +16,7 @@ cDspIFace::cDspIFace(QString bp, QString hn, int hp)
     m_sHost = hn;
     m_nPort = hp;
     //DspMeasDataList.setAutoDelete( true ); // the list owns the objects
-    DspMemoryDataList.setAutoDelete( true ); // the list owns the objects
+    //DspMemoryDataList.setAutoDelete( true ); // the list owns the objects
     m_ActTimer = new cSMTimer();
     QObject::connect(m_ActTimer,SIGNAL(timeout(int)),this,SLOT(ActionHandler(int)));
 }
@@ -452,7 +452,13 @@ void cDspIFace::ClearVarLists() // löscht alle varlisten
 
 void cDspIFace::ClearMemLists() // löscht alle memorylisten
 {
-    while ( DspMemoryDataList.removeFirst() );
+    cDspMeasData* poiDspMeasData = nullptr;
+    while ( !DspMemoryDataList.isEmpty() ){
+        poiDspMeasData= DspMemoryDataList.first();
+        delete poiDspMeasData;
+        DspMemoryDataList.removeFirst();
+    //while ( DspMemoryDataList.removeFirst() );
+    }
 }
 
 
