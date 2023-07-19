@@ -3008,7 +3008,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         break; // EN61850ReadStatusFinished
 
     case EN61850WriteStatusStart:
-        DspIFace->DspMemoryWrite(ETHStatusResetHandle,dInt); // schreibt die daten in den dsp
+        DspIFace->DspMemoryWrite(ETHStatusResetHandle); // schreibt die daten in den dsp
         AHS++;
         break; // EN61850WriteStatusStart
 

@@ -534,14 +534,21 @@ cDspMeasData* cDspIFace::GetMVHandle(QString s) // legt eine neue messwerte grup
 }
 
 
-cDspMeasData* cDspIFace::GetMemHandle(QString s)
+cDspMeasDataUlong* cDspIFace::GetMemHandle(QString s)
 {
-    cDspMeasData* pdmd = new cDspMeasData(s); // neues object anlegen
+    cDspMeasDataUlong* pdmd = new cDspMeasDataUlong(s); // neues object anlegen
     DspMemoryDataList.append(pdmd); // an ptr liste hängen
     return pdmd; // handle rückgabe
 }
 
+
 void cDspIFace::addVarItem(cDspMeasData* pMData, cDspVar var) // eine neue dsp variable
+{
+    pMData->addVarItem(var);
+}
+
+
+void cDspIFace::addVarItem(cDspMeasDataUlong* pMData, cDspVar var) // eine neue dsp variable
 {
     pMData->addVarItem(var);
 }
@@ -572,6 +579,12 @@ void cDspIFace::DspMemoryRead(cDspMeasData* pMData) // liest alle daten dieser m
     m_ActTimer->start(0,DspMemoryReadStart);
 }
 
+void cDspIFace::DspMemoryRead(cDspMeasDataUlong *pMData)
+{
+    m_pMeasDataUlong = pMData;
+    m_ActTimer->start(0,DspMemoryReadStart);
+}
+
 
 void cDspIFace::ReadDeviceVersion()
 {
@@ -585,15 +598,29 @@ void cDspIFace::ReadServerVersion()
 }
 
 
-void cDspIFace::DspMemoryWrite(cDspMeasData* pMData,dType dt)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
+void cDspIFace::DspMemoryWrite(cDspMeasData* pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
 {	
     m_pMeasData = pMData;
-    m_nP1 = dt;
+    m_pMeasDataUlong = nullptr;
+    m_ActTimer->start(0,DspMemoryWriteStart);
+}
+
+
+void cDspIFace::DspMemoryWrite(cDspMeasDataUlong* pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
+{
+    m_pMeasDataUlong = pMData;
+    m_pMeasData = nullptr;
     m_ActTimer->start(0,DspMemoryWriteStart);
 }
 
 
 float* cDspIFace::data(cDspMeasData* pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
+{
+    return pMData->data();
+}
+
+
+ulong* cDspIFace::data(cDspMeasDataUlong* pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
 {
     return pMData->data();
 }
@@ -625,19 +652,36 @@ void cDspIFace::GetInterfaceData()
     QString list;
     QStringList DataEntryList, DataList; // werte zuorden 
     QString s;
-    bool ok;
-    
+    bool bnotFloat;
+    float *fval;
+    ulong *lval;
+
+
     list = iFaceSock->GetAnswer();
     DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit allen werten
-    float *val = m_pMeasData->data();
+    if(m_pMeasData == nullptr) {
+        lval = m_pMeasDataUlong->data();
+        bnotFloat = true;
+    }
+    else {
+        fval = m_pMeasData->data();
+        bnotFloat = false;
+    }
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
         s = *it;
         s = s.section(":",1,1);
         DataList = QStringList::split(",",s);
-        for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2,val++ ) {
+        for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2) {
             s = *it2;
             s.remove(';');
-            *val = s.toFloat();
+            if  (bnotFloat){
+                *lval = s.toULong();
+                lval++;
+            }
+            else {
+                *fval = s.toFloat();
+                fval++;
+            }
         }
     }
 }
@@ -833,9 +877,22 @@ void cDspIFace::SendDspMemoryWriteCommand()
     
     ts << "mem:writ ";
     
-    list = m_pMeasData->VarList(); // liste mit allen variablen und deren länge
-    float* fval = m_pMeasData->data();
-    ulong* lval = (ulong*) fval;
+    float* fval;
+    ulong* lval;
+    bool bnotFloat;
+
+    if (m_pMeasData == nullptr){
+        list = m_pMeasDataUlong->VarList(); // liste mit allen variablen und deren länge
+        lval = m_pMeasDataUlong->data();
+        bnotFloat = true;
+    }
+    else
+    {
+        list = m_pMeasData->VarList(); // liste mit allen variablen und deren länge
+        fval = m_pMeasData->data();
+        bnotFloat = false;
+    }
+
     DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit je variable, länge
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
         s = *it; // einen eintrag variable, länge
@@ -843,7 +900,7 @@ void cDspIFace::SendDspMemoryWriteCommand()
         int n = s.section(",",1,1).toInt(); // anzahl der werte für diese var.
         for (int i = 0;i < n; i++) {
             ts << ",";
-            if (m_nP1 == dInt)  {// wir haben integer daten
+            if (bnotFloat)  {// wir haben integer daten
                 ts << *lval;
                 lval++;
             }

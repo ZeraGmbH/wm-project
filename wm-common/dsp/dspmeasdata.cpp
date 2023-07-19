@@ -1,10 +1,44 @@
 #include "dspmeasdata.h"
 
 
+QString& cDspMeasDataBase::MeasVarList()
+{
+    //    QString list;
+    m_slist="";
+    QTextStream ts( &m_slist, QIODevice::WriteOnly );
+    foreach ( cDspVar DspVar, DspVarList )
+        if ((DspVar.type() & (vApplication | vMemory)) > 0) ts << QString("%1;").arg(DspVar.Name());
+    return m_slist;
+}
+
+
+QString& cDspMeasDataBase::VarList()
+{
+    //    QString vlist;
+    m_slist="";
+    QTextStream ts( &m_slist, QIODevice::WriteOnly );
+    foreach ( cDspVar DspVar, DspVarList )
+        ts << QString("%1,%2;").arg(DspVar.Name()).arg(DspVar.size());
+    return m_slist;
+}
+
+
+QString& cDspMeasDataBase::name()
+{
+    return m_sname;
+}
+
+
 cDspMeasData::cDspMeasData(QString s)
 {
     m_sname = s;
     //DspVarList.setAutoDelete(true);
+}
+
+
+uint cDspMeasData::getDataLenght()
+{
+    return DspVarData.size();
 }
 
 float* cDspMeasData::data() // gibt einen zeiger zurück auf die var daten vom typ vapplication
@@ -22,34 +56,38 @@ void cDspMeasData::addVarItem(cDspVar var) // eine neue dsp variable
 }
 
 
-QString& cDspMeasData::MeasVarList()
+
+cDspMeasDataUlong::cDspMeasDataUlong(QString s)
 {
-    //    QString list;
-    m_slist="";
-    QTextStream ts( &m_slist, QIODevice::WriteOnly );
-    foreach ( cDspVar DspVar, DspVarList )
-        if ((DspVar.type() & (vApplication | vMemory)) > 0) ts << QString("%1;").arg(DspVar.Name());
-    return m_slist;
+    m_sname = s;
+    //DspVarList.setAutoDelete(true);
 }
 
 
-QString& cDspMeasData::VarList()
-{
-    //    QString vlist;
-    m_slist="";
-    QTextStream ts( &m_slist, QIODevice::WriteOnly );
-    foreach ( cDspVar DspVar, DspVarList )
-        ts << QString("%1,%2;").arg(DspVar.Name()).arg(DspVar.size());
-    return m_slist;
-}
-
-
-QString& cDspMeasData::name()
-{
-    return m_sname;
-}
-
-uint cDspMeasData::getDataLenght()
+uint cDspMeasDataUlong::getDataLenght()
 {
     return DspVarData.size();
+}
+
+
+void cDspMeasDataUlong::reset()
+{ //sets the defined variables to '0'
+    foreach (ulong lval, DspVarData){
+        lval = 0;
+    }
+}
+
+
+ulong* cDspMeasDataUlong::data() // gibt einen zeiger zurück auf die var daten vom typ vapplication
+{
+    return DspVarData.data();
+}
+
+
+void cDspMeasDataUlong::addVarItem(cDspVar var) // eine neue dsp variable
+{
+    DspVarList.append(var);
+    // wenn var für application relevant -> platz reservieren für das ergebnis
+    if ( (var.type() & (vApplication | vMemory)) > 0)
+        DspVarData.resize ( DspVarData.size() + var.size());
 }
