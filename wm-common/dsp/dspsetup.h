@@ -16,14 +16,23 @@ struct MeasDataStruct
     cDspMeasData* RawValData3;
 };
 
+struct EthDataStruct
+{
+    cDspMeasDataUlong* ETHStatusHandle;
+    cDspMeasDataUlong* ETHStatusResetHandle;
+};
+
 class DspSetup
 {
 public:
+    void setDspMemList(cDspIFace* DspIFace);
     void setDspVarList(cConfData* confData, cDspIFace* DspIFace, int sampleCount);
     void SetDspWMCmdList(cConfData* confData, cDspIFace* DspIFace, int sampleCount, bool bnConventional);
     MeasDataStruct* getMeasData();
+    EthDataStruct* getEthData();
 private:
     MeasDataStruct m_measData;
+    EthDataStruct m_ethData;
 };
 
 #endif // DSPSETUP_H
