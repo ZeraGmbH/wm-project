@@ -19,6 +19,8 @@ WMViewBase::WMViewBase(QWidget *parent) :
 WMViewBase::~WMViewBase()
 {
     destroy();
+    delete wmEdit;
+    delete wmEdit2;
     delete ui;
 }
 
