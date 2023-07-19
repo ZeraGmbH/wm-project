@@ -199,6 +199,7 @@ cWM3000I::~cWM3000I()
     delete m_SelftestMsgBox;
     delete m_ActTimer;
     delete m_AsyncTimer;
+    delete DummyRange;
     DspIFace->ClearVarLists();
 
     if (mScopeDialog) delete mScopeDialog;
