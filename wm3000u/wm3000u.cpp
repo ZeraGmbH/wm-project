@@ -2763,7 +2763,7 @@ void cWM3000U::ActionHandler(int entryAHS)
     case EN61850ReadStatusStart:
         if (DspIFace->connected())
         {
-            DspIFace->DspMemoryRead(ETHStatusHandle); // holt die daten ins dsp interface
+            DspIFace->DspMemoryRead(m_dspSetup.getEthData()->ETHStatusHandle); // holt die daten ins dsp interface
             AHS++;
         }
         else
@@ -2777,7 +2777,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         if ( !DspIFace->IFaceError() ) // wenn kein fehler aufgetreten
         {
             cEN61850Info EnStat; // holen der werte
-            quint32 *source = (quint32*) DspIFace->data(ETHStatusHandle);
+            quint32 *source = (quint32*) DspIFace->data(m_dspSetup.getEthData()->ETHStatusHandle);
             quint32 *dest = &(EnStat.ByteCount[0]);
             for (uint i=0; i< sizeof(EnStat)/sizeof(quint32);i++) *dest++ = *source++;
             emit EN61850StatusSignal(&EnStat); // und senden
@@ -2787,7 +2787,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         break; // EN61850ReadStatusFinished
 
     case EN61850WriteStatusStart:
-        DspIFace->DspMemoryWrite(ETHStatusResetHandle); // schreibt die daten in den dsp
+        DspIFace->DspMemoryWrite(m_dspSetup.getEthData()->ETHStatusResetHandle); // schreibt die daten in den dsp
         AHS++;
         break; // EN61850WriteStatusStart
 
@@ -3129,20 +3129,7 @@ void cWM3000U::setupServers()
     connect(PCBIFace,SIGNAL(iFaceDone()),this,SLOT(XIFaceDoneSlot()));
     connect(PCBIFace,SIGNAL(iFaceError()),this,SLOT(pcbIFaceErrorSlot()));
 
-    DspIFace->ClearMemLists();
-    ETHStatusHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(ETHStatusHandle, cDspVar("ETHDATACOUNT",2,vMemory));
-    DspIFace->addVarItem(ETHStatusHandle, cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(ETHStatusHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
-
-    ETHStatusResetHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(ETHStatusResetHandle, cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(ETHStatusResetHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
-
-    ulong* pdata = (ulong*) ETHStatusResetHandle->data();
-    *pdata = 0;
-    pdata++;
-    *pdata = 0;
+    m_dspSetup.setDspMemList(DspIFace);
 }
 
 

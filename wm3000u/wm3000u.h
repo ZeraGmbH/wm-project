@@ -475,10 +475,6 @@ private:
     bool m_bDspMeasureTriggerActive;
     bool m_bDspMeasureIgnore;
     tJustValues m_JustValues;
-    cDspMeasData* RawValData2;
-    cDspMeasData* RawValData3;
-    cDspMeasDataUlong* ETHStatusHandle;
-    cDspMeasDataUlong* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
     wmScopeDialog *mScopeDialog = nullptr;

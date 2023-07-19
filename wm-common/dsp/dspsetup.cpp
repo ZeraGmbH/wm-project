@@ -332,6 +332,28 @@ void DspSetup::SetDspWMCmdList(cConfData *confData, cDspIFace *DspIFace, int sam
     DspIFace->addIntListItem( s = "STOPCHAIN(1,0x0003)"); // ende prozessnr., hauptkette 0 subkette 3
 }
 
+void DspSetup::setDspMemList(cDspIFace* DspIFace)
+{
+    DspIFace->ClearMemLists();
+    m_ethData.ETHStatusHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
+    DspIFace->addVarItem(m_ethData.ETHStatusHandle, cDspVar("ETHDATACOUNT",2,vMemory));
+    DspIFace->addVarItem(m_ethData.ETHStatusHandle, cDspVar("ETHERRORS",1,vMemory));
+    DspIFace->addVarItem(m_ethData.ETHStatusHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+
+    m_ethData.ETHStatusResetHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
+    DspIFace->addVarItem(m_ethData.ETHStatusResetHandle, cDspVar("ETHERRORS",1,vMemory));
+    DspIFace->addVarItem(m_ethData.ETHStatusResetHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+
+    m_ethData.ETHStatusHandle->reset();
+    m_ethData.ETHStatusResetHandle->reset();
+}
+
+EthDataStruct *DspSetup::getEthData()
+{
+    return &m_ethData;
+}
+
+
 MeasDataStruct *DspSetup::getMeasData()
 {
     return &m_measData;
