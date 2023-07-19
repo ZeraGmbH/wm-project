@@ -10,23 +10,44 @@
 
 enum AVType {vApplication = 1, vDspIntern = 2, vMemory = 4}; // application variable type
 
-class cDspMeasData
+class cDspMeasDataBase
 {
 public:
-    cDspMeasData(QString); // name des messdaten satzes
-    float* data();
-    void addVarItem(cDspVar);
+
     QString& VarList(); // liste mit allen variablen mit längenangaben
     QString& MeasVarList(); // liste aller namen vom typ vapplikation bzw. vmemory
     QString& name();
-    uint getDataLenght();
 
-private:
+protected:
     QList<cDspVar> DspVarList;
-    QVector<float> DspVarData;
     // Q3MemArray has been replaced by QVector https://fiona.dmcs.pl/po/qt-tutorial/docs/qt/porting4.html#qmemarray-t
     QString m_sname;
     QString m_slist;
+};
+
+
+class cDspMeasDataUlong : public cDspMeasDataBase
+{
+public:
+    cDspMeasDataUlong(QString); // name des messdaten satzes
+    void addVarItem(cDspVar);
+    ulong* data();
+    uint getDataLenght();
+    void reset();
+private:
+    QVector<ulong> DspVarData;
+};
+
+
+class cDspMeasData : public cDspMeasDataBase
+{
+public:
+    cDspMeasData(QString); // name des messdaten satzes
+    void addVarItem(cDspVar);
+    float* data();
+    uint getDataLenght();
+private:
+    QVector<float> DspVarData;
 };
 
 

@@ -477,8 +477,8 @@ private:
     tJustValues m_JustValues;
     cDspMeasData* RawValData2;
     cDspMeasData* RawValData3;
-    cDspMeasData* ETHStatusHandle;
-    cDspMeasData* ETHStatusResetHandle;
+    cDspMeasDataUlong* ETHStatusHandle;
+    cDspMeasDataUlong* ETHStatusResetHandle;
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
     wmScopeDialog *mScopeDialog = nullptr;

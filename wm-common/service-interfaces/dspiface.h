@@ -19,9 +19,6 @@
 #include "zhclientsocket.h"
 
 
-enum dType {dInt, dFloat};
-
-
 enum dspIFaceActionHandlerState {
     dspIFaceIdle, // 0
     
@@ -129,15 +126,19 @@ public:
     void TriggerIntHKSK(int); // triggert die abarbeitung hksk in intliste
     void addCycListItem(QString&); // ein neues Kommando ans ende der cyc. liste
     void addIntListItem(QString&); // dito für intliste
-    cDspMeasData* GetMVHandle(QString); // legt eine neue messwerte gruppe an 
-    cDspMeasData* GetMemHandle(QString); // legt eine neue memory gruppe an
+    cDspMeasData* GetMVHandle(QString); // legt eine neue messwerte gruppe an
+    cDspMeasDataUlong* GetMemHandle(QString); // legt eine neue memory gruppe an
     void addVarItem(cDspMeasData*, cDspVar); // eine neue dsp variable
+    void addVarItem(cDspMeasDataUlong*, cDspVar);
     void ActivateInterface(); // aktiviert die var- und cmd-listen im dsp
     void DeactivateInterface(); // nur anders rum
     void DataAcquisition(cDspMeasData*); // liest alle daten dieser messwertegruppe vom type vapplication
     void DspMemoryRead(cDspMeasData*); // liest alle daten dieser memorygruppe
-    void DspMemoryWrite(cDspMeasData*,dType); // schreibt alle daten dieser memorygruppe
+    void DspMemoryRead(cDspMeasDataUlong*);
+    void DspMemoryWrite(cDspMeasData*); // schreibt alle daten dieser memorygruppe
+    void DspMemoryWrite(cDspMeasDataUlong*);
     float* data(cDspMeasData*); // gibt einen zeiger zurück auf die var daten vom typ vapplication
+    ulong* data(cDspMeasDataUlong*);
     void SetGainCorrection(int,float); // setzt für kanal (int 0..) die verstärkungskorrektur
     void SetPhaseCorrection(int,float); // setzt für kanal (int 0..) die phasenkorrektur    
     void SetOffsetCorrection(int,float); // setzt für kanal (int 0..) die offsetkorrektur
@@ -158,7 +159,7 @@ private:
     int m_nPort; // host port
     QStringList CycCmdList, IntCmdList;
     QList<cDspMeasData*> DspMeasDataList; // eine liste mit zeigern auf "programmdaten"
-    QList<cDspMeasData*> DspMemoryDataList; // eine liste mit zeigern auf  dsp speicher allgemein
+    QList<cDspMeasDataUlong*> DspMemoryDataList; // eine liste mit zeigern auf  dsp speicher allgemein
     cSMTimer* m_ActTimer;
     void GetInterfaceData();
     void TestDspRunning(); // schreibt test kommando an dsp
@@ -190,7 +191,8 @@ private:
     ulong m_nuP1;
     ulong m_lP1[16]; // parameter
     cETHAdress m_ethadr;
-    cDspMeasData *m_pMeasData; 
+    cDspMeasData *m_pMeasData;
+    cDspMeasDataUlong *m_pMeasDataUlong;
     int m_nBusyCount;
     bool m_bConnected;
 };
