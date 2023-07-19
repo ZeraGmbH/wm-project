@@ -50,7 +50,6 @@ cWMessageBox::cWMessageBox ( const QString & caption, const QString & text, Icon
 
 cWMessageBox::~cWMessageBox()
 {
-    this->QMessageBox::~QMessageBox();
 }
 
 
@@ -195,6 +194,13 @@ cWM3000I::cWM3000I() :
 cWM3000I::~cWM3000I() 
 {
     WriteSettings(".ses");
+
+    delete m_OVLMsgBox;
+    delete m_SelftestMsgBox;
+    delete m_ActTimer;
+    delete m_AsyncTimer;
+    DspIFace->ClearVarLists();
+
     if (mScopeDialog) delete mScopeDialog;
     delete DspIFace;
     delete PCBIFace;
