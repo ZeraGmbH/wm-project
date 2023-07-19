@@ -280,6 +280,8 @@ int main(int argc, char *argv[])
 
     int ret = app.exec();
 
+    delete g_WMInfo;
+    delete wm3000DeviceServer;
     delete g_WMDevice;
     delete g_WMView;
 
