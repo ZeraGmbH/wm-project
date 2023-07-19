@@ -189,6 +189,7 @@ void wmProgressDialog::calcTimes(int val)
                     mCalcRest = time.addSecs(c);
                     time = QTime::currentTime();
                     mEndZeit = time.addSecs(c);
+                    qDebug("calcTimes: number: %i duration: %i sum: %i sec",val-1,b,c);
                     mShow = true;
                 }
                 mLastNumber = val;
