@@ -8,9 +8,9 @@
 #include "wmeditor.h"
 
 wmEditor::wmEditor (QWidget* parent, const char *name)
-    : Q3TextEdit (parent,name)	{};
-	
+    : QPlainTextEdit (name, parent)	{}
+
 void wmEditor::closeEvent (QCloseEvent *e) {
-    emit textMessage ( text() );
+    emit textMessage ( this->toPlainText() );
     e->accept();
 }
