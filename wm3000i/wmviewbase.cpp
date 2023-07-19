@@ -272,11 +272,10 @@ void WMViewBase::EditOETFileSlot()
     QFile file(m_ConfData.m_sOETFile); // text einlesen
     if ( file.open( IO_ReadWrite ) ) {
         QTextStream stream( &file );
-        wmEdit->setTextFormat(Qt::PlainText);
         QString text = stream.read();
         if (text.isEmpty())
             text = "15A;15A;100%;0.01%;0.0grad";
-        wmEdit->setText( text );
+        wmEdit->setPlainText( text );
         file.close();
         wmEdit->show();
     } // wenn der editor geschlossen wird -> signal mit neuem text (geht auf den slot eins tiefer)
@@ -286,7 +285,7 @@ void WMViewBase::EditOETFileSlot()
 void WMViewBase::ReceiveOETFileSlot(QString nText)
 {
     wmEdit->hide();
-    if (wmEdit->isModified()) { // der text hat sich geändert
+    if (wmEdit->document()->isModified()) { // der text hat sich geändert
         m_ConfData.m_sOETFile = Q3FileDialog::getSaveFileName( m_ConfData.m_sOETFile,
                                                                tr("Eigenfehlertabelle (*oet)"),
                                                                this,
@@ -334,8 +333,7 @@ void WMViewBase::EditResultFileSlot()
     QFile file(m_ConfData.m_sResultFile); // text einlesen
     if ( file.open( IO_ReadOnly ) ) {
         QTextStream stream( &file );
-        wmEdit2->setTextFormat(Qt::PlainText);
-        wmEdit2->setText( stream.read() );
+        wmEdit2->setPlainText( stream.read() );
         file.close();
         wmEdit2->show();
     } // wenn der editor geschlossen wird -> signal mit neuem text (geht auf den slot eins tiefer)
