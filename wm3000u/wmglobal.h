@@ -158,7 +158,6 @@ enum SenseMode {sensNsensX, adcNadcX, sensNadcX, sensXadcN, sensNsensX0V, anzSen
 enum MeasMode {Un_UxAbs,Un_EVT,Un_nConvent,maxMMode}; // messmodi der wm3000u
 enum SignalModes {AC, DC, maxSMode}; // signal modi
 enum UserDecisions {AbortProgram,Stop,Retry,SimulationMode}; // benutzer entscheidungen
-enum Languages {de,gb,pl};
 
 
 class cJustMeasInfo

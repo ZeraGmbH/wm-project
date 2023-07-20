@@ -7,34 +7,32 @@ INCLUDEPATH	+= .
 
 
 HEADERS	+= \
-	devserver.h \
-	pcbiface.h \
-	wmglobal.h \
-	wm3000i.h \
+    devserver.h \
+    pcbiface.h \
+    wmglobal.h \
+    wm3000i.h \
     wmioffsetcustomlabels.h \
-	wm3000scpiface.h \
-    wmviewbase.h \
+    wm3000scpiface.h \
     wmrawactualvalbase.h \
     confdialogbase.h \
     rangedialogbase.h \
+    wmviewbasei.h \
 
 SOURCES	+= \
-	devserver.cpp \
-	main.cpp \
-	pcbiface.cpp \
-	wm3000i.cpp \
+    devserver.cpp \
+    main.cpp \
+    pcbiface.cpp \
+    wm3000i.cpp \
     wmioffsetcustomlabels.cpp \
-	wm3000scpiface.cpp \
-    wmviewbase.cpp \
+    wm3000scpiface.cpp \
     wmrawactualvalbase.cpp \
     rangedialogbase.cpp \
-    confdialogbase.cpp
-
+    confdialogbase.cpp \
+    wmviewbasei.cpp \
 
 FORMS	= confdialogbase.ui \
 	rangedialogbase.ui \
 	wmrawactualvalbase.ui \
-	wmviewbase.ui
 
 
 ######################################################################
