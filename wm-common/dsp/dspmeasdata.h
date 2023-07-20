@@ -14,15 +14,14 @@ class cDspMeasDataBase
 {
 public:
 
-    QString& VarList(); // liste mit allen variablen mit längenangaben
-    QString& MeasVarList(); // liste aller namen vom typ vapplikation bzw. vmemory
+    QString VarList(); // liste mit allen variablen mit längenangaben
+    QString MeasVarList(); // liste aller namen vom typ vapplikation bzw. vmemory
     QString& name();
 
 protected:
     QList<cDspVar> DspVarList;
     // Q3MemArray has been replaced by QVector https://fiona.dmcs.pl/po/qt-tutorial/docs/qt/porting4.html#qmemarray-t
     QString m_sname;
-    QString m_slist;
 };
 
 
