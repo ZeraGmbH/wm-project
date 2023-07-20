@@ -27,7 +27,7 @@ void wmScopeDialog::clearChannelPointerList()
     mDspMeasDataList.clear();
 }
 
-void wmScopeDialog::setChannelPointer(cDspMeasData *dspMeasData)
+void wmScopeDialog::setChannelPointer(cDspMeasData<float> *dspMeasData)
 {
     mDspMeasDataList.append(dspMeasData);
 }
@@ -36,7 +36,7 @@ void wmScopeDialog::updateBoxItems()
 {
     mChannel0->clear();
     mChannel1->clear();
-    foreach (cDspMeasData* poi, mDspMeasDataList ) {
+    foreach (cDspMeasData<float>* poi, mDspMeasDataList ) {
         mChannel0->insertItem(poi->VarList());
         mChannel1->insertItem(poi->VarList());
     }
@@ -52,9 +52,9 @@ bool wmScopeDialog::isShowEnabled()
     return !m_bShow;
 }
 
-cDspMeasData *wmScopeDialog::getSelectedChannelPointer(int channel)
+cDspMeasData<float> *wmScopeDialog::getSelectedChannelPointer(int channel)
 {
-    cDspMeasData * poi;
+    cDspMeasData<float> * poi;
 
     if (channel == 0 ) {
         poi = mDspMeasDataList.at(mChannel0->currentItem());
