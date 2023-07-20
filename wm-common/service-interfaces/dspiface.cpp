@@ -26,7 +26,10 @@ cDspIFace::~cDspIFace()
 {
     iFaceSock->close();
     ClearVarLists();
+    ClearMemLists();
     delete m_ActTimer;
+    delete m_pMeasData;
+    delete m_pMeasDataUlong;
 }
 
 
