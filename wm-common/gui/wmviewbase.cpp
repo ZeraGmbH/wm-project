@@ -1,5 +1,4 @@
 #include "wmviewbase.h"
-#include "wmglobal.h"
 #include "wmeditor.h"
 #include "widgetgeometry.h"
 #include "ui_wmviewbase.h"
@@ -7,14 +6,14 @@
 #include <Q3FileDialog>
 #include <QTextEdit>
 
-WMViewBase::WMViewBase(QWidget *parent) :
+WMViewBase::WMViewBase(WMViewBase *parent) :
     Q3MainWindow(parent),
     ui(new Ui::WMViewBase),
     m_statusLabelContainer(this)
 {
     ui->setupUi((Q3MainWindow*) this);
-    init();
 }
+
 
 WMViewBase::~WMViewBase()
 {
@@ -34,7 +33,7 @@ void WMViewBase::configureWM1000Items()
 {
     ui->Ansicht->removeAction(ui->ansichtEN61850Action);
     QString s;
-    s = QObject::tr("Wandlermesseinrichtung WM1000U");
+    s = QObject::tr("Wandlermesseinrichtung WM1000I");
     setWindowTitle(s);
 }
 
@@ -53,6 +52,7 @@ void WMViewBase::init()
     m_bJustified = false;
     m_bFreqQuestionable = false;
     m_bPPSQuestionable = false;
+
     for (int i =0 ; i < nmaxRecentOEFiles; i++) m_nrecentOEFileIds[i] = -1;
     for (int i =0 ; i < nmaxRecentMVFiles; i++) m_nrecentMVFileIds[i] = -1;
     for (int i =0 ; i < nmaxRecentSESFiles; i++) m_nrecentSESFileIds[i] = -1;
@@ -67,34 +67,35 @@ void WMViewBase::init()
     ui->ansichtDialogAction->setChecked(false);
     ui->ansichtEigenfehlerAction->setChecked(false);
     ui->ansichtEN61850Action->setChecked(false);
+    ui->ansichtScopeAction->setChecked(false);
 
     onLoadSession(".ses");
     connect(ui->ansichtScopeAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtScopeViewToggled(bool)));
     connect(this,SIGNAL(UIansichtScopeViewSet(bool)),ui->ansichtScopeAction,SLOT(setChecked(bool)));
 
     connect(ui->ansichtFehlerMessungAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtFehlerMessungActionToggled(bool))); // öffnen der fehlermesswert anzeige
+    connect(ui->ansichtFehlerMessungAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // wir speichern die laufende sitzung immer
     connect(this,SIGNAL(UIansichtFehlerMessungActionSet(bool)),ui->ansichtFehlerMessungAction,SLOT(setChecked(bool)));
-    connect(this,SIGNAL(UIansichtFehlerMessungActionSet(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
 
     connect(ui->ansichtEigenfehlerAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtEigenfehlerActionToggled(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtEigenfehlerAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
     connect(this,SIGNAL(UIansichtEigenfehlerActionSet(bool)),ui->ansichtEigenfehlerAction,SLOT(setChecked(bool)));
-    connect(this,SIGNAL(UIansichtEigenfehlerActionSet(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
 
     connect(ui->ansichtIstwerteAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtIstwerteActionToggled(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtIstwerteAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
     connect(this,SIGNAL(UIansichtIstwerteActionSet(bool)),ui->ansichtIstwerteAction,SLOT(setChecked(bool)));
-    connect(this,SIGNAL(UIansichtIstwerteActionSet(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
 
-    connect(ui->ansichtOffsetAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtOffsetActionToggled(bool)));
+    connect(ui->ansichtOffsetAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtOffsetActionToggled(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtOffsetAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
     connect(this,SIGNAL(UIansichtOffsetActionSet(bool)),ui->ansichtOffsetAction,SLOT(setChecked(bool)));
-    connect(this,SIGNAL(UIansichtOffsetActionSet(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
 
     connect(ui->ansichtDialogAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtDialogActionToggled(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtDialogAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
     connect(this,SIGNAL(UIansichtDialogActionSet(bool)),ui->ansichtDialogAction,SLOT(setChecked(bool)));
-    connect(this,SIGNAL(UIansichtDialogActionSet(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
 
     connect(ui->ansichtEN61850Action,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtEN61850ActionToggled(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtEN61850Action,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
     connect(this,SIGNAL(UIansichtEN61850ActionSet(bool)),ui->ansichtEN61850Action,SLOT(setChecked(bool)));
-    connect(this,SIGNAL(UIansichtEN61850ActionSet(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
 
     connect(ui->einstellungenConfAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenConfActionActivated()));
     connect(ui->einstellungenBereichAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenBereichActionActivated()));
@@ -129,40 +130,6 @@ void WMViewBase::SetViewConfDataInfoSlot( cConfData *cd )
 }
 
 
-void WMViewBase::ActualizeStates()
-{
-    if (m_ConfData.m_bDCmeasurement)
-    {
-        ui->messungOffsetKanalNAction->setEnabled(true);
-        ui->messungOffsetKanalXAction->setEnabled(true);
-    }
-    else
-    {
-        ui->messungOffsetKanalNAction->setEnabled(false);
-        ui->messungOffsetKanalXAction->setEnabled(false);
-    }
-
-    if (m_ConfData.m_bRunning)
-    {
-        ui->messungStartAction->setMenuText(tr("S&top"));
-        ui->messungStartAction->setStatusTip(tr("Messung anhalten"));
-    }
-    else
-    {
-        ui->messungStartAction->setMenuText(tr("S&tart"));
-        ui->messungStartAction->setStatusTip(tr("Messung starten"));
-    }
-    
-    ui->messungSimulationAction->setOn(m_ConfData.m_bSimulation);
-    ui->hilfeSelbsttestAction->setDisabled(m_ConfData.m_bSimulation); // selbsttest disabled wenn simulation
-    
-    m_statusLabelContainer.updateLabels(&m_ConfData, m_bJustified, m_bFreqQuestionable, m_bPPSQuestionable);
-
-    UpdateRecentFileList(recentOETFiles,m_ConfData.m_sOETFile);
-    UpdateRecentFileList(recentResultFiles,m_ConfData.m_sResultFile);
-}
-
-
 void WMViewBase::OpenOETFileSlot() // zum laden einer eigenfehlertabelle
 {
     Q3FileDialog *OETFileDialog=new Q3FileDialog ( QDir::homePath(),tr("Eigenfehlertabellen (*.oet)"),this);
@@ -186,11 +153,11 @@ void WMViewBase::UpdateRecentFileList(QStringList& sl, QString f)
         sl.remove(f); // wenn es den eintrag schon gibt -> löschen
         sl.push_front(f); // dann neuen an den anfang der liste setzen
     }
-    
+
     while ((int) recentOETFiles.size()>nmaxRecentOEFiles)
         recentOETFiles.pop_back();
     int n = (int) recentOETFiles.size();
-    
+
     for (int i=0; i<n; i++)
     {
         QString text = QString ("&%1 %2").arg(i+1).arg(strippedName(recentOETFiles[i]));
@@ -204,7 +171,7 @@ void WMViewBase::UpdateRecentFileList(QStringList& sl, QString f)
             ui->Datei->changeItem(m_nrecentOEFileIds[i],text);
         }
     }
-    
+
     while ((int) recentResultFiles.size()>nmaxRecentMVFiles)
         recentResultFiles.pop_back();
 
@@ -283,7 +250,7 @@ void WMViewBase::EditOETFileSlot()
         QTextStream stream( &file );
         QString text = stream.read();
         if (text.isEmpty())
-            text = "100V;100V;100%;0.01%;0.0grad";
+            text = "15A;15A;100%;0.01%;0.0grad";
         wmEdit->setPlainText( text );
         file.close();
         wmEdit->show();
@@ -373,7 +340,7 @@ void WMViewBase::StoreResultSlot()
 {
     if (m_ConfData.m_sResultFile=="") { // wir haben noch keine ergebnisdatei geöffnet
         QString s = Q3FileDialog::getSaveFileName(
-                    QString("%1%2").arg(QDir::homePath()).arg("results/results.xml"),
+            QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("results/results.xml"),
                     "Ergebnisdateien (*.xml)",
                     this,
                     "",
@@ -398,11 +365,12 @@ void WMViewBase::OpenRecentResultFileSlot(int index)
 bool WMViewBase::onLoadSession(QString session)
 {
     QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
+    getDeviceName();
+    QString ls = QString("%1/.%2/%3%4").arg(QDir::homePath()).arg(getDeviceName()).arg(name()).arg(fi.fileName());
     QFile file(ls);
     if ( file.open( IO_ReadOnly ) ) {
         QDataStream stream( &file );
-        int mA, iA , oA, dA, eA, enA;
+        int mA, iA, oA, dA, eA, enA;
         stream >> mA >> iA >> oA >> dA >> eA >> enA;
         stream >> m_widGeometry;
         file.close();
@@ -419,20 +387,25 @@ bool WMViewBase::onLoadSession(QString session)
         move(m_widGeometry.getPoint());
         show();
         // FVWM und Gnome verhalten sich anders
-#ifndef FVWM 
+#ifndef FVWM
         move(m_widGeometry.getPoint());
-#endif   
+#endif
 
         return true;
     }
     return false;
-}   
+}
 
 
 void WMViewBase::onSaveSession(QString session)
 {
+    if(!QDir(QString("%1/.%2/").arg(QDir::homePath()).arg(getDeviceName())).exists())
+    {
+        //create temporary object that gets deleted when leaving the control block
+        QDir().mkdir(QString("%1/.%2/").arg(QDir::homePath()).arg(getDeviceName()));
+    }
     QFileInfo fi(session);
-    QString ls = QString("%1/.wm3000u/%2%3").arg(QDir::homePath()).arg(name()).arg(fi.fileName());
+    QString ls = QString("%1/.%2/%3%4").arg(QDir::homePath()).arg(getDeviceName()).arg(name()).arg(fi.fileName());
     QFile file(ls);
     //    file.remove();
     if ( file.open( QIODevice::Unbuffered | QIODevice::WriteOnly ) ) {
@@ -458,16 +431,16 @@ void WMViewBase::onSaveSession(QString session)
         stream << m_widGeometry;
         file.close();
     }
-}    
+}
 
 void WMViewBase::StoreSessionSlot()
 {
-    SessionName = Q3FileDialog::getSaveFileName( QString("%1/wm3000u/%2").arg(QDir::homePath()).arg("/Session.ses"),
+    SessionName = Q3FileDialog::getSaveFileName( QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("/Session.ses"),
                                                  tr("Sitzung Name (*.ses)"),
                                                  this,
                                                  "",
                                                  tr("Sitzung speichern"));
-    
+
     QFile file(SessionName);
     if ( file.open( IO_WriteOnly ) ) {
         file.close();
@@ -479,7 +452,7 @@ void WMViewBase::StoreSessionSlot()
 
 void WMViewBase::onLoadSessionSlot()
 {
-    Q3FileDialog *SessionFileDialog=new Q3FileDialog ( QString("%1/wm3000u").arg(QDir::homePath()),
+    Q3FileDialog *SessionFileDialog=new Q3FileDialog ( QString("%1/%2").arg(QDir::homePath()).arg(getDeviceName()),
                                                        tr("Sitzung Name (*.ses)"),
                                                        this);
     SessionFileDialog->setCaption(tr("Sitzung laden"));
@@ -505,7 +478,7 @@ void WMViewBase::closeEvent(QCloseEvent* ce)
 }
 
 
-void WMViewBase::resizeEvent (QResizeEvent *)
+void WMViewBase::resizeEvent(QResizeEvent *)
 {
     onSaveSession(".ses");
 }
@@ -516,16 +489,22 @@ void WMViewBase::moveEvent(QMoveEvent *)
     onSaveSession(".ses");
 }
 
+void WMViewBase::setDeviceName(QString str)
+{
+    m_deviceName = str;
+}
 
-void WMViewBase::UpdateRecentSESList(QString ses)
+
+
+void WMViewBase::UpdateRecentSESList( QString ses )
 {
     recentSESFiles.remove(ses); // wenn es den eintrag schon gibt -> löschen
     recentSESFiles.push_front(ses); // dann neuen an den anfang der liste setzen
-    
+
     while ((int) recentSESFiles.size()>nmaxRecentSESFiles)
         recentSESFiles.pop_back();
     int n = (int) recentSESFiles.size();
-    
+
     for (int i=0; i<n; i++)
     {
         QString text = QString ("&%1 %2").arg(i+1).arg(strippedName(recentSESFiles[i]));
@@ -541,22 +520,11 @@ void WMViewBase::UpdateRecentSESList(QString ses)
     }
 }
 
-void WMViewBase::updateXRangeLabel(QLabel *xRangeLabel)
+QString WMViewBase::getDeviceName()
 {
-    switch (m_ConfData.m_nMeasMode) { // statuszeile bereich x,diff,ect eintragen
-    case Un_UxAbs:
-        xRangeLabel->setText(QString("ChX=%1").arg(m_ConfData.m_sRangeX));
-        xRangeLabel->show();
-        break;
-    case Un_EVT:
-        xRangeLabel->setText(QString("ChEVT=%1").arg(m_ConfData.m_sRangeET));
-        xRangeLabel->show();
-        break;
-    case Un_nConvent:
-        xRangeLabel->hide();
-        break;
-    }
+    return m_deviceName;
 }
+
 
 void WMViewBase::OpenRecentSESFileSlot(int index)
 {
@@ -593,13 +561,13 @@ void WMViewBase::SetPolishSlot()
 
 void WMViewBase::JustFlashProgSlot()
 {
-    emit JustFlashProgSignal(); // signal an wm3000 das flash zu prograsmmieren
+    emit JustFlashProgSignal(); // signal an wm3000 das flash zu programmieren
 }
 
 
 void WMViewBase::JustFlashExportSlot()
 {
-    QString File = Q3FileDialog::getSaveFileName(QString("%1%2").arg(QDir::homePath()).arg("JData.xml"),
+    QString File = Q3FileDialog::getSaveFileName(QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("JData.xml"),
                                                  tr("Datei Name (*.xml)"),
                                                  this,
                                                  "",
@@ -612,12 +580,12 @@ void WMViewBase::JustFlashExportSlot()
 
 void WMViewBase::JustFlashImportSlot()
 {
-    QString File = Q3FileDialog::getOpenFileName(QString("%1%2").arg(QDir::homePath()).arg("JData.xml"),
+    QString File = Q3FileDialog::getOpenFileName(QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("JData.xml"),
                                                  tr("Datei Name (*.xml)"),
                                                  this,
                                                  "",
                                                  tr("Justagedaten importieren"));
-    
+
     if (File != "") // wenn ""  -> es war cancel
         emit JustFlashImportSignal(File);
 }
@@ -626,12 +594,13 @@ void WMViewBase::JustFlashImportSlot()
 void WMViewBase::SaveDefaultSessionSlot(bool)
 {
     onSaveSession(".ses");
+    emit onSaveSessionSignal(".ses"); // die anderen
 }
 
 void WMViewBase::RemoteCtrlInfoSlot(bool remote )
 {
     uint i;
-    
+
     for (i = 0; i < ui->Datei->count(); i++) // wenn remote betrieb alle items disablen
         ui->Datei->setItemEnabled (ui->Datei->idAt(i) , !remote) ;
     for (i = 0; i < ui->Messung->count(); i++) // wenn remote betrieb alle items disablen
@@ -655,9 +624,10 @@ void WMViewBase::SetFreqStatSlot(bool b)
     ActualizeStates();
 }
 
-
 void WMViewBase::SetPPSStatSlot(bool b)
 {
     m_bPPSQuestionable = b;
     ActualizeStates();
 }
+
+

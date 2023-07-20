@@ -16,6 +16,7 @@
 #include "wmeditor.h"
 #include "widgetgeometry.h"
 #include "statuslabelcontainer.h"
+#include  "wmglobalcommon.h"
 
 namespace Ui {
     class WMViewBase;
@@ -26,16 +27,16 @@ class WMViewBase : public Q3MainWindow, public IStatusLabelXRangeParent
     Q_OBJECT
 
 public:
-    explicit WMViewBase( QWidget* parent = 0);
+    explicit WMViewBase(WMViewBase* parent = 0);
     ~WMViewBase();
     virtual QString strippedName( QString s );
     void removeJustageItem();
     void configureWM1000Items();
     void configureWMwoDC();
+    virtual void ActualizeStates() = 0;
 
 public slots:
     void SetViewConfDataInfoSlot( cConfData * cd );
-    void ActualizeStates();
     virtual void OpenOETFileSlot();
     virtual void UpdateRecentFileList( QStringList & sl, QString f );
     virtual void OpenRecentOETFileSlot( int index );
@@ -103,30 +104,33 @@ protected:
     virtual void closeEvent(QCloseEvent *ce) override;
     virtual void resizeEvent (QResizeEvent *) override;
     virtual void moveEvent(QMoveEvent *) override;
-
-private:
-    Ui::WMViewBase *ui;
-    int m_nrecentSESFileIds[nmaxRecentSESFiles];
-    WidgetGeometry m_widGeometry;
-    QString SessionName;
-    QStringList recentResultFiles;
-    wmEditor* wmEdit;
-    QStringList recentMVFiles;
     cConfData m_ConfData;
-    int m_nrecentOEFileIds[nmaxRecentOEFiles];
-    QStringList recentOETFiles;
-    int m_nrecentMVFileIds[nmaxRecentMVFiles];
-    wmEditor* wmEdit2;
-    QStringList recentSESFiles;
+    Ui::WMViewBase *ui;
     bool m_bJustified;
     bool m_bFreqQuestionable;
     bool m_bPPSQuestionable;
     StatusLabelContainer m_statusLabelContainer;
 
+    QStringList recentResultFiles;
+    QStringList recentOETFiles;
+    void setDeviceName(QString);
     void init();
+
+private:
+    int m_nrecentSESFileIds[nmaxRecentSESFiles];
+    WidgetGeometry m_widGeometry;
+    QString SessionName;
+    wmEditor* wmEdit;
+    QStringList recentMVFiles;
+    int m_nrecentOEFileIds[nmaxRecentOEFiles];
+    int m_nrecentMVFileIds[nmaxRecentMVFiles];
+    wmEditor* wmEdit2;
+    QStringList recentSESFiles;
+    QString m_deviceName;
+
     void destroy();
     void UpdateRecentSESList( QString ses );
-    virtual void updateXRangeLabel(QLabel* xRangeLabel) override;
+    QString getDeviceName();
 
 private slots:
     virtual void StoreSessionSlot();

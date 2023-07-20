@@ -17,7 +17,7 @@
 #include "wmmeasvaluesbase.h"
 #include "wmoeviewbase.h"
 #include "wmrawactualvalbase.h"
-#include "wmviewbase.h"
+#include "wmviewbaseu.h"
 #include "logfileview.h"
 #include "wmglobal.h"
 #include "wm3000u.h"
@@ -33,7 +33,7 @@
 #include <wmoffsetvalbase.h>
 
 cWM3000U* g_WMDevice;
-WMViewBase *g_WMView; 
+WMViewBaseU *g_WMView;
 
 int main(int argc, char *argv[])
 {
@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
     app.installTranslator(qtTranslator);
     app.installTranslator(appTranslator);
 
-    g_WMView = new WMViewBase; // erst mal hauptfenster erzeugen
+    g_WMView = new WMViewBaseU(); // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
 
     if (!bJustage)
