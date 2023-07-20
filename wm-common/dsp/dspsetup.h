@@ -6,20 +6,20 @@
 
 struct MeasDataStruct
 {
-    cDspMeasData* MaxValData;
-    cDspMeasData* RMSValData; // schnelle rms messung (4..26 * 20ms @ 50hz)
-    cDspMeasData* ActValData;
-    cDspMeasData* RawValData0;
-    cDspMeasData* RawValData1;
-    cDspMeasData* RawValDataSinConHanning;
-    cDspMeasData* RawValData2;
-    cDspMeasData* RawValData3;
+    cDspMeasData<float>* MaxValData;
+    cDspMeasData<float>* RMSValData; // schnelle rms messung (4..26 * 20ms @ 50hz)
+    cDspMeasData<float>* ActValData;
+    cDspMeasData<float>* RawValData0;
+    cDspMeasData<float>* RawValData1;
+    cDspMeasData<float>* RawValDataSinConHanning;
+    cDspMeasData<float>* RawValData2;
+    cDspMeasData<float>* RawValData3;
 };
 
 struct EthDataStruct
 {
-    cDspMeasDataUlong* ETHStatusHandle;
-    cDspMeasDataUlong* ETHStatusResetHandle;
+    cDspMeasData<ulong>* ETHStatusHandle;
+    cDspMeasData<ulong>* ETHStatusResetHandle;
 };
 
 class DspSetup

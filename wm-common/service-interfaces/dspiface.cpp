@@ -530,29 +530,29 @@ void cDspIFace::addIntListItem(QString &s) // dito für intliste
 }
 
 
-cDspMeasData* cDspIFace::GetMVHandle(QString s) // legt eine neue messwerte gruppe für befehlketten an 
+cDspMeasData<float>* cDspIFace::GetMVHandle(QString s) // legt eine neue messwerte gruppe für befehlketten an
 {
-    cDspMeasData* pdmd = new cDspMeasData(s); // neues object anlegen
+    cDspMeasData<float>* pdmd = new cDspMeasData<float>(s); // neues object anlegen
     DspMeasDataList.append(pdmd); // an ptr liste hängen
     return pdmd; // handle rückgabe
 }
 
 
-cDspMeasDataUlong* cDspIFace::GetMemHandle(QString s)
+cDspMeasData<ulong> *cDspIFace::GetMemHandle(QString s)
 {
-    cDspMeasDataUlong* pdmd = new cDspMeasDataUlong(s); // neues object anlegen
+    cDspMeasData<ulong>* pdmd = new cDspMeasData<ulong>(s); // neues object anlegen
     DspMemoryDataList.append(pdmd); // an ptr liste hängen
     return pdmd; // handle rückgabe
 }
 
 
-void cDspIFace::addVarItem(cDspMeasData* pMData, cDspVar var) // eine neue dsp variable
+void cDspIFace::addVarItem(cDspMeasData<float> *pMData, cDspVar var) // eine neue dsp variable
 {
     pMData->addVarItem(var);
 }
 
 
-void cDspIFace::addVarItem(cDspMeasDataUlong* pMData, cDspVar var) // eine neue dsp variable
+void cDspIFace::addVarItem(cDspMeasData<ulong>* pMData, cDspVar var) // eine neue dsp variable
 {
     pMData->addVarItem(var);
 }
@@ -570,20 +570,20 @@ void cDspIFace::DeactivateInterface() // nur anders rum
 }
 
 
-void cDspIFace::DataAcquisition(cDspMeasData* pMData) // liest alle daten vom type vapplication
+void cDspIFace::DataAcquisition(cDspMeasData<float> *pMData) // liest alle daten vom type vapplication
 {
     m_pMeasData = pMData;
     m_ActTimer->start(0,DataAcquisitionStart);
 }
 
 
-void cDspIFace::DspMemoryRead(cDspMeasData* pMData) // liest alle daten dieser memorygruppe
+void cDspIFace::DspMemoryRead(cDspMeasData<float> *pMData) // liest alle daten dieser memorygruppe
 {
     m_pMeasData = pMData;
     m_ActTimer->start(0,DspMemoryReadStart);
 }
 
-void cDspIFace::DspMemoryRead(cDspMeasDataUlong *pMData)
+void cDspIFace::DspMemoryRead(cDspMeasData<ulong> *pMData)
 {
     m_pMeasDataUlong = pMData;
     m_ActTimer->start(0,DspMemoryReadStart);
@@ -602,7 +602,7 @@ void cDspIFace::ReadServerVersion()
 }
 
 
-void cDspIFace::DspMemoryWrite(cDspMeasData* pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
+void cDspIFace::DspMemoryWrite(cDspMeasData<float> *pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
 {	
     m_pMeasData = pMData;
     m_pMeasDataUlong = nullptr;
@@ -610,7 +610,7 @@ void cDspIFace::DspMemoryWrite(cDspMeasData* pMData)  // schreibt alle daten die
 }
 
 
-void cDspIFace::DspMemoryWrite(cDspMeasDataUlong* pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
+void cDspIFace::DspMemoryWrite(cDspMeasData<ulong> *pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
 {
     m_pMeasDataUlong = pMData;
     m_pMeasData = nullptr;
@@ -618,13 +618,13 @@ void cDspIFace::DspMemoryWrite(cDspMeasDataUlong* pMData)  // schreibt alle date
 }
 
 
-float* cDspIFace::data(cDspMeasData* pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
+float* cDspIFace::data(cDspMeasData<float> *pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
 {
     return pMData->data();
 }
 
 
-ulong* cDspIFace::data(cDspMeasDataUlong* pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
+ulong* cDspIFace::data(cDspMeasData<ulong> *pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
 {
     return pMData->data();
 }
@@ -733,7 +733,7 @@ void cDspIFace::SendVarListCommand() // die komplette varliste bestehend aus n t
     QString plist;
     QTextStream ts( &plist, QIODevice::WriteOnly );
 
-    foreach ( cDspMeasData* pDspMeasData, DspMeasDataList )
+    foreach ( cDspMeasData<float>* pDspMeasData, DspMeasDataList )
         ts << pDspMeasData->VarList();
     QString cmd = QString ("measure:list:ravlist %1\n").arg(plist);
     iFaceSock->SendCommand(cmd);
