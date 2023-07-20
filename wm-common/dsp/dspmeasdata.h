@@ -13,13 +13,14 @@ enum AVType {vApplication = 1, vDspIntern = 2, vMemory = 4}; // application vari
 class cDspMeasDataBase
 {
 public:
-
+    cDspMeasDataBase(QString name);
     QString VarList(); // liste mit allen variablen mit längenangaben
     QString MeasVarList(); // liste aller namen vom typ vapplikation bzw. vmemory
     QString& name();
 
 protected:
     QList<cDspVar> DspVarList;
+private:
     QString m_sname;
 };
 
@@ -27,7 +28,7 @@ protected:
 class cDspMeasDataUlong : public cDspMeasDataBase
 {
 public:
-    cDspMeasDataUlong(QString); // name des messdaten satzes
+    cDspMeasDataUlong(QString name); // name des messdaten satzes
     void addVarItem(cDspVar);
     ulong* data();
     uint getDataLenght();
@@ -41,7 +42,7 @@ private:
 class cDspMeasData : public cDspMeasDataBase
 {
 public:
-    cDspMeasData(QString); // name des messdaten satzes
+    cDspMeasData(QString name); // name des messdaten satzes
     void addVarItem(cDspVar);
     float* data();
     uint getDataLenght();
