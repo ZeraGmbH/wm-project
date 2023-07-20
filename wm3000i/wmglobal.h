@@ -137,7 +137,6 @@ enum MeasMode {In_IxDiff,In_ECT,In_nConvent,In_IxAbs,maxMMode}; // messmodi, in_
 
 enum SignalModes {AC, DC, maxSMode}; // signal modi
 enum UserDecisions {AbortProgram,Stop,Retry,SimulationMode}; // benutzer entscheidungen
-enum Languages {de,gb,pl};
 
 
 class cJustMeasInfo

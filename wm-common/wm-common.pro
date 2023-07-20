@@ -14,6 +14,7 @@ HEADERS = \
     dsp/dspmeasdata.h \
     dsp/dspsetup.h \
     dsp/dspvar.h \
+    gui/wmviewbase.h \
     gui/bigletter.h \
     gui/en61850monitor.h \
     gui/logfileview.h \
@@ -82,6 +83,7 @@ HEADERS = \
     tools.h \
     versserial.h \
     wmactvalues.h \
+    wmglobalcommon.h \
     wmparameter.h \
     zeraglobal.h \
     zerainfo.h
@@ -91,6 +93,7 @@ SOURCES = \
     client-access/deviceserver.cpp \
     dsp/dspmeasdata.cpp \
     dsp/dspsetup.cpp \
+    gui/wmviewbase.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
     gui/logfileview.cpp \
@@ -143,6 +146,7 @@ SOURCES = \
     zerainfo.cpp
 
 FORMS = \
+    gui/wmviewbase.ui \
     gui/en61850monitor.ui \
     gui/versionviewbase.ui \
     gui/wmmeasconfigbase.ui \

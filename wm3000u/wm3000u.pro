@@ -6,36 +6,35 @@ CONFIG	+= qt
 INCLUDEPATH	+= .
 
 HEADERS	+=  \
-	wmglobal.h \
+    wmglobal.h \
     wmuoffsetcustomlabels.h \
-	wm3000u.h \
-	pcbiface.h \
-	wm3000scpiface.h \
-	devserver.h \
+    wm3000u.h \
+    pcbiface.h \
+    wm3000scpiface.h \
+    devserver.h \
     confdialogbase.h \
     rangedialogbase.h \
     wmrawactualvalbase.h \
-    wmviewbase.h \
     dbushelper.h \
     dbushelperadapter.h \
+    wmviewbaseu.h
 
 SOURCES	+=  \
-	main.cpp \
+    main.cpp \
     wmuoffsetcustomlabels.cpp \
-	wm3000u.cpp \
-	pcbiface.cpp \
-	wm3000scpiface.cpp \
-	devserver.cpp \
-    wmviewbase.cpp \
+    wm3000u.cpp \
+    pcbiface.cpp \
+    wm3000scpiface.cpp \
+    devserver.cpp \
     wmrawactualvalbase.cpp \
     confdialogbase.cpp \
     rangedialogbase.cpp \
     dbushelper.cpp \
     dbushelperadapter.cpp \
-    wmglobal.cpp
+    wmglobal.cpp \
+    wmviewbaseu.cpp
 
-FORMS	= wmviewbase.ui \
-	rangedialogbase.ui \
+FORMS	= rangedialogbase.ui \
 	wmrawactualvalbase.ui \
     confdialogbase.ui
 
