@@ -25,6 +25,7 @@ cDspIFace::cDspIFace(QString bp, QString hn, int hp)
 cDspIFace::~cDspIFace()
 {
     iFaceSock->close();
+    ClearVarLists();
     delete m_ActTimer;
 }
 
