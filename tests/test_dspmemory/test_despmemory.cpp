@@ -20,7 +20,7 @@ private slots:
 
 void test_despmemory::test_measVarListSingle()
 {
-    cDspMeasData test("test");
+    cDspMeasData<float> test("test");
     test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
     QString strActual, strExpected;
     strActual = test.MeasVarList();
@@ -30,7 +30,7 @@ void test_despmemory::test_measVarListSingle()
 
 void test_despmemory::test_measVarListMultiple()
 {
-    cDspMeasData test("test");
+    cDspMeasData<float> test("test");
     test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
     test.addVarItem(cDspVar("Hallo",1,vApplication | vDspIntern));
     test.addVarItem(cDspVar("Fuzzy",1,vApplication | vDspIntern));
@@ -42,7 +42,7 @@ void test_despmemory::test_measVarListMultiple()
 
 void test_despmemory::test_getFloatPointer()
 {
-    cDspMeasData test("test");
+    cDspMeasData<float> test("test");
     test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
     float* fpoi = nullptr;
     fpoi = test.data();
@@ -51,7 +51,7 @@ void test_despmemory::test_getFloatPointer()
 
 void test_despmemory::test_getDataLenght()
 {
-    cDspMeasData test("test");
+    cDspMeasData<float> test("test");
     test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
     test.addVarItem(cDspVar("MAXX",1,vApplication | vDspIntern));
     test.addVarItem(cDspVar("MAXG",1,vApplication | vDspIntern));
@@ -65,7 +65,7 @@ void test_despmemory::test_getDataLenght()
 
 void test_despmemory::test_getDataLenght1024()
 {
-    cDspMeasData test("test");
+    cDspMeasData<float> test("test");
     test.addVarItem(cDspVar("MAXG",1024,vApplication | vDspIntern));
     uint i = test.getDataLenght();
     QCOMPARE(i,(uint)1024);
@@ -73,7 +73,7 @@ void test_despmemory::test_getDataLenght1024()
 
 void test_despmemory::test_getMeasDataName()
 {
-    cDspMeasData test("test");
+    cDspMeasData<float> test("test");
     QString strActual, strExpected;
     strExpected = "test";
     strActual = test.name();
@@ -82,7 +82,7 @@ void test_despmemory::test_getMeasDataName()
 
 void test_despmemory::test_varlist()
 {
-    cDspMeasData test("test");
+    cDspMeasData<float> test("test");
     test.addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
     test.addVarItem(cDspVar("MAXG",1024,vApplication | vDspIntern));
     QString str = test.VarList();
