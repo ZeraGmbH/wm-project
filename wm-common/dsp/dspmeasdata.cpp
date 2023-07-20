@@ -1,5 +1,8 @@
 #include "dspmeasdata.h"
 
+cDspMeasDataBase::cDspMeasDataBase(QString name) : m_sname(name)
+{
+}
 
 QString cDspMeasDataBase::MeasVarList()
 {
@@ -9,7 +12,6 @@ QString cDspMeasDataBase::MeasVarList()
         if ((DspVar.type() & (vApplication | vMemory)) > 0) ts << QString("%1;").arg(DspVar.Name());
     return str;
 }
-
 
 QString cDspMeasDataBase::VarList()
 {
@@ -27,10 +29,9 @@ QString& cDspMeasDataBase::name()
 }
 
 
-cDspMeasData::cDspMeasData(QString s)
+cDspMeasData::cDspMeasData(QString name) :
+    cDspMeasDataBase(name)
 {
-    m_sname = s;
-    //DspVarList.setAutoDelete(true);
 }
 
 
@@ -55,10 +56,9 @@ void cDspMeasData::addVarItem(cDspVar var) // eine neue dsp variable
 
 
 
-cDspMeasDataUlong::cDspMeasDataUlong(QString s)
+cDspMeasDataUlong::cDspMeasDataUlong(QString name) :
+    cDspMeasDataBase(name)
 {
-    m_sname = s;
-    //DspVarList.setAutoDelete(true);
 }
 
 
