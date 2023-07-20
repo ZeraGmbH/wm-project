@@ -20,7 +20,6 @@ public:
 
 protected:
     QList<cDspVar> DspVarList;
-    // Q3MemArray has been replaced by QVector https://fiona.dmcs.pl/po/qt-tutorial/docs/qt/porting4.html#qmemarray-t
     QString m_sname;
 };
 
@@ -34,6 +33,7 @@ public:
     uint getDataLenght();
     void reset();
 private:
+    // Q3MemArray has been replaced by QVector https://fiona.dmcs.pl/po/qt-tutorial/docs/qt/porting4.html#qmemarray-t
     QVector<ulong> DspVarData;
 };
 
@@ -46,6 +46,7 @@ public:
     float* data();
     uint getDataLenght();
 private:
+    // Q3MemArray has been replaced by QVector https://fiona.dmcs.pl/po/qt-tutorial/docs/qt/porting4.html#qmemarray-t
     QVector<float> DspVarData;
 };
 
