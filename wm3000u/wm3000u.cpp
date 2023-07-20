@@ -199,7 +199,6 @@ cWM3000U::~cWM3000U()
     delete m_ActTimer;
     delete m_AsyncTimer;
     delete DummyRange;
-    DspIFace->ClearVarLists();
 
     if (mScopeDialog) delete mScopeDialog;
     delete DspIFace;
