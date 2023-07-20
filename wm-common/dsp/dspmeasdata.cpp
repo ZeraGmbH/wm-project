@@ -1,25 +1,23 @@
 #include "dspmeasdata.h"
 
 
-QString& cDspMeasDataBase::MeasVarList()
+QString cDspMeasDataBase::MeasVarList()
 {
-    //    QString list;
-    m_slist="";
-    QTextStream ts( &m_slist, QIODevice::WriteOnly );
+    QString str = QString();
+    QTextStream ts( &str, QIODevice::WriteOnly );
     foreach ( cDspVar DspVar, DspVarList )
         if ((DspVar.type() & (vApplication | vMemory)) > 0) ts << QString("%1;").arg(DspVar.Name());
-    return m_slist;
+    return str;
 }
 
 
-QString& cDspMeasDataBase::VarList()
+QString cDspMeasDataBase::VarList()
 {
-    //    QString vlist;
-    m_slist="";
-    QTextStream ts( &m_slist, QIODevice::WriteOnly );
+    QString str = QString();
+    QTextStream ts( &str, QIODevice::WriteOnly );
     foreach ( cDspVar DspVar, DspVarList )
         ts << QString("%1,%2;").arg(DspVar.Name()).arg(DspVar.size());
-    return m_slist;
+    return str;
 }
 
 
