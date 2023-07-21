@@ -10,62 +10,62 @@ void DspSetup::setDspVarList(cConfData *confData, cDspIFace *DspIFace, int sampl
 
     // maxima
     m_measData.MaxValData = DspIFace->GetMVHandle(""); // wir holen uns ein handle für den maximumsucher
-    DspIFace->addVarItem(m_measData.MaxValData, cDspVar("MAXN",1,vApplication | vDspIntern));
-    DspIFace->addVarItem(m_measData.MaxValData, cDspVar("MAXX",1,vApplication | vDspIntern));
-    DspIFace->addVarItem(m_measData.MaxValData, cDspVar("MAXRDY",1,vApplication | vDspIntern));
+    m_measData.MaxValData->addVarItem(cDspVar("MAXN",1,vApplication | vDspIntern));
+    m_measData.MaxValData->addVarItem(cDspVar("MAXX",1,vApplication | vDspIntern));
+    m_measData.MaxValData->addVarItem(cDspVar("MAXRDY",1,vApplication | vDspIntern));
 
     // schnelle rms messung zur lastpunkt bestimmung 1x rms gesamtsignal 1x ampl 1. grundwelle
     // erweitert jetzt auch für kanal x
     m_measData.RMSValData = DspIFace->GetMVHandle("");
-    DspIFace->addVarItem(m_measData.RMSValData, cDspVar("FRMSN",1,vApplication | vDspIntern));
-    DspIFace->addVarItem(m_measData.RMSValData, cDspVar("FAMPL1N",1,vApplication | vDspIntern));
-    DspIFace->addVarItem(m_measData.RMSValData, cDspVar("FRMSX",1,vApplication | vDspIntern));
-    DspIFace->addVarItem(m_measData.RMSValData, cDspVar("FAMPL1X",1,vApplication | vDspIntern));
+    m_measData.RMSValData->addVarItem(cDspVar("FRMSN",1,vApplication | vDspIntern));
+    m_measData.RMSValData->addVarItem(cDspVar("FAMPL1N",1,vApplication | vDspIntern));
+    m_measData.RMSValData->addVarItem(cDspVar("FRMSX",1,vApplication | vDspIntern));
+    m_measData.RMSValData->addVarItem(cDspVar("FAMPL1X",1,vApplication | vDspIntern));
 
     m_measData.ActValData = DspIFace->GetMVHandle(""); // wir holen uns ein handle für die istwerte daten
     //	nur dsp intern verwendete messdaten
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("SINDEX",1,vDspIntern)); // index zur speicherung der sampledaten für die fehlermessung (variables messintervall);
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("SINDEX2",1,vDspIntern)); // index zur speicherung der sampledaten für die schnelle lastpunktmessung (festes messintervall = 4 signalperioden);
+    m_measData.ActValData->addVarItem(cDspVar("SINDEX",1,vDspIntern)); // index zur speicherung der sampledaten für die fehlermessung (variables messintervall);
+    m_measData.ActValData->addVarItem(cDspVar("SINDEX2",1,vDspIntern)); // index zur speicherung der sampledaten für die schnelle lastpunktmessung (festes messintervall = 4 signalperioden);
 
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("TEMP1",1,vDspIntern)); // werden nur temp. benötigt weil winkel und betrag
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("TEMP2",1,vDspIntern)); // direkt ermittelt werden zwecks filterung
+    m_measData.ActValData->addVarItem(cDspVar("TEMP1",1,vDspIntern)); // werden nur temp. benötigt weil winkel und betrag
+    m_measData.ActValData->addVarItem(cDspVar("TEMP2",1,vDspIntern)); // direkt ermittelt werden zwecks filterung
 
     // diese werte ab hier werden gefiltert
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("KFKORR",1,vDspIntern)); // kreisfrequenz korrektur koeffizient
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("RMSN",1,vDspIntern));
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("AMPL1N",1,vDspIntern));
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("RMSX",1,vDspIntern));
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("AMPL1X",1,vDspIntern));
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("DPHI",1,vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("KFKORR",1,vDspIntern)); // kreisfrequenz korrektur koeffizient
+    m_measData.ActValData->addVarItem(cDspVar("RMSN",1,vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("AMPL1N",1,vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("RMSX",1,vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("AMPL1X",1,vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("DPHI",1,vDspIntern));
     // dphi=(phix-phin) - tdsync * (10*10^-9) * 2PI / (signalfreq* kfkorr) =(phix-phin) -tdsync * (2PI / (signalfreq*10^8)) * (1/kfkorr) -->
 
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("FILTER",10,vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("FILTER",10,vDspIntern));
     // KFKORR wird separat gefiltert
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("N",1,vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("N",1,vDspIntern));
 
     // gefilterte messergebnisse
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("KFKORRF",1,vApplication | vDspIntern)); // kreisfrequenz korrektur koeffizient
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("RMSNF",1,vApplication | vDspIntern)); // rms wert kanal n
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("AMPL1NF",1,vApplication | vDspIntern)); // amplitude 1. oberwelle kanal n
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("RMSXF",1,vApplication | vDspIntern)); // rms wert kanal x
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("AMPL1XF",1,vApplication | vDspIntern)); // amplitude 1. oberwelle kanal x
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("DPHIF",1,vApplication | vDspIntern)); // winkel kanal x - winkel kanal n
+    m_measData.ActValData->addVarItem(cDspVar("KFKORRF",1,vApplication | vDspIntern)); // kreisfrequenz korrektur koeffizient
+    m_measData.ActValData->addVarItem(cDspVar("RMSNF",1,vApplication | vDspIntern)); // rms wert kanal n
+    m_measData.ActValData->addVarItem(cDspVar("AMPL1NF",1,vApplication | vDspIntern)); // amplitude 1. oberwelle kanal n
+    m_measData.ActValData->addVarItem(cDspVar("RMSXF",1,vApplication | vDspIntern)); // rms wert kanal x
+    m_measData.ActValData->addVarItem(cDspVar("AMPL1XF",1,vApplication | vDspIntern)); // amplitude 1. oberwelle kanal x
+    m_measData.ActValData->addVarItem(cDspVar("DPHIF",1,vApplication | vDspIntern)); // winkel kanal x - winkel kanal n
 
     // nicht gefilterte messergebnisse
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("TDSYNC",1,vApplication | vDspIntern)); // delay time pps -> 1. sample
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("PHIN",1,vApplication | vDspIntern));
-    DspIFace->addVarItem(m_measData.ActValData, cDspVar("PHIX",1,vApplication | vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("TDSYNC",1,vApplication | vDspIntern)); // delay time pps -> 1. sample
+    m_measData.ActValData->addVarItem(cDspVar("PHIN",1,vApplication | vDspIntern));
+    m_measData.ActValData->addVarItem(cDspVar("PHIX",1,vApplication | vDspIntern));
 
     m_measData.RawValData0 = DspIFace->GetMVHandle("");
-    DspIFace->addVarItem(m_measData.RawValData0, cDspVar("MESSSIGNAL0",nS,vApplication | vDspIntern));
+    m_measData.RawValData0->addVarItem(cDspVar("MESSSIGNAL0",nS,vApplication | vDspIntern));
     m_measData.RawValData1 = DspIFace->GetMVHandle("");
-    DspIFace->addVarItem(m_measData.RawValData1, cDspVar("MESSSIGNAL1",nS,vApplication | vDspIntern));
+    m_measData.RawValData1->addVarItem(cDspVar("MESSSIGNAL1",nS,vApplication | vDspIntern));
     m_measData.RawValDataSinConHanning = DspIFace->GetMVHandle("");
-    DspIFace->addVarItem(m_measData.RawValDataSinConHanning, cDspVar("SCHAN",schanLen,vApplication | vDspIntern)); // sinus, cosinus, hanning abwechselnd
+    m_measData.RawValDataSinConHanning->addVarItem(cDspVar("SCHAN",schanLen,vApplication | vDspIntern)); // sinus, cosinus, hanning abwechselnd
     m_measData.RawValData2 = DspIFace->GetMVHandle("");
-    DspIFace->addVarItem(m_measData.RawValData2, cDspVar("MESSSIGNAL2",4*sampleCount,vApplication | vDspIntern));
+    m_measData.RawValData2->addVarItem(cDspVar("MESSSIGNAL2",4*sampleCount,vApplication | vDspIntern));
     m_measData.RawValData3 = DspIFace->GetMVHandle("");
-    DspIFace->addVarItem(m_measData.RawValData3, cDspVar("MESSSIGNAL3",4*sampleCount,vApplication | vDspIntern));
+    m_measData.RawValData3->addVarItem(cDspVar("MESSSIGNAL3",4*sampleCount,vApplication | vDspIntern));
 }
 
 void DspSetup::SetDspWMCmdList(cConfData *confData, cDspIFace *DspIFace, int sampleCount, bool bnConventional)
@@ -336,13 +336,13 @@ void DspSetup::setDspMemList(cDspIFace* DspIFace)
 {
     DspIFace->ClearMemLists();
     m_ethData.ETHStatusHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(m_ethData.ETHStatusHandle, cDspVar("ETHDATACOUNT",2,vMemory));
-    DspIFace->addVarItem(m_ethData.ETHStatusHandle, cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(m_ethData.ETHStatusHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+    m_ethData.ETHStatusHandle->addVarItem(cDspVar("ETHDATACOUNT",2,vMemory));
+    m_ethData.ETHStatusHandle->addVarItem(cDspVar("ETHERRORS",1,vMemory));
+    m_ethData.ETHStatusHandle->addVarItem(cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
 
     m_ethData.ETHStatusResetHandle = DspIFace->GetMemHandle(""); // wir holen uns ein memory handle
-    DspIFace->addVarItem(m_ethData.ETHStatusResetHandle, cDspVar("ETHERRORS",1,vMemory));
-    DspIFace->addVarItem(m_ethData.ETHStatusResetHandle, cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
+    m_ethData.ETHStatusResetHandle->addVarItem(cDspVar("ETHERRORS",1,vMemory));
+    m_ethData.ETHStatusResetHandle->addVarItem(cDspVar("ETHSYNCLOSTCOUNT",1,vMemory));
 
     m_ethData.ETHStatusHandle->reset();
     m_ethData.ETHStatusResetHandle->reset();
