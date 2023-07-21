@@ -128,8 +128,6 @@ public:
     void addIntListItem(QString&); // dito für intliste
     cDspMeasData<float>* GetMVHandle(QString); // legt eine neue messwerte gruppe an
     cDspMeasData<ulong>* GetMemHandle(QString); // legt eine neue memory gruppe an
-    void addVarItem(cDspMeasData<float>*, cDspVar); // eine neue dsp variable
-    void addVarItem(cDspMeasData<ulong>*, cDspVar);
     void ActivateInterface(); // aktiviert die var- und cmd-listen im dsp
     void DeactivateInterface(); // nur anders rum
     void DataAcquisition(cDspMeasData<float>*); // liest alle daten dieser messwertegruppe vom type vapplication
