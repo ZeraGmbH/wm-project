@@ -545,19 +545,6 @@ cDspMeasData<ulong> *cDspIFace::GetMemHandle(QString s)
     return pdmd; // handle rückgabe
 }
 
-
-void cDspIFace::addVarItem(cDspMeasData<float> *pMData, cDspVar var) // eine neue dsp variable
-{
-    pMData->addVarItem(var);
-}
-
-
-void cDspIFace::addVarItem(cDspMeasData<ulong>* pMData, cDspVar var) // eine neue dsp variable
-{
-    pMData->addVarItem(var);
-}
-
-
 void cDspIFace::ActivateInterface() // aktiviert die var- und cmd-listen im dsp
 {
     m_ActTimer->start(0,ActivateInterfaceStart);
