@@ -9,28 +9,6 @@ WMViewBaseI::WMViewBaseI(WMViewBase *parent) :
     init();
 }
 
-void WMViewBaseI::ActualizeStates()
-{
-    if (m_ConfData.m_bRunning)
-    {
-        ui->messungStartAction->setMenuText(tr("S&top"));
-        ui->messungStartAction->setStatusTip(tr("Messung anhalten"));
-    }
-    else
-    {
-        ui->messungStartAction->setMenuText(tr("S&tart"));
-        ui->messungStartAction->setStatusTip(tr("Messung starten"));
-    }
-
-    ui->messungSimulationAction->setOn(m_ConfData.m_bSimulation);
-    ui->hilfeSelbsttestAction->setDisabled(m_ConfData.m_bSimulation);
-
-    m_statusLabelContainer.updateLabels(&m_ConfData, m_bJustified, m_bFreqQuestionable, m_bPPSQuestionable);
-
-    UpdateRecentFileList(recentOETFiles, m_ConfData.m_sOETFile);
-    UpdateRecentFileList(recentResultFiles, m_ConfData.m_sResultFile);
-}
-
 
 void WMViewBaseI::updateXRangeLabel(QLabel *xRangeLabel)
 {
