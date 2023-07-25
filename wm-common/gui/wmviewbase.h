@@ -33,7 +33,7 @@ public:
     void removeJustageItem();
     void configureWM1000Items();
     void configureWMwoDC();
-    virtual void ActualizeStates() = 0;
+    virtual void ActualizeStates();
 
 public slots:
     void SetViewConfDataInfoSlot( cConfData * cd );

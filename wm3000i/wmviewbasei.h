@@ -10,7 +10,6 @@ class WMViewBaseI : public WMViewBase
 public:
     explicit WMViewBaseI( WMViewBase* parent = 0);
     Q_OBJECT
-    void ActualizeStates() override;
 private:
     virtual void updateXRangeLabel(QLabel* xRangeLabel) override;
     WMViewBase* m_parent;
