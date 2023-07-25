@@ -139,9 +139,9 @@ void ConfDialogBase::init()
 
     if (!g_WMDevice->isNewSamplerates())
     {
-        ui->SPeriodeButtonGroup->removeChild(ui->S96RadioButton);
-        ui->SPeriodeButtonGroup->removeChild(ui->S240RadioButton);
-        ui->SPeriodeButtonGroup->removeChild(ui->S288RadioButton);
+        ui->SPeriodeGroupBox->removeChild(ui->S96RadioButton);
+        ui->SPeriodeGroupBox->removeChild(ui->S240RadioButton);
+        ui->SPeriodeGroupBox->removeChild(ui->S288RadioButton);
     }
 
 }
