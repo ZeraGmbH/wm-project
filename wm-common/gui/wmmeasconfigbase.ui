@@ -26,12 +26,9 @@
    <item>
     <layout class="QHBoxLayout">
      <item>
-      <widget class="Q3GroupBox" name="groupBox40">
+      <widget class="QGroupBox" name="groupBox40">
        <property name="title">
         <string/>
-       </property>
-       <property name="lineWidth" stdset="0">
-        <number>0</number>
        </property>
        <layout class="QVBoxLayout">
         <item>
@@ -150,7 +147,7 @@
       </widget>
      </item>
      <item>
-      <widget class="Q3GroupBox" name="LPgroupBox">
+      <widget class="QGroupBox" name="LPgroupBox">
        <property name="title">
         <string>Loadpoint</string>
        </property>
@@ -209,10 +206,7 @@
       </widget>
      </item>
      <item>
-      <widget class="Q3GroupBox" name="ErrgroupBox">
-       <property name="title">
-        <string>Error</string>
-       </property>
+      <widget class="QGroupBox" name="ErrgroupBox">
        <layout class="QVBoxLayout">
         <item>
          <widget class="QSpinBox" name="ErrspinBoxFW">
@@ -268,7 +262,7 @@
       </widget>
      </item>
      <item>
-      <widget class="Q3GroupBox" name="WgroupBox">
+      <widget class="QGroupBox" name="WgroupBox">
        <property name="title">
         <string>Angle</string>
        </property>
@@ -326,7 +320,7 @@
       </widget>
      </item>
      <item>
-      <widget class="Q3GroupBox" name="RCFgroupBox">
+      <widget class="QGroupBox" name="RCFgroupBox">
        <property name="title">
         <string>RCF</string>
        </property>
@@ -431,14 +425,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends>QGroupBox</extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <includes>
   <include location="local">formatinfo.h</include>
  </includes>
@@ -477,86 +463,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>LPcomboBox</sender>
-   <signal>activated(int)</signal>
-   <receiver>WMMeasConfigBase</receiver>
-   <slot>LPComboActivatedSlot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ErrcomboBox</sender>
-   <signal>activated(int)</signal>
-   <receiver>WMMeasConfigBase</receiver>
-   <slot>ErrComboActivatedSlot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>WcomboBox</sender>
-   <signal>activated(int)</signal>
-   <receiver>WMMeasConfigBase</receiver>
-   <slot>WComboActivatedSlot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>IECradioButton</sender>
-   <signal>clicked()</signal>
-   <receiver>WMMeasConfigBase</receiver>
-   <slot>IECCheckedSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ANSIradioButton</sender>
-   <signal>clicked()</signal>
-   <receiver>WMMeasConfigBase</receiver>
-   <slot>ANSICheckedSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>buttonOk</sender>
    <signal>clicked()</signal>
    <receiver>WMMeasConfigBase</receiver>
@@ -572,37 +478,15 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>TotalRMSradioButton</sender>
-   <signal>clicked()</signal>
-   <receiver>WMMeasConfigBase</receiver>
-   <slot>TotalRMScheckedSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>H1radioButton</sender>
-   <signal>clicked()</signal>
-   <receiver>WMMeasConfigBase</receiver>
-   <slot>H1RMScheckedSlot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
+ <slots>
+  <slot>SendData2AppSlot()</slot>
+  <slot>LPComboActivatedSlot(int)</slot>
+  <slot>ErrComboActivatedSlot(int)</slot>
+  <slot>WComboActivatedSlot(int)</slot>
+  <slot>IECCheckedSlot()</slot>
+  <slot>ANSICheckedSlot()</slot>
+  <slot>TotalRMScheckedSlot()</slot>
+  <slot>H1RMScheckedSlot()</slot>
+ </slots>
 </ui>
