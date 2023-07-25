@@ -2,16 +2,17 @@
 #include "wmeditor.h"
 #include "widgetgeometry.h"
 #include "ui_wmviewbase.h"
-#include <Q3MainWindow>
-#include <Q3FileDialog>
+#include <QMainWindow>
+#include <QFileDialog>
 #include <QTextEdit>
+#include <QTextStream>
 
 WMViewBase::WMViewBase(WMViewBase *parent) :
-    Q3MainWindow(parent),
+    QMainWindow(parent),
     ui(new Ui::WMViewBase),
     m_statusLabelContainer(this)
 {
-    ui->setupUi((Q3MainWindow*) this);
+    ui->setupUi((QMainWindow*) this);
 }
 
 
@@ -155,10 +156,9 @@ void WMViewBase::SetViewConfDataInfoSlot( cConfData *cd )
 
 void WMViewBase::OpenOETFileSlot() // zum laden einer eigenfehlertabelle
 {
-    Q3FileDialog *OETFileDialog=new Q3FileDialog ( QDir::homePath(),tr("Eigenfehlertabellen (*.oet)"),this);
-    OETFileDialog->setCaption(tr("Eigenfehlertabellen"));
-    OETFileDialog->setMode( Q3FileDialog::AnyFile);
-    OETFileDialog-> setSelection("./Transformer.oet");
+    QFileDialog *OETFileDialog=new QFileDialog(this,tr("Eigenfehlertabellen"), QDir::homePath(),tr("Eigenfehlertabellen (*.oet)"));
+    OETFileDialog->setMode( QFileDialog::AnyFile);
+    //OETFileDialog->setSelection("./Transformer.oet");
     if ( OETFileDialog->exec() == QDialog::Accepted ) {
         QString OETFile = OETFileDialog->selectedFile();
         UpdateRecentFileList(recentOETFiles,OETFile);
@@ -285,11 +285,11 @@ void WMViewBase::ReceiveOETFileSlot(QString nText)
 {
     wmEdit->hide();
     if (wmEdit->document()->isModified()) { // der text hat sich geändert
-        m_ConfData.m_sOETFile = Q3FileDialog::getSaveFileName( m_ConfData.m_sOETFile,
-                                                               tr("Eigenfehlertabelle (*oet)"),
-                                                               this,
-                                                               "",
-                                                               tr("Speichern unter"));
+        m_ConfData.m_sOETFile = QFileDialog::getSaveFileName( this,
+                                                             tr("Speichern unter"),
+                                                             m_ConfData.m_sOETFile,
+                                                               tr("Eigenfehlertabelle (*oet)")
+                                                               );
         m_ConfData.m_bOENewLoad = true;
     }
 
@@ -306,11 +306,10 @@ void WMViewBase::ReceiveOETFileSlot(QString nText)
 
 void WMViewBase::OpenResultFileSlot()
 {
-    Q3FileDialog *ResultFileDialog=new Q3FileDialog ( ".",tr("Ergebnisdateien (*.xml)"),this);
+    QFileDialog *ResultFileDialog=new QFileDialog ( this,tr("Ergebnisdateien"), ".",tr("Ergebnisdateien (*.xml)"));
     ResultFileDialog->setDir(QDir(QString("%1%2").arg(QDir::homePath()).arg("results")));
-    ResultFileDialog->setCaption(tr("Ergebnisdateien"));
-    ResultFileDialog->setMode( Q3FileDialog::AnyFile);
-    ResultFileDialog->setSelection("results.xml");
+    ResultFileDialog->setMode( QFileDialog::AnyFile);
+    //ResultFileDialog->setSelection("results.xml");
     if ( ResultFileDialog->exec() == QDialog::Accepted ) {
         QString rFile;
         rFile=ResultFileDialog->selectedFile();
@@ -362,12 +361,12 @@ void WMViewBase::CloseResultFileSlot()
 void WMViewBase::StoreResultSlot()
 {
     if (m_ConfData.m_sResultFile=="") { // wir haben noch keine ergebnisdatei geöffnet
-        QString s = Q3FileDialog::getSaveFileName(
-            QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("results/results.xml"),
-                    "Ergebnisdateien (*.xml)",
-                    this,
-                    "",
-                    "Ergebnisdateien" );
+        QString s = QFileDialog::getSaveFileName(
+                this,
+                tr("Ergebnisdateien"),
+                QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("results/results.xml"),
+                "Ergebnisdateien (*.xml)"
+                );
         if (s == "") return; // nichts ausgewählt -> fertig
         m_ConfData.m_sResultFile = s;
         emit SendConfDataSignal(&m_ConfData);
@@ -458,11 +457,12 @@ void WMViewBase::onSaveSession(QString session)
 
 void WMViewBase::StoreSessionSlot()
 {
-    SessionName = Q3FileDialog::getSaveFileName( QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("/Session.ses"),
-                                                 tr("Sitzung Name (*.ses)"),
-                                                 this,
-                                                 "",
-                                                 tr("Sitzung speichern"));
+    SessionName = QFileDialog::getSaveFileName( this,
+                                               tr("Sitzung speichern"),
+                                               QString("%1/.%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("/Session.ses"),
+                                                 tr("Sitzung Name (*.ses)")
+                                                );
+
 
     QFile file(SessionName);
     if ( file.open( IO_WriteOnly ) ) {
@@ -475,11 +475,12 @@ void WMViewBase::StoreSessionSlot()
 
 void WMViewBase::onLoadSessionSlot()
 {
-    Q3FileDialog *SessionFileDialog=new Q3FileDialog ( QString("%1/%2").arg(QDir::homePath()).arg(getDeviceName()),
-                                                       tr("Sitzung Name (*.ses)"),
-                                                       this);
-    SessionFileDialog->setCaption(tr("Sitzung laden"));
-    SessionFileDialog->setMode( Q3FileDialog::ExistingFile);
+    QFileDialog *SessionFileDialog=new QFileDialog ( this,
+                                                     tr("Sitzung laden"),
+                                                     QString("%1/.%2").arg(QDir::homePath()).arg(getDeviceName()),
+                                                       tr("Sitzung Name (*.ses)")
+                                                       );
+    SessionFileDialog->setMode( QFileDialog::ExistingFile);
     if ( SessionFileDialog->exec() == QDialog::Accepted ) {
         SessionName = SessionFileDialog->selectedFile();
         UpdateRecentSESList(SessionName);
@@ -590,12 +591,11 @@ void WMViewBase::JustFlashProgSlot()
 
 void WMViewBase::JustFlashExportSlot()
 {
-    QString File = Q3FileDialog::getSaveFileName(QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("JData.xml"),
-                                                 tr("Datei Name (*.xml)"),
-                                                 this,
-                                                 "",
-                                                 tr("Justagedaten exportieren"));
-
+    QString File = QFileDialog::getSaveFileName( this,
+                                                tr("Justagedaten exportieren"),
+                                                 QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("JData.xml"),
+                                                 tr("Datei Name (*.xml)")
+                                                 );
     if (File != "") // wenn ""  -> es war cancel
         emit JustFlashExportSignal(File);
 }
@@ -603,11 +603,11 @@ void WMViewBase::JustFlashExportSlot()
 
 void WMViewBase::JustFlashImportSlot()
 {
-    QString File = Q3FileDialog::getOpenFileName(QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("JData.xml"),
-                                                 tr("Datei Name (*.xml)"),
-                                                 this,
-                                                 "",
-                                                 tr("Justagedaten importieren"));
+    QString File = QFileDialog::getOpenFileName(this,
+                                                tr("Justagedaten importieren"),
+                                                QString("%1/%2/%3").arg(QDir::homePath()).arg(getDeviceName()).arg("JData.xml"),
+                                                 tr("Datei Name (*.xml)")
+                                                 );
 
     if (File != "") // wenn ""  -> es war cancel
         emit JustFlashImportSignal(File);
