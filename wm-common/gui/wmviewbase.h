@@ -10,7 +10,7 @@
 #ifndef WMVIEWBASE_H
 #define WMVIEWBASE_H
 
-#include <Q3MainWindow>
+#include <QMainWindow>
 #include "maxrecentfiles.h"
 #include "confdata.h"
 #include "wmeditor.h"
@@ -22,7 +22,7 @@ namespace Ui {
     class WMViewBase;
 }
 
-class WMViewBase : public Q3MainWindow, public IStatusLabelXRangeParent
+class WMViewBase : public QMainWindow, public IStatusLabelXRangeParent
 {
     Q_OBJECT
 

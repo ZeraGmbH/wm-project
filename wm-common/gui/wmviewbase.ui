@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>WMViewBase</class>
- <widget class="Q3MainWindow" name="WMViewBase">
+ <widget class="QMainWindow" name="WMViewBase">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -818,9 +818,9 @@
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>Q3MainWindow</class>
+   <class>QMainWindow</class>
    <extends>QWidget</extends>
-   <header>q3mainwindow.h</header>
+   <header>qmainwindow.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

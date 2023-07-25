@@ -5,7 +5,6 @@
 
 #include <qstring.h>
 #include <qstringlist.h>
-#include <q3mainwindow.h>
 #include <q3textbrowser.h>
 #include <qtimer.h>
 #include <qpushbutton.h>

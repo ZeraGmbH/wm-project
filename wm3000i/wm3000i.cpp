@@ -9,7 +9,6 @@
 #include <qpixmap.h>
 #include <qpushbutton.h>
 #include <qaction.h>
-#include <q3mainwindow.h>
 #include <qsize.h>
 #include <qwidget.h>
 #include <q3textbrowser.h>
