@@ -62,19 +62,19 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>6</number>
      </property>
      <widget class="QWidget" name="Widget8">
       <attribute name="title">
        <string>Modus</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>10</y>
          <width>169</width>
-         <height>186</height>
+         <height>216</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -83,7 +83,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="Q3ButtonGroup" name="ModeButtonGroup">
+             <widget class="QGroupBox" name="ModeButtonGroup">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -96,10 +96,7 @@
               <property name="title">
                <string>Messung</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignTop</set>
-              </property>
-              <property name="margin">
+              <property name="margin" stdset="0">
                <number>0</number>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -108,6 +105,9 @@
                  <property name="text">
                   <string>In/&amp;Ix</string>
                  </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">buttonGroup_2</string>
+                 </attribute>
                 </widget>
                </item>
                <item>
@@ -124,6 +124,9 @@
                  <property name="shortcut">
                   <string>Alt+E</string>
                  </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">buttonGroup_2</string>
+                 </attribute>
                 </widget>
                </item>
                <item>
@@ -143,13 +146,16 @@
                  <property name="shortcut">
                   <string>Alt+C</string>
                  </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">buttonGroup_2</string>
+                 </attribute>
                 </widget>
                </item>
               </layout>
              </widget>
             </item>
             <item>
-             <widget class="Q3ButtonGroup" name="DCButtonGroup">
+             <widget class="QGroupBox" name="DCGroupBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -158,15 +164,6 @@
               </property>
               <property name="font">
                <font/>
-              </property>
-              <property name="title">
-               <string>Signal</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignTop</set>
-              </property>
-              <property name="margin">
-               <number>0</number>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
                <item>
@@ -243,7 +240,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
-               <widget class="Q3GroupBox" name="CmpKorrGroupBox">
+               <widget class="QGroupBox" name="CmpKorrGroupBox">
                 <property name="title">
                  <string>Phasenfehler Prüfling</string>
                 </property>
@@ -251,26 +248,20 @@
                  <item row="1" column="0">
                   <widget class="QLabel" name="CmpKorrLabel2">
                    <property name="text">
-                    <string>&amp;Totzeit[ms]:</string>
+                    <string>Totzeit[ms]:</string>
                    </property>
                    <property name="wordWrap">
                     <bool>false</bool>
-                   </property>
-                   <property name="buddy">
-                    <cstring>CmpKorrLineEdit2</cstring>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="0">
                   <widget class="QLabel" name="CmpKorrLabel1">
                    <property name="text">
-                    <string>&amp;Phasenlage[°]:</string>
+                    <string>Phasenlage[°]:</string>
                    </property>
                    <property name="wordWrap">
                     <bool>false</bool>
-                   </property>
-                   <property name="buddy">
-                    <cstring>CmpKorrLineEdit1</cstring>
                    </property>
                   </widget>
                  </item>
@@ -308,7 +299,7 @@
                </widget>
               </item>
               <item>
-               <widget class="Q3GroupBox" name="CmpKorrGroupBox_3">
+               <widget class="QGroupBox" name="CmpKorrGroupBox_3">
                 <property name="title">
                  <string>Offset Korrektur</string>
                 </property>
@@ -333,7 +324,7 @@
              </layout>
             </item>
             <item>
-             <widget class="Q3GroupBox" name="CmpCorrGroupBox">
+             <widget class="QGroupBox" name="CmpCorrGroupBox">
               <property name="title">
                <string>Korrektur Normwandler</string>
               </property>
@@ -394,20 +385,20 @@
       <attribute name="title">
        <string>Messung</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>13</x>
          <y>10</y>
-         <width>444</width>
-         <height>161</height>
+         <width>461</width>
+         <height>193</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_23">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_22">
           <item>
-           <widget class="Q3ButtonGroup" name="FreqButtonGroup">
+           <widget class="QGroupBox" name="FreqGroupBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -416,9 +407,6 @@
             </property>
             <property name="font">
              <font/>
-            </property>
-            <property name="title">
-             <string>Signalfrequenz</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_8">
              <item>
@@ -486,10 +474,7 @@
            </widget>
           </item>
           <item>
-           <widget class="Q3ButtonGroup" name="SPeriodeButtonGroup">
-            <property name="title">
-             <string>Abtastungen</string>
-            </property>
+           <widget class="QGroupBox" name="SPeriodeGroupBox">
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
               <widget class="QRadioButton" name="S80RadioButton">
@@ -526,6 +511,19 @@
                </property>
               </widget>
              </item>
+             <item>
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </widget>
           </item>
@@ -534,7 +532,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
-           <widget class="Q3GroupBox" name="CmpIntervallGroupBox">
+           <widget class="QGroupBox" name="CmpIntervallGroupBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -560,13 +558,10 @@
                 <font/>
                </property>
                <property name="text">
-                <string>&amp;Perioden:</string>
+                <string>Perioden:</string>
                </property>
                <property name="wordWrap">
                 <bool>false</bool>
-               </property>
-               <property name="buddy">
-                <cstring>CmpIntervallSpinBox</cstring>
                </property>
               </widget>
              </item>
@@ -609,7 +604,7 @@
            </widget>
           </item>
           <item>
-           <widget class="Q3GroupBox" name="TIntegrationGroupBox">
+           <widget class="QGroupBox" name="TIntegrationGroupBox">
             <property name="title">
              <string>Integrationszeit</string>
             </property>
@@ -617,13 +612,10 @@
              <item>
               <widget class="QLabel" name="TIntegrationLabel">
                <property name="text">
-                <string>&amp;Zeit[sec]:</string>
+                <string>Zeit[sec]:</string>
                </property>
                <property name="wordWrap">
                 <bool>false</bool>
-               </property>
-               <property name="buddy">
-                <cstring>TIntegrationSpinBox</cstring>
                </property>
               </widget>
              </item>
@@ -672,21 +664,12 @@
        <item row="0" column="0" rowspan="2">
         <layout class="QVBoxLayout">
          <item>
-          <widget class="Q3ButtonGroup" name="SyncButtonGroup">
+          <widget class="QGroupBox" name="SyncGroupBox">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
-           </property>
-           <property name="title">
-            <string>PPS-Signal</string>
-           </property>
-           <property name="exclusive">
-            <bool>false</bool>
-           </property>
-           <property name="radioButtonExclusive">
-            <bool>true</bool>
            </property>
            <layout class="QHBoxLayout">
             <item>
@@ -770,13 +753,10 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>&amp;TSync[ms]:</string>
+                   <string>TSync[ms]:</string>
                   </property>
                   <property name="wordWrap">
                    <bool>false</bool>
-                  </property>
-                  <property name="buddy">
-                   <cstring>TSyncSpinBox</cstring>
                   </property>
                  </widget>
                 </item>
@@ -807,7 +787,7 @@
           </widget>
          </item>
          <item>
-          <widget class="Q3GroupBox" name="groupBox">
+          <widget class="QGroupBox" name="groupBox">
            <property name="title">
             <string/>
            </property>
@@ -873,8 +853,40 @@
        <string>Teilerverhältnisse</string>
       </attribute>
       <layout class="QGridLayout">
+       <item row="1" column="2">
+        <spacer name="spacer44">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>201</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <spacer name="spacer43">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>201</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="1" column="1">
-        <widget class="Q3GroupBox" name="ECTratioGroupBox">
+        <widget class="QGroupBox" name="ECTratioGroupBox">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -1005,7 +1017,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="Q3GroupBox" name="NTRatioGroupBox">
+        <widget class="QGroupBox" name="NTRatioGroupBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
            <horstretch>0</horstretch>
@@ -1129,40 +1141,8 @@
          </layout>
         </widget>
        </item>
-       <item row="1" column="2">
-        <spacer name="spacer44">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>201</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="2">
-        <spacer name="spacer43">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>201</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="0" column="1">
-        <widget class="Q3GroupBox" name="NTRatioGroupBox2">
+        <widget class="QGroupBox" name="NTRatioGroupBox2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
            <horstretch>0</horstretch>
@@ -1264,7 +1244,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="Q3GroupBox" name="XTRatioGroupBox">
+        <widget class="QGroupBox" name="XTRatioGroupBox">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -1278,37 +1258,22 @@
           <string>X</string>
          </property>
          <layout class="QGridLayout">
-          <item row="1" column="1" rowspan="2">
-           <widget class="QLineEdit" name="RatioSekXLineEdit">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <item row="0" column="3" rowspan="2">
+           <widget class="QRadioButton" name="xPrim_w3radioButton">
+            <property name="text">
+             <string>/sqrt(3)</string>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>75</width>
-              <height>32767</height>
-             </size>
-            </property>
-            <property name="maxLength">
-             <number>9</number>
+            <property name="autoExclusive">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="RatioSekXLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+          <item row="0" column="2" rowspan="2">
+           <widget class="QRadioButton" name="xPrim_3radioButton">
             <property name="text">
-             <string>Sek:</string>
+             <string>/3</string>
             </property>
-            <property name="wordWrap">
+            <property name="autoExclusive">
              <bool>false</bool>
             </property>
            </widget>
@@ -1351,13 +1316,22 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="2" rowspan="2">
-           <widget class="QRadioButton" name="xPrim_3radioButton">
-            <property name="text">
-             <string>/3</string>
+          <item row="1" column="1" rowspan="2">
+           <widget class="QLineEdit" name="RatioSekXLineEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="autoExclusive">
-             <bool>false</bool>
+            <property name="maximumSize">
+             <size>
+              <width>75</width>
+              <height>32767</height>
+             </size>
+            </property>
+            <property name="maxLength">
+             <number>9</number>
             </property>
            </widget>
           </item>
@@ -1371,12 +1345,18 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="3" rowspan="2">
-           <widget class="QRadioButton" name="xPrim_w3radioButton">
-            <property name="text">
-             <string>/sqrt(3)</string>
+          <item row="2" column="0">
+           <widget class="QLabel" name="RatioSekXLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="autoExclusive">
+            <property name="text">
+             <string>Sek:</string>
+            </property>
+            <property name="wordWrap">
              <bool>false</bool>
             </property>
            </widget>
@@ -1400,7 +1380,7 @@
       <attribute name="title">
        <string>nConvent</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>9</x>
@@ -1415,7 +1395,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="Q3GroupBox" name="groupBox7">
+             <widget class="QGroupBox" name="groupBox7">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -2027,7 +2007,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
-               <widget class="Q3GroupBox" name="groupBox11">
+               <widget class="QGroupBox" name="groupBox11">
                 <property name="title">
                  <string>Priority tagged</string>
                 </property>
@@ -2177,7 +2157,7 @@
                </widget>
               </item>
               <item>
-               <widget class="Q3GroupBox" name="groupBox12">
+               <widget class="QGroupBox" name="groupBox12">
                 <property name="title">
                  <string>Ethertype header</string>
                 </property>
@@ -2254,7 +2234,7 @@
                </widget>
               </item>
               <item>
-               <widget class="Q3GroupBox" name="groupBox9">
+               <widget class="QGroupBox" name="groupBox9">
                 <property name="title">
                  <string>Data set</string>
                 </property>
@@ -2371,7 +2351,7 @@
        <item>
         <layout class="QHBoxLayout">
          <item>
-          <widget class="Q3GroupBox" name="LogfileSizeGroupBox">
+          <widget class="QGroupBox" name="LogfileSizeGroupBox">
            <property name="title">
             <string>Logfile</string>
            </property>
@@ -2505,20 +2485,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>Q3GroupBox</class>
-   <extends>QGroupBox</extends>
-   <header>Qt3Support/Q3GroupBox</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Q3ButtonGroup</class>
-   <extends>Q3GroupBox</extends>
-   <header>Qt3Support/Q3ButtonGroup</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>ConfTabWidget</tabstop>
   <tabstop>buttonOk</tabstop>
@@ -2532,4 +2498,7 @@
  </includes>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup_2"/>
+ </buttongroups>
 </ui>
