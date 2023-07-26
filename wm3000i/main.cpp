@@ -113,6 +113,7 @@ int main(int argc, char *argv[])
 
     g_WMDevice->setNewSamplerates(newsamplerates);
 
+    g_WMView->setWMWindowTitle();
     QString machineName = "wm3000i";
 
     cReleaseInfo releaseInfo;

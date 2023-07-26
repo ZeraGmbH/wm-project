@@ -32,6 +32,7 @@ public:
     virtual QString strippedName( QString s );
     void removeJustageItem();
     void configureWM1000Items();
+    void setWMWindowTitle();
     void configureWMwoDC();
     virtual void ActualizeStates();
 
@@ -127,6 +128,7 @@ private:
     wmEditor* wmEdit2;
     QStringList recentSESFiles;
     QString m_deviceName;
+    bool m_isWm1000=false;
 
     void destroy();
     void UpdateRecentSESList( QString ses );
