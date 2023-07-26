@@ -32,18 +32,9 @@
    <font/>
   </property>
   <property name="windowTitle">
-   <string>Wandlermesseinrichtung WM3000I</string>
+   <string>Wandlermesseinrichtung</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>23</y>
-     <width>540</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
+  <widget class="QWidget" name="widget"/>
   <widget class="QMenuBar" name="MenuBarEditor">
    <property name="geometry">
     <rect>
@@ -816,14 +807,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>QMainWindow</class>
-   <extends>QWidget</extends>
-   <header>qmainwindow.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <includes>
   <include location="global">qlabel.h</include>
   <include location="local">maxrecentfiles.h</include>
@@ -1138,4 +1121,23 @@
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>SimulationSlot()</slot>
+  <slot>StartSlot()</slot>
+  <slot>OpenOETFileSlot()</slot>
+  <slot>CloseOETFileSlot()</slot>
+  <slot>EditOETFileSlot()</slot>
+  <slot>OpenResultFileSlot()</slot>
+  <slot>CloseResultFileSlot()</slot>
+  <slot>EditResultFileSlot()</slot>
+  <slot>StoreSessionSlot()</slot>
+  <slot>onLoadSessionSlot()</slot>
+  <slot>StoreResultSlot()</slot>
+  <slot>SetGermanSlot()</slot>
+  <slot>SetEnglishSlot()</slot>
+  <slot>JustFlashProgSlot()</slot>
+  <slot>JustFlashImportSlot()</slot>
+  <slot>JustFlashExportSlot()</slot>
+  <slot>SetPolishSlot()</slot>
+ </slots>
 </ui>

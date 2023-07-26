@@ -33,8 +33,16 @@ void WMViewBase::removeJustageItem()
 void WMViewBase::configureWM1000Items()
 {
     ui->Ansicht->removeAction(ui->ansichtEN61850Action);
+    m_isWm1000 = true;
+}
+
+void WMViewBase::setWMWindowTitle()
+{
     QString s;
-    s = QObject::tr("Wandlermesseinrichtung WM1000I");
+    s = QObject::tr("Wandlermesseinrichtung %1").arg(getDeviceName().toUpper());
+    if (m_isWm1000) {
+        s = s.replace("3","1");
+    }
     setWindowTitle(s);
 }
 
