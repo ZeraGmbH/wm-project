@@ -176,6 +176,7 @@ void wmProgressDialog::calcTimes(int val)
         mStart0 = QTime::currentTime();
         mShow = false;
         mLastNumber = 0;
+        mStart0ChangedAtVal = 1;
     }
     else {
         if (mLastNumber != val) {
@@ -183,8 +184,13 @@ void wmProgressDialog::calcTimes(int val)
                 QTime time;
                 time.setHMS(0,0,0);
                 a = mStart0.secsTo(mNext);
-                if (val > 1){
-                    b= a / (val-1);
+                if (a<0) { // time is negativ
+                    qDebug("times are worng");
+                    mStart0 = mNext;
+                    mStart0ChangedAtVal = val;
+                }
+                if (val > mStart0ChangedAtVal){
+                    b= a / (val-mStart0ChangedAtVal);
                     c= (b * mProgressFirst->maximum()) - ((val-1)*b);
                     mCalcRest = time.addSecs(c);
                     time = QTime::currentTime();

@@ -51,7 +51,7 @@ private:
     bool mbAbort;
     QTime mStart0, mNext, mCalcRest, mEndZeit;
     bool mShow;
-    int mLastNumber;
+    int mLastNumber, mStart0ChangedAtVal;
 
     void seuptGui();
     void calcTimes(int val);
