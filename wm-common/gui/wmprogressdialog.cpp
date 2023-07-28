@@ -66,7 +66,7 @@ void wmProgressDialog::setValue3(int value)
     val = mProgressThird->maximum();
     mProgressThird->setValue(val-value);
     if (mShow){
-    mState->setText("Restzeit :" + mCalcRest.toString("hh:mm:ss") +"\nEndzeit" + mEndZeit.toString("hh:mm:ss") );
+    mState->setText("Restzeit: " + mCalcRest.toString("hh:mm:ss") +"\nEndzeit: " + mEndZeit.toString("hh:mm:ss") );
     mCalcRest = mCalcRest.addSecs(-1);
     }
     else
@@ -184,7 +184,7 @@ void wmProgressDialog::calcTimes(int val)
                 QTime time;
                 time.setHMS(0,0,0);
                 a = mStart0.secsTo(mNext);
-                if (a<0) { // time is negativ
+                if ((a<0) || (a > 1000)) { // time is negativ or to big
                     qDebug("times are worng");
                     mStart0 = mNext;
                     mStart0ChangedAtVal = val;
