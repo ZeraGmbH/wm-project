@@ -185,7 +185,6 @@ void wmProgressDialog::calcTimes(int val)
                 time.setHMS(0,0,0);
                 a = mStart0.secsTo(mNext);
                 if ((a<0) || (a > 1000)) { // time is negativ or to big
-                    qDebug("times are worng");
                     mStart0 = mNext;
                     mStart0ChangedAtVal = val;
                 }
@@ -195,7 +194,6 @@ void wmProgressDialog::calcTimes(int val)
                     mCalcRest = time.addSecs(c);
                     time = QTime::currentTime();
                     mEndZeit = time.addSecs(c);
-                    qDebug("calcTimes: number: %i duration: %i sum: %i sec",val-1,b,c);
                     mShow = true;
                 }
                 mLastNumber = val;
