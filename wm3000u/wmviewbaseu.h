@@ -3,7 +3,6 @@
 
 #include "wmglobal.h"
 #include "wmviewbase.h"
-#include "ui_wmviewbase.h"
 
 class WMViewBaseU : public WMViewBase
 {
