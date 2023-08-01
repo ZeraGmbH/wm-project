@@ -3,22 +3,9 @@
 #ifndef WMGLOBAL_H
 #define WMGLOBAL_H
 
-#include <memory>
-#include <vector>
-
-#include <qstring.h>
-//Added by qt3to4:
-#include <Q3MemArray>
-
 #include <QDir>
 
-#include "confdata.h"
-#include "complex.h"
-#include "range.h"
-#include "dspactvalues.h"
-#include "dspvar.h"
-
-
+#include  "wmglobalcommon.h"
 
 //#define FVWM 1
 
@@ -148,32 +135,20 @@
 #define OffsetJustDataFilePath QDir::homePath()+"/wm3000u/offsetdata"
 #define NSAOffsetJustDataFilePath QDir::homePath()+"/wm3000u/.offsetinfo"
 
-const float TDBase = 100.0e6; // 100 mhz auflösung für td messung (pps->1. sample)
-
-enum SyncSources {Intern,Extern,MaxSSource}; // sync sources
-enum SignalFreqs {F16,F50,F60,MaxFreq}; // -> feste abtastfrequenzen
-enum SampleRates {S80,S96,S240,S256,S288,MaxSRate}; // abtastraten
 enum JustMode {sensNadcXPhase, sensXadcNPhase, sensEVTadcNPhase, sensNsensXOffset, sensNOffset, sensXOffset, sensEVTOffset, adcNPhase, adcXPhase}; // justage modes
-enum SenseMode {sensNsensX, adcNadcX, sensNadcX, sensXadcN, sensNsensX0V, anzSenseMode}; // sense modes innerhalb der hardware
-enum MeasMode {Un_UxAbs,Un_EVT,Un_nConvent,maxMMode}; // messmodi der wm3000u
-enum SignalModes {AC, DC, maxSMode}; // signal modi
-enum UserDecisions {AbortProgram,Stop,Retry,SimulationMode}; // benutzer entscheidungen
+enum MeasMode {Un_UxAbs,Un_EVT,Un_nConvent,maxMMode}; // messmodi der wm3000u#
 
-
-class cJustMeasInfo
+class cJustMeasInfo : public cJustMeasInfoBase , public cJustMeasInfoBaseInt
 {
 public:
-    cJustMeasInfo(const QString rngN, const QString rngX, const QString rngStore, SenseMode sm, MeasMode mm, JustMode jm, int nS, int nIgn, int nMeas )
-        :m_srngN(rngN), m_srngX(rngX), m_srngStore(rngStore), m_nSMode(sm), m_nMMode(mm), m_nJMode(jm), m_nnS(nS), m_nIgnore(nIgn), m_nnMeas(nMeas){}
-    QString m_srngN; // bereich kanal n der angewählt wird
-    QString m_srngX; // bereich kanal x ......
-    QString m_srngStore; // der bereich auf dem die justage daten gespeichert werden
-    SenseMode m_nSMode; // sense mode (was zu testen bzw. justieren ist)
+    cJustMeasInfo(const QString rngN, const QString rngX, const QString rngStore, SenseMode sm, MeasMode mm, JustMode jm, int nS, int nIgn, int nMeas ):
+        cJustMeasInfoBase(rngN, rngX, rngStore, sm),
+        cJustMeasInfoBaseInt(nS, nIgn, nMeas),
+        m_nMMode(mm),
+        m_nJMode(jm) {}
+
     MeasMode m_nMMode; // in welchem messmodus
     JustMode m_nJMode; // welcher justage modues
-    int m_nnS; // samples pro periode
-    int m_nIgnore; // anzahl messungen zum einschwingen
-    int m_nnMeas; // anzahl messungen zur messwertbestimmung
 };
 
 typedef std::vector<std::unique_ptr<cJustMeasInfo>> cPhaseNodeMeasInfoList;
