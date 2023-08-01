@@ -101,8 +101,8 @@ enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
 			  SetConfENMAdrWM3000,
 			  GetConfENMAdrMU,
 			  SetConfENMAdrMU,
-			  GetConfRatioEvt, // 73
-			  SetConfRatioEvt,
+              GetConfRatioExt, // 73
+              SetConfRatioExt,
 			  GetConfRatioChx,
 			  SetConfRatioChx,
 			  GetConfRatioChn,
@@ -245,7 +245,7 @@ private:
     tVersSerial* m_pVersion;
     cwmActValues mActValues;
     QStringList m_sNXItemList;
-    QStringList m_sEVTItemList;
+    QStringList m_sExTItemList;
     QStringList mMeasChannelList; // liste aller messkanäle
     int m_nWait4What;
     QTimer m_waitForMeasTimeoutTimer;
@@ -338,8 +338,8 @@ private:
     void mSetConfENMAdrWM3000(char*);
     char* mGetConfENMAdrMU();
     void mSetConfENMAdrMU(char*);
-    char* mGetConfRatioEvt();
-    void mSetConfRatioEvt(char*);
+    char* mGetConfRatioExt();
+    void mSetConfRatioExt(char*);
     char* mGetConfRatioChx();
     void mSetConfRatioChx(char*);
     char* mGetConfRatioChn();

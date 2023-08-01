@@ -269,7 +269,7 @@ void cWM3000SCPIFace::onMeasWaitTimeout()
 }
 
 
-void cWM3000SCPIFace::SetRangeListSlot( cWMRangeList& nx,  cWMRangeList& ect)
+void cWM3000SCPIFace::SetRangeListSlot( cWMRangeList& nx,  cWMRangeList& ext)
 {
     CWMRange *Range;
     Q3PtrListIterator<CWMRange> it(nx);
@@ -277,9 +277,9 @@ void cWM3000SCPIFace::SetRangeListSlot( cWMRangeList& nx,  cWMRangeList& ect)
     m_sNXItemList.clear(); // liste erst mal leeren
     for(Range=it.toFirst();Range;Range=++it) m_sNXItemList.append(Range->Name());
 
-    it=ect;
-    m_sECTItemList.clear(); // liste erst mal leeren
-    for(Range=it.toFirst();Range;Range=++it) m_sECTItemList.append(Range->Name());
+    it=ext;
+    m_sExTItemList.clear(); // liste erst mal leeren
+    for(Range=it.toFirst();Range;Range=++it) m_sExTItemList.append(Range->Name());
 }
 
 
@@ -483,7 +483,7 @@ char* cWM3000SCPIFace::mOutRangeCatalog()
     switch (n) {
     case 0:
     case 1: sl = m_sNXItemList; break;
-    case 2: sl = m_sECTItemList; break;
+    case 2: sl = m_sExTItemList; break;
     default: break;
     }
     s = sl.join(";");
@@ -505,7 +505,7 @@ void cWM3000SCPIFace::mSetRange(char* s)
         {
         case 0: sl = m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeNVorgabe;break;
         case 1: sl = m_sNXItemList; nrange = &m_ConfDataTarget.m_sRangeXVorgabe;break;
-        case 2: sl = m_sECTItemList; nrange = &m_ConfDataTarget.m_sRangeETVorgabe;break;
+        case 2: sl = m_sExTItemList; nrange = &m_ConfDataTarget.m_sRangeETVorgabe;break;
         default: break;
         }
 
@@ -840,7 +840,7 @@ void cWM3000SCPIFace::mSetConfENMAdrMU(char* s)
 }
 
 
-char* cWM3000SCPIFace::mGetConfRatioEct()
+char* cWM3000SCPIFace::mGetConfRatioExt()
 {
     QString rs;
 
@@ -849,7 +849,7 @@ char* cWM3000SCPIFace::mGetConfRatioEct()
 }
 
 
-void cWM3000SCPIFace::mSetConfRatioEct(char* s)
+void cWM3000SCPIFace::mSetConfRatioExt(char* s)
 {
     QString sprim, ssek;
     if ( GetTransformerRatio(&s, sprim, ssek,true) )
@@ -1921,7 +1921,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
             case SetConfEnDSet: mSetConfEnDSet(s);break;
             case SetConfENMAdrWM3000: mSetConfENMAdrWM3000(s);break;
             case SetConfENMAdrMU: mSetConfENMAdrMU(s);break;
-            case SetConfRatioEct: mSetConfRatioEct(s);break;
+            case SetConfRatioExt: mSetConfRatioExt(s);break;
             case SetConfRatioChx: mSetConfRatioChx(s);break;
             case SetConfRatioChn: mSetConfRatioChn(s);break;
             case SetConfSyncStrong: mSetConfSyncStrong(s);break;
@@ -1977,7 +1977,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetConfEnDSet:
     case SetConfENMAdrWM3000:
     case SetConfENMAdrMU:
-    case SetConfRatioEct:
+    case SetConfRatioExt:
     case SetConfRatioChx:
     case SetConfRatioChn:
     case SetConfSyncStrong:
@@ -2058,7 +2058,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfEnDSet: an = mGetConfEnDSet();break;
         case GetConfENMAdrWM3000: an = mGetConfENMAdrWM3000();break;
         case GetConfENMAdrMU: an = mGetConfENMAdrMU();break;
-        case GetConfRatioEct: an = mGetConfRatioEct();break;
+        case GetConfRatioExt: an = mGetConfRatioExt();break;
         case GetConfRatioChx: an = mGetConfRatioChx();break;
         case GetConfRatioChn: an = mGetConfRatioChn();break;
         case GetConfSyncStrong: an = mGetConfSyncStrong();break;
@@ -2122,7 +2122,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfEnDSet:
         case GetConfENMAdrWM3000:
         case GetConfENMAdrMU:
-        case GetConfRatioEct:
+        case GetConfRatioExt:
         case GetConfRatioChx:
         case GetConfRatioChn:
         case GetConfSyncStrong:
@@ -2191,7 +2191,7 @@ cNodeSCPI* ConfigurationSynchronizationPeriod;
 cNodeSCPI* ConfigurationRatio;
 cNodeSCPI* ConfigurationRatioN;
 cNodeSCPI* ConfigurationRatioX;
-cNodeSCPI* ConfigurationRatioECT;
+cNodeSCPI* ConfigurationRatioExT;
 cNodeSCPI* ConfigurationEN61850;
 cNodeSCPI* ConfigurationEN61850MacAdress;
 cNodeSCPI* ConfigurationEN61850MacAdressMergingUnit;
@@ -2344,8 +2344,8 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationEN61850MacAdressMergingUnit=new cNodeSCPI("MERGINGUNIT",isQuery | isCommand,ConfigurationEN61850MacAdressWM3000,NULL,SetConfENMAdrMU,GetConfENMAdrMU);
     ConfigurationEN61850MacAdress=new cNodeSCPI("MACADRESS",isNode,ConfigurationEN61850DataSet,ConfigurationEN61850MacAdressMergingUnit,nixCmd,nixCmd);
     ConfigurationEN61850=new cNodeSCPI("EN61850",isNode,ConfigurationApply,ConfigurationEN61850MacAdress,nixCmd,nixCmd);
-    ConfigurationRatioECT=new cNodeSCPI("ECT",isQuery | isCommand,NULL,NULL,SetConfRatioEct,GetConfRatioEct);
-    ConfigurationRatioX=new cNodeSCPI("X",isQuery | isCommand,ConfigurationRatioECT,NULL,SetConfRatioChx,GetConfRatioChx);
+    ConfigurationRatioExT=new cNodeSCPI("ECT",isQuery | isCommand,NULL,NULL,SetConfRatioExt,GetConfRatioExt);
+    ConfigurationRatioX=new cNodeSCPI("X",isQuery | isCommand,ConfigurationRatioExT,NULL,SetConfRatioChx,GetConfRatioChx);
     ConfigurationRatioN=new cNodeSCPI("N",isQuery | isCommand,ConfigurationRatioX,NULL,SetConfRatioChn,GetConfRatioChn);
     ConfigurationRatio=new cNodeSCPI("RATIO",isNode,ConfigurationEN61850,ConfigurationRatioN,nixCmd,nixCmd);
     ConfigurationSynchronizationStrong=new cNodeSCPI("STRONG",isQuery | isCommand,NULL,NULL,SetConfSyncStrong,GetConfSyncStrong);
