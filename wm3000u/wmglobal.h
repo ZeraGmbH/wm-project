@@ -135,7 +135,6 @@
 #define OffsetJustDataFilePath QDir::homePath()+"/wm3000u/offsetdata"
 #define NSAOffsetJustDataFilePath QDir::homePath()+"/wm3000u/.offsetinfo"
 
-enum JustMode {sensNadcXPhase, sensXadcNPhase, sensEVTadcNPhase, sensNsensXOffset, sensNOffset, sensXOffset, sensEVTOffset, adcNPhase, adcXPhase}; // justage modes
 enum MeasMode {Un_UxAbs,Un_EVT,Un_nConvent,maxMMode}; // messmodi der wm3000u#
 
 class cJustMeasInfo : public cJustMeasInfoBase , public cJustMeasInfoBaseInt

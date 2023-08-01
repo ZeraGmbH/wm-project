@@ -119,7 +119,6 @@
 #define NSAOffsetJustDataFilePath QDir::homePath()+"/wm3000i/.offsetinfo"
 
 // alt jetzt sensemode enum tsmode {sensNsensX, adcNadcX, sensNadcX, sensXadcN, adcXadcN = 5, sensXadcNECT = 11}; // testmodi innerhalb der hardware
-enum JustMode {sensNadcXPhase, sensXadcNPhase, sensECTadcNPhase, sensNsensXOffset, sensNOffset, sensXOffset, sensECTOffset, adcNPhase, adcXPhase}; // justage modes
 enum MeasMode {In_IxDiff,In_ECT,In_nConvent,In_IxAbs,maxMMode}; // messmodi, in_ixabs wird (wurde) nur für justage zwecke verwendet
 
 class cJustMeasInfo : public cJustMeasInfoBase, public cJustMeasInfoBaseInt

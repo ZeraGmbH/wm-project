@@ -2086,7 +2086,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                 m_sJustText = trUtf8("Messung Kanal N, %1 läuft").arg(PhaseNodeMeasInfo->m_srngStore);
                 break;
             case sensXadcNPhase:
-            case sensEVTadcNPhase:
+            case sensExTadcNPhase:
                 m_sJustText = trUtf8("Messung Kanal X, %1 läuft").arg(PhaseNodeMeasInfo->m_srngStore);
                 break;
             default:
@@ -2125,7 +2125,7 @@ void cWM3000U::ActionHandler(int entryAHS)
             ph0 = ph0 - ph1;
             break; // wir wollten kanal n sense messen
         case sensXadcNPhase:
-        case sensEVTadcNPhase:
+        case sensExTadcNPhase:
             ph0 = ph1 - ph0;
             break; // wir wollten kanal x bzw. evt sense messen
         default:
@@ -2190,7 +2190,7 @@ void cWM3000U::ActionHandler(int entryAHS)
             break;
         case adcXPhase:
         case sensXadcNPhase:
-        case sensEVTadcNPhase:
+        case sensExTadcNPhase:
             PCBIFace->setPhaseNodeInfo("ch1", PhaseNodeMeasInfo->m_srngStore, N, ph0, PhaseJustFreq[N]);
             break;
         default:
@@ -2422,7 +2422,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                 m_sJustText = trUtf8("Messung Kanal N %1 läuft").arg(OffsetMeasInfo->m_srngN);
                 break;
             case sensXOffset:
-            case sensEVTOffset:
+            case sensExTOffset:
                 // dito
                 m_sJustText = trUtf8("Messung Kanal X %1 läuft").arg(OffsetMeasInfo->m_srngX);
                 break;
@@ -2495,7 +2495,7 @@ void cWM3000U::ActionHandler(int entryAHS)
             PCBIFace->setOffsetNodeInfo("ch1", OffsetMeasInfo->m_srngX, 0, offs1, 1.0);
             AHS += 2; // dito
             break;
-        case sensEVTOffset:
+        case sensExTOffset:
             lr = Range(OffsetMeasInfo->m_srngX,m_sEVTRangeList);
             sel = lr->Selector();
             PCBIFace->setOffsetNodeInfo("ch1", sel, 0, offs1, 1.0);
@@ -2532,7 +2532,7 @@ void cWM3000U::ActionHandler(int entryAHS)
             adjOffsetCorrectionHash.remove(key);
             adjOffsetCorrectionHash[key] = offs1;
             break;
-        case sensEVTOffset:
+        case sensExTOffset:
             key = Range(OffsetMeasInfo->m_srngX, m_sEVTRangeList)->getOffsKorrKey();
             adjOffsetCorrectionHash.remove(key);
             adjOffsetCorrectionHash[key] = offs1;
@@ -3483,7 +3483,7 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
 
     // + die liste der evt bereiche in kanal x
     for (uint i = 0; i < m_sEVTRangeList.count()-1; i++) // i = 0 wäre der safety range.... jetzt nicht mehr
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo("3.75V", m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Selector(), sensXadcN, Un_EVT, sensEVTadcNPhase, S80, 4, 20))));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo("3.75V", m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Selector(), sensXadcN, Un_EVT, sensExTadcNPhase, S80, 4, 20))));
 
 }
 
@@ -3553,7 +3553,7 @@ void cWM3000U::SetOffsetMeasInfo(int te, int tm)
         {
             // für diesen bereich haben wir noch keine eintrag in die liste , was zu tun ist
             adjOffsetCorrectionHash[key] = 0.0; // platzhalter
-            m_OffsetMeasInfoList.append(new cJustMeasInfo(m_sNRangeList.at(0)->Name(), m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Name(), sensNsensX0V, Un_EVT, sensEVTOffset, S80, te, tm));
+            m_OffsetMeasInfoList.append(new cJustMeasInfo(m_sNRangeList.at(0)->Name(), m_sEVTRangeList.at(i)->Name(), m_sEVTRangeList.at(i)->Name(), sensNsensX0V, Un_EVT, sensExTOffset, S80, te, tm));
         }
     }
 }
