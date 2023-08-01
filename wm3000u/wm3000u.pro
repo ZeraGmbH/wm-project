@@ -31,7 +31,6 @@ SOURCES	+=  \
     rangedialogbase.cpp \
     dbushelper.cpp \
     dbushelperadapter.cpp \
-    wmglobal.cpp \
     wmviewbaseu.cpp
 
 FORMS	= rangedialogbase.ui \
