@@ -4,8 +4,6 @@
 #ifndef WM3000SCPIFACE_H
 #define WM3000SCPIFACE_H
 
-#include <qstringlist.h>
-
 #include "tools.h"
 #include "wmglobal.h"
 #include "wmactvalues.h"
@@ -195,7 +193,7 @@ enum wait4What { wait4Nothing,
 	             wait4MeasurementData,
 	             wait4LoadpointData,
                  wait4SelftestResult,
-                 wait4Offsetresult,
+                 wait4Offsetresult
 		 };
 
 class cWM3000SCPIFace: public cSCPIFace
@@ -367,9 +365,9 @@ private:
     char* mGetConfCompOecFile();
     void mSetConfCompOecFile(char*);
     char* mGetConfCompOecOn();
+    void mSetConfCompOecOn(char*);
     char* mGetConfCompOffskN();
     char* mGetConfCompOffskX();
-    void mSetConfCompOecOn(char*);
     void mSetConfCompOffskN(char*);
     void mSetConfCompOffskX(char*);
 //    char* mGetConfCompModeCatalog();
@@ -379,7 +377,7 @@ private:
     void mSetConfOperMode(char*);
     char* mGetConfOperMode();
     char* mGetConfOperSignalCatalog();
-    void mSetConfOperSignal(char*s);
+    void mSetConfOperSignal(char* s);
     char* mGetConfOperSignal();
    
 };

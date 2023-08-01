@@ -260,7 +260,6 @@ void cWM3000SCPIFace::CmdExecution(QString& s)
     }
 }
 
-
 void cWM3000SCPIFace::onMeasWaitTimeout()
 {
     stopMeasWaitTimeout();
@@ -511,7 +510,7 @@ void cWM3000SCPIFace::mSetRange(char* s)
 
         if (GetParameter(&s, range, true))
         {
-            if (nrange && sl.contains(range)) {
+            if(nrange && sl.contains(range)) {
                 *nrange = range;
                 emit SendRange(&m_ConfDataTarget);
             }
@@ -1094,7 +1093,6 @@ char* cWM3000SCPIFace::mGetConfCompPhcPhase()
 void cWM3000SCPIFace::mSetConfCompPhcPhase(char* s)
 {
     double dphase;
-
     if ( GetParameter(&s, dphase, 0.0, 360.0, true) )
     {
         m_ConfDataTarget.m_fxPhaseShift = dphase;
@@ -1206,7 +1204,6 @@ char* cWM3000SCPIFace::mGetConfOperModeCatalog()
 void cWM3000SCPIFace::mSetConfOperMode(char* s)
 {
     int m;
-
     if ( SearchEntry(&s,MModeName,maxMMode,m,true) )
     {
         if (g_WMDevice->isConventional())
@@ -1235,7 +1232,7 @@ char* cWM3000SCPIFace::mGetConfOperMode()
 }
 
 
-char *cWM3000SCPIFace::mGetConfOperSignalCatalog()
+char* cWM3000SCPIFace::mGetConfOperSignalCatalog()
 {
     QString rs;
 
@@ -1245,10 +1242,9 @@ char *cWM3000SCPIFace::mGetConfOperSignalCatalog()
 }
 
 
-void cWM3000SCPIFace::mSetConfOperSignal(char *s)
+void cWM3000SCPIFace::mSetConfOperSignal(char* s)
 {
     int m;
-
     if ( SearchEntry(&s,SModeName,maxSMode,m,true) )
     {
         if (g_WMDevice->isDC())
@@ -1268,7 +1264,7 @@ void cWM3000SCPIFace::mSetConfOperSignal(char *s)
 }
 
 
-char *cWM3000SCPIFace::mGetConfOperSignal()
+char* cWM3000SCPIFace::mGetConfOperSignal()
 {
     QString rs;
 
@@ -1783,7 +1779,6 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
     }
-
     case ReadLPStart:
         EXS++;
         m_nWait4What = wait4LoadpointData;
@@ -1833,7 +1828,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
         }
         else
         {
-            emit ChannelNOffsetMeasureRequest(); // selbsttest anstossen
+            emit ChannelNOffsetMeasureRequest(); // messung anstossen
             m_nWait4What =  wait4Offsetresult;
             EXS++;
         }
@@ -1854,7 +1849,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
         }
         else
         {
-            emit ChannelXOffsetMeasureRequest(); // selbsttest anstossen
+            emit ChannelXOffsetMeasureRequest(); // messung anstossen
             m_nWait4What =  wait4Offsetresult;
             EXS++;
         }
@@ -1866,9 +1861,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
-
     }
-    
 
     if (EXS == ExecCmdIdle)  // wenn wir fertig sind
         if ( !EXSFifo.empty() )  // und das kommando fifo nicht leer ist
@@ -1966,8 +1959,8 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetConfEnVid:
     case SetConfEnCfi:
     case SetConfEnUPriority:
-    case SetConfENLAsdu:
     case SetConfENFAsdu:
+    case SetConfENLAsdu:
     case SetConfEnDSet:
     case SetConfENMAdrWM3000:
     case SetConfENMAdrMU:
@@ -2072,7 +2065,6 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfOperMode: an = mGetConfOperMode();break;
         case GetConfOperSignalCatalog: an = mGetConfOperSignalCatalog();break;
         case GetConfOperSignal: an = mGetConfOperSignal();break;
-
         default:	qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
         }
 
@@ -2180,19 +2172,20 @@ cNodeSCPI* ConfigurationMeasureSRate;
 cNodeSCPI* ConfigurationMeasureMPeriod;
 cNodeSCPI* ConfigurationMeasureIntegrationTime;
 cNodeSCPI* ConfigurationSynchronization;
+cNodeSCPI* ConfigurationSynchronizationStrong;
 cNodeSCPI* ConfigurationSynchronizationSource;
 cNodeSCPI* ConfigurationSynchronizationPeriod;
-cNodeSCPI* ConfigurationSynchronizationStrong;
 cNodeSCPI* ConfigurationRatio;
 cNodeSCPI* ConfigurationRatioN;
 cNodeSCPI* ConfigurationRatioX;
 cNodeSCPI* ConfigurationRatioEVT;
-cNodeSCPI* ConfigurationEN61850; 					   		                                                      cNodeSCPI* ConfigurationEN61850MacAdress;
+cNodeSCPI* ConfigurationEN61850;
+cNodeSCPI* ConfigurationEN61850MacAdress;
 cNodeSCPI* ConfigurationEN61850MacAdressMergingUnit;
 cNodeSCPI* ConfigurationEN61850MacAdressWM3000;
 cNodeSCPI* ConfigurationEN61850DataSet;
-cNodeSCPI* ConfigurationEN61850LAsdu;
 cNodeSCPI* ConfigurationEN61850FAsdu;
+cNodeSCPI* ConfigurationEN61850LAsdu;
 cNodeSCPI* ConfigurationEN61850UserPriority;
 cNodeSCPI* ConfigurationEN61850Cfi;
 cNodeSCPI* ConfigurationEN61850Vid;
@@ -2297,7 +2290,6 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     StatusStandard=new cNodeSCPI("STANDARD",isQuery,StatusOperation,NULL,nixCmd,GetStatusStandard);
     Status=new cNodeSCPI("STATUS",isNode,System,StatusStandard,nixCmd,nixCmd);
     
-
     // implementiertes store model
 
     StoreChannelNOffset=new cNodeSCPI("NOFFSET",isQuery,NULL,NULL,nixCmd,GetChannelNOffsetCmd);
@@ -2332,11 +2324,8 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationEN61850Vid=new cNodeSCPI("VID",isQuery | isCommand,ConfigurationEN61850Appid,NULL,SetConfEnVid,GetConfEnVid);
     ConfigurationEN61850Cfi=new cNodeSCPI("CFI",isQuery | isCommand,ConfigurationEN61850Vid,NULL,SetConfEnCfi,GetConfEnCfi);
     ConfigurationEN61850UserPriority=new cNodeSCPI("UPRIORITY",isQuery | isCommand,ConfigurationEN61850Cfi,NULL,SetConfEnUPriority,GetConfEnUPriority);
-
-    ConfigurationEN61850LAsdu=new cNodeSCPI("LASDU",isQuery | isCommand,ConfigurationEN61850UserPriority,NULL,SetConfENLAsdu,GetConfENLAsdu);
-
-
     ConfigurationEN61850FAsdu=new cNodeSCPI("FASDU",isQuery | isCommand,ConfigurationEN61850LAsdu,NULL,SetConfENFAsdu,GetConfENFAsdu);
+    ConfigurationEN61850LAsdu=new cNodeSCPI("LASDU",isQuery | isCommand,ConfigurationEN61850UserPriority,NULL,SetConfENLAsdu,GetConfENLAsdu);
     ConfigurationEN61850DataSet=new cNodeSCPI("DATASET",isQuery | isCommand,ConfigurationEN61850FAsdu,NULL,SetConfEnDSet,GetConfEnDSet);
     ConfigurationEN61850MacAdressWM3000=new cNodeSCPI("WM3000",isQuery | isCommand,NULL,NULL,SetConfENMAdrWM3000,GetConfENMAdrWM3000);
     ConfigurationEN61850MacAdressMergingUnit=new cNodeSCPI("MERGINGUNIT",isQuery | isCommand,ConfigurationEN61850MacAdressWM3000,NULL,SetConfENMAdrMU,GetConfENMAdrMU);
@@ -2355,6 +2344,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationMeasureSRate=new cNodeSCPI("SRATE",isQuery | isCommand,ConfigurationMeasureMPeriod,NULL,SetConfMeasSRate,GetConfMeasSRate);
     ConfigurationMeasureSigFrequency=new cNodeSCPI("SIGFREQUENCY",isQuery | isCommand,ConfigurationMeasureSRate,NULL,SetConfMeasSFreq,GetConfMeasSFreq);
     ConfigurationMeasure=new cNodeSCPI("MEASURE",isNode,ConfigurationSynchronization,ConfigurationMeasureSigFrequency,nixCmd,nixCmd);
+
     ConfigurationComputationPHCorrectionTime=new cNodeSCPI("TIME",isQuery | isCommand,NULL,NULL,SetConfCompPhcTime,GetConfCompPhcTime);
     ConfigurationComputationPHCorrectionPhase=new cNodeSCPI("PHASE",isQuery | isCommand,ConfigurationComputationPHCorrectionTime,NULL,SetConfCompPhcPhase,GetConfCompPhcPhase);
     ConfigurationComputationPHCorrection=new cNodeSCPI("PHCORRECTION",isNode,NULL,ConfigurationComputationPHCorrectionPhase,nixCmd,nixCmd);
