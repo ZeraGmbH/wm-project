@@ -41,8 +41,6 @@ char* cWM3000SCPIFace::GetDeviceIdentification()
         s = "UnKnown";
 
     return sAlloc(s);
-
-
 }
 
 
@@ -1283,7 +1281,6 @@ char* cWM3000SCPIFace::mGetConfOperSignal()
         rs = QString("%1,%2").arg(DC).arg(SModeName[DC]);
     else
         rs = QString("%1,%2").arg(AC).arg(SModeName[AC]);
-
     return sAlloc(rs);
 }
 
@@ -1776,7 +1773,6 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
             ampln = fabs(mActValues.VekN);
             amplx = fabs(mActValues.VekX);
         }
-
         s = QString("%1;%2;%3;%4;%5;%6;%7;%8;%9")
                 .arg(mActValues.Frequenz)
                 .arg(ampln)
@@ -1792,12 +1788,9 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
                 .arg(fabs(mActValues.VekDX))
                 .arg(UserAtan(mActValues.VekDX))
                 .arg(mActValues.RCF);
-
-
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
-
     }
     case ReadLPStart:
         EXS++;
@@ -1856,7 +1849,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
         break;
 
     case ifChannelNOffsetFinished:
-        s = QString("%1").arg(OffsetResult);
+        s = QString("%1").arg(OffsetResult); // wir benutzen das selftest resultat auch für hier
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
@@ -1881,9 +1874,8 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
-
     }
-    
+
     if (EXS == ExecCmdIdle)  // wenn wir fertig sind
         if ( !EXSFifo.empty() )  // und das kommando fifo nicht leer ist
         {
@@ -1945,7 +1937,6 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
             case SetConfCompOecOn: mSetConfCompOecOn(s);break;
             case SetConfCompOffskN: mSetConfCompOffskN(s);break;
             case SetConfCompOffskX: mSetConfCompOffskX(s);break;
-                //		  case SetConfCompMode: mSetConfCompMode(s);break;
             case SetConfOperMode: mSetConfOperMode(s);break;
             case SetConfOperSignal: mSetConfOperSignal(s);break;
             default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
@@ -2002,7 +1993,6 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetConfCompOecOn:
     case SetConfCompOffskN:
     case SetConfCompOffskX:
-        //	case SetConfCompMode:
     case SetConfOperMode:
     case SetConfOperSignal:
         m_stateMachineTimer.start(0, ExecCmdPartFinished);
@@ -2084,8 +2074,6 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfCompOecOn: an = mGetConfCompOecOn();break;
         case GetConfCompOffskN: an = mGetConfCompOffskN();break;
         case GetConfCompOffskX: an = mGetConfCompOffskX();break;
-            //	case GetConfCompModeCatalog: an = mGetConfCompModeCatalog();break;
-            //	case GetConfCompMode: an = mGetConfCompMode();break;
         case GetConfOperModeCatalog: an = mGetConfOperModeCatalog();break;
         case GetConfOperMode: an = mGetConfOperMode();break;
         case GetConfOperSignalCatalog: an = mGetConfOperSignalCatalog();break;
@@ -2150,8 +2138,6 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfCompOecOn:
         case GetConfCompOffskN:
         case GetConfCompOffskX:
-            //	case GetConfCompModeCatalog:
-            //	case GetConfCompMode:
         case GetConfOperModeCatalog:
         case GetConfOperMode:
         case GetConfOperSignalCatalog:
@@ -2351,9 +2337,9 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationEN61850Vid=new cNodeSCPI("VID",isQuery | isCommand,ConfigurationEN61850Appid,NULL,SetConfEnVid,GetConfEnVid);
     ConfigurationEN61850Cfi=new cNodeSCPI("CFI",isQuery | isCommand,ConfigurationEN61850Vid,NULL,SetConfEnCfi,GetConfEnCfi);
     ConfigurationEN61850UserPriority=new cNodeSCPI("UPRIORITY",isQuery | isCommand,ConfigurationEN61850Cfi,NULL,SetConfEnUPriority,GetConfEnUPriority);
-    ConfigurationEN61850FAsdu=new cNodeSCPI("FASDU",isQuery | isCommand,ConfigurationEN61850UserPriority,NULL,SetConfENFAsdu,GetConfENFAsdu);
-    ConfigurationEN61850LAsdu=new cNodeSCPI("LASDU",isQuery | isCommand,ConfigurationEN61850FAsdu,NULL,SetConfENLAsdu,GetConfENLAsdu);
-    ConfigurationEN61850DataSet=new cNodeSCPI("DATASET",isQuery | isCommand,ConfigurationEN61850LAsdu,NULL,SetConfEnDSet,GetConfEnDSet);
+    ConfigurationEN61850FAsdu=new cNodeSCPI("FASDU",isQuery | isCommand,ConfigurationEN61850LAsdu,NULL,SetConfENFAsdu,GetConfENFAsdu);
+    ConfigurationEN61850LAsdu=new cNodeSCPI("LASDU",isQuery | isCommand,ConfigurationEN61850UserPriority,NULL,SetConfENLAsdu,GetConfENLAsdu);
+    ConfigurationEN61850DataSet=new cNodeSCPI("DATASET",isQuery | isCommand,ConfigurationEN61850FAsdu,NULL,SetConfEnDSet,GetConfEnDSet);
     ConfigurationEN61850MacAdressWM3000=new cNodeSCPI("WM3000",isQuery | isCommand,NULL,NULL,SetConfENMAdrWM3000,GetConfENMAdrWM3000);
     ConfigurationEN61850MacAdressMergingUnit=new cNodeSCPI("MERGINGUNIT",isQuery | isCommand,ConfigurationEN61850MacAdressWM3000,NULL,SetConfENMAdrMU,GetConfENMAdrMU);
     ConfigurationEN61850MacAdress=new cNodeSCPI("MACADRESS",isNode,ConfigurationEN61850DataSet,ConfigurationEN61850MacAdressMergingUnit,nixCmd,nixCmd);
@@ -2380,8 +2366,8 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationComputationOECorrection=new cNodeSCPI("OECORRECTION",isNode,ConfigurationComputationPHCorrection,ConfigurationComputationOECorrectionOn,nixCmd,nixCmd);
     ConfigurationComputationXOffset=new cNodeSCPI("XOFFSET",isQuery | isCommand,ConfigurationComputationOECorrection,NULL,SetConfCompOffskX,GetConfCompOffskX);
     ConfigurationComputationNOffset=new cNodeSCPI("NOFFSET",isQuery | isCommand,ConfigurationComputationXOffset,NULL,SetConfCompOffskN,GetConfCompOffskN);
-    ConfigurationComputation=new cNodeSCPI("COMPUTATION",isNode,ConfigurationMeasure,ConfigurationComputationNOffset,nixCmd,nixCmd);
 
+    ConfigurationComputation=new cNodeSCPI("COMPUTATION",isNode,ConfigurationMeasure,ConfigurationComputationNOffset,nixCmd,nixCmd);
     ConfigurationOperationSignalCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,GetConfOperSignalCatalog);
     ConfigurationOperationSignal=new cNodeSCPI("SIGNAL",isNode | isQuery | isCommand,ConfigurationComputation,ConfigurationOperationSignalCatalog,SetConfOperSignal,GetConfOperSignal);
     ConfigurationOperationModeCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,GetConfOperModeCatalog);

@@ -4,19 +4,15 @@
 #ifndef WM3000SCPIFACE_H
 #define WM3000SCPIFACE_H
 
-
 #include "tools.h"
-#include "versserial.h"
-#include "wmactvalues.h"
 #include "wmglobal.h"
+#include "wmactvalues.h"
+#include "versserial.h"
 #include "confdata.h"
 #include "scpiface.h"
 #include "en61850.h"
-#include "scpiface.h"
 #include "scpicommoncmdtype.h"
 #include "scpiexecutecommandstates.h"
-#include <QStringList>
-#include <QTimer>
 
 enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
 			
