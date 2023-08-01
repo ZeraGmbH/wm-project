@@ -16,7 +16,7 @@
 #include "wmeditor.h"
 #include "widgetgeometry.h"
 #include "statuslabelcontainer.h"
-#include  "wmglobalcommon.h"
+#include "wmglobalcommon.h"
 
 namespace Ui {
     class WMViewBase;
