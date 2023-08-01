@@ -137,17 +137,16 @@
 
 enum MeasMode {Un_UxAbs,Un_EVT,Un_nConvent,maxMMode}; // messmodi der wm3000u#
 
-class cJustMeasInfo : public cJustMeasInfoBase , public cJustMeasInfoBaseInt
+class cJustMeasInfo : public cJustMeasInfoBase , public cJustMeasInfoBase2nd
 {
 public:
     cJustMeasInfo(const QString rngN, const QString rngX, const QString rngStore, SenseMode sm, MeasMode mm, JustMode jm, int nS, int nIgn, int nMeas ):
         cJustMeasInfoBase(rngN, rngX, rngStore, sm),
-        cJustMeasInfoBaseInt(nS, nIgn, nMeas),
-        m_nMMode(mm),
-        m_nJMode(jm) {}
+        cJustMeasInfoBase2nd(jm, nS, nIgn, nMeas),
+        m_nMMode(mm) {}
 
     MeasMode m_nMMode; // in welchem messmodus
-    JustMode m_nJMode; // welcher justage modues
+
 };
 
 typedef std::vector<std::unique_ptr<cJustMeasInfo>> cPhaseNodeMeasInfoList;
