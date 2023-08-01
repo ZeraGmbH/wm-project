@@ -12,7 +12,7 @@
 
 extern cWM3000U* g_WMDevice;
 extern  scpiErrorType SCPIError[];
-extern char* MModeName[];
+char* MModeName[maxMMode] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"Un/nConvent"};
 char* SModeName[maxSMode] = {(char*)"AC",(char*)"DC"};
 char* FreqName[MaxFreq] = {(char*)"16.67",(char*)"50.0",(char*)"60.0"};
 double SFrequency[MaxFreq] = {16.67, 50.0, 60.0};
