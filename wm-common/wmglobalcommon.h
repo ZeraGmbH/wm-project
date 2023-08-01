@@ -33,11 +33,12 @@ public:
     SenseMode m_nSMode; // sense mode (was zu testen bzw. justieren ist)
 };
 
-class cJustMeasInfoBaseInt
+class cJustMeasInfoBase2nd
 {
 public:
-    cJustMeasInfoBaseInt(int nS, int nIgn, int nMeas)
-        :m_nnS(nS), m_nIgnore(nIgn), m_nnMeas(nMeas){}
+    cJustMeasInfoBase2nd(JustMode jm, int nS, int nIgn, int nMeas)
+        :m_nJMode(jm), m_nnS(nS), m_nIgnore(nIgn), m_nnMeas(nMeas){}
+    JustMode m_nJMode; // welcher justage modues
     int m_nnS; // samples pro periode
     int m_nIgnore; // anzahl messungen zum einschwingen
     int m_nnMeas; // anzahl messungen zur messwertbestimmung
