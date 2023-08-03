@@ -8,6 +8,9 @@
 #include "scpistatebits.h"
 #include "scpierrortypes.h"
 #include "scpierrorindicator.h"
+#include "wm3kscpispecialbase.h"
+
+#include <QFile>
 
 extern  scpiErrorType SCPIError[];
 extern char* MModeName[];
@@ -21,13 +24,14 @@ double SFrequency[MaxFreq] = {16.67, 50.0, 60.0};
 char* SSourceName[MaxSSource] = {(char*)"intern",(char*)"extern"};
 
 
-cWM3000SCPIFace::cWM3000SCPIFace(cClientIODevice* ciod, short l)
-    :cSCPIFace(ciod, l)
+cWM3000SCPIFace::cWM3000SCPIFace(cClientIODevice* ciod, short l, WM3kSCPISpecialBase* special)
+    :cSCPIFace(ciod, l),
+    m_Special(special)
 {
     m_pCommands = InitScpiCmdTree(m_pCommands); // verketten der common und scpi commands
     m_nWait4What = wait4Nothing;
     m_bAddEventError = false;
-    mMeasChannelList << "N" << "X" << m_Special.getExTName();
+    mMeasChannelList << "N" << "X" << m_Special->getExTName();
     m_pVersion  = 0;
 }
 
@@ -55,8 +59,8 @@ void cWM3000SCPIFace::ResetDevice()
 {
     emit SetDefaultMeasConfig(); // die messeinrichtung stellt defaults ein
     
-    m_ConfDataTarget.m_sRangeNVorgabe = m_Special.getMaxRange();
-    m_ConfDataTarget.m_sRangeXVorgabe = m_Special.getMaxRange();
+    m_ConfDataTarget.m_sRangeNVorgabe = m_Special->getMaxRange();
+    m_ConfDataTarget.m_sRangeXVorgabe = m_Special->getMaxRange();
     m_ConfDataTarget.m_sRangeETVorgabe = "15.0V";
     m_ConfDataTarget.m_bSimulation = false; // reset schaltet auf normalen messbetrieb
     m_ConfDataTarget.m_bRunning = true; // läuft
@@ -1022,7 +1026,7 @@ void cWM3000SCPIFace::mSetConfMeasSRate(char* s)
 
     if ( SearchEntry(&s, SRates, MaxSRate, src, true) )
     {
-        if (!m_Special.isNewSamplerates())
+        if (!m_Special->isNewSamplerates())
         {
             switch (src)
             {
@@ -1192,7 +1196,7 @@ void cWM3000SCPIFace::mSetConfCompOffskX(char* s)
 char* cWM3000SCPIFace::mGetConfOperModeCatalog()
 {
     QString rs;
-    rs = m_Special.getConfOperModeCatalog();
+    rs = m_Special->getConfOperModeCatalog();
     return sAlloc(rs);
 }
 
@@ -1200,17 +1204,17 @@ char* cWM3000SCPIFace::mGetConfOperModeCatalog()
 void cWM3000SCPIFace::mSetConfOperMode(char* s)
 {
     int m;
-    if ( SearchEntry(&s,MModeName,maxMMode,m,true) )
+    if ( SearchEntry(&s,MModeName,m_Special->getmaxMMode(),m,true) )
     {
-        if (m_Special.isConventional())
+        if (m_Special->isConventional())
         {
-            if (!m_Special.setWM1000SetConfOperMode(&m_ConfDataTarget,m))
+            if (!m_Special->setWM1000SetConfOperMode(&m_ConfDataTarget,m))
                 AddEventError(ParameterNotAllowed);
             return;
         }
         else
         {
-            if (m_Special.setWM3000SetConfOperMode(&m_ConfDataTarget,m))
+            if (m_Special->setWM3000SetConfOperMode(&m_ConfDataTarget,m))
                 return;
         }
     }
@@ -1242,7 +1246,7 @@ void cWM3000SCPIFace::mSetConfOperSignal(char* s)
     int m;
     if ( SearchEntry(&s,SModeName,maxSMode,m,true) )
     {
-        if (m_Special.isDC())
+        if (m_Special->isDC())
         {   // wir dürfen alle signal modi
             m_ConfDataTarget.m_bDCmeasurement = (m == DC);
             return;
@@ -1769,7 +1773,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
                 .arg(mActValues.LoadPoint1X)
                 .arg(mActValues.AmplErrorIEC)
                 .arg(mActValues.AmplErrorANSI);
-        s += m_Special.fetchActualValues(&mActValues);
+        s += m_Special->fetchActualValues(&mActValues);
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
@@ -2326,7 +2330,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationEN61850MacAdressMergingUnit=new cNodeSCPI("MERGINGUNIT",isQuery | isCommand,ConfigurationEN61850MacAdressWM3000,NULL,SetConfENMAdrMU,GetConfENMAdrMU);
     ConfigurationEN61850MacAdress=new cNodeSCPI("MACADRESS",isNode,ConfigurationEN61850DataSet,ConfigurationEN61850MacAdressMergingUnit,nixCmd,nixCmd);
     ConfigurationEN61850=new cNodeSCPI("EN61850",isNode,ConfigurationApply,ConfigurationEN61850MacAdress,nixCmd,nixCmd);
-    ConfigurationRatioExT=new cNodeSCPI(m_Special.getExTName(),isQuery | isCommand,NULL,NULL,SetConfRatioExt,GetConfRatioExt);
+    ConfigurationRatioExT=new cNodeSCPI(m_Special->getExTName(),isQuery | isCommand,NULL,NULL,SetConfRatioExt,GetConfRatioExt);
     ConfigurationRatioX=new cNodeSCPI("X",isQuery | isCommand,ConfigurationRatioExT,NULL,SetConfRatioChx,GetConfRatioChx);
     ConfigurationRatioN=new cNodeSCPI("N",isQuery | isCommand,ConfigurationRatioX,NULL,SetConfRatioChn,GetConfRatioChn);
     ConfigurationRatio=new cNodeSCPI("RATIO",isNode,ConfigurationEN61850,ConfigurationRatioN,nixCmd,nixCmd);

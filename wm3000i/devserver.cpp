@@ -15,7 +15,7 @@ cwm3000DeviceServer::cwm3000DeviceServer(quint16 port) :
 void cwm3000DeviceServer::newConnection(int fd)
 {
     cClientSocketDevice* csd = new cClientSocketDevice(fd);
-    cWM3000SCPIFace* iface = new cWM3000SCPIFace( csd, 20);
+    cWM3000SCPIFace* iface = new cWM3000SCPIFace( csd, 20, &m_Special);
 			     
     if  (m_SCPIFacePtrList.isEmpty() )
 	emit RemoteCtrlInfo(true); // wir informieren wenn sich der 1. client verbunden hat

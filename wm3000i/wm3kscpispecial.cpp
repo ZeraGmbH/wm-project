@@ -7,11 +7,6 @@ extern char* MModeName[];
 char* SRatesName[MaxSRate] = {(char*)"80",(char*)"96",(char*)"240",(char*)"256",(char*)"288"}; // abtastraten
 int SRates[MaxSRate] = {80,96,240,256,288};
 
-WM3kSCPISpecial::WM3kSCPISpecial()
-{
-
-}
-
 bool WM3kSCPISpecial::isConventional()
 {
     return g_WMDevice->isConventional();
