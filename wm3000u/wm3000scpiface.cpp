@@ -1191,10 +1191,7 @@ void cWM3000SCPIFace::mSetConfCompOffskX(char* s)
 char* cWM3000SCPIFace::mGetConfOperModeCatalog()
 {
     QString rs;
-    rs = QString("%1,%2").arg(Un_UxAbs).arg(MModeName[Un_UxAbs]);
-    if (!m_Special.isConventional())
-        for (int i = Un_UxAbs+1; i < maxMMode; i++)
-            rs = rs + ";" + QString("%1,%2").arg(i).arg(MModeName[i]);
+    rs = m_Special.getConfOperModeCatalog();
     return sAlloc(rs);
 }
 
@@ -1206,15 +1203,14 @@ void cWM3000SCPIFace::mSetConfOperMode(char* s)
     {
         if (m_Special.isConventional())
         {
-            m_ConfDataTarget.m_nMeasMode = Un_UxAbs;
-            if (m != Un_UxAbs)
+            if (!m_Special.setWM1000SetConfOperMode(&m_ConfDataTarget,m))
                 AddEventError(ParameterNotAllowed);
             return;
         }
         else
         {
-            m_ConfDataTarget.m_nMeasMode = m;
-            return;
+            if (m_Special.setWM3000SetConfOperMode(&m_ConfDataTarget,m))
+                return;
         }
     }
     AddEventError(ParameterNotAllowed);
