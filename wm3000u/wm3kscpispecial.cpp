@@ -39,10 +39,22 @@ QString WM3kSCPISpecial::getMaxRange()
 
 QString WM3kSCPISpecial::getConfOperModeCatalog()
 {
-/*    QString rs;
+    QString rs;
     rs = QString("%1,%2").arg(Un_UxAbs).arg(MModeName[Un_UxAbs]);
     if (!g_WMDevice->isConventional())
         for (int i = Un_UxAbs+1; i < maxMMode; i++)
             rs = rs + ";" + QString("%1,%2").arg(i).arg(MModeName[i]);
-    return rs;*/
+    return rs;
+}
+
+bool WM3kSCPISpecial::setWM1000SetConfOperMode(cConfData *conf, int m)
+{
+    conf->m_nMeasMode = Un_UxAbs;
+    return (m == Un_UxAbs);
+}
+
+bool WM3kSCPISpecial::setWM3000SetConfOperMode(cConfData *conf, int m)
+{
+    conf->m_nMeasMode = m;
+    return true;
 }
