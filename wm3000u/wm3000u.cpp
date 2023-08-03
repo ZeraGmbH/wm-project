@@ -34,7 +34,7 @@
 #include "scpiquestionstates.h"
 
 extern WMViewBase *g_WMView;
-extern char* MModeName[];
+char* MModeName[maxMMode] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"Un/nConvent"};
 
 const double PI = 3.141592654;
 const double PI_180 = 1.74532925e-2;

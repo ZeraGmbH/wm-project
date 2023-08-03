@@ -6,6 +6,7 @@ CONFIG	+= qt
 INCLUDEPATH	+= .
 
 HEADERS	+=  \
+    wm3kscpispecial.h \
     wmglobal.h \
     wmuoffsetcustomlabels.h \
     wm3000u.h \
@@ -21,6 +22,7 @@ HEADERS	+=  \
 
 SOURCES	+=  \
     main.cpp \
+    wm3kscpispecial.cpp \
     wmuoffsetcustomlabels.cpp \
     wm3000u.cpp \
     pcbiface.cpp \

@@ -9,6 +9,7 @@ INCLUDEPATH	+= .
 HEADERS	+= \
     devserver.h \
     pcbiface.h \
+    wm3kscpispecial.h \
     wmglobal.h \
     wm3000i.h \
     wmioffsetcustomlabels.h \
@@ -23,6 +24,7 @@ SOURCES	+= \
     main.cpp \
     pcbiface.cpp \
     wm3000i.cpp \
+    wm3kscpispecial.cpp \
     wmioffsetcustomlabels.cpp \
     wm3000scpiface.cpp \
     wmrawactualvalbase.cpp \
