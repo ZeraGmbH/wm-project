@@ -23,6 +23,7 @@
 #include "en61850.h"
 #include "clientiodevice.h"
 #include "deviceserver.h"
+#include "wm3kscpispecial.h"
 
 class cwm3000DeviceServer:  public cDeviceServer  // der wm3000 device server
 {
@@ -73,6 +74,7 @@ signals:
     void AffectStatus(uchar, ushort);
     
 private:
+    WM3kSCPISpecial m_Special;
     cConfData m_ConfData; // wir speichern die konfiguration zwischen
     tVersSerial* m_pV;
     cWMRangeList m_sNXRangeList;

@@ -11,7 +11,6 @@ HEADERS	+=  \
     wmuoffsetcustomlabels.h \
     wm3000u.h \
     pcbiface.h \
-    wm3000scpiface.h \
     devserver.h \
     confdialogbase.h \
     rangedialogbase.h \
@@ -26,7 +25,6 @@ SOURCES	+=  \
     wmuoffsetcustomlabels.cpp \
     wm3000u.cpp \
     pcbiface.cpp \
-    wm3000scpiface.cpp \
     devserver.cpp \
     wmrawactualvalbase.cpp \
     confdialogbase.cpp \

@@ -5,15 +5,16 @@
 #define WM3000SCPIFACE_H
 
 #include "tools.h"
-#include "wmglobal.h"
+#include "range.h"
 #include "wmactvalues.h"
 #include "versserial.h"
 #include "confdata.h"
 #include "scpiface.h"
 #include "en61850.h"
+#include "wmglobalcommon.h"
 #include "scpicommoncmdtype.h"
 #include "scpiexecutecommandstates.h"
-#include "wm3kscpispecial.h"
+#include "wm3kscpispecialbase.h"
 
 enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
 			
@@ -202,7 +203,7 @@ class cWM3000SCPIFace: public cSCPIFace
     Q_OBJECT
     
 public:
-    cWM3000SCPIFace(cClientIODevice*, short); //  das zugehörige io device, länge für die eventqueue
+    cWM3000SCPIFace(cClientIODevice*, short, WM3kSCPISpecialBase*); //  das zugehörige io device, länge für die eventqueue
     virtual void SCPICmd( int, char*);
     virtual char* SCPIQuery( int, char*);
     virtual char* GetDeviceIdentification();
@@ -241,7 +242,7 @@ signals:
     void ChannelXOffsetMeasureRequest();
         
 private:
-    WM3kSCPISpecial m_Special;
+    WM3kSCPISpecialBase *m_Special;
     int SelftestResult;
     double OffsetResult;
     tVersSerial* m_pVersion;

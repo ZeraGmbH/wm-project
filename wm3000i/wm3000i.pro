@@ -13,7 +13,6 @@ HEADERS	+= \
     wmglobal.h \
     wm3000i.h \
     wmioffsetcustomlabels.h \
-    wm3000scpiface.h \
     wmrawactualvalbase.h \
     confdialogbase.h \
     rangedialogbase.h \
@@ -26,7 +25,6 @@ SOURCES	+= \
     wm3000i.cpp \
     wm3kscpispecial.cpp \
     wmioffsetcustomlabels.cpp \
-    wm3000scpiface.cpp \
     wmrawactualvalbase.cpp \
     rangedialogbase.cpp \
     confdialogbase.cpp \
