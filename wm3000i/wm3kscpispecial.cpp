@@ -1,5 +1,7 @@
 #include "wm3kscpispecial.h"
+#include "wm3000i.h"
 
+extern cWM3000I* g_WMDevice;
 extern char* MModeName[];
 
 char* SRatesName[MaxSRate] = {(char*)"80",(char*)"96",(char*)"240",(char*)"256",(char*)"288"}; // abtastraten
@@ -8,6 +10,21 @@ int SRates[MaxSRate] = {80,96,240,256,288};
 WM3kSCPISpecial::WM3kSCPISpecial()
 {
 
+}
+
+bool WM3kSCPISpecial::isConventional()
+{
+    return g_WMDevice->isConventional();
+}
+
+bool WM3kSCPISpecial::isDC()
+{
+    return g_WMDevice->isDC();
+}
+
+bool WM3kSCPISpecial::isNewSamplerates()
+{
+    return g_WMDevice->isNewSamplerates();
 }
 
 QString WM3kSCPISpecial::getExTName()

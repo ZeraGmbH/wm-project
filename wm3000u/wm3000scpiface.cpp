@@ -8,9 +8,7 @@
 #include "scpistatebits.h"
 #include "scpierrortypes.h"
 #include "scpierrorindicator.h"
-#include "wm3000u.h"
 
-extern cWM3000U* g_WMDevice;
 extern  scpiErrorType SCPIError[];
 extern char* MModeName[];
 
@@ -1023,7 +1021,7 @@ void cWM3000SCPIFace::mSetConfMeasSRate(char* s)
 
     if ( SearchEntry(&s, SRates, MaxSRate, src, true) )
     {
-        if (!g_WMDevice->isNewSamplerates())
+        if (!m_Special.isNewSamplerates())
         {
             switch (src)
             {
@@ -1194,7 +1192,7 @@ char* cWM3000SCPIFace::mGetConfOperModeCatalog()
 {
     QString rs;
     rs = QString("%1,%2").arg(Un_UxAbs).arg(MModeName[Un_UxAbs]);
-    if (!g_WMDevice->isConventional())
+    if (!m_Special.isConventional())
         for (int i = Un_UxAbs+1; i < maxMMode; i++)
             rs = rs + ";" + QString("%1,%2").arg(i).arg(MModeName[i]);
     return sAlloc(rs);
@@ -1206,7 +1204,7 @@ void cWM3000SCPIFace::mSetConfOperMode(char* s)
     int m;
     if ( SearchEntry(&s,MModeName,maxMMode,m,true) )
     {
-        if (g_WMDevice->isConventional())
+        if (m_Special.isConventional())
         {
             m_ConfDataTarget.m_nMeasMode = Un_UxAbs;
             if (m != Un_UxAbs)
@@ -1247,7 +1245,7 @@ void cWM3000SCPIFace::mSetConfOperSignal(char* s)
     int m;
     if ( SearchEntry(&s,SModeName,maxSMode,m,true) )
     {
-        if (g_WMDevice->isDC())
+        if (m_Special.isDC())
         {   // wir dürfen alle signal modi
             m_ConfDataTarget.m_bDCmeasurement = (m == DC);
             return;
