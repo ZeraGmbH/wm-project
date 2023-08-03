@@ -2,22 +2,24 @@
 #include "tools.h"
 #include "confdata.h"
 #include "wmparameter.h"
-#include "wm3000u.h"
 #include "maxperiods.h"
 #include "scpi.h"
 #include "scpistatsyst.h"
 #include "scpistatebits.h"
 #include "scpierrortypes.h"
 #include "scpierrorindicator.h"
+#include "wm3000u.h"
 
 extern cWM3000U* g_WMDevice;
 extern  scpiErrorType SCPIError[];
-char* MModeName[maxMMode] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"Un/nConvent"};
+extern char* MModeName[];
+
+extern char* SRatesName[];
+extern int SRates[];
+
 char* SModeName[maxSMode] = {(char*)"AC",(char*)"DC"};
 char* FreqName[MaxFreq] = {(char*)"16.67",(char*)"50.0",(char*)"60.0"};
 double SFrequency[MaxFreq] = {16.67, 50.0, 60.0};
-char* SRatesName[MaxSRate] = {(char*)"80",(char*)"256"}; // abtastraten
-int SRates[MaxSRate] = {80,256};
 char* SSourceName[MaxSSource] = {(char*)"intern",(char*)"extern"};
 
 
@@ -27,7 +29,7 @@ cWM3000SCPIFace::cWM3000SCPIFace(cClientIODevice* ciod, short l)
     m_pCommands = InitScpiCmdTree(m_pCommands); // verketten der common und scpi commands
     m_nWait4What = wait4Nothing;
     m_bAddEventError = false;
-    mMeasChannelList << "N" << "X" << "EVT";
+    mMeasChannelList << "N" << "X" << m_Special.getExTName();
     m_pVersion  = 0;
 }
 
@@ -55,8 +57,8 @@ void cWM3000SCPIFace::ResetDevice()
 {
     emit SetDefaultMeasConfig(); // die messeinrichtung stellt defaults ein
     
-    m_ConfDataTarget.m_sRangeNVorgabe = "480V";
-    m_ConfDataTarget.m_sRangeXVorgabe = "480V";
+    m_ConfDataTarget.m_sRangeNVorgabe = m_Special.getMaxRange();
+    m_ConfDataTarget.m_sRangeXVorgabe = m_Special.getMaxRange();
     m_ConfDataTarget.m_sRangeETVorgabe = "15.0V";
     m_ConfDataTarget.m_bSimulation = false; // reset schaltet auf normalen messbetrieb
     m_ConfDataTarget.m_bRunning = true; // läuft
@@ -1191,12 +1193,10 @@ void cWM3000SCPIFace::mSetConfCompOffskX(char* s)
 char* cWM3000SCPIFace::mGetConfOperModeCatalog()
 {
     QString rs;
-
     rs = QString("%1,%2").arg(Un_UxAbs).arg(MModeName[Un_UxAbs]);
     if (!g_WMDevice->isConventional())
         for (int i = Un_UxAbs+1; i < maxMMode; i++)
             rs = rs + ";" + QString("%1,%2").arg(i).arg(MModeName[i]);
-
     return sAlloc(rs);
 }
 
@@ -2331,7 +2331,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationEN61850MacAdressMergingUnit=new cNodeSCPI("MERGINGUNIT",isQuery | isCommand,ConfigurationEN61850MacAdressWM3000,NULL,SetConfENMAdrMU,GetConfENMAdrMU);
     ConfigurationEN61850MacAdress=new cNodeSCPI("MACADRESS",isNode,ConfigurationEN61850DataSet,ConfigurationEN61850MacAdressMergingUnit,nixCmd,nixCmd);
     ConfigurationEN61850=new cNodeSCPI("EN61850",isNode,ConfigurationApply,ConfigurationEN61850MacAdress,nixCmd,nixCmd);
-    ConfigurationRatioExT=new cNodeSCPI("EVT",isQuery | isCommand,NULL,NULL,SetConfRatioExt,GetConfRatioExt);
+    ConfigurationRatioExT=new cNodeSCPI(m_Special.getExTName(),isQuery | isCommand,NULL,NULL,SetConfRatioExt,GetConfRatioExt);
     ConfigurationRatioX=new cNodeSCPI("X",isQuery | isCommand,ConfigurationRatioExT,NULL,SetConfRatioChx,GetConfRatioChx);
     ConfigurationRatioN=new cNodeSCPI("N",isQuery | isCommand,ConfigurationRatioX,NULL,SetConfRatioChn,GetConfRatioChn);
     ConfigurationRatio=new cNodeSCPI("RATIO",isNode,ConfigurationEN61850,ConfigurationRatioN,nixCmd,nixCmd);

@@ -13,6 +13,7 @@
 #include "en61850.h"
 #include "scpicommoncmdtype.h"
 #include "scpiexecutecommandstates.h"
+#include "wm3kscpispecial.h"
 
 enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
 			
@@ -240,6 +241,7 @@ signals:
     void ChannelXOffsetMeasureRequest();
         
 private:
+    WM3kSCPISpecial m_Special;
     int SelftestResult;
     double OffsetResult;
     tVersSerial* m_pVersion;
