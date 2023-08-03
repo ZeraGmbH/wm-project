@@ -68,3 +68,13 @@ bool WM3kSCPISpecial::setWM3000SetConfOperMode(cConfData *conf, int m)
     return false;
 }
 
+QString WM3kSCPISpecial::fetchActualValues(cwmActValues *act)
+{
+    QString str;
+    str = QString(";%1;%2;%3;%4")
+              .arg(act->AngleError)
+              .arg(fabs(act->VekDX))
+              .arg(UserAtan(act->VekDX))
+              .arg(act->RCF);
+    return str;
+}

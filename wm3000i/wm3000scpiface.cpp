@@ -1769,11 +1769,7 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
                 .arg(mActValues.LoadPoint1X)
                 .arg(mActValues.AmplErrorIEC)
                 .arg(mActValues.AmplErrorANSI);
-        s += QString(";%1;%2;%3;%4")
-                .arg(mActValues.AngleError)
-                .arg(fabs(mActValues.VekDX))
-                .arg(UserAtan(mActValues.VekDX))
-                .arg(mActValues.RCF);
+        s += m_Special.fetchActualValues(&mActValues);
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
