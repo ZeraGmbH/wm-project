@@ -8,9 +8,7 @@
 #include "scpistatebits.h"
 #include "scpierrortypes.h"
 #include "scpierrorindicator.h"
-#include "wm3000i.h"
 
-extern cWM3000I* g_WMDevice;
 extern  scpiErrorType SCPIError[];
 extern char* MModeName[];
 
@@ -1024,7 +1022,7 @@ void cWM3000SCPIFace::mSetConfMeasSRate(char* s)
 
     if ( SearchEntry(&s, SRates, MaxSRate, src, true) )
     {
-        if (!g_WMDevice->isNewSamplerates())
+        if (!m_Special.isNewSamplerates())
         {
             switch (src)
             {
@@ -1194,7 +1192,7 @@ void cWM3000SCPIFace::mSetConfCompOffskX(char* s)
 char* cWM3000SCPIFace::mGetConfOperModeCatalog()
 {
     QString rs;
-    if (g_WMDevice->isConventional())
+    if (m_Special.isConventional())
         rs = QString("%1,%2").arg(In_IxAbs).arg(MModeName[In_IxAbs]);
     else
 
@@ -1212,7 +1210,7 @@ void cWM3000SCPIFace::mSetConfOperMode(char* s)
     int m;
     if ( SearchEntry(&s,MModeName,maxMMode,m,true) )
     {
-        if (g_WMDevice->isConventional())
+        if (m_Special.isConventional())
         {
             if (m == In_IxAbs) // nur conventional (wm1000i)
             {
@@ -1256,7 +1254,7 @@ void cWM3000SCPIFace::mSetConfOperSignal(char* s)
     int m;
     if ( SearchEntry(&s,SModeName,maxSMode,m,true) )
     {
-        if (g_WMDevice->isDC())
+        if (m_Special.isDC())
         {   // wir dürfen alle signal modi
             m_ConfDataTarget.m_bDCmeasurement = (m == DC);
             return;
