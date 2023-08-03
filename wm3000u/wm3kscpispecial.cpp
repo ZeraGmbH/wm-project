@@ -58,3 +58,10 @@ bool WM3kSCPISpecial::setWM3000SetConfOperMode(cConfData *conf, int m)
     conf->m_nMeasMode = m;
     return true;
 }
+
+QString WM3kSCPISpecial::fetchActualValues(cwmActValues *act)
+{
+    QString str;
+    str = QString(";%1;%2").arg(act->AngleError).arg(act->RCF);
+    return str;
+}

@@ -3,6 +3,7 @@
 
 #include "wmglobal.h"
 #include "confdata.h"
+#include "wmactvalues.h"
 #include <QString>
 
 class WM3kSCPISpecial
@@ -17,6 +18,7 @@ public:
     QString getConfOperModeCatalog();
     bool setWM1000SetConfOperMode(cConfData *conf, int m);
     bool setWM3000SetConfOperMode(cConfData *conf, int m);
+    QString fetchActualValues(cwmActValues *act);
 };
 
 #endif // WM3KSCPISPECIAL_H
