@@ -133,6 +133,6 @@ public:
 };
 
 typedef std::vector<std::unique_ptr<cJustMeasInfo>> cPhaseNodeMeasInfoList;
-typedef QList<cJustMeasInfo*> cOffsetMeasInfoList;
+typedef Q3PtrList<cJustMeasInfo> cOffsetMeasInfoList;
 
 #endif

@@ -218,7 +218,6 @@ void cWM3000U::ActionHandler(int entryAHS)
     static int mCount;
     static cCalcInfo *PhaseCalcInfo;
     static cCalcInfo *OffsetCalcInfo;
-    static cJustMeasInfo *OffsetMeasInfo;
     static float ph0,ph1;
     static float offs0, offs1;
     static complex SenseVektor, ADCVektor;
@@ -2569,8 +2568,8 @@ void cWM3000U::ActionHandler(int entryAHS)
         {
             lprogress++;
             mWmProgressDialog->setValue(lprogress);
-            m_OffsetMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
-            //m_OffsetMeasInfoList.removeFirst();
+           // m_OffsetMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
+            m_OffsetMeasInfoList.removeFirst();
 
             if (m_OffsetMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
             { // wir sind fertig mit der ermittlung
@@ -2625,8 +2624,8 @@ void cWM3000U::ActionHandler(int entryAHS)
     case OffsetMeasWM3000Exec5Var:
         lprogress++;
         mWmProgressDialog->setValue(lprogress);
-        m_OffsetMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
-        //m_OffsetMeasInfoList.removeFirst();
+        //m_OffsetMeasInfoList.remove(0); //Qt4.8 has no remove first (avail from 5.1)
+        m_OffsetMeasInfoList.removeFirst();
 
         if (m_OffsetMeasInfoList.isEmpty() || (mWmProgressDialog->isAbort()) || bOverload ) // entweder normal fertig geworden oder abbruch oder übersteuerung (solls eigentlich nicht geben)
         { // wir sind fertig mit der ermittlung
@@ -3509,7 +3508,7 @@ void cWM3000U::SetOffsetMeasInfo(int te, int tm)
     QString key;
 
     m_OffsetMeasInfoList.clear();
-    //m_OffsetMeasInfoList.setAutoDelete(true); // wis how to delete the containing elements?
+    m_OffsetMeasInfoList.setAutoDelete(true); // wis how to delete the containing elements?
 
     adjOffsetCorrectionHash.clear();
     measOffsetCorrectionHash.clear();

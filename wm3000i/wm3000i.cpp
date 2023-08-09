@@ -250,7 +250,6 @@ void cWM3000I::ActionHandler(int entryAHS)
     static int mCount;
     static cCalcInfo *PhaseCalcInfo;
     static cCalcInfo *OffsetCalcInfo;
-    static cJustMeasInfo *OffsetMeasInfo;
     static float ph0,ph1;
     static float offs0, offs1;
     static complex SenseNVektor, ADCXVektor, SenseXVektor, ADCNVektor;
@@ -2566,7 +2565,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         StopMeasurement(); // das kumuliert nur ....
         mWmProgressDialog->setValue(lprogress); // progess bar setzen
         mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
-        OffsetMeasInfo = m_OffsetMeasInfoList.first(); // info was zu tun ist
+        OffsetMeasInfo = m_OffsetMeasInfoList.getFirst(); // info was zu tun ist
 
         if (m_OffsetJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
