@@ -32,6 +32,7 @@
 #include "scpiaffectatatuscode.h"
 #include "scpioperationstates.h"
 #include "scpiquestionstates.h"
+#include "wmmessagebox.h"
 
 extern WMViewBase *g_WMView;
 char* MModeName[maxMMode] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"Un/nConvent"};
@@ -902,6 +903,8 @@ void cWM3000U::ActionHandler(int entryAHS)
                 m_bJust = false;
                 emit JustifiedSignal(false);
                 emit AffectStatus(SetQuestStat, QuestNotJustified);
+                wmMessageBox msgb;
+                msgb.notJustMsgBox(stat);
             }
             else
             {
@@ -2967,6 +2970,7 @@ void cWM3000U::ActionHandler(int entryAHS)
 void cWM3000U::ServerIFaceErrorHandling(int error, QString host, int port)
 {
     int userRM;
+    wmMessageBox msgBox;
     bool binitdone = m_binitDone; // wir merken uns den init. zustand
     m_binitDone = false; // so laufen keine weiteren ereignisse auf
 
@@ -2974,52 +2978,22 @@ void cWM3000U::ServerIFaceErrorHandling(int error, QString host, int port)
 
     if (error & (myErrConnectionRefused | myErrHostNotFound | myErrSocketConnectionTimeOut) )
     {
-        QString m = tr("Keine Verbindung zu %1:%2\n") .arg(host).arg(port);
-        if (error & ! myErrHostNotFound)
-            m+=tr("Host nicht gefunden.\n");
-        else
-            m+=tr("Host gefunden. Keine Verbindung zu Server.\n");
-
-        m+=tr("Das Programm kann ohne Server nur\n"
-              "im Simulations Modus betrieben werden.\n");
-
-        userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),m,
-                                       tr("Programm&Abbruch"),
-                                       tr("&Wiederholen"),
-                                       tr("&Simulation"),
-                                       1,-1 );
+        userRM = msgBox.msgConnection(error,host,port);
     }
 
-    else if (error & myErrSocketWrite) {
-        userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),
-                                       tr("Fehler beim Schreiben von Daten\n"
-                                          "für %1:%2 .\n"
-                                          "Details stehen in LogFile.").arg(host) .arg(port),
-                                       tr("Programm&Abbruch"),
-                                       tr("&Wiederholen"),
-                                       tr("&Simulation"),
-                                       1,-1 );
+    else if (error & myErrSocketWrite)
+    {
+        userRM = msgBox.msgAnswer(host,port);
     }
 
-    else if (error & (myErrSocketUnexpectedAnswer | myErrSocketReadTimeOut) ) {
-        userRM =  QMessageBox::warning( 0, tr("TCP-Verbindung"),
-                                        tr("Unerwartete Antwort beim Lesen\n"
-                                           "von %1:%2 erhalten.\n"
-                                           "Details stehen in LogFile.").arg(host).arg(port),
-                                        tr("Programm&Abbruch"),
-                                        tr("&Wiederholen"),
-                                        tr("&Simulation"),1,-1 );
+    else if (error & (myErrSocketUnexpectedAnswer | myErrSocketReadTimeOut) )
+    {
+        userRM = msgBox.msgAnswerUnexpect(host,port);
     }
 
-    else if (error & myErrDeviceBusy) {
-        userRM = QMessageBox::warning( 0, tr("TCP-Verbindung"),
-                                       tr("Device ist busy\n"
-                                          "( %1:%2 ).\n"
-                                          "Details stehen in LogFile.").arg(host) .arg(port),
-                                       tr("Programm&Abbruch"),
-                                       tr("&Wiederholen"),
-                                       tr("&Simulation"),
-                                       1,-1 );
+    else if (error & myErrDeviceBusy)
+    {
+        userRM = msgBox.msgBusy(host,port);
     }
 
     else
