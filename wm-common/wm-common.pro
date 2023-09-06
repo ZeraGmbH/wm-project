@@ -33,6 +33,7 @@ HEADERS = \
     gui/wmsampledialog.h \
     gui/wmscopedialog.h \
     just/justValues.h \
+    just/phastjusthelpers.h \
     scales-and-units/angleunits.h \
     scales-and-units/currentunits.h \
     scales-and-units/errorunits.h \
@@ -112,6 +113,7 @@ SOURCES = \
     gui/wmrawactualconfigbase.cpp \
     gui/wmsampledialog.cpp \
     gui/wmscopedialog.cpp \
+    just/phastjusthelpers.cpp \
     scales-and-units/angleunits.cpp \
     scales-and-units/currentunits.cpp \
     scales-and-units/errorunits.cpp \

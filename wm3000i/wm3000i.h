@@ -490,7 +490,7 @@ private:
     /*wm3000ActionHandlerState*/ int m_PhaseNodeMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_OffsetMeasState; // hier merken wir uns wo´s weiter geht
     /*wm3000ActionHandlerState*/ int m_SelftestState; // hier merken wir uns wo´s weiter geht
-    Q3ValueList<float> JustValueList;
+    QList<float> JustValueList;
     QHash<QString, double> adjOffsetCorrectionHash; // offset korrektur in lsb hier sammeln wir während des abgleiches
     QHash<QString, double> measOffsetCorrectionHash; // wenn abgleich durchgelaufen ist werden die werte hierhin kopiert
     QString m_sJustText;
