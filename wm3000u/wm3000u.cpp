@@ -22,6 +22,7 @@
 #include <q3valuelist.h>
 #include <qfileinfo.h>
 
+#include "phastjusthelpers.h"
 #include "wmviewbase.h"
 #include "logfile.h"
 #include "range.h"
@@ -188,6 +189,7 @@ cWM3000U::cWM3000U() :
     mWmProgressDialog = nullptr;
     connect(&m_wmwdt,SIGNAL(timeout()),this,SLOT(externalTriggerTimeoutTriggerd()));
 
+    m_bNewSamplerates = false;
 }
 
 
@@ -2155,14 +2157,18 @@ void cWM3000U::ActionHandler(int entryAHS)
                     stream << "Ph0: " << value << "\n" ;
                     if( min > value) min = value;
                     if (max < value) max = value;
-                    ph0 -= value;
                     }
                 diff = (max - min) * 60.0;  // 1,6858° -> 1° 41' 9" -> 41,1516'
                 stream << "Diff: " << diff << " Minuten \n";
+
                 m_PhaseJustLogfile.flush();
                 m_PhaseJustLogfile.close();
             }
-            ph0 /= JustValueList.count(); // der mittelwert aus den messungen
+            PhastJustHelpers PhaJusHelp;
+            PhaJusHelp.calculateMinMaxDiffValues(&JustValueList);
+            PhaJusHelp.deleteFaultyPhasenJustageItem(PhaJusHelp.getMeanValues(),PhaJusHelp.getDiffValue(),&JustValueList);
+
+            ph0 = PhaJusHelp.getMeanValues()*-1; // ph0 /= JustValueList.count(); // der mittelwert aus den messungen
             AHS = PhaseNodeMeasExec4;
             m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
         }
