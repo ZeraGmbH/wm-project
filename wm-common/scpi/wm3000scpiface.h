@@ -143,7 +143,10 @@ enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
               GetConfOperMode,
               GetConfOperSignalCatalog,
               SetConfOperSignal,
-              GetConfOperSignal
+              GetConfOperSignal,
+              StartDeviceJustagePhase,
+              getPhaseJustageState,
+              StartDeviceJustageOffset
     		      };
 
 
@@ -225,6 +228,7 @@ public slots:
     void ReceiveVersionInfo(tVersSerial*);
     void ReceiveSelftestResult(int);
     void ReceiveNXOffset(double offs);
+    void revceiveSendActualJustageStateString(QString);
 
 protected slots:    
     virtual void ExecuteCommand(int); // ausführen kommandos statemachine
@@ -240,12 +244,15 @@ signals:
     void SelftestRequest();
     void ChannelNOffsetMeasureRequest();
     void ChannelXOffsetMeasureRequest();
+    void signalStartDeviceJustagePhase();
+    void signalStartDeviceJustageOffset();
         
 private:
     WM3kSCPISpecialBase *m_Special;
     int SelftestResult;
     double OffsetResult;
     tVersSerial* m_pVersion;
+    QString m_JustState;
     cwmActValues mActValues;
     QStringList m_sNXItemList;
     QStringList m_sExTItemList;
@@ -382,6 +389,9 @@ private:
     char* mGetConfOperSignalCatalog();
     void mSetConfOperSignal(char* s);
     char* mGetConfOperSignal();
+    void mStartDeviceJustagePhase(char*);
+    char* mGetPhaseJustageState();
+    void mStartDeviceJustageOffset(char *);
 };
 
 #endif

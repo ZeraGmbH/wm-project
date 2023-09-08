@@ -379,7 +379,7 @@ private slots:
     void SelftestAbortSlot();
     void OverLoadMaxQuitSlot();
     void externalTriggerTimeoutTriggerd();
-    
+    void justStateString(QString);
     
 signals:    
     void JustifiedSignal(bool); // signal an hauptview ob justiert oder nicht
@@ -405,6 +405,7 @@ signals:
     void OffsetValue(double);
     void FreqQuestionable(bool);
     void PPSQuestionable(bool);
+    void actualJustStateString(QString);
 
 protected:
     tVersSerial SerialVersions; // serien nummer und version

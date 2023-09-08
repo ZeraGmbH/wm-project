@@ -33,6 +33,7 @@ cWM3000SCPIFace::cWM3000SCPIFace(cClientIODevice* ciod, short l, WM3kSCPISpecial
     m_bAddEventError = false;
     mMeasChannelList << "N" << "X" << m_Special->getExTName();
     m_pVersion  = 0;
+    m_JustState = "unknow";
 }
 
 
@@ -248,6 +249,11 @@ void cWM3000SCPIFace::ReceiveNXOffset(double offs)
         OffsetResult = offs;
         m_stateMachineTimer.start(0, ExecCmdContinue); // und geben die kontrolle an die statemachine
     }
+}
+
+void cWM3000SCPIFace::revceiveSendActualJustageStateString(QString str)
+{
+    m_JustState = str;
 }
 
 
@@ -1275,6 +1281,25 @@ char* cWM3000SCPIFace::mGetConfOperSignal()
 }
 
 
+void cWM3000SCPIFace::mStartDeviceJustagePhase(char* s)
+{   // done like apply shows us
+    emit signalStartDeviceJustagePhase();
+    SetnoOperFlag(false); // wir warten auf justage fertig
+}
+
+char *cWM3000SCPIFace::mGetPhaseJustageState()
+{
+    return sAlloc(m_JustState);
+}
+
+
+void cWM3000SCPIFace::mStartDeviceJustageOffset(char* s)
+{   // done like apply shows us
+    emit signalStartDeviceJustageOffset();
+    SetnoOperFlag(false); // wir warten auf justage fertig
+}
+
+
 bool cWM3000SCPIFace::SearchEntry(char** s, char** sa, int max, int& n, bool chkEnd) // suche, worin, wieviele einträge, eintrag, test auf ende
 {
     bool ok;
@@ -1925,6 +1950,8 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
             case SetConfCompOffskX: mSetConfCompOffskX(s);break;
             case SetConfOperMode: mSetConfOperMode(s);break;
             case SetConfOperSignal: mSetConfOperSignal(s);break;
+            case StartDeviceJustagePhase: mStartDeviceJustagePhase(s);break;
+            case StartDeviceJustageOffset: mStartDeviceJustageOffset(s);break;
             default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
         }
         else
@@ -1981,6 +2008,8 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetConfCompOffskX:
     case SetConfOperMode:
     case SetConfOperSignal:
+    case StartDeviceJustagePhase:
+    case StartDeviceJustageOffset:
         m_stateMachineTimer.start(0, ExecCmdPartFinished);
     default:
         break;
@@ -2064,6 +2093,8 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfOperMode: an = mGetConfOperMode();break;
         case GetConfOperSignalCatalog: an = mGetConfOperSignalCatalog();break;
         case GetConfOperSignal: an = mGetConfOperSignal();break;
+        case getPhaseJustageState: an = mGetPhaseJustageState();break;
+
         default:	qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
         }
 
@@ -2127,6 +2158,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfOperModeCatalog:
         case GetConfOperMode:
         case GetConfOperSignalCatalog:
+        case getPhaseJustageState:
         case GetConfOperSignal:
             m_stateMachineTimer.start(0, ExecCmdPartFinished);
         default:
@@ -2147,6 +2179,12 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
 
 
 // die vollständige scpi kommando liste
+
+cNodeSCPI* device;
+cNodeSCPI* deviceJust;
+cNodeSCPI* deviceJustPhase;
+cNodeSCPI* deviceJustOffset;
+cNodeSCPI* deviceJustStatus;
 
 cNodeSCPI* Configuration;
 cNodeSCPI* ConfigurationOperation;
@@ -2361,7 +2399,15 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     ConfigurationOperation=new cNodeSCPI("OPERATION",isNode,ConfigurationComputation,ConfigurationOperationMode,nixCmd,nixCmd);
     Configuration=new cNodeSCPI("CONFIGURATION",isNode | isCommand,Measure,ConfigurationOperation,MeasurementConfigure,nixCmd);
 
-    return (Configuration);
+    deviceJustStatus = new cNodeSCPI("PROGRESS", isQuery ,NULL,NULL,nixCmd,getPhaseJustageState);
+    deviceJustOffset = new cNodeSCPI("OFFSET", isCommand ,deviceJustStatus,NULL,StartDeviceJustageOffset,nixCmd);
+    deviceJustPhase = new cNodeSCPI("PHASE", isCommand ,deviceJustOffset,NULL,StartDeviceJustagePhase,nixCmd);
+    deviceJust = new cNodeSCPI("JUST",isNode,NULL,deviceJustPhase,nixCmd,nixCmd);
+
+    device = new cNodeSCPI("DEVICE",isNode, Configuration, deviceJust, nixCmd, nixCmd);
+
+    return (device);
+
 }
 
 void cWM3000SCPIFace::startMeasWaitTimeout()

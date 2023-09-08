@@ -388,6 +388,7 @@ private slots:
     void SelftestAbortSlot();
     void OverLoadMaxQuitSlot();
     void externalTriggerTimeoutTriggerd();
+    void justStateString(QString);
     
 signals:    
     void SendConfDataSignal(cConfData*); // konfigurationsdaten senden
@@ -413,6 +414,7 @@ signals:
     void JustifiedSignal(bool);
     void FreqQuestionable(bool);
     void PPSQuestionable(bool);
+    void actualJustStateString(QString);
     
 protected:
     tVersSerial SerialVersions; // serien nummer und version

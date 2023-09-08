@@ -40,6 +40,7 @@ void cwm3000DeviceServer::newConnection(int fd)
     
     connect( this, SIGNAL(SendVersionInfo(tVersSerial*)), iface, SLOT(ReceiveVersionInfo(tVersSerial*)));
     iface->ReceiveVersionInfo(m_pV); // neue interfaces werden 1x expl. informiert
+    connect( this, SIGNAL(sendActualJustStateString(QString)),iface, SLOT(revceiveSendActualJustageStateString(QString)));
     connect( iface, SIGNAL(SelftestRequest()), this, SLOT(ReceiveSelftestRequest())); 
     connect( this, SIGNAL(SendSelftestResult(int)), iface, SLOT(ReceiveSelftestResult(int)));
 
@@ -48,7 +49,8 @@ void cwm3000DeviceServer::newConnection(int fd)
     connect( this, SIGNAL(SendOffsetResult(double)), iface, SLOT(ReceiveNXOffset(double)));
 
     connect( this, SIGNAL(AffectStatus(uchar, ushort)), iface, SLOT(AffectSCPIStatus(uchar, ushort)));
-    
+    connect( iface, SIGNAL(signalStartDeviceJustagePhase()),this, SLOT(receiveStartDeviceJustagePhase()));
+    connect( iface, SIGNAL(signalStartDeviceJustageOffset()),this, SLOT(receiveStartDeviceJustageOffset()));
 }
     
 
@@ -161,10 +163,25 @@ void cwm3000DeviceServer::ReceiveVersionInfo(tVersSerial *v)
 }
 
 
+void cwm3000DeviceServer::receiveActualJustStateString(QString str)
+{
+    emit sendActualJustStateString(str);
+}
+
+
 void cwm3000DeviceServer::ReceiveAffectStatus(uchar act, ushort stat)
 {
     emit AffectStatus(act, stat);
 }
 
 
+void cwm3000DeviceServer::receiveStartDeviceJustagePhase()
+{
+    emit startDeviceJustagePhase();
+}
 
+
+void cwm3000DeviceServer::receiveStartDeviceJustageOffset()
+{
+    emit startDeviceJustageOffset();
+}
