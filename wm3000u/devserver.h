@@ -52,7 +52,10 @@ public slots:
     void ReceiveActualValues(cwmActValues*); // empfängt messwerte vom device
     void ReceiveLPValue(cwmActValues*); // empfängt lastpunkt  vom device
     void ReceiveVersionInfo(tVersSerial*); // empfängt info von device
+    void receiveActualJustStateString(QString);
     void ReceiveAffectStatus(uchar act, ushort stat);
+    void receiveStartDeviceJustagePhase();
+    void receiveStartDeviceJustageOffset();
     
 signals:
     void SendDeviceConfiguration(cConfData*); // senden der conf.  an das device
@@ -72,6 +75,9 @@ signals:
     void SendLPValue(cwmActValues*); // sendet lastpunkt an die clients
     void SendVersionInfo(tVersSerial*); // sendet info an die clients
     void AffectStatus(uchar, ushort);
+    void startDeviceJustagePhase();
+    void startDeviceJustageOffset();
+    void sendActualJustStateString(QString);
     
 private:
     WM3kSCPISpecial m_Special;

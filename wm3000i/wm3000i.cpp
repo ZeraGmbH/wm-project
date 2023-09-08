@@ -2041,8 +2041,9 @@ void cWM3000I::ActionHandler(int entryAHS)
         mWmProgressDialog->setTitel(trUtf8("Phasenkorrekturkoeffizienten"));
 
         lprogress = 0; // int. progress counter
-        mWmProgressDialog->setValue(lprogress);
         QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
+        QObject::connect(mWmProgressDialog,SIGNAL(actualStateString(QString)),this,SLOT(justStateString(QString)));
+        mWmProgressDialog->setValue(lprogress);
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
         N = 0; // durchlaufzähler
@@ -2495,6 +2496,8 @@ void cWM3000I::ActionHandler(int entryAHS)
 
         lprogress = 0; // int. progress counter
         QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
+        QObject::connect(mWmProgressDialog,SIGNAL(actualStateString(QString)),this,SLOT(justStateString(QString)));
+        mWmProgressDialog->setValue(lprogress);
 
         NewConfData = m_ConfData; // zum umsetzen
         SaveConfData = m_ConfData; // wir haben eine kopie der aktuellen konfiguration
@@ -3572,6 +3575,11 @@ void cWM3000I::externalTriggerTimeoutTriggerd()
         m_ActTimer->start(0,ConfigurationSetSyncSource);
         emit PPSQuestionable(true);
     }
+}
+
+void cWM3000I::justStateString(QString str)
+{
+    emit actualJustStateString(str);
 }
 
 

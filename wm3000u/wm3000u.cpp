@@ -1922,8 +1922,9 @@ void cWM3000U::ActionHandler(int entryAHS)
         mWmProgressDialog->setTitel(trUtf8("Phasenkorrekturkoeffizienten"));
 
         lprogress = 0; // int. progress counter
-        mWmProgressDialog->setValue(lprogress);
         QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
+        QObject::connect(mWmProgressDialog,SIGNAL(actualStateString(QString)),this,SLOT(justStateString(QString)));
+        mWmProgressDialog->setValue(lprogress);
         AHS++;
         m_ActTimer->start(0,wm3000Continue);
         N = 0; // durchlaufzähler
@@ -2289,6 +2290,8 @@ void cWM3000U::ActionHandler(int entryAHS)
 
         lprogress = 0; // int. progress counter
         QObject::connect(mWmProgressDialog,SIGNAL(aborted()),this,SLOT(JustAbortSlot()));
+        QObject::connect(mWmProgressDialog,SIGNAL(actualStateString(QString)),this,SLOT(justStateString(QString)));
+        mWmProgressDialog->setValue(lprogress);
 
         NewConfData = m_ConfData; // zum umsetzen
         SaveConfData = m_ConfData; // wir haben eine kopie der aktuellen konfiguration
@@ -3388,6 +3391,11 @@ void cWM3000U::externalTriggerTimeoutTriggerd()
     }
 }
 
+void cWM3000U::justStateString(QString str)
+{
+    emit actualJustStateString(str);
+}
+
 
 void cWM3000U::SetPhaseCalcInfo() // wir init. die liste damit die statemachine weiß was zu tun ist
 {
@@ -3448,9 +3456,9 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW80.50", adcNadcX, Un_UxAbs, adcNPhase, S80, 4, 20)))); // bereiche optimal für hw freq messung, modus adc/adc, für 80 samples/periode und 4 messungen einschwingzeit, 10 messungen für stützstellenermittlung
     m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW256.50", adcNadcX, Un_UxAbs, adcNPhase, S256, 4, 20))));
     if (m_bNewSamplerates) {
-    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW96.50", adcNadcX, Un_UxAbs, adcNPhase, S96, 4, 20))));
-    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW288.50", adcNadcX, Un_UxAbs, adcNPhase, S288, 4, 20))));
-    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW240.60", adcNadcX, Un_UxAbs, adcNPhase, S240, 4, 20))));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW96.50", adcNadcX, Un_UxAbs, adcNPhase, S96, 4, 20))));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW288.50", adcNadcX, Un_UxAbs, adcNPhase, S288, 4, 20))));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW240.60", adcNadcX, Un_UxAbs, adcNPhase, S240, 4, 20))));
     }
     // die liste für alle konv. bereiche in kanal n
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)

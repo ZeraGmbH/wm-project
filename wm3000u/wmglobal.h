@@ -121,9 +121,10 @@
 //                  abhängig. die anzahl der asdu's in einer apdu ist ebenfalls davon abhängig. das scpi
 //                  interface musste angepasst werden. der automatische phasenabgleich war entsprechend
 //                  zu erweitern. die neue version läuft nur mit dem leiterkarten server ab v2.09.
+// V2.39 8.9.2023   Tons of changes documented in github
 
 
-#define WMVersion "V2.38"
+#define WMVersion "V2.39"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"

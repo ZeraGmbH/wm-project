@@ -103,9 +103,10 @@
 //                  zu erweitern. die neue version läuft nur mit dem leiterkarten server ab v2.09.
 // V2.35 05.05.2023 changes see git@github.com:ZeraGmbH/wm-project.git
 //                  WM got stuck on INIT Command when sync was set to extern
+// V2.36 08.09.2023 Tons of changes documented in github
 
 
-#define WMVersion "V2.35"
+#define WMVersion "V2.36"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"

@@ -17,6 +17,7 @@ wmProgressDialog::wmProgressDialog(QString strTitle, int minValue, int maxValue,
 
 wmProgressDialog::~wmProgressDialog()
 {
+    emit actualStateString(mbAbort?"aborted":"ready");
     delete mAbort;
     delete mProgressFirst;
     delete mProgressSecond;
@@ -53,6 +54,8 @@ void wmProgressDialog::setValue(int value)
 {
     calcTimes(value);
     mProgressFirst->setValue(value);
+    if (value == 0)
+        emit actualStateString("running");
 }
 
 void wmProgressDialog::setValue2(int value)
@@ -197,6 +200,7 @@ void wmProgressDialog::calcTimes(int val)
                     mShow = true;
                 }
                 mLastNumber = val;
+                emit actualStateString("running "+ mCalcRest.toString("hh:mm:ss"));
             }
         }
 }

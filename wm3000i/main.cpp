@@ -238,6 +238,8 @@ int main(int argc, char *argv[])
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMView,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMRangeDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMConfDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
+    QObject::connect(wm3000DeviceServer,SIGNAL(startDeviceJustagePhase()),g_WMDevice,SLOT(JustagePhaseSlot()));
+    QObject::connect(wm3000DeviceServer,SIGNAL(startDeviceJustageOffset()),g_WMDevice,SLOT(JustageOffsetSlot()));
     QObject::connect((QObject*)g_WMDevice,SIGNAL(EN61850StatusSignal(cEN61850Info*)),wm3000DeviceServer,SLOT(ReceiveETHStatus( cEN61850Info*))); // setzen der eth status info
     QObject::connect(wm3000DeviceServer,SIGNAL(RequestEN61850Info()),(QObject*)g_WMDevice,SLOT(EN61850InfoRequestSlot())); // anforderung der eth status info
 
@@ -257,6 +259,7 @@ int main(int argc, char *argv[])
     QObject::connect(wm3000DeviceServer,SIGNAL(SendRangeCommand(cConfData*)),(QObject*)g_WMDevice,SLOT(SetRangeSlot(cConfData*))); // bereiche setzen
     QObject::connect((QObject*)g_WMDevice,SIGNAL(SendRangeListSignal(cWMRangeList&,cWMRangeList&)),wm3000DeviceServer,SLOT(SetRangeListSlot( cWMRangeList&,  cWMRangeList&))); // bereichlisten übertragen
     QObject::connect((QObject*)g_WMDevice,SIGNAL(SendVersionInfo(tVersSerial*)),wm3000DeviceServer,SLOT(ReceiveVersionInfo(tVersSerial*))); // version info übertragen
+    QObject::connect((QObject*)g_WMDevice,SIGNAL(actualJustStateString(QString)),wm3000DeviceServer,SLOT(receiveActualJustStateString(QString)));
 
     QObject::connect(wm3000DeviceServer,SIGNAL(SendDefaultConfigCommand()),(QObject*)g_WMDevice,SLOT(DefaultSettingsMeasurementSlot())); // default konfig setzen
     QObject::connect((QObject*)g_WMDevice,SIGNAL(RangeAutomaticDone()),wm3000DeviceServer,SLOT(ReceiveRangeAutomaticDone())); // bereich automatic fertig

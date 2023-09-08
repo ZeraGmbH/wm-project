@@ -33,11 +33,7 @@ public:
     void set3rdDisabled();
 signals:
     void aborted();
-
-public slots:
-
-
-signals:
+    void actualStateString(QString);
 
 private:
     QPushButton *mAbort;
