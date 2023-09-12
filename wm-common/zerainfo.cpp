@@ -42,7 +42,6 @@ void cZeraInfo::AboutWM3000Slot()
                     QMessageBox::NoButton);
 
     pAboutWM->show();
-    qWarning("%s",qPrintable(tr(m_machineInfoTitle)));
 }
 
 void cZeraInfo::setInfoStrings(int nr)
