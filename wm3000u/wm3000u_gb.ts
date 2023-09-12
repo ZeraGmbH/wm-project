@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en">
+<TS version="2.0" language="en">
 <context>
     <name>ConfDialogBase</name>
     <message>
@@ -47,17 +47,17 @@
         <source>Alt+I</source>
         <translation>Alt+I</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Phasenfehler Prüfling</source>
         <translation>Phase error DUT</translation>
     </message>
     <message>
         <source>&amp;Totzeit[ms]:</source>
-        <translation>&amp;Delay[ms]:</translation>
+        <translation type="obsolete">&amp;Delay[ms]:</translation>
     </message>
     <message>
         <source>&amp;Phasenlage[°]:</source>
-        <translation>&amp;Phase angle[°]:</translation>
+        <translation type="obsolete">&amp;Phase angle[°]:</translation>
     </message>
     <message>
         <source>Korrektur Normwandler</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>&amp;Zeit[sec]:</source>
-        <translation>&amp;Time[sec]:</translation>
+        <translation type="obsolete">&amp;Time[sec]:</translation>
     </message>
     <message>
         <source>Signalfrequenz</source>
@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>&amp;Perioden:</source>
-        <translation>&amp;Periods:</translation>
+        <translation type="obsolete">&amp;Periods:</translation>
     </message>
     <message>
         <source>Synchronisation</source>
@@ -133,13 +133,13 @@
     </message>
     <message>
         <source>&amp;TSync[ms]:</source>
-        <translation>&amp;TSync[ms]:</translation>
+        <translation type="obsolete">&amp;TSync[ms]:</translation>
     </message>
     <message>
         <source>Strenge EN61850 Synchronisation</source>
         <translation>Strong EN61850 Synchronisation</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Teilerverhältnisse</source>
         <translation>Transformer ratios</translation>
     </message>
@@ -235,7 +235,7 @@
         <source>Logfile</source>
         <translation>LogFile</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Grösse</source>
         <translation>Size
 </translation>
@@ -252,7 +252,7 @@
         <source>&amp;Abbruch</source>
         <translation>C&amp;ancel</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Bitte überprüfen! 
 Erlaubt mV,V,kV</source>
         <translation>Please check!
@@ -338,136 +338,168 @@ Allowed mV,V,kV</translation>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>TSync[ms]:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Totzeit</source>
+        <translation>Delay</translation>
+    </message>
+    <message>
+        <source>Phasenlage</source>
+        <translation>Phase angle</translation>
+    </message>
+    <message utf8="true">
+        <source>°</source>
+        <translation type="unfinished">°</translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Perioden</source>
+        <translation>Periodes</translation>
+    </message>
+    <message>
+        <source>Zeit</source>
+        <translation>Time</translation>
+    </message>
+    <message>
+        <source>sec</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EN61850monitor</name>
     <message>
         <source>EN61850-9-2 Monitor</source>
-        <translation type="vanished">EN61850-9-2 Monitoring</translation>
+        <translation type="obsolete">EN61850-9-2 Monitoring</translation>
     </message>
     <message>
         <source>Counters</source>
-        <translation type="vanished">Counters</translation>
+        <translation type="obsolete">Counters</translation>
     </message>
     <message>
         <source>Bytes received:</source>
-        <translation type="vanished">Bytes received:</translation>
+        <translation type="obsolete">Bytes received:</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="vanished">0</translation>
+        <translation type="obsolete">0</translation>
     </message>
     <message>
         <source>Syncronization lost: </source>
-        <translation type="vanished">Syncronisation lost:</translation>
+        <translation type="obsolete">Syncronisation lost:</translation>
     </message>
     <message>
         <source>MAC Errors</source>
-        <translation type="vanished">MAC Errors</translation>
+        <translation type="obsolete">MAC Errors</translation>
     </message>
     <message>
         <source>Runt Frame</source>
-        <translation type="vanished">Runt Frame</translation>
+        <translation type="obsolete">Runt Frame</translation>
     </message>
     <message>
         <source>Late Collision</source>
-        <translation type="vanished">Late Collision</translation>
+        <translation type="obsolete">Late Collision</translation>
     </message>
     <message>
         <source>Receive Timeout</source>
-        <translation type="vanished">Receive Timeout</translation>
+        <translation type="obsolete">Receive Timeout</translation>
     </message>
     <message>
         <source>Physical Layer</source>
-        <translation type="vanished">Physical Layer</translation>
+        <translation type="obsolete">Physical Layer</translation>
     </message>
     <message>
         <source>Alignment</source>
-        <translation type="vanished">Alignment</translation>
+        <translation type="obsolete">Alignment</translation>
     </message>
     <message>
         <source>CRC</source>
-        <translation type="vanished">CRC</translation>
+        <translation type="obsolete">CRC</translation>
     </message>
     <message>
         <source>FIFO Overflow</source>
-        <translation type="vanished">FIFO Overflow</translation>
+        <translation type="obsolete">FIFO Overflow</translation>
     </message>
     <message>
         <source>Sync lost</source>
-        <translation type="vanished">Sync Lost</translation>
+        <translation type="obsolete">Sync Lost</translation>
     </message>
     <message>
         <source>Decoder Errors</source>
-        <translation type="vanished">Decoder Errors</translation>
+        <translation type="obsolete">Decoder Errors</translation>
     </message>
     <message>
         <source>savPdu</source>
-        <translation type="vanished">savPDU</translation>
+        <translation type="obsolete">savPDU</translation>
     </message>
     <message>
         <source>num. of ASDU</source>
-        <translation type="vanished">num. of ASDU</translation>
+        <translation type="obsolete">num. of ASDU</translation>
     </message>
     <message>
         <source>seq. of ASDU&apos;s</source>
-        <translation type="vanished">seq. of ASDU´s</translation>
+        <translation type="obsolete">seq. of ASDU´s</translation>
     </message>
     <message>
         <source>seq. of ASDU n</source>
-        <translation type="vanished">seq. of ASDU n</translation>
+        <translation type="obsolete">seq. of ASDU n</translation>
     </message>
     <message>
         <source>Service Ident.</source>
-        <translation type="vanished">Service Ident.</translation>
+        <translation type="obsolete">Service Ident.</translation>
     </message>
     <message>
         <source>smpCnt</source>
-        <translation type="vanished">smpCnt</translation>
+        <translation type="obsolete">smpCnt</translation>
     </message>
     <message>
         <source>confRev</source>
-        <translation type="vanished">confRev</translation>
+        <translation type="obsolete">confRev</translation>
     </message>
     <message>
         <source>smpSynch</source>
-        <translation type="vanished">smpSynch</translation>
+        <translation type="obsolete">smpSynch</translation>
     </message>
     <message>
         <source>seq. of Data</source>
-        <translation type="vanished">seq. of Data</translation>
+        <translation type="obsolete">seq. of Data</translation>
     </message>
     <message>
         <source>MAC Adress mismatch</source>
-        <translation type="vanished">MAC Adress mismatch</translation>
+        <translation type="obsolete">MAC Adress mismatch</translation>
     </message>
     <message>
         <source>Ethertype, APPID</source>
-        <translation type="vanished">Ethertype, APPID</translation>
+        <translation type="obsolete">Ethertype, APPID</translation>
     </message>
     <message>
         <source>Priority tagged</source>
-        <translation type="vanished">Priority tagged</translation>
+        <translation type="obsolete">Priority tagged</translation>
     </message>
     <message>
         <source>ASDU not avail</source>
-        <translation type="vanished">ASDU not avail</translation>
+        <translation type="obsolete">ASDU not avail</translation>
     </message>
     <message>
         <source>Data Sync lost</source>
-        <translation type="vanished">Data Sync lost</translation>
+        <translation type="obsolete">Data Sync lost</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="vanished">&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Reset</source>
-        <translation type="vanished">&amp;Reset</translation>
+        <translation type="obsolete">&amp;Reset</translation>
     </message>
     <message>
         <source>Alt+R</source>
-        <translation type="vanished">Alt+R</translation>
+        <translation type="obsolete">Alt+R</translation>
     </message>
 </context>
 <context>
@@ -478,7 +510,7 @@ Allowed mV,V,kV</translation>
     </message>
     <message>
         <source>WM3000U Bedienungsanleitung</source>
-        <translation type="vanished">WM3000U User manual</translation>
+        <translation type="obsolete">WM3000U User manual</translation>
     </message>
     <message>
         <source>WM1000U SCPI Kommunikation</source>
@@ -486,39 +518,39 @@ Allowed mV,V,kV</translation>
     </message>
     <message>
         <source>Wandlermesseinrichtung WM1000U</source>
-        <translation>Transformer measuring device WM1000U</translation>
+        <translation type="obsolete">Transformer measuring device WM1000U</translation>
     </message>
     <message>
         <source>Keine</source>
-        <translation type="vanished">None</translation>
+        <translation type="obsolete">None</translation>
     </message>
     <message>
         <source>Gestartet</source>
-        <translation type="vanished">Started</translation>
+        <translation type="obsolete">Started</translation>
     </message>
     <message>
         <source>Gestoppt</source>
-        <translation type="vanished">Stopped</translation>
+        <translation type="obsolete">Stopped</translation>
     </message>
     <message>
         <source>Simulation</source>
-        <translation type="vanished">Simulation</translation>
+        <translation type="obsolete">Simulation</translation>
     </message>
     <message>
         <source>Justiert</source>
-        <translation type="vanished">Justified</translation>
+        <translation type="obsolete">Justified</translation>
     </message>
     <message>
         <source>Nicht justiert</source>
-        <translation type="vanished">Not justified</translation>
+        <translation type="obsolete">Not justified</translation>
     </message>
     <message>
         <source>!!SignalFrequenz!!</source>
-        <translation type="vanished">!!Signalfrequency!!</translation>
+        <translation type="obsolete">!!Signalfrequency!!</translation>
     </message>
     <message>
         <source>kein PPS</source>
-        <translation type="vanished">No PPS</translation>
+        <translation type="obsolete">No PPS</translation>
     </message>
 </context>
 <context>
@@ -544,190 +576,190 @@ Allowed mV,V,kV</translation>
     <name>VersionViewBase</name>
     <message>
         <source>Device:</source>
-        <translation type="vanished">Device:</translation>
+        <translation type="obsolete">Device:</translation>
     </message>
     <message>
         <source>Device Version:</source>
-        <translation type="vanished">Device Version:</translation>
+        <translation type="obsolete">Device Version:</translation>
     </message>
     <message>
         <source>Serial Number:</source>
-        <translation type="vanished">Serial Number:</translation>
+        <translation type="obsolete">Serial Number:</translation>
     </message>
     <message>
         <source>AdjustmentData:</source>
-        <translation type="vanished">AdjustmentData:</translation>
+        <translation type="obsolete">AdjustmentData:</translation>
     </message>
     <message>
         <source>PCB Version:</source>
-        <translation type="vanished">PCB Version:</translation>
+        <translation type="obsolete">PCB Version:</translation>
     </message>
     <message>
         <source>PCB Server:</source>
-        <translation type="vanished">PCB Server:</translation>
+        <translation type="obsolete">PCB Server:</translation>
     </message>
     <message>
         <source>DSP Version:</source>
-        <translation type="vanished">DSP Version:</translation>
+        <translation type="obsolete">DSP Version:</translation>
     </message>
     <message>
         <source>DSP Server:</source>
-        <translation type="vanished">DSP Server:</translation>
+        <translation type="obsolete">DSP Server:</translation>
     </message>
 </context>
 <context>
     <name>WMMeasConfigBase</name>
     <message>
         <source>Messwert Formatsteuerung</source>
-        <translation type="vanished">Actual values format control</translation>
+        <translation type="obsolete">Actual values format control</translation>
     </message>
     <message>
         <source>Feldbreite:</source>
-        <translation type="vanished">Fieldwidth:</translation>
+        <translation type="obsolete">Fieldwidth:</translation>
     </message>
     <message>
         <source>Auflösung:</source>
-        <translation type="vanished">Resolution:</translation>
+        <translation type="obsolete">Resolution:</translation>
     </message>
     <message>
         <source>Einheit:</source>
-        <translation type="vanished">Unit:</translation>
+        <translation type="obsolete">Unit:</translation>
     </message>
     <message>
         <source>Lastpunkt</source>
-        <translation type="vanished">Loadpoint</translation>
+        <translation type="obsolete">Loadpoint</translation>
     </message>
     <message>
         <source>Fehler</source>
-        <translation type="vanished">Error</translation>
+        <translation type="obsolete">Error</translation>
     </message>
     <message>
         <source>Winkel</source>
-        <translation type="vanished">Angle</translation>
+        <translation type="obsolete">Angle</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="vanished">&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Cancel</translation>
+        <translation type="obsolete">&amp;Cancel</translation>
     </message>
 </context>
 <context>
     <name>WMMeasValuesBase</name>
     <message>
         <source>Fehlermesswerte</source>
-        <translation type="vanished">Error measurement</translation>
+        <translation type="obsolete">Error measurement</translation>
     </message>
     <message>
         <source>F:</source>
-        <translation type="vanished">E:</translation>
+        <translation type="obsolete">E:</translation>
     </message>
     <message>
         <source>phi:</source>
-        <translation type="vanished">phi:</translation>
+        <translation type="obsolete">phi:</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="vanished">%</translation>
+        <translation type="obsolete">%</translation>
     </message>
     <message>
         <source>°</source>
-        <translation type="vanished">°</translation>
+        <translation type="obsolete">°</translation>
     </message>
     <message>
         <source>LP(X):</source>
-        <translation type="vanished">LP(X):</translation>
+        <translation type="obsolete">LP(X):</translation>
     </message>
     <message>
         <source>LP(N):</source>
-        <translation type="vanished">LP(N):</translation>
+        <translation type="obsolete">LP(N):</translation>
     </message>
 </context>
 <context>
     <name>WMOeViewBase</name>
     <message>
         <source>Eigenfehler</source>
-        <translation type="vanished">Ref. transformer error</translation>
+        <translation type="obsolete">Ref. transformer error</translation>
     </message>
     <message>
         <source>Wandler:</source>
-        <translation type="vanished">Transformer:</translation>
+        <translation type="obsolete">Transformer:</translation>
     </message>
     <message>
         <source>Primär:</source>
-        <translation type="vanished">Primary:</translation>
+        <translation type="obsolete">Primary:</translation>
     </message>
     <message>
         <source>Sekundär:</source>
-        <translation type="vanished">Secondary:</translation>
+        <translation type="obsolete">Secondary:</translation>
     </message>
     <message>
         <source>Lastpunkt:</source>
-        <translation type="vanished">Loadpoint:</translation>
+        <translation type="obsolete">Loadpoint:</translation>
     </message>
     <message>
         <source>Betrag:</source>
-        <translation type="vanished">Gain:</translation>
+        <translation type="obsolete">Gain:</translation>
     </message>
     <message>
         <source>Winkel:</source>
-        <translation type="vanished">Angle:</translation>
+        <translation type="obsolete">Angle:</translation>
     </message>
     <message>
         <source>--------</source>
-        <translation type="vanished">--------</translation>
+        <translation type="obsolete">--------</translation>
     </message>
 </context>
 <context>
     <name>WMOffsetValBase</name>
     <message>
         <source>---------</source>
-        <translation type="vanished">---------</translation>
+        <translation type="obsolete">---------</translation>
     </message>
     <message>
         <source>Un:</source>
-        <translation type="vanished">Un:</translation>
+        <translation type="obsolete">Un:</translation>
     </message>
     <message>
         <source>Ux:</source>
-        <translation type="vanished">Ux:</translation>
+        <translation type="obsolete">Ux:</translation>
     </message>
 </context>
 <context>
     <name>WMRawActualConfigBase</name>
     <message>
         <source>Vektoren Formatsteuerung</source>
-        <translation type="vanished">Vectors format control</translation>
+        <translation type="obsolete">Vectors format control</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation type="vanished">Amplitude</translation>
+        <translation type="obsolete">Amplitude</translation>
     </message>
     <message>
         <source>Winkel</source>
-        <translation type="vanished">Angle</translation>
+        <translation type="obsolete">Angle</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="vanished">&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Cancel</translation>
+        <translation type="obsolete">&amp;Cancel</translation>
     </message>
     <message>
         <source>prim/sek</source>
-        <translation type="vanished">prim/sec</translation>
+        <translation type="obsolete">prim/sec</translation>
     </message>
     <message>
         <source>primär</source>
-        <translation type="vanished">primary</translation>
+        <translation type="obsolete">primary</translation>
     </message>
     <message>
         <source>sekundär</source>
-        <translation type="vanished">secondary</translation>
+        <translation type="obsolete">secondary</translation>
     </message>
 </context>
 <context>
@@ -760,7 +792,7 @@ Allowed mV,V,kV</translation>
         <source>--------- </source>
         <translation>---------</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -769,520 +801,492 @@ Allowed mV,V,kV</translation>
     <name>WMViewBase</name>
     <message>
         <source>Wandlermesseinrichtung WM3000U</source>
-        <translation>Transformer measuring device WM3000U</translation>
+        <translation type="obsolete">Transformer measuring device WM3000U</translation>
     </message>
     <message>
         <source>&amp;Datei</source>
-        <translation>&amp;File</translation>
+        <translation type="obsolete">&amp;File</translation>
     </message>
     <message>
         <source>&amp;Eigenfehlertabelle</source>
-        <translation>&amp;Ref. transformer errors</translation>
+        <translation type="obsolete">&amp;Ref. transformer errors</translation>
     </message>
     <message>
         <source>E&amp;rgebnisdatei</source>
-        <translation>R&amp;esultfile</translation>
+        <translation type="obsolete">R&amp;esultfile</translation>
     </message>
     <message>
         <source>&amp;Messung</source>
-        <translation>&amp;Measurement</translation>
+        <translation type="obsolete">&amp;Measurement</translation>
     </message>
     <message>
         <source>&amp;Ansicht</source>
-        <translation>&amp;Views</translation>
+        <translation type="obsolete">&amp;Views</translation>
     </message>
     <message>
         <source>&amp;Einstellungen</source>
-        <translation>&amp;Settings</translation>
+        <translation type="obsolete">&amp;Settings</translation>
     </message>
     <message>
         <source>&amp;Justage</source>
-        <translation>&amp;Adjustment</translation>
+        <translation type="obsolete">&amp;Adjustment</translation>
     </message>
     <message>
         <source>&amp;Hilfe</source>
-        <translation>&amp;Help</translation>
+        <translation type="obsolete">&amp;Help</translation>
     </message>
     <message>
         <source>Menu Eigenfehlertabelle</source>
-        <translation>Menu Ref. Transormer error</translation>
+        <translation type="obsolete">Menu Ref. Transormer error</translation>
     </message>
     <message>
         <source>&amp;Beenden</source>
-        <translation>&amp;Exit</translation>
+        <translation type="obsolete">&amp;Exit</translation>
     </message>
     <message>
         <source>Beendet das laufende Programm</source>
-        <translation>Stops the running program</translation>
+        <translation type="obsolete">Stops the running program</translation>
     </message>
     <message>
         <source>Ctrl+X</source>
-        <translation>Ctrl+X</translation>
+        <translation type="obsolete">Ctrl+X</translation>
     </message>
     <message>
         <source>&amp;Bereich</source>
-        <translation>&amp;Range</translation>
+        <translation type="obsolete">&amp;Range</translation>
     </message>
     <message>
         <source>Bereiche auswählen</source>
-        <translation>Select Ranges</translation>
+        <translation type="obsolete">Select Ranges</translation>
     </message>
     <message>
         <source>F4</source>
-        <translation>F4</translation>
+        <translation type="obsolete">F4</translation>
     </message>
     <message>
         <source>&amp;Speichern Sitzung</source>
-        <translation>&amp;Store session</translation>
+        <translation type="obsolete">&amp;Store session</translation>
     </message>
     <message>
         <source>Speichert alle aktuellen Einstellungen in einer Datei</source>
-        <translation>Stores all actual settings in a file</translation>
+        <translation type="obsolete">Stores all actual settings in a file</translation>
     </message>
     <message>
         <source>&amp;Laden Sitzung</source>
-        <translation>&amp;Load session</translation>
+        <translation type="obsolete">&amp;Load session</translation>
     </message>
     <message>
         <source>Liesst alle Einstellungen aus einer Datei</source>
-        <translation>Read all settings from a file</translation>
+        <translation type="obsolete">Read all settings from a file</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation>&amp;Start</translation>
+        <translation type="obsolete">&amp;Start</translation>
     </message>
     <message>
         <source>Messung starten</source>
-        <translation>Starting measurement</translation>
+        <translation type="obsolete">Starting measurement</translation>
     </message>
     <message>
         <source>Si&amp;mulation</source>
-        <translation>Si&amp;mulation</translation>
+        <translation type="obsolete">Si&amp;mulation</translation>
     </message>
     <message>
         <source>S&amp;imulation</source>
-        <translation>S&amp;imulation</translation>
+        <translation type="obsolete">S&amp;imulation</translation>
     </message>
     <message>
         <source>Simulierte Messung durchführen</source>
-        <translation>Running simulated measurement</translation>
+        <translation type="obsolete">Running simulated measurement</translation>
     </message>
     <message>
         <source>&amp;FehlerMessung</source>
-        <translation>&amp;Errormeasurement</translation>
+        <translation type="obsolete">&amp;Errormeasurement</translation>
     </message>
     <message>
         <source>&amp;Fehlerwerte</source>
-        <translation>&amp;Error values</translation>
+        <translation type="obsolete">&amp;Error values</translation>
     </message>
     <message>
         <source>Fehlermesswerte Fenster</source>
-        <translation>Error measurement window</translation>
+        <translation type="obsolete">Error measurement window</translation>
     </message>
     <message>
         <source>&amp;Eigenfehler</source>
-        <translation>R&amp;ef. transformer error</translation>
+        <translation type="obsolete">R&amp;ef. transformer error</translation>
     </message>
     <message>
         <source>Eigenfehler Fenster</source>
-        <translation>Reference transformer error window</translation>
+        <translation type="obsolete">Reference transformer error window</translation>
     </message>
     <message>
         <source>&amp;Dialog</source>
-        <translation>&amp;Dialog</translation>
+        <translation type="obsolete">&amp;Dialog</translation>
     </message>
     <message>
         <source>Dialog Fenster</source>
-        <translation>Dialog window</translation>
+        <translation type="obsolete">Dialog window</translation>
     </message>
     <message>
         <source>&amp;Konfiguration</source>
-        <translation>&amp;Configuration</translation>
+        <translation type="obsolete">&amp;Configuration</translation>
     </message>
     <message>
         <source>Messeinrichtung konfigurieren</source>
-        <translation>Configuring the device</translation>
+        <translation type="obsolete">Configuring the device</translation>
     </message>
     <message>
         <source>&amp;Info</source>
-        <translation>&amp;Info</translation>
+        <translation type="obsolete">&amp;Info</translation>
     </message>
     <message>
         <source>Informationen zur Messeinrichtung</source>
-        <translation>Information concerning WM3000</translation>
+        <translation type="obsolete">Information concerning WM3000</translation>
     </message>
     <message>
         <source>Informationen zu Zera</source>
-        <translation>Information concerning Zera</translation>
+        <translation type="obsolete">Information concerning Zera</translation>
     </message>
     <message>
         <source>Info über &amp;Zera</source>
-        <translation>Info about &amp;Zera</translation>
+        <translation type="obsolete">Info about &amp;Zera</translation>
     </message>
     <message>
         <source>Informationen zu ZERA</source>
-        <translation>Informations concerning ZERA</translation>
+        <translation type="obsolete">Informations concerning ZERA</translation>
     </message>
     <message>
         <source>&amp;Manual</source>
-        <translation type="vanished">&amp;Manual</translation>
+        <translation type="obsolete">&amp;Manual</translation>
     </message>
     <message>
         <source>Lesen Sie hier die Bedienungsanleitung</source>
-        <translation type="vanished">Read the manual online</translation>
+        <translation type="obsolete">Read the manual online</translation>
     </message>
     <message>
         <source>Informationen zu Qt</source>
-        <translation>Information concerning Qt</translation>
+        <translation type="obsolete">Information concerning Qt</translation>
     </message>
     <message>
         <source>Info über &amp;Qt</source>
-        <translation>Info about &amp;Qt</translation>
+        <translation type="obsolete">Info about &amp;Qt</translation>
     </message>
     <message>
         <source>Schliesst die geladene Eigenfehlertabelle</source>
-        <translation>Closes ref. transformer error file</translation>
+        <translation type="obsolete">Closes ref. transformer error file</translation>
     </message>
     <message>
         <source>Istwerte</source>
-        <translation>Actual values</translation>
+        <translation type="obsolete">Actual values</translation>
     </message>
     <message>
         <source>&amp;Vektoren</source>
-        <translation>&amp;Vectors</translation>
+        <translation type="obsolete">&amp;Vectors</translation>
     </message>
     <message>
         <source>Istwerte Fenster</source>
-        <translation>Actual values window</translation>
+        <translation type="obsolete">Actual values window</translation>
     </message>
     <message>
         <source>&amp;Öffnen</source>
-        <translation>&amp;Open</translation>
+        <translation type="obsolete">&amp;Open</translation>
     </message>
     <message>
         <source>Öffnen einer Eigenfehlertabelle</source>
-        <translation>Open reference transformer file</translation>
+        <translation type="obsolete">Open reference transformer file</translation>
     </message>
     <message>
         <source>&amp;Schliessen</source>
-        <translation>&amp;Close</translation>
+        <translation type="obsolete">&amp;Close</translation>
     </message>
     <message>
         <source>Schliessen der Eigenfehlertabelle</source>
-        <translation>Close reference transformer file</translation>
+        <translation type="obsolete">Close reference transformer file</translation>
     </message>
     <message>
         <source>&amp;Bearbeiten</source>
-        <translation>&amp;Edit</translation>
+        <translation type="obsolete">&amp;Edit</translation>
     </message>
     <message>
         <source>Bearbeiten einer Eigenfehlertabelle</source>
-        <translation>Edit reference transformer file</translation>
+        <translation type="obsolete">Edit reference transformer file</translation>
     </message>
     <message>
         <source>Schliessen der Ergebnisdatei</source>
-        <translation>Close result file</translation>
+        <translation type="obsolete">Close result file</translation>
     </message>
     <message>
         <source>Bearbeiten einer Ergebnisdatei</source>
-        <translation>Edit result file</translation>
+        <translation type="obsolete">Edit result file</translation>
     </message>
     <message>
         <source>Speichern Messwerte</source>
-        <translation>Store results</translation>
+        <translation type="obsolete">Store results</translation>
     </message>
     <message>
         <source>Speichern &amp;Messwerte</source>
-        <translation>Store &amp;results</translation>
+        <translation type="obsolete">Store &amp;results</translation>
     </message>
     <message>
         <source>F5</source>
-        <translation>F5</translation>
+        <translation type="obsolete">F5</translation>
     </message>
     <message>
         <source>Öffnen der Ergebnisdatei</source>
-        <translation>Open result file</translation>
+        <translation type="obsolete">Open result file</translation>
     </message>
     <message>
         <source>&amp;Neu</source>
-        <translation>&amp;New</translation>
+        <translation type="obsolete">&amp;New</translation>
     </message>
     <message>
         <source>&amp;Bereiche</source>
-        <translation>&amp;Ranges</translation>
+        <translation type="obsolete">&amp;Ranges</translation>
     </message>
     <message>
         <source>Bereiche anwählen</source>
-        <translation>Select ranges</translation>
+        <translation type="obsolete">Select ranges</translation>
     </message>
     <message>
         <source>F6</source>
-        <translation>F6</translation>
+        <translation type="obsolete">F6</translation>
     </message>
     <message>
         <source>BAuto</source>
-        <translation>BAuto</translation>
+        <translation type="obsolete">BAuto</translation>
     </message>
     <message>
         <source>BereichAuto</source>
-        <translation>BereichAuto</translation>
+        <translation type="obsolete">BereichAuto</translation>
     </message>
     <message>
         <source>Amplitude</source>
-        <translation>Amplitude</translation>
+        <translation type="obsolete">Amplitude</translation>
     </message>
     <message>
         <source>&amp;Amplitude</source>
-        <translation>&amp;Amplitude</translation>
+        <translation type="obsolete">&amp;Amplitude</translation>
     </message>
     <message>
         <source>Amplitudenabgleich mit externer Steuerung</source>
-        <translation>Adjustment of amplitude under external controls</translation>
+        <translation type="obsolete">Adjustment of amplitude under external controls</translation>
     </message>
     <message>
         <source>Phasen</source>
-        <translation>Phase</translation>
+        <translation type="obsolete">Phase</translation>
     </message>
     <message>
         <source>&amp;Phase</source>
-        <translation>&amp;Phase</translation>
+        <translation type="obsolete">&amp;Phase</translation>
     </message>
     <message>
         <source>Phasenlage Justage automatisch</source>
-        <translation>Automatic phaseangle adjustment</translation>
+        <translation type="obsolete">Automatic phaseangle adjustment</translation>
     </message>
     <message>
         <source>Action</source>
-        <translation>Action</translation>
+        <translation type="obsolete">Action</translation>
     </message>
     <message>
         <source>Action_2</source>
-        <translation>Action_2</translation>
+        <translation type="obsolete">Action_2</translation>
     </message>
     <message>
         <source>Action_3</source>
-        <translation>Action_3</translation>
+        <translation type="obsolete">Action_3</translation>
     </message>
     <message>
         <source>Action_4</source>
-        <translation>Action_4</translation>
+        <translation type="obsolete">Action_4</translation>
     </message>
     <message>
         <source>Phasen&amp;berechnung</source>
-        <translation>Phase&amp;Computation</translation>
+        <translation type="obsolete">Phase&amp;Computation</translation>
     </message>
     <message>
         <source>Phasenlage Koeffizientenberechnung</source>
-        <translation>Computation of phase anglle coefficients</translation>
+        <translation type="obsolete">Computation of phase anglle coefficients</translation>
     </message>
     <message>
         <source>E&amp;N61850</source>
-        <translation>E&amp;N61850</translation>
+        <translation type="obsolete">E&amp;N61850</translation>
     </message>
     <message>
         <source>EN61850 Statusanzeige</source>
-        <translation>EN61850 status report</translation>
+        <translation type="obsolete">EN61850 status report</translation>
     </message>
     <message>
         <source>S&amp;top</source>
-        <translation>S&amp;top</translation>
+        <translation type="obsolete">S&amp;top</translation>
     </message>
     <message>
         <source>Messung anhalten</source>
-        <translation>Stop the running measurement</translation>
+        <translation type="obsolete">Stop the running measurement</translation>
     </message>
     <message>
         <source>S&amp;tart</source>
-        <translation>S&amp;tart</translation>
+        <translation type="obsolete">S&amp;tart</translation>
     </message>
     <message>
         <source>Gestartet</source>
-        <translation type="vanished">Started</translation>
+        <translation type="obsolete">Started</translation>
     </message>
     <message>
         <source>Gestoppt</source>
-        <translation type="vanished">Stopped</translation>
+        <translation type="obsolete">Stopped</translation>
     </message>
     <message>
         <source>Simulation</source>
-        <translation type="vanished">Simulation</translation>
+        <translation type="obsolete">Simulation</translation>
     </message>
     <message>
         <source>Reale Messung</source>
-        <translation type="vanished">Real meas</translation>
+        <translation type="obsolete">Real meas</translation>
     </message>
     <message>
         <source>Keine</source>
-        <translation type="vanished">None</translation>
+        <translation type="obsolete">None</translation>
     </message>
     <message>
         <source>Eigenfehlertabellen (*.oet)</source>
-        <translation>Ref. Transformer files (*.oet)</translation>
+        <translation type="obsolete">Ref. Transformer files (*.oet)</translation>
     </message>
     <message>
         <source>Eigenfehlertabellen</source>
-        <translation>Ref. transformer files</translation>
+        <translation type="obsolete">Ref. transformer files</translation>
     </message>
     <message>
         <source>Eigenfehlertabelle (*oet)</source>
-        <translation>Ref. transformer files (*oet)</translation>
+        <translation type="obsolete">Ref. transformer files (*oet)</translation>
     </message>
     <message>
         <source>Speichern unter</source>
-        <translation>Save as</translation>
+        <translation type="obsolete">Save as</translation>
     </message>
     <message>
         <source>Ergebnisdateien (*.xml)</source>
-        <translation>Result files (*.xml)</translation>
+        <translation type="obsolete">Result files (*.xml)</translation>
     </message>
     <message>
         <source>Ergebnisdateien</source>
-        <translation>Result files</translation>
+        <translation type="obsolete">Result files</translation>
     </message>
     <message>
         <source>Sitzung Name (*.ses)</source>
-        <translation>Session name (*.ses)</translation>
+        <translation type="obsolete">Session name (*.ses)</translation>
     </message>
     <message>
         <source>Sitzung speichern</source>
-        <translation>Save session</translation>
+        <translation type="obsolete">Save session</translation>
     </message>
     <message>
         <source>Sitzung laden</source>
-        <translation>Read session</translation>
+        <translation type="obsolete">Read session</translation>
     </message>
     <message>
         <source>&amp;Sprache</source>
-        <translation>&amp;Language</translation>
+        <translation type="obsolete">&amp;Language</translation>
     </message>
     <message>
         <source>Deutsch</source>
-        <translation>German</translation>
+        <translation type="obsolete">German</translation>
     </message>
     <message>
         <source>Englisch</source>
-        <translation>English</translation>
+        <translation type="obsolete">English</translation>
     </message>
     <message>
         <source>F&amp;lash programmieren</source>
-        <translation>F&amp;lash programming</translation>
+        <translation type="obsolete">F&amp;lash programming</translation>
     </message>
     <message>
         <source>Flash data &amp;export</source>
-        <translation>Flash data &amp;export</translation>
+        <translation type="obsolete">Flash data &amp;export</translation>
     </message>
     <message>
         <source>Flash data &amp;import</source>
-        <translation>Flas data &amp;import</translation>
+        <translation type="obsolete">Flas data &amp;import</translation>
     </message>
     <message>
         <source>&amp;Version</source>
-        <translation>&amp;Version</translation>
+        <translation type="obsolete">&amp;Version</translation>
     </message>
     <message>
         <source>Übersicht Versionen</source>
-        <translation>Overview versions</translation>
+        <translation type="obsolete">Overview versions</translation>
     </message>
     <message>
         <source>&amp;Selbsttest</source>
-        <translation>&amp;Selftest</translation>
+        <translation type="obsolete">&amp;Selftest</translation>
     </message>
     <message>
         <source>Selbsttest starten</source>
-        <translation>Selftest start</translation>
+        <translation type="obsolete">Selftest start</translation>
     </message>
     <message>
         <source>Datei Name (*.xml)</source>
-        <translation>Filename (*.xml)</translation>
+        <translation type="obsolete">Filename (*.xml)</translation>
     </message>
     <message>
         <source>Justagedaten exportieren</source>
-        <translation>Justdata export</translation>
+        <translation type="obsolete">Justdata export</translation>
     </message>
     <message>
         <source>Justagedaten importieren</source>
-        <translation>Justdata import</translation>
+        <translation type="obsolete">Justdata import</translation>
     </message>
     <message>
         <source>F7</source>
-        <translation>F7</translation>
+        <translation type="obsolete">F7</translation>
     </message>
     <message>
         <source>Justiert</source>
-        <translation type="vanished">Justified</translation>
+        <translation type="obsolete">Justified</translation>
     </message>
     <message>
         <source>Nicht justiert</source>
-        <translation type="vanished">Not justified</translation>
+        <translation type="obsolete">Not justified</translation>
     </message>
     <message>
         <source>!!SignalFrequenz!!</source>
-        <translation type="vanished">!!Signalfrequency!!</translation>
+        <translation type="obsolete">!!Signalfrequency!!</translation>
     </message>
     <message>
         <source>Polnisch</source>
-        <translation>Polish</translation>
+        <translation type="obsolete">Polish</translation>
     </message>
     <message>
         <source>Offsetabgleich WM3000</source>
-        <translation>Offset adjustment WM3000</translation>
+        <translation type="obsolete">Offset adjustment WM3000</translation>
     </message>
     <message>
         <source>Offsetmessung Kanal N</source>
-        <translation>Offset measurement Channel N</translation>
+        <translation type="obsolete">Offset measurement Channel N</translation>
     </message>
     <message>
         <source>Offsetmessung Kanal X</source>
-        <translation>Offset measurement Channel X</translation>
+        <translation type="obsolete">Offset measurement Channel X</translation>
     </message>
     <message>
         <source>&amp;Offset</source>
-        <translation>&amp;Offset</translation>
-    </message>
-    <message>
-        <source>Phasenberechnung</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>new item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Release Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offsetberechnung</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kurve</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">&amp;Offset</translation>
     </message>
 </context>
 <context>
     <name>cOwnError</name>
     <message>
         <source>°</source>
-        <translation type="vanished">°</translation>
+        <translation type="obsolete">°</translation>
     </message>
     <message>
         <source>Eigenfehlertabelle</source>
-        <translation type="vanished">Ref. Transformer file</translation>
+        <translation type="obsolete">Ref. Transformer file</translation>
     </message>
     <message>
         <source>Fehler in %1
 Zeile : %2
 </source>
-        <translation type="vanished">Error in %1
+        <translation type="obsolete">Error in %1
 Line : %2
 </translation>
     </message>
@@ -1293,7 +1297,7 @@ Line : %2
         <source>Wandlermesseinrichtung WM3000U</source>
         <translation>Transformer measuring device WM3000U</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Berechnung läuft ...</source>
         <translation>Computation running ...</translation>
     </message>
@@ -1313,7 +1317,7 @@ Line : %2
         <source>Konfiguration setzen ...</source>
         <translation>Setting Configuration ...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Einschwingzeit läuft</source>
         <translation>settling time</translation>
     </message>
@@ -1321,7 +1325,7 @@ Line : %2
         <source>Messung Kanal N, adc läuft</source>
         <translation type="obsolete">Measurement channel N, adc running</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Messung Kanal N, %1 läuft</source>
         <translation>Measurement channel N, %1 running</translation>
     </message>
@@ -1329,61 +1333,61 @@ Line : %2
         <source>Messung Kanal X, adc läuft</source>
         <translation type="obsolete">Measurement channel X, adc running</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Messung Kanal X, %1 läuft</source>
         <translation>Measurement channel X, %1 running</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Berechnung und Datenübertragung ...</source>
         <translation>Computation and data setting ...</translation>
     </message>
     <message>
         <source>Keine Verbindung zu %1:%2
 </source>
-        <translation>No connection to %1:%2
+        <translation type="obsolete">No connection to %1:%2
 </translation>
     </message>
     <message>
         <source>Host nicht gefunden.
 </source>
-        <translation>Host not found.
+        <translation type="obsolete">Host not found.
 </translation>
     </message>
     <message>
         <source>Host gefunden. Keine Verbindung zu Server.
 </source>
-        <translation>Host found. No connection to server.
+        <translation type="obsolete">Host found. No connection to server.
 </translation>
     </message>
     <message>
         <source>Das Programm kann ohne Server nur
 im Simulations Modus betrieben werden.
 </source>
-        <translation>Without server, the program can only
+        <translation type="obsolete">Without server, the program can only
 run in simulation mode.
 </translation>
     </message>
     <message>
         <source>TCP-Verbindung</source>
-        <translation>TCP-connection</translation>
+        <translation type="obsolete">TCP-connection</translation>
     </message>
     <message>
         <source>Programm&amp;Abbruch</source>
-        <translation>&amp;Abort Program</translation>
+        <translation type="obsolete">&amp;Abort Program</translation>
     </message>
     <message>
         <source>&amp;Wiederholen</source>
-        <translation>&amp;Repeat</translation>
+        <translation type="obsolete">&amp;Repeat</translation>
     </message>
     <message>
         <source>&amp;Simulation</source>
-        <translation>&amp;Simulation</translation>
+        <translation type="obsolete">&amp;Simulation</translation>
     </message>
     <message>
         <source>Fehler beim Schreiben von Daten
 fÃ¼r %1:%2 .
 Details stehen in LogFile.</source>
-        <translation type="vanished">Error while writing data
+        <translation type="obsolete">Error while writing data
 for %1:%2.
 See logfile for details.</translation>
     </message>
@@ -1391,7 +1395,7 @@ See logfile for details.</translation>
         <source>Unerwartete Antwort beim Lesen
 von %1:%2 erhalten.
 Details stehen in LogFile.</source>
-        <translation>Unexpected answer at read
+        <translation type="obsolete">Unexpected answer at read
 from %1:%2 received.
 See logfile for detail.</translation>
     </message>
@@ -1399,7 +1403,7 @@ See logfile for detail.</translation>
         <source>Device ist busy
 ( %1:%2 ).
 Details stehen in LogFile.</source>
-        <translation>Device is busy
+        <translation type="obsolete">Device is busy
 ( %1:%2).
 See logfile for details.</translation>
     </message>
@@ -1414,12 +1418,12 @@ See logfile for details.</translation>
     <message>
         <source>
 Nicht identische Versionsnummer !</source>
-        <translation type="vanished">Not identical version number !</translation>
+        <translation type="obsolete">Not identical version number !</translation>
     </message>
     <message>
         <source>
 Nicht identische Seriennummer !</source>
-        <translation type="vanished">Not identical serial number !</translation>
+        <translation type="obsolete">Not identical serial number !</translation>
     </message>
     <message>
         <source>Selbstest ...</source>
@@ -1443,13 +1447,13 @@ Nicht identische Seriennummer !</source>
     </message>
     <message>
         <source>Achtung !</source>
-        <translation type="vanished">Attention !</translation>
+        <translation type="obsolete">Attention !</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Übersteuerung</source>
         <translation>Overload</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Es ist eine Übersteuerung im grössten Bereich
 aufgetreten. Bitte überprüfen Sie die Messgrössen</source>
         <translation>An overload condition has occured in maximum range.
@@ -1474,12 +1478,12 @@ Details stehen im Logfile</source>
     </message>
     <message>
         <source>Gerät ist nicht justiert !</source>
-        <translation type="vanished">Device is not justified !</translation>
+        <translation type="obsolete">Device is not justified !</translation>
     </message>
     <message>
         <source>
 Keine DC Justage Daten !</source>
-        <translation type="vanished">No DC adjustment data available !</translation>
+        <translation type="obsolete">No DC adjustment data available !</translation>
     </message>
     <message>
         <source>Initialisierung...</source>
@@ -1489,15 +1493,15 @@ Keine DC Justage Daten !</source>
         <source>Offsetkorrekturen</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Messung Kanal N %1, X %2 läuft</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Messung Kanal N %1 läuft</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Messung Kanal X %1 läuft</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1512,12 +1516,6 @@ Keine DC Justage Daten !</source>
     <message>
         <source>Offsetmessung Kanal X</source>
         <translation type="unfinished">Offset measurement Channel X</translation>
-    </message>
-    <message>
-        <source>Fehler beim Schreiben von Daten
-für %1:%2 .
-Details stehen in LogFile.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

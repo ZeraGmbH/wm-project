@@ -82,15 +82,15 @@ int main(int argc, char *argv[])
     {
     case de:
         if (!appTranslator->load("wm-common_de.qm",qmPath)) qWarning("translation file not found (de)");
-        if (!qtTranslator->load("wm-common_de.qm",qmPath))  qWarning("translation file not found (pl)");
+        if (!qtTranslator->load("wm-common_de.qm",qmPath))  qWarning("translation file not found (de)");
         break;
     case gb:
         appTranslator->load("wm3000u_gb.qm",qmPath);
-        qtTranslator->load("wm3000u_gb.qm",qmPath);
+        if (!qtTranslator->load("wm-common_gb.qm",qmPath))  qWarning("translation file not found (gb)");
         break;
     case pl:
         appTranslator->load("wm3000u_pl.qm",qmPath);
-        qtTranslator->load("wm3000u_pl.qm",qmPath);
+        if (!qtTranslator->load("wm-common_pl.qm",qmPath))  qWarning("translation file not found (pl)");
         break;
     }
 

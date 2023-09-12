@@ -81,16 +81,16 @@ int main(int argc, char *argv[])
     switch (g_WMDevice->m_ConfData.Language)
     {
        case de:
-        appTranslator->load("wm-common_de.qm",qmPath);
-        qtTranslator->load("wm-common_de.qm",qmPath);
+        if (!appTranslator->load("wm-common_de.qm",qmPath)) qWarning("wm3000 translation file not found (de)");
+        if (!qtTranslator->load("wm-common_de.qm",qmPath))  qWarning("common translation file not found (de)");
         break;
        case gb:
-        appTranslator->load("wm3000i_gb.qm",qmPath);
-        qtTranslator->load("wm3000i_gb.qm",qmPath);
+        if (!appTranslator->load("wm3000i_gb.qm",qmPath)) qWarning("wm3000 translation file not found (gb)");;
+        if (!qtTranslator->load("wm-common_gb.qm",qmPath))  qWarning("common translation file not found (gb)");
         break;
        case pl:
-        appTranslator->load("wm3000i_pl.qm",qmPath);
-        qtTranslator->load("wm3000i_pl.qm",qmPath);
+        if (!appTranslator->load("wm3000i_pl.qm",qmPath)) qWarning("wm3000 translation file not found (pl)");;
+        if (!qtTranslator->load("wm-common_pl.qm",qmPath))  qWarning("common translation file not found (pl)");
         break;
     }
 
