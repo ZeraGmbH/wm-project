@@ -3290,7 +3290,7 @@ bool cWM3000I::isDC()
 
 void cWM3000I::setNewSamplerates(bool b)
 {
-    m_bNewSamplerates = b;
+    m_bNewSamplerates = false; //b;
 }
 
 
