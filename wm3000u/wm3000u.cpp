@@ -3074,7 +3074,7 @@ bool cWM3000U::isDC()
 
 void cWM3000U::setNewSamplerates(bool b)
 {
-    m_bNewSamplerates = b;
+    m_bNewSamplerates = false; //b;
 }
 
 
