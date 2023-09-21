@@ -143,6 +143,7 @@ void wmProgressDialog::set3rdDisabled()
 
 void wmProgressDialog::seuptGui()
 {
+    setMinimumWidth(400);
     mvLay = new QVBoxLayout;
     mAbort = new QPushButton;
     mProgressFirst = new QProgressBar;
