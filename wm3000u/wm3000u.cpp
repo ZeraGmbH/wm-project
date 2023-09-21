@@ -2150,24 +2150,19 @@ void cWM3000U::ActionHandler(int entryAHS)
             mWmProgressDialog->set2ndDisabled();
             mWmProgressDialog->set3rdDisabled();
             ph0 = 0.0;
+
+            PhastJustHelpers PhaJusHelp;
+            PhaJusHelp.calculateMinMaxDiffValues(&JustValueList);
+            if (PhaJusHelp.deleteFaultyPhasenJustageItem(PhaJusHelp.getMeanValues(),PhaJusHelp.getDiffValue(),&JustValueList)){
+                PhaJusHelp.calculateMinMaxDiffValues(&JustValueList, false);
+            }
             if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
             {
                 QTextStream stream( &m_PhaseJustLogfile );
-                for (i = 0; i < JustValueList.count(); i++){
-                    value = JustValueList[i];
-                    stream << "Ph0: " << value << "\n" ;
-                    if( min > value) min = value;
-                    if (max < value) max = value;
-                    }
-                diff = (max - min) * 60.0;  // 1,6858° -> 1° 41' 9" -> 41,1516'
-                stream << "Diff: " << diff << " Minuten \n";
-
+                stream << PhaJusHelp.getLogString();
                 m_PhaseJustLogfile.flush();
                 m_PhaseJustLogfile.close();
             }
-            PhastJustHelpers PhaJusHelp;
-            PhaJusHelp.calculateMinMaxDiffValues(&JustValueList);
-            PhaJusHelp.deleteFaultyPhasenJustageItem(PhaJusHelp.getMeanValues(),PhaJusHelp.getDiffValue(),&JustValueList);
 
             ph0 = PhaJusHelp.getMeanValues()*-1; // ph0 /= JustValueList.count(); // der mittelwert aus den messungen
             AHS = PhaseNodeMeasExec4;
