@@ -8,8 +8,11 @@ class PhastJustHelpers
 {
 public:
     PhastJustHelpers();
-    void deleteFaultyPhasenJustageItem(float mittel, float diff, QList<float> *anglesList);
-    void calculateMinMaxDiffValues(QList<float> *angleList);
+    bool deleteFaultyPhasenJustageItem(float mittel, float diff, QList<float> *anglesList);
+    void calculateMinMaxDiffValues(QList<float> *angleList, bool log = true);
+    void addToLog(QString str);
+    QString getLogString();
+    void clearLogStr();
     float getMinValue();
     float getMaxValue();
     float getDiffValue();
@@ -20,6 +23,8 @@ private:
     float m_fMax;
     float m_fDiff;
     float m_fMean;
+
+    QString m_logString;
 };
 
 #endif // PHASTJUSTHELPERS_H

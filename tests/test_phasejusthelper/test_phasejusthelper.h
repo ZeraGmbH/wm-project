@@ -20,11 +20,15 @@ private slots:
     void test_case2();
     void test_case3();
     void test_case4();
-/*    void test_case5();
-    void test_case6();*/
+    void test_case5();
+    void test_case6();
+
+    void test_addLogString();
+    void test_clearLogString();
 
 private:
-    QList<float> values, values2;
+    void initTestValues();
+    QList<float> values, values2, values3;
 
 };
 
