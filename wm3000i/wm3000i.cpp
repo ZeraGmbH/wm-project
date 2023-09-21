@@ -2285,8 +2285,8 @@ void cWM3000I::ActionHandler(int entryAHS)
         {
             qreal min(359.99), max(0.0), diff(0.0), value(0.0);
             mWmProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));
-            mWmProgressDialog->set2ndDisabled();
-            mWmProgressDialog->set3rdDisabled();
+            //mWmProgressDialog->set2ndDisabled();
+            //mWmProgressDialog->set3rdDisabled();
             ph0 = 0.0;
 
             PhastJustHelpers PhaJusHelp;
@@ -2301,10 +2301,21 @@ void cWM3000I::ActionHandler(int entryAHS)
                 m_PhaseJustLogfile.flush();
                 m_PhaseJustLogfile.close();
             }
+            if (PhaJusHelp.hasBelly()){
+                // restart this measurement!
+                mCount = PhaseNodeMeasInfo->m_nnMeas; // und setzen den zähler dafür
+                JustValueList.clear();
+                mWmProgressDialog->setMessageStr("Hueppel");
+                AHS = PhaseNodeMeasExec3;
+                m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
 
-            ph0 = PhaJusHelp.getMeanValues()*-1; // ph0 /= JustValueList.count(); // der mittelwert aus den messungen
-            AHS = PhaseNodeMeasExec4;
-            m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
+            }
+            else {
+                mWmProgressDialog->setMessageStr("");
+                ph0 = PhaJusHelp.getMeanValues()*-1; // ph0 /= JustValueList.count(); // der mittelwert aus den messungen
+                AHS = PhaseNodeMeasExec4;
+                m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
+            }
         }
         else
         {
