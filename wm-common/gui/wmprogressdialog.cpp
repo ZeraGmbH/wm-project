@@ -21,7 +21,7 @@ wmProgressDialog::~wmProgressDialog()
     delete mAbort;
     delete mProgressFirst;
     delete mProgressSecond;
-    delete mMessage ;
+    delete mHint;
     delete mPrompt;
     delete mState;
     delete mvLay;
@@ -99,8 +99,16 @@ void wmProgressDialog::setAbortButtonText(QString str)
 
 void wmProgressDialog::setMessageStr(QString str)
 {
-    mMessage->appendPlainText(str);
-    mMessage->show();
+    if (str.length()>0)
+    {
+        mHint->setText(str);
+        mHint->show();
+    }
+    else
+    {
+        mHint->setText("");
+        mHint->hide();
+    }
 }
 
 void wmProgressDialog::abort()
@@ -149,24 +157,24 @@ void wmProgressDialog::seuptGui()
     mProgressFirst = new QProgressBar;
     mProgressSecond = new QProgressBar;
     mProgressThird = new QProgressBar;
-    mMessage = new QPlainTextEdit;
     mPrompt = new QLabel;
     mState = new QLabel;
+    mHint = new QLabel;
     mvLay->addWidget(mPrompt);
     mvLay->addWidget(mProgressFirst);
     mvLay->addWidget(mProgressSecond);
     mvLay->addWidget(mProgressThird);
-    mvLay->addWidget(mMessage);
     mhLay = new QHBoxLayout;
     mhLay->addWidget(mState);
     mhLay->addWidget(mAbort);
     mvLay->addItem(mhLay);
+    mvLay->addWidget(mHint);
     setLayout(mvLay);
     mbAbort = false;
     mProgressSecond->hide();
     mProgressThird->hide();
     mAbort->hide();
-    mMessage->hide();
+    mHint->hide();
 
     connect(mAbort,SIGNAL(clicked()),this,SLOT(abort()));
     this->show();

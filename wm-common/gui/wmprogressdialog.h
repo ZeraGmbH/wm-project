@@ -40,8 +40,7 @@ private:
     QProgressBar *mProgressFirst;
     QProgressBar *mProgressSecond;
     QProgressBar *mProgressThird;
-    QPlainTextEdit *mMessage;
-    QLabel *mPrompt, *mState;
+    QLabel *mPrompt, *mState, *mHint;
     QVBoxLayout *mvLay;
     QHBoxLayout *mhLay;
     bool mbAbort;
