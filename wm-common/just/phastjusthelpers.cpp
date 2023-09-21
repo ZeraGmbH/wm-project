@@ -51,6 +51,14 @@ void PhastJustHelpers::calculateMinMaxDiffValues(QList<float> *angleList, bool l
     m_fMean = ph0 *-1;
 }
 
+bool PhastJustHelpers::hasBelly()
+{
+    bool retValue;
+    retValue = (m_fDiff > 1.0/60.0);
+    if (retValue) addToLog(QString("Belly detected: %1").arg(m_fDiff));
+    return retValue;
+}
+
 void PhastJustHelpers::addToLog(QString str)
 {
     m_logString.append(str+"\n");

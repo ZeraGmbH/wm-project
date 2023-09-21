@@ -26,9 +26,12 @@ private slots:
     void test_addLogString();
     void test_clearLogString();
 
+    void test_BellyDetector();
+
 private:
     void initTestValues();
-    QList<float> values, values2, values3;
+    void initBellyTestValues(int i);
+    QList<float> values, values2, values3,bellyVal;
 
 };
 

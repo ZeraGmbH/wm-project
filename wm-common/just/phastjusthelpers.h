@@ -10,6 +10,7 @@ public:
     PhastJustHelpers();
     bool deleteFaultyPhasenJustageItem(float mittel, float diff, QList<float> *anglesList);
     void calculateMinMaxDiffValues(QList<float> *angleList, bool log = true);
+    bool hasBelly();
     void addToLog(QString str);
     QString getLogString();
     void clearLogStr();
