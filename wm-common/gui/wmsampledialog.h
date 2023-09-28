@@ -17,6 +17,7 @@ class wmSampleData : public QObject
 public:
     int mOffset;
     int mSamples;
+    bool mhScale;
     QString mSignalName;
     QList<int> mDisplayValues;
     QPair<float,float> mMinMax;
@@ -32,6 +33,7 @@ public:
     void setSingalProperties(QString &str, int chan);
     void setSignalNameCh0(QString str);
     void setSignalNameCh1(QString str);
+    void setSampleValuesList(QList<float> list, bool append);
     void setSampleValues(float *val, int chan = 0);
     QString getSignalName() {return mSignalName; };
     int getSignalSamples() {return mSamples;};
@@ -51,6 +53,8 @@ public:
 protected:
     void paintEvent(QPaintEvent *e);
 private:
+    void dialogUpdate();
+
     wmSampleData mDataCh0, mDataCh1;
     QPair<float,float> mMinMax;
 
