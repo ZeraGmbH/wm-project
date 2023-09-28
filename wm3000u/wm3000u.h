@@ -478,7 +478,7 @@ private:
     cwmActValues ActValues;
     cDspMaxValues MaxValues;
     wmScopeDialog *mScopeDialog = nullptr;
-    wmSampleDialog *mSampleDialog1;
+    wmSampleDialog *mPhasJustDialog = nullptr;
     wmProgressDialog *mWmProgressDialog;
     std::unique_ptr<cJustMeasInfo> PhaseNodeMeasInfo;
     cJustMeasInfo* OffsetMeasInfo;
