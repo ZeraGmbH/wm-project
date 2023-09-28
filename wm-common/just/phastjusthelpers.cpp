@@ -45,7 +45,6 @@ void PhastJustHelpers::calculateMinMaxDiffValues(QList<float> *angleList, bool l
     diff = (max - min) * 60.0;  // 1,6858° -> 1° 41' 9" -> 41,1516'
     addToLog(QString("Diff: %1 Minuten").arg(diff));
     ph0 /= angleList->count();
-    addToLog(QString("Mean: %1").arg(ph0));
     m_fMin = min;
     m_fMax = max;
     m_fDiff = diff / 60.0;
@@ -55,7 +54,7 @@ void PhastJustHelpers::calculateMinMaxDiffValues(QList<float> *angleList, bool l
 bool PhastJustHelpers::hasBelly()
 {
     bool retValue;
-   retValue = (m_fDiff > 2.0/60.0);
+    retValue = (m_fDiff > 1.0/60.0);
     if (retValue) addToLog(QString("Belly detected: %1").arg(m_fDiff));
     return retValue;
 }
