@@ -8,6 +8,8 @@ wmSampleDialog::wmSampleDialog(QWidget *parent)
 {
     mDataCh0.mOffset = 10;
     mDataCh1.mOffset = 20;
+    mDataCh0.mCurveValues.clear();
+    mDataCh1.mCurveValues.clear();
     setMinimumSize(640,240);
 }
 
@@ -36,19 +38,43 @@ void wmSampleDialog::setSignalNameCh1(QString str)
     mDataCh1.mSignalName = str;
 }
 
+void wmSampleDialog::setSampleValuesList(QList<float> list,bool append)
+{
+    mDataCh0.mhScale = true;
+    mDataCh1.mhScale = true;
+    if (append){
+        mDataCh0.mCurveValues.append(list);
+    }
+    else{
+        mDataCh1.mCurveValues = mDataCh0.mCurveValues;
+        mDataCh1.mSignalName = mDataCh0.mSignalName;
+        mDataCh0.mCurveValues = list;
+    }
+    setMinMaxToMember(mDataCh0);
+    setMinMaxToMember(mDataCh1);
+    dialogUpdate();
+}
+
 
 void wmSampleDialog::setSampleValues(float *val, int chan)
 {
     if (chan == 0) {
         copyValuesToMemberList(val, mDataCh0);
         setMinMaxToMember(mDataCh0);
+        mDataCh0.mhScale = false;
         //nastyCorrectioApproach(mDataCh0);
     }
     if (chan == 1){
         copyValuesToMemberList(val, mDataCh1);
         setMinMaxToMember(mDataCh1);
+        mDataCh1.mhScale = false;
         //nastyCorrectioApproach(mDataCh1);
     }
+    dialogUpdate();
+}
+
+void wmSampleDialog::dialogUpdate()
+{
     getMinMaxFromValuesToMember(getMinMaxFromValues(mDataCh0,mDataCh1));
 
     scaleToMemberIntValuesToHeight(mDataCh0);
@@ -57,7 +83,6 @@ void wmSampleDialog::setSampleValues(float *val, int chan)
     //"gemalt" werden könnten, Horizontale Scalierung fehlt noch.
     QDialog::update();
 }
-
 
 QList<float> wmSampleDialog::copyValuesToList(float *val)
 {
@@ -179,13 +204,18 @@ void wmSampleDialog::paintCurve(QPainter *qp, QColor color, wmSampleData &values
     qp->setPen(pen);
     int lastx, lasty, akty;
     int number = values.mDisplayValues.count();
+    int scale= 1;
+    if(values.mhScale && (number > 0)){
+        int width = this->geometry().width();
+        scale = width / number;
+    }
 
     for ( int i(0); i< number;i++){
             akty = values.mDisplayValues.at(i);
         if (i!=0){
-            qp->drawLine(lastx,lasty,i,akty);
+            qp->drawLine(lastx,lasty,i*scale,akty);
         }
-    lastx = i;
+    lastx = i*scale;
     lasty = akty;
     }
 
@@ -193,7 +223,7 @@ void wmSampleDialog::paintCurve(QPainter *qp, QColor color, wmSampleData &values
     qp->setPen(pen);
 
         for ( int i(0); i< number;i++){
-            qp->drawPoint(i,values.mDisplayValues.at(i));
+            qp->drawPoint(i*scale,values.mDisplayValues.at(i));
         }
 
 }
