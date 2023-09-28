@@ -45,6 +45,7 @@ void PhastJustHelpers::calculateMinMaxDiffValues(QList<float> *angleList, bool l
     diff = (max - min) * 60.0;  // 1,6858° -> 1° 41' 9" -> 41,1516'
     addToLog(QString("Diff: %1 Minuten").arg(diff));
     ph0 /= angleList->count();
+    addToLog(QString("Mean: %1").arg(ph0));
     m_fMin = min;
     m_fMax = max;
     m_fDiff = diff / 60.0;
