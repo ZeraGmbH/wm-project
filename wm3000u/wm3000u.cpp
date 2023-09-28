@@ -1990,6 +1990,7 @@ void cWM3000U::ActionHandler(int entryAHS)
         {
             lprogress++;
             mWmProgressDialog->setValue(lprogress);
+            mPhasJustDialog = new wmSampleDialog;
             NewConfData = m_ConfData; // zum umsetzen
             SaveConfData = m_ConfData; // wir haben eine kopie der aktuellen konfiguration
             NewConfData.m_bOECorrection = false; // nix korrigieren
@@ -2156,6 +2157,22 @@ void cWM3000U::ActionHandler(int entryAHS)
             if (PhaJusHelp.deleteFaultyPhasenJustageItem(PhaJusHelp.getMeanValues(),PhaJusHelp.getDiffValue(),&JustValueList)){
                 PhaJusHelp.calculateMinMaxDiffValues(&JustValueList, false);
             }
+
+            mPhasJustDialog->setSampleValuesList(JustValueList,N>0);
+            mPhasJustDialog->setSignalNameCh0(m_sJustText.mid(14));
+            mPhasJustDialog->show();
+            if (N==3) {
+                QPixmap bild;
+                QString path;
+                bild = bild.grabWidget(mPhasJustDialog);
+                path = m_sJustText.mid(14);
+                path = path.left(path.indexOf("l"));
+                path = path.replace(" ","");
+                path = path.replace(",","-");
+                path = path.replace(".","-");
+                path = QDir::homePath()+"/wm3000u/log/PhaseJustPic" + path + ".png";
+                bild.save(path);
+            }
             if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
             {
                 QTextStream stream( &m_PhaseJustLogfile );
@@ -2163,22 +2180,11 @@ void cWM3000U::ActionHandler(int entryAHS)
                 m_PhaseJustLogfile.flush();
                 m_PhaseJustLogfile.close();
             }
-            if (PhaJusHelp.hasBelly()){
-                // restart this measurement!
-                mCount = PhaseNodeMeasInfo->m_nnMeas; // und setzen den zähler dafür
-                JustValueList.clear();
-                mWmProgressDialog->setMessageStr("Hueppel");
-                AHS = PhaseNodeMeasExec3;
-                m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
-
-            }
-            else {
-                mWmProgressDialog->setMessageStr("");
-                ph0 = PhaJusHelp.getMeanValues()*-1; // ph0 /= JustValueList.count(); // der mittelwert aus den messungen
-                AHS = PhaseNodeMeasExec4;
-                m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
-            }
-        }
+            PhaJusHelp.hasBelly();
+            ph0 = PhaJusHelp.getMeanValues()*-1; // ph0 /= JustValueList.count(); // der mittelwert aus den messungen
+            AHS = PhaseNodeMeasExec4;
+            m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
+    }
         else
         {
             QObject::connect(this,SIGNAL(MeasureReady()),this,SLOT(PhaseJustSyncSlot()));
@@ -2282,6 +2288,7 @@ void cWM3000U::ActionHandler(int entryAHS)
 
     case PhaseNodeMeasFinished:
         delete mWmProgressDialog;
+        delete mPhasJustDialog;
         JustagePhaseBerechnungSlot(); // berechnung noch starten
         AHS = wm3000Idle;
         break;
