@@ -9,6 +9,13 @@ WMMeasConfigBase::WMMeasConfigBase(QWidget* parent, QList<eUnit *> lpUnitList):
     ui(new Ui::WMMeasConfigBase)
 {
     ui->setupUi(this);
+    connect(ui->WcomboBox,SIGNAL(activated(int)),this,SLOT(WComboActivatedSlot(int)));
+    connect(ui->LPcomboBox,SIGNAL(activated(int)),this,SLOT(LPComboActivatedSlot(int)));
+    connect(ui->ErrcomboBox,SIGNAL(activated(int)),this, SLOT(ErrComboActivatedSlot(int)));
+    connect(ui->TotalRMSradioButton,SIGNAL(clicked(bool)),this, SLOT(TotalRMScheckedSlot()));
+    connect(ui->H1radioButton,SIGNAL(clicked(bool)),this,SLOT(H1RMScheckedSlot()));
+    connect(ui->IECradioButton,SIGNAL(clicked(bool)),this,SLOT(IECCheckedSlot()));
+    connect(ui->ANSIradioButton,SIGNAL(clicked(bool)),this,SLOT(ANSICheckedSlot()));
     m_lpUnitList = lpUnitList;
     init();
 }
