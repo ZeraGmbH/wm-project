@@ -2157,7 +2157,7 @@ void cWM3000U::ActionHandler(int entryAHS)
             if (PhaJusHelp.deleteFaultyPhasenJustageItem(PhaJusHelp.getMeanValues(),PhaJusHelp.getDiffValue(),&JustValueList)){
                 PhaJusHelp.calculateMinMaxDiffValues(&JustValueList, false);
             }
-
+/*
             mPhasJustDialog->setSampleValuesList(JustValueList,N>0);
             mPhasJustDialog->setSignalNameCh0(m_sJustText.mid(14));
             mPhasJustDialog->show();
@@ -2172,7 +2172,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                 path = path.replace(".","-");
                 path = QDir::homePath()+"/wm3000u/log/PhaseJustPic" + path + ".png";
                 bild.save(path);
-            }
+            }*/
             if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
             {
                 QTextStream stream( &m_PhaseJustLogfile );
