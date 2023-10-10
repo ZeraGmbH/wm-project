@@ -7,6 +7,12 @@ WMRawActualConfigBase::WMRawActualConfigBase( QWidget* parent):
     ui(new Ui::WMRawActualConfigBase)
 {
     ui->setupUi(this);
+    connect(ui->Amplx1radioButton,SIGNAL(clicked(bool)),this, SLOT(amplx1checkedSlot()));
+    connect(ui->Amplx1_sqrt2radioButton,SIGNAL(clicked(bool)),this, SLOT(amplx1_sq2checkedSlot()));
+    connect(ui->MathradioButton,SIGNAL(clicked(bool)),this, SLOT(winkelmathcheckedSlot()));
+    connect(ui->TechradioButton,SIGNAL(clicked(bool)),this, SLOT(winkeltechcheckedSlot()));
+    connect(ui->PrimradioButton,SIGNAL(clicked(bool)),this, SLOT(primCheckedSlot()));
+    connect(ui->SekradioButton,SIGNAL(clicked(bool)),this, SLOT(sekCheckedSlot()));
     init();
 }
 
