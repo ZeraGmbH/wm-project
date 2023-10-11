@@ -30,7 +30,7 @@ protected:
     virtual void closeEvent(QCloseEvent * ce) override;
     virtual void resizeEvent(QResizeEvent *) override;
     virtual void moveEvent(QMoveEvent *) override;
-    virtual void contextMenuEvent(QContextMenuEvent *) override;
+    virtual void mousePressEvent(QMouseEvent *) override;
 private slots:
     void onSaveConfig();
     void onWriteStreamForGeomChange();
