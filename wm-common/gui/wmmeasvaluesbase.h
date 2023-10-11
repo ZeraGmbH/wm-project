@@ -41,7 +41,8 @@ protected:
     virtual void closeEvent(QCloseEvent *ce ) override;
     virtual void resizeEvent(QResizeEvent*) override;
     virtual void moveEvent(QMoveEvent*) override;
-    virtual void mousePressEvent( QMouseEvent *) override;
+    virtual void mousePressEvent(QMouseEvent *) override;
+    virtual void contextMenuEvent(QContextMenuEvent *) override;
 
 private slots:
     void onSaveConfig();
@@ -65,6 +66,7 @@ private:
     SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
+    QTimer m_Timer;
 };
 
 #endif // WMMEASVALUESBASE_H
