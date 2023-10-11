@@ -4,7 +4,6 @@
 #include "common-modes.h"
 #include <tools.h>
 #include <geometrytowidget.h>
-#include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <QFileInfo>
 
@@ -185,7 +184,7 @@ void WMRawActualValBase::onSaveSession(QString session)
     m_sessionStreamer.writeSession(objectName(), session);
 }
 
-void WMRawActualValBase::contextMenuEvent(QContextMenuEvent *)
+void WMRawActualValBase::mousePressEvent(QMouseEvent *mouseevent)
 {
     emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
     m_pContextMenu->show();

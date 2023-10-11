@@ -5,7 +5,6 @@
 #include "errorunits.h"
 #include "angleunits.h"
 #include "rcfunits.h"
-#include <QContextMenuEvent>
 #include <QCloseEvent>
 #include <Q3BoxLayout>
 #include <QResizeEvent>
@@ -68,6 +67,12 @@ void WMMeasValuesBase::resizeEvent(QResizeEvent*)
 void WMMeasValuesBase::moveEvent(QMoveEvent*)
 {
     m_settingsChangeTimer.startDelayed();
+}
+
+void WMMeasValuesBase::mousePressEvent(QMouseEvent *)
+{
+    emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
+    m_pContextMenu->show();
 }
 
 void WMMeasValuesBase::SetActualValuesSlot( cwmActValues * av)
@@ -204,12 +209,6 @@ bool WMMeasValuesBase::onLoadSession(QString session)
 void WMMeasValuesBase::onSaveSession(QString session)
 {
     m_sessionStreamer.writeSession(objectName(), session);
-}
-
-void WMMeasValuesBase::contextMenuEvent(QContextMenuEvent*)
-{
-    emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
-    m_pContextMenu->show();
 }
 
 void WMMeasValuesBase::readStream(QDataStream &stream)
