@@ -22,6 +22,8 @@ WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<e
     connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(int,int,int, cFormatInfo*)));
     connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
+    m_Timer.setSingleShot(true);
+    m_Timer.setInterval(1000);
 }
 
 WMMeasValuesBase::~WMMeasValuesBase()
@@ -69,7 +71,19 @@ void WMMeasValuesBase::moveEvent(QMoveEvent*)
     m_settingsChangeTimer.startDelayed();
 }
 
-void WMMeasValuesBase::mousePressEvent(QMouseEvent *)
+void WMMeasValuesBase::mousePressEvent(QMouseEvent *event)
+{
+    if(m_Timer.isActive()){
+        emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
+        m_pContextMenu->show();
+    }
+    else {
+    m_Timer.start();
+    }
+    event->accept();
+}
+
+void WMMeasValuesBase::contextMenuEvent(QContextMenuEvent *)
 {
     emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
     m_pContextMenu->show();

@@ -26,6 +26,8 @@ WMRawActualValBase::WMRawActualValBase(QWidget* parent, QString machineName):
     connect(m_pContextMenu,SIGNAL(SendVektorDisplayFormat(int,int,int)),this,SLOT(ReceiveVektorDispFormat(int,int,int)));
     connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
+    m_Timer.setSingleShot(true);
+    m_Timer.setInterval(1000);
 }
 
 WMRawActualValBase::~WMRawActualValBase()
@@ -184,7 +186,19 @@ void WMRawActualValBase::onSaveSession(QString session)
     m_sessionStreamer.writeSession(objectName(), session);
 }
 
-void WMRawActualValBase::mousePressEvent(QMouseEvent *mouseevent)
+void WMRawActualValBase::mousePressEvent(QMouseEvent *event)
+{
+    if(m_Timer.isActive()){
+    emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
+    m_pContextMenu->show();
+    }
+    else {
+    m_Timer.start();
+    }
+    event->accept();
+}
+
+void WMRawActualValBase::contextMenuEvent(QContextMenuEvent *)
 {
     emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
     m_pContextMenu->show();
