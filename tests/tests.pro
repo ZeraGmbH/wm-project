@@ -6,4 +6,5 @@ SUBDIRS = \
     test_settingschangetimer \
     test_sessionfilenamegen \
     test_phasejusthelper \
+    test_anglecmpoverfrequency \
     test_sessionstreamer

@@ -34,6 +34,7 @@
 #include "scpioperationstates.h"
 #include "scpiquestionstates.h"
 #include "wmmessagebox.h"
+#include "anglecmpoverfrequency.h"
 
 extern WMViewBase *g_WMView;
 char* MModeName[maxMMode] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"Un/nConvent"};
@@ -4240,6 +4241,16 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
     double phik;
     //  korrektur des kanal X vektors mit der abtastverzögerung und dem bekannten phasenfehler des prüflings
     phik = ( ( -360.0  * ActValues.Frequenz * m_ConfData.m_fxTimeShift * 1.0e-3 ) - m_ConfData.m_fxPhaseShift) * PI_180;
+
+    // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
+    // a certain value dependent of the rated sample rate and the rated frequency (aka samplerate).
+
+    if ( m_ConfData.m_nMeasMode == Un_nConvent)  // nur nConvent
+    {
+        angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
+        phik += angleComp.getAngleCorrectionValue();
+    }
+
     ActValues.VekXSek *= complex( cos(phik),sin(phik) );
 
     // eigenfehler korrektur des normwandlers
