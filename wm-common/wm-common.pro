@@ -61,6 +61,7 @@ HEADERS = \
     scpi/scpistatsyst.h \
     scpi/wm3000scpiface.h \
     scpi/wm3kscpispecialbase.h \
+    settings/anglecmpoverfrequency.h \
     settings/confdata.h \
     settings/ethadress.h \
     settings/settingschangetimer.h \
@@ -130,6 +131,7 @@ SOURCES = \
     scpi/scpiface.cpp \
     scpi/scpistatsyst.cpp \
     scpi/wm3000scpiface.cpp \
+    settings/anglecmpoverfrequency.cpp \
     settings/confdata.cpp \
     settings/ethadress.cpp \
     settings/settingschangetimer.cpp \

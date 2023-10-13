@@ -5,7 +5,6 @@
 #ifndef CONFDATA_H
 #define CONFDATA_H
 
-#include <q3ptrlist.h>
 #include <qstring.h>
 
 #include "ethadress.h"
