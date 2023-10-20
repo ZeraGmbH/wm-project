@@ -17,12 +17,16 @@ double angleCmpOverFrequency::getCompValue(int sampleRate, int confFrequency)
 {
     double val (0.0);
     if (sampleRate == 80) {
+        if (confFrequency == 16)
+            val = samp80Freq1623;
         if (confFrequency == 50)
             val = samp80Freq50;
         if (confFrequency == 60)
             val = samp80Freq60;
     }
     if (sampleRate == 256) {
+        if (confFrequency == 16)
+            val = samp256Freq1623;
         if (confFrequency == 50)
             val = samp256Freq50;
         if (confFrequency == 60)
