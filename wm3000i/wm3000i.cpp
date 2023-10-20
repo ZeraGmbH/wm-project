@@ -4353,8 +4353,16 @@ void cWM3000I::CmpActFrequency()
 void cWM3000I::CmpActValues() {  // here we will do all the necessary computations
     // korrektur der rohwinkel weil fft phi = 0 für cosinus
     
-    ActValues.PHIN = normWinkelrad02PI(ActValues.dspActValues.phin - PI/2);  // winkel zwischen 0 und 2PI
-    ActValues.PHIX = normWinkelrad02PI(ActValues.dspActValues.phix - PI/2); // wenn IxdIx PHIX ist der winkel von dIX !!!!!!!
+    // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
+    // a certain value dependent of the rated sample rate and the rated frequency (aka samplerate).
+
+    double angleCorr;
+    angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
+    angleCorr = angleComp.getAngleCorrectionValue();
+
+    ActValues.PHIN = normWinkelrad02PI(ActValues.dspActValues.phin - PI/2)-angleCorr;  // winkel zwischen 0 und 2PI
+        if ( m_ConfData.m_nMeasMode == In_nConvent) angleCorr = 0.0;
+    ActValues.PHIX = normWinkelrad02PI(ActValues.dspActValues.phix - PI/2)-angleCorr; // wenn IxdIx PHIX ist der winkel von dIX !!!!!!!
     
     // frequenz und abtastverzögerung berechnen
 
@@ -4452,15 +4460,6 @@ void cWM3000I::CmpActValues() {  // here we will do all the necessary computatio
     double phik;
     //  korrektur des kanal X vektors mit der bekannten abtastverzögerung und dem bekannten phasenfehler des prüflings
     phik = ( ( -360.0  * ActValues.Frequenz * m_ConfData.m_fxTimeShift * 1.0e-3 ) - m_ConfData.m_fxPhaseShift) * PI_180;
-
-    // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
-    // a certain value dependent of the rated sample rate and the rated frequency (aka samplerate).
-
-    if ( m_ConfData.m_nMeasMode == In_nConvent)  // nur nConvent
-    {
-        angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
-        phik += angleComp.getAngleCorrectionValue();
-    }
 
     ActValues.VekXSek *= complex( cos(phik),sin(phik) );
 

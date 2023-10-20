@@ -4157,8 +4157,16 @@ void cWM3000U::CmpActFrequency()
 void cWM3000U::CmpActValues() {  // here we will do all the necessary computations
     // korrektur der rohwinkel weil fft phi = 0 für cosinus
 
-    ActValues.PHIN = normWinkelrad02PI(ActValues.dspActValues.phin - PI/2);  // winkel zwischen 0 und 2PI
-    ActValues.PHIX = normWinkelrad02PI(ActValues.dspActValues.phix - PI/2);
+    // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
+    // a certain value dependent of the rated sample rate and the rated frequency (aka samplerate).
+
+    double angleCorr;
+    angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
+    angleCorr = angleComp.getAngleCorrectionValue();
+
+    ActValues.PHIN = normWinkelrad02PI(ActValues.dspActValues.phin - PI/2)-angleCorr;  // winkel zwischen 0 und 2PI
+    if ( m_ConfData.m_nMeasMode == Un_nConvent) angleCorr = 0.0;
+    ActValues.PHIX = normWinkelrad02PI(ActValues.dspActValues.phix - PI/2)-angleCorr;
 
     // frequenz und abtastverzögerung berechnen
 
@@ -4194,6 +4202,7 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
     }
 
     double kx = PrimX.toDouble() / SekX.toDouble();
+
 
     // berechnen der sekundär grössen
     // amplitude n,x sind gefilterte messwerte, die winkel nicht da feste abtastfrequenz
@@ -4244,12 +4253,6 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
 
     // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
     // a certain value dependent of the rated sample rate and the rated frequency (aka samplerate).
-
-    if ( m_ConfData.m_nMeasMode == Un_nConvent)  // nur nConvent
-    {
-        angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
-        phik += angleComp.getAngleCorrectionValue();
-    }
 
     ActValues.VekXSek *= complex( cos(phik),sin(phik) );
 
