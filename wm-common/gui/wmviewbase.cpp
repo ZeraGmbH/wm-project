@@ -27,6 +27,7 @@ WMViewBase::~WMViewBase()
 void WMViewBase::removeJustageItem()
 {
     ui->MenuBarEditor->removeAction(ui->Justage->menuAction());
+    ui->ansichtScopeAction->removeFrom(ui->Ansicht);
 }
 
 
