@@ -9,9 +9,9 @@ void test_anglecmpoverfrequency::test_getcompValue()
     val = test.getCompValue(80,60);
     QCOMPARE( qFuzzyCompare(val,static_cast<double>(0.546/180*M_PI)), true);
     val = test.getCompValue(256,50);
-    QCOMPARE( qFuzzyCompare(val,static_cast<double>(0.789/180*M_PI)), true);
+    QCOMPARE( qFuzzyCompare(val,static_cast<double>(0.777/180*M_PI)), true);
     val = test.getCompValue(256,60);
-    QCOMPARE( qFuzzyCompare(val,static_cast<double>(0.649/180*M_PI)), true);
+    QCOMPARE( qFuzzyCompare(val,static_cast<double>(0.648/180*M_PI)), true);
     val = test.getCompValue(96,50);
     QCOMPARE( qFuzzyCompare(val,static_cast<double>(0.0)), true);
 
@@ -45,11 +45,11 @@ void test_anglecmpoverfrequency::test_angleCorrection()
 
     test.getCompValue(256,50);
     val = test.correctAngle(1.0,55.0,50);
-    QCOMPARE( qFuzzyCompare(val,static_cast<double>(1.0+(5.0*0.789/180*M_PI))), true);
+    QCOMPARE( qFuzzyCompare(val,static_cast<double>(1.0+(5.0*0.777/180*M_PI))), true);
 
     test.getCompValue(256,60);
     val = test.correctAngle(-1.0,55.0,60.0);
-    QCOMPARE( qFuzzyCompare(val,static_cast<double>(-1.0+(-5.0*0.649/180*M_PI))), true);
+    QCOMPARE( qFuzzyCompare(val,static_cast<double>(-1.0+(-5.0*0.648/180*M_PI))), true);
 }
 
 QTEST_MAIN(test_anglecmpoverfrequency)

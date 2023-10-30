@@ -16,8 +16,8 @@
 
 const double samp80Freq50 = 0.656 / 180 * M_PI;
 const double samp80Freq60 = 0.546 / 180 * M_PI;
-const double samp256Freq50 = 0.789 / 180 * M_PI;
-const double samp256Freq60 = 0.649 / 180 * M_PI;
+const double samp256Freq50 = 0.777 / 180 * M_PI;
+const double samp256Freq60 = 0.648 / 180 * M_PI;
 const double samp80Freq1623 = 1.965 / 180 * M_PI;
 const double samp256Freq1623 = 2.3305 / 180 * M_PI;
 
