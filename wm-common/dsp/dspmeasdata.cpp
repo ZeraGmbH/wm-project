@@ -61,4 +61,4 @@ void cDspMeasData<T>::reset()
 }
 
 template class cDspMeasData<float>;
-template class cDspMeasData<ulong>;
+template class cDspMeasData<quint32>;

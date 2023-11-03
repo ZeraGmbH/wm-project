@@ -536,9 +536,9 @@ cDspMeasData<float>* cDspIFace::GetMVHandle(QString s) // legt eine neue messwer
 }
 
 
-cDspMeasData<ulong> *cDspIFace::GetMemHandle(QString s)
+cDspMeasData<quint32> *cDspIFace::GetMemHandle(QString s)
 {
-    cDspMeasData<ulong>* pdmd = new cDspMeasData<ulong>(s); // neues object anlegen
+    cDspMeasData<quint32>* pdmd = new cDspMeasData<quint32>(s); // neues object anlegen
     DspMemoryDataList.append(pdmd); // an ptr liste hängen
     return pdmd; // handle rückgabe
 }
@@ -568,7 +568,7 @@ void cDspIFace::DspMemoryRead(cDspMeasData<float> *pMData) // liest alle daten d
     m_ActTimer->start(0,DspMemoryReadStart);
 }
 
-void cDspIFace::DspMemoryRead(cDspMeasData<ulong> *pMData)
+void cDspIFace::DspMemoryRead(cDspMeasData<quint32> *pMData)
 {
     m_pMeasDataUlong = pMData;
     m_ActTimer->start(0,DspMemoryReadStart);
@@ -595,7 +595,7 @@ void cDspIFace::DspMemoryWrite(cDspMeasData<float> *pMData)  // schreibt alle da
 }
 
 
-void cDspIFace::DspMemoryWrite(cDspMeasData<ulong> *pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
+void cDspIFace::DspMemoryWrite(cDspMeasData<quint32> *pMData)  // schreibt alle daten dieser memorygruppe die daten sind schon im data feld
 {
     m_pMeasDataUlong = pMData;
     m_pMeasData = nullptr;
@@ -609,7 +609,7 @@ float* cDspIFace::data(cDspMeasData<float> *pMData) // gibt einen zeiger zurück
 }
 
 
-ulong* cDspIFace::data(cDspMeasData<ulong> *pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
+quint32* cDspIFace::data(cDspMeasData<quint32> *pMData) // gibt einen zeiger zurück auf die var daten vom typ vapplication
 {
     return pMData->data();
 }
