@@ -40,6 +40,7 @@ private:
     virtual void writeStream(QDataStream& stream) override;
     virtual void setDefaults() override;
     void setInitialDefaults();
+    void setSettingslabel();
     Ui::WMRawActualValBase *ui;
     cwmActValues m_ActValues;
     cConfData *m_pConfData;

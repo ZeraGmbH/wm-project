@@ -146,6 +146,7 @@ void WMRawActualValBase::ReceiveAVDataSlot( cwmActValues *ActValues )
 
         ui->dXxPhaseDisp -> setText( QString("%1 %2").arg(phi,8,'f',4).arg( trUtf8("°")) );
         ui->FreqDisp -> setText( QString("%1 Hz").arg(ActValues->Frequenz,9,'f',5) );
+        setSettingslabel();
     }
 }
 
@@ -209,6 +210,7 @@ void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
     AmplDispMode = m;
     WinkelDispMode = m2;
     PrimSekDispMode = m3;
+    setSettingslabel();
 }
 
 void WMRawActualValBase::onSaveConfig()
@@ -221,6 +223,41 @@ void WMRawActualValBase::onWriteStreamForGeomChange()
     m_geomToFromStream = geometryFromWidget(this);
     onSaveConfig();
 }
+
+void WMRawActualValBase::setSettingslabel()
+{
+    QString str;
+    str.append("Ampl.: ");
+    switch (AmplDispMode){
+    case x1:
+    str.append("x1");
+    break;
+    case x1_SQRT2:
+    str.append("RMS");
+    break;
+    }
+    str.append("\t");
+    switch (PrimSekDispMode){
+    case prim:
+    str.append("prim");
+    break;
+    case sek:
+    str.append("sec");
+    break;
+    }
+    str.append("\t");
+    switch (WinkelDispMode ) {
+    case mathpos:
+    str.append("math pos");
+    break;
+    case techpos:
+    str.append("tec pos");
+    break;
+    }
+    ui->Settingslabel->setStyleSheet("color: gray");
+    ui->Settingslabel->setText(str);
+}
+
 
 void WMRawActualValBase::readStream(QDataStream &stream)
 {
