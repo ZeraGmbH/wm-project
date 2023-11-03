@@ -324,6 +324,22 @@ void cDspIFace::ActionHandler(int entryAHS)
         break; // DataAcquisitionFinished
     }
 
+    case DspMemoryReadLongStart:
+        SendDspMemoryReadLongCommand();
+        AHS++;
+        break;
+
+    case DspMemoryReadLongFinished:
+        if (m_biFaceError)
+            emit iFaceError();
+        else
+        {
+            GetInterfaceLongData();
+            emit iFaceDone();
+        }
+        AHS = dspIFaceIdle; // wir sind durch
+        break; // DspMemoryReadFinished
+
     case DspMemoryReadStart:
         SendDspMemoryReadCommand();
         AHS++;
@@ -571,7 +587,7 @@ void cDspIFace::DspMemoryRead(cDspMeasData<float> *pMData) // liest alle daten d
 void cDspIFace::DspMemoryRead(cDspMeasData<quint32> *pMData)
 {
     m_pMeasDataUlong = pMData;
-    m_ActTimer->start(0,DspMemoryReadStart);
+    m_ActTimer->start(0,DspMemoryReadLongStart);
 }
 
 
@@ -641,21 +657,12 @@ void cDspIFace::GetInterfaceData()
     QString list;
     QStringList DataEntryList, DataList; // werte zuorden 
     QString s;
-    bool bnotFloat;
     float *fval;
-    quint32 *lval;
 
 
     list = iFaceSock->GetAnswer();
     DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit allen werten
-    if(m_pMeasData == nullptr) {
-        lval = m_pMeasDataUlong->data();
-        bnotFloat = true;
-    }
-    else {
-        fval = m_pMeasData->data();
-        bnotFloat = false;
-    }
+    fval = m_pMeasData->data();
     for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
         s = *it;
         s = s.section(":",1,1);
@@ -663,14 +670,32 @@ void cDspIFace::GetInterfaceData()
         for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2) {
             s = *it2;
             s.remove(';');
-            if  (bnotFloat){
-                *lval = s.toULong();
-                lval++;
-            }
-            else {
-                *fval = s.toFloat();
-                fval++;
-            }
+            *fval = s.toFloat();
+            fval++;
+        }
+    }
+}
+
+void cDspIFace::GetInterfaceLongData()
+{
+    QString list;
+    QStringList DataEntryList, DataList; // werte zuorden
+    QString s;
+    quint32 *lval;
+
+
+    list = iFaceSock->GetAnswer();
+    DataEntryList = QStringList::split(";",list); // wir haben jetzt eine stringliste mit allen werten
+    lval = m_pMeasDataUlong->data();
+    for ( QStringList::Iterator it = DataEntryList.begin(); it != DataEntryList.end(); ++it ) {
+        s = *it;
+        s = s.section(":",1,1);
+        DataList = QStringList::split(",",s);
+        for ( QStringList::Iterator it2 = DataList.begin(); it2 != DataList.end(); ++it2) {
+            s = *it2;
+            s.remove(';');
+            *lval = s.toULong();
+            lval++;
         }
     }
 }
@@ -849,6 +874,11 @@ void cDspIFace::SendDataAcquisitionCommand()
     iFaceSock->SendQuery(Cmd); // abfrage durchführen
 }
 
+void cDspIFace::SendDspMemoryReadLongCommand()
+{
+    QString Cmd = QString("mem:read %1\n").arg(m_pMeasDataUlong->VarList()); // kommando zusammenbauen
+    iFaceSock->SendQuery(Cmd); // abfrage durchführen
+}
 
 void cDspIFace::SendDspMemoryReadCommand()
 {

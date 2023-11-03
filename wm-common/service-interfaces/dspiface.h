@@ -77,7 +77,10 @@ enum dspIFaceActionHandlerState {
     
     DataAcquisitionStart, 
     DataAcquisitionFinished,
-    
+
+    DspMemoryReadLongStart,
+    DspMemoryReadLongFinished,
+
     DspMemoryReadStart,
     DspMemoryReadFinished,
     
@@ -160,6 +163,7 @@ private:
     QList<cDspMeasData<quint32>*> DspMemoryDataList; // eine liste mit zeigern auf  dsp speicher allgemein
     cSMTimer* m_ActTimer;
     void GetInterfaceData();
+    void GetInterfaceLongData();
     void TestDspRunning(); // schreibt test kommando an dsp
     void SetDspBootPath(); // schreibt kommando für bootpath zu setzen
     void DspReset(); 
@@ -177,6 +181,7 @@ private:
     void SendSetDsp61850EthSyncCommand();
     void SendTriggerIntHKSKCommand();
     void SendDataAcquisitionCommand();
+    void SendDspMemoryReadLongCommand();
     void SendDspMemoryReadCommand();
     void SendDspMemoryWriteCommand();
     void SendActivateInterfaceCommand();
