@@ -1085,7 +1085,7 @@ void cWM3000SCPIFace::mSetConfCompPhcTime(char* s)
 {
     double dtime;
 
-    if ( GetParameter(&s, dtime, 0.0, 20.0, true) )// max. 20 ms
+    if ( GetParameter(&s, dtime, -20.0, 20.0, true) )// max. 20 ms
     {
         m_ConfDataTarget.m_fxTimeShift = dtime;
     }
