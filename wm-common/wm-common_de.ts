@@ -1256,7 +1256,7 @@ Versions number not identical !</source>
         <location filename="gui/wmmessagebox.cpp" line="19"/>
         <source>
 Serial number not identical !</source>
-        <translation>Seriannummer stimmt nicht überein !</translation>
+        <translation>Seriennummer stimmt nicht überein !</translation>
     </message>
     <message>
         <location filename="gui/wmmessagebox.cpp" line="27"/>
