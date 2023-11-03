@@ -643,7 +643,7 @@ void cDspIFace::GetInterfaceData()
     QString s;
     bool bnotFloat;
     float *fval;
-    ulong *lval;
+    quint32 *lval;
 
 
     list = iFaceSock->GetAnswer();
@@ -867,7 +867,7 @@ void cDspIFace::SendDspMemoryWriteCommand()
     ts << "mem:writ ";
     
     float* fval;
-    ulong* lval;
+    quint32* lval;
     bool bnotFloat;
 
     if (m_pMeasData == nullptr){
