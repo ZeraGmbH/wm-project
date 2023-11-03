@@ -127,16 +127,16 @@ public:
     void addCycListItem(QString&); // ein neues Kommando ans ende der cyc. liste
     void addIntListItem(QString&); // dito für intliste
     cDspMeasData<float>* GetMVHandle(QString); // legt eine neue messwerte gruppe an
-    cDspMeasData<ulong>* GetMemHandle(QString); // legt eine neue memory gruppe an
+    cDspMeasData<quint32> *GetMemHandle(QString); // legt eine neue memory gruppe an
     void ActivateInterface(); // aktiviert die var- und cmd-listen im dsp
     void DeactivateInterface(); // nur anders rum
     void DataAcquisition(cDspMeasData<float>*); // liest alle daten dieser messwertegruppe vom type vapplication
     void DspMemoryRead(cDspMeasData<float>*); // liest alle daten dieser memorygruppe
-    void DspMemoryRead(cDspMeasData<ulong>*);
+    void DspMemoryRead(cDspMeasData<quint32> *);
     void DspMemoryWrite(cDspMeasData<float>*); // schreibt alle daten dieser memorygruppe
-    void DspMemoryWrite(cDspMeasData<ulong>*);
+    void DspMemoryWrite(cDspMeasData<quint32>*);
     float* data(cDspMeasData<float>*); // gibt einen zeiger zurück auf die var daten vom typ vapplication
-    ulong* data(cDspMeasData<ulong>*);
+    quint32 *data(cDspMeasData<quint32> *);
     void SetGainCorrection(int,float); // setzt für kanal (int 0..) die verstärkungskorrektur
     void SetPhaseCorrection(int,float); // setzt für kanal (int 0..) die phasenkorrektur    
     void SetOffsetCorrection(int,float); // setzt für kanal (int 0..) die offsetkorrektur
@@ -157,7 +157,7 @@ private:
     int m_nPort; // host port
     QStringList CycCmdList, IntCmdList;
     QList<cDspMeasData<float>*> DspMeasDataList; // eine liste mit zeigern auf "programmdaten"
-    QList<cDspMeasData<ulong>*> DspMemoryDataList; // eine liste mit zeigern auf  dsp speicher allgemein
+    QList<cDspMeasData<quint32>*> DspMemoryDataList; // eine liste mit zeigern auf  dsp speicher allgemein
     cSMTimer* m_ActTimer;
     void GetInterfaceData();
     void TestDspRunning(); // schreibt test kommando an dsp
@@ -190,7 +190,7 @@ private:
     ulong m_lP1[16]; // parameter
     cETHAdress m_ethadr;
     cDspMeasData<float> *m_pMeasData;
-    cDspMeasData<ulong> *m_pMeasDataUlong;
+    cDspMeasData<quint32> *m_pMeasDataUlong;
     int m_nBusyCount;
     bool m_bConnected;
 };

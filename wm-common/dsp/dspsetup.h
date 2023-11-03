@@ -18,8 +18,8 @@ struct MeasDataStruct
 
 struct EthDataStruct
 {
-    cDspMeasData<ulong>* ETHStatusHandle;
-    cDspMeasData<ulong>* ETHStatusResetHandle;
+    cDspMeasData<quint32>* ETHStatusHandle;
+    cDspMeasData<quint32>* ETHStatusResetHandle;
 };
 
 class DspSetup
