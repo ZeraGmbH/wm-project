@@ -915,50 +915,50 @@ lub mA,A,kA</translation>
         <translation>Wektory</translation>
     </message>
     <message>
-        <location filename="wmrawactualvalbase.ui" line="69"/>
-        <location filename="wmrawactualvalbase.ui" line="121"/>
-        <location filename="wmrawactualvalbase.ui" line="131"/>
+        <location filename="wmrawactualvalbase.ui" line="53"/>
+        <location filename="wmrawactualvalbase.ui" line="95"/>
+        <location filename="wmrawactualvalbase.ui" line="134"/>
         <location filename="wmrawactualvalbase.ui" line="144"/>
-        <location filename="wmrawactualvalbase.ui" line="209"/>
+        <location filename="wmrawactualvalbase.ui" line="180"/>
         <source>---------</source>
         <translation>---------</translation>
     </message>
     <message>
-        <location filename="wmrawactualvalbase.ui" line="98"/>
+        <location filename="wmrawactualvalbase.ui" line="82"/>
         <source>--------</source>
         <translation>--------</translation>
     </message>
     <message>
-        <location filename="wmrawactualvalbase.ui" line="111"/>
+        <location filename="wmrawactualvalbase.ui" line="196"/>
         <source>--------- </source>
         <translation>---------</translation>
     </message>
     <message>
-        <location filename="wmrawactualvalbase.ui" line="160"/>
+        <location filename="wmrawactualvalbase.ui" line="209"/>
         <source>Ix:</source>
         <translation>Ix:</translation>
     </message>
     <message>
-        <location filename="wmrawactualvalbase.ui" line="173"/>
+        <location filename="wmrawactualvalbase.ui" line="124"/>
         <source>F:</source>
         <translation>F:</translation>
     </message>
     <message>
-        <location filename="wmrawactualvalbase.ui" line="186"/>
+        <location filename="wmrawactualvalbase.ui" line="167"/>
         <source>In:</source>
         <translation>In:</translation>
     </message>
     <message>
-        <location filename="wmrawactualvalbase.ui" line="196"/>
+        <location filename="wmrawactualvalbase.ui" line="154"/>
         <source>dIx:</source>
         <translation>dIx:</translation>
     </message>
     <message utf8="true">
-        <location filename="wmrawactualvalbase.cpp" line="20"/>
-        <location filename="wmrawactualvalbase.cpp" line="22"/>
-        <location filename="wmrawactualvalbase.cpp" line="91"/>
-        <location filename="wmrawactualvalbase.cpp" line="120"/>
-        <location filename="wmrawactualvalbase.cpp" line="146"/>
+        <location filename="wmrawactualvalbase.cpp" line="19"/>
+        <location filename="wmrawactualvalbase.cpp" line="21"/>
+        <location filename="wmrawactualvalbase.cpp" line="92"/>
+        <location filename="wmrawactualvalbase.cpp" line="121"/>
+        <location filename="wmrawactualvalbase.cpp" line="147"/>
         <source>°</source>
         <translation>°</translation>
     </message>
@@ -1515,10 +1515,10 @@ Nicht identische Seriennummer !</source>
         <location filename="wm3000i.cpp" line="1868"/>
         <location filename="wm3000i.cpp" line="1960"/>
         <location filename="wm3000i.cpp" line="2039"/>
-        <location filename="wm3000i.cpp" line="2494"/>
-        <location filename="wm3000i.cpp" line="2904"/>
-        <location filename="wm3000i.cpp" line="2934"/>
-        <location filename="wm3000i.cpp" line="3019"/>
+        <location filename="wm3000i.cpp" line="2500"/>
+        <location filename="wm3000i.cpp" line="2910"/>
+        <location filename="wm3000i.cpp" line="2940"/>
+        <location filename="wm3000i.cpp" line="3028"/>
         <source>Abbruch</source>
         <translation>Przerwij</translation>
     </message>
@@ -1529,14 +1529,14 @@ Nicht identische Seriennummer !</source>
     </message>
     <message>
         <location filename="wm3000i.cpp" line="2137"/>
-        <location filename="wm3000i.cpp" line="2580"/>
-        <location filename="wm3000i.cpp" line="3048"/>
+        <location filename="wm3000i.cpp" line="2586"/>
+        <location filename="wm3000i.cpp" line="3057"/>
         <source>Konfiguration setzen ...</source>
         <translation>Ustawianie konfiguracji...</translation>
     </message>
     <message utf8="true">
         <location filename="wm3000i.cpp" line="2193"/>
-        <location filename="wm3000i.cpp" line="2625"/>
+        <location filename="wm3000i.cpp" line="2631"/>
         <source>Einschwingzeit läuft</source>
         <translation>Czas ustalania się</translation>
     </message>
@@ -1562,74 +1562,74 @@ Nicht identische Seriennummer !</source>
     </message>
     <message utf8="true">
         <location filename="wm3000i.cpp" line="2287"/>
-        <location filename="wm3000i.cpp" line="2676"/>
+        <location filename="wm3000i.cpp" line="2682"/>
         <source>Berechnung und Datenübertragung ...</source>
         <translation>Obliczanie i transmisja danych...</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="2493"/>
+        <location filename="wm3000i.cpp" line="2499"/>
         <source>Initialisierung...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="2495"/>
+        <location filename="wm3000i.cpp" line="2501"/>
         <source>Offsetkorrekturen</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000i.cpp" line="2642"/>
+        <location filename="wm3000i.cpp" line="2648"/>
         <source>Messung Kanal N %1, X %2 läuft</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000i.cpp" line="2646"/>
+        <location filename="wm3000i.cpp" line="2652"/>
         <source>Messung Kanal N %1 läuft</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000i.cpp" line="2651"/>
+        <location filename="wm3000i.cpp" line="2657"/>
         <source>Messung Kanal X %1 läuft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="2903"/>
-        <location filename="wm3000i.cpp" line="2933"/>
+        <location filename="wm3000i.cpp" line="2909"/>
+        <location filename="wm3000i.cpp" line="2939"/>
         <source>Messung...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="2905"/>
+        <location filename="wm3000i.cpp" line="2911"/>
         <source>Offsetmessung Kanal N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="2936"/>
+        <location filename="wm3000i.cpp" line="2942"/>
         <source>Offsetmessung Kanal X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3018"/>
+        <location filename="wm3000i.cpp" line="3027"/>
         <source>Selbstest ...</source>
         <translation>Autotest ...</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3020"/>
+        <location filename="wm3000i.cpp" line="3029"/>
         <source>Selbsttest</source>
         <translation>Autotest</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3057"/>
+        <location filename="wm3000i.cpp" line="3066"/>
         <source>Bereiche setzen ...</source>
         <translation>Ustawianie zakresów ...</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3071"/>
-        <location filename="wm3000i.cpp" line="3092"/>
+        <location filename="wm3000i.cpp" line="3080"/>
+        <location filename="wm3000i.cpp" line="3101"/>
         <source>Messung ...</source>
         <translation>Pomiar ...</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3081"/>
+        <location filename="wm3000i.cpp" line="3090"/>
         <source>Modus setzen ...</source>
         <translation>Ustawianie trybu ...</translation>
     </message>
@@ -1696,22 +1696,22 @@ Details stehen in LogFile.</source>
 Szczegóły w LogFile.</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3251"/>
+        <location filename="wm3000i.cpp" line="3260"/>
         <source>Wandlermesseinrichtung WM1000I</source>
         <translation>Urządzenie pomiarowe przekładników WM1000I</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3253"/>
+        <location filename="wm3000i.cpp" line="3262"/>
         <source>Wandlermesseinrichtung WM3000I</source>
         <translation>Urządzenie pomiarowe przekładników WM3000I</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3322"/>
+        <location filename="wm3000i.cpp" line="3331"/>
         <source>Amplituden Justage</source>
         <translation>Adiustacja amplitudy</translation>
     </message>
     <message>
-        <location filename="wm3000i.cpp" line="3322"/>
+        <location filename="wm3000i.cpp" line="3331"/>
         <source>Noch nicht implementiert</source>
         <translation>Nie wprowadzono jeszcze</translation>
     </message>
