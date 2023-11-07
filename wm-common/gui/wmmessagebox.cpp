@@ -82,3 +82,8 @@ int wmMessageBox::msgBusy(QString host, int port)
     return userRM;
 }
 
+void wmMessageBox::justDataWritten()
+{
+    QMessageBox::information(0,tr("Justage Data Written"),tr("Justage Data Written"));
+}
+

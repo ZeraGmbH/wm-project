@@ -198,7 +198,7 @@
         <translation>Kein PPS</translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="42"/>
+        <location filename="gui/wmviewbase.cpp" line="43"/>
         <source>Wandlermesseinrichtung %1</source>
         <translation></translation>
     </message>
@@ -657,7 +657,7 @@
     </message>
     <message>
         <location filename="gui/wmviewbase.ui" line="246"/>
-        <location filename="gui/wmviewbase.cpp" line="139"/>
+        <location filename="gui/wmviewbase.cpp" line="140"/>
         <source>Messung starten</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1066,80 +1066,80 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="133"/>
+        <location filename="gui/wmviewbase.cpp" line="134"/>
         <source>S&amp;top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="134"/>
+        <location filename="gui/wmviewbase.cpp" line="135"/>
         <source>Messung anhalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="138"/>
+        <location filename="gui/wmviewbase.cpp" line="139"/>
         <source>S&amp;tart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="167"/>
+        <location filename="gui/wmviewbase.cpp" line="168"/>
         <source>Eigenfehlertabellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="167"/>
+        <location filename="gui/wmviewbase.cpp" line="168"/>
         <source>Eigenfehlertabellen (*.oet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="297"/>
+        <location filename="gui/wmviewbase.cpp" line="298"/>
         <source>Speichern unter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="299"/>
+        <location filename="gui/wmviewbase.cpp" line="300"/>
         <source>Eigenfehlertabelle (*oet)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="317"/>
-        <location filename="gui/wmviewbase.cpp" line="374"/>
+        <location filename="gui/wmviewbase.cpp" line="318"/>
+        <location filename="gui/wmviewbase.cpp" line="375"/>
         <source>Ergebnisdateien</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="317"/>
+        <location filename="gui/wmviewbase.cpp" line="318"/>
         <source>Ergebnisdateien (*.xml)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="469"/>
+        <location filename="gui/wmviewbase.cpp" line="470"/>
         <source>Sitzung speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="471"/>
-        <location filename="gui/wmviewbase.cpp" line="489"/>
+        <location filename="gui/wmviewbase.cpp" line="472"/>
+        <location filename="gui/wmviewbase.cpp" line="490"/>
         <source>Sitzung Name (*.ses)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="487"/>
+        <location filename="gui/wmviewbase.cpp" line="488"/>
         <source>Sitzung laden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="603"/>
+        <location filename="gui/wmviewbase.cpp" line="604"/>
         <source>Justagedaten exportieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="605"/>
-        <location filename="gui/wmviewbase.cpp" line="617"/>
+        <location filename="gui/wmviewbase.cpp" line="606"/>
+        <location filename="gui/wmviewbase.cpp" line="618"/>
         <source>Datei Name (*.xml)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/wmviewbase.cpp" line="615"/>
+        <location filename="gui/wmviewbase.cpp" line="616"/>
         <source>Justagedaten importieren</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1335,6 +1335,11 @@ Details stehen in LogFile.</source>
 ( %1:%2 ).
 Details stehen in LogFile.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="87"/>
+        <source>Justage Data Written</source>
+        <translation>Justagedaten geschrieben</translation>
     </message>
 </context>
 </TS>
