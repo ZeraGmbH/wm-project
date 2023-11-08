@@ -52,8 +52,9 @@ void cPCBIFace::ActionHandler(int entryAHS)
         else {
             SocketDoneSlot();
         }
-	break; // pcbIFaceConnectYourselfStart
-	
+    break; // pcbIFaceConnectYourselfStart
+
+    case JustFlashEnabledFinished:
     case JustFlashProgFinished:
     case JustFlashExportFinished:
     case JustFlashImportFinished:
@@ -181,6 +182,11 @@ void cPCBIFace::ActionHandler(int entryAHS)
     SendcmpOffsetCoefficientCommand();
     AHS++;
     break; // cmpOffsetCoefficientStart
+
+    case JustFlashEnabledStart:
+    SendJustFlashEnabled();
+    AHS++;
+    break;
 
     case JustFlashProgStart:
 	SendJustFlashProgCommand();
@@ -402,6 +408,11 @@ void cPCBIFace::cmpOffsetCoefficient(QString chn)
     m_ActTimer->start(0,cmpOffsetCoefficientStart);
 }
 
+void cPCBIFace::JustFlashEnabled()
+{
+    m_ActTimer->start(0,JustFlashEnabledStart);
+}
+
 void cPCBIFace::JustFlashProgram()
 {
     m_ActTimer->start(0,JustFlashProgStart);
@@ -468,6 +479,7 @@ void cPCBIFace::SetSenseProtection(int p)
     m_nP1 = p;
     m_ActTimer->start(0,SetSenseProtectionStart);       
 }
+
 
 void cPCBIFace::SendOpenChannelCommand()
 {
@@ -585,6 +597,12 @@ void cPCBIFace::SendcmpOffsetCoefficientCommand()
 {
     QString cmds = QString("calc:%1:comp:coff\n").arg(m_sP1);
     iFaceSock->SendCommand(cmds);
+}
+
+void cPCBIFace::SendJustFlashEnabled()
+{
+    QString cmds = "mmem:enab?\n";
+    iFaceSock->SendQuery(cmds);
 }
 
 void cPCBIFace::SendJustFlashProgCommand()
