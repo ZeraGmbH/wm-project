@@ -2759,9 +2759,12 @@ void cWM3000U::ActionHandler(int entryAHS)
         break;
 
     case JustageFlashProgFinished:
+    {
+        wmMessageBox msgb;
+        msgb.justDataWritten();
         AHS = wm3000Idle; // ob fehler oder nicht wir sind fertig
         break;
-
+    }
     case JustageFlashExportStart:
         PCBIFace->JustFlashExport(JDataFile);
         AHS++;
