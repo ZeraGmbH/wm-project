@@ -55,7 +55,8 @@ void cPCBIFace::ActionHandler(int entryAHS)
             SocketDoneSlot();
         }
         break; // pcbIFaceConnectYourselfStart
-	
+
+    case JustFlashEnabledFinished:
     case JustFlashProgFinished:
     case JustFlashExportFinished:
     case JustFlashImportFinished:
@@ -175,7 +176,12 @@ void cPCBIFace::ActionHandler(int entryAHS)
         SendcmpOffsetCoefficientCommand();
         AHS++;
         break; // setPhaseNodeInfoStart
-	
+
+    case JustFlashEnabledStart:
+        SendJustFlashEnabled();
+        AHS++;
+        break;
+
     case JustFlashProgStart:
         SendJustFlashProgCommand();
         AHS++;
@@ -387,6 +393,11 @@ void cPCBIFace::cmpOffsetCoefficient(QString chn)
     m_ActTimer->start(0,cmpOffsetCoefficientStart);
 }
 
+void cPCBIFace::JustFlashEnabled()
+{
+    m_ActTimer->start(0,JustFlashEnabledStart);
+}
+
 void cPCBIFace::JustFlashProgram()
 {
     m_ActTimer->start(0,JustFlashProgStart);
@@ -564,6 +575,11 @@ void cPCBIFace::SendcmpOffsetCoefficientCommand()
     iFaceSock->SendCommand(cmds);
 }
 
+void cPCBIFace::SendJustFlashEnabled()
+{
+    QString cmds = "mmem:enab?\n";
+    iFaceSock->SendQuery(cmds);
+}
 
 void cPCBIFace::SendJustFlashProgCommand()
 {

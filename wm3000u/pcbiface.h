@@ -69,7 +69,10 @@ enum pcbIFaceActionHandlerState {
 
     cmpOffsetCoefficientStart,
     cmpOffsetCoefficientFinished,
-        
+
+    JustFlashEnabledStart,
+    JustFlashEnabledFinished,
+
     JustFlashProgStart,
     JustFlashProgFinished,
     
@@ -132,7 +135,8 @@ public:
     void setOffsetStatus(QString, QString, int);
     void cmpOffsetCoefficient(QString);
     void SetSenseProtection(int);
-       
+
+    void JustFlashEnabled();
     void JustFlashProgram();
     void JustFlashExport(QString);
     void JustFlashImport(QString);
@@ -171,6 +175,7 @@ private:
     void SendcmpOffsetCoefficientCommand();
     void SendSetSenseProtectionCommand();
     
+    void SendJustFlashEnabled();
     void SendJustFlashProgCommand();
     void SendJustFlashExportCommand();
     void SendJustFlashImportCommand();
