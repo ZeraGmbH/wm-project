@@ -253,12 +253,18 @@ enum wm3000ActionHandlerState {
     OffsetMeasChannelXSync,
     OffsetMeasChannelXFinished,
 
+    JustageFlashProgEnabledStart,
+    JustageFlashProgEnabledFinished,
+
     JustageFlashProgStart,
     JustageFlashProgFinished,
     
     JustageFlashExportStart,
     JustageFlashExportFinished,
     
+    JustageFlashImportEnabledStart,
+    JustageFlashImportEnabledFinished,
+
     JustageFlashImportStart,
     JustageFlashImportFinished, // 180
     

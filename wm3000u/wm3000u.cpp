@@ -2753,6 +2753,25 @@ void cWM3000U::ActionHandler(int entryAHS)
         AHS = wm3000Idle;
         break;
 
+    case JustageFlashProgEnabledStart:
+        PCBIFace->JustFlashEnabled();
+        AHS++;
+        break;
+
+    case JustageFlashProgEnabledFinished:
+    {
+        int i = PCBIFace->iFaceSock->GetAnswer().toInt(); // antwort lesen
+        if(i==0){
+            wmMessageBox msgb;
+            msgb.setSchnubbel();
+            AHS = wm3000Idle;
+            break;
+        }
+        AHS = JustageFlashProgStart;
+        m_ActTimer->start(0,wm3000Continue);
+        break;
+    }
+
     case JustageFlashProgStart:
         PCBIFace->JustFlashProgram();
         AHS++;
@@ -2773,6 +2792,25 @@ void cWM3000U::ActionHandler(int entryAHS)
     case JustageFlashExportFinished:
         AHS = wm3000Idle; // ob fehler oder nicht wir sind fertig
         break;
+
+    case JustageFlashImportEnabledStart:
+        PCBIFace->JustFlashEnabled();
+        AHS++;
+        break;
+
+    case JustageFlashImportEnabledFinished:
+    {
+        int i = PCBIFace->iFaceSock->GetAnswer().toInt(); // antwort lesen
+        if(i==0){
+            wmMessageBox msgb;
+            msgb.setSchnubbel();
+            AHS = wm3000Idle;
+            break;
+        }
+        AHS = JustageFlashImportStart;
+        m_ActTimer->start(0,wm3000Continue);
+        break;
+    }
 
     case JustageFlashImportStart:
         PCBIFace->JustFlashImport(JDataFile);
@@ -3170,7 +3208,7 @@ void cWM3000U::JustagePhaseBerechnungSlot(void)
 
 void cWM3000U::JustageFlashProgSlot(void)
 {
-    emit StartStateMachine(JustageFlashProgStart);
+    emit StartStateMachine(JustageFlashProgEnabledStart);
 }
 
 
@@ -3188,7 +3226,7 @@ void cWM3000U::JustageFlashImportSlot(QString s)
     QFileInfo fi( s );
     s.replace("."+fi.extension(false),"");
     JDataFile = s;
-    emit StartStateMachine(JustageFlashImportStart);
+    emit StartStateMachine(JustageFlashImportEnabledStart);
 }
 
 
