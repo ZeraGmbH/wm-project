@@ -17,6 +17,7 @@ public:
     int msgAnswerUnexpect(QString host, int port);
     int msgBusy(QString host, int port);
     void justDataWritten();
+    void setSchnubbel();
 signals:
 
 };

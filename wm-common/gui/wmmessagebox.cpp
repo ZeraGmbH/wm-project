@@ -87,3 +87,7 @@ void wmMessageBox::justDataWritten()
     QMessageBox::information(0,tr("Justage Data Written"),tr("Justage Data Written"));
 }
 
+void wmMessageBox::setSchnubbel()
+{
+    QMessageBox::critical(0,("Schnubbel"),tr("PCB Server reported:\n'Schnubbel not set!'\n\nPlease enable justage by activating\njustage-switch by inserting 'Schnubbel'\n\nAnd try again!\n\nNo data written!"));
+}
