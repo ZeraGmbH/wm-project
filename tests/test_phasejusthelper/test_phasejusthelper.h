@@ -22,6 +22,7 @@ private slots:
     void test_case4();
     void test_case5();
     void test_case6();
+    void test_negPhaseValues();
 
     void test_addLogString();
     void test_clearLogString();
@@ -31,7 +32,7 @@ private slots:
 private:
     void initTestValues();
     void initBellyTestValues(int i);
-    QList<float> values, values2, values3,bellyVal;
+    QList<float> values, values2, values3,bellyVal, negValues;
 
 };
 

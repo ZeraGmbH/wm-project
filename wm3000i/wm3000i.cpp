@@ -2305,7 +2305,7 @@ void cWM3000I::ActionHandler(int entryAHS)
                 // restart this measurement!
                 mCount = PhaseNodeMeasInfo->m_nnMeas; // und setzen den zähler dafür
                 JustValueList.clear();
-                mWmProgressDialog->setMessageStr("Hueppel");
+                mWmProgressDialog->setMessageStr("Hueppel Diff > 1'");
                 AHS = PhaseNodeMeasExec3;
                 m_ActTimer->start(0,wm3000Continue); // wir starten wieder selbst
 
