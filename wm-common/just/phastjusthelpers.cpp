@@ -34,7 +34,7 @@ bool PhastJustHelpers::deleteFaultyPhasenJustageItem(float mittel, float diff, Q
 
 void PhastJustHelpers::calculateMinMaxDiffValues(QList<float> *angleList, bool log)
 {
-    qreal min(359.99), max(0.0), diff(0.0), value(0.0), ph0(0.0);
+    qreal min(359.9), max(-359.9), diff(0.0), value(0.0), ph0(0.0);
     for (int i = 0; i < angleList->count(); i++){
         value = angleList->at(i);
         if (log) addToLog(QString("Ph0: %1").arg(value));

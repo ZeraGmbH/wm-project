@@ -67,6 +67,16 @@ void test_phasejusthelper::test_case6()
     QCOMPARE(bVal, false);
 }
 
+void test_phasejusthelper::test_negPhaseValues()
+{
+    initTestValues();
+    PhastJustHelpers helper;
+    helper.calculateMinMaxDiffValues(&negValues);
+    //float diff = helper.getDiffValue();
+    QCOMPARE( qFuzzyCompare(helper.getDiffValue(),static_cast<float>(0.0018988)),true);
+
+}
+
 void test_phasejusthelper::test_addLogString()
 {
     PhastJustHelpers helper;
@@ -113,6 +123,7 @@ void test_phasejusthelper::initTestValues()
     values.clear();
     values2.clear();
     values3.clear();
+    negValues.clear();
 
     values.append(0.041);
     values.append (0.042);
@@ -176,6 +187,27 @@ void test_phasejusthelper::initTestValues()
     values3.append(0.0189879);
     values3.append(0.0188513);
     values3.append(1.70558);
+
+    negValues.append(-0.0171966);
+    negValues.append(-0.0165272);
+    negValues.append(-0.0159945);
+    negValues.append(-0.0166365);
+    negValues.append(-0.0158852);
+    negValues.append(-0.015489);
+    negValues.append(-0.0166775);
+    negValues.append(-0.0172102);
+    negValues.append(-0.0166365);
+    negValues.append(-0.0168687);
+    negValues.append(-0.0172649);
+    negValues.append(-0.0166228);
+    negValues.append(-0.0164999);
+    negValues.append(-0.0160628);
+    negValues.append(-0.0165136);
+    negValues.append(-0.016213);
+    negValues.append(-0.0164043);
+    negValues.append(-0.0173878);
+    negValues.append(-0.0163496);
+    negValues.append(-0.0169234);
 }
 
 void test_phasejusthelper::initBellyTestValues(int i)
