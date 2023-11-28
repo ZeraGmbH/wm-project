@@ -7,4 +7,5 @@ SUBDIRS = \
     test_sessionfilenamegen \
     test_phasejusthelper \
     test_anglecmpoverfrequency \
+    test_cmpactvalue \
     test_sessionstreamer
