@@ -24,7 +24,6 @@
 
 #include "phastjusthelpers.h"
 #include "wmviewbase.h"
-#include "logfile.h"
 #include "range.h"
 #include "wm3000u.h"
 #include "wmparameter.h"
@@ -35,12 +34,12 @@
 #include "scpiquestionstates.h"
 #include "wmmessagebox.h"
 #include "anglecmpoverfrequency.h"
+#include "cmpactvalues.h"
 
 extern WMViewBase *g_WMView;
 char* MModeName[maxMMode] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"Un/nConvent"};
 
 const double PI = 3.141592654;
-const double PI_180 = 1.74532925e-2;
 
 const float PhaseJustFreq[4] = {16.66, 30.0, 50.0, 60.0}; // feste frequenzwerte zur phasenjustage
 
@@ -4205,6 +4204,8 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
     angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
     angleCorr = angleComp.getAngleCorrectionValue();
 
+    cmpActValues compute(&m_ConfData, &ActValues);
+
     ActValues.PHIN = normWinkelrad02PI(ActValues.dspActValues.phin - PI/2)-angleCorr;  // winkel zwischen 0 und 2PI
     if ( m_ConfData.m_nMeasMode == Un_nConvent) angleCorr = 0.0;
     ActValues.PHIX = normWinkelrad02PI(ActValues.dspActValues.phix - PI/2)-angleCorr;
@@ -4288,43 +4289,9 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
     // rotieren, wir legen vekn auf die ordinate und vekx hat den winkel dphif = konstant
     // winkel korrekturen aus abtastverzögerungen und phasenkorrekturwerten
 
-    double phik;
-    //  korrektur des kanal X vektors mit der abtastverzögerung und dem bekannten phasenfehler des prüflings
-    phik = ( ( -360.0  * ActValues.Frequenz * m_ConfData.m_fxTimeShift * 1.0e-3 ) - m_ConfData.m_fxPhaseShift) * PI_180;
+    compute.setFactors(kn,kx);
+    compute.berechnung(&m_ownError);
 
-    // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
-    // a certain value dependent of the rated sample rate and the rated frequency (aka samplerate).
-
-    ActValues.VekXSek *= complex( cos(phik),sin(phik) );
-
-    // eigenfehler korrektur des normwandlers
-
-    ActValues.UInCorr = m_ownError.GetOECorrVector(); // achtung complex !!!!!
-    ActValues.VekNSek *= ActValues.UInCorr;
-
-    // umrechnen auf primärgrößen
-
-    ActValues.VekX = ActValues.VekXSek * kx;
-    ActValues.VekN = ActValues.VekNSek * kn;
-
-    //  fehler berechnung
-
-    ActValues.AngleError = UserAtan(ActValues.VekX) - UserAtan(ActValues.VekN);
-    ActValues.AngleError = normWinkelrad_PIPI(ActValues.AngleError);
-
-    double err;
-
-    if (m_ConfData.m_bDCmeasurement)
-        err = (ActValues.VekX.re() - ActValues.VekN.re()) / ActValues.VekN.re();
-    else
-    {
-        double absN;
-        absN = fabs(ActValues.VekN);
-        err = (fabs(ActValues.VekX) -absN) / absN;
-    }
-
-    ActValues.AmplErrorIEC = 100.0 * err;
-    ActValues.RCF = 1.0 / (1.0 + err);
     ActValues.AmplErrorANSI = (ActValues.AmplErrorIEC/100.0 - ( (1.0+ActValues.AmplErrorIEC/100.0) * (4.0 / 3.0) * ActValues.AngleError ))*100.0;
 
     ActValues.bvalid = true; // aktivieren der fehleranzeige

@@ -122,9 +122,10 @@
 //                  interface musste angepasst werden. der automatische phasenabgleich war entsprechend
 //                  zu erweitern. die neue version läuft nur mit dem leiterkarten server ab v2.09.
 // V2.39 8.9.2023   Tons of changes documented in github
+// V2.40 28.11.2023 cmpactvalues added under test
 
 
-#define WMVersion "V2.39"
+#define WMVersion "V2.40"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"
