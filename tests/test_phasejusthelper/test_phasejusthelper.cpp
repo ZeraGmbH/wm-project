@@ -22,6 +22,7 @@ void test_phasejusthelper::test_case1()
 void test_phasejusthelper::test_case2()
 {
     PhastJustHelpers helper;
+    initTestValues();
     helper.calculateMinMaxDiffValues(&values2);
     QCOMPARE( qFuzzyCompare(helper.getMinValue(),static_cast<float>(38.1)), true);
     QCOMPARE( qFuzzyCompare(helper.getMaxValue(),static_cast<float>(38.9)), true);
@@ -30,6 +31,7 @@ void test_phasejusthelper::test_case2()
 void test_phasejusthelper::test_case3()
 {
     PhastJustHelpers helper;
+    initTestValues();
     helper.calculateMinMaxDiffValues(&values);
     helper.deleteFaultyPhasenJustageItem(helper.getMeanValues(),helper.getDiffValue(),&values);
     QCOMPARE(values.count(),19);
@@ -38,6 +40,7 @@ void test_phasejusthelper::test_case3()
 void test_phasejusthelper::test_case4()
 {
     PhastJustHelpers helper;
+    initTestValues();
     helper.calculateMinMaxDiffValues(&values2);
     helper.deleteFaultyPhasenJustageItem(helper.getMeanValues(),helper.getDiffValue(),&values2);
     QCOMPARE(values2.count(),19);
@@ -47,9 +50,10 @@ void test_phasejusthelper::test_case4()
 void test_phasejusthelper::test_case5()
 {
     PhastJustHelpers helper;
+    initTestValues();
     helper.calculateMinMaxDiffValues(&values3);
     helper.deleteFaultyPhasenJustageItem(helper.getMeanValues(),helper.getDiffValue(),&values3);
-    QCOMPARE(values2.count(),19);
+    QCOMPARE(values3.count(),19);
     //QString log;
     //log = helper.getLogString();
 }
@@ -116,6 +120,21 @@ void test_phasejusthelper::test_BellyDetector()
     helper.clearLogStr();
     QCOMPARE(helper.hasBelly(),false);
     QCOMPARE(helper.getLogString().length(),0);
+}
+
+void test_phasejusthelper::test_only20Values()
+{
+    initTestValues();
+    QList<float> testValues;
+    testValues.append(values2);
+    testValues.append(0.7);
+    testValues.append(0.8);
+    testValues.append(0.9);
+    testValues.append(1.0);
+    testValues.append(negValues);
+    PhastJustHelpers helper;
+    helper.calculateMinMaxDiffValues(&testValues);
+    QCOMPARE( qFuzzyCompare(helper.getDiffValue(),static_cast<float>(0.0018988)),true);
 }
 
 void test_phasejusthelper::initTestValues()
