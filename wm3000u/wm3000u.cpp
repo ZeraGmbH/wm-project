@@ -190,6 +190,7 @@ cWM3000U::cWM3000U() :
     connect(&m_wmwdt,SIGNAL(timeout()),this,SLOT(externalTriggerTimeoutTriggerd()));
 
     m_bNewSamplerates = false;
+    m_bJustage = false;
 }
 
 
@@ -3143,6 +3144,11 @@ void cWM3000U::setIpAddress(QString address)
     setupServers();
 }
 
+void cWM3000U::setJustage()
+{
+    m_bJustage = true;
+}
+
 void cWM3000U::setupServers()
 {
     // default TCP connection
@@ -4200,9 +4206,11 @@ void cWM3000U::CmpActValues() {  // here we will do all the necessary computatio
     // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
     // a certain value dependent of the rated sample rate and the rated frequency (aka samplerate).
 
-    double angleCorr;
-    angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
-    angleCorr = angleComp.getAngleCorrectionValue();
+    double angleCorr(0.0);
+    if (!m_bJustage) { // true when WM was started with option justage
+        angleCmpOverFrequency angleComp(&m_ConfData, &ActValues);
+        angleCorr = angleComp.getAngleCorrectionValue();
+    }
 
     cmpActValues compute(&m_ConfData, &ActValues);
 

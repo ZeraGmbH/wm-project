@@ -334,6 +334,7 @@ public:
     void setNewSamplerates(bool b);
     bool isNewSamplerates();
     void setIpAddress(QString address);
+    void setJustage();
 
 
 public slots:
@@ -430,6 +431,7 @@ protected:
 private:
     bool m_binitDone;
     bool m_bIFError; // zum feststellen ob bei der letzten aktion ein fehler war
+    bool m_bJustage;
     // cWM3000SCPIFace* m_pWM3000SCPIFace;
     // cZeraDeviceServer* m_pZeraDeviceServer;
     
