@@ -23,11 +23,10 @@ private slots:
     void test_case5();
     void test_case6();
     void test_negPhaseValues();
-
     void test_addLogString();
     void test_clearLogString();
-
     void test_BellyDetector();
+    void test_only20Values();
 
 private:
     void initTestValues();

@@ -2215,6 +2215,8 @@ void cWM3000I::ActionHandler(int entryAHS)
         if (mCount == 0) { // eingeschwungen
             m_PhaseNodeMeasState = PhaseNodeMeasExec3; // ab jetzt messen wir wirklich
             mCount = PhaseNodeMeasInfo->m_nnMeas; // und setzen den zähler dafür
+            if (N == 2)   // 50 Hz
+                mCount = 100;
             mWmProgressDialog->setMinMax3rd(0,mCount);
             switch (PhaseNodeMeasInfo->m_nJMode)
             { // geht anders .... aber ist so übersichtlicher
