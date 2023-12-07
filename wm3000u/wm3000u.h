@@ -473,7 +473,7 @@ private:
 
     void SimulatedMeasurement();
     void CmpActFrequency();
-    void CmpActValues();
+    void wmCmpActValues();
     void CmpRMSValues();
     void CorrActValues();
     void CorrRMSValues();

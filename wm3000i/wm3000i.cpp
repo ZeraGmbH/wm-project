@@ -1527,7 +1527,7 @@ void cWM3000I::ActionHandler(int entryAHS)
             m_JustValues.OffsetCorrCh1 = ocs.toFloat();
 
             CorrActValues();
-            CmpActValues();
+            wmCmpActValues();
             emit SendActValuesSignal(&ActValues);
             emit MeasureReady();
         }
@@ -4371,7 +4371,7 @@ void cWM3000I::SimulatedMeasurement()
     MaxValues.maxx = ActValues.dspActValues.ampl1xf;
     MaxValues.maxRdy = 1.0; // maxima sind verfügbar
     
-    CmpActValues();
+    wmCmpActValues();
     CmpRMSValues();
     emit SendActValuesSignal(&ActValues);
     emit SendLPSignal(&ActValues);
@@ -4402,7 +4402,7 @@ void cWM3000I::CmpActFrequency()
 }
 
 
-void cWM3000I::CmpActValues() {  // here we will do all the necessary computations
+void cWM3000I::wmCmpActValues() {  // here we will do all the necessary computations
     // korrektur der rohwinkel weil fft phi = 0 für cosinus
     
     // This is the 2023 Version of the next level correction, only in non conventional mode, the angle error shall be corrected by
