@@ -2189,6 +2189,9 @@ void cWM3000I::ActionHandler(int entryAHS)
         NewConfData.m_sRangeETSoll = NewConfData.m_sRangeET = NewConfData.m_sRangeETVorgabe; // bereich kanal x
         m_PhaseNodeMeasState = PhaseNodeMeasExec2; // hier müssen wir später weitermachen
         mCount = PhaseNodeMeasInfo->m_nIgnore; // einschwingzeit setzen in messdurchläufen
+        //if (PhaseNodeMeasInfo->m_srngX.contains("25mV") || PhaseNodeMeasInfo->m_srngX.contains("50mV") || PhaseNodeMeasInfo->m_srngX.contains("100mV"))
+        //    // definition aus SetPhaseNodeMeasInfo ist 4 für nIgnore (wartezeit = 4 Messungen warten)
+        //    mCount = 40;
         m_sJustText = trUtf8("Einschwingzeit läuft" );
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
         mWmProgressDialog->setMinMax2nd(0,4);
@@ -2244,7 +2247,6 @@ void cWM3000I::ActionHandler(int entryAHS)
 
     case PhaseNodeMeasExec3:
     {
-        int i;
         ph0 = ActValues.PHIN;
         ph1 = ActValues.PHIX;
         if (mWmProgressDialog->isAbort()) {
@@ -2282,7 +2284,6 @@ void cWM3000I::ActionHandler(int entryAHS)
         mWmProgressDialog->setValue3(mCount);
         if (mCount == 0)
         {
-            qreal min(359.99), max(0.0), diff(0.0), value(0.0);
             mWmProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));
             //mWmProgressDialog->set2ndDisabled();
             //mWmProgressDialog->set3rdDisabled();
