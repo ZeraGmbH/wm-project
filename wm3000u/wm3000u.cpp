@@ -4212,7 +4212,7 @@ void cWM3000U::wmCmpActValues() {  // here we will do all the necessary computat
         angleCorr = angleComp.getAngleCorrectionValue();
     }
 
-    cmpActValues compute(&m_ConfData, &ActValues);
+    cmpActValues computeActVal(&m_ConfData, &ActValues);
 
     ActValues.PHIN = normWinkelrad02PI(ActValues.dspActValues.phin - PI/2)-angleCorr;  // winkel zwischen 0 und 2PI
     if ( m_ConfData.m_nMeasMode == Un_nConvent) angleCorr = 0.0;
@@ -4297,8 +4297,8 @@ void cWM3000U::wmCmpActValues() {  // here we will do all the necessary computat
     // rotieren, wir legen vekn auf die ordinate und vekx hat den winkel dphif = konstant
     // winkel korrekturen aus abtastverzögerungen und phasenkorrekturwerten
 
-    compute.setFactors(kn,kx);
-    compute.berechnung(&m_ownError);
+    computeActVal.setFactors(kn,kx);
+    computeActVal.berechnung(&m_ownError);
 
     ActValues.AmplErrorANSI = (ActValues.AmplErrorIEC/100.0 - ( (1.0+ActValues.AmplErrorIEC/100.0) * (4.0 / 3.0) * ActValues.AngleError ))*100.0;
 
