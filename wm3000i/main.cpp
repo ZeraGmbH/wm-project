@@ -100,8 +100,10 @@ int main(int argc, char *argv[])
     g_WMView = new WMViewBaseI; // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
 
-    if (!bJustage)
+    if (!bJustage){
         g_WMView->removeJustageItem();
+        g_WMDevice->setJustage();
+    }
 
     g_WMDevice->setConventional(bconvent);
     if (bconvent)

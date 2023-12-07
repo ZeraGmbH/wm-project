@@ -344,6 +344,7 @@ public:
     void setNewSamplerates(bool b);
     bool isNewSamplerates();
     void setIpAddress(QString address);
+    void setJustage();
 
 public slots:
      // slots, die vom hauptfenster aus aktiviert werden
@@ -438,6 +439,7 @@ protected:
 private:
     bool m_binitDone;
     bool m_bIFError; // zum feststellen ob bei der letzten aktion ein fehler war
+    bool m_bJustage; // this disables frequency kompensation during justage
     
     void DefaultSettings(cConfData&);
     void DefaultSettingsMeasurement(cConfData&);
