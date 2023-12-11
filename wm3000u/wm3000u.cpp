@@ -2068,6 +2068,8 @@ void cWM3000U::ActionHandler(int entryAHS)
     case PhaseNodeMeasExec2:
         mCount--;
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
+        if (N == 2)   // 50 Hz
+            mCount = 100;
         mWmProgressDialog->setValue3(mCount);
         if (mWmProgressDialog->isAbort()) {
             AHS = PhaseNodeMeasExec5;
