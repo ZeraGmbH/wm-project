@@ -2068,8 +2068,6 @@ void cWM3000U::ActionHandler(int entryAHS)
     case PhaseNodeMeasExec2:
         mCount--;
         mWmProgressDialog->setLabelText (QString("%1 %2 ...").arg(m_sJustText).arg(mCount));
-        if (N == 2)   // 50 Hz
-            mCount = 100;
         mWmProgressDialog->setValue3(mCount);
         if (mWmProgressDialog->isAbort()) {
             AHS = PhaseNodeMeasExec5;
@@ -2082,6 +2080,8 @@ void cWM3000U::ActionHandler(int entryAHS)
         { // eingeschwungen
             m_PhaseNodeMeasState = PhaseNodeMeasExec3; // ab jetzt messen wir wirklich
             mCount = PhaseNodeMeasInfo->m_nnMeas; // und setzen den zähler dafür
+            if (N == 2)   // 50 Hz
+                mCount = 100;
             mWmProgressDialog->setMinMax3rd(0,mCount);
             switch (PhaseNodeMeasInfo->m_nJMode)
             { // geht anders .... aber ist so übersichtlicher
