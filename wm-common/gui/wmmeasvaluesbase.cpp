@@ -265,6 +265,7 @@ void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* 
         m_Format[i] = *fi;
     m_nDisplayMode = m;
     m_nLPDisplayMode = m2;
+    onSaveConfig();
 }
 
 void WMMeasValuesBase::onSaveConfig()

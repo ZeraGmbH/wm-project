@@ -211,6 +211,7 @@ void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
     WinkelDispMode = m2;
     PrimSekDispMode = m3;
     setSettingslabel();
+    onSaveConfig();
 }
 
 void WMRawActualValBase::onSaveConfig()
