@@ -133,6 +133,9 @@ void ConfDialogBase::init()
     {
         ui->ConfTabWidget->removeChild(ui->DCRadioButton);
         ui->ACRadioButton->setEnabled(false);
+        ui->Widget9->removeChild(ui->OffsetCorrectionNCheckbox);
+        ui->Widget9->removeChild(ui->OffsetCorrectionXCheckbox);
+        ui->Widget9->removeChild(ui->CmpKorrGroupBox_3);
     }
 
     if (!g_WMDevice->isNewSamplerates())
