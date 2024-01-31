@@ -123,9 +123,10 @@
 //                  zu erweitern. die neue version läuft nur mit dem leiterkarten server ab v2.09.
 // V2.39 8.9.2023   Tons of changes documented in github
 // V2.40 28.11.2023 cmpactvalues added under test
+// V2.41 31.1.2024  changes cofdialogbase to delete dc correction on non dc WMs
 
 
-#define WMVersion "V2.40"
+#define WMVersion "V2.41"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"

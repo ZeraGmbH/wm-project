@@ -105,9 +105,9 @@
 //                  WM got stuck on INIT Command when sync was set to extern
 // V2.36 08.09.2023 Tons of changes documented in github
 // V2.37 28.11.2023 cmpactvalues added under test
+// V2.38 31.1.2024  changes cofdialogbase to delete dc correction on non dc WMs
 
-
-#define WMVersion "V2.37"
+#define WMVersion "V2.38"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
