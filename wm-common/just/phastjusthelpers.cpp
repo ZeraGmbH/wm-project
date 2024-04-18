@@ -34,11 +34,13 @@ bool PhastJustHelpers::deleteFaultyPhasenJustageItem(float mittel, float diff, Q
 
 void PhastJustHelpers::calculateMinMaxDiffValues(QList<float> *angleList, bool log)
 {
+    const int iNumberOfValues  = 20; // This number of Measured values shall be taken into acount
     qreal min(359.9), max(-359.9), diff(0.0), value(0.0), ph0(0.0);
-    int start;
-    start = angleList->count()-20;
-    if (start < 0)
+    int start, number = 0;
+    start = angleList->count() - iNumberOfValues;
+    if (start < 0){
         start = 0;
+    }
     for (int i = 0; i < angleList->count(); i++){
         value = angleList->at(i);
         if (log) addToLog(QString("Ph0: %1").arg(value));
@@ -46,11 +48,12 @@ void PhastJustHelpers::calculateMinMaxDiffValues(QList<float> *angleList, bool l
             if( min > value) min = value;
             if (max < value) max = value;
             ph0 -= value;
+            number++;
         }
     }
     diff = (max - min) * 60.0;  // 1,6858° -> 1° 41' 9" -> 41,1516'
     addToLog(QString("Diff: %1 Minuten").arg(diff));
-    ph0 /= angleList->count();
+    ph0 /= number;
     addToLog(QString("Mean: %1").arg(ph0));
     m_fMin = min;
     m_fMax = max;
