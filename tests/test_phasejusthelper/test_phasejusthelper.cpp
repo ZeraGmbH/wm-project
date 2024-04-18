@@ -135,6 +135,7 @@ void test_phasejusthelper::test_only20Values()
     PhastJustHelpers helper;
     helper.calculateMinMaxDiffValues(&testValues);
     QCOMPARE( qFuzzyCompare(helper.getDiffValue(),static_cast<float>(0.0018988)),true);
+    QCOMPARE( qFuzzyCompare(helper.getMeanValues(),static_cast<float>(-0.0165682)),true);
 }
 
 void test_phasejusthelper::initTestValues()
