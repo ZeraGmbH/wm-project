@@ -14,6 +14,7 @@ HEADERS = \
     dsp/dspmeasdata.h \
     dsp/dspsetup.h \
     dsp/dspvar.h \
+    gui/cwmessagebox.h \
     gui/wmmessagebox.h \
     gui/wmviewbase.h \
     gui/bigletter.h \
@@ -99,6 +100,7 @@ SOURCES = \
     client-access/deviceserver.cpp \
     dsp/dspmeasdata.cpp \
     dsp/dspsetup.cpp \
+    gui/cwmessagebox.cpp \
     gui/wmmessagebox.cpp \
     gui/wmviewbase.cpp \
     gui/en61850monitor.cpp \
