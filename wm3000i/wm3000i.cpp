@@ -1718,6 +1718,7 @@ void cWM3000I::ActionHandler(int entryAHS)
 
 
                 bOverloadMaxOld = bOverloadMax;
+                bOverloadMax = false;
 
 #ifdef DEBUG
                 qDebug("RangeObsermatic overload=%s", bOverload?"1":"0");
@@ -1772,24 +1773,27 @@ void cWM3000I::ActionHandler(int entryAHS)
 
 
     case RangeObsermaticOverload:
+        if (m_OVLMsgBox->count() != 0)
+            qDebug() << "Time: " << mTime.currentTime().toString("ss.zzz") << "Overload: " << m_OVLMsgBox->count();
         if (m_ConfData.m_bSimulation) {
             AHS = wm3000Idle;
         }
         else
         {
-            if (bOverloadMax && (!bOverloadMaxOld) ) // nur  nach positiver flanke !!!
-            {
+            if (m_OVLMsgBox->analyseOvld(bOverloadMax,bOverloadMaxOld)){
                 m_OVLMsgBox->show();
-                emit AffectStatus(SetQuestStat, QuestOverLoadMax);
-                PCBIFace->SetSenseProtection(1); // overloadmax -> schutzschaltung aktivieren
+                    emit AffectStatus(SetQuestStat, QuestOverLoadMax);
+                    PCBIFace->SetSenseProtection(1); // overloadmax -> schutzschaltung aktivieren
+                }
 #ifdef DEBUG
                 StopMeasurement(); // wir hören hier im debug fall auf, so können wir
                 AHS = wm3000Idle;  // uns die history auf dem xterm ansehen
 
 #endif		
-            }
-            else
+//            }
+            else {
                 m_ActTimer->start(0,wm3000Continue); // rangeobsermaticresetmaximum
+            }
 
             AHS++;
         }
