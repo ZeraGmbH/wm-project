@@ -1627,6 +1627,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                 bool bOvlx = false;
 
                 bOverloadMaxOld = bOverloadMax;
+                bOverloadMax = false;
 
                 mustDo |= SelectRange(m_sNRangeList,m_ConfData.m_sRangeN,m_ConfData.m_sRangeNSoll,m_ConfData.m_sRangeNVorgabe,MaxValues.maxn,bOvln);
 
@@ -1670,20 +1671,22 @@ void cWM3000U::ActionHandler(int entryAHS)
 
 
     case RangeObsermaticOverload:
+        if (m_OVLMsgBox->count() != 0)
+        qDebug() << "Time: " << mTime.currentTime().toString("ss.zzz") << "Overload: " << m_OVLMsgBox->count();
         if (m_ConfData.m_bSimulation) {
             AHS = wm3000Idle;
         }
         else
         {
-            if (bOverloadMax && (!bOverloadMaxOld) ) // nur  nach positiver flanke !!!
-            {
+            if (m_OVLMsgBox->analyseOvld(bOverloadMax,bOverloadMaxOld)){
                 m_OVLMsgBox->show();
+
                 emit AffectStatus(SetQuestStat, QuestOverLoadMax);
                 PCBIFace->SetSenseProtection(1); // overloadmax -> schutzschaltung aktivieren
             }
-            else
+            else {
                 m_ActTimer->start(0,wm3000Continue); // rangeobsermaticresetmaximum
-
+            }
             AHS++;
         }
 

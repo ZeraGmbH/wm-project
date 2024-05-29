@@ -497,6 +497,7 @@ private:
     QString m_IpAddress;
     DspSetup m_dspSetup;
     WmWatchDogTimer m_wmwdt;
+    QTime mTime;
     void setupServers();
     void setupSampleDialog();
 };
