@@ -43,23 +43,6 @@ const double PI = 3.141592654;
 
 const float PhaseJustFreq[4] = {16.66, 30.0, 50.0, 60.0}; // feste frequenzwerte zur phasenjustage
 
-
-cWMessageBox::cWMessageBox ( const QString & caption, const QString & text, Icon icon, int button0, int button1, int button2, QWidget * parent, const char * name , bool modal, Qt::WFlags f ) : QMessageBox ( caption, text, icon, button0, button1, button2, parent, name, modal, f)
-{
-}
-
-cWMessageBox::~cWMessageBox()
-{
-}
-
-
-void cWMessageBox::done(int r)
-{
-    emit WMBoxClosed();
-    QMessageBox::done(r);
-}
-
-
 cWM3000I::cWM3000I() :
     m_ownError(new Wm3000iOwnErrorParamChecker)
 {
