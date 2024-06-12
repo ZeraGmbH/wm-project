@@ -124,9 +124,11 @@
 // V2.39 8.9.2023   Tons of changes documented in github
 // V2.40 28.11.2023 cmpactvalues added under test
 // V2.41 31.1.2024  changes cofdialogbase to delete dc correction on non dc WMs
+// V2.42            Actual Values take 100 calculate last 20
+// V2.43 12.6.24    Adds overload to special class cwmmessagebox
 
 
-#define WMVersion "V2.41"
+#define WMVersion "V2.43"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"
