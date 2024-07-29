@@ -126,6 +126,7 @@
 // V2.41 31.1.2024  changes cofdialogbase to delete dc correction on non dc WMs
 // V2.42            Actual Values take 100 calculate last 20
 // V2.43 12.6.24    Adds overload to special class cwmmessagebox
+// V2.44 29.7.24    Bugfix setting samplerates from interface
 
 
 #define WMVersion "V2.43"
