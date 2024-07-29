@@ -1032,24 +1032,23 @@ void cWM3000SCPIFace::mSetConfMeasSRate(char* s)
 
     if ( SearchEntry(&s, SRates, MaxSRate, src, true) )
     {
-        if (!m_Special->isNewSamplerates())
+        switch (src)
         {
-            switch (src)
-            {
-            case S96:
-            case S240:
-            case S288:
+        case S96:
+        case S240:
+        case S288:
+            if(!m_Special->isNewSamplerates())
                 AddEventError(ParameterNotAllowed);
-                break;
-            }
-
-            return;
+            else
+                m_ConfDataTarget.m_nSRate = src;
+            break;
+        case S80:
+        case S256:
+            m_ConfDataTarget.m_nSRate = src;
+            break;
         }
-
-        m_ConfDataTarget.m_nSRate = src;
     }
 }
-
 
 char* cWM3000SCPIFace::mGetConfMeasSFreq()
 {
