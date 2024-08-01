@@ -317,7 +317,7 @@ void ConfDialogBase::SetRatioMenu()
 
 void ConfDialogBase::SetLogMenu()
 {
-   ui->LogfileSizeSpinbox->setValue(m_ConfDataTemp.m_nLogFileMax >>16);
+   ui->LogfileSizeSpinbox->setValue(m_ConfDataTemp.m_nLogFileMax >>10);
 }
 
 
@@ -402,7 +402,7 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
     m_ConfDataTemp.m_bStrongEthSynchronisation=ui->SSynccheckBox->isChecked();
     // SyncMenu gescannt
     
-    m_ConfDataTemp.m_nLogFileMax=(ui->LogfileSizeSpinbox->value())<<16;
+    m_ConfDataTemp.m_nLogFileMax=(ui->LogfileSizeSpinbox->value())<<10;
     // LogMenu gescannt
     
      if (ui->RatioNPrimComboBox->count()==0)   // es existiert keine eigenfehlertabelle, bzw. korrektur aus
