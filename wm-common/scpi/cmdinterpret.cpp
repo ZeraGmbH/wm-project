@@ -36,9 +36,7 @@ bool cCmdInterpreter::CmdExecute(cNode* RootCmd,cbIFace* callback, char* CmdStri
     return (ret);
 }
 
-
 void cCmdInterpreter::SetParser(cParse* p)
 {
     m_pParser = p;
 }
-

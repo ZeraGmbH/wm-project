@@ -8,4 +8,5 @@ SUBDIRS = \
     test_phasejusthelper \
     test_anglecmpoverfrequency \
     test_cmpactvalue \
-    test_sessionstreamer
+    test_sessionstreamer \
+    test_deviface

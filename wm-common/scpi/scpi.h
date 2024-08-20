@@ -50,6 +50,15 @@ public:
     virtual  ~cNodeSCPI(){};
     // konstruktor, sNodeName, nNodedef, pNextNode, pNewLevelNode, Cmd, Query
     virtual cNode* TestNode(cCmdInterpreter*, char**); // zeiger, zeiger auf zeiger auf inputzeile, testet den knoten
+    QString getNodeName() ;
+    bool hasChild();
+    cNodeSCPI *getChild();
+    bool hasNext();
+    cNodeSCPI *getNext();
+    bool bIsNode() {return nNodeDef & isNode;};
+    bool bIsQuery() {return nNodeDef & isQuery;};
+    bool bIsCommand(){return nNodeDef & isCommand;};
+    bool bIsValidCommand() {return m_nCmd;};
 private:
     cSCPIString sNodeName; // name des knoten
 };
