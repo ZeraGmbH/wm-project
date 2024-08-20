@@ -20,6 +20,7 @@ public:
     cParse* m_pParser;
     void SetParser(cParse*); // wir können ihn umschreiben
     bool CmdExecute(cNode*,cbIFace*, char*, char*&); // return ja/nein , par die befehlsliste, das callback interface, input , output
+
     cbIFace* m_pcbIFace; // pointer auf call back interface
     QStringList dedicatedList; // liste gefundener schlüsselwörter
 };

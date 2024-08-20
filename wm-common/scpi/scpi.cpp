@@ -72,9 +72,33 @@ cNode* cNodeSCPI::TestNode(cCmdInterpreter* ci,char** inp)
 	 m_nNodeStat |= (nNodeDef & isCommand); // gesetzt wenn es eines sein darf
                *inp=tinp; // lass dem Kommando das zeichen (reparsen)
 	 return (NULL);
-     }
+    }
 }
 
+QString cNodeSCPI::getNodeName()
+{
+    return sNodeName;
+}
+
+bool cNodeSCPI::hasChild()
+{
+    return this->pNewLevelNode;
+}
+
+cNodeSCPI *cNodeSCPI::getChild()
+{
+    return static_cast<cNodeSCPI*> (pNewLevelNode);
+}
+
+bool cNodeSCPI::hasNext()
+{
+    return this->pNextNode;
+}
+
+cNodeSCPI *cNodeSCPI::getNext()
+{
+    return static_cast<cNodeSCPI*> (pNextNode);
+}
 
 cNodeSCPIVar::cNodeSCPIVar(QStringList* sl,int ns,cNode* n1,cNode* n2,int ct,int qt)
     :cNode(ns,n1,n2,ct,qt)	{

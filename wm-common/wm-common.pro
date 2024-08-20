@@ -58,6 +58,7 @@ HEADERS = \
     scpi/cmdtimer.h \
     scpi/parse.h \
     scpi/scpi.h \
+    scpi/scpideviface.h \
     scpi/scpierrortypes.h \
     scpi/scpiface.h \
     scpi/scpistatsyst.h \
@@ -131,6 +132,7 @@ SOURCES = \
     scpi/cmdtimer.cpp \
     scpi/parse.cpp \
     scpi/scpi.cpp \
+    scpi/scpideviface.cpp \
     scpi/scpierrortypes.cpp \
     scpi/scpiface.cpp \
     scpi/scpistatsyst.cpp \

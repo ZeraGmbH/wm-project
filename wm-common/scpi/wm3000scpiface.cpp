@@ -9,6 +9,7 @@
 #include "scpierrortypes.h"
 #include "scpierrorindicator.h"
 #include "wm3kscpispecialbase.h"
+#include "scpideviface.h"
 
 #include <QFile>
 
@@ -1298,6 +1299,14 @@ void cWM3000SCPIFace::mStartDeviceJustageOffset(char* s)
     SetnoOperFlag(false); // wir warten auf justage fertig
 }
 
+char *cWM3000SCPIFace::mDeviceInterFace()
+{
+    QString test;
+    scpideviface iface;
+    test = iface.GetInterface(m_pCommands);
+    return sAlloc(test);
+}
+
 
 bool cWM3000SCPIFace::SearchEntry(char** s, char** sa, int max, int& n, bool chkEnd) // suche, worin, wieviele einträge, eintrag, test auf ende
 {
@@ -2093,6 +2102,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfOperSignalCatalog: an = mGetConfOperSignalCatalog();break;
         case GetConfOperSignal: an = mGetConfOperSignal();break;
         case getPhaseJustageState: an = mGetPhaseJustageState();break;
+        case DeviceInterFace: an = mDeviceInterFace(); break;
 
         default:	qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
         }
@@ -2158,6 +2168,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfOperMode:
         case GetConfOperSignalCatalog:
         case getPhaseJustageState:
+        case DeviceInterFace:
         case GetConfOperSignal:
             m_stateMachineTimer.start(0, ExecCmdPartFinished);
         default:
@@ -2180,6 +2191,9 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
 // die vollständige scpi kommando liste
 
 cNodeSCPI* device;
+
+cNodeSCPI* deviceIFace;
+
 cNodeSCPI* deviceJust;
 cNodeSCPI* deviceJustPhase;
 cNodeSCPI* deviceJustOffset;
@@ -2403,7 +2417,9 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     deviceJustPhase = new cNodeSCPI("PHASE", isCommand ,deviceJustOffset,NULL,StartDeviceJustagePhase,nixCmd);
     deviceJust = new cNodeSCPI("JUST",isNode,NULL,deviceJustPhase,nixCmd,nixCmd);
 
-    device = new cNodeSCPI("DEVICE",isNode, Configuration, deviceJust, nixCmd, nixCmd);
+    deviceIFace = new cNodeSCPI("IFACE", isQuery,deviceJust,NULL,nixCmd,DeviceInterFace);
+
+    device = new cNodeSCPI("DEVICE",isNode, Configuration, deviceIFace, nixCmd, nixCmd);
 
     return (device);
 

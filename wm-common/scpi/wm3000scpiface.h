@@ -146,7 +146,8 @@ enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
               GetConfOperSignal,
               StartDeviceJustagePhase,
               getPhaseJustageState,
-              StartDeviceJustageOffset
+              StartDeviceJustageOffset,
+              DeviceInterFace
     		      };
 
 
@@ -392,6 +393,7 @@ private:
     void mStartDeviceJustagePhase(char*);
     char* mGetPhaseJustageState();
     void mStartDeviceJustageOffset(char *);
+    char* mDeviceInterFace();
 };
 
 #endif
