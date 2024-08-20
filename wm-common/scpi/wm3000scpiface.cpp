@@ -2406,7 +2406,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
 
     ConfigurationComputation=new cNodeSCPI("COMPUTATION",isNode,ConfigurationMeasure,ConfigurationComputationNOffset,nixCmd,nixCmd);
     ConfigurationOperationSignalCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,GetConfOperSignalCatalog);
-    ConfigurationOperationSignal=new cNodeSCPI("SIGNAL",isNode | isQuery | isCommand,ConfigurationComputation,ConfigurationOperationSignalCatalog,SetConfOperSignal,GetConfOperSignal);
+    ConfigurationOperationSignal=new cNodeSCPI("SIGNAL",isNode | isQuery | isCommand,NULL,ConfigurationOperationSignalCatalog,SetConfOperSignal,GetConfOperSignal);
     ConfigurationOperationModeCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,GetConfOperModeCatalog);
     ConfigurationOperationMode=new cNodeSCPI("MODE",isNode | isQuery | isCommand,ConfigurationOperationSignal,ConfigurationOperationModeCatalog,SetConfOperMode,GetConfOperMode);
     ConfigurationOperation=new cNodeSCPI("OPERATION",isNode,ConfigurationComputation,ConfigurationOperationMode,nixCmd,nixCmd);
