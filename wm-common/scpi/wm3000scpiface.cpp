@@ -2362,7 +2362,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     Read=new cNodeSCPI("READ",isNode | isQuery,Sense,ReadLoadpoint,nixCmd,MeasurementRead);
     Fetch=new cNodeSCPI("FETCH",isNode | isQuery,Read,NULL,nixCmd,MeasurementFetch);
     Initiate=new cNodeSCPI("INITIATE",isNode | isCommand,Fetch,NULL,MeasurementInitiate,nixCmd);
-    Measure=new cNodeSCPI("MEASURE",isNode | isQuery,Initiate,Initiate,nixCmd,Measurement);
+    Measure=new cNodeSCPI("MEASURE",isNode | isQuery,Initiate,NULL,nixCmd,Measurement);
 
     // implementiertes configuration model
     
