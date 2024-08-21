@@ -49,8 +49,10 @@ QString scpideviface::getChildInterface(cNode *node)
         str = str.append(getChildInterface(scpiNode->getChild()));
     }
 
-    if (strNode == mSCPItreeItemName.last())
-        mSCPItreeItemName.removeLast();
+    if (mSCPItreeItemName.length()>0){
+        if (strNode == mSCPItreeItemName.last())
+            mSCPItreeItemName.removeLast();
+    }
 
     if (scpiNode->hasNext()){
         str = str.append(getChildInterface(scpiNode->getNext()));
