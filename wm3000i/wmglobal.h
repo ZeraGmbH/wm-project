@@ -109,8 +109,9 @@
 // V2.39            Actual Values take 100 calculate last 20
 // V2.40 12.6.24    Adds overload to special class cwmmessagebox
 // 2.41 21.8.24     adds bugfix on scpi interface
+// 2.42 29.8.24     adds dev:iface to export interface
 
-#define WMVersion "V2.41"
+#define WMVersion "V2.42"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
