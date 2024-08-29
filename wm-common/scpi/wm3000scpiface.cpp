@@ -1307,6 +1307,12 @@ char *cWM3000SCPIFace::mDeviceInterFace()
     return sAlloc(test);
 }
 
+void cWM3000SCPIFace::mDeviceInterFaceFile(char* s)
+{
+    scpideviface iface;
+    iface.GetInterface(m_pCommands);
+    iface.exportToFile();
+}
 
 bool cWM3000SCPIFace::SearchEntry(char** s, char** sa, int max, int& n, bool chkEnd) // suche, worin, wieviele einträge, eintrag, test auf ende
 {
@@ -1960,6 +1966,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
             case SetConfOperSignal: mSetConfOperSignal(s);break;
             case StartDeviceJustagePhase: mStartDeviceJustagePhase(s);break;
             case StartDeviceJustageOffset: mStartDeviceJustageOffset(s);break;
+            case DeviceInterFaceFile: mDeviceInterFaceFile(s); break;
             default: qDebug("ProgrammierFehler"); // hier sollten wir nie hinkommen
         }
         else
@@ -2018,6 +2025,7 @@ void cWM3000SCPIFace::SCPICmd( int cmd,char* s) {
     case SetConfOperSignal:
     case StartDeviceJustagePhase:
     case StartDeviceJustageOffset:
+    case DeviceInterFaceFile:
         m_stateMachineTimer.start(0, ExecCmdPartFinished);
     default:
         break;
@@ -2169,6 +2177,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetConfOperSignalCatalog:
         case getPhaseJustageState:
         case DeviceInterFace:
+        case DeviceInterFaceFile:
         case GetConfOperSignal:
             m_stateMachineTimer.start(0, ExecCmdPartFinished);
         default:
@@ -2417,7 +2426,7 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     deviceJustPhase = new cNodeSCPI("PHASE", isCommand ,deviceJustOffset,NULL,StartDeviceJustagePhase,nixCmd);
     deviceJust = new cNodeSCPI("JUST",isNode,NULL,deviceJustPhase,nixCmd,nixCmd);
 
-    deviceIFace = new cNodeSCPI("IFACE", isQuery,deviceJust,NULL,nixCmd,DeviceInterFace);
+    deviceIFace = new cNodeSCPI("IFACE", isQuery | isCommand,deviceJust,NULL,DeviceInterFaceFile,DeviceInterFace);
 
     device = new cNodeSCPI("DEVICE",isNode, Configuration, deviceIFace, nixCmd, nixCmd);
 
