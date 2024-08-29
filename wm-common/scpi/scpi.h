@@ -37,6 +37,15 @@ public:
     int m_nNodeStat; // ergebnis des parse durchlaufes
     int m_nCmd;
     int m_nQuery;
+    bool bIsNode() {return nNodeDef & isNode;};
+    bool bIsQuery() {return nNodeDef & isQuery;};
+    bool bIsCommand(){return nNodeDef & isCommand;};
+
+    bool hasChild();
+    cNode *getChild();
+    bool hasNext();
+    cNode *getNext();
+
 protected:    
     cNode* pNextNode; // nächster knoten im selben level
     cNode* pNewLevelNode; // nachfolge knoten im nächsten level;
@@ -51,14 +60,6 @@ public:
     // konstruktor, sNodeName, nNodedef, pNextNode, pNewLevelNode, Cmd, Query
     virtual cNode* TestNode(cCmdInterpreter*, char**); // zeiger, zeiger auf zeiger auf inputzeile, testet den knoten
     QString getNodeName() ;
-    bool hasChild();
-    cNodeSCPI *getChild();
-    bool hasNext();
-    cNodeSCPI *getNext();
-    bool bIsNode() {return nNodeDef & isNode;};
-    bool bIsQuery() {return nNodeDef & isQuery;};
-    bool bIsCommand(){return nNodeDef & isCommand;};
-    bool bIsValidCommand() {return m_nCmd;};
 private:
     cSCPIString sNodeName; // name des knoten
 };
@@ -71,6 +72,7 @@ public:
     // konstruktor, psNodeNames,psNode2Set, nNodedef, pNextNode, pNewLevelNode, Cmd, Query
     virtual cNode* TestNode(cCmdInterpreter*, char**); // zeiger, zeiger auf zeiger auf inputzeile, testet den knoten
     void SetNodeNameList(QStringList*); // zum späteren umschreiben der liste der knotennamen
+    QStringList* getNoteNameList() {return sNodeNames;};
 private:
     QStringList* sNodeNames; // liste der möglichen nodes (es handelt sich z.b. um kanal namen)
 };
