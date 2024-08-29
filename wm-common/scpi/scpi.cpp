@@ -40,6 +40,26 @@ cNode::cNode(int ns,cNode* n1,cNode* n2,int cmd,int query) {
     m_nQuery = query;
 }
 
+bool cNode::hasChild()
+{
+    return this->pNewLevelNode;
+}
+
+cNode *cNode::getChild()
+{
+    return pNewLevelNode;
+}
+
+bool cNode::hasNext()
+{
+    return this->pNextNode;
+}
+
+cNode *cNode::getNext()
+{
+    return pNextNode;
+}
+
 // konstruktor, sNodeName, nNodedef, pNextNode, pNewLevelNode, m_pCmd, m_pQuery
 cNodeSCPI::cNodeSCPI (const char* s,int ns,cNode* n1,cNode* n2,int cmd,int query)
     :cNode(ns,n1,n2,cmd,query)	{
@@ -78,26 +98,6 @@ cNode* cNodeSCPI::TestNode(cCmdInterpreter* ci,char** inp)
 QString cNodeSCPI::getNodeName()
 {
     return sNodeName;
-}
-
-bool cNodeSCPI::hasChild()
-{
-    return this->pNewLevelNode;
-}
-
-cNodeSCPI *cNodeSCPI::getChild()
-{
-    return static_cast<cNodeSCPI*> (pNewLevelNode);
-}
-
-bool cNodeSCPI::hasNext()
-{
-    return this->pNextNode;
-}
-
-cNodeSCPI *cNodeSCPI::getNext()
-{
-    return static_cast<cNodeSCPI*> (pNextNode);
 }
 
 cNodeSCPIVar::cNodeSCPIVar(QStringList* sl,int ns,cNode* n1,cNode* n2,int ct,int qt)
