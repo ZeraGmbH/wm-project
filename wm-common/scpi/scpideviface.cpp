@@ -12,6 +12,24 @@ QString scpideviface::GetInterface(cNode* RootCmd)
     return mInterface.join("\n");
 }
 
+bool scpideviface::exportToFile()
+{
+    bool ok(false);
+    mDeviceInterfaceFile.setName(QDir(DeviceInterfaceFilePath).absPath());
+    if(mDeviceInterfaceFile.exists(QDir(DeviceInterfaceFilePath).absPath()))
+    {
+        mDeviceInterfaceFile.remove();
+    }
+    if(mDeviceInterfaceFile.open(QIODevice::WriteOnly))
+    {
+        mDeviceInterfaceFile.write(mInterface.join("\n").toLocal8Bit());
+        mDeviceInterfaceFile.flush();
+        mDeviceInterfaceFile.close();
+        ok = true;
+    }
+    return ok;
+}
+
 void scpideviface::getChildInterface(cNode *node)
 {
     cNodeSCPI *scpiNode = dynamic_cast<cNodeSCPI*>(node);
