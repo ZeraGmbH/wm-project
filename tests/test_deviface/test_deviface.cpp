@@ -37,6 +37,18 @@ cNode *test_deviface::initTestCMdTreeFirst(cNode *cn)
     return (device);
 }
 
+cNode *test_deviface::initTestCmdTreeWithVarNode(cNode *cn)
+{
+    mMeasChannelList = {"N","X","ExT"};
+    cNodeSCPI* SenseCNameRangeCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,nixCmd);
+    cNodeSCPI* SenseCNameRange=new cNodeSCPI("RANGE",isNode | isCommand | isQuery,NULL,SenseCNameRangeCatalog,nixCmd,nixCmd);
+    cNodeSCPIVar* SenseCName=new cNodeSCPIVar(&mMeasChannelList,isNode,NULL,SenseCNameRange,nixCmd,nixCmd);
+    cNodeSCPI* SenseChannelCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,nixCmd);
+    cNodeSCPI* SenseChannel=new cNodeSCPI("CHANNEL",isNode,SenseCName,SenseChannelCatalog,nixCmd,nixCmd);
+    cNodeSCPI* Sense=new cNodeSCPI("SENSE",isNode,NULL,SenseChannel,nixCmd,nixCmd);
+    return (Sense);
+}
+
 void test_deviface::test_numberone()
 {
     cNode* commands;
@@ -46,7 +58,7 @@ void test_deviface::test_numberone()
     str = deviface.GetInterface(commands);
     QStringList list;
     list = str.split("\n");
-    QCOMPARE(list.count(),5);
+    QCOMPARE(list.count(),4);
     QCOMPARE(list.at(0),QString("DEVICE:IFACE?"));
     QCOMPARE(list.at(1),QString("JUST:PHASE!"));
     QCOMPARE(list.at(2),QString("JUST:OFFSET!"));
@@ -64,10 +76,25 @@ void test_deviface::test_numbertwo()
     str = deviface.GetInterface(commands);
     QStringList list;
     list = str.split("\n");
-    QCOMPARE(list.count(),21);
+    QCOMPARE(list.count(),20);
     QCOMPARE(list.at(0),QString("CONFIGURATION!"));
     // ...
     QCOMPARE(list.at(19),QString("MEASURE?"));
+}
+
+void test_deviface::test_usesVarNodes()
+{
+    cNode* commands;
+    commands = initTestCmdTreeWithVarNode(NULL);
+    scpideviface deviface;
+    QString str;
+    str = deviface.GetInterface(commands);
+    QStringList list;
+    list = str.split("\n");
+    QCOMPARE(list.count(),10);
+    QCOMPARE(list.at(0),QString("SENSE:CHANNEL:CATALOG?"));
+    // ...
+    QCOMPARE(list.at(9),QString("SENSE:ExT:RANGE:CATALOG?"));
 }
 
 QTEST_MAIN(test_deviface)
