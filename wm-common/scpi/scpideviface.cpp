@@ -5,73 +5,69 @@ scpideviface::scpideviface() {}
 
 QString scpideviface::GetInterface(cNode* RootCmd)
 {
-    QString str, temp;
-    cNodeSCPI* actNode = static_cast<cNodeSCPI*>(RootCmd);
+    mInterface.clear();
     mSCPItreeItemName.clear();
-    temp = actNode->getNodeName();
-
-  //  while (actNode->bIsNode()){
-        str = str.append(getChildInterface(actNode));
-        qDebug() << str;
-        if(actNode->hasNext()){
-            actNode = actNode->getNext();
-        }
-        else {
-            return str;
-        }
-    //}
-    return str;
+    cNode* actNode = RootCmd;
+    getChildInterface(actNode);
+    return mInterface.join("\n");
 }
 
-QString scpideviface::getChildInterface(cNode *node)
+void scpideviface::getChildInterface(cNode *node)
 {
-    QString str, strNode;
-    cNodeSCPI *scpiNode = static_cast<cNodeSCPI*>(node);
-    strNode = scpiNode->getNodeName();
-    mSCPItreeItemName.append(strNode);
+    cNodeSCPI *scpiNode = dynamic_cast<cNodeSCPI*>(node);
+    if (scpiNode != 0)
+        GetIChildntreface(scpiNode);
+    cNodeSCPIVar *scpiNodeVar = dynamic_cast<cNodeSCPIVar*>(node);
+    if (scpiNodeVar != 0)
+        GetChildIntreface(scpiNodeVar);
 
+}
+
+
+void scpideviface::GetIChildntreface(cNodeSCPI *node)
+{
+    QString strNode = node->getNodeName();
+    mSCPItreeItemName.append(strNode);
+    GetChildInterfaceString(node, strNode);
+}
+
+
+void scpideviface::GetChildIntreface(cNodeSCPIVar *node)
+{
+    QStringList* list;
+    list = node->getNoteNameList();
+    foreach(QString str,*list){
+        mSCPItreeItemName.append(str);
+        GetChildInterfaceString(node, str);
+        if(mSCPItreeItemName.last() == str)
+            mSCPItreeItemName.removeLast();
+    }
+}
+
+void scpideviface::GetChildInterfaceString(cNode *scpiNode, const QString nodeName)
+{
     if(scpiNode->bIsQuery() || scpiNode->bIsCommand()){
         if(scpiNode->bIsQuery()){
-            str = str.append(mSCPItreeItemName.join(":") + "?\n");
+            mInterface.append(mSCPItreeItemName.join(":") + "?");
         }
         if(scpiNode->bIsCommand()){
-            str = str.append(mSCPItreeItemName.join(":") + "!\n");
+            mInterface.append(mSCPItreeItemName.join(":") + "!");
         }
         if(!scpiNode->bIsNode())
             mSCPItreeItemName.removeLast();
     }
-    //if(scpiNode->bIsNode())
-    //      str = str.append(getNextInterface(scpiNode->getNext()));
-
- //   }
-
     if (scpiNode->hasChild()){
-        str = str.append(getChildInterface(scpiNode->getChild()));
+        getChildInterface(scpiNode->getChild());
     }
 
     if (mSCPItreeItemName.length()>0){
-        if (strNode == mSCPItreeItemName.last())
+        if (nodeName == mSCPItreeItemName.last())
             mSCPItreeItemName.removeLast();
     }
 
     if (scpiNode->hasNext()){
-        str = str.append(getChildInterface(scpiNode->getNext()));
+        getChildInterface(scpiNode->getNext());
     }
-
-    return str;
 }
 
-QString scpideviface::getNextInterface(cNode *node)
-{
-    QString str;
-    cNodeSCPI *scpiNode = static_cast<cNodeSCPI*>(node);
-    str = str.append(scpiNode->getNodeName());
-    if(scpiNode->hasChild()){
-        str = str.append(":" + getChildInterface(scpiNode->getChild()));
-    }
-    if(scpiNode->hasNext()){
-        str = str.append(":" + getChildInterface(scpiNode->getNext()));
-    }
-    return str;
-}
 

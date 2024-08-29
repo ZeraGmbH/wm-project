@@ -13,10 +13,13 @@ class scpideviface
 public:
     scpideviface();
     QString GetInterface(cNode *RootCmd);
+
 private:
-    QString getChildInterface(cNode *node);
-    QString getNextInterface(cNode *node);
-    QStringList mSCPItreeItemName;
+    void getChildInterface(cNode *node);
+    void GetIChildntreface(cNodeSCPI *node);
+    void GetChildIntreface(cNodeSCPIVar *node);
+    void GetChildInterfaceString(cNode *scpiNode, const QString nodeName);
+    QStringList mSCPItreeItemName, mInterface;
 
 };
 
