@@ -23,33 +23,33 @@ ConfDialogBase::~ConfDialogBase()
 
 void ConfDialogBase::init()
 {
-    QRegExp rx( "^[0-9,A-F]{2,2}$" );
+    QRegExp rx( "^[0-9,a-f,A-F]{2,2}$" );
     QValidator* MacValidator = new QRegExpValidator( rx, this );
 
-    ui->MacSLineEdit6->setInputMask("NN");
+    ui->MacSLineEdit6->setInputMask("HH");
     ui->MacSLineEdit6->setValidator(MacValidator);
-    ui->MacSLineEdit5->setInputMask("NN");
+    ui->MacSLineEdit5->setInputMask("HH");
     ui->MacSLineEdit5->setValidator(MacValidator);
-    ui->MacSLineEdit4->setInputMask("NN");
+    ui->MacSLineEdit4->setInputMask("HH");
     ui->MacSLineEdit4->setValidator(MacValidator);
-    ui->MacSLineEdit3->setInputMask("NN");
+    ui->MacSLineEdit3->setInputMask("HH");
     ui->MacSLineEdit3->setValidator(MacValidator);
-    ui->MacSLineEdit2->setInputMask("NN");
+    ui->MacSLineEdit2->setInputMask("HH");
     ui->MacSLineEdit2->setValidator(MacValidator);
-    ui->MacSLineEdit1->setInputMask("NN");
+    ui->MacSLineEdit1->setInputMask("HH");
     ui->MacSLineEdit1->setValidator(MacValidator);
 
-    ui->MacDLineEdit6->setInputMask("NN");
+    ui->MacDLineEdit6->setInputMask("HH");
     ui->MacDLineEdit6->setValidator(MacValidator);
-    ui->MacDLineEdit5->setInputMask("NN");
+    ui->MacDLineEdit5->setInputMask("HH");
     ui->MacDLineEdit5->setValidator(MacValidator);
-    ui->MacDLineEdit4->setInputMask("NN");
+    ui->MacDLineEdit4->setInputMask("HH");
     ui->MacDLineEdit4->setValidator(MacValidator);
-    ui->MacDLineEdit3->setInputMask("NN");
+    ui->MacDLineEdit3->setInputMask("HH");
     ui->MacDLineEdit3->setValidator(MacValidator);
-    ui->MacDLineEdit2->setInputMask("NN");
+    ui->MacDLineEdit2->setInputMask("HH");
     ui->MacDLineEdit2->setValidator(MacValidator);
-    ui->MacDLineEdit1->setInputMask("NN");
+    ui->MacDLineEdit1->setInputMask("HH");
     ui->MacDLineEdit1->setValidator(MacValidator);
 
     QRegExp rx2( "^[0-7]{1,1}$" );
