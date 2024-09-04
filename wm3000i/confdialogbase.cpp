@@ -13,6 +13,7 @@ ConfDialogBase::ConfDialogBase( QWidget* parent):
 {
     ui->setupUi(this);
     init();
+    this->setModal(false);
 }
 
 ConfDialogBase::~ConfDialogBase()
@@ -62,14 +63,14 @@ void ConfDialogBase::init()
     ui->CFIlineEdit->setInputMask("N");
     ui->CFIlineEdit->setValidator(CFIValidator);
 
-    QRegExp rx4( "^[0-9,A-F]{3,3}$" );
+    QRegExp rx4( "^[0-9,a-f,A-F]{3,3}$" );
     QValidator* VIDValidator = new QRegExpValidator( rx4, this );
-    ui->VIDlineEdit->setInputMask("NNN");
+    ui->VIDlineEdit->setInputMask("HHH");
     ui->VIDlineEdit->setValidator(VIDValidator);
 
-    QRegExp rx5( "^[0-9,A-F]{4,4}$" );
+    QRegExp rx5( "^[0-9,a-f,A-F]{4,4}$" );
     QValidator* APPIDValidator = new QRegExpValidator( rx5, this );
-    ui->APPIDlineEdit->setInputMask("NNNN");
+    ui->APPIDlineEdit->setInputMask("HHHH");
     ui->APPIDlineEdit->setValidator(APPIDValidator);
 
     QRegExp rx6 ("^([0-9]+)(|\\.([0-9]+))(|mA|kA|A)$" );
@@ -148,7 +149,6 @@ void ConfDialogBase::init()
         ui->SPeriodeGroupBox->removeChild(ui->S240RadioButton);
         ui->SPeriodeGroupBox->removeChild(ui->S288RadioButton);
     }
-
 }
 
 void ConfDialogBase::SetConfInfoSlot(cConfData *cd )
@@ -230,6 +230,7 @@ void ConfDialogBase::accept()
         ApplyDataSlot();
         m_ConfData = m_ConfDataTemp;
         emit SendConfDataSignal(&m_ConfData);
+        mWmKeyBoard->hide();
         close();
     }
 }
@@ -238,6 +239,7 @@ void ConfDialogBase::abortSlot()
 {
     m_ConfDataTemp = m_ConfData;
     SetConfInfoSlot(&m_ConfData);
+    mWmKeyBoard->hide();
     close();
 }
 
@@ -751,7 +753,6 @@ void ConfDialogBase::SxRadioButtonChecked()
     SetnConventMenu();
 }
 
-
 bool ConfDialogBase::is_3( const QString &s )
 {
     return (s.contains("/3"));
@@ -763,6 +764,28 @@ bool ConfDialogBase::is_w3( const QString &s )
     return (s.contains("/w3"));
 }
 
+void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
+{
+    mWmKeyBoard = keyboard;
+    ui->APPIDlineEdit->setKeyboard(keyboard);
+    ui->TPIDlineEdit->setKeyboard(keyboard);
+    ui->VIDlineEdit->setKeyboard(keyboard);
+    ui->EthTypelineEdit->setKeyboard(keyboard);
+
+    ui->MacSLineEdit1->setKeyboard(keyboard);
+    ui->MacSLineEdit2->setKeyboard(keyboard);
+    ui->MacSLineEdit3->setKeyboard(keyboard);
+    ui->MacSLineEdit4->setKeyboard(keyboard);
+    ui->MacSLineEdit5->setKeyboard(keyboard);
+    ui->MacSLineEdit6->setKeyboard(keyboard);
+
+    ui->MacDLineEdit1->setKeyboard(keyboard);
+    ui->MacDLineEdit2->setKeyboard(keyboard);
+    ui->MacDLineEdit3->setKeyboard(keyboard);
+    ui->MacDLineEdit4->setKeyboard(keyboard);
+    ui->MacDLineEdit5->setKeyboard(keyboard);
+    ui->MacDLineEdit6->setKeyboard(keyboard);
+}
 
 const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRadioButton *qrb_w3)
 {
@@ -774,5 +797,15 @@ const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRad
     return m_sText;
 }
 
-
+/*void ConfDialogBase::on_ConfTabWidget_currentChanged(int index)
+{
+    if(index == 5){
+        mWmKeyBoard->show();
+        mWmKeyBoard->setParent(this);
+        this->grabKeyboard();
+    }
+    else
+        mWmKeyBoard->hide();
+    this->releaseKeyboard();
+}*/
 

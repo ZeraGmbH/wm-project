@@ -32,6 +32,7 @@
 #include "wmioffsetcustomlabels.h"
 #include <wmoffsetvalbase.h>
 
+wmKeyboardForm* g_KeyBoard;
 cWM3000I* g_WMDevice;
 WMViewBaseI *g_WMView;
 
@@ -127,6 +128,8 @@ int main(int argc, char *argv[])
     else
         g_WMInfo = new cZeraInfo(wmInfoWm3000I);
 
+    g_KeyBoard = new wmKeyboardForm();  // onScreenkeyboard
+
     QList<eUnit *>lpUnitList;
     lpUnitList.append(LoadpointUnit + LPProzent);
     lpUnitList.append(CurrentUnit + CurrA);
@@ -193,6 +196,7 @@ int main(int argc, char *argv[])
     LogFile.SendLogSlot(); // alte log daten an view
 
     ConfDialogBase *g_WMConfDialog = new ConfDialogBase(g_WMView); // confdialog erzeugen
+    g_WMConfDialog->setKeyboard(g_KeyBoard);
     QObject::connect(g_WMView,SIGNAL(UIeinstellungenConfActionActivated()),g_WMConfDialog,SLOT(show())); // öffnen der konfigurations dialoges vom hauptfenster
     QObject::connect(g_WMConfDialog,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // confdialog sendet konfigurationsdaten an device
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMConfDialog,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an confdialog
