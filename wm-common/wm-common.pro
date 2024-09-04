@@ -4,7 +4,8 @@ CONFIG += staticlib
 TRANSLATIONS    = wm-common_de.ts \
                   wm-common_pl.ts
 
-QT += widgets network qt3support
+QT += widgets network qt3support \
+    widgets
 
 HEADERS = \
     client-access/clientiodevice.h \
@@ -15,6 +16,8 @@ HEADERS = \
     dsp/dspsetup.h \
     dsp/dspvar.h \
     gui/cwmessagebox.h \
+    gui/cwmlineedit.h \
+    gui/wmkeyboardform.h \
     gui/wmmessagebox.h \
     gui/wmviewbase.h \
     gui/bigletter.h \
@@ -102,6 +105,8 @@ SOURCES = \
     dsp/dspmeasdata.cpp \
     dsp/dspsetup.cpp \
     gui/cwmessagebox.cpp \
+    gui/cwmlineedit.cpp \
+    gui/wmkeyboardform.cpp \
     gui/wmmessagebox.cpp \
     gui/wmviewbase.cpp \
     gui/en61850monitor.cpp \
@@ -161,6 +166,7 @@ SOURCES = \
     zerainfo.cpp
 
 FORMS = \
+    gui/wmkeyboardform.ui \
     gui/wmviewbase.ui \
     gui/en61850monitor.ui \
     gui/versionviewbase.ui \
