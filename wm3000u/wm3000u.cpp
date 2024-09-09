@@ -2099,7 +2099,6 @@ void cWM3000U::ActionHandler(int entryAHS)
 
     case PhaseNodeMeasExec3:
     {
-        int i;
         ph0 = ActValues.PHIN;
         ph1 = ActValues.PHIX;
         if (mWmProgressDialog->isAbort()) {
@@ -2135,7 +2134,6 @@ void cWM3000U::ActionHandler(int entryAHS)
         mWmProgressDialog->setValue3(mCount);
         if (mCount == 0)
         {
-            qreal min(359.99), max(0.0), diff(0.0), value(0.0);
             mWmProgressDialog->setLabelText (trUtf8("Berechnung und Datenübertragung ..."));
             //mWmProgressDialog->set2ndDisabled();
             //mWmProgressDialog->set3rdDisabled();
@@ -2146,22 +2144,6 @@ void cWM3000U::ActionHandler(int entryAHS)
             if (PhaJusHelp.deleteFaultyPhasenJustageItem(PhaJusHelp.getMeanValues(),PhaJusHelp.getDiffValue(),&JustValueList)){
                 PhaJusHelp.calculateMinMaxDiffValues(&JustValueList, false);
             }
-/*
-            mPhasJustDialog->setSampleValuesList(JustValueList,N>0);
-            mPhasJustDialog->setSignalNameCh0(m_sJustText.mid(14));
-            mPhasJustDialog->show();
-            if (N==3) {
-                QPixmap bild;
-                QString path;
-                bild = bild.grabWidget(mPhasJustDialog);
-                path = m_sJustText.mid(14);
-                path = path.left(path.indexOf("l"));
-                path = path.replace(" ","");
-                path = path.replace(",","-");
-                path = path.replace(".","-");
-                path = QDir::homePath()+"/wm3000u/log/PhaseJustPic" + path + ".png";
-                bild.save(path);
-            }*/
             if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
             {
                 QTextStream stream( &m_PhaseJustLogfile );
