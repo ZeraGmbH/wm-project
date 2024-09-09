@@ -72,6 +72,7 @@ void wmKeyboardForm::show(const QString text)
 
 void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
 {
+    Q_UNUSED(strKey);
     if(mPoi != nullptr)
     {
         QKeyEvent event(QEvent::KeyPress, iKey, Qt::NoModifier);

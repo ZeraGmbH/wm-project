@@ -69,6 +69,7 @@ cDspMeasData<float> *wmScopeDialog::getSelectedChannelPointer(int channel)
 
 void wmScopeDialog::closeEvent(QCloseEvent *ce)
 {
+    Q_UNUSED(ce);
     m_bShow = false;
     emit sigIsVisible(false);
     //ce->accept();

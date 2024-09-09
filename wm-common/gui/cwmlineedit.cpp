@@ -41,6 +41,7 @@ void cWmLineEdit::keyPressEvent(QKeyEvent *event)
 
 void cWmLineEdit::focusInEvent(QFocusEvent *event)
 {
+    Q_UNUSED(event);
     if (mKeyBoard != nullptr){
         mKeyBoard->setParent(this);
         mKeyBoard->setHex(inputMask());

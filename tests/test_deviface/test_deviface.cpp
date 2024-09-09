@@ -2,6 +2,7 @@
 
 cNode *test_deviface::initTestCMdTree(cNode *cn)
 {
+    Q_UNUSED(cn);
     cNodeSCPI* Measure=new cNodeSCPI("MEASURE",isNode | isQuery,NULL,NULL,nixCmd,nixCmd);
     cNodeSCPI* ConfigurationMeasure=new cNodeSCPI("MEASURE",isNode,NULL,NULL, nixCmd,nixCmd);
 
@@ -27,6 +28,7 @@ cNode *test_deviface::initTestCMdTree(cNode *cn)
 
 cNode *test_deviface::initTestCMdTreeFirst(cNode *cn)
 {
+    Q_UNUSED(cn);
     cNodeSCPI* deviceJustStatus = new cNodeSCPI("PROGRESS", isQuery ,NULL,NULL,nixCmd,nixCmd);
     cNodeSCPI* deviceJustOffset = new cNodeSCPI("OFFSET", isCommand ,deviceJustStatus,NULL,nixCmd,nixCmd);
     cNodeSCPI* deviceJustPhase = new cNodeSCPI("PHASE", isCommand ,deviceJustOffset,NULL,nixCmd,nixCmd);
@@ -39,6 +41,7 @@ cNode *test_deviface::initTestCMdTreeFirst(cNode *cn)
 
 cNode *test_deviface::initTestCmdTreeWithVarNode(cNode *cn)
 {
+    Q_UNUSED(cn);
     mMeasChannelList = {"N","X","ExT"};
     cNodeSCPI* SenseCNameRangeCatalog=new cNodeSCPI("CATALOG",isQuery,NULL,NULL,nixCmd,nixCmd);
     cNodeSCPI* SenseCNameRange=new cNodeSCPI("RANGE",isNode | isCommand | isQuery,NULL,SenseCNameRangeCatalog,nixCmd,nixCmd);
