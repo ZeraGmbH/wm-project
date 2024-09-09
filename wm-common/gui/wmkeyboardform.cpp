@@ -89,8 +89,6 @@ void wmKeyboardForm::keyPressEvent(QKeyEvent *event)
     {
         postEvent(key,"");
     }
-    if (key == Qt::Key_Tab)
-        ;
     event->accept();
 }
 
