@@ -4118,6 +4118,10 @@ void cWM3000U::SimulatedMeasurement()
         e =  m_ConfData.m_XSecondary;
         val = 1.0;
         rej = 1e-3;
+        break;
+    default:
+        val = r->Value();
+        rej = r->Rejection();
     }
 
     ActValues.dspActValues.rmsxf = e.toDouble() * rnd;
