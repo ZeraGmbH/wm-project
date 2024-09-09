@@ -73,6 +73,7 @@ private slots:
     virtual void evtSek_w3radioButtonChecked();
     virtual void FxRadioButtonChecked();
     virtual void SxRadioButtonChecked();
+    void on_ConfTabWidget_currentChanged(int index);
 };
 
 #endif // CONFDIALOGBASE_H

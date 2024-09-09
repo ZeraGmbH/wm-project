@@ -805,6 +805,10 @@ const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRad
     return m_sText;
 }
 
-
+void ConfDialogBase::on_ConfTabWidget_currentChanged(int index)
+{
+    Q_UNUSED(index);
+    mWmKeyBoard->hide();
+}
 
 
