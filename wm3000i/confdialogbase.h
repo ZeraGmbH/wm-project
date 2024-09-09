@@ -83,6 +83,7 @@ private slots:
     virtual void FxRadioButtonChecked();
     virtual void SxRadioButtonChecked();
 
+    void on_ConfTabWidget_currentChanged(int index);
 };
 
 
