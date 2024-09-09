@@ -15,12 +15,27 @@ void cWmLineEdit::setKeyboard(wmKeyboardForm *poi)
 void cWmLineEdit::keyPressEvent(QKeyEvent *event)
 {
     QString text;
-    if(event->key() != 0 ){
-        int key = event->key();
-        text = keyText(key);
-        text = text.prepend(this->text());
-        text = text.mid(1,inputMask().length());
-        setText(text);
+    int key = event->key();
+
+    if (key == Qt::Key_Tab) {
+        event->ignore();
+    }
+    else {
+        if(((key <= Qt::Key_F) && (key >= Qt::Key_0)) || (key == Qt::Key_Comma)) {
+            int len;
+            text = keyText(key);
+            if (inputMask().isEmpty()){
+                len = this->text().length();
+            }
+            else
+            {
+                len = inputMask().length();
+            }
+            text = text.prepend(this->text());
+            text = text.mid(1,len);
+            setText(text);
+            mKeyBoard->show(this->text());
+        }
     }
 }
 
@@ -28,15 +43,17 @@ void cWmLineEdit::focusInEvent(QFocusEvent *event)
 {
     if (mKeyBoard != nullptr){
         mKeyBoard->setParent(this);
-        mKeyBoard->setHex(inputMask().contains("H"));
-        mKeyBoard->show();
+        mKeyBoard->setHex(inputMask());
+        mKeyBoard->show(this->text());
+        this->setCursorPosition(0);
+        this->setSelection(0,0);
     }
 }
 
-void cWmLineEdit::focusOutEvent(QFocusEvent *event)
+void cWmLineEdit::mouseReleaseEvent(QMouseEvent *)
 {
-//    if (mKeyBoard != nullptr)
-//        mKeyBoard->hide();
+    this->setCursorPosition(0);
+    this->setSelection(0,0);
 }
 
 QString cWmLineEdit::keyText(int key)

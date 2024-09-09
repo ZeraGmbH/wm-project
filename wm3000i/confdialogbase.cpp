@@ -768,9 +768,9 @@ void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
 {
     mWmKeyBoard = keyboard;
     ui->APPIDlineEdit->setKeyboard(keyboard);
-    ui->TPIDlineEdit->setKeyboard(keyboard);
+ //   ui->TPIDlineEdit->setKeyboard(keyboard);
     ui->VIDlineEdit->setKeyboard(keyboard);
-    ui->EthTypelineEdit->setKeyboard(keyboard);
+ //   ui->EthTypelineEdit->setKeyboard(keyboard);
 
     ui->MacSLineEdit1->setKeyboard(keyboard);
     ui->MacSLineEdit2->setKeyboard(keyboard);
@@ -785,6 +785,15 @@ void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
     ui->MacDLineEdit4->setKeyboard(keyboard);
     ui->MacDLineEdit5->setKeyboard(keyboard);
     ui->MacDLineEdit6->setKeyboard(keyboard);
+
+    ui->UPrioritylineEdit->setKeyboard(keyboard);
+    ui->CFIlineEdit->setKeyboard(keyboard);
+    ui->FirstASDUlineEdit->setKeyboard(keyboard);
+    ui->LastASDUlineEdit->setKeyboard(keyboard);
+    ui->SetlineEdit->setKeyboard(keyboard);
+
+    ui->CmpKorrLineEdit1->setKeyboard(keyboard);
+    ui->CmpKorrLineEdit2->setKeyboard(keyboard);
 }
 
 const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRadioButton *qrb_w3)

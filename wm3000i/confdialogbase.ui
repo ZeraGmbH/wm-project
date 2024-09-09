@@ -64,7 +64,7 @@
         <enum>QTabWidget::TabShape::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Widget8">
         <attribute name="title">
@@ -241,7 +241,7 @@
                   <item row="0" column="1" rowspan="2">
                    <layout class="QVBoxLayout">
                     <item>
-                     <widget class="QLineEdit" name="CmpKorrLineEdit1">
+                     <widget class="cWmLineEdit" name="CmpKorrLineEdit1">
                       <property name="focusPolicy">
                        <enum>Qt::FocusPolicy::StrongFocus</enum>
                       </property>
@@ -260,7 +260,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="CmpKorrLineEdit2">
+                     <widget class="cWmLineEdit" name="CmpKorrLineEdit2">
                       <property name="maxLength">
                        <number>8</number>
                       </property>
@@ -1417,6 +1417,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1464,6 +1467,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1507,6 +1513,9 @@
                     <width>30</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
                   </property>
                   <property name="text">
                    <string>FF</string>
@@ -1552,6 +1561,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1596,6 +1608,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1639,6 +1654,9 @@
                     <width>30</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
                   </property>
                   <property name="text">
                    <string>FF</string>
@@ -1688,6 +1706,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1735,6 +1756,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1778,6 +1802,9 @@
                     <width>30</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
                   </property>
                   <property name="text">
                    <string>FF</string>
@@ -1823,6 +1850,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1867,6 +1897,9 @@
                     <height>20</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
+                  </property>
                   <property name="text">
                    <string>FF</string>
                   </property>
@@ -1910,6 +1943,9 @@
                     <width>30</width>
                     <height>20</height>
                    </size>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::StrongFocus</enum>
                   </property>
                   <property name="text">
                    <string>FF</string>
@@ -1983,7 +2019,7 @@
                </widget>
               </item>
               <item row="0" column="2">
-               <widget class="QLineEdit" name="UPrioritylineEdit">
+               <widget class="cWmLineEdit" name="UPrioritylineEdit">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2018,7 +2054,7 @@
                </widget>
               </item>
               <item row="0" column="4">
-               <widget class="cWmLineEdit" name="TPIDlineEdit">
+               <widget class="QLineEdit" name="TPIDlineEdit">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
@@ -2033,6 +2069,9 @@
                   <width>40</width>
                   <height>20</height>
                  </size>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::FocusPolicy::StrongFocus</enum>
                 </property>
                 <property name="text">
                  <string>8100</string>
@@ -2053,7 +2092,7 @@
                </widget>
               </item>
               <item row="1" column="2">
-               <widget class="QLineEdit" name="CFIlineEdit">
+               <widget class="cWmLineEdit" name="CFIlineEdit">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2095,6 +2134,9 @@
                   <height>20</height>
                  </size>
                 </property>
+                <property name="focusPolicy">
+                 <enum>Qt::FocusPolicy::StrongFocus</enum>
+                </property>
                 <property name="text">
                  <string>0</string>
                 </property>
@@ -2133,7 +2175,7 @@
                </widget>
               </item>
               <item row="0" column="2">
-               <widget class="cWmLineEdit" name="EthTypelineEdit">
+               <widget class="QLineEdit" name="EthTypelineEdit">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
@@ -2142,6 +2184,9 @@
                   <width>40</width>
                   <height>20</height>
                  </size>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::FocusPolicy::StrongFocus</enum>
                 </property>
                 <property name="text">
                  <string>88BA</string>
@@ -2168,6 +2213,9 @@
                   <width>40</width>
                   <height>20</height>
                  </size>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::FocusPolicy::StrongFocus</enum>
                 </property>
                 <property name="text">
                  <string>0000</string>
@@ -2200,7 +2248,7 @@
              </property>
              <layout class="QGridLayout">
               <item row="1" column="1">
-               <widget class="QLineEdit" name="LastASDUlineEdit">
+               <widget class="cWmLineEdit" name="LastASDUlineEdit">
                 <property name="maximumSize">
                  <size>
                   <width>16</width>
@@ -2233,7 +2281,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="SetlineEdit">
+               <widget class="cWmLineEdit" name="SetlineEdit">
                 <property name="maximumSize">
                  <size>
                   <width>16</width>
@@ -2246,7 +2294,7 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLineEdit" name="FirstASDUlineEdit">
+               <widget class="cWmLineEdit" name="FirstASDUlineEdit">
                 <property name="maximumSize">
                  <size>
                   <width>16</width>
