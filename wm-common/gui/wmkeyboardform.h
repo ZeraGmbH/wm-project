@@ -14,8 +14,9 @@ class wmKeyboardForm : public QWidget
 public:
     explicit wmKeyboardForm(QWidget *parent = nullptr);
     ~wmKeyboardForm();
-    void setHex(bool show);
+    void setHex(const QString inputMask);
     void setParent(QWidget *parent);
+    void show(const QString text);
 private slots:
     void on_pushButton1_clicked();
     void on_pushButton2_clicked();
@@ -39,6 +40,8 @@ private:
     QWidget* mPoi = nullptr;
     Ui::wmKeyboardForm *ui;
     void postEvent(const int iKey, const QString strKey);
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // WMKEYBOARDFORM_H

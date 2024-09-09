@@ -7,7 +7,8 @@ wmKeyboardForm::wmKeyboardForm(QWidget *parent)
     , ui(new Ui::wmKeyboardForm)
 {
     ui->setupUi(this);
-    setHex(false);
+    setHex("");
+    ui->lineEdit->setDisabled(true);
 }
 
 wmKeyboardForm::~wmKeyboardForm()
@@ -15,20 +16,32 @@ wmKeyboardForm::~wmKeyboardForm()
     delete ui;
 }
 
-void wmKeyboardForm::setHex(bool show)
+void wmKeyboardForm::setHex(const QString inputMask)
 {
-    if (show){
-
-        ui->pushButtonA->show();
-        ui->pushButtonB->show();
-        ui->pushButtonC->show();
-        ui->pushButtonD->show();
-        ui->pushButtonE->show();
-        ui->pushButtonF->show();
-        ui->pushButtonKomma->hide();
+    if (inputMask.length() >0 ){
+        if (inputMask.contains("H"))
+        {
+            ui->pushButtonA->show();
+            ui->pushButtonB->show();
+            ui->pushButtonC->show();
+            ui->pushButtonD->show();
+            ui->pushButtonE->show();
+            ui->pushButtonF->show();
+            ui->pushButtonKomma->hide();
+        }
+        if (inputMask.contains("N"))
+        {
+            ui->pushButtonA->hide();
+            ui->pushButtonB->hide();
+            ui->pushButtonC->hide();
+            ui->pushButtonD->hide();
+            ui->pushButtonE->hide();
+            ui->pushButtonF->hide();
+            ui->pushButtonKomma->hide();
+        }
     }
-    else
-    {
+        else
+        {
         ui->pushButtonA->hide();
         ui->pushButtonB->hide();
         ui->pushButtonC->hide();
@@ -36,12 +49,19 @@ void wmKeyboardForm::setHex(bool show)
         ui->pushButtonE->hide();
         ui->pushButtonF->hide();
         ui->pushButtonKomma->show();
-    }
+
+        }
 }
 
 void wmKeyboardForm::setParent(QWidget *parent)
 {
     mPoi = parent;
+}
+
+void wmKeyboardForm::show(const QString text)
+{
+    ui->lineEdit->setText(text);
+    QWidget::show();
 }
 
 void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
@@ -55,6 +75,17 @@ void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
     }
 }
 
+void wmKeyboardForm::keyPressEvent(QKeyEvent *event)
+{
+    int key = event->key();
+    if(((key <= Qt::Key_F) && (key >= Qt::Key_0)) || (key == Qt::Key_Comma))
+    {
+        postEvent(key,"");
+    }
+    if (key == Qt::Key_Tab)
+        ;
+    event->accept();
+}
 
 void wmKeyboardForm::on_pushButton1_clicked()
 {
