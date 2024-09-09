@@ -3099,6 +3099,7 @@ bool cWM3000U::isDC()
 
 void cWM3000U::setNewSamplerates(bool b)
 {
+    Q_UNUSED(b); // unused until ZERA wants to use the new Sample rates
     m_bNewSamplerates = false; //b;
 }
 
