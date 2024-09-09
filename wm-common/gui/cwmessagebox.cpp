@@ -11,6 +11,7 @@ cWMessageBox::~cWMessageBox()
 
 bool cWMessageBox::analyseOvld(bool bOvld, bool bOldOvld)
 {
+    Q_UNUSED(bOldOvld);
     if (bOvld){
         countOVL();
     }

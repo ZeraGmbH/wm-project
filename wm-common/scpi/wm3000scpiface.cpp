@@ -1283,6 +1283,7 @@ char* cWM3000SCPIFace::mGetConfOperSignal()
 
 void cWM3000SCPIFace::mStartDeviceJustagePhase(char* s)
 {   // done like apply shows us
+    Q_UNUSED(s);
     emit signalStartDeviceJustagePhase();
     SetnoOperFlag(false); // wir warten auf justage fertig
 }
@@ -1295,6 +1296,7 @@ char *cWM3000SCPIFace::mGetPhaseJustageState()
 
 void cWM3000SCPIFace::mStartDeviceJustageOffset(char* s)
 {   // done like apply shows us
+    Q_UNUSED(s);
     emit signalStartDeviceJustageOffset();
     SetnoOperFlag(false); // wir warten auf justage fertig
 }
@@ -1309,6 +1311,7 @@ char *cWM3000SCPIFace::mDeviceInterFace()
 
 void cWM3000SCPIFace::mDeviceInterFaceFile(char* s)
 {
+    Q_UNUSED(s);
     scpideviface iface;
     iface.GetInterface(m_pCommands);
     iface.exportToFile();
