@@ -429,7 +429,7 @@
              <property name="title">
               <string>Abtastungen</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_4">
+             <layout class="QVBoxLayout" name="verticalLayout_41">
               <item>
                <widget class="QRadioButton" name="S80RadioButton">
                 <property name="text">
