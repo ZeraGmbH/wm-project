@@ -4339,11 +4339,11 @@ void cWM3000I::SimulatedMeasurement()
         ActValues.dspActValues.rmsxf = e.toDouble() * rnd;
         break;
     case In_nConvent:
-
         e =  m_ConfData.m_XSecondary;
         val = 1.0;
         rej = 1e-3;
         ActValues.dspActValues.rmsxf = e.toDouble() * rnd;
+        break;
     default:
         val = r->Value();
         rej = r->Rejection();
