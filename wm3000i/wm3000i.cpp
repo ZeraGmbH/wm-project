@@ -2117,6 +2117,7 @@ void cWM3000I::ActionHandler(int entryAHS)
             AHS++;
             // kein break wir laufen einfach drüber
         }
+        // fall through
 
     case PhaseNodeMeasNodeConfig:
     {
@@ -3083,6 +3084,7 @@ void cWM3000I::ActionHandler(int entryAHS)
         AHS++;
 
         // kein break wir laufen einfach drüber
+        // fall through
 
     case SelftestMeasConfiguration:
         mWmProgressDialog->setLabelText (trUtf8("Konfiguration setzen ..." ));
