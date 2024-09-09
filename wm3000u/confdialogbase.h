@@ -6,6 +6,8 @@
 #include <QRadioButton>
 #include "qvalidator.h"
 #include "confdata.h"
+#include "wmkeyboardform.h"
+
 
 namespace Ui {
     class ConfDialogBase;
@@ -20,6 +22,7 @@ public:
     ~ConfDialogBase();
     virtual bool is_3( const QString & s );
     virtual bool is_w3( const QString & s );
+    void setKeyboard(wmKeyboardForm *keyboard);
 
 public slots:
     virtual void SetConfInfoSlot( cConfData * cd );
@@ -46,6 +49,7 @@ private:
     cConfData m_ConfData, m_ConfDataTemp;
     bool m_bRemoteCtrl;
     QString m_sText;
+    wmKeyboardForm* mWmKeyBoard;
 
     void init();
     void Actualize();
