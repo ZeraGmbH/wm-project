@@ -9,6 +9,8 @@ wmKeyboardForm::wmKeyboardForm(QWidget *parent)
     ui->setupUi(this);
     setHex("");
     ui->lineEdit->setDisabled(true);
+    setWindowFlags(Qt::WindowStaysOnTopHint);
+
 }
 
 wmKeyboardForm::~wmKeyboardForm()
@@ -18,6 +20,7 @@ wmKeyboardForm::~wmKeyboardForm()
 
 void wmKeyboardForm::setHex(const QString inputMask)
 {
+    QString titel;
     if (inputMask.length() >0 ){
         if (inputMask.contains("H"))
         {
@@ -28,6 +31,7 @@ void wmKeyboardForm::setHex(const QString inputMask)
             ui->pushButtonE->show();
             ui->pushButtonF->show();
             ui->pushButtonKomma->hide();
+            titel = "hex keyboard";
         }
         if (inputMask.contains("N"))
         {
@@ -38,6 +42,7 @@ void wmKeyboardForm::setHex(const QString inputMask)
             ui->pushButtonE->hide();
             ui->pushButtonF->hide();
             ui->pushButtonKomma->hide();
+            titel = "number keyboard";
         }
     }
         else
@@ -49,8 +54,9 @@ void wmKeyboardForm::setHex(const QString inputMask)
         ui->pushButtonE->hide();
         ui->pushButtonF->hide();
         ui->pushButtonKomma->show();
-
+        titel = "float keyboard";
         }
+    setWindowTitle(titel);
 }
 
 void wmKeyboardForm::setParent(QWidget *parent)
