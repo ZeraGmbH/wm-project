@@ -81,7 +81,7 @@ void test_cmpactvalue::test_timeShift()
     values.VekX = values.VekXSek;
     compute.fehlerBerechnung();
     // test no positive timeshift
-    double angle = values.AngleError;
+    // double angle = values.AngleError;
     QCOMPARE(qFuzzyCompare(values.AngleError,0.314159265),true);
 
     data.m_fxTimeShift = -1.0;
