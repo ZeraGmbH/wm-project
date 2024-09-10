@@ -10,7 +10,6 @@ wmKeyboardForm::wmKeyboardForm(QWidget *parent)
     setHex("");
     ui->lineEdit->setDisabled(true);
     setWindowFlags(Qt::WindowStaysOnTopHint);
-
 }
 
 wmKeyboardForm::~wmKeyboardForm()
@@ -67,7 +66,13 @@ void wmKeyboardForm::setParent(QWidget *parent)
 void wmKeyboardForm::show(const QString text)
 {
     ui->lineEdit->setText(text);
+    moveWindow();
     QWidget::show();
+}
+
+void wmKeyboardForm::setAvailGeometry(const QRect desktop)
+{
+    mDesktop = desktop;
 }
 
 void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
@@ -80,6 +85,11 @@ void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
         QKeyEvent event2nd(QEvent::KeyRelease, iKey, Qt::NoModifier);
         QApplication::sendEvent(mPoi,&event2nd);
     }
+}
+
+void wmKeyboardForm::moveWindow()
+{
+    this->move(mDesktop.width()-this->width()-10,mDesktop.height()-this->height()-8);
 }
 
 void wmKeyboardForm::keyPressEvent(QKeyEvent *event)
