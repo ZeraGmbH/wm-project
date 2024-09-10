@@ -24,7 +24,8 @@ void cWmLineEdit::keyPressEvent(QKeyEvent *event)
         if(((key <= Qt::Key_F) && (key >= Qt::Key_0)) || (key == Qt::Key_Comma)) {
             int len;
             text = keyText(key);
-            if (inputMask().isEmpty()){
+            if (inputMask().isEmpty())
+            {
                 len = this->text().length();
             }
             else

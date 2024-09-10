@@ -2,6 +2,8 @@
 #define WMKEYBOARDFORM_H
 
 #include <QWidget>
+#include <QRect>
+#include <QScreen>
 
 namespace Ui {
 class wmKeyboardForm;
@@ -17,6 +19,7 @@ public:
     void setHex(const QString inputMask);
     void setParent(QWidget *parent);
     void show(const QString text);
+    void setAvailGeometry(const QRect desktop);
 private slots:
     void on_pushButton1_clicked();
     void on_pushButton2_clicked();
@@ -38,8 +41,10 @@ private slots:
 
 private:
     QWidget* mPoi = nullptr;
+    QRect mDesktop;
     Ui::wmKeyboardForm *ui;
     void postEvent(const int iKey, const QString strKey);
+    void moveWindow();
 protected:
     void keyPressEvent(QKeyEvent *event) override;
 };

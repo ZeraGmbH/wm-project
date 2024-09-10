@@ -9,6 +9,7 @@
 #include <qevent.h>
 #include <qnamespace.h>
 #include <qmenubar.h>
+#include <QDesktopWidget>
 
 #include "zerainfo.h"
 #include "confdialogbase.h"
@@ -129,6 +130,7 @@ int main(int argc, char *argv[])
         g_WMInfo = new cZeraInfo(wmInfoWm3000U);
 
     g_KeyBoard = new wmKeyboardForm();  // onScreenkeyboard
+    g_KeyBoard->setAvailGeometry(app.desktop()->availableGeometry(g_WMView));
 
     QList<eUnit *>lpUnitList;
     lpUnitList.append(LoadpointUnit + LPProzent);
