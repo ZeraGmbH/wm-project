@@ -1,43 +1,55 @@
 #include "cwmlineedit.h"
 
 cWmLineEdit::cWmLineEdit(QGroupBox *parent)
-{}
+{
+     mMode = HEXINPUT;
+}
 
 cWmLineEdit::cWmLineEdit(QLineEdit *parent)
     : QLineEdit{parent}
-{}
+{
+    mMode = HEXINPUT;
+}
 
 void cWmLineEdit::setKeyboard(wmKeyboardForm *poi)
 {
     mKeyBoard = poi;
 }
 
+void cWmLineEdit::setInputMode(int mode)
+{
+    mMode = mode;
+}
+
 void cWmLineEdit::keyPressEvent(QKeyEvent *event)
 {
     QString text;
     int key = event->key();
+    if(((key <= Qt::Key_F) && (key >= Qt::Key_0)) || (key == Qt::Key_Comma)) {
+        text = keyText(key);
+        switch (mMode)
+        {
+        case HEXINPUT:
+            keyPressedHex(text);
+            break;
 
-    if (key == Qt::Key_Tab) {
-        event->ignore();
-    }
-    else {
-        if(((key <= Qt::Key_F) && (key >= Qt::Key_0)) || (key == Qt::Key_Comma)) {
-            int len;
-            text = keyText(key);
-            if (inputMask().isEmpty())
-            {
-                len = this->text().length();
-            }
-            else
-            {
-                len = inputMask().length();
-            }
-            text = text.prepend(this->text());
-            text = text.mid(1,len);
-            setText(text);
-            mKeyBoard->show(this->text());
+        case NUMINPUT:
+            keyPressedNum(text);
+            break;
+
+        case FIXEDNUMINPUT:
+            keyPressedNumFixed(text);
+            break;
+
+        case FLOATINPUT:
+            keyPressedFloat(text);
+            break;
         }
+
+
+        mKeyBoard->show(this->text());
     }
+    QLineEdit::keyPressEvent(event);
 }
 
 void cWmLineEdit::focusInEvent(QFocusEvent *event)
@@ -45,10 +57,10 @@ void cWmLineEdit::focusInEvent(QFocusEvent *event)
     Q_UNUSED(event);
     if (mKeyBoard != nullptr){
         mKeyBoard->setParent(this);
-        mKeyBoard->setHex(inputMask());
+        mKeyBoard->setHex(mMode);
         mKeyBoard->show(this->text());
-        this->setCursorPosition(0);
-        this->setSelection(0,0);
+        //this->setCursorPosition(0);
+        //this->setSelection(0,0);
     }
 }
 
@@ -56,6 +68,54 @@ void cWmLineEdit::mouseReleaseEvent(QMouseEvent *)
 {
     this->setCursorPosition(0);
     this->setSelection(0,0);
+    if ((mMode == FLOATINPUT) || (mMode == FIXEDNUMINPUT))
+        this->setText("");
+}
+
+void cWmLineEdit::keyPressedHex(QString str)
+{
+    QString text;
+    int len;
+    text = str;
+    len = inputMask().length();
+    text = text.prepend(this->text());
+    text = text.mid(1,len);
+    setText(text);
+
+}
+
+void cWmLineEdit::keyPressedNum(QString str)
+{
+    QString text;
+    int len;
+    text = str;
+    len = this->text().length();
+    text = text.prepend(this->text());
+    text = text.mid(1,len);
+    setText(text);
+
+}
+
+void cWmLineEdit::keyPressedNumFixed(QString str)
+{
+    QString text;
+    int len(5);
+    text = str;
+    text = text.prepend(this->text());
+    text = text.mid(0,len);
+    setText(text);
+
+}
+
+void cWmLineEdit::keyPressedFloat(QString str)
+{
+    QString text;
+    int len(5);
+    text = str;
+    text = text.prepend(this->text());
+    text = text.mid(0,len);
+    setText(text);
+
 }
 
 QString cWmLineEdit::keyText(int key)

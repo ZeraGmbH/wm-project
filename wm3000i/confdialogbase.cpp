@@ -834,13 +834,33 @@ void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
     ui->MacDLineEdit6->setKeyboard(keyboard);
 
     ui->UPrioritylineEdit->setKeyboard(keyboard);
+    ui->UPrioritylineEdit->setInputMode(NUMINPUT);
     ui->CFIlineEdit->setKeyboard(keyboard);
+    ui->CFIlineEdit->setInputMode(NUMINPUT);
     ui->FirstASDUlineEdit->setKeyboard(keyboard);
+    ui->FirstASDUlineEdit->setInputMode(NUMINPUT);
     ui->LastASDUlineEdit->setKeyboard(keyboard);
+    ui->LastASDUlineEdit->setInputMode(NUMINPUT);
     ui->SetlineEdit->setKeyboard(keyboard);
+    ui->SetlineEdit->setInputMode(NUMINPUT);
 
     ui->CmpKorrLineEdit1->setKeyboard(keyboard);
+    ui->CmpKorrLineEdit1->setInputMode(FLOATINPUT);
     ui->CmpKorrLineEdit2->setKeyboard(keyboard);
+    ui->CmpKorrLineEdit2->setInputMode(FLOATINPUT);
+
+    ui->RatioPrimNLineEdit->setKeyboard(keyboard);
+    ui->RatioPrimNLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekNLineEdit->setKeyboard(keyboard);
+    ui->RatioSekNLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioPrimXLineEdit->setKeyboard(keyboard);
+    ui->RatioPrimXLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekXLineEdit->setKeyboard(keyboard);
+    ui->RatioSekXLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekECTLineEdit->setKeyboard(keyboard);
+    ui->RatioSekECTLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioPrimECTLineEdit->setKeyboard(keyboard);
+    ui->RatioPrimECTLineEdit->setInputMode(FIXEDNUMINPUT);
 }
 
 const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRadioButton *qrb_w3, QComboBox *unit)
