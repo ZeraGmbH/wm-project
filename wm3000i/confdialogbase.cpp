@@ -300,11 +300,21 @@ void ConfDialogBase::clearUnitComboBoxes()
     ui->RatioSekECTUnitComboBox->clear();
 }
 
+void ConfDialogBase::setSqrtSymbolToCheckBoxesText()
+{
+    QString sqrt = QString::fromUtf8("\u221A");
+    ui->xPrim_w3radioButton->setText("/"+sqrt+"3");
+    ui->xSek_w3radioButton->setText("/"+sqrt+"3");
+    ui->nPrim_w3radioButton->setText("/"+sqrt+"3");
+    ui->nSek_w3radioButton->setText("/"+sqrt+"3");
+    ui->ectPrim_w3radioButton->setText("/"+sqrt+"3");
+    ui->ectSek_w3radioButton->setText("/"+sqrt+"3");
+}
 
 void ConfDialogBase::SetRatioMenu()
 {
     clearUnitComboBoxes();
-
+    setSqrtSymbolToCheckBoxesText();
 
     ui->RatioPrimNunitComboBox->insertStringList(m_unitListA);
     ui->RatioSekNUnitcomboBox->insertStringList(m_unitListA);
