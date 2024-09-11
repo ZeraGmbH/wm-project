@@ -175,7 +175,9 @@ void ConfDialogBase::SetConfListSlot( QStringList & NPItems, QStringList & NSIte
     ui->RatioNPrimComboBox->setCurrentItem(NPItems.findIndex(m_ConfDataTemp.m_NPrimary));
     ui->RatioNSekComboBox->clear();
     ui->RatioNSekComboBox->insertStringList(NSItems); // normalwandler sekundär stufen
-    ui->RatioNSekComboBox->setCurrentItem(NSItems.findIndex(m_ConfDataTemp.m_NSecondary));    	}}
+    ui->RatioNSekComboBox->setCurrentItem(NSItems.findIndex(m_ConfDataTemp.m_NSecondary));
+    }
+}
 
 
 void ConfDialogBase::Actualize()
@@ -288,28 +290,48 @@ void ConfDialogBase::SetSyncMenu()
     ui->SSynccheckBox->setChecked(m_ConfDataTemp.m_bStrongEthSynchronisation);
 }
 
+void ConfDialogBase::clearUnitComboBoxes()
+{
+    ui->RatioPrimNunitComboBox->clear();
+    ui->RatioSekNUnitcomboBox->clear();
+    ui->RatioPrimXUnitComboBox->clear();
+    ui->RatioSekXUnitComboBox->clear();
+    ui->RatioPrimECTUnitComboBox->clear();
+    ui->RatioSekECTUnitComboBox->clear();
+}
+
 
 void ConfDialogBase::SetRatioMenu()
 {
+    clearUnitComboBoxes();
+
+
+    ui->RatioPrimNunitComboBox->insertStringList(m_unitListA);
+    ui->RatioSekNUnitcomboBox->insertStringList(m_unitListA);
+
     // alle edit felder  und radiobuttons vorbesetzen
-    ui->RatioPrimNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NPrimary));
-    ui->RatioSekNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NSecondary));
+    ui->RatioPrimNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NPrimary, ui->RatioPrimNunitComboBox));
+    ui->RatioSekNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NSecondary, ui->RatioSekNUnitcomboBox));
     ui->nPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_NPrimary));
     ui->nPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_NPrimary));
     ui->nSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_NSecondary));
     ui->nSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_NSecondary));
 
+    ui->RatioPrimXUnitComboBox->insertStringList(m_unitListA);
+    ui->RatioSekXUnitComboBox->insertStringList(m_unitListA);
 
-    ui->RatioPrimXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XPrimary));
-    ui->RatioSekXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XSecondary));
+    ui->RatioPrimXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XPrimary, ui->RatioPrimXUnitComboBox));
+    ui->RatioSekXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XSecondary, ui->RatioSekXUnitComboBox));
     ui->xPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_XPrimary));
     ui->xPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_XPrimary));
     ui->xSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_XSecondary));
     ui->xSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_XSecondary));
 
+    ui->RatioPrimECTUnitComboBox->insertStringList(m_unitListA);
+    ui->RatioSekECTUnitComboBox->insertStringList(m_unitListV);
 
-    ui->RatioPrimECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETPrimary));
-    ui->RatioSekECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETSecondary));
+    ui->RatioPrimECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETPrimary, ui->RatioPrimECTUnitComboBox));
+    ui->RatioSekECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETSecondary, ui->RatioSekECTUnitComboBox));
     ui->ectPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ETPrimary));
     ui->ectPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_ETPrimary));
     ui->ectSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ETSecondary));
@@ -367,19 +389,18 @@ void ConfDialogBase::SuggestASDUs()
     }
 }
 
-
 void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen, die menus aktualisiert
 {
     switch (m_ConfDataTemp.m_nMeasMode) {
     case In_IxDiff:
     case In_IxAbs:
     case In_nConvent:
-        m_ConfDataTemp.m_XPrimary = genRatioText( ui->RatioPrimXLineEdit->text(), ui->xPrim_3radioButton, ui->xPrim_w3radioButton);
-        m_ConfDataTemp.m_XSecondary = genRatioText( ui->RatioSekXLineEdit->text(), ui->xSek_3radioButton, ui->xSek_w3radioButton);
+        m_ConfDataTemp.m_XPrimary = genRatioText( ui->RatioPrimXLineEdit->text(), ui->xPrim_3radioButton, ui->xPrim_w3radioButton, ui->RatioPrimXUnitComboBox);
+        m_ConfDataTemp.m_XSecondary = genRatioText( ui->RatioSekXLineEdit->text(), ui->xSek_3radioButton, ui->xSek_w3radioButton, ui->RatioSekXUnitComboBox);
         break;
     case In_ECT:
-        m_ConfDataTemp.m_ETPrimary = genRatioText( ui->RatioPrimECTLineEdit->text(), ui->ectPrim_3radioButton, ui->ectPrim_w3radioButton);
-        m_ConfDataTemp.m_ETSecondary = genRatioText( ui->RatioSekECTLineEdit->text(), ui->ectSek_3radioButton, ui->ectSek_w3radioButton);
+        m_ConfDataTemp.m_ETPrimary = genRatioText( ui->RatioPrimECTLineEdit->text(), ui->ectPrim_3radioButton, ui->ectPrim_w3radioButton, ui->RatioPrimECTUnitComboBox);
+        m_ConfDataTemp.m_ETSecondary = genRatioText( ui->RatioSekECTLineEdit->text(), ui->ectSek_3radioButton, ui->ectSek_w3radioButton, ui->RatioSekECTUnitComboBox);
         break;
     }
 
@@ -410,8 +431,8 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
 
      if (ui->RatioNPrimComboBox->count()==0)   // es existiert keine eigenfehlertabelle, bzw. korrektur aus
     {
-        m_ConfDataTemp.m_NPrimary = genRatioText( ui->RatioPrimNLineEdit->text(), ui->nPrim_3radioButton, ui->nPrim_w3radioButton);
-        m_ConfDataTemp.m_NSecondary = genRatioText( ui->RatioSekNLineEdit->text(), ui->nSek_3radioButton, ui->nSek_w3radioButton);
+        m_ConfDataTemp.m_NPrimary = genRatioText( ui->RatioPrimNLineEdit->text(), ui->nPrim_3radioButton, ui->nPrim_w3radioButton, ui->RatioPrimNunitComboBox);
+        m_ConfDataTemp.m_NSecondary = genRatioText( ui->RatioSekNLineEdit->text(), ui->nSek_3radioButton, ui->nSek_w3radioButton, ui->RatioSekNUnitcomboBox);
     }
     else
     {
@@ -642,11 +663,27 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 }
 
 
-const QString& ConfDialogBase::baseUnitText(const QString& s )
+const QString& ConfDialogBase::baseUnitText(const QString& s , QComboBox* unit )
 {
     m_sText = s;
     m_sText = m_sText.replace("/w3", "");
     m_sText = m_sText.replace("/3", "");
+    foreach(QString strUnit, m_unitListA)
+    {
+        if (m_sText.contains(strUnit))
+        {
+            m_sText = m_sText.replace(strUnit, "");
+            unit->setCurrentText(strUnit);
+        }
+    }
+    foreach(QString strUnit, m_unitListV)
+    {
+        if (m_sText.contains(strUnit))
+        {
+            m_sText = m_sText.replace(strUnit, "");
+            unit->setCurrentText(strUnit);
+        }
+    }
     return m_sText;
 }
 
@@ -796,9 +833,10 @@ void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
     ui->CmpKorrLineEdit2->setKeyboard(keyboard);
 }
 
-const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRadioButton *qrb_w3)
+const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRadioButton *qrb_w3, QComboBox *unit)
 {
     m_sText = s;
+    m_sText += unit->text(unit->currentIndex());
     if (qrb_3->isChecked())
     m_sText += "/3";
     if (qrb_w3->isChecked())
