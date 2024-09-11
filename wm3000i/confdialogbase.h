@@ -13,6 +13,7 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include <QRadioButton>
+#include "qcombobox.h"
 #include "qvalidator.h"
 #include "confdata.h"
 #include "wmkeyboardform.h"
@@ -59,12 +60,15 @@ private:
     bool m_bRemoteCtrl;
     QString m_sText;
     wmKeyboardForm* mWmKeyBoard;
+    const QStringList m_unitListA = {"mA","kA","A"};
+    const QStringList m_unitListV = {"mV","kV","V"};
 
     void init();
     void Actualize();
-    virtual const QString & baseUnitText( const QString & s );
-    virtual const QString & genRatioText( QString s, QRadioButton * qrb_3, QRadioButton * qrb_w3 );
+    virtual const QString & baseUnitText(const QString & s , QComboBox *unit);
+    virtual const QString & genRatioText(QString s, QRadioButton * qrb_3, QRadioButton * qrb_w3 , QComboBox *unit);
     void SuggestASDUs();
+    void clearUnitComboBoxes();
 
 private slots:
     void ApplyDataSlot();
