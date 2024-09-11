@@ -16,10 +16,11 @@ class wmKeyboardForm : public QWidget
 public:
     explicit wmKeyboardForm(QWidget *parent = nullptr);
     ~wmKeyboardForm();
-    void setHex(const QString inputMask);
+    void setHex(int mode);
     void setParent(QWidget *parent);
     void show(const QString text);
     void setAvailGeometry(const QRect desktop);
+
 private slots:
     void on_pushButton1_clicked();
     void on_pushButton2_clicked();

@@ -1,4 +1,5 @@
 #include "wmkeyboardform.h"
+#include "cwmlineedit.h"
 #include "ui_wmkeyboardform.h"
 #include <QKeyEvent>
 
@@ -7,7 +8,7 @@ wmKeyboardForm::wmKeyboardForm(QWidget *parent)
     , ui(new Ui::wmKeyboardForm)
 {
     ui->setupUi(this);
-    setHex("");
+    setHex(HEXINPUT);
     ui->lineEdit->setDisabled(true);
     setWindowFlags(Qt::WindowStaysOnTopHint);
 }
@@ -17,35 +18,12 @@ wmKeyboardForm::~wmKeyboardForm()
     delete ui;
 }
 
-void wmKeyboardForm::setHex(const QString inputMask)
+void wmKeyboardForm::setHex(int mode)
 {
     QString titel;
-    if (inputMask.length() >0 ){
-        if (inputMask.contains("H"))
-        {
-            ui->pushButtonA->show();
-            ui->pushButtonB->show();
-            ui->pushButtonC->show();
-            ui->pushButtonD->show();
-            ui->pushButtonE->show();
-            ui->pushButtonF->show();
-            ui->pushButtonKomma->hide();
-            titel = "hex keyboard";
-        }
-        if (inputMask.contains("N"))
-        {
-            ui->pushButtonA->hide();
-            ui->pushButtonB->hide();
-            ui->pushButtonC->hide();
-            ui->pushButtonD->hide();
-            ui->pushButtonE->hide();
-            ui->pushButtonF->hide();
-            ui->pushButtonKomma->hide();
-            titel = "number keyboard";
-        }
-    }
-        else
-        {
+    switch (mode)
+    {
+    case FLOATINPUT:
         ui->pushButtonA->hide();
         ui->pushButtonB->hide();
         ui->pushButtonC->hide();
@@ -54,7 +32,41 @@ void wmKeyboardForm::setHex(const QString inputMask)
         ui->pushButtonF->hide();
         ui->pushButtonKomma->show();
         titel = "float keyboard";
-        }
+        break;
+
+    case NUMINPUT:
+        ui->pushButtonA->hide();
+        ui->pushButtonB->hide();
+        ui->pushButtonC->hide();
+        ui->pushButtonD->hide();
+        ui->pushButtonE->hide();
+        ui->pushButtonF->hide();
+        ui->pushButtonKomma->hide();
+        titel = "number keyboard";
+        break;
+
+    case FIXEDNUMINPUT:
+        ui->pushButtonA->hide();
+        ui->pushButtonB->hide();
+        ui->pushButtonC->hide();
+        ui->pushButtonD->hide();
+        ui->pushButtonE->hide();
+        ui->pushButtonF->hide();
+        ui->pushButtonKomma->hide();
+        titel = "keyboard";
+        break;
+
+    case HEXINPUT:
+        ui->pushButtonA->show();
+        ui->pushButtonB->show();
+        ui->pushButtonC->show();
+        ui->pushButtonD->show();
+        ui->pushButtonE->show();
+        ui->pushButtonF->show();
+        ui->pushButtonKomma->hide();
+        titel = "hex keyboard";
+        break;
+    }
     setWindowTitle(titel);
 }
 
@@ -200,4 +212,3 @@ void wmKeyboardForm::on_pushButtonF_clicked()
 {
     postEvent(Qt::Key_F,"F");
 }
-
