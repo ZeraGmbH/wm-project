@@ -69,6 +69,7 @@ private:
     virtual const QString & genRatioText(QString s, QRadioButton * qrb_3, QRadioButton * qrb_w3 , QComboBox *unit);
     void SuggestASDUs();
     void clearUnitComboBoxes();
+    void setSqrtSymbolToCheckBoxesText();
 
 private slots:
     void ApplyDataSlot();
