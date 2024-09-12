@@ -17,7 +17,7 @@
 #include "qvalidator.h"
 #include "confdata.h"
 #include "wmkeyboardform.h"
-
+#include "confguihelper.h"
 
 namespace Ui {
     class ConfDialogBase;
@@ -60,24 +60,17 @@ private:
     bool m_bRemoteCtrl;
     QString m_sText;
     wmKeyboardForm* mWmKeyBoard;
-    //const QStringList m_DividerStr = {"1","/w3","/3"};
-    const QStringList m_DividerStr = {"1",QString::fromUtf8("/\u221A3"),"/3"};
-    const QStringList m_unitListA = {"mA","kA","A"};
-    const QStringList m_unitListV = {"mV","kV","V"};
+    confGuiHelper *mGuiHelper;
 
     void init();
     void Actualize();
-    virtual const QString & baseUnitText(const QString & s , QComboBox *unit, QComboBox *divider);
-    virtual const QString & genRatioText(QString s, QComboBox *unit, QComboBox *divider );
     void SuggestASDUs();
     void clearUnitComboBoxes();
-    void setSqrtSymbolToCheckBoxesText();
 
 private slots:
     void ApplyDataSlot();
     virtual void FxRadioButtonChecked();
     virtual void SxRadioButtonChecked();
-
     void on_ConfTabWidget_currentChanged(int index);
 };
 

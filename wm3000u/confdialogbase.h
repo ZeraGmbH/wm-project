@@ -4,9 +4,11 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include <QRadioButton>
+#include "qcombobox.h"
 #include "qvalidator.h"
 #include "confdata.h"
 #include "wmkeyboardform.h"
+#include "confguihelper.h"
 
 
 namespace Ui {
@@ -43,34 +45,21 @@ protected:
     virtual void SetLogMenu();
     virtual void SetMessungMenu();
 
-
 private:
     Ui::ConfDialogBase *ui;
     cConfData m_ConfData, m_ConfDataTemp;
     bool m_bRemoteCtrl;
     QString m_sText;
     wmKeyboardForm* mWmKeyBoard;
+    confGuiHelper *mGuiHelper;
 
     void init();
     void Actualize();
-    virtual const QString & baseUnitText( const QString & s );
-    virtual const QString & genRatioText( QString s, QRadioButton * qrb_3, QRadioButton * qrb_w3 );
     void SuggestASDUs();
+    void clearUnitComboBoxes();
 
 private slots:
     void ApplyDataSlot();
-    virtual void nPrim_3radioButtonChecked();
-    virtual void nPrim_w3radioButtonChecked();
-    virtual void nSek_3radioButtonChecked();
-    virtual void nSek_w3radioButtonChecked();
-    virtual void xPrim_3radioButtonChecked();
-    virtual void xPrim_w3radioButtonChecked();
-    virtual void xSek_3radioButtonChecked();
-    virtual void xSek_w3radioButtonChecked();
-    virtual void evtPrim_3radioButtonChecked();
-    virtual void evtPrim_w3radioButtonChecked();
-    virtual void evtSek_3radioButtonChecked();
-    virtual void evtSek_w3radioButtonChecked();
     virtual void FxRadioButtonChecked();
     virtual void SxRadioButtonChecked();
     void on_ConfTabWidget_currentChanged(int index);

@@ -64,7 +64,7 @@
         <enum>QTabWidget::TabShape::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>4</number>
        </property>
        <widget class="QWidget" name="Widget8">
         <attribute name="title">
@@ -1095,7 +1095,7 @@
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QComboBox" name="RatioPrimNunitComboBox"/>
+             <widget class="QComboBox" name="RatioPrimNUnitComboBox"/>
             </item>
             <item row="1" column="1">
              <widget class="cWmLineEdit" name="RatioSekNLineEdit">
@@ -1155,7 +1155,7 @@
              <widget class="QComboBox" name="RatioPrimNDivComboBox"/>
             </item>
             <item row="1" column="2">
-             <widget class="QComboBox" name="RatioSekNUnitcomboBox"/>
+             <widget class="QComboBox" name="RatioSekNUnitComboBox"/>
             </item>
            </layout>
           </widget>

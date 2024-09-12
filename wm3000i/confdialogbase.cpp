@@ -14,6 +14,7 @@ ConfDialogBase::ConfDialogBase( QWidget* parent):
     ui->setupUi(this);
     init();
     this->setModal(false);
+    mGuiHelper = new confGuiHelper(false);
 }
 
 ConfDialogBase::~ConfDialogBase()
@@ -126,6 +127,7 @@ void ConfDialogBase::init()
     if (!g_WMDevice->isDC())
     {
         ui->ConfTabWidget->removeChild(ui->DCRadioButton);
+        ui->ACRadioButton->setEnabled(false);
         ui->Widget9->removeChild(ui->OffsetCorrectionNCheckbox);
         ui->Widget9->removeChild(ui->OffsetCorrectionXCheckbox);
         ui->Widget9->removeChild(ui->CmpKorrGroupBox_3);
@@ -280,8 +282,8 @@ void ConfDialogBase::SetSyncMenu()
 
 void ConfDialogBase::clearUnitComboBoxes()
 {
-    ui->RatioPrimNunitComboBox->clear();
-    ui->RatioSekNUnitcomboBox->clear();
+    ui->RatioPrimNUnitComboBox->clear();
+    ui->RatioSekNUnitComboBox->clear();
     ui->RatioPrimXUnitComboBox->clear();
     ui->RatioSekXUnitComboBox->clear();
     ui->RatioPrimECTUnitComboBox->clear();
@@ -299,35 +301,34 @@ void ConfDialogBase::SetRatioMenu()
 {
     clearUnitComboBoxes();
 
-    ui->RatioPrimNunitComboBox->insertStringList(m_unitListA);
-    ui->RatioSekNUnitcomboBox->insertStringList(m_unitListA);
+    ui->RatioPrimNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioSekNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
 
-    ui->RatioPrimNDivComboBox->insertStringList(m_DividerStr);
-    ui->RatioSekNDivComboBox->insertStringList(m_DividerStr);
+    ui->RatioPrimNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioSekNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
 
     // alle edit felder  und radiobuttons vorbesetzen
-    ui->RatioPrimNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NPrimary, ui->RatioPrimNunitComboBox, ui->RatioPrimNDivComboBox));
-    ui->RatioSekNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NSecondary, ui->RatioSekNUnitcomboBox, ui->RatioSekNDivComboBox));
+    ui->RatioPrimNLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_NPrimary, ui->RatioPrimNUnitComboBox, ui->RatioPrimNDivComboBox));
+    ui->RatioSekNLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_NSecondary, ui->RatioSekNUnitComboBox, ui->RatioSekNDivComboBox));
 
-    ui->RatioPrimXUnitComboBox->insertStringList(m_unitListA);
-    ui->RatioSekXUnitComboBox->insertStringList(m_unitListA);
+    ui->RatioPrimXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioSekXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
 
-    ui->RatioPrimXDivComboBox->insertStringList(m_DividerStr);
-    ui->RatioSekXDivComboBox->insertStringList(m_DividerStr);
+    ui->RatioPrimXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioSekXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
 
-    ui->RatioPrimXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XPrimary, ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox));
-    ui->RatioSekXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XSecondary, ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox));
+    ui->RatioPrimXLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_XPrimary, ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox));
+    ui->RatioSekXLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_XSecondary, ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox));
 
-    ui->RatioPrimECTUnitComboBox->insertStringList(m_unitListA);
-    ui->RatioSekECTUnitComboBox->insertStringList(m_unitListV);
+    ui->RatioPrimECTUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioSekECTUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
 
-    ui->RatioPrimECTDivComboBox->insertStringList(m_DividerStr);
-    ui->RatioSekECTDivComboBox->insertStringList(m_DividerStr);
+    ui->RatioPrimECTDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioSekECTDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
 
-    ui->RatioPrimECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETPrimary, ui->RatioPrimECTUnitComboBox, ui->RatioPrimECTDivComboBox));
-    ui->RatioSekECTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETSecondary, ui->RatioSekECTUnitComboBox, ui->RatioSekECTDivComboBox));
+    ui->RatioPrimECTLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_ETPrimary, ui->RatioPrimECTUnitComboBox, ui->RatioPrimECTDivComboBox));
+    ui->RatioSekECTLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_ETSecondary, ui->RatioSekECTUnitComboBox, ui->RatioSekECTDivComboBox));
 }
-
 
 
 void ConfDialogBase::SetLogMenu()
@@ -385,12 +386,12 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
     case In_IxDiff:
     case In_IxAbs:
     case In_nConvent:
-        m_ConfDataTemp.m_XPrimary = genRatioText( ui->RatioPrimXLineEdit->text(), ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox);
-        m_ConfDataTemp.m_XSecondary = genRatioText( ui->RatioSekXLineEdit->text(), ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox);
+        m_ConfDataTemp.m_XPrimary = mGuiHelper->genRatioText( ui->RatioPrimXLineEdit->text(), ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox);
+        m_ConfDataTemp.m_XSecondary = mGuiHelper->genRatioText( ui->RatioSekXLineEdit->text(), ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox);
         break;
     case In_ECT:
-        m_ConfDataTemp.m_ETPrimary = genRatioText( ui->RatioPrimECTLineEdit->text(), ui->RatioPrimECTUnitComboBox, ui->RatioPrimECTDivComboBox);
-        m_ConfDataTemp.m_ETSecondary = genRatioText( ui->RatioSekECTLineEdit->text(), ui->RatioSekECTUnitComboBox, ui->RatioSekECTDivComboBox);
+        m_ConfDataTemp.m_ETPrimary = mGuiHelper->genRatioText( ui->RatioPrimECTLineEdit->text(), ui->RatioPrimECTUnitComboBox, ui->RatioPrimECTDivComboBox);
+        m_ConfDataTemp.m_ETSecondary = mGuiHelper->genRatioText( ui->RatioSekECTLineEdit->text(), ui->RatioSekECTUnitComboBox, ui->RatioSekECTDivComboBox);
         break;
     }
 
@@ -421,8 +422,8 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
 
      if (ui->RatioNPrimComboBox->count()==0)   // es existiert keine eigenfehlertabelle, bzw. korrektur aus
     {
-        m_ConfDataTemp.m_NPrimary = genRatioText( ui->RatioPrimNLineEdit->text(), ui->RatioPrimNunitComboBox, ui->RatioPrimNDivComboBox);
-        m_ConfDataTemp.m_NSecondary = genRatioText( ui->RatioSekNLineEdit->text(), ui->RatioSekNUnitcomboBox, ui->RatioSekNDivComboBox);
+        m_ConfDataTemp.m_NPrimary = mGuiHelper->genRatioText( ui->RatioPrimNLineEdit->text(), ui->RatioPrimNUnitComboBox, ui->RatioPrimNDivComboBox);
+        m_ConfDataTemp.m_NSecondary = mGuiHelper->genRatioText( ui->RatioSekNLineEdit->text(), ui->RatioSekNUnitComboBox, ui->RatioSekNDivComboBox);
     }
     else
     {
@@ -462,7 +463,7 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
     if (ui->F50RadioButton->isChecked()) m_ConfDataTemp.m_nSFreq=F50;
     if (ui->F60RadioButton->isChecked()) m_ConfDataTemp.m_nSFreq=F60;
 
-    float f = 50.0;
+    float f(50.0);
     switch (m_ConfDataTemp.m_nSFreq)
     {  // wir setzen den realen frequenzwert
       case F16: f = 50.0/3;break;
@@ -548,7 +549,6 @@ void ConfDialogBase::SetnConventMenu()
 
     ui->EthTypelineEdit->setText(QString("%1").arg((m_ConfDataTemp.m_nEthTypeHeader >> 16) & 0xFFFF,4,16).replace(' ','0').upper() );
     ui->APPIDlineEdit->setText(QString("%1").arg(m_ConfDataTemp.m_nEthTypeHeader & 0xFFFF,4,16).replace(' ','0').upper() );
-
 }
 
 
@@ -653,40 +653,6 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 }
 
 
-const QString& ConfDialogBase::baseUnitText(const QString& s , QComboBox* unit ,QComboBox* divider)
-{
-    m_sText = s;
-    divider->setCurrentText("1");
-    foreach (QString strDiv, m_DividerStr)
-    {
-        strDiv = strDiv.replace(QString::fromUtf8("\u221A"),"w");
-        if (m_sText.contains(strDiv))
-        {
-            m_sText = m_sText.replace(strDiv, "");
-            strDiv = strDiv.replace("w",QString::fromUtf8("\u221A"));
-            divider->setCurrentText(strDiv);
-        }
-    }
-    foreach(QString strUnit, m_unitListA)
-    {
-        if (m_sText.contains(strUnit))
-        {
-            m_sText = m_sText.replace(strUnit, "");
-            unit->setCurrentText(strUnit);
-        }
-    }
-    foreach(QString strUnit, m_unitListV)
-    {
-        if (m_sText.contains(strUnit))
-        {
-            m_sText = m_sText.replace(strUnit, "");
-            unit->setCurrentText(strUnit);
-        }
-    }
-    return m_sText;
-}
-
-
 void ConfDialogBase::FxRadioButtonChecked()
 {
     ApplyDataSlot(); // wir übernehmen die neue frequenz
@@ -764,16 +730,6 @@ void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
     ui->RatioSekECTLineEdit->setInputMode(FIXEDNUMINPUT);
     ui->RatioPrimECTLineEdit->setKeyboard(keyboard);
     ui->RatioPrimECTLineEdit->setInputMode(FIXEDNUMINPUT);
-}
-
-const QString& ConfDialogBase::genRatioText(QString s, QComboBox *unit, QComboBox *divider)
-{
-    m_sText = s;
-    m_sText += unit->text(unit->currentIndex());
-    if (divider->currentIndex()!=0)
-        m_sText += divider->text(divider->currentIndex());
-    m_sText = m_sText.replace(QString::fromUtf8("\u221A"),"w");
-    return m_sText;
 }
 
 void ConfDialogBase::on_ConfTabWidget_currentChanged(int index)

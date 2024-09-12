@@ -5,12 +5,14 @@ TRANSLATIONS    = wm-common_de.ts \
                   wm-common_pl.ts
 
 QT += widgets network qt3support \
+    widgets \
     widgets
 
 HEADERS = \
     client-access/clientiodevice.h \
     client-access/clientsocketdevice.h \
     client-access/deviceserver.h \
+    confguihelper.h \
     dsp/dspactvalues.h \
     dsp/dspmeasdata.h \
     dsp/dspsetup.h \
@@ -102,6 +104,7 @@ HEADERS = \
 SOURCES = \
     client-access/clientsocketdevice.cpp \
     client-access/deviceserver.cpp \
+    confguihelper.cpp \
     dsp/dspmeasdata.cpp \
     dsp/dspsetup.cpp \
     gui/cwmessagebox.cpp \
