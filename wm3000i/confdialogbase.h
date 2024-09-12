@@ -60,31 +60,21 @@ private:
     bool m_bRemoteCtrl;
     QString m_sText;
     wmKeyboardForm* mWmKeyBoard;
+    //const QStringList m_DividerStr = {"1","/w3","/3"};
+    const QStringList m_DividerStr = {"1",QString::fromUtf8("/\u221A3"),"/3"};
     const QStringList m_unitListA = {"mA","kA","A"};
     const QStringList m_unitListV = {"mV","kV","V"};
 
     void init();
     void Actualize();
-    virtual const QString & baseUnitText(const QString & s , QComboBox *unit);
-    virtual const QString & genRatioText(QString s, QRadioButton * qrb_3, QRadioButton * qrb_w3 , QComboBox *unit);
+    virtual const QString & baseUnitText(const QString & s , QComboBox *unit, QComboBox *divider);
+    virtual const QString & genRatioText(QString s, QComboBox *unit, QComboBox *divider );
     void SuggestASDUs();
     void clearUnitComboBoxes();
     void setSqrtSymbolToCheckBoxesText();
 
 private slots:
     void ApplyDataSlot();
-    virtual void nPrim_3radioButtonChecked();
-    virtual void nPrim_w3radioButtonChecked();
-    virtual void nSek_3radioButtonChecked();
-    virtual void nSek_w3radioButtonChecked();
-    virtual void xPrim_3radioButtonChecked();
-    virtual void xPrim_w3radioButtonChecked();
-    virtual void xSek_3radioButtonChecked();
-    virtual void xSek_w3radioButtonChecked();
-    virtual void ectPrim_3radioButtonChecked();
-    virtual void ectPrim_w3radioButtonChecked();
-    virtual void ectSek_3radioButtonChecked();
-    virtual void ectSek_w3radioButtonChecked();
     virtual void FxRadioButtonChecked();
     virtual void SxRadioButtonChecked();
 

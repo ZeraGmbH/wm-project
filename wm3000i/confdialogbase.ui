@@ -873,32 +873,6 @@
             <string>X</string>
            </property>
            <layout class="QGridLayout">
-            <item row="2" column="0">
-             <widget class="QLabel" name="RatioSekXLabel">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Sek:</string>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="3">
-             <widget class="QRadioButton" name="xSek_3radioButton">
-              <property name="text">
-               <string>/3</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="cWmLineEdit" name="RatioPrimXLineEdit">
               <property name="enabled">
@@ -921,17 +895,7 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="4">
-             <widget class="QRadioButton" name="xSek_w3radioButton">
-              <property name="text">
-               <string>/sqrt(3)</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1" rowspan="2">
+            <item row="1" column="1">
              <widget class="cWmLineEdit" name="RatioSekXLineEdit">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -950,25 +914,33 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="3" rowspan="2">
-             <widget class="QRadioButton" name="xPrim_3radioButton">
-              <property name="text">
-               <string>/3</string>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="RatioSekXUnitComboBox"/>
+            </item>
+            <item row="0" column="2">
+             <widget class="QComboBox" name="RatioPrimXUnitComboBox"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="RatioSekXLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="autoExclusive">
+              <property name="text">
+               <string>Sek:</string>
+              </property>
+              <property name="wordWrap">
                <bool>false</bool>
               </property>
              </widget>
             </item>
-            <item row="0" column="4" rowspan="2">
-             <widget class="QRadioButton" name="xPrim_w3radioButton">
-              <property name="text">
-               <string>/sqrt(3)</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
+            <item row="1" column="3">
+             <widget class="QComboBox" name="RatioSekXDivComboBox"/>
+            </item>
+            <item row="0" column="3">
+             <widget class="QComboBox" name="RatioPrimXDivComboBox"/>
             </item>
             <item row="0" column="0">
              <widget class="QLabel" name="RatioPrimXLabel">
@@ -985,12 +957,6 @@
                <bool>false</bool>
               </property>
              </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QComboBox" name="RatioPrimXUnitComboBox"/>
-            </item>
-            <item row="2" column="2">
-             <widget class="QComboBox" name="RatioSekXUnitComboBox"/>
             </item>
            </layout>
           </widget>
@@ -1110,14 +1076,7 @@
            </property>
            <layout class="QGridLayout">
             <item row="1" column="3">
-             <widget class="QRadioButton" name="nSek_3radioButton">
-              <property name="text">
-               <string>/3</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
+             <widget class="QComboBox" name="RatioSekNDivComboBox"/>
             </item>
             <item row="0" column="0">
              <widget class="QLabel" name="RatioPrimXLabel_2">
@@ -1135,13 +1094,25 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
-             <widget class="QRadioButton" name="nSek_w3radioButton">
-              <property name="text">
-               <string>/sqrt(3)</string>
+            <item row="0" column="2">
+             <widget class="QComboBox" name="RatioPrimNunitComboBox"/>
+            </item>
+            <item row="1" column="1">
+             <widget class="cWmLineEdit" name="RatioSekNLineEdit">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
+              <property name="maximumSize">
+               <size>
+                <width>75</width>
+                <height>32767</height>
+               </size>
+              </property>
+              <property name="maxLength">
+               <number>9</number>
               </property>
              </widget>
             </item>
@@ -1157,16 +1128,6 @@
                <string>Sek:</string>
               </property>
               <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="QRadioButton" name="nPrim_w3radioButton">
-              <property name="text">
-               <string>/sqrt(3)</string>
-              </property>
-              <property name="autoExclusive">
                <bool>false</bool>
               </property>
              </widget>
@@ -1191,36 +1152,7 @@
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QRadioButton" name="nPrim_3radioButton">
-              <property name="text">
-               <string>/3</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="cWmLineEdit" name="RatioSekNLineEdit">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>75</width>
-                <height>32767</height>
-               </size>
-              </property>
-              <property name="maxLength">
-               <number>9</number>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QComboBox" name="RatioPrimNunitComboBox"/>
+             <widget class="QComboBox" name="RatioPrimNDivComboBox"/>
             </item>
             <item row="1" column="2">
              <widget class="QComboBox" name="RatioSekNUnitcomboBox"/>
@@ -1243,7 +1175,10 @@
             <string>ECT</string>
            </property>
            <layout class="QGridLayout">
-            <item row="1" column="1" rowspan="2">
+            <item row="0" column="2">
+             <widget class="QComboBox" name="RatioPrimECTUnitComboBox"/>
+            </item>
+            <item row="1" column="1">
              <widget class="cWmLineEdit" name="RatioSekECTLineEdit">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -1262,43 +1197,13 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="3" rowspan="2">
-             <widget class="QRadioButton" name="ectPrim_3radioButton">
-              <property name="text">
-               <string>/3</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="RatioSekECTUnitComboBox"/>
             </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="RatioPrimXLabel_3">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Prim:</string>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-             </widget>
+            <item row="1" column="3">
+             <widget class="QComboBox" name="RatioSekECTDivComboBox"/>
             </item>
-            <item row="0" column="4" rowspan="2">
-             <widget class="QRadioButton" name="ectPrim_w3radioButton">
-              <property name="text">
-               <string>/sqrt(3)</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
+            <item row="1" column="0">
              <widget class="QLabel" name="RatioSekXLabel_3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1310,16 +1215,6 @@
                <string>Sek:</string>
               </property>
               <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QRadioButton" name="ectSek_w3radioButton">
-              <property name="text">
-               <string>/sqrt(3)</string>
-              </property>
-              <property name="autoExclusive">
                <bool>false</bool>
               </property>
              </widget>
@@ -1346,21 +1241,24 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QRadioButton" name="ectSek_3radioButton">
-              <property name="text">
-               <string>/3</string>
+            <item row="0" column="3">
+             <widget class="QComboBox" name="RatioPrimECTDivComboBox"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="RatioPrimXLabel_3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="autoExclusive">
+              <property name="text">
+               <string>Prim:</string>
+              </property>
+              <property name="wordWrap">
                <bool>false</bool>
               </property>
              </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QComboBox" name="RatioPrimECTUnitComboBox"/>
-            </item>
-            <item row="2" column="2">
-             <widget class="QComboBox" name="RatioSekECTUnitComboBox"/>
             </item>
            </layout>
           </widget>
@@ -2443,22 +2341,6 @@
      <item>
       <layout class="QHBoxLayout" name="_2">
        <item>
-        <spacer name="Horizontal Spacing2">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>254</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <widget class="QPushButton" name="buttonOk">
          <property name="text">
           <string>&amp;OK</string>
@@ -2486,6 +2368,22 @@
           <bool>true</bool>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="Horizontal Spacing2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>254</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>
