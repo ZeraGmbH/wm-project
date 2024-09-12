@@ -13,6 +13,7 @@ ConfDialogBase::ConfDialogBase( QWidget* parent):
     ui->setupUi(this);
     init();
     this->setModal(false);
+    mGuiHelper = new confGuiHelper(true);
 }
 
 ConfDialogBase::~ConfDialogBase()
@@ -98,18 +99,6 @@ void ConfDialogBase::init()
     connect(ui->DCRadioButton,SIGNAL(clicked()),this,SLOT(ApplyDataSlot()));
     connect(ui->ACRadioButton,SIGNAL(clicked()),this,SLOT(ApplyDataSlot()));
     connect(ui->CmpCorrCheckBox,SIGNAL(clicked()),this,SLOT(ApplyDataSlot()));
-    connect(ui->nSek_w3radioButton,SIGNAL(clicked()),this,SLOT(nSek_w3radioButtonChecked()));
-    connect(ui->nSek_3radioButton,SIGNAL(clicked()),this,SLOT(nSek_3radioButtonChecked()));
-    connect(ui->nPrim_w3radioButton,SIGNAL(clicked()),this,SLOT(nPrim_w3radioButtonChecked()));
-    connect(ui->nPrim_3radioButton,SIGNAL(clicked()),this,SLOT(nPrim_3radioButtonChecked()));
-    connect(ui->evtPrim_w3radioButton,SIGNAL(clicked()),this,SLOT(evtPrim_w3radioButtonChecked()));
-    connect(ui->evtPrim_3radioButton,SIGNAL(clicked()),this,SLOT(evtPrim_3radioButtonChecked()));
-    connect(ui->evtSek_w3radioButton,SIGNAL(clicked()),this,SLOT(evtSek_w3radioButtonChecked()));
-    connect(ui->evtSek_3radioButton,SIGNAL(clicked()),this,SLOT(evtSek_3radioButtonChecked()));
-    connect(ui->xPrim_w3radioButton,SIGNAL(clicked()),this,SLOT(xPrim_w3radioButtonChecked()));
-    connect(ui->xPrim_3radioButton,SIGNAL(clicked()),this,SLOT(xPrim_3radioButtonChecked()));
-    connect(ui->xSek_w3radioButton,SIGNAL(clicked()),this,SLOT(xSek_w3radioButtonChecked()));
-    connect(ui->xSek_3radioButton,SIGNAL(clicked()),this,SLOT(xSek_3radioButtonChecked()));
     connect(ui->S80RadioButton,SIGNAL(clicked()),this,SLOT(SxRadioButtonChecked()));
     connect(ui->S96RadioButton,SIGNAL(clicked()),this,SLOT(SxRadioButtonChecked()));
     connect(ui->S240RadioButton,SIGNAL(clicked()),this,SLOT(SxRadioButtonChecked()));
@@ -145,9 +134,7 @@ void ConfDialogBase::init()
         ui->SPeriodeButtonGroup->removeChild(ui->S240RadioButton);
         ui->SPeriodeButtonGroup->removeChild(ui->S288RadioButton);
     }
-
 }
-
 
 void ConfDialogBase::SetConfInfoSlot(cConfData *cd )
 {
@@ -173,7 +160,8 @@ void ConfDialogBase::SetConfListSlot( QStringList & NPItems, QStringList & NSIte
         ui->RatioNPrimComboBox->setCurrentItem(NPItems.findIndex(m_ConfDataTemp.m_NPrimary));
         ui->RatioNSekComboBox->clear();
         ui->RatioNSekComboBox->insertStringList(NSItems); // normalwandler sekundär stufen
-        ui->RatioNSekComboBox->setCurrentItem(NSItems.findIndex(m_ConfDataTemp.m_NSecondary));    	}
+        ui->RatioNSekComboBox->setCurrentItem(NSItems.findIndex(m_ConfDataTemp.m_NSecondary));
+    }
 }
 
 
@@ -227,13 +215,11 @@ void ConfDialogBase::accept()
     {
         ApplyDataSlot();
         m_ConfData = m_ConfDataTemp;
-
         emit SendConfDataSignal(&m_ConfData);
         mWmKeyBoard->hide();
         close();
     }
 }
-
 
 void ConfDialogBase::abortSlot()
 {
@@ -289,33 +275,55 @@ void ConfDialogBase::SetSyncMenu()
 }
 
 
-void ConfDialogBase::SetRatioMenu()
+void ConfDialogBase::clearUnitComboBoxes()
 {
-    // alle edit felder  und radiobuttons vorbesetzen
-    ui->RatioPrimNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NPrimary));
-    ui->RatioSekNLineEdit->setText(baseUnitText(m_ConfDataTemp.m_NSecondary));
-    ui->nPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_NPrimary));
-    ui->nPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_NPrimary));
-    ui->nSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_NSecondary));
-    ui->nSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_NSecondary));
-    
-    
-    ui->RatioPrimXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XPrimary));
-    ui->RatioSekXLineEdit->setText(baseUnitText(m_ConfDataTemp.m_XSecondary));
-    ui->xPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_XPrimary));
-    ui->xPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_XPrimary));
-    ui->xSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_XSecondary));
-    ui->xSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_XSecondary));
-    
-    
-    ui->RatioPrimEVTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETPrimary));
-    ui->RatioSekEVTLineEdit->setText(baseUnitText(m_ConfDataTemp.m_ETSecondary));
-    ui->evtPrim_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ETPrimary));
-    ui->evtPrim_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_ETPrimary));
-    ui->evtSek_3radioButton->setChecked(is_3(m_ConfDataTemp.m_ETSecondary));
-    ui->evtSek_w3radioButton->setChecked(is_w3(m_ConfDataTemp.m_ETSecondary));
+    ui->RatioPrimNUnitComboBox->clear();
+    ui->RatioSekNUnitComboBox->clear();
+    ui->RatioPrimXUnitComboBox->clear();
+    ui->RatioSekXUnitComboBox->clear();
+    ui->RatioPrimEVTUnitComboBox->clear();
+    ui->RatioSekEVTUnitComboBox->clear();
+
+    ui->RatioPrimNDivComboBox->clear();
+    ui->RatioSekNDivComboBox->clear();
+    ui->RatioPrimXDivComboBox->clear();
+    ui->RatioSekXDivComboBox->clear();
+    ui->RatioPrimEVTDivComboBox->clear();
+    ui->RatioSekEVTDivComboBox->clear();
 }
 
+void ConfDialogBase::SetRatioMenu()
+{
+    clearUnitComboBoxes();
+    ui->RatioPrimNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioSekNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+
+    ui->RatioPrimNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioSekNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+
+    // alle edit felder  und radiobuttons vorbesetzen
+    ui->RatioPrimNLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_NPrimary, ui->RatioPrimNUnitComboBox, ui->RatioPrimNDivComboBox));
+    ui->RatioSekNLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_NSecondary, ui->RatioSekNUnitComboBox, ui->RatioSekNDivComboBox));
+
+    ui->RatioPrimXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioSekXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+
+    ui->RatioPrimXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioSekXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+
+    ui->RatioPrimXLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_XPrimary, ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox));
+    ui->RatioSekXLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_XSecondary, ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox));
+
+    ui->RatioPrimEVTUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioSekEVTUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
+
+    ui->RatioPrimEVTDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioSekEVTDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+
+    ui->RatioPrimEVTLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_ETPrimary, ui->RatioPrimEVTUnitComboBox, ui->RatioPrimEVTDivComboBox));
+    ui->RatioSekEVTLineEdit->setText(mGuiHelper->baseUnitText(m_ConfDataTemp.m_ETSecondary, ui->RatioSekEVTUnitComboBox, ui->RatioSekEVTDivComboBox));
+
+}
 
 
 void ConfDialogBase::SetLogMenu()
@@ -374,12 +382,12 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
     {
 	case Un_UxAbs:
 	case Un_nConvent:
-            m_ConfDataTemp.m_XPrimary = genRatioText( ui->RatioPrimXLineEdit->text(), ui->xPrim_3radioButton, ui->xPrim_w3radioButton);
-            m_ConfDataTemp.m_XSecondary = genRatioText( ui->RatioSekXLineEdit->text(), ui->xSek_3radioButton, ui->xSek_w3radioButton);
+        m_ConfDataTemp.m_XPrimary = mGuiHelper->genRatioText( ui->RatioPrimXLineEdit->text(),ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox);
+        m_ConfDataTemp.m_XSecondary = mGuiHelper->genRatioText( ui->RatioSekXLineEdit->text(), ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox);
 	    break;
 	case Un_EVT:
-            m_ConfDataTemp.m_ETPrimary = genRatioText( ui->RatioPrimEVTLineEdit->text(), ui->evtPrim_3radioButton, ui->evtPrim_w3radioButton);
-            m_ConfDataTemp.m_ETSecondary = genRatioText( ui->RatioSekEVTLineEdit->text(), ui->evtSek_3radioButton, ui->evtSek_w3radioButton);
+        m_ConfDataTemp.m_ETPrimary = mGuiHelper->genRatioText( ui->RatioPrimEVTLineEdit->text(), ui->RatioPrimEVTUnitComboBox, ui->RatioPrimEVTDivComboBox);
+        m_ConfDataTemp.m_ETSecondary = mGuiHelper->genRatioText( ui->RatioSekEVTLineEdit->text(), ui->RatioSekEVTUnitComboBox, ui->RatioSekEVTDivComboBox);
 	    break;
 	}
  
@@ -410,8 +418,8 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
     
      if (ui->RatioNPrimComboBox->count()==0)   // es existiert keine eigenfehlertabelle, bzw. korrektur aus
     {
-         m_ConfDataTemp.m_NPrimary = genRatioText( ui->RatioPrimNLineEdit->text(), ui->nPrim_3radioButton, ui->nPrim_w3radioButton);
-         m_ConfDataTemp.m_NSecondary = genRatioText( ui->RatioSekNLineEdit->text(), ui->nSek_3radioButton, ui->nSek_w3radioButton);
+        m_ConfDataTemp.m_NPrimary = mGuiHelper->genRatioText( ui->RatioPrimNLineEdit->text(), ui->RatioPrimNUnitComboBox, ui->RatioPrimNDivComboBox);
+         m_ConfDataTemp.m_NSecondary = mGuiHelper->genRatioText( ui->RatioSekNLineEdit->text(), ui->RatioSekNUnitComboBox, ui->RatioSekNDivComboBox);
     }
     else
     {	
@@ -451,12 +459,13 @@ void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen,
     if (ui->F50RadioButton->isChecked()) m_ConfDataTemp.m_nSFreq=F50;
     if (ui->F60RadioButton->isChecked()) m_ConfDataTemp.m_nSFreq=F60;
     
-    float f;
-    switch (m_ConfDataTemp.m_nSFreq) {  // wir setzen den realen frequenzwert
+    float f(50.0);
+    switch (m_ConfDataTemp.m_nSFreq)
+    {  // wir setzen den realen frequenzwert
       case F16: f = 50.0/3;break;
       case F50: f = 50.0;break;
       case F60: f = 60.0;
-      }
+    }
     
     m_ConfDataTemp.m_fSFreq = f;
     
@@ -640,98 +649,6 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 }
 
 
-const QString& ConfDialogBase::baseUnitText(const QString& s )
-{
-    m_sText = s;
-    m_sText = m_sText.replace("/w3", "");
-    m_sText = m_sText.replace("/3", "");
-    return m_sText;
-}
-
-
-void ConfDialogBase::nPrim_3radioButtonChecked()
-{
-    if (ui->nPrim_3radioButton->isChecked())
-        ui->nPrim_w3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::nPrim_w3radioButtonChecked()
-{
-    if (ui->nPrim_w3radioButton->isChecked())
-        ui->nPrim_3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::nSek_3radioButtonChecked()
-{
-    if (ui->nSek_3radioButton->isChecked())
-        ui->nSek_w3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::nSek_w3radioButtonChecked()
-{
-    if (ui->nSek_w3radioButton->isChecked())
-        ui->nSek_3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::xPrim_3radioButtonChecked()
-{
-    if (ui->xPrim_3radioButton->isChecked())
-        ui->xPrim_w3radioButton->setChecked(false);
-}
-
-
-
-void ConfDialogBase::xPrim_w3radioButtonChecked()
-{
-    if (ui->xPrim_w3radioButton->isChecked())
-        ui->xPrim_3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::xSek_3radioButtonChecked()
-{
-    if (ui->xSek_3radioButton->isChecked())
-        ui->xSek_w3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::xSek_w3radioButtonChecked()
-{
-    if (ui->xSek_w3radioButton->isChecked())
-        ui->xSek_3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::evtPrim_3radioButtonChecked()
-{
-    if (ui->evtPrim_3radioButton->isChecked())
-        ui->evtPrim_w3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::evtPrim_w3radioButtonChecked()
-{
-    if (ui->evtPrim_w3radioButton->isChecked())
-        ui->evtPrim_3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::evtSek_3radioButtonChecked()
-{
-    if (ui->evtSek_3radioButton->isChecked())
-        ui->evtSek_w3radioButton->setChecked(false);
-}
-
-
-void ConfDialogBase::evtSek_w3radioButtonChecked()
-{
-    if (ui->evtSek_w3radioButton->isChecked())
-        ui->evtSek_3radioButton->setChecked(false);
-}
 
 
 void ConfDialogBase::FxRadioButtonChecked()
@@ -785,25 +702,35 @@ void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
     ui->MacDLineEdit6->setKeyboard(keyboard);
 
     ui->UPrioritylineEdit->setKeyboard(keyboard);
+    ui->UPrioritylineEdit->setInputMode(NUMINPUT);
     ui->CFIlineEdit->setKeyboard(keyboard);
+    ui->CFIlineEdit->setInputMode(NUMINPUT);
     ui->FirstASDUlineEdit->setKeyboard(keyboard);
+    ui->FirstASDUlineEdit->setInputMode(NUMINPUT);
     ui->LastASDUlineEdit->setKeyboard(keyboard);
+    ui->LastASDUlineEdit->setInputMode(NUMINPUT);
     ui->SetlineEdit->setKeyboard(keyboard);
+    ui->SetlineEdit->setInputMode(NUMINPUT);
 
     ui->CmpKorrLineEdit1->setKeyboard(keyboard);
+    ui->CmpKorrLineEdit1->setInputMode(FLOATINPUT);
     ui->CmpKorrLineEdit2->setKeyboard(keyboard);
+    ui->CmpKorrLineEdit2->setInputMode(FLOATINPUT);
+
+    ui->RatioPrimNLineEdit->setKeyboard(keyboard);
+    ui->RatioPrimNLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekNLineEdit->setKeyboard(keyboard);
+    ui->RatioSekNLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioPrimXLineEdit->setKeyboard(keyboard);
+    ui->RatioPrimXLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekXLineEdit->setKeyboard(keyboard);
+    ui->RatioSekXLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekEVTLineEdit->setKeyboard(keyboard);
+    ui->RatioSekEVTLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioPrimEVTLineEdit->setKeyboard(keyboard);
+    ui->RatioPrimEVTLineEdit->setInputMode(FIXEDNUMINPUT);
 }
 
-
-const QString& ConfDialogBase::genRatioText(QString s, QRadioButton *qrb_3, QRadioButton *qrb_w3)
-{
-    m_sText = s;
-    if (qrb_3->isChecked())
-	m_sText += "/3";
-    if (qrb_w3->isChecked())
-	m_sText += "/w3";
-    return m_sText;
-}
 
 void ConfDialogBase::on_ConfTabWidget_currentChanged(int index)
 {
