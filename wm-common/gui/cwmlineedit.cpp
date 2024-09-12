@@ -49,7 +49,8 @@ void cWmLineEdit::keyPressEvent(QKeyEvent *event)
 
         mKeyBoard->show(this->text());
     }
-    QLineEdit::keyPressEvent(event);
+    if (key != Qt::Key_Escape)
+        QLineEdit::keyPressEvent(event);
 }
 
 void cWmLineEdit::focusInEvent(QFocusEvent *event)
@@ -67,9 +68,16 @@ void cWmLineEdit::focusInEvent(QFocusEvent *event)
 void cWmLineEdit::mouseReleaseEvent(QMouseEvent *)
 {
     this->setCursorPosition(0);
-    this->setSelection(0,0);
+
     if ((mMode == FLOATINPUT) || (mMode == FIXEDNUMINPUT))
-        this->setText("");
+    {
+         this->setSelection(0,this->text().length());
+    }
+    else
+    {
+            this->setSelection(0,0);
+    }
+        //this->setText("");
 }
 
 void cWmLineEdit::keyPressedHex(QString str)
@@ -100,8 +108,11 @@ void cWmLineEdit::keyPressedNumFixed(QString str)
 {
     QString text;
     int len(5);
+    int sel;
+    sel = selectionStart();
     text = str;
-    text = text.prepend(this->text());
+    if(sel == -1)
+        text = text.prepend(this->text());
     text = text.mid(0,len);
     setText(text);
 
@@ -110,9 +121,12 @@ void cWmLineEdit::keyPressedNumFixed(QString str)
 void cWmLineEdit::keyPressedFloat(QString str)
 {
     QString text;
-    int len(5);
+    int len(8);
+    int sel;
+    sel = selectionStart();
     text = str;
-    text = text.prepend(this->text());
+    if(sel == -1)
+        text = text.prepend(this->text());
     text = text.mid(0,len);
     setText(text);
 
