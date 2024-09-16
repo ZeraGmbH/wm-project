@@ -244,7 +244,7 @@ bool ConfDialogBase::acceptEot()
     }
     if ( !rationOetOK )
     {
-        QMessageBox::information( this, trUtf8("Normalwandler"),  trUtf8("Bitte überprüfen! \nkein Bereich gewählt"));
+        QMessageBox::information( this, trUtf8("Normalwandler"),  trUtf8("Bitte überprüfen! \nKein Bereich gewählt"));
     }
     return rationOetOK;
 }

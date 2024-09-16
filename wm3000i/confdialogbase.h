@@ -67,6 +67,8 @@ private:
     void SuggestASDUs();
     void clearUnitComboBoxes();
 
+    bool acceptEot();
+    bool acceptRatio();
 private slots:
     void ApplyDataSlot();
     virtual void FxRadioButtonChecked();
