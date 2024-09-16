@@ -5,8 +5,7 @@ confGuiHelper::confGuiHelper(bool voltage) :
 {
     if (voltage)
     {
-        m_unitListV = {"mA","kA","A"};
-        m_unitListA = {"mV","kV","V"};
+        m_unitListV = m_unitListA = {"mV","kV","V"};
     }
     else
     {
