@@ -21,6 +21,8 @@ public:
     void setHex(int mode);
     void setParent(cWmLineEdit *parent);
     void show(const QString text);
+    void showText(const QString text);
+    void hide();
     void setAvailGeometry(const QRect desktop);
     void setAKey(const int key);
 

@@ -56,7 +56,7 @@ void cWmLineEdit::keyPressEvent(QKeyEvent *event)
     {
     QLineEdit::keyPressEvent(event);
     }
-    mKeyBoard->show(this->text());
+    mKeyBoard->showText(this->text());
 }
 
 void cWmLineEdit::focusInEvent(QFocusEvent *event)
@@ -65,7 +65,7 @@ void cWmLineEdit::focusInEvent(QFocusEvent *event)
     if (mKeyBoard != nullptr){
         mKeyBoard->setParent(this);
         mKeyBoard->setHex(mMode);
-        mKeyBoard->show(this->text());
+        mKeyBoard->showText(this->text());
     }
 }
 
