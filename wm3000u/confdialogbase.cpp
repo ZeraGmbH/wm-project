@@ -195,8 +195,19 @@ void ConfDialogBase::Actualize()
     }
 }
 
-
 void ConfDialogBase::accept()
+{
+    if( acceptRatio() && acceptEot())
+    {
+    ApplyDataSlot();
+    m_ConfData = m_ConfDataTemp;
+    emit SendConfDataSignal(&m_ConfData);
+    mWmKeyBoard->hide();
+    close();
+    }
+}
+
+bool ConfDialogBase::acceptRatio()
 {
     bool ratioInputOK = true;
     
@@ -211,14 +222,31 @@ void ConfDialogBase::accept()
     {
 	QMessageBox::information( this, trUtf8("Teilerverhältnisse"),  trUtf8("Bitte überprüfen! \nErlaubt mV,V,kV"));
     }
-    else
+    return ratioInputOK;
+}
+
+bool ConfDialogBase::acceptEot()
+{
+    bool rationOetOK(true);
+    if (ui->RatioNPrimComboBox->isEnabled())
     {
-        ApplyDataSlot();
-        m_ConfData = m_ConfDataTemp;
-        emit SendConfDataSignal(&m_ConfData);
-        mWmKeyBoard->hide();
-        close();
+        if (ui->RatioNPrimComboBox->currentIndex() == -1)
+        {
+            rationOetOK = false;
+        }
     }
+    if (ui->RatioNSekComboBox->isEnabled())
+    {
+        if (ui->RatioNSekComboBox->currentIndex() == -1)
+        {
+            rationOetOK = false;
+        }
+    }
+    if ( !rationOetOK )
+    {
+        QMessageBox::information( this, trUtf8("Normalwandler"),  trUtf8("Bitte überprüfen! \nkein Bereich gewählt"));
+    }
+    return rationOetOK;
 }
 
 void ConfDialogBase::abortSlot()
