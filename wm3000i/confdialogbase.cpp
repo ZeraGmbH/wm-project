@@ -204,20 +204,7 @@ void ConfDialogBase::Actualize()
 
 void ConfDialogBase::accept()
 {
-    bool ratioInputOK = true;
-
-    ratioInputOK = ratioInputOK &&  ui->RatioPrimNLineEdit->hasAcceptableInput()
-                         && ui->RatioSekNLineEdit->hasAcceptableInput()
-                         && ui->RatioPrimXLineEdit->hasAcceptableInput()
-               && ui->RatioSekXLineEdit->hasAcceptableInput()
-               && ui->RatioPrimECTLineEdit->hasAcceptableInput()
-               && ui->RatioSekECTLineEdit->hasAcceptableInput();
-
-    if ( !ratioInputOK )
-    {
-    QMessageBox::information( this, trUtf8("Teilerverhältnisse"),  trUtf8("Bitte überprüfen! \nErlaubt mV,V,kV\n oder mA,A,kA"));
-    }
-    else
+    if( acceptRatio() && acceptEot())
     {
         ApplyDataSlot();
         m_ConfData = m_ConfDataTemp;
@@ -225,6 +212,48 @@ void ConfDialogBase::accept()
         mWmKeyBoard->hide();
         close();
     }
+}
+
+bool ConfDialogBase::acceptRatio()
+{
+    bool ratioInputOK = true;
+
+    ratioInputOK = ratioInputOK &&  ui->RatioPrimNLineEdit->hasAcceptableInput()
+                   && ui->RatioSekNLineEdit->hasAcceptableInput()
+                   && ui->RatioPrimXLineEdit->hasAcceptableInput()
+                   && ui->RatioSekXLineEdit->hasAcceptableInput()
+                   && ui->RatioPrimECTLineEdit->hasAcceptableInput()
+                   && ui->RatioSekECTLineEdit->hasAcceptableInput();
+
+    if ( !ratioInputOK )
+    {
+        QMessageBox::information( this, trUtf8("Teilerverhältnisse"),  trUtf8("Bitte überprüfen! \nErlaubt mV,V,kV"));
+    }
+    return ratioInputOK;
+}
+
+bool ConfDialogBase::acceptEot()
+{
+    bool rationOetOK(true);
+    if (ui->RatioNPrimComboBox->isEnabled())
+    {
+        if (ui->RatioNPrimComboBox->currentIndex() == -1)
+        {
+            rationOetOK = false;
+        }
+    }
+    if (ui->RatioNSekComboBox->isEnabled())
+    {
+        if (ui->RatioNSekComboBox->currentIndex() == -1)
+        {
+            rationOetOK = false;
+        }
+    }
+    if ( !rationOetOK )
+    {
+        QMessageBox::information( this, trUtf8("Normalwandler"),  trUtf8("Bitte überprüfen! \nKein Bereich gewählt"));
+    }
+    return rationOetOK;
 }
 
 void ConfDialogBase::abortSlot()
