@@ -5,6 +5,8 @@
 #include <QRect>
 #include <QScreen>
 
+class cWmLineEdit;
+
 namespace Ui {
 class wmKeyboardForm;
 }
@@ -17,9 +19,10 @@ public:
     explicit wmKeyboardForm(QWidget *parent = nullptr);
     ~wmKeyboardForm();
     void setHex(int mode);
-    void setParent(QWidget *parent);
+    void setParent(cWmLineEdit *parent);
     void show(const QString text);
     void setAvailGeometry(const QRect desktop);
+    void setAKey(const int key);
 
 private slots:
     void on_pushButton1_clicked();
@@ -41,7 +44,7 @@ private slots:
     void on_pushButtonF_clicked();
 
 private:
-    QWidget* mPoi = nullptr;
+    cWmLineEdit* mPoi = nullptr;
     QRect mDesktop;
     Ui::wmKeyboardForm *ui;
     void postEvent(const int iKey, const QString strKey);
