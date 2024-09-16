@@ -81,6 +81,7 @@ void cWmLineEdit::mouseReleaseEvent(QMouseEvent *)
     {
             this->setSelection(0,0);
     }
+    mKeyBoard->show(this->text());
 }
 
 void cWmLineEdit::keyPressedHex(QString str)
