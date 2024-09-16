@@ -23,7 +23,7 @@ public:
     explicit cWmLineEdit(QLineEdit *parent = nullptr);
     void setKeyboard(wmKeyboardForm* poi);
     void setInputMode(int mode);
-
+    void inputFromSoftKeyBord(const int key);
 signals:
 protected:
     void keyPressEvent(QKeyEvent *event) override;
@@ -35,9 +35,11 @@ private:
     void keyPressedNum(QString str);
     void keyPressedNumFixed(QString str);
     void keyPressedFloat(QString str);
+    QString keyText(int key);
     wmKeyboardForm *mKeyBoard = nullptr;
     int mMode;
-    QString keyText(int key);
+    QGroupBox* mGroup;
+    QLineEdit* mLine;
 };
 
 #endif // CWMLINEEDIT_H

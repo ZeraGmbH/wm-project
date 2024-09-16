@@ -1,12 +1,13 @@
 #include "cwmlineedit.h"
 
 cWmLineEdit::cWmLineEdit(QGroupBox *parent)
+    : mGroup(parent)
 {
      mMode = HEXINPUT;
 }
 
 cWmLineEdit::cWmLineEdit(QLineEdit *parent)
-    : QLineEdit{parent}
+    : mLine(parent)
 {
     mMode = HEXINPUT;
 }
@@ -21,36 +22,41 @@ void cWmLineEdit::setInputMode(int mode)
     mMode = mode;
 }
 
-void cWmLineEdit::keyPressEvent(QKeyEvent *event)
+void cWmLineEdit::inputFromSoftKeyBord(const int key)
 {
     QString text;
-    int key = event->key();
-    if(((key <= Qt::Key_F) && (key >= Qt::Key_0)) || (key == Qt::Key_Comma)) {
-        text = keyText(key);
-        switch (mMode)
-        {
-        case HEXINPUT:
-            keyPressedHex(text);
-            break;
+    text = keyText(key);
+    switch (mMode)
+    {
+    case HEXINPUT:
+        keyPressedHex(text);
+        break;
 
-        case NUMINPUT:
-            keyPressedNum(text);
-            break;
+    case NUMINPUT:
+        keyPressedNum(text);
+        break;
 
-        case FIXEDNUMINPUT:
-            keyPressedNumFixed(text);
-            break;
+    case FIXEDNUMINPUT:
+        keyPressedNumFixed(text);
+        break;
 
-        case FLOATINPUT:
-            keyPressedFloat(text);
-            break;
-        }
-
-
-        mKeyBoard->show(this->text());
+    case FLOATINPUT:
+        keyPressedFloat(text);
+        break;
     }
-    if (key != Qt::Key_Escape)
-        QLineEdit::keyPressEvent(event);
+}
+
+void cWmLineEdit::keyPressEvent(QKeyEvent *event)
+{
+    if (mMode == HEXINPUT || mMode == NUMINPUT)
+    {
+        mKeyBoard->setAKey(event->key());
+    }
+    else
+    {
+    QLineEdit::keyPressEvent(event);
+    }
+    mKeyBoard->show(this->text());
 }
 
 void cWmLineEdit::focusInEvent(QFocusEvent *event)
@@ -60,8 +66,6 @@ void cWmLineEdit::focusInEvent(QFocusEvent *event)
         mKeyBoard->setParent(this);
         mKeyBoard->setHex(mMode);
         mKeyBoard->show(this->text());
-        //this->setCursorPosition(0);
-        //this->setSelection(0,0);
     }
 }
 
@@ -77,31 +81,35 @@ void cWmLineEdit::mouseReleaseEvent(QMouseEvent *)
     {
             this->setSelection(0,0);
     }
-        //this->setText("");
 }
 
 void cWmLineEdit::keyPressedHex(QString str)
 {
-    QString text;
+    QString text, temp;
     int len;
-    text = str;
-    len = inputMask().length();
-    text = text.prepend(this->text());
-    text = text.mid(1,len);
-    setText(text);
-
+    if (str != ".")
+    {
+        text = str;
+        temp = inputMask();
+        len = inputMask().length()-2;
+        text = text.prepend(this->text());
+        text = text.mid(1,len);
+        setText(text);
+    }
 }
 
 void cWmLineEdit::keyPressedNum(QString str)
 {
     QString text;
     int len;
-    text = str;
-    len = this->text().length();
-    text = text.prepend(this->text());
-    text = text.mid(1,len);
-    setText(text);
-
+    if (str != ".")
+    {
+        text = str;
+        len = this->text().length();
+        text = text.prepend(this->text());
+        text = text.mid(1,len);
+        setText(text);
+    }
 }
 
 void cWmLineEdit::keyPressedNumFixed(QString str)
@@ -169,6 +177,7 @@ QString cWmLineEdit::keyText(int key)
     case Qt::Key_F : str = "F";
         break;
     case Qt::Key_Comma : str = ".";
+    case Qt::Key_Period : str = ".";
         break;
 
     default: str = "";

@@ -70,7 +70,7 @@ void wmKeyboardForm::setHex(int mode)
     setWindowTitle(titel);
 }
 
-void wmKeyboardForm::setParent(QWidget *parent)
+void wmKeyboardForm::setParent(cWmLineEdit *parent)
 {
     mPoi = parent;
 }
@@ -87,15 +87,25 @@ void wmKeyboardForm::setAvailGeometry(const QRect desktop)
     mDesktop = desktop;
 }
 
+void wmKeyboardForm::setAKey(const int key)
+{
+    if(((key <= Qt::Key_F) && (key >= Qt::Key_0)) || (key == Qt::Key_Comma))
+        postEvent(key,"");
+}
+
 void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
 {
     Q_UNUSED(strKey);
     if(mPoi != nullptr)
     {
+        mPoi->inputFromSoftKeyBord(iKey);
+        mPoi->activateWindow();
+        /*
         QKeyEvent event(QEvent::KeyPress, iKey, Qt::NoModifier);
         QApplication::sendEvent(mPoi,&event);
         QKeyEvent event2nd(QEvent::KeyRelease, iKey, Qt::NoModifier);
         QApplication::sendEvent(mPoi,&event2nd);
+*/
     }
 }
 
@@ -111,7 +121,6 @@ void wmKeyboardForm::keyPressEvent(QKeyEvent *event)
     {
         postEvent(key,"");
     }
-    event->accept();
 }
 
 void wmKeyboardForm::on_pushButton1_clicked()
@@ -174,7 +183,10 @@ void wmKeyboardForm::on_pushButton0_clicked()
 
 void wmKeyboardForm::on_pushButtonKomma_clicked()
 {
-    postEvent(Qt::Key_Comma,",");
+    // ASCII defines
+    // Comma (,) to be 44 Qt::Key_Comma 0x2c
+    // Period (.) to be 46 Qt::Key_Period 0x2e
+    postEvent(Qt::Key_Comma,".");
 }
 
 
