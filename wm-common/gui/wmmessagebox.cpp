@@ -91,3 +91,14 @@ void wmMessageBox::setSchnubbel()
 {
     QMessageBox::critical(0,("Schnubbel"),tr("PCB Server reported:\n'Schnubbel not set!'\n\nPlease enable justage by activating\njustage-switch by inserting 'Schnubbel'\n\nAnd try again!\n\nNo data written!"));
 }
+
+void wmMessageBox::msgRatioErr()
+{
+    QMessageBox::information( 0, trUtf8("scaling factor"),  trUtf8("Please check!"));
+}
+
+void wmMessageBox::msgRatioEotErr()
+{
+    QMessageBox::information( 0, trUtf8("refernece transducer"),  trUtf8("Please check! \nNo range selected"));
+}
+

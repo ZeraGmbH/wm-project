@@ -9,7 +9,7 @@
 #include "confdata.h"
 #include "wmkeyboardform.h"
 #include "confguihelper.h"
-
+#include "wmmessagebox.h"
 
 namespace Ui {
     class ConfDialogBase;
@@ -52,6 +52,7 @@ private:
     QString m_sText;
     wmKeyboardForm* mWmKeyBoard;
     confGuiHelper *mGuiHelper;
+    wmMessageBox mWmMsgBox;
 
     void init();
     void Actualize();
