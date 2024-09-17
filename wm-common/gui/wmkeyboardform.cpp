@@ -10,6 +10,7 @@ wmKeyboardForm::wmKeyboardForm(QWidget *parent)
     ui->setupUi(this);
     setHex(HEXINPUT);
     ui->lineEdit->setDisabled(true);
+    ui->lineEdit->setStyleSheet("background-color: white;  color: black");
     setWindowFlags(Qt::WindowStaysOnTopHint);
 }
 
