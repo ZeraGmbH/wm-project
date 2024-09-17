@@ -129,8 +129,9 @@
 // V2.44 29.7.24    Bugfix setting samplerates from interface
 // 2.45 21.8.24     adds bugfix on scpi interface
 // 2.47 29.8.24     adds dev:iface to export interface
+// 2.48 16.9.24     adds onscreenkeyboard
 
-#define WMVersion "V2.47"
+#define WMVersion "V2.48"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"

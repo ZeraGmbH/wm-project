@@ -110,8 +110,9 @@
 // V2.40 12.6.24    Adds overload to special class cwmmessagebox
 // 2.41 21.8.24     adds bugfix on scpi interface
 // 2.42 29.8.24     adds dev:iface to export interface
+// 2.43 16.9.24     adds onscreenkeyboard
 
-#define WMVersion "V2.42"
+#define WMVersion "V2.43"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"

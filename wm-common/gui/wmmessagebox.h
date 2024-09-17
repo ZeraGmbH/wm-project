@@ -18,6 +18,8 @@ public:
     int msgBusy(QString host, int port);
     void justDataWritten();
     void setSchnubbel();
+    void msgRatioErr();
+    void msgRatioEotErr();
 signals:
 
 };

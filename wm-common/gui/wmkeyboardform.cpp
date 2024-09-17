@@ -1,6 +1,5 @@
 #include "wmkeyboardform.h"
 #include "cwmlineedit.h"
-#include "qdebug.h"
 #include "ui_wmkeyboardform.h"
 #include <QKeyEvent>
 
@@ -81,18 +80,15 @@ void wmKeyboardForm::show(const QString text)
     ui->lineEdit->setText(text);
     moveWindow();
     QWidget::show();
-    qDebug() << "keyboard show";
 }
 
 void wmKeyboardForm::showText(const QString text)
 {
     ui->lineEdit->setText(text);
-    qDebug() << "set Text";
 }
 
 void wmKeyboardForm::hide()
 {
-    qDebug() << "keyboard hide";
     QWidget::hide();
 }
 

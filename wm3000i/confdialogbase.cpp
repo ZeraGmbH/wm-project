@@ -1,4 +1,3 @@
-#include "QMessageBox"
 #include "confdialogbase.h"
 #include "ui_confdialogbase.h"
 #include "wm3000i.h"
@@ -227,7 +226,7 @@ bool ConfDialogBase::acceptRatio()
 
     if ( !ratioInputOK )
     {
-        QMessageBox::information( this, trUtf8("Teilerverhältnisse"),  trUtf8("Bitte überprüfen! \nErlaubt mV,V,kV"));
+        mWmMsgBox.msgRatioErr();
     }
     return ratioInputOK;
 }
@@ -251,7 +250,7 @@ bool ConfDialogBase::acceptEot()
     }
     if ( !rationOetOK )
     {
-        QMessageBox::information( this, trUtf8("Normalwandler"),  trUtf8("Bitte überprüfen! \nKein Bereich gewählt"));
+        mWmMsgBox.msgRatioEotErr();
     }
     return rationOetOK;
 }
