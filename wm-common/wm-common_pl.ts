@@ -1227,6 +1227,99 @@ Zeile : %2
     </message>
 </context>
 <context>
+    <name>wmKeyboardForm</name>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="26"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="45"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="63"/>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="81"/>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="99"/>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="117"/>
+        <source>.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="138"/>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="156"/>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="174"/>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="192"/>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="210"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="228"/>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="246"/>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="264"/>
+        <source>F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="282"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="300"/>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="318"/>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="336"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>wmMessageBox</name>
     <message>
         <location filename="gui/wmmessagebox.cpp" line="12"/>
@@ -1338,6 +1431,42 @@ Szczegóły w LogFile.</translation>
     <message>
         <location filename="gui/wmmessagebox.cpp" line="87"/>
         <source>Justage Data Written</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="92"/>
+        <source>PCB Server reported:
+&apos;Schnubbel not set!&apos;
+
+Please enable justage by activating
+justage-switch by inserting &apos;Schnubbel&apos;
+
+And try again!
+
+No data written!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="97"/>
+        <source>scaling factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="97"/>
+        <source>Please check!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="102"/>
+        <source>Please check! 
+No range selected</source>
+        <oldsource>Bitte überprüfen! 
+No range selected</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="102"/>
+        <source>refernece transducer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

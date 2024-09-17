@@ -313,10 +313,6 @@
         <translation>Lastpunkt</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="obsolete">Fehler</translation>
-    </message>
-    <message>
         <location filename="gui/wmmeasconfigbase.ui" line="267"/>
         <source>Angle</source>
         <translation>Winkel</translation>
@@ -1224,14 +1220,103 @@ Zeile : %2
         <translation>WM3000U</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About WM3000U&lt;/h3&gt;                             &lt;p&gt;WM3000U is the new voltage transformer test&lt;br&gt;device developed by ZERA.&lt;/p&gt;                             &lt;p&gt;It provides abilities of testing conventional&lt;br&gt;transformers, EVT as well as nonconventional&lt;br&gt;transformers using IEC 61850-9-2.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;&amp;Uuml;ber WM3000U&lt;/h3&gt;                     &lt;p&gt;WM3000U ist die neue Spannungswandlermessbr&amp;uuml;cke enwickelt von ZERA.&lt;/p&gt;                     &lt;p&gt;Sie bietet M&amp;ouml;glichkeiten zum Testen konventioneller&lt;br&gt;Spannungswandler, EVT und nicht konventioneller &lt;br&gt;Wandler nach IEC 61850-9-2.&lt;/p&gt;</translation>
-    </message>
-    <message>
         <location filename="zerainfo.cpp" line="76"/>
         <location filename="zerainfo.cpp" line="77"/>
         <source>unknown</source>
         <translation>unbekannt</translation>
+    </message>
+</context>
+<context>
+    <name>wmKeyboardForm</name>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="26"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="45"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="63"/>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="81"/>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="99"/>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="117"/>
+        <source>.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="138"/>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="156"/>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="174"/>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="192"/>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="210"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="228"/>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="246"/>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="264"/>
+        <source>F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="282"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="300"/>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="318"/>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmkeyboardform.ui" line="336"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1340,6 +1425,43 @@ Details stehen in LogFile.</source>
         <location filename="gui/wmmessagebox.cpp" line="87"/>
         <source>Justage Data Written</source>
         <translation>Justagedaten geschrieben</translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="92"/>
+        <source>PCB Server reported:
+&apos;Schnubbel not set!&apos;
+
+Please enable justage by activating
+justage-switch by inserting &apos;Schnubbel&apos;
+
+And try again!
+
+No data written!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="97"/>
+        <source>scaling factor</source>
+        <translation>Teilerverhältnisse</translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="97"/>
+        <source>Please check!</source>
+        <translation>Bitte überprüfen!</translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="102"/>
+        <source>Please check! 
+No range selected</source>
+        <oldsource>Bitte überprüfen! 
+No range selected</oldsource>
+        <translation>Bitte überprüfen!
+Kein Bereich gewählt</translation>
+    </message>
+    <message>
+        <location filename="gui/wmmessagebox.cpp" line="102"/>
+        <source>refernece transducer</source>
+        <translation>Normalwandler</translation>
     </message>
 </context>
 </TS>
