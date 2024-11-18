@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
     bool bconvent = false;
     bool bdc = false;
     bool newsamplerates = false;
+    bool bppsWatchDog = false;
 
     for (int i = 1; i < argc; i++)
     {
@@ -70,6 +71,8 @@ int main(int argc, char *argv[])
             newsamplerates = true;
         if(option.startsWith("-ip")) {
             address = option.replace("-ip", "").trimmed();
+        if (option == "-PPSwatchdog")
+            bppsWatchDog = true;
         }
     }
 
@@ -102,6 +105,7 @@ int main(int argc, char *argv[])
     g_WMView = new WMViewBaseU(); // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
 
+    g_WMDevice->setPPSWatchDog(bppsWatchDog);
     if (!bJustage) {
         g_WMView->removeJustageItem();
         g_WMDevice->setJustage();

@@ -320,7 +320,7 @@ public:
     bool isNewSamplerates();
     void setIpAddress(QString address);
     void setJustage();
-
+    void setPPSWatchDog(bool val);
 
 public slots:
      // slots, die vom hauptfenster aus aktiviert werden
@@ -417,6 +417,7 @@ private:
     bool m_binitDone;
     bool m_bIFError; // zum feststellen ob bei der letzten aktion ein fehler war
     bool m_bJustage;
+    bool m_bPpsWatchDogDisable;
     // cWM3000SCPIFace* m_pWM3000SCPIFace;
     // cZeraDeviceServer* m_pZeraDeviceServer;
     
