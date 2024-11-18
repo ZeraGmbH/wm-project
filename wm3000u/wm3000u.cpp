@@ -3117,6 +3117,11 @@ void cWM3000U::setIpAddress(QString address)
     setupServers();
 }
 
+void cWM3000U::setPPSWatchDog(bool val)
+{
+    m_bPpsWatchDogDisable = val;
+}
+
 void cWM3000U::setJustage()
 {
     m_bJustage = true;
@@ -3418,8 +3423,11 @@ void cWM3000U::OverLoadMaxQuitSlot()
 void cWM3000U::externalTriggerTimeoutTriggerd()
 {
     if (m_ConfData.m_nSyncSource == Extern) {
-        m_ConfData.m_nSyncSource = Intern;
-        m_ActTimer->start(0,ConfigurationSetSyncSource);
+        if (!m_bPpsWatchDogDisable)
+        {
+            m_ConfData.m_nSyncSource = Intern;
+            m_ActTimer->start(0,ConfigurationSetSyncSource);
+        }
         emit PPSQuestionable(true);
     }
 }
