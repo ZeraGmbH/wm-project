@@ -174,6 +174,7 @@ cWM3000U::cWM3000U() :
 
     m_bNewSamplerates = false;
     m_bJustage = false;
+    m_bPpsWatchDogTriggered = false;
 }
 
 
@@ -1259,6 +1260,11 @@ void cWM3000U::ActionHandler(int entryAHS)
         }
         else
         {
+            if (m_bPpsWatchDogDisable && m_bPpsWatchDogTriggered)
+            {
+                emit PPSQuestionable(false); // nimt "kein PPs anzeige wieder weg
+                m_bPpsWatchDogTriggered = false;
+            }
             emit AffectStatus(ResetOperStat, OperMeasuring);
             // wieso das hier ??
             // die schnittstellenverbindung kann erst aufgebaut werden wenn das gerät läuft.
@@ -3422,6 +3428,7 @@ void cWM3000U::OverLoadMaxQuitSlot()
 
 void cWM3000U::externalTriggerTimeoutTriggerd()
 {
+    m_bPpsWatchDogTriggered = true;
     if (m_ConfData.m_nSyncSource == Extern) {
         if (m_bPpsWatchDogDisable)
         {
