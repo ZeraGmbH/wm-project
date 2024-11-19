@@ -3423,7 +3423,12 @@ void cWM3000U::OverLoadMaxQuitSlot()
 void cWM3000U::externalTriggerTimeoutTriggerd()
 {
     if (m_ConfData.m_nSyncSource == Extern) {
-        if (!m_bPpsWatchDogDisable)
+        if (m_bPpsWatchDogDisable)
+        {
+            ActValues.bvalid = false; // wir schalten die fehleranzeige inaktiv
+            emit SendActValuesSignal(&ActValues);
+        }
+        else
         {
             m_ConfData.m_nSyncSource = Intern;
             m_ActTimer->start(0,ConfigurationSetSyncSource);
