@@ -1310,6 +1310,11 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
+            if (m_bPpsWatchDogDisable && m_bPpsWatchDogTriggered)
+            {
+                emit PPSQuestionable(false); // nimt "kein PPs anzeige wieder weg
+                m_bPpsWatchDogTriggered = false;
+            }
             // wieso das hier ??
             // die schnittstellenverbindung kann erst aufgebaut werden wenn das gerät läuft.
             // das interface wird dynamisch instanziiert nach aufbau der verbindung
@@ -3349,6 +3354,11 @@ void cWM3000I::setIpAddress(QString address)
     setupServers();
 }
 
+void cWM3000I::setPPSWatchDog(bool val)
+{
+    m_bPpsWatchDogDisable = val;
+}
+
 void cWM3000I::setJustage()
 {
     m_bJustage = true;
@@ -3618,9 +3628,18 @@ void cWM3000I::OverLoadMaxQuitSlot()
 
 void cWM3000I::externalTriggerTimeoutTriggerd()
 {
+    m_bPpsWatchDogTriggered = true;
     if (m_ConfData.m_nSyncSource == Extern) {
+        if (m_bPpsWatchDogDisable)
+        {
+            ActValues.bvalid = false; // wir schalten die fehleranzeige inaktiv
+            emit SendActValuesSignal(&ActValues);
+        }
+        else
+        {
         m_ConfData.m_nSyncSource = Intern;
         m_ActTimer->start(0,ConfigurationSetSyncSource);
+        }
         emit PPSQuestionable(true);
     }
 }

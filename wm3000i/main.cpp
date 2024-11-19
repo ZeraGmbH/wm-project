@@ -117,6 +117,7 @@ int main(int argc, char *argv[])
     g_WMView = new WMViewBaseI; // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
 
+    g_WMDevice->setPPSWatchDog(bppsWatchDog);
     if (!bJustage){
         g_WMView->removeJustageItem();
         g_WMDevice->setJustage();
