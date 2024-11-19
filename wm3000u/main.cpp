@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
             address = option.replace("-ip", "").trimmed();
             qDebug("Found option ip address");
         }
-        if (option == "-PPSwatchdog"){
+        if (option == "-ppswatchdog"){
             bppsWatchDog = true;
             qDebug("Found option PPS Watch Dog");
         }

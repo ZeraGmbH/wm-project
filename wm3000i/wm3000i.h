@@ -329,6 +329,7 @@ public:
     bool isNewSamplerates();
     void setIpAddress(QString address);
     void setJustage();
+    void setPPSWatchDog(bool val);
 
 public slots:
      // slots, die vom hauptfenster aus aktiviert werden
@@ -424,6 +425,8 @@ private:
     bool m_binitDone;
     bool m_bIFError; // zum feststellen ob bei der letzten aktion ein fehler war
     bool m_bJustage; // this disables frequency kompensation during justage
+    bool m_bPpsWatchDogDisable;
+    bool m_bPpsWatchDogTriggered;
     
     void DefaultSettings(cConfData&);
     void DefaultSettingsMeasurement(cConfData&);
