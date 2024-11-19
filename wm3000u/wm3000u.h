@@ -418,6 +418,7 @@ private:
     bool m_bIFError; // zum feststellen ob bei der letzten aktion ein fehler war
     bool m_bJustage;
     bool m_bPpsWatchDogDisable;
+    bool m_bPpsWatchDogTriggered;
     // cWM3000SCPIFace* m_pWM3000SCPIFace;
     // cZeraDeviceServer* m_pZeraDeviceServer;
     
