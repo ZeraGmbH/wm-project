@@ -56,21 +56,36 @@ int main(int argc, char *argv[])
     bool bconvent = false;
     bool bdc = false;
     bool newsamplerates = false;
+    bool bppsWatchDog = false;
 
     for (int i = 1; i < argc; i++)
     {
         option = argv[i];
-        if (option == "-justage")
+        if (option == "-justage"){
             bJustage = true;
-        if (option == "-convent")
+            qDebug("Found option justage");
+        }
+        if (option == "-convent"){
             bconvent = true;
-        if (option == "-dc")
+            qDebug("Found option convent");
+        }
+        if (option == "-dc"){
             bdc = true;
-        if (option == "-newsamplerates")
+            qDebug("Found option dc");
+        }
+        if (option == "-newsamplerates"){
             newsamplerates = true;
+            qDebug("Found option newsamplerates");
+        }
         if(option.startsWith("-ip")) {
             address = option.replace("-ip", "").trimmed();
+            qDebug("Found option ip address");
         }
+        if (option == "-ppswatchdog"){
+            bppsWatchDog = true;
+            qDebug("Found option PPS Watch Dog");
+        }
+
     }
 
     g_WMDevice = new cWM3000I; //  die eigentliche Messeinrichtung wird später dynamisch je nach aufruf erzeugt
