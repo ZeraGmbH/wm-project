@@ -111,8 +111,9 @@
 // 2.41 21.8.24     adds bugfix on scpi interface
 // 2.42 29.8.24     adds dev:iface to export interface
 // 2.43 16.9.24     adds onscreenkeyboard
+// 2.44 19.11.24    adds disable Watchdogtimer
 
-#define WMVersion "V2.43"
+#define WMVersion "V2.44"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
