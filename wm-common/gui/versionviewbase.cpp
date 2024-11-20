@@ -22,6 +22,11 @@ VersionsViewBase::~VersionsViewBase()
     delete ui;
 }
 
+void VersionsViewBase::setOptionStr(QString str)
+{
+    ui->Opions->setText(str);
+}
+
 void VersionsViewBase::ReceiveVersionData(tVersSerial* p)
 {
     pVersion = p;

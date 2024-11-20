@@ -25,6 +25,7 @@ class VersionsViewBase : public QDialog
 public:
     explicit VersionsViewBase( QWidget* parent = 0);
     ~VersionsViewBase();
+    void setOptionStr(QString str);
 
 public slots:
     virtual void ReceiveVersionData( tVersSerial * p );

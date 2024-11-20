@@ -105,6 +105,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QLabel" name="OptionsLabel">
+       <property name="text">
+        <string>Options</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -173,6 +180,13 @@
      </item>
      <item>
       <widget class="QLabel" name="DSPServerText">
+       <property name="text">
+        <string>----------</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="Opions">
        <property name="text">
         <string>----------</string>
        </property>
