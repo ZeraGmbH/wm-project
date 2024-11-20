@@ -32,6 +32,7 @@
 #include "loadpointunits.h"
 #include "wmioffsetcustomlabels.h"
 #include <wmoffsetvalbase.h>
+#include <commandlineparameter.h>
 
 wmKeyboardForm* g_KeyBoard;
 cWM3000I* g_WMDevice;
@@ -50,46 +51,11 @@ int main(int argc, char *argv[])
 #endif
     app.setFont(f2);
 
-    QString option ="";
-    QString address = "127.0.0.1";
-    bool bJustage = false;
-    bool bconvent = false;
-    bool bdc = false;
-    bool newsamplerates = false;
-    bool bppsWatchDog = false;
-
-    for (int i = 1; i < argc; i++)
-    {
-        option = argv[i];
-        if (option == "-justage"){
-            bJustage = true;
-            qDebug("Found option justage");
-        }
-        if (option == "-convent"){
-            bconvent = true;
-            qDebug("Found option convent");
-        }
-        if (option == "-dc"){
-            bdc = true;
-            qDebug("Found option dc");
-        }
-        if (option == "-newsamplerates"){
-            newsamplerates = true;
-            qDebug("Found option newsamplerates");
-        }
-        if(option.startsWith("-ip")) {
-            address = option.replace("-ip", "").trimmed();
-            qDebug("Found option ip address");
-        }
-        if (option == "-ppswatchdog"){
-            bppsWatchDog = true;
-            qDebug("Found option PPS Watch Dog");
-        }
-
-    }
+    CommandLineParameter mCmdLPar;
+    mCmdLPar.Parse(argc, argv);
 
     g_WMDevice = new cWM3000I; //  die eigentliche Messeinrichtung wird später dynamisch je nach aufruf erzeugt
-    g_WMDevice->setIpAddress(address);
+    g_WMDevice->setIpAddress(mCmdLPar.GetIpAdress());
 
     QString qmPath = "/usr/share/wm3000i";
     QTranslator* appTranslator = new QTranslator(&app);
@@ -117,21 +83,21 @@ int main(int argc, char *argv[])
     g_WMView = new WMViewBaseI; // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
 
-    g_WMDevice->setPPSWatchDog(bppsWatchDog);
-    if (!bJustage){
+    g_WMDevice->setPPSWatchDog(mCmdLPar.GetPpsWatchDog());
+    if (!mCmdLPar.GetJustage()){
         g_WMView->removeJustageItem();
         g_WMDevice->setJustage();
     }
 
-    g_WMDevice->setConventional(bconvent);
-    if (bconvent)
+    g_WMDevice->setConventional(mCmdLPar.GetConvent());
+    if (mCmdLPar.GetConvent())
         g_WMView->configureWM1000Items();
 
-    g_WMDevice->setDC(bdc);
-    if (!bdc)
+    g_WMDevice->setDC(mCmdLPar.GetDC());
+    if (!mCmdLPar.GetDC())
         g_WMView->configureWMwoDC();
 
-    g_WMDevice->setNewSamplerates(newsamplerates);
+    g_WMDevice->setNewSamplerates(mCmdLPar.GetNewSampleRates());
 
     g_WMView->setWMWindowTitle();
     QString machineName = "wm3000i";
@@ -188,7 +154,7 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMOffsetView,SLOT(SetConfInfoSlot(cConfData*)));
 
     CLogFileView* g_WMSCPILogFileView;
-    if (bconvent)
+    if (mCmdLPar.GetConvent())
         g_WMSCPILogFileView =
                 new CLogFileView(QObject::tr("WM1000I SCPI Kommunikation"), 100, g_WMView, "WMSCPILogView", machineName);
     else
