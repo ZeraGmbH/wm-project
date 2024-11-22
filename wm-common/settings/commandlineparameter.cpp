@@ -29,7 +29,8 @@ void CommandLineParameter::Parse(int argc, char *argv[])
             qDebug("Found option newsamplerates");
         }
         if(option.startsWith(strIPAdress)) {
-            IPAdress = option.replace(strIPAdress, "").trimmed();
+            bIpAdress = true;
+            mstrIPAdress = option.replace(strIPAdress, "").trimmed();
             qDebug("Found option ip address");
         }
         if (option == strPpsWatchDog){
@@ -47,6 +48,6 @@ QString CommandLineParameter::GetOptionString()
     if(bDc) option += "dc ";
     if(bNewSampleRates) option += "newsr ";
     if(bPpsWatchDog) option += "pwdt ";
-    if(strIPAdress != IPAdress) option += "ip";
+    if(bIpAdress) option += "ip";
     return option;
 }
