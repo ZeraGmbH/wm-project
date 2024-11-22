@@ -10,6 +10,7 @@ class test_cmdlinepar : public QObject
 private:
     void init(QString str);
     char * helper(QString str);
+    QByteArray ba0,ba1;
     int argc;
     char *argv[2];
 private slots:
