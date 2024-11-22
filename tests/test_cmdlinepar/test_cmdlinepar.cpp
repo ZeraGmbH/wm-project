@@ -1,25 +1,23 @@
 #include "test_cmdlinepar.h"
 
-#include "string.h"
-/* argc
-   argv
-*/
-
 
 char *test_cmdlinepar::helper(QString str)
 {
     char* cstr;
-    std::string fname = str.toStdString();
-    cstr = new char [fname.size()+1];
-    strlcpy( cstr, fname.c_str(),fname.size()+1 );
+    QByteArray ba = str.toLatin1();
+    cstr = ba.data();
     return cstr;
 }
 
 void test_cmdlinepar::init(QString str)
 {
     argc = 2;
-    argv[0] = helper("wm3000");
-    argv[1] = helper(str);
+    ba0.clear();
+    ba0.append("wm3000");
+    ba1.clear();
+    ba1.append(str.toLatin1());
+    argv[0] = ba0.data();
+    argv[1] = ba1.data();
 }
 
 void test_cmdlinepar::test_numberone()
