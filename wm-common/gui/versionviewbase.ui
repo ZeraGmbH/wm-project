@@ -108,7 +108,7 @@
      <item>
       <widget class="QLabel" name="OptionsLabel">
        <property name="text">
-        <string>Options</string>
+        <string>Options:</string>
        </property>
       </widget>
      </item>
