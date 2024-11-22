@@ -257,11 +257,10 @@ int main(int argc, char *argv[])
 
     QObject::connect((QObject*)g_WMDevice,SIGNAL(SendLPSignal(cwmActValues*)),wm3000DeviceServer,SLOT(ReceiveLPValue( cwmActValues*))); // neuen lastpunkt an fehlermesswert anzeige senden
 
-
-
     VersionsViewBase *g_VersionsView = new VersionsViewBase(g_WMView);
     QObject::connect(g_WMView,SIGNAL(UIhilfeVersionActionActivated()),g_VersionsView,SLOT(ShowVersionSlot())); // anzeige aller system versionen
     QObject::connect((QObject*)g_WMDevice,SIGNAL(SendVersionInfo(tVersSerial*)),g_VersionsView,SLOT(ReceiveVersionData(tVersSerial*))); // übergabe der system informationen
+    g_VersionsView->setOptionStr(mCmdLPar.GetOptionString());
 
     g_WMDevice->InitWM3000();
     g_WMView->show();  // zeige das hauptfenster
