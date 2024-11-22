@@ -14,14 +14,15 @@ public:
     bool GetDC() {return bDc;};
     bool GetNewSampleRates() {return bNewSampleRates;};
     bool GetPpsWatchDog() {return bPpsWatchDog;};
-    QString GetIpAdress() {return IPAdress;}
+    QString GetIpAdress() {return mstrIPAdress;}
 private:
     bool bJustage = false;
     bool bConvent = false;
     bool bDc = false;
     bool bNewSampleRates = false;
     bool bPpsWatchDog = false;
-    QString IPAdress = "127.0.0.1";
+    bool bIpAdress = false;
+    QString mstrIPAdress = "127.0.0.1";
 
     const QString strJustage = "-justage";
     const QString strConvent = "-convent";
