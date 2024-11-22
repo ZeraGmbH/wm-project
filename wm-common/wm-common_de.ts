@@ -251,7 +251,11 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="128"/>
+        <location filename="gui/versionviewbase.ui" line="111"/>
+        <source>Options:</source>
+        <translation>Optionen:</translation>
+    </message>
+    <message>
         <location filename="gui/versionviewbase.ui" line="135"/>
         <location filename="gui/versionviewbase.ui" line="142"/>
         <location filename="gui/versionviewbase.ui" line="149"/>
@@ -259,6 +263,8 @@
         <location filename="gui/versionviewbase.ui" line="163"/>
         <location filename="gui/versionviewbase.ui" line="170"/>
         <location filename="gui/versionviewbase.ui" line="177"/>
+        <location filename="gui/versionviewbase.ui" line="184"/>
+        <location filename="gui/versionviewbase.ui" line="191"/>
         <source>----------</source>
         <translation></translation>
     </message>
@@ -330,7 +336,7 @@
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="412"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Abbruch</translation>
     </message>
 </context>
 <context>
@@ -525,7 +531,7 @@
     <message>
         <location filename="gui/wmrawactualconfigbase.ui" line="136"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Abbruch</translation>
     </message>
 </context>
 <context>

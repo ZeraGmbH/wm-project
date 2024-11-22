@@ -251,7 +251,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="128"/>
+        <location filename="gui/versionviewbase.ui" line="111"/>
+        <source>Options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="gui/versionviewbase.ui" line="135"/>
         <location filename="gui/versionviewbase.ui" line="142"/>
         <location filename="gui/versionviewbase.ui" line="149"/>
@@ -259,6 +263,8 @@
         <location filename="gui/versionviewbase.ui" line="163"/>
         <location filename="gui/versionviewbase.ui" line="170"/>
         <location filename="gui/versionviewbase.ui" line="177"/>
+        <location filename="gui/versionviewbase.ui" line="184"/>
+        <location filename="gui/versionviewbase.ui" line="191"/>
         <source>----------</source>
         <translation type="unfinished"></translation>
     </message>

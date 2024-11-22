@@ -446,12 +446,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="176"/>
+        <location filename="main.cpp" line="158"/>
         <source>WM1000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM1000U</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="179"/>
+        <location filename="main.cpp" line="161"/>
         <source>WM3000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM3000U</translation>
     </message>
@@ -553,147 +553,147 @@ Details stehen im Logfile</source>
         <translation>Test zakończony, szczegóły w LogFile</translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="1740"/>
-        <location filename="wm3000u.cpp" line="1835"/>
+        <location filename="wm3000u.cpp" line="1746"/>
+        <location filename="wm3000u.cpp" line="1841"/>
         <source>Berechnung läuft ...</source>
         <translation>Obliczanie w toku...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="1906"/>
+        <location filename="wm3000u.cpp" line="1912"/>
         <source>Koeffizienten 0 setzen ...</source>
         <translation>Resetowanie współczynników...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="1741"/>
-        <location filename="wm3000u.cpp" line="1836"/>
-        <location filename="wm3000u.cpp" line="1907"/>
-        <location filename="wm3000u.cpp" line="2273"/>
-        <location filename="wm3000u.cpp" line="2677"/>
-        <location filename="wm3000u.cpp" line="2707"/>
-        <location filename="wm3000u.cpp" line="2833"/>
+        <location filename="wm3000u.cpp" line="1747"/>
+        <location filename="wm3000u.cpp" line="1842"/>
+        <location filename="wm3000u.cpp" line="1913"/>
+        <location filename="wm3000u.cpp" line="2279"/>
+        <location filename="wm3000u.cpp" line="2683"/>
+        <location filename="wm3000u.cpp" line="2713"/>
+        <location filename="wm3000u.cpp" line="2839"/>
         <source>Abbruch</source>
         <translation>Przerwij</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="1909"/>
+        <location filename="wm3000u.cpp" line="1915"/>
         <source>Phasenkorrekturkoeffizienten</source>
         <translation>Współczynniki korekty fazy</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2000"/>
-        <location filename="wm3000u.cpp" line="2352"/>
-        <location filename="wm3000u.cpp" line="2863"/>
+        <location filename="wm3000u.cpp" line="2006"/>
+        <location filename="wm3000u.cpp" line="2358"/>
+        <location filename="wm3000u.cpp" line="2869"/>
         <source>Konfiguration setzen ...</source>
         <translation>Ustawianie konfiguracji...</translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="2046"/>
-        <location filename="wm3000u.cpp" line="2397"/>
+        <location filename="wm3000u.cpp" line="2052"/>
+        <location filename="wm3000u.cpp" line="2403"/>
         <source>Einschwingzeit läuft</source>
         <translation>Czas ustalania się</translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="2076"/>
         <location filename="wm3000u.cpp" line="2082"/>
+        <location filename="wm3000u.cpp" line="2088"/>
         <source>Messung Kanal N, %1 läuft</source>
         <translation>Pomiar kanał N, %1 uruchomiony</translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="2079"/>
-        <location filename="wm3000u.cpp" line="2086"/>
+        <location filename="wm3000u.cpp" line="2085"/>
+        <location filename="wm3000u.cpp" line="2092"/>
         <source>Messung Kanal X, %1 läuft</source>
         <translation>Pomiar kanał X, %1 uruchomiony</translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="2138"/>
-        <location filename="wm3000u.cpp" line="2448"/>
+        <location filename="wm3000u.cpp" line="2144"/>
+        <location filename="wm3000u.cpp" line="2454"/>
         <source>Berechnung und Datenübertragung ...</source>
         <translation>Obliczanie i transmisja danych...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2272"/>
+        <location filename="wm3000u.cpp" line="2278"/>
         <source>Initialisierung...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2274"/>
+        <location filename="wm3000u.cpp" line="2280"/>
         <source>Offsetkorrekturen</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="2414"/>
+        <location filename="wm3000u.cpp" line="2420"/>
         <source>Messung Kanal N %1, X %2 läuft</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="2418"/>
+        <location filename="wm3000u.cpp" line="2424"/>
         <source>Messung Kanal N %1 läuft</source>
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="wm3000u.cpp" line="2423"/>
+        <location filename="wm3000u.cpp" line="2429"/>
         <source>Messung Kanal X %1 läuft</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2676"/>
-        <location filename="wm3000u.cpp" line="2706"/>
+        <location filename="wm3000u.cpp" line="2682"/>
+        <location filename="wm3000u.cpp" line="2712"/>
         <source>Messung...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2678"/>
+        <location filename="wm3000u.cpp" line="2684"/>
         <source>Offsetmessung Kanal N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2708"/>
+        <location filename="wm3000u.cpp" line="2714"/>
         <source>Offsetmessung Kanal X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2832"/>
+        <location filename="wm3000u.cpp" line="2838"/>
         <source>Selbstest ...</source>
         <translation>Autotest ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2834"/>
+        <location filename="wm3000u.cpp" line="2840"/>
         <source>Selbsttest</source>
         <translation>Autotest</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2872"/>
+        <location filename="wm3000u.cpp" line="2878"/>
         <source>Bereiche setzen ...</source>
         <translation>Ustawianie zakresów ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2887"/>
-        <location filename="wm3000u.cpp" line="2908"/>
+        <location filename="wm3000u.cpp" line="2893"/>
+        <location filename="wm3000u.cpp" line="2914"/>
         <source>Messung ...</source>
         <translation>Pomiar ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="2897"/>
+        <location filename="wm3000u.cpp" line="2903"/>
         <source>Modus setzen ...</source>
         <translation>Ustawianie trybu ...</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3059"/>
+        <location filename="wm3000u.cpp" line="3065"/>
         <source>Wandlermesseinrichtung WM1000U</source>
         <translation>Urządzenie pomiarowe przekładników WM1000U</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3061"/>
+        <location filename="wm3000u.cpp" line="3067"/>
         <source>Wandlermesseinrichtung WM3000U</source>
         <translation>Urządzenie pomiarowe przekładników WM3000U</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3168"/>
+        <location filename="wm3000u.cpp" line="3179"/>
         <source>Amplituden Justage</source>
         <translation>Adiustacja amplitudy</translation>
     </message>
     <message>
-        <location filename="wm3000u.cpp" line="3168"/>
+        <location filename="wm3000u.cpp" line="3179"/>
         <source>Noch nicht implementiert</source>
         <translation>Nie wprowadzono jeszcze</translation>
     </message>
