@@ -9,4 +9,5 @@ SUBDIRS = \
     test_anglecmpoverfrequency \
     test_cmpactvalue \
     test_sessionstreamer \
-    test_deviface
+    test_deviface \
+    test_cmdlinepar
