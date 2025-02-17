@@ -131,8 +131,9 @@
 // 2.47 29.8.24     adds dev:iface to export interface
 // 2.48 16.9.24     adds onscreenkeyboard
 // 2.49 19.11.24    adds disable Watchdogtimer
+// 2.50 17.2.25     adds releaseinfo to version widget
 
-#define WMVersion "V2.49"
+#define WMVersion "V2.50"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"
