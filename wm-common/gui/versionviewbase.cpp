@@ -32,6 +32,7 @@ void VersionsViewBase::ReceiveVersionData(tVersSerial* p)
     pVersion = p;
     ui->DeviceText->setText(p->DeviceName);
     ui->DeviceVersionText->setText(p->DeviceVersion);
+    ui->ReleaseNumberText->setText(p->GetReleaseVersion());
     ui->SerialNrText->setText(p->PCBSerialNr);
     ui->AdjDataText->setText(p->JDataChksum);
     ui->PCBVersionText->setText( p->PCBVersion);

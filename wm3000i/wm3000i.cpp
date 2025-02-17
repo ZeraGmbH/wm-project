@@ -48,12 +48,6 @@ cWM3000I::cWM3000I() :
 {
 
     SerialVersions.DeviceVersion = WMVersion;
-    SerialVersions.PCBSerialNr = "Unknown"; // wird ggf. später aus hardware gelesen
-    SerialVersions.PCBVersion = "Unknown";
-    SerialVersions.PCBServer = "Unknown";
-    SerialVersions.DSPVersion = "Unknown";
-    SerialVersions.DSPServer = "Unknown";
-    SerialVersions.JDataChksum = "Unknown";
 
     // wenn device confdata sendet -> auch  an eigenfehler klasse
     connect(this,SIGNAL(SendConfDataSignal(cConfData*)), &m_ownError,SLOT(SetConfInfoSlot(cConfData*)));

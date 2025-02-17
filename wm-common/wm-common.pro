@@ -167,6 +167,7 @@ SOURCES = \
     settings/sessionstreamer.cpp \
     tcpconfig.cpp \
     tools.cpp \
+    versserial.cpp \
     wmparameter.cpp \
     zerainfo.cpp
 
