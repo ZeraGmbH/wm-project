@@ -2,9 +2,15 @@
 #define VERSSERIAL_H
 
 #include <QString>
+#include <QFile>
+#include <QTextStream>
 
-struct tVersSerial
+class tVersSerial
 {
+public:
+    tVersSerial();;
+    QString GetReleaseVersion();;
+
     QString DeviceName;
     QString DeviceVersion;
     QString PCBSerialNr;
@@ -13,6 +19,9 @@ struct tVersSerial
     QString DSPVersion;
     QString DSPServer;
     QString JDataChksum;
-};
+private:
+    QString ReleaseVersion;
+    void setReleaseNr();
 
+};
 #endif // VERSSERIAL_H
