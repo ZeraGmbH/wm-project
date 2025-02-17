@@ -747,17 +747,17 @@ void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
     ui->CmpKorrLineEdit2->setInputMode(FLOATINPUT);
 
     ui->RatioPrimNLineEdit->setKeyboard(keyboard);
-    ui->RatioPrimNLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioPrimNLineEdit->setInputMode(FLOATINPUT);
     ui->RatioSekNLineEdit->setKeyboard(keyboard);
-    ui->RatioSekNLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekNLineEdit->setInputMode(FLOATINPUT);
     ui->RatioPrimXLineEdit->setKeyboard(keyboard);
-    ui->RatioPrimXLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioPrimXLineEdit->setInputMode(FLOATINPUT);
     ui->RatioSekXLineEdit->setKeyboard(keyboard);
-    ui->RatioSekXLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekXLineEdit->setInputMode(FLOATINPUT);
     ui->RatioSekECTLineEdit->setKeyboard(keyboard);
-    ui->RatioSekECTLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioSekECTLineEdit->setInputMode(FLOATINPUT);
     ui->RatioPrimECTLineEdit->setKeyboard(keyboard);
-    ui->RatioPrimECTLineEdit->setInputMode(FIXEDNUMINPUT);
+    ui->RatioPrimECTLineEdit->setInputMode(FLOATINPUT);
 }
 
 void ConfDialogBase::on_ConfTabWidget_currentChanged(int index)
