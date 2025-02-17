@@ -112,8 +112,9 @@
 // 2.42 29.8.24     adds dev:iface to export interface
 // 2.43 16.9.24     adds onscreenkeyboard
 // 2.44 19.11.24    adds disable Watchdogtimer
+// 2.45 17.2.25     adds releaseinfo to version widget
 
-#define WMVersion "V2.44"
+#define WMVersion "V2.45"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
