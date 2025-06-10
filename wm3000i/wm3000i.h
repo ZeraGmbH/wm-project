@@ -28,6 +28,7 @@
 #include <justValues.h>
 #include "wmscopedialog.h"
 #include "dspsetup.h"
+#include "vectordiagramm.h"
 
 class cRSelectString: public QString {
 public:    
@@ -510,6 +511,7 @@ private:
     QTime mTime;
     void setupServers();
     void setupSampleDialog();
+    ComplexVectorWidget *mVecWidget;
 };
 
 #endif    
