@@ -19,6 +19,7 @@ HEADERS = \
     dsp/dspvar.h \
     gui/cwmessagebox.h \
     gui/cwmlineedit.h \
+    gui/vectordiagramm.h \
     gui/wmkeyboardform.h \
     gui/wmmessagebox.h \
     gui/wmviewbase.h \
@@ -110,6 +111,7 @@ SOURCES = \
     dsp/dspsetup.cpp \
     gui/cwmessagebox.cpp \
     gui/cwmlineedit.cpp \
+    gui/vectordiagramm.cpp \
     gui/wmkeyboardform.cpp \
     gui/wmmessagebox.cpp \
     gui/wmviewbase.cpp \

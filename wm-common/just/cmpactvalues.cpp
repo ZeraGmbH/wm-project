@@ -37,7 +37,7 @@ void cmpActValues::fehlerBerechnung()
     }
 
     m_actValues->AmplErrorIEC = 100.0 * err;
-    m_actValues->RCF = 1.0 / (1.0 + err);
+    m_actValues->RCF = 1.0 / (1.0 + err);   // ratio corretion factor
 }
 
 void cmpActValues::phikBerechnung()

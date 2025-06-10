@@ -168,6 +168,9 @@ cWM3000I::cWM3000I() :
 
     m_bNewSamplerates = false;
     m_bJustage = false;
+    mVecWidget = new ComplexVectorWidget;
+    mVecWidget->resize(250,200);
+    mVecWidget->show();
 }
 
 
@@ -4367,15 +4370,23 @@ void cWM3000I::SimulatedMeasurement()
     ActValues.dspActValues.rmsxf *= rej/val;
     ActValues.RMSX1Sek = ActValues.dspActValues.rmsxf;
     ActValues.dspActValues.ampl1xf = ActValues.dspActValues.rmsxf * 1.414213562; // klirrfaktor = 0
-    ActValues.dspActValues.phix = 0.0+PI/2; // vektor hat 0°
+    if ((ActValues.dspActValues.dphif > (360.0/57.237)) || (ActValues.dspActValues.phix < (0.0))) ActValues.dspActValues.phix = 0.0;
+    ActValues.dspActValues.dphif = ActValues.dspActValues.dphif + 5.0 / 57.237;
 
-    ActValues.dspActValues.dphif = 0.0; // differenz vektor hat 0°
+    ActValues.dspActValues.phix = ActValues.dspActValues.dphif +PI/2; // vektor hat 0°
+
+    ActValues.dspActValues.dphif = ActValues.dspActValues.dphif;
     MaxValues.maxn = ActValues.dspActValues.ampl1nf;
     MaxValues.maxx = ActValues.dspActValues.ampl1xf;
     MaxValues.maxRdy = 1.0; // maxima sind verfügbar
     
     wmCmpActValues();
     CmpRMSValues();
+    mVecWidget->setValue(1,ActValues.VekN.re(),ActValues.VekN.im());
+    mVecWidget->setValue(2,ActValues.VekX.re(), ActValues.VekX.im());
+    mVecWidget->setValue(3,ActValues.VekDX.re(), ActValues.VekDX.im());
+    mVecWidget->update();
+
     emit SendActValuesSignal(&ActValues);
     emit SendLPSignal(&ActValues);
 }
