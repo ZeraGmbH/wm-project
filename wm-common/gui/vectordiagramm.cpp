@@ -56,17 +56,21 @@
         double scale = Scale();
 
         // Funktion zum Zeichnen eines Vektors
-        auto drawVector = [&](const std::complex<double>& c, QColor color, const std::complex<int> center) {
+        auto drawVector = [&](const std::complex<double>& c, QColor color,const QString text, const std::complex<int> center) {
             int x = center.real() + c.real() * scale;
             int y = center.imag() - c.imag() * scale; // y-Achse nach oben
             painter.setPen(QPen(color, 2));
             painter.drawLine(center.real(), center.imag(), x, y);
+            x = center.real() + (c.real()/2) * scale +3;
+            y = center.imag() - (c.imag()/2) * scale -3; // y-Achse nach oben
+
+            painter.drawText(x ,y ,text);
             // Pfeilspitze hinzufügen (optional)
         };
 
         // Zeichne die drei komplexen Vektoren
-        drawVector(c1, Qt::red, center);
-        drawVector(c2, Qt::green, center);
-        drawVector(c3, Qt::blue, c1i);
+        drawVector(c1, Qt::red,"In", center);
+        drawVector(c2, Qt::green,"Ix", center);
+        drawVector(c3, Qt::blue,"dIx", c1i);
     }
 
