@@ -113,8 +113,9 @@
 // 2.43 16.9.24     adds onscreenkeyboard
 // 2.44 19.11.24    adds disable Watchdogtimer
 // 2.45 17.2.25     adds releaseinfo to version widget
+// 2.46 7.10.25     improves translations
 
-#define WMVersion "V2.45"
+#define WMVersion "V2.46"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
