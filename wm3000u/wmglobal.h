@@ -132,8 +132,9 @@
 // 2.48 16.9.24     adds onscreenkeyboard
 // 2.49 19.11.24    adds disable Watchdogtimer
 // 2.50 17.2.25     adds releaseinfo to version widget
+// 2.51 7.10.25     improves translations
 
-#define WMVersion "V2.50"
+#define WMVersion "V2.51"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"
