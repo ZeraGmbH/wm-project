@@ -222,41 +222,45 @@
     </message>
     <message>
         <location filename="gui/versionviewbase.ui" line="51"/>
+        <source>Release Version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/versionviewbase.ui" line="58"/>
         <source>Serial Number:</source>
         <translation>Seriennummer:</translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="61"/>
+        <location filename="gui/versionviewbase.ui" line="68"/>
         <source>AdjustmentData:</source>
         <translation>Justagedaten:</translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="71"/>
+        <location filename="gui/versionviewbase.ui" line="78"/>
         <source>PCB Version:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="81"/>
+        <location filename="gui/versionviewbase.ui" line="88"/>
         <source>PCB Server:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="91"/>
+        <location filename="gui/versionviewbase.ui" line="98"/>
         <source>DSP Version:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="101"/>
+        <location filename="gui/versionviewbase.ui" line="108"/>
         <source>DSP Server:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="111"/>
+        <location filename="gui/versionviewbase.ui" line="118"/>
         <source>Options:</source>
         <translation>Optionen:</translation>
     </message>
     <message>
-        <location filename="gui/versionviewbase.ui" line="135"/>
         <location filename="gui/versionviewbase.ui" line="142"/>
         <location filename="gui/versionviewbase.ui" line="149"/>
         <location filename="gui/versionviewbase.ui" line="156"/>
@@ -265,6 +269,8 @@
         <location filename="gui/versionviewbase.ui" line="177"/>
         <location filename="gui/versionviewbase.ui" line="184"/>
         <location filename="gui/versionviewbase.ui" line="191"/>
+        <location filename="gui/versionviewbase.ui" line="198"/>
+        <location filename="gui/versionviewbase.ui" line="205"/>
         <source>----------</source>
         <translation></translation>
     </message>

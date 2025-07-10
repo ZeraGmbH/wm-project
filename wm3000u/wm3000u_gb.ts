@@ -375,7 +375,7 @@
     </message>
     <message>
         <source>F:</source>
-        <translation>F:</translation>
+        <translation type="obsolete">F:</translation>
     </message>
     <message>
         <source>---------</source>
@@ -392,6 +392,10 @@
     <message utf8="true">
         <source>°</source>
         <translation>°</translation>
+    </message>
+    <message>
+        <source>f:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
