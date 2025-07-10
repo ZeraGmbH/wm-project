@@ -168,9 +168,9 @@ cWM3000I::cWM3000I() :
 
     m_bNewSamplerates = false;
     m_bJustage = false;
-    mVecWidget = new ComplexVectorWidget;
-    mVecWidget->resize(250,200);
-    mVecWidget->show();
+//    mVecWidget = new ComplexVectorWidget;
+//    mVecWidget->resize(250,200);
+//    mVecWidget->show();
 }
 
 
