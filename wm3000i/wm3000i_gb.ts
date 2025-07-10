@@ -359,7 +359,7 @@
     </message>
     <message>
         <source>F:</source>
-        <translation>F:</translation>
+        <translation type="obsolete">E:</translation>
     </message>
     <message>
         <source>---------</source>
@@ -388,6 +388,10 @@
     <message>
         <source>dIx:</source>
         <translation>dIx:</translation>
+    </message>
+    <message>
+        <source>f:</source>
+        <translation></translation>
     </message>
 </context>
 <context>

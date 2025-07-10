@@ -58,27 +58,40 @@ int main(int argc, char *argv[])
     g_WMDevice->setIpAddress(mCmdLPar.GetIpAdress());
 
     QString qmPath = "/usr/share/wm3000i";
-    QTranslator* appTranslator = new QTranslator(&app);
-    QTranslator* qtTranslator = new QTranslator(&app);
+    QString qmFileCom, qmFileWm;
 
     switch (g_WMDevice->m_ConfData.Language)
     {
        case de:
-        if (!appTranslator->load("wm-common_de.qm",qmPath)) qWarning("wm3000 translation file not found (de)");
-        if (!qtTranslator->load("wm-common_de.qm",qmPath))  qWarning("common translation file not found (de)");
+        qmFileWm = "";
+        qmFileCom = "wm-common_de.qm";
         break;
        case gb:
-        if (!appTranslator->load("wm3000i_gb.qm",qmPath)) qWarning("wm3000 translation file not found (gb)");;
-        if (!qtTranslator->load("wm-common_gb.qm",qmPath))  qWarning("common translation file not found (gb)");
+           qmFileWm = "wm3000i_gb.qm";
+           qmFileCom = "wm-common_gb.qm";
         break;
        case pl:
-        if (!appTranslator->load("wm3000i_pl.qm",qmPath)) qWarning("wm3000 translation file not found (pl)");;
-        if (!qtTranslator->load("wm-common_pl.qm",qmPath))  qWarning("common translation file not found (pl)");
+           qmFileWm = "wm3000i_pl.qm";
+           qmFileCom = "wm-common_pl.qm";
         break;
     }
+   if (!qmFileWm.isEmpty())
+   {
+        QTranslator* appTranslator = new QTranslator(&app);
+        if (!appTranslator->load(qmFileWm,qmPath))
+            qWarning() << qPrintable(qmFileWm) << " translation file not found";
+        else
+            app.installTranslator(appTranslator);
+   }
+   if (!qmFileCom.isEmpty())
+    {
+        QTranslator* qtTranslator = new QTranslator(&app);
+        if (!qtTranslator->load(qmFileCom,qmPath))
+            qWarning() << qPrintable(qmFileCom) << " translation file not found ";
+        else
+            app.installTranslator(qtTranslator);
+    }
 
-    app.installTranslator(qtTranslator);
-    app.installTranslator(appTranslator);
 
     g_WMView = new WMViewBaseI; // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen

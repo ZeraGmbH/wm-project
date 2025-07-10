@@ -2,6 +2,7 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 TRANSLATIONS    = wm-common_de.ts \
+                  wm-common_gb.ts \
                   wm-common_pl.ts
 
 QT += widgets network qt3support \

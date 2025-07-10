@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>185</width>
-    <height>112</height>
+    <height>136</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -121,7 +121,7 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="text">
-      <string>F:</string>
+      <string>f:</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>

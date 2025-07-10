@@ -361,7 +361,7 @@
         <number>15</number>
        </property>
        <property name="m_sDisplay" stdset="0">
-        <string></string>
+        <string/>
        </property>
       </widget>
      </item>

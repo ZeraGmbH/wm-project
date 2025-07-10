@@ -347,7 +347,7 @@
     <message>
         <location filename="gui/wmmeasvaluesbase.ui" line="105"/>
         <source>F:</source>
-        <translation></translation>
+        <translation>E:</translation>
     </message>
     <message>
         <location filename="gui/wmmeasvaluesbase.ui" line="130"/>
