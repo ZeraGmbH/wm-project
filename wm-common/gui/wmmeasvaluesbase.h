@@ -23,6 +23,7 @@ class WMMeasValuesBase : public QDialog, public ISessionStreamImplementor
 public:
     explicit WMMeasValuesBase(QWidget* parent, QString machineName, QList<eUnit *> lpUnitList);
     ~WMMeasValuesBase();
+    void activateContextMenu();
 
 public slots:
     virtual void onShowHide(bool shw);

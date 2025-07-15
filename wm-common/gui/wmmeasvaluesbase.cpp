@@ -71,11 +71,16 @@ void WMMeasValuesBase::moveEvent(QMoveEvent*)
     m_settingsChangeTimer.startDelayed();
 }
 
+void WMMeasValuesBase::activateContextMenu()
+{
+    emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
+    m_pContextMenu->show();
+}
+
 void WMMeasValuesBase::mousePressEvent(QMouseEvent *event)
 {
     if(m_Timer.isActive()){
-        emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
-        m_pContextMenu->show();
+        activateContextMenu();
     }
     else {
     m_Timer.start();
@@ -85,8 +90,7 @@ void WMMeasValuesBase::mousePressEvent(QMouseEvent *event)
 
 void WMMeasValuesBase::contextMenuEvent(QContextMenuEvent *)
 {
-    emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
-    m_pContextMenu->show();
+    activateContextMenu();
 }
 
 void WMMeasValuesBase::SetActualValuesSlot( cwmActValues * av)

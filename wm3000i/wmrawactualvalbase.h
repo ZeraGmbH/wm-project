@@ -16,6 +16,7 @@ class WMRawActualValBase : public QDialog, public ISessionStreamImplementor
 public:
     explicit WMRawActualValBase(QWidget* parent, QString machineName);
     ~WMRawActualValBase();
+    void activateContextMenu();
 public slots:
     void onShowHide(bool shw);
     void ReceiveAVDataSlot(cwmActValues *ActValues);
