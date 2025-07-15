@@ -144,6 +144,8 @@
     <addaction name="justageFlashProgAction"/>
     <addaction name="justageFlasExportAction"/>
     <addaction name="justageFlashImportAction"/>
+    <addaction name="separator"/>
+    <addaction name="actionAuto_Screenshooter"/>
    </widget>
    <addaction name="Datei"/>
    <addaction name="Messung"/>
@@ -802,6 +804,14 @@
    </property>
    <property name="ansichtScopeAction" stdset="0">
     <string/>
+   </property>
+  </action>
+  <action name="actionAuto_Screenshooter">
+   <property name="text">
+    <string>Auto Screenshooter</string>
+   </property>
+   <property name="shortcut">
+    <string>F12</string>
    </property>
   </action>
  </widget>
