@@ -6,8 +6,6 @@ TRANSLATIONS    = wm-common_de.ts \
                   wm-common_pl.ts
 
 QT += widgets network qt3support \
-    widgets \
-    widgets
 
 HEADERS = \
     client-access/clientiodevice.h \
