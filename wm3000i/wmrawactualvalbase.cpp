@@ -187,11 +187,17 @@ void WMRawActualValBase::onSaveSession(QString session)
     m_sessionStreamer.writeSession(objectName(), session);
 }
 
+void WMRawActualValBase::activateContextMenu()
+{
+    emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
+    m_pContextMenu->show();
+
+}
+
 void WMRawActualValBase::mousePressEvent(QMouseEvent *event)
 {
     if(m_Timer.isActive()){
-    emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
-    m_pContextMenu->show();
+        activateContextMenu();
     }
     else {
     m_Timer.start();
@@ -201,8 +207,7 @@ void WMRawActualValBase::mousePressEvent(QMouseEvent *event)
 
 void WMRawActualValBase::contextMenuEvent(QContextMenuEvent *)
 {
-    emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
-    m_pContextMenu->show();
+    activateContextMenu();
 }
 
 void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
