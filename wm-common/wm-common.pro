@@ -69,6 +69,7 @@ HEADERS = \
     scpi/scpistatsyst.h \
     scpi/wm3000scpiface.h \
     scpi/wm3kscpispecialbase.h \
+    screenshooter.h \
     settings/anglecmpoverfrequency.h \
     settings/commandlineparameter.h \
     settings/confdata.h \
@@ -147,6 +148,7 @@ SOURCES = \
     scpi/scpiface.cpp \
     scpi/scpistatsyst.cpp \
     scpi/wm3000scpiface.cpp \
+    screenshooter.cpp \
     settings/anglecmpoverfrequency.cpp \
     settings/commandlineparameter.cpp \
     settings/confdata.cpp \
