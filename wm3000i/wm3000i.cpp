@@ -4382,10 +4382,10 @@ void cWM3000I::SimulatedMeasurement()
     
     wmCmpActValues();
     CmpRMSValues();
-    mVecWidget->setValue(1,ActValues.VekN.re(),ActValues.VekN.im());
-    mVecWidget->setValue(2,ActValues.VekX.re(), ActValues.VekX.im());
-    mVecWidget->setValue(3,ActValues.VekDX.re(), ActValues.VekDX.im());
-    mVecWidget->update();
+//    mVecWidget->setValue(1,ActValues.VekN.re(),ActValues.VekN.im());
+//    mVecWidget->setValue(2,ActValues.VekX.re(), ActValues.VekX.im());
+//    mVecWidget->setValue(3,ActValues.VekDX.re(), ActValues.VekDX.im());
+//    mVecWidget->update();
 
     emit SendActValuesSignal(&ActValues);
     emit SendLPSignal(&ActValues);

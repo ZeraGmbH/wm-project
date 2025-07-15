@@ -511,7 +511,7 @@ private:
     QTime mTime;
     void setupServers();
     void setupSampleDialog();
-    ComplexVectorWidget *mVecWidget;
+    //ComplexVectorWidget *mVecWidget;
 };
 
 #endif    
