@@ -13,6 +13,7 @@
 #include <QMainWindow>
 #include "maxrecentfiles.h"
 #include "confdata.h"
+#include "screenshooter.h"
 #include "wmeditor.h"
 #include "widgetgeometry.h"
 #include "statuslabelcontainer.h"
@@ -129,6 +130,7 @@ private:
     QStringList recentSESFiles;
     QString m_deviceName;
     bool m_isWm1000=false;
+    screenshooter* m_ScrShooter;
 
     void destroy();
     void UpdateRecentSESList( QString ses );
@@ -145,6 +147,7 @@ private slots:
     virtual void JustFlashExportSlot();
     virtual void JustFlashImportSlot();
     virtual void SaveDefaultSessionSlot(bool);
+    void on_actionAuto_Screenshooter_triggered();
 };
 
 #endif // WMVIEWBASE_H

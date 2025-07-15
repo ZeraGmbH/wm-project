@@ -13,6 +13,7 @@ WMViewBase::WMViewBase(WMViewBase *parent) :
     m_statusLabelContainer(this)
 {
     ui->setupUi((QMainWindow*) this);
+    m_ScrShooter = new screenshooter;
 }
 
 
@@ -22,6 +23,26 @@ WMViewBase::~WMViewBase()
     delete wmEdit;
     delete wmEdit2;
     delete ui;
+}
+
+void WMViewBase::on_actionAuto_Screenshooter_triggered()
+{
+    m_ScrShooter->showUIbyExec(ui->Datei);
+    m_ScrShooter->storeScreenShot(ui->Datei,"04_Datei");
+    m_ScrShooter->showUIbyExec(ui->popupMenu);
+    m_ScrShooter->storeScreenShot(ui->popupMenu,"04_1_DateiEigenfehler");
+    m_ScrShooter->showUIbyExec(ui->popupMenu_6);
+    m_ScrShooter->storeScreenShot(ui->popupMenu_6,"04_2_DateiErgebnisdatei");
+    m_ScrShooter->showUIbyExec(ui->Messung);
+    m_ScrShooter->storeScreenShot(ui->Messung,"06_Messung");
+    m_ScrShooter->showUIbyExec(ui->Einstellungen);
+    m_ScrShooter->storeScreenShot(ui->Einstellungen,"10_Einstell");
+    m_ScrShooter->showUIbyExec(ui->Hilfe);
+    m_ScrShooter->storeScreenShot(ui->Hilfe,"19_Hilfe");
+    m_ScrShooter->showUIbyExec(ui->Sprache);
+    m_ScrShooter->storeScreenShot(ui->Sprache,"21_Sprache");
+    m_ScrShooter->showUIbyExec(ui->Justage);
+    m_ScrShooter->storeScreenShot(ui->Justage,"23_Justage");
 }
 
 void WMViewBase::removeJustageItem()
