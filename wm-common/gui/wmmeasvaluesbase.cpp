@@ -77,6 +77,37 @@ void WMMeasValuesBase::activateContextMenu()
     m_pContextMenu->show();
 }
 
+void WMMeasValuesBase::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
+
+void WMMeasValuesBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 31);
+}
+
+void WMMeasValuesBase::takeScreenshootSetting()
+{
+    activateContextMenu();
+    mScrShooter->useTimer(m_pContextMenu, 32);
+}
+
+void WMMeasValuesBase::takeScreenshootSettingFinished()
+{
+    m_pContextMenu->hide();
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
+}
+
 void WMMeasValuesBase::mousePressEvent(QMouseEvent *event)
 {
     if(m_Timer.isActive()){
