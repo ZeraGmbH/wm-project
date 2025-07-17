@@ -1,4 +1,5 @@
 #include "wmviewbase.h"
+#include "qdebug.h"
 #include "wmeditor.h"
 #include "widgetgeometry.h"
 #include "ui_wmviewbase.h"
@@ -13,7 +14,6 @@ WMViewBase::WMViewBase(WMViewBase *parent) :
     m_statusLabelContainer(this)
 {
     ui->setupUi((QMainWindow*) this);
-    m_ScrShooter = new screenshooter;
 }
 
 
@@ -25,24 +25,70 @@ WMViewBase::~WMViewBase()
     delete ui;
 }
 
-void WMViewBase::on_actionAuto_Screenshooter_triggered()
+void WMViewBase::AutoScreenShoterTriggered()
 {
-    m_ScrShooter->showUIbyExec(ui->Datei);
-    m_ScrShooter->storeScreenShot(ui->Datei,"04_Datei");
-    m_ScrShooter->showUIbyExec(ui->popupMenu);
-    m_ScrShooter->storeScreenShot(ui->popupMenu,"04_1_DateiEigenfehler");
-    m_ScrShooter->showUIbyExec(ui->popupMenu_6);
-    m_ScrShooter->storeScreenShot(ui->popupMenu_6,"04_2_DateiErgebnisdatei");
-    m_ScrShooter->showUIbyExec(ui->Messung);
-    m_ScrShooter->storeScreenShot(ui->Messung,"06_Messung");
-    m_ScrShooter->showUIbyExec(ui->Einstellungen);
-    m_ScrShooter->storeScreenShot(ui->Einstellungen,"10_Einstell");
-    m_ScrShooter->showUIbyExec(ui->Hilfe);
-    m_ScrShooter->storeScreenShot(ui->Hilfe,"19_Hilfe");
-    m_ScrShooter->showUIbyExec(ui->Sprache);
-    m_ScrShooter->storeScreenShot(ui->Sprache,"21_Sprache");
-    m_ScrShooter->showUIbyExec(ui->Justage);
-    m_ScrShooter->storeScreenShot(ui->Justage,"23_Justage");
+    QPoint point;
+    uint adjust;
+    point = ui->MenuBarEditor->rect().bottomLeft();
+    ui->Datei->exec(mapToGlobal(point));
+    adjust = mScrShooter->storeScreenShot(ui->Datei,"07_Datei");
+    ui->Datei->exec(mapToGlobal(point));
+    mScrShooter->storeScreenShotW(this,"08_Datei",adjust);
+
+    ui->Messung->exec(mapToGlobal(point+ QPoint(65,0)));
+    adjust = mScrShooter->storeScreenShot(ui->Messung,"11_Messung");
+    ui->Messung->exec(mapToGlobal(point+ QPoint(65,0)));
+    mScrShooter->storeScreenShotW(this,"12_Messung",adjust);
+
+    ui->Ansicht->exec(mapToGlobal(point+ QPoint(145,0)));
+    adjust = mScrShooter->storeScreenShot(ui->Ansicht,"13_Ansicht");
+    ui->Ansicht->exec(mapToGlobal(point+ QPoint(145,0)));
+    mScrShooter->storeScreenShotW(this,"14_Ansicht",adjust);
+
+    ui->Einstellungen->exec(mapToGlobal(point+ QPoint(205,0)));
+    adjust = mScrShooter->storeScreenShot(ui->Einstellungen,"15_Einstell");
+    ui->Einstellungen->exec(mapToGlobal(point+ QPoint(205,0)));
+    mScrShooter->storeScreenShotW(this,"16_Einstell",adjust);
+
+    ui->Hilfe->exec(mapToGlobal(point+ QPoint(305,0)));
+    adjust = mScrShooter->storeScreenShot(ui->Hilfe,"24_Hilfe");
+    ui->Hilfe->exec(mapToGlobal(point+ QPoint(305,0)));
+    mScrShooter->storeScreenShotW(this,"25_Hilfe",adjust);
+
+    ui->Sprache->exec(mapToGlobal(point+ QPoint(355,0)));
+    adjust = mScrShooter->storeScreenShot(ui->Sprache,"26_Sprache");
+    ui->Sprache->exec(mapToGlobal(point+ QPoint(355,0)));
+    mScrShooter->storeScreenShotW(this,"27_Sprache",adjust);
+
+    ui->Justage->exec(mapToGlobal(point+ QPoint(425,0)));
+    adjust = mScrShooter->storeScreenShot(ui->Justage,"28_Justage");
+    ui->Justage->exec(mapToGlobal(point+ QPoint(425,0)));
+    mScrShooter->storeScreenShotW(this,"29_Justage",adjust);
+    emit ScreenshooterTriggeredByUser();
+}
+
+void WMViewBase::setScreenShooter(screenshooter* poi)
+{
+    mScrShooter = poi;
+}
+
+void WMViewBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 2);
+}
+
+void WMViewBase::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
 }
 
 void WMViewBase::removeJustageItem()
@@ -50,7 +96,6 @@ void WMViewBase::removeJustageItem()
     ui->MenuBarEditor->removeAction(ui->Justage->menuAction());
     ui->ansichtScopeAction->removeFrom(ui->Ansicht);
 }
-
 
 void WMViewBase::configureWM1000Items()
 {
@@ -169,7 +214,6 @@ void WMViewBase::ActualizeStates()
     UpdateRecentFileList(recentOETFiles, m_ConfData.m_sOETFile);
     UpdateRecentFileList(recentResultFiles, m_ConfData.m_sResultFile);
 }
-
 
 void WMViewBase::destroy()
 {
@@ -543,6 +587,11 @@ void WMViewBase::moveEvent(QMoveEvent *)
     onSaveSession(".ses");
 }
 
+void WMViewBase::mousePressEvent(QMouseEvent *event)
+{
+    qWarning() << "MouseEvent" << event->globalPos();
+}
+
 void WMViewBase::setDeviceName(QString str)
 {
     m_deviceName = str;
@@ -682,5 +731,3 @@ void WMViewBase::SetPPSStatSlot(bool b)
     m_bPPSQuestionable = b;
     ActualizeStates();
 }
-
-
