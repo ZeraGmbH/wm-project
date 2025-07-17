@@ -2,7 +2,7 @@
 #include "ui_wmscreenshoterguibase.h"
 
 wmscreenshoterguibase::wmscreenshoterguibase(QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::wmscreenshoterguibase)
 {
     ui->setupUi(this);
