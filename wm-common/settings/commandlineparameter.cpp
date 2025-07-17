@@ -37,6 +37,10 @@ void CommandLineParameter::Parse(int argc, char *argv[])
             bPpsWatchDog = true;
             qDebug("Found option PPS Watch Dog");
         }
+        if (option == strScreen){
+            bScreen = true;
+            qDebug("Found option Screen");
+        }
     }
 }
 
@@ -50,4 +54,15 @@ QString CommandLineParameter::GetOptionString()
     if(bPpsWatchDog) option += "pwdt ";
     if(bIpAdress) option += "ip";
     return option;
+}
+
+QString CommandLineParameter::GetOptionStringForFolders()
+{
+    QString str;
+    str = mLanguage;
+    if(bConvent)  str += "wm1000"; else str += "wm3000";
+    str += mDevice;
+    if(bDc) str += "dc";
+    if(bNewSampleRates) str += "newsr";
+    return str;
 }

@@ -9,12 +9,16 @@ public:
     CommandLineParameter();
     void Parse(int argc, char *argv[]);
     QString GetOptionString();
+    QString GetOptionStringForFolders();
     bool GetJustage() {return bJustage;};
     bool GetConvent() {return bConvent;};
     bool GetDC() {return bDc;};
     bool GetNewSampleRates() {return bNewSampleRates;};
     bool GetPpsWatchDog() {return bPpsWatchDog;};
+    bool GetScreenShoter() {return bScreen;};
     QString GetIpAdress() {return mstrIPAdress;}
+    void setLanguage(const QString lang) {mLanguage = lang;};
+    void setDevice(const QString device) {mDevice = device;};
 private:
     bool bJustage = false;
     bool bConvent = false;
@@ -22,7 +26,9 @@ private:
     bool bNewSampleRates = false;
     bool bPpsWatchDog = false;
     bool bIpAdress = false;
+    bool bScreen = false;
     QString mstrIPAdress = "127.0.0.1";
+    QString mLanguage, mDevice;
 
     const QString strJustage = "-justage";
     const QString strConvent = "-convent";
@@ -30,6 +36,7 @@ private:
     const QString strNewSampleRates = "-newsamplerates";
     const QString strIPAdress = "-ip";
     const QString strPpsWatchDog = "-ppswatchdog";
+    const QString strScreen = "-screen";
 
 };
 
