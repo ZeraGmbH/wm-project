@@ -20,6 +20,11 @@ EN61850monitor::~EN61850monitor()
     delete ui;
 }
 
+void EN61850monitor::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
+
 void EN61850monitor::onShowHide(bool shw)
 {
     m_settingsChangeTimer.startDelayed();
@@ -151,6 +156,25 @@ bool EN61850monitor::onLoadSession(QString session)
 void EN61850monitor::onSaveSession(QString session)
 {
     m_sessionStreamer.writeSession(objectName(), session);
+}
+
+void EN61850monitor::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 36);
+}
+
+void EN61850monitor::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
 }
 
 void EN61850monitor::accept()

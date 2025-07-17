@@ -2,6 +2,7 @@
 #define EN61850MONBASE_H
 
 #include "en61850.h"
+#include "screenshooter.h"
 #include "widgetgeometry.h"
 #include "sessionstreamer.h"
 #include "settingschangetimer.h"
@@ -17,11 +18,16 @@ class EN61850monitor : public QDialog, public ISessionStreamImplementor
 public:
     explicit EN61850monitor(QWidget* parent, QString machineName);
     ~EN61850monitor();
+    void setScreenShooter(screenshooter* poi);
+
 public slots:
     virtual void onShowHide(bool shw);
     virtual void onETHStatus(cEN61850Info *ethInfo);
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
+    void takeScreenshoots();
+    void takeScreenshootFinished();
+
 signals:
     void sigRequestInformation();
     void sigIsVisible(bool);
@@ -48,6 +54,7 @@ private:
     SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
+    screenshooter* mScrShooter;
 };
 
 #endif // EN61850MONBASE_H
