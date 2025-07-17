@@ -15,7 +15,10 @@ RangeDialogBase::~RangeDialogBase()
     delete ui;
 }
 
-
+void RangeDialogBase::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
 
 void RangeDialogBase::ActualizeDialog() // aktualisiert dialoganzeige
 {
@@ -110,4 +113,23 @@ void RangeDialogBase::showEvent( QShowEvent * )
 void RangeDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
     setEnabled(!remote);
+}
+
+void RangeDialogBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 37);
+}
+
+void RangeDialogBase::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
 }
