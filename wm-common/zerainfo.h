@@ -17,6 +17,7 @@ class cZeraInfo:public QObject
     Q_OBJECT
 public:
     cZeraInfo(int nr);
+    bool isWM3000();
 public slots:
     void AboutZeraSlot();
     void AboutWM3000Slot();
@@ -24,6 +25,7 @@ private:
     void setInfoStrings(int nr);
     QString m_machineInfoTitle;
     QString m_machineInfo;
+    int m_nr;
 
 };
 
