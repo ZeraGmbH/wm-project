@@ -36,6 +36,7 @@ public:
     void setWMWindowTitle();
     void configureWMwoDC();
     virtual void ActualizeStates();
+    void setScreenShooter(screenshooter *poi);
 
 public slots:
     void SetViewConfDataInfoSlot( cConfData * cd );
@@ -60,6 +61,8 @@ public slots:
     virtual void SetJustifiedSlot( bool b );
     virtual void SetFreqStatSlot(bool b);
     virtual void SetPPSStatSlot(bool b);
+    void takeScreenshoots();
+    void takeScreenshootFinished();
 
 signals:
     void SendConfDataSignal(cConfData*);
@@ -101,11 +104,13 @@ signals:
     void UIdateiBeendenActionActivated();
     void UIhilfeVersionActionActivated();
     void UIhilfeReleaseInfoActionActivated();
+    void ScreenshooterTriggeredByUser();
 
 protected:
     virtual void closeEvent(QCloseEvent *ce) override;
     virtual void resizeEvent (QResizeEvent *) override;
     virtual void moveEvent(QMoveEvent *) override;
+    virtual void mousePressEvent(QMouseEvent *event) override;
     cConfData m_ConfData;
     Ui::WMViewBase *ui;
     bool m_bJustified;
@@ -130,7 +135,7 @@ private:
     QStringList recentSESFiles;
     QString m_deviceName;
     bool m_isWm1000=false;
-    screenshooter* m_ScrShooter;
+    screenshooter* mScrShooter;
 
     void destroy();
     void UpdateRecentSESList( QString ses );
@@ -147,7 +152,7 @@ private slots:
     virtual void JustFlashExportSlot();
     virtual void JustFlashImportSlot();
     virtual void SaveDefaultSessionSlot(bool);
-    void on_actionAuto_Screenshooter_triggered();
+    void AutoScreenShoterTriggered();
 };
 
 #endif // WMVIEWBASE_H
