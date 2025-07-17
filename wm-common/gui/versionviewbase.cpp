@@ -27,6 +27,11 @@ void VersionsViewBase::setOptionStr(QString str)
     ui->Opions->setText(str);
 }
 
+void VersionsViewBase::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
+
 void VersionsViewBase::ReceiveVersionData(tVersSerial* p)
 {
     pVersion = p;
@@ -41,10 +46,26 @@ void VersionsViewBase::ReceiveVersionData(tVersSerial* p)
     ui->DSPServerText->setText( p->DSPServer);
 }
 
-
-
-
 void VersionsViewBase::ShowVersionSlot()
 {
     show();
+}
+
+void VersionsViewBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 41);
+}
+
+void VersionsViewBase::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
 }

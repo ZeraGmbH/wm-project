@@ -12,6 +12,7 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+#include "screenshooter.h"
 #include "versserial.h"
 
 namespace Ui {
@@ -26,15 +27,18 @@ public:
     explicit VersionsViewBase( QWidget* parent = 0);
     ~VersionsViewBase();
     void setOptionStr(QString str);
+    void setScreenShooter(screenshooter *poi);
 
 public slots:
     virtual void ReceiveVersionData( tVersSerial * p );
     virtual void ShowVersionSlot();
+    void takeScreenshoots();
+    void takeScreenshootFinished();
 
 private:
     Ui::VersionViewBase *ui;
     tVersSerial* pVersion;
-
+    screenshooter* mScrShooter;
 };
 
 #endif // VERSIONSVIEWBASE_H
