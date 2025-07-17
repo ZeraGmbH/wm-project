@@ -11,6 +11,7 @@
 #include <qmenubar.h>
 #include <QDesktopWidget>
 
+#include "wmscreenshoterguibase.h"
 #include "zerainfo.h"
 #include "confdialogbase.h"
 #include "dbushelper.h"
@@ -37,6 +38,8 @@
 wmKeyboardForm* g_KeyBoard;
 cWM3000U* g_WMDevice;
 WMViewBaseU *g_WMView;
+wmscreenshoterguibase* g_WMScrShoGui;
+screenshooter* g_WMScreenShooter;
 
 int main(int argc, char *argv[])
 {
@@ -59,20 +62,24 @@ int main(int argc, char *argv[])
 
     QString qmPath = "/usr/share/wm3000u";
     QString qmFileCom, qmFileWm;
+    mCmdLPar.setDevice("U");
 
     switch (g_WMDevice->m_ConfData.Language)
     {
     case de:
         qmFileWm = "";
         qmFileCom = "wm-common_de.qm";
+        mCmdLPar.setLanguage("de");
         break;
     case gb:
         qmFileWm = "wm3000u_gb.qm";
         qmFileCom = "wm-common_gb.qm";
+        mCmdLPar.setLanguage("gb");
         break;
     case pl:
         qmFileWm = "wm3000u_pl.qm";
         qmFileCom = "wm-common_pl.qm";
+        mCmdLPar.setLanguage("pl");
         break;
     }
 
@@ -111,6 +118,12 @@ int main(int argc, char *argv[])
         g_WMView->configureWMwoDC();
 
     g_WMDevice->setNewSamplerates(mCmdLPar.GetNewSampleRates());
+
+    if(mCmdLPar.GetScreenShoter()){
+        g_WMScrShoGui = new wmscreenshoterguibase;
+        g_WMScreenShooter = new screenshooter;
+        g_WMScrShoGui->show();
+    }
 
     g_WMView->setWMWindowTitle();
     QString machineName = "wm3000u";
@@ -273,6 +286,46 @@ int main(int argc, char *argv[])
 
     g_WMDevice->InitWM3000();
     g_WMView->show();  // zeige das hauptfenster
+
+    if(mCmdLPar.GetScreenShoter()){
+        g_WMScreenShooter->setFolderName(mCmdLPar.GetOptionStringForFolders());
+        g_WMView->setScreenShooter(g_WMScreenShooter);
+        g_WMConfDialog->setScreenShooter(g_WMScreenShooter);
+        g_WMErrMeasValView->setScreenShooter(g_WMScreenShooter);
+        g_WMActValView->setScreenShooter(g_WMScreenShooter);
+        g_WMOeView->setScreenShooter(g_WMScreenShooter);
+        g_WMRangeDialog->setScreenShooter(g_WMScreenShooter);
+        g_VersionsView->setScreenShooter(g_WMScreenShooter);
+        if (g_WMInfo->isWM3000())
+        {
+            g_ETHMonitor->setScreenShooter(g_WMScreenShooter);
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_ETHMonitor,SLOT(takeScreenshoots()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_ETHMonitor,SLOT(takeScreenshootFinished()));
+        }
+
+        QObject::connect(g_WMScrShoGui,SIGNAL(screenShooterStart()),g_WMView,SLOT(AutoScreenShoterTriggered()));
+        QObject::connect(g_WMView,SIGNAL(ScreenshooterTriggeredByUser()),g_WMView,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(update(uint,QString)),g_WMScrShoGui,SLOT(update(uint,QString)));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotHauptFinished()),g_WMView,SLOT(takeScreenshootFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotHauptFinished()),g_WMConfDialog,SLOT(screenshooterTriggered()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(keyboardScreenShotFinished()),g_WMErrMeasValView,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerFinished()),g_WMErrMeasValView,SLOT(takeScreenshootSetting()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerEinstellFinished()),g_WMErrMeasValView,SLOT(takeScreenshootSettingFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerEinstellFinished()),g_WMActValView,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVektorFinished()),g_WMActValView,SLOT(takeScreenshootSetting()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVektorEinstellFinished()),g_WMActValView,SLOT(takeScreenshootSettingFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVektorEinstellFinished()),g_WMOeView,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEigenFinished()),g_WMOeView,SLOT(takeScreenshootFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEigenFinished()),g_VersionsView,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_VersionsView,SLOT(takeScreenshootFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_WMRangeDialog,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMRangeDialog,SLOT(takeScreenshootFinished()));
+    }
 
 
     //add dbus controls for visibility of windows
