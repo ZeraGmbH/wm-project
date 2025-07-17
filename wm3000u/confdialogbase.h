@@ -7,6 +7,7 @@
 #include "qcombobox.h"
 #include "qvalidator.h"
 #include "confdata.h"
+#include "screenshooter.h"
 #include "wmkeyboardform.h"
 #include "confguihelper.h"
 #include "wmmessagebox.h"
@@ -25,6 +26,7 @@ public:
     virtual bool is_3( const QString & s );
     virtual bool is_w3( const QString & s );
     void setKeyboard(wmKeyboardForm *keyboard);
+    void setScreenShooter(screenshooter *poi);
 
 public slots:
     virtual void SetConfInfoSlot( cConfData * cd );
@@ -33,6 +35,8 @@ public slots:
     virtual void abortSlot();
     virtual void SetnConventMenu();
     virtual void RemoteCtrlInfoSlot( bool remote );
+    void screenshooterTriggered();
+    void keyboardScreenshorTriggerd();
 
 signals:
     void SendConfDataSignal(cConfData*);
@@ -53,6 +57,7 @@ private:
     wmKeyboardForm* mWmKeyBoard;
     confGuiHelper *mGuiHelper;
     wmMessageBox mWmMsgBox;
+    screenshooter* mScrShooter;
 
     void init();
     void Actualize();
