@@ -2,6 +2,7 @@
 #define WMOEVIEWBASE_H
 
 #include "ownerrorviewdata.h"
+#include "screenshooter.h"
 #include "widgetgeometry.h"
 #include "sessionstreamer.h"
 #include "settingschangetimer.h"
@@ -17,11 +18,15 @@ class WMOeViewBase : public QDialog, public ISessionStreamImplementor
 public:
     explicit WMOeViewBase(QWidget* parent, QString machineName);
     ~WMOeViewBase();
+    void setScreenShooter(screenshooter* poi);
 public slots:
     virtual void ReceiveOEViewDataSlot(cOwnErrorViewData *oe);
     virtual void onShowHide(bool shw);
     void onSaveSession(QString session);
     bool onLoadSession(QString session);
+    void takeScreenshoots();
+    void takeScreenshootFinished();
+
 signals:
     void sigIsVisible(bool);
 protected:
@@ -39,6 +44,7 @@ private:
     SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
+    screenshooter* mScrShooter;
 };
 
 #endif // WMOEVIEWBASE_H

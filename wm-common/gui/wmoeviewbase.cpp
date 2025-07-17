@@ -18,6 +18,11 @@ WMOeViewBase::~WMOeViewBase()
     delete ui;
 }
 
+void WMOeViewBase::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
+
 void WMOeViewBase::onSaveConfig()
 {
     onSaveSession(".ses");
@@ -95,4 +100,23 @@ bool WMOeViewBase::onLoadSession(QString session)
 {
     m_sessionStreamer.readSession(objectName(), session);
     return true;
+}
+
+void WMOeViewBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 35);
+}
+
+void WMOeViewBase::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
 }
