@@ -3,6 +3,7 @@
 
 #include "bigletter.h"
 #include "confdata.h"
+#include "screenshooter.h"
 #include "widgetgeometry.h"
 #include "wmmeasconfigbase.h"
 #include "formatinfo.h"
@@ -23,7 +24,7 @@ class WMMeasValuesBase : public QDialog, public ISessionStreamImplementor
 public:
     explicit WMMeasValuesBase(QWidget* parent, QString machineName, QList<eUnit *> lpUnitList);
     ~WMMeasValuesBase();
-    void activateContextMenu();
+    void setScreenShooter(screenshooter* poi);
 
 public slots:
     virtual void onShowHide(bool shw);
@@ -33,6 +34,9 @@ public slots:
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
     virtual void ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo * fi );
+    void takeScreenshoots();
+    void takeScreenshootSetting();
+    void takeScreenshootSettingFinished();
 
 signals:
     void sigIsVisible(bool);
@@ -57,6 +61,7 @@ private:
     void adjustBoxWidths();
     void actualizeLoadPoint();
     void setLayoutSize();
+    void activateContextMenu();
     Ui::WMMeasValuesBase *ui;
     cwmActValues m_ActValues;
     cConfData m_ConfData;
@@ -68,6 +73,7 @@ private:
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
     QTimer m_Timer;
+    screenshooter* mScrShooter;
 };
 
 #endif // WMMEASVALUESBASE_H
