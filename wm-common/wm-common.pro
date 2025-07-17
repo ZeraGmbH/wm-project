@@ -21,6 +21,7 @@ HEADERS = \
     gui/vectordiagramm.h \
     gui/wmkeyboardform.h \
     gui/wmmessagebox.h \
+    gui/wmscreenshoterguibase.h \
     gui/wmviewbase.h \
     gui/bigletter.h \
     gui/en61850monitor.h \
@@ -114,6 +115,7 @@ SOURCES = \
     gui/vectordiagramm.cpp \
     gui/wmkeyboardform.cpp \
     gui/wmmessagebox.cpp \
+    gui/wmscreenshoterguibase.cpp \
     gui/wmviewbase.cpp \
     gui/en61850monitor.cpp \
     gui/bigletter.cpp \
@@ -176,6 +178,7 @@ SOURCES = \
 
 FORMS = \
     gui/wmkeyboardform.ui \
+    gui/wmscreenshoterguibase.ui \
     gui/wmviewbase.ui \
     gui/en61850monitor.ui \
     gui/versionviewbase.ui \
