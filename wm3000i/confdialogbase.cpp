@@ -20,6 +20,13 @@ ConfDialogBase::~ConfDialogBase()
 {
     destroy();
     delete ui;
+    delete mGuiHelper;
+}
+
+void ConfDialogBase::setScreenShooter(screenshooter* poi)
+{
+    mScrShooter = poi;
+    connect(mScrShooter,SIGNAL(keyboardScreenShot()),this,SLOT(keyboardScreenshorTriggerd()));
 }
 
 void ConfDialogBase::init()
@@ -680,6 +687,17 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
     Actualize();
 }
 
+void ConfDialogBase::screenshooterTriggered()
+{
+    mScrShooter->storeScreen("2_Alles");
+    this->show();
+    mScrShooter->setTabWidgetPoi(this, ui->ConfTabWidget);
+}
+
+void ConfDialogBase::keyboardScreenshorTriggerd()
+{
+    mScrShooter->setKeyBoardWidgetPoi(mWmKeyBoard);
+}
 
 void ConfDialogBase::FxRadioButtonChecked()
 {
