@@ -35,6 +35,11 @@ WMRawActualValBase::~WMRawActualValBase()
     delete ui;
 }
 
+void WMRawActualValBase::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
+
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
     m_settingsChangeTimer.startDelayed();
@@ -154,11 +159,17 @@ void WMRawActualValBase::onSaveSession(QString session)
     m_sessionStreamer.writeSession(objectName(), session);
 }
 
+void WMRawActualValBase::activateContextMenu()
+{
+    emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
+    m_pContextMenu->show();
+
+}
+
 void WMRawActualValBase::mousePressEvent(QMouseEvent *event)
 {
     if(m_Timer.isActive()){
-    emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
-    m_pContextMenu->show();
+        activateContextMenu();
     }
     else {
     m_Timer.start();
@@ -168,8 +179,7 @@ void WMRawActualValBase::mousePressEvent(QMouseEvent *event)
 
 void WMRawActualValBase::contextMenuEvent(QContextMenuEvent *)
 {
-    emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
-    m_pContextMenu->show();
+    activateContextMenu();
 }
 
 void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
@@ -179,6 +189,32 @@ void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
     PrimSekDispMode = m3;
     setSettingslabel();
     onSaveConfig();
+}
+
+void WMRawActualValBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 33);
+}
+
+void WMRawActualValBase::takeScreenshootSetting()
+{
+    activateContextMenu();
+    mScrShooter->useTimer(m_pContextMenu, 34);
+}
+
+void WMRawActualValBase::takeScreenshootSettingFinished()
+{
+    m_pContextMenu->hide();
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
 }
 
 void WMRawActualValBase::onSaveConfig()
