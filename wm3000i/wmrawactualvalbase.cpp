@@ -35,6 +35,11 @@ WMRawActualValBase::~WMRawActualValBase()
     delete ui;
 }
 
+void WMRawActualValBase::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
+
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
     m_settingsChangeTimer.startDelayed();
@@ -217,6 +222,32 @@ void WMRawActualValBase::ReceiveVektorDispFormat(int m, int m2, int m3)
     PrimSekDispMode = m3;
     setSettingslabel();
     onSaveConfig();
+}
+
+void WMRawActualValBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 33);
+}
+
+void WMRawActualValBase::takeScreenshootSetting()
+{
+    activateContextMenu();
+    mScrShooter->useTimer(m_pContextMenu, 34);
+}
+
+void WMRawActualValBase::takeScreenshootSettingFinished()
+{
+    m_pContextMenu->hide();
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
 }
 
 void WMRawActualValBase::onSaveConfig()

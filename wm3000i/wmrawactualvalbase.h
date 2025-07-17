@@ -1,6 +1,7 @@
 #ifndef WMRAWACTUALVALBASE_H
 #define WMRAWACTUALVALBASE_H
 
+#include "screenshooter.h"
 #include "ui_wmrawactualvalbase.h"
 #include "wmactvalues.h"
 #include "widgetgeometry.h"
@@ -16,7 +17,8 @@ class WMRawActualValBase : public QDialog, public ISessionStreamImplementor
 public:
     explicit WMRawActualValBase(QWidget* parent, QString machineName);
     ~WMRawActualValBase();
-    void activateContextMenu();
+    void setScreenShooter(screenshooter* poi);
+
 public slots:
     void onShowHide(bool shw);
     void ReceiveAVDataSlot(cwmActValues *ActValues);
@@ -24,6 +26,10 @@ public slots:
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
     void ReceiveVektorDispFormat(int m, int m2, int m3);
+    void takeScreenshoots();
+    void takeScreenshootSetting();
+    void takeScreenshootSettingFinished();
+
 signals:
     void sigIsVisible(bool);
     void SendVektorDispFormat(bool,int,int,int);
@@ -42,6 +48,7 @@ private:
     virtual void setDefaults() override;
     void setInitialDefaults();
     void setSettingslabel();
+    void activateContextMenu();
     Ui::WMRawActualValBase *ui;
     cwmActValues m_ActValues;
     cConfData *m_pConfData;
@@ -53,6 +60,7 @@ private:
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
     QTimer m_Timer;
+    screenshooter* mScrShooter;
 };
 
 #endif // WMRAWACTUALVALBASE_H
