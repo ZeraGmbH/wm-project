@@ -17,6 +17,7 @@
 #include <QLabel>
 #include "range.h"
 #include "confdata.h"
+#include "screenshooter.h"
 
 namespace Ui {
     class RangeDialogBase;
@@ -29,6 +30,7 @@ class RangeDialogBase : public QDialog
 public:
     explicit RangeDialogBase( QWidget* parent = 0);
     ~RangeDialogBase();
+    void setScreenShooter(screenshooter* poi);
 
 public slots:
     virtual void SetRangeListSlot( cWMRangeList & nx, cWMRangeList & evt );
@@ -37,6 +39,8 @@ public slots:
     void SetXRangeSlot( const QString & xr );
     void SetECTRangeSlot( const QString & er );
     virtual void RemoteCtrlInfoSlot( bool );
+    void takeScreenshoots();
+    void takeScreenshootFinished();
 
 signals:
     void SendRange(cConfData*);
@@ -48,12 +52,12 @@ protected:
 
 
 private:
+    void ActualizeDialog();
     Ui::RangeDialogBase *ui;
     cConfData m_ConfData;
     QStringList m_sNXItemList;
     QStringList m_sECTItemList;
-
-    void ActualizeDialog();
+    screenshooter* mScrShooter;
 
 };
 
