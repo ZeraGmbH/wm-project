@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
     g_WMDevice->setNewSamplerates(mCmdLPar.GetNewSampleRates());
 
     if(mCmdLPar.GetScreenShoter()){
-        g_WMScrShoGui = new wmscreenshoterguibase;
+        g_WMScrShoGui = new wmscreenshoterguibase(g_WMView);
         g_WMScreenShooter = new screenshooter;
         g_WMScrShoGui->show();
     }

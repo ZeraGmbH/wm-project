@@ -1,13 +1,13 @@
 #ifndef WMSCREENSHOTERGUIBASE_H
 #define WMSCREENSHOTERGUIBASE_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class wmscreenshoterguibase;
 }
 
-class wmscreenshoterguibase : public QWidget
+class wmscreenshoterguibase : public QDialog
 {
     Q_OBJECT
 
