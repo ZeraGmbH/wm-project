@@ -28,6 +28,9 @@ public:
     void setWidgetPointer(QWidget* poi);
     void setFolderName(const QString folderName);
     void setFontSize(int size);
+    void setConvent(bool convent);
+    void setJustage(bool just);
+    bool isJustage();
 signals:
     void keyboardScreenShot();
     void keyboardScreenShotFinished();
@@ -53,6 +56,8 @@ private:
     wmKeyboardForm* mKeyboard;
     QString mFolderName;
     int mOnTarget;
+    bool mWM1000;
+    bool mJustage;
     enum PictureNumber{
         INVALID = 0,
         MAIN = 2,

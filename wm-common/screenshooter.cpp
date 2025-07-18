@@ -70,8 +70,22 @@ void screenshooter::setFolderName(const QString folderName)
 
 void screenshooter::setFontSize(int size)
 {
-
     if(size == 9) mOnTarget = true; else mOnTarget = false;
+}
+
+void  screenshooter::setConvent(bool convent)
+{
+    mWM1000 = convent;
+}
+
+void screenshooter::setJustage(bool just)
+{
+    mJustage = just;
+}
+
+bool screenshooter::isJustage()
+{
+    return mJustage;
 }
 
 void screenshooter::storeScreen(QString fileName)
@@ -168,7 +182,15 @@ void screenshooter::timerExpired()
         break;
     case MESSUNG :
         storeScreenShotW(mWidgetPoi, "19_Messung");
-        mActualNumber =SYNCHR;
+        if (mWM1000)
+        {
+            mActualNumber =TEILER;
+            emit update(mActualNumber, "");
+        }
+        else
+        {
+            mActualNumber =SYNCHR;
+        }
         mTabWidgetPoi->setCurrentIndex(3);
         mTimer->start();
         break;
@@ -180,8 +202,17 @@ void screenshooter::timerExpired()
         break;
     case TEILER:
         storeScreenShotW(mWidgetPoi, "21_Teiler");
-        mActualNumber =NCONV;
-        mTabWidgetPoi->setCurrentIndex(5);
+        if (mWM1000)
+        {
+            mActualNumber =LOGFIL;
+            mTabWidgetPoi->setCurrentIndex(4);
+            emit update(mActualNumber, "");
+        }
+        else
+        {
+            mActualNumber =NCONV;
+            mTabWidgetPoi->setCurrentIndex(5);
+        }
         mTimer->start();
         break;
     case NCONV:
@@ -255,6 +286,7 @@ void screenshooter::timerExpired()
         storeScreenShotW(mWidgetPoi, "41_Version");
         mActualNumber = INVALID;
         emit screenShotVersionFinished();
+        emit update(20,"finished");
         break;
     default:
         break;
