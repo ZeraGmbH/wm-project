@@ -16,8 +16,6 @@ public:
     ~wmscreenshoterguibase();
 signals:
     void screenShooterStart();
-public slots:
-    void update(const uint nr, const QString text);
 private:
     Ui::wmscreenshoterguibase *ui;
 private slots:
