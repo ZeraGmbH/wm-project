@@ -64,5 +64,6 @@ QString CommandLineParameter::GetOptionStringForFolders()
     str += mDevice;
     if(bDc) str += "dc";
     if(bNewSampleRates) str += "newsr";
+    if(bJustage) str += "just ";
     return str;
 }

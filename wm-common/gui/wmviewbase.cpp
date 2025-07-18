@@ -60,10 +60,13 @@ void WMViewBase::AutoScreenShoterTriggered()
     ui->Sprache->exec(mapToGlobal(point+ QPoint(355,0)));
     mScrShooter->storeScreenShotW(this,"27_Sprache",adjust);
 
-    ui->Justage->exec(mapToGlobal(point+ QPoint(425,0)));
-    adjust = mScrShooter->storeScreenShot(ui->Justage,"28_Justage");
-    ui->Justage->exec(mapToGlobal(point+ QPoint(425,0)));
-    mScrShooter->storeScreenShotW(this,"29_Justage",adjust);
+    if (mScrShooter->isJustage())
+    {
+        ui->Justage->exec(mapToGlobal(point+ QPoint(425,0)));
+        adjust = mScrShooter->storeScreenShot(ui->Justage,"28_Justage");
+        ui->Justage->exec(mapToGlobal(point+ QPoint(425,0)));
+        mScrShooter->storeScreenShotW(this,"29_Justage",adjust);
+    }
     emit ScreenshooterTriggeredByUser();
 }
 

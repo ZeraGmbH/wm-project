@@ -124,6 +124,8 @@ int main(int argc, char *argv[])
         g_WMScrShoGui->show();
         g_WMScreenShooter = new screenshooter;
         g_WMScreenShooter->setFontSize(f.pointSize());
+        g_WMScreenShooter->setConvent(mCmdLPar.GetConvent());
+        g_WMScreenShooter->setJustage(mCmdLPar.GetJustage());
     }
 
     g_WMView->setWMWindowTitle();
