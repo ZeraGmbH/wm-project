@@ -304,11 +304,13 @@ int main(int argc, char *argv[])
             g_ETHMonitor->setScreenShooter(g_WMScreenShooter);
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_ETHMonitor,SLOT(takeScreenshoots()));
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_ETHMonitor,SLOT(takeScreenshootFinished()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_WMScrShoGui,SLOT(show()));
         }
+        else
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScrShoGui,SLOT(show()));
 
         QObject::connect(g_WMScrShoGui,SIGNAL(screenShooterStart()),g_WMView,SLOT(AutoScreenShoterTriggered()));
         QObject::connect(g_WMView,SIGNAL(ScreenshooterTriggeredByUser()),g_WMView,SLOT(takeScreenshoots()));
-        QObject::connect(g_WMScreenShooter,SIGNAL(update(uint,QString)),g_WMScrShoGui,SLOT(update(uint,QString)));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotHauptFinished()),g_WMView,SLOT(takeScreenshootFinished()));
 
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotHauptFinished()),g_WMConfDialog,SLOT(screenshooterTriggered()));

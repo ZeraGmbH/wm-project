@@ -158,9 +158,7 @@ void screenshooter::setKeyBoardWidgetPoi(wmKeyboardForm *poi)
 
 void screenshooter::timerExpired()
 {
-    emit update(mActualNumber, "");
     switch (mActualNumber){
-
     case INVALID:
         break;
     case MAIN:
@@ -185,7 +183,6 @@ void screenshooter::timerExpired()
         if (mWM1000)
         {
             mActualNumber =TEILER;
-            emit update(mActualNumber, "");
         }
         else
         {
@@ -206,7 +203,6 @@ void screenshooter::timerExpired()
         {
             mActualNumber =LOGFIL;
             mTabWidgetPoi->setCurrentIndex(4);
-            emit update(mActualNumber, "");
         }
         else
         {
