@@ -110,7 +110,6 @@ protected:
     virtual void closeEvent(QCloseEvent *ce) override;
     virtual void resizeEvent (QResizeEvent *) override;
     virtual void moveEvent(QMoveEvent *) override;
-    virtual void mousePressEvent(QMouseEvent *event) override;
     cConfData m_ConfData;
     Ui::WMViewBase *ui;
     bool m_bJustified;

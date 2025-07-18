@@ -587,11 +587,6 @@ void WMViewBase::moveEvent(QMoveEvent *)
     onSaveSession(".ses");
 }
 
-void WMViewBase::mousePressEvent(QMouseEvent *event)
-{
-    qWarning() << "MouseEvent" << event->globalPos();
-}
-
 void WMViewBase::setDeviceName(QString str)
 {
     m_deviceName = str;
