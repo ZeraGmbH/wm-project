@@ -123,6 +123,8 @@ int main(int argc, char *argv[])
         g_WMScrShoGui = new wmscreenshoterguibase(g_WMView);
         g_WMScreenShooter = new screenshooter;
         g_WMScrShoGui->show();
+        g_WMScreenShooter->setFontSize(f.pointSize());
+
     }
 
     g_WMView->setWMWindowTitle();

@@ -22,7 +22,10 @@ void screenshooter::showUIbyExec(QMenu *uipoi)
 {
     QPoint pos_UI, pos_Window, pos_Korr, pos_Aim;
     pos_UI = uipoi->pos();
-    pos_Korr = {10,34};
+    if (mOnTarget)
+        pos_Korr = {2,26};
+    else
+        pos_Korr = {10,34};
     pos_Aim = pos_UI + pos_Korr;
     mActualNumber = INVALID;
     mTimer->start();
@@ -65,6 +68,12 @@ void screenshooter::setFolderName(const QString folderName)
     }
 }
 
+void screenshooter::setFontSize(int size)
+{
+
+    if(size == 9) mOnTarget = true; else mOnTarget = false;
+}
+
 void screenshooter::storeScreen(QString fileName)
 {
     QPixmap map;
@@ -94,7 +103,11 @@ void screenshooter::storeScreenShotW(QWidget* poi, QString fileName, int adjust)
     pos = poi->pos();
     rect = poi->rect();
     rect.moveTo(pos);
-    rect.adjust(0,0,10,34);
+    if (mOnTarget)
+        rect.adjust(0,0,2,26);
+    else
+        rect.adjust(0,0,10,34);
+
     if (adjust != 0)
     {
         rect.adjust(0,0,0,adjust);

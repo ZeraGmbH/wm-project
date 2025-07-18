@@ -27,6 +27,7 @@ public:
     bool showed();
     void setWidgetPointer(QWidget* poi);
     void setFolderName(const QString folderName);
+    void setFontSize(int size);
 signals:
     void keyboardScreenShot();
     void keyboardScreenShotFinished();
@@ -51,6 +52,7 @@ private:
     QTabWidget* mTabWidgetPoi;
     wmKeyboardForm* mKeyboard;
     QString mFolderName;
+    int mOnTarget;
     enum PictureNumber{
         INVALID = 0,
         MAIN = 2,
