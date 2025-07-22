@@ -38,7 +38,10 @@ void WMMeasValuesBase::adjustBoxWidths()
         for(int i=0; i<bLayout->count(); ++i) {
             QLayoutItem *child = bLayout->itemAt(i);
             QLayout *childLayout = child->layout();
-            int width = childLayout->minimumSize().width();
+            int width;
+            if (i==0) { width = 30;}
+            if (i==1) { width = 60;}
+            if (i==2) { width = 10;}
             bLayout->setStretchFactor(childLayout, width);
         }
     }
@@ -134,7 +137,7 @@ void WMMeasValuesBase::ActualizeLPSlot( cwmActValues * av )
 {
     m_ActValues = *av;
     actualizeLoadPoint();
-    setLayoutSize();
+   // setLayoutSize();
     adjustBoxWidths();
 }
 
