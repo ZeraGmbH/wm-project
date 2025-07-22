@@ -8,6 +8,7 @@ class CommandLineParameter
 public:
     CommandLineParameter();
     void Parse(int argc, char *argv[]);
+    void ParseFile();
     QString GetOptionString();
     QString GetOptionStringForFolders();
     bool GetJustage() {return bJustage;};
@@ -20,6 +21,9 @@ public:
     void setLanguage(const QString lang) {mLanguage = lang;};
     void setDevice(const QString device) {mDevice = device;};
 private:
+    QStringList convertArgumentsToStringList(int argc, char *argv[]);
+    void ParseFromStringList(QStringList largv);
+
     bool bJustage = false;
     bool bConvent = false;
     bool bDc = false;
