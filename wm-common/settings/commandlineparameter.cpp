@@ -1,4 +1,6 @@
 #include "commandlineparameter.h"
+#include "qfileinfo.h"
+#include "qstringlist.h"
 
 
 CommandLineParameter::CommandLineParameter()
@@ -8,10 +10,14 @@ CommandLineParameter::CommandLineParameter()
 
 void CommandLineParameter::Parse(int argc, char *argv[])
 {
-    QString option;
-    for (int i = 1; i < argc; i++)
+    ParseFromStringList(convertArgumentsToStringList(argc,argv));
+}
+
+void CommandLineParameter::ParseFromStringList(QStringList largv)
+{
+    foreach(QString option, largv)
     {
-        option = argv[i];
+
         if (option == strJustage){
             bJustage = true;
             qDebug("Found option justage");
@@ -42,6 +48,35 @@ void CommandLineParameter::Parse(int argc, char *argv[])
             qDebug("Found option Screen");
         }
     }
+}
+
+void CommandLineParameter::ParseFile()
+{
+    QStringList largv;
+    QString option;
+    QFile fConfFile;
+    fConfFile.setFileName("/usr/bin/WMStartConf");
+    if (fConfFile.open(QIODevice::ReadOnly))
+    {
+        while(!fConfFile.atEnd())
+        {
+            option = fConfFile.readLine();
+            option = option.mid(0,option.length()-1);
+            largv.append(option);
+        }
+        fConfFile.close();
+    }
+    ParseFromStringList(largv);
+}
+
+QStringList CommandLineParameter::convertArgumentsToStringList(int argc, char *argv[])
+{
+    QStringList list;
+    for (int i = 1; i < argc; i++)
+    {
+        list.append(argv[i]);
+    }
+    return list;
 }
 
 QString CommandLineParameter::GetOptionString()
