@@ -90,5 +90,15 @@ void test_cmdlinepar::test_ppswdt()
     QCOMPARE(str,sollStr);
 }
 
+void test_cmdlinepar::test_screen()
+{
+    init("-screen");
+    CommandLineParameter cmdLPar;
+    cmdLPar.Parse(argc,argv);
+    QString str, sollStr="";
+    str = cmdLPar.GetOptionString();
+    QCOMPARE(str,sollStr);
+}
+
 
 QTEST_MAIN(test_cmdlinepar)
