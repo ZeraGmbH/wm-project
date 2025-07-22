@@ -21,6 +21,7 @@ private slots:
     void test_dc();
     void test_sample();
     void test_ppswdt();
+    void test_screen();
 };
 
 #endif
