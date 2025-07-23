@@ -207,6 +207,9 @@
      </item>
      <item>
       <widget class="QGroupBox" name="ErrgroupBox">
+       <property name="title">
+        <string>Error</string>
+       </property>
        <layout class="QVBoxLayout">
         <item>
          <widget class="QSpinBox" name="ErrspinBoxFW">
