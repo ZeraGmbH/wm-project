@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
 
     CommandLineParameter mCmdLPar;
     mCmdLPar.Parse(argc, argv);
+    mCmdLPar.setFileName("/etc/WMConfFile");
     mCmdLPar.ParseFile();
 
     g_WMDevice = new cWM3000U; //  die eigentliche Messeinrichtung wird später dynamisch je nach aufruf erzeugt
