@@ -20,6 +20,7 @@ public:
     QString GetIpAdress() {return mstrIPAdress;}
     void setLanguage(const QString lang) {mLanguage = lang;};
     void setDevice(const QString device) {mDevice = device;};
+    void setFileName(const QString str);
 private:
     QStringList convertArgumentsToStringList(int argc, char *argv[]);
     void ParseFromStringList(QStringList largv);
@@ -33,6 +34,7 @@ private:
     bool bScreen = false;
     QString mstrIPAdress = "127.0.0.1";
     QString mLanguage, mDevice;
+    QString mFileName;
 
     const QString strJustage = "-justage";
     const QString strConvent = "-convent";

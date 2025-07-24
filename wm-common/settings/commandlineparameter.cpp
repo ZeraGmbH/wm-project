@@ -50,23 +50,31 @@ void CommandLineParameter::ParseFromStringList(QStringList largv)
     }
 }
 
+void CommandLineParameter::setFileName(const QString str)
+{
+    mFileName = str;
+}
+
 void CommandLineParameter::ParseFile()
 {
     QStringList largv;
     QString option;
     QFile fConfFile;
-    fConfFile.setFileName("/usr/bin/WMStartConf");
-    if (fConfFile.open(QIODevice::ReadOnly))
+    if (!mFileName.isEmpty())
     {
-        while(!fConfFile.atEnd())
+        fConfFile.setFileName("/usr/bin/WMStartConf");
+        if (fConfFile.open(QIODevice::ReadOnly))
         {
-            option = fConfFile.readLine();
-            option = option.mid(0,option.length()-1);
-            largv.append(option);
+            while(!fConfFile.atEnd())
+            {
+                option = fConfFile.readLine();
+                option = option.mid(0,option.length()-1);
+                largv.append(option);
+            }
+            fConfFile.close();
         }
-        fConfFile.close();
+        ParseFromStringList(largv);
     }
-    ParseFromStringList(largv);
 }
 
 QStringList CommandLineParameter::convertArgumentsToStringList(int argc, char *argv[])
