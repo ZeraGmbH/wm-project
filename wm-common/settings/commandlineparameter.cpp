@@ -62,7 +62,7 @@ void CommandLineParameter::ParseFile()
     QFile fConfFile;
     if (!mFileName.isEmpty())
     {
-        fConfFile.setFileName("/usr/bin/WMStartConf");
+        fConfFile.setFileName(mFileName);
         if (fConfFile.open(QIODevice::ReadOnly))
         {
             while(!fConfFile.atEnd())
