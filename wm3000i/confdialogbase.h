@@ -30,7 +30,7 @@ class ConfDialogBase : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConfDialogBase( QWidget* parent = 0);
+    explicit ConfDialogBase(QWidget* parent = 0, bool onlyRatio = false);
     ~ConfDialogBase();
     virtual bool is_3( const QString & s );
     virtual bool is_w3( const QString & s );
@@ -46,6 +46,7 @@ public slots:
     virtual void RemoteCtrlInfoSlot( bool remote );
     void screenshooterTriggered();
     void keyboardScreenshorTriggerd();
+    void showRatio();
 
 signals:
     void SendConfDataSignal(cConfData*);
@@ -63,6 +64,7 @@ private:
     Ui::ConfDialogBase *ui;
     cConfData m_ConfData, m_ConfDataTemp;
     bool m_bRemoteCtrl;
+    bool m_bOnlyRatio;
     QString m_sText;
     wmKeyboardForm* mWmKeyBoard;
     confGuiHelper *mGuiHelper;

@@ -89,6 +89,7 @@ signals:
     void UIansichtEN61850ActionSet(bool);
     void UIeinstellungenConfActionActivated();
     void UIeinstellungenBereichActionActivated();
+    void UIeinstellungenTeilerActionActivated();
     void UIJustageAmplitudeActionActivated();
     void UIJustagePhaseActionActivated();
     void UIJustageKoeffBerechnungActionActivated();

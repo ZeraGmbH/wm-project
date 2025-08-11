@@ -108,6 +108,7 @@
     </property>
     <addaction name="einstellungenConfAction"/>
     <addaction name="einstellungenBereichAction"/>
+    <addaction name="einstellungenTeilerAction"/>
    </widget>
    <widget class="QMenu" name="Hilfe">
     <property name="title">
@@ -803,6 +804,17 @@
    </property>
    <property name="ansichtScopeAction" stdset="0">
     <string/>
+   </property>
+  </action>
+  <action name="einstellungenTeilerAction">
+   <property name="text">
+    <string>&amp;Teiler</string>
+   </property>
+   <property name="toolTip">
+    <string>Teiler</string>
+   </property>
+   <property name="shortcut">
+    <string>F8</string>
    </property>
   </action>
  </widget>
