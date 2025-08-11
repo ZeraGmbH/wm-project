@@ -281,14 +281,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Frequenz</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sample</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>TSync[ms]:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -319,6 +311,14 @@
     <message>
         <source>sek</source>
         <translation>sec</translation>
+    </message>
+    <message>
+        <source>Signalfrequenz</source>
+        <translation>Signal frequency</translation>
+    </message>
+    <message>
+        <source>Abtastungen</source>
+        <translation>Samples</translation>
     </message>
 </context>
 <context>
@@ -356,10 +356,6 @@
     <message>
         <source>Vektoren</source>
         <translation>Vectors</translation>
-    </message>
-    <message>
-        <source>F:</source>
-        <translation type="obsolete">E:</translation>
     </message>
     <message>
         <source>---------</source>
