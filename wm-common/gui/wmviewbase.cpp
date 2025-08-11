@@ -178,6 +178,7 @@ void WMViewBase::init()
 
     connect(ui->einstellungenConfAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenConfActionActivated()));
     connect(ui->einstellungenBereichAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenBereichActionActivated()));
+    connect(ui->einstellungenTeilerAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenTeilerActionActivated()));
     connect(ui->JustageAmplitudeAction,SIGNAL(activated()),this,SIGNAL(UIJustageAmplitudeActionActivated()));
     connect(ui->JustagePhaseAction,SIGNAL(activated()),this,SIGNAL(UIJustagePhaseActionActivated()));
     connect(ui->JustageKoeffBerechnungAction,SIGNAL(activated()),this,SIGNAL(UIJustageKoeffBerechnungActionActivated()));
