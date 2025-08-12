@@ -238,8 +238,6 @@ void ConfDialogBase::Actualize()
     }
     if (m_bOnlyRatio){
         ui->RatioTabPage->resize({300,300});
-        m_settingsChangeTimer.startDelayed();
-
     }
 }
 
