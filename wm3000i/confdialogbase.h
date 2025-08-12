@@ -13,8 +13,6 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include <QRadioButton>
-#include "qcombobox.h"
-#include "qvalidator.h"
 #include "confdata.h"
 #include "screenshooter.h"
 #include "wmkeyboardform.h"
