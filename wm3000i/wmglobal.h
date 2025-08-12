@@ -114,8 +114,9 @@
 // 2.44 19.11.24    adds disable Watchdogtimer
 // 2.45 17.2.25     adds releaseinfo to version widget
 // 2.46 7.10.25     improves translations
+// 2.47 12.8.25     Ratio Widget
 
-#define WMVersion "V2.46"
+#define WMVersion "V2.47"
 
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"

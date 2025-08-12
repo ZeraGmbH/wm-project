@@ -192,29 +192,61 @@ void ConfDialogBase::Actualize()
      case In_IxAbs:
      case In_IxDiff:
      case In_nConvent:
-         ui->XTRatioGroupBox->setEnabled(true);
-         ui->ECTratioGroupBox->setEnabled(false);
-         break;
-     case In_ECT:
-         ui->XTRatioGroupBox->setEnabled(false);
-         ui->ECTratioGroupBox->setEnabled(true);
-         break;
- /*	case In_nConvent:
-         XTRatioGroupBox->setEnabled(false);
-         ECTratioGroupBox->setEnabled(false);
-         break; */
-     }
+        if(m_bOnlyRatio)
+        {
+            ui->XTRatioGroupBox->show();
+            ui->ECTratioGroupBox->hide();
+        }
+        else
+        {
+            ui->XTRatioGroupBox->setEnabled(true);
+            ui->ECTratioGroupBox->setEnabled(false);
+        }
+        break;
+    case In_ECT:
+        if(m_bOnlyRatio)
+        {
+            ui->XTRatioGroupBox->hide();
+            ui->ECTratioGroupBox->show();
+        }
+        else
+        {
+            ui->XTRatioGroupBox->setEnabled(false);
+            ui->ECTratioGroupBox->setEnabled(true);
+        }
+        break;
+/*	case In_nConvent:
+        XTRatioGroupBox->setEnabled(false);
+        ECTratioGroupBox->setEnabled(false);
+    break; */
+    }
 
     if (ui->RatioNPrimComboBox->count()==0  || m_bRemoteCtrl ) // es existiert keine eigenfehlertabelle
     { // bzw. wir sind unter rechner kontrolle
-        ui->NTRatioGroupBox->setEnabled(true);
-        ui->NTRatioGroupBox2->setEnabled(false);
-     }
-     else
-     {
-     ui->NTRatioGroupBox2->setEnabled(true);
-     ui->NTRatioGroupBox->setEnabled(false);
-     }
+        if (m_bOnlyRatio)
+        {
+            ui->NTRatioGroupBox2->hide();
+            ui->NTRatioGroupBox->show();
+        }
+        else
+        {
+            ui->NTRatioGroupBox->setEnabled(true);
+            ui->NTRatioGroupBox2->setEnabled(false);
+        }
+    }
+    else
+    {
+        if (m_bOnlyRatio)
+        {
+            ui->NTRatioGroupBox2->show();
+            ui->NTRatioGroupBox->hide();
+        }
+        else
+        {
+            ui->NTRatioGroupBox2->setEnabled(true);
+            ui->NTRatioGroupBox->setEnabled(false);
+        }
+    }
 }
 
 
