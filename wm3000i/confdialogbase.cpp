@@ -237,7 +237,8 @@ void ConfDialogBase::Actualize()
         }
     }
     if (m_bOnlyRatio){
-        ui->RatioTabPage->resize({300,300});
+        ui->RatioTabPage->resize({280,280});
+        // The widget needs to be resized, as it gets to big after the hide/show settings where changed
     }
 }
 
