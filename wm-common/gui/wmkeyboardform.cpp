@@ -1,5 +1,6 @@
 #include "wmkeyboardform.h"
 #include "cwmlineedit.h"
+#include "qdebug.h"
 #include "ui_wmkeyboardform.h"
 #include <QKeyEvent>
 
@@ -122,7 +123,10 @@ void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
 
 void wmKeyboardForm::moveWindow()
 {
-    this->move(mDesktop.width()-this->width()-10,mDesktop.height()-this->height()-8);
+    int width = mDesktop.width()-this->width()-10;
+    int height = mDesktop.height()-this->height()-8;
+    qDebug() << "keyboard" << width << height ;
+    this->move(width,height);
 }
 
 void wmKeyboardForm::keyPressEvent(QKeyEvent *event)
