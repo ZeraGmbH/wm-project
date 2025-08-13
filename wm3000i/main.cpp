@@ -267,6 +267,7 @@ int main(int argc, char *argv[])
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMView,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMRangeDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMConfDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
+    QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMRatioDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(startDeviceJustagePhase()),g_WMDevice,SLOT(JustagePhaseSlot()));
     QObject::connect(wm3000DeviceServer,SIGNAL(startDeviceJustageOffset()),g_WMDevice,SLOT(JustageOffsetSlot()));
     QObject::connect((QObject*)g_WMDevice,SIGNAL(EN61850StatusSignal(cEN61850Info*)),wm3000DeviceServer,SLOT(ReceiveETHStatus( cEN61850Info*))); // setzen der eth status info
