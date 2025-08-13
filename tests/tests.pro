@@ -10,4 +10,5 @@ SUBDIRS = \
     test_cmpactvalue \
     test_sessionstreamer \
     test_deviface \
-    test_cmdlinepar
+    test_cmdlinepar \
+    test_scpiRatio

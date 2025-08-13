@@ -8,6 +8,7 @@
 #include "cmdinterpret.h"
 #include "tools.h"
 #include <QObject>
+#include "scpihelper.h"
 
 class cSCPIStatSyst; // forward to avoid circular includes
 
@@ -71,6 +72,7 @@ protected:
     bool isAuthorized();
     cNode* m_pCommands;
     cParse* m_pParser;
+    scpiHelper* m_pScpiHelper;
     cCmdInterpreter* m_pCmdInterpreter;
     QString m_sCommand;
     QString m_sAnswer; // wir speichern antworten zwischen

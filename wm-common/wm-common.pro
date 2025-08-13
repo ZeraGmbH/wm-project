@@ -67,6 +67,7 @@ HEADERS = \
     scpi/scpideviface.h \
     scpi/scpierrortypes.h \
     scpi/scpiface.h \
+    scpi/scpihelper.h \
     scpi/scpistatsyst.h \
     scpi/wm3000scpiface.h \
     scpi/wm3kscpispecialbase.h \
@@ -148,6 +149,7 @@ SOURCES = \
     scpi/scpideviface.cpp \
     scpi/scpierrortypes.cpp \
     scpi/scpiface.cpp \
+    scpi/scpihelper.cpp \
     scpi/scpistatsyst.cpp \
     scpi/wm3000scpiface.cpp \
     screenshooter.cpp \
