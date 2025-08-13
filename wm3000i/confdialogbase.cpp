@@ -719,6 +719,7 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
     m_bRemoteCtrl = remote;
     ui->buttonOk->setEnabled(!remote);
+    ui->RatioApplyPushButton->setEnabled(!remote);
     Actualize();
 }
 
