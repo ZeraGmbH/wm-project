@@ -15,6 +15,7 @@ cSCPIFace::cSCPIFace(cClientIODevice* ciod,short l) { // länge für die eventqu
     m_pCIOD = ciod; // unser io device
     m_nQueueLen = l;
     m_pParser = new cParse(); // default parser
+    m_pScpiHelper = new scpiHelper(m_pParser);
     m_pCmdInterpreter = new cCmdInterpreter(m_pParser);
     m_pOperationStat = new cSCPIStatSyst(this ,STBoper); // events landen in bit7 d. statusbytes
     m_pQuestionableStat = new cSCPIStatSyst(this, STBques); // events landen in bit3 d. statusbytes

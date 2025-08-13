@@ -272,7 +272,6 @@ private:
     bool GetParameter(char**, ushort&, int, int, int, bool); // zeiger auf input ,  der gefundene wert, min, max, base, test auf blank?
     bool GetParameter(char**, double&, double, double, bool); // zeiger auf input ,  der gefundene wert, min, max ,test auf blank?
     bool GetParameter(char**, QString&,bool); // zeiger auf input, der gefundene string, test auf blank?
-    bool GetTransformerRatio(char**, QString&, QString&, bool);
     void SetMacAdress(char**, cETHAdress&);
     bool SearchEntry(char**, char**, int, int&, bool); // suche, worin, wieviele einträge, eintrag, test auf    blank
     bool SearchEntry(char**, double*, int, int&, bool); // suche, worin, wieviele einträge, eintrag, test auf    blank

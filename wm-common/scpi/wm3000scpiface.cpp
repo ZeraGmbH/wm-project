@@ -863,11 +863,16 @@ char* cWM3000SCPIFace::mGetConfRatioExt()
 void cWM3000SCPIFace::mSetConfRatioExt(char* s)
 {
     QString sprim, ssek;
-    if ( GetTransformerRatio(&s, sprim, ssek,true) )
+    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek,true) )
     {
         m_ConfDataTarget.m_ETPrimary = sprim;
         m_ConfDataTarget.m_ETSecondary = ssek;
     }
+    else
+    {
+        AddEventError(m_pScpiHelper->getErrors());
+    }
+
 }
 
 
@@ -884,11 +889,16 @@ void cWM3000SCPIFace::mSetConfRatioChx(char* s)
 {
     QString sprim, ssek;
 
-    if ( GetTransformerRatio(&s, sprim, ssek,true) )
+    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek,true) )
     {
         m_ConfDataTarget.m_XPrimary = sprim;
         m_ConfDataTarget.m_XSecondary = ssek;
     }
+    else
+    {
+        AddEventError(m_pScpiHelper->getErrors());
+    }
+
 }
 
 
@@ -905,10 +915,14 @@ void cWM3000SCPIFace::mSetConfRatioChn(char* s)
 {
     QString sprim, ssek;
 
-    if ( GetTransformerRatio(&s, sprim, ssek, true) )
+    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek, true) )
     {
         m_ConfDataTarget.m_NPrimary = sprim;
         m_ConfDataTarget.m_NSecondary = ssek;
+    }
+    else
+    {
+        AddEventError(m_pScpiHelper->getErrors());
     }
 }
 
@@ -1580,50 +1594,6 @@ bool cWM3000SCPIFace::GetParameter(char** s, QString& par,bool chkEnd) // zeiger
 }
 
 
-bool cWM3000SCPIFace::GetTransformerRatio(char** s, QString& ps, QString& ss, bool chkEnd)
-{
-    bool ok = true ;
-    int i;
-    QString par[2];
-    WmParameter ep[2];
-    
-    QString ws = m_pParser->SetWhiteSpace(" :"); // wir definieren whitespace um
-    
-    for ( i = 0; i < 2; i++)
-        par[i] = m_pParser->GetKeyword(s); //  2  parameter lesen
-    
-    m_pParser->SetWhiteSpace(ws); // jetzt wieder zurück
-    
-    if (chkEnd && !(m_pParser->GetKeyword(s)).isEmpty() )
-    {
-        AddEventError(InvalidSeparator);
-        return false;
-    }
-
-    if ( par[0].isEmpty() || par[1].isEmpty() )
-    {
-        AddEventError(MissingParameter);
-        return false;
-    }
-    
-    for ( i = 0; i < 2; i++)
-    {
-        ep[i] = par[i];
-        if ( !( ep[i].isVoltage() || ep[i].withoutUnit() ))
-            ok = false;
-    }
-    
-    if ( !ok)
-    {
-        AddEventError(ParameterNotAllowed);
-        return false;
-    }
-    
-    ps = par[0];
-    ss = par[1];
-    
-    return true;
-}
 
 
 void cWM3000SCPIFace::SetMacAdress(char** s, cETHAdress& leth)
