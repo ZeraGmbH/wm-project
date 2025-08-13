@@ -39,7 +39,7 @@ bool scpiHelper::GetTransformerRatio(char** s, QString& ps, QString& ss, bool ch
     for ( i = 0; i < 2; i++)
     {
         ep[i] = par[i];
-        if ( !( ep[i].isVoltage() || ep[i].withoutUnit() ))
+        if ( !( ep[i].isVoltage() || ep[i].isCurrent() || ep[i].withoutUnit() ))
             ok = false;
     }
 
