@@ -309,6 +309,7 @@ int main(int argc, char *argv[])
         g_WMOeView->setScreenShooter(g_WMScreenShooter);
         g_WMRangeDialog->setScreenShooter(g_WMScreenShooter);
         g_VersionsView->setScreenShooter(g_WMScreenShooter);
+        g_WMRatioDialog->setScreenShooter(g_WMScreenShooter);
         if (g_WMInfo->isWM3000())
         {
             g_ETHMonitor->setScreenShooter(g_WMScreenShooter);
@@ -338,8 +339,12 @@ int main(int argc, char *argv[])
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEigenFinished()),g_VersionsView,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_VersionsView,SLOT(takeScreenshootFinished()));
 
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_WMRangeDialog,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_WMRatioDialog,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMRatioDialog,SLOT(takeScreenshootFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMRangeDialog,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMRangeDialog,SLOT(takeScreenshootFinished()));
+
     }
 
 
