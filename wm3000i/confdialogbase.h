@@ -45,7 +45,8 @@ public slots:
     void screenshooterTriggered();
     void keyboardScreenshorTriggerd();
     void showRatio();
-
+    void takeScreenshoots();
+    void takeScreenshootFinished();
 signals:
     void SendConfDataSignal(cConfData*);
 
