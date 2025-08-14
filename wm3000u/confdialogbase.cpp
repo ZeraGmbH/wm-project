@@ -5,13 +5,15 @@
 
 extern cWM3000U* g_WMDevice;
 
-ConfDialogBase::ConfDialogBase( QWidget* parent):
+
+ConfDialogBase::ConfDialogBase(QWidget* parent, bool onlyRatio):
     QDialog(parent),
-    ui(new Ui::ConfDialogBase)
+    ui(new Ui::ConfDialogBase),
+    m_bOnlyRatio(onlyRatio)
 {
     ui->setupUi(this);
     init();
-    this->setModal(false);
+    this->setModal(!m_bOnlyRatio);
     mGuiHelper = new confGuiHelper(true);
 }
 
@@ -19,6 +21,7 @@ ConfDialogBase::~ConfDialogBase()
 {
     destroy();
     delete ui;
+    delete mGuiHelper;
 }
 
 void ConfDialogBase::setScreenShooter(screenshooter* poi)
@@ -115,29 +118,37 @@ void ConfDialogBase::init()
 
     m_bRemoteCtrl = false;
 
-    if (g_WMDevice->isConventional())
+    if (!m_bOnlyRatio)
     {
-        ui->ConfTabWidget->removeTab(ui->ConfTabWidget->indexOf(ui->nConventTabPage));
-        ui->ConfTabWidget->removeTab(ui->ConfTabWidget->indexOf(ui->SyncTabPage));
-        ui->ModeButtonGroup->removeChild(ui->Mode3RadioButton);
-        ui->ModeButtonGroup->removeChild(ui->Mode2RadioButton);
-        ui->RatioTabPage->removeChild((ui->EVTratioGroupBox));
-    }
+        ui->RatioApplyPushButton->hide();
+        if (g_WMDevice->isConventional())
+        {
+            ui->ConfTabWidget->removeTab(ui->ConfTabWidget->indexOf(ui->nConventTabPage));
+            ui->ConfTabWidget->removeTab(ui->ConfTabWidget->indexOf(ui->SyncTabPage));
+            ui->ModeButtonGroup->removeChild(ui->Mode3RadioButton);
+            ui->ModeButtonGroup->removeChild(ui->Mode2RadioButton);
+            ui->RatioTabPage->removeChild((ui->EVTratioGroupBox));
+        }
 
-    if (!g_WMDevice->isDC())
-    {
-        ui->ConfTabWidget->removeChild(ui->DCRadioButton);
-        ui->ACRadioButton->setEnabled(false);
-        ui->Widget9->removeChild(ui->OffsetCorrectionNCheckbox);
-        ui->Widget9->removeChild(ui->OffsetCorrectionXCheckbox);
-        ui->Widget9->removeChild(ui->CmpKorrGroupBox_3);
-    }
+        if (!g_WMDevice->isDC())
+        {
+            ui->ConfTabWidget->removeChild(ui->DCRadioButton);
+            ui->ACRadioButton->setEnabled(false);
+            ui->Widget9->removeChild(ui->OffsetCorrectionNCheckbox);
+            ui->Widget9->removeChild(ui->OffsetCorrectionXCheckbox);
+            ui->Widget9->removeChild(ui->CmpKorrGroupBox_3);
+        }
 
-    if (!g_WMDevice->isNewSamplerates())
+        if (!g_WMDevice->isNewSamplerates())
+        {
+            ui->SPeriodeButtonGroup->removeChild(ui->S96RadioButton);
+            ui->SPeriodeButtonGroup->removeChild(ui->S240RadioButton);
+            ui->SPeriodeButtonGroup->removeChild(ui->S288RadioButton);
+        }
+    }
+    else
     {
-        ui->SPeriodeButtonGroup->removeChild(ui->S96RadioButton);
-        ui->SPeriodeButtonGroup->removeChild(ui->S240RadioButton);
-        ui->SPeriodeButtonGroup->removeChild(ui->S288RadioButton);
+        connect(ui->RatioApplyPushButton,SIGNAL(clicked()),this,SLOT(accept()));
     }
 }
 
@@ -177,10 +188,21 @@ void ConfDialogBase::Actualize()
 	case Un_nConvent:
             ui->XTRatioGroupBox->setEnabled(true);
             ui->EVTratioGroupBox->setEnabled(false);
+            if(m_bOnlyRatio)
+            {
+                ui->XTRatioGroupBox->show();
+                ui->EVTratioGroupBox->hide();
+            }
 	    break;
 	case Un_EVT:
             ui->XTRatioGroupBox->setEnabled(false);
             ui->EVTratioGroupBox->setEnabled(true);
+            if(m_bOnlyRatio)
+            {
+                ui->XTRatioGroupBox->hide();
+                ui->EVTratioGroupBox->show();
+            }
+
 	    break;
 /*	case Un_nConvent:
             ui->XTRatioGroupBox->setEnabled(false);
@@ -192,13 +214,25 @@ void ConfDialogBase::Actualize()
    { // bzw. wir sind unter rechner kontrolle
        ui->NTRatioGroupBox->setEnabled(true);
        ui->NTRatioGroupBox2->setEnabled(false);
+       if (m_bOnlyRatio)
+       {
+           ui->NTRatioGroupBox2->hide();
+           ui->NTRatioGroupBox->show();
+       }
     }
     else
     {
         ui->NTRatioGroupBox2->setEnabled(true);
         ui->NTRatioGroupBox->setEnabled(false);
+        if (m_bOnlyRatio)
+        {
+            ui->NTRatioGroupBox2->show();
+            ui->NTRatioGroupBox->hide();
+        }
     }
+    resizeRatioTab();
 }
+
 
 void ConfDialogBase::accept()
 {
@@ -228,6 +262,14 @@ bool ConfDialogBase::acceptRatio()
         mWmMsgBox.msgRatioErr();
     }
     return ratioInputOK;
+}
+
+void ConfDialogBase::resizeRatioTab()
+{
+    if (m_bOnlyRatio){
+        ui->RatioTabPage->resize({280,280});
+        // The widget needs to be resized, as it gets to big after the hide/show settings where changed
+    }
 }
 
 bool ConfDialogBase::acceptEot()
@@ -678,6 +720,8 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
     m_bRemoteCtrl = remote;
     ui->buttonOk->setEnabled(!remote);
+    if (remote)
+        ui->RatioTabPage->hide();
     Actualize();
 }
 
@@ -691,6 +735,13 @@ void ConfDialogBase::screenshooterTriggered()
 void ConfDialogBase::keyboardScreenshorTriggerd()
 {
     mScrShooter->setKeyBoardWidgetPoi(mWmKeyBoard);
+}
+
+void ConfDialogBase::showRatio()
+{
+    ui->RatioTabPage->setParent(0);
+    ui->RatioTabPage->setWindowTitle("Transformer Ratio");
+    ui->RatioTabPage->show();
 }
 
 void ConfDialogBase::FxRadioButtonChecked()
@@ -779,5 +830,3 @@ void ConfDialogBase::on_ConfTabWidget_currentChanged(int index)
     Q_UNUSED(index);
     mWmKeyBoard->hide();
 }
-
-

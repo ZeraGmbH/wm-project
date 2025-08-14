@@ -76,7 +76,6 @@ private:
 
     bool acceptEot();
     bool acceptRatio();
-    void initScreenShooter();
     void resizeRatioTab();
 private slots:
     void ApplyDataSlot();
