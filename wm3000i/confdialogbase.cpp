@@ -727,6 +727,26 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
     Actualize();
 }
 
+
+void ConfDialogBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    {
+        showRatio();
+        this->move(0,0);
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(ui->RatioTabPage, 42);
+}
+
+void ConfDialogBase::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        ui->RatioTabPage->hide();
+    }
+}
+
 void ConfDialogBase::screenshooterTriggered()
 {
     mScrShooter->storeScreen("2_Alles");
@@ -830,4 +850,3 @@ void ConfDialogBase::on_ConfTabWidget_currentChanged(int index)
     Q_UNUSED(index);
     mWmKeyBoard->hide();
 }
-
