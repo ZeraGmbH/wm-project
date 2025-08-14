@@ -80,8 +80,8 @@ void wmKeyboardForm::setParent(cWmLineEdit *parent)
 void wmKeyboardForm::show(const QString text)
 {
     ui->lineEdit->setText(text);
-    moveWindow();
     QWidget::show();
+    moveWindow();
 }
 
 void wmKeyboardForm::showText(const QString text)
