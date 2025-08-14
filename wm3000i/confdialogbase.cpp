@@ -154,7 +154,6 @@ void ConfDialogBase::init()
     {
         connect(ui->RatioApplyPushButton,SIGNAL(clicked()),this,SLOT(accept()));
     }
-
 }
 
 void ConfDialogBase::SetConfInfoSlot(cConfData *cd )
@@ -203,7 +202,6 @@ void ConfDialogBase::Actualize()
     case In_ECT:
         ui->XTRatioGroupBox->setEnabled(false);
         ui->ECTratioGroupBox->setEnabled(true);
-
         if(m_bOnlyRatio)
         {
             ui->XTRatioGroupBox->hide();

@@ -216,6 +216,13 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMConfDialog,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an confdialog
     QObject::connect(g_WMDevice,SIGNAL(SendConfDialogInfoSignal(QStringList&,QStringList&)),g_WMConfDialog,SLOT(SetConfListSlot( QStringList&, QStringList&))); // device sendet wandler primär/sekundär stufen und nennwerte
 
+    ConfDialogBase *g_WMRatioDialog = new ConfDialogBase(g_WMView,true); // confdialog erzeugen
+    g_WMRatioDialog->setKeyboard(g_KeyBoard);
+    QObject::connect(g_WMView,SIGNAL(UIeinstellungenTeilerActionActivated()),g_WMRatioDialog,SLOT(showRatio()));
+    QObject::connect(g_WMRatioDialog,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // ratiodialog sendet konfigurationsdaten an device
+    QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMRatioDialog,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an confdialog
+    QObject::connect(g_WMDevice,SIGNAL(SendConfDialogInfoSignal(QStringList&,QStringList&)),g_WMRatioDialog,SLOT(SetConfListSlot( QStringList&, QStringList&))); // device sendet wandler primär/sekundär stufen und nennwerte
+
     RangeDialogBase *g_WMRangeDialog = new RangeDialogBase(g_WMView);   // bereichauswahlmenu erzeugen
     QObject::connect(g_WMView,SIGNAL(UIeinstellungenBereichActionActivated()),g_WMRangeDialog,SLOT(show()));  // öffnen des bereichauswahl dialoges vom hauptfenster
     QObject::connect(g_WMDevice,SIGNAL(SendRangeListSignal( cWMRangeList&, cWMRangeList&)),g_WMRangeDialog,SLOT(SetRangeListSlot( cWMRangeList&, cWMRangeList&))); // device sendet bereich informationen an rangedialog
@@ -258,6 +265,7 @@ int main(int argc, char *argv[])
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMView,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMRangeDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMConfDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
+    QObject::connect(wm3000DeviceServer,SIGNAL(RemoteCtrlInfo(bool)),g_WMRatioDialog,SLOT(RemoteCtrlInfoSlot(bool))); // server sendet remote ctrl info an view
     QObject::connect(wm3000DeviceServer,SIGNAL(startDeviceJustagePhase()),g_WMDevice,SLOT(JustagePhaseSlot()));
     QObject::connect(wm3000DeviceServer,SIGNAL(startDeviceJustageOffset()),g_WMDevice,SLOT(JustageOffsetSlot()));
     QObject::connect((QObject*)g_WMDevice,SIGNAL(EN61850StatusSignal(cEN61850Info*)),wm3000DeviceServer,SLOT(ReceiveETHStatus( cEN61850Info*))); // setzen der eth status info
