@@ -282,7 +282,11 @@ void screenshooter::timerExpired()
         storeScreenShotW(mWidgetPoi, "41_Version");
         mActualNumber = INVALID;
         emit screenShotVersionFinished();
-        emit update(20,"finished");
+        break;
+    case RATIOWIDGET:
+        storeScreenShotW(mWidgetPoi, "42_RatioWidget");
+        mActualNumber = INVALID;
+        emit screenShotRatioFinished();
         break;
     default:
         break;

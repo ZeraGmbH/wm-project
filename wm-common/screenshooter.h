@@ -44,6 +44,7 @@ signals:
     void screenShotHauptFinished();
     void screenShotInfoFinished();
     void screenShotVersionFinished();
+    void screenShotRatioFinished();
     void update(uint nr, QString text);
 private:
     bool storeMap(QPixmap* map, QString fileName);
@@ -78,7 +79,8 @@ private:
         KEYBOARDFLOAT =38,
         KEYBOARDHEX,
         INFO,
-        VERSION
+        VERSION,
+        RATIOWIDGET
     };
 private slots:
     void timerExpired();
