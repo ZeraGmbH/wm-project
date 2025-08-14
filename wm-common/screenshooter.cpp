@@ -151,7 +151,7 @@ void screenshooter::setKeyBoardWidgetPoi(wmKeyboardForm *poi)
 {
     mKeyboard = poi;
     mKeyboard->setHex(3);
-    mKeyboard->show("0x2A");
+    mKeyboard->show("0.042");
     mActualNumber = KEYBOARDFLOAT;
     mTimer->start();
 }
@@ -264,7 +264,7 @@ void screenshooter::timerExpired()
         mActualNumber= KEYBOARDHEX;
         mKeyboard->hide();
         mKeyboard->setHex(0);
-        mKeyboard->show("0.042");
+        mKeyboard->show("0x42");
         mTimer->start();
         break;
     case KEYBOARDHEX:
