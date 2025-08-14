@@ -236,10 +236,7 @@ void ConfDialogBase::Actualize()
             ui->NTRatioGroupBox->hide();
         }
     }
-    if (m_bOnlyRatio){
-        ui->RatioTabPage->resize({280,280});
-        // The widget needs to be resized, as it gets to big after the hide/show settings where changed
-    }
+    resizeRatioTab();
 }
 
 
@@ -271,6 +268,14 @@ bool ConfDialogBase::acceptRatio()
         mWmMsgBox.msgRatioErr();
     }
     return ratioInputOK;
+}
+
+void ConfDialogBase::resizeRatioTab()
+{
+    if (m_bOnlyRatio){
+        ui->RatioTabPage->resize({280,280});
+        // The widget needs to be resized, as it gets to big after the hide/show settings where changed
+    }
 }
 
 bool ConfDialogBase::acceptEot()
