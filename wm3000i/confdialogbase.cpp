@@ -13,15 +13,12 @@ ConfDialogBase::ConfDialogBase( QWidget* parent , bool onlyRatio ):
 {
     ui->setupUi(this);
     init();
-    this->setModal(!m_bOnlyRatio);
-    mGuiHelper = new confGuiHelper(false);
 }
 
 ConfDialogBase::~ConfDialogBase()
 {
     destroy();
     delete ui;
-    delete mGuiHelper;
 }
 
 void ConfDialogBase::init()
