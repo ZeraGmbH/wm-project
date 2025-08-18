@@ -123,8 +123,8 @@ void wmKeyboardForm::postEvent(const int iKey, const QString strKey)
 
 void wmKeyboardForm::moveWindow()
 {
-    int width = mDesktop.width()-this->width()-10;
-    int height = mDesktop.height()-this->height()-8;
+    int width = mDesktop.width()-this->width()-12;
+    int height = mDesktop.height()-this->height()-35;
     qDebug() << "keyboard" << width << height ;
     this->move(width,height);
 }
