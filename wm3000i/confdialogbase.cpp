@@ -7,7 +7,7 @@ extern cWM3000I* g_WMDevice;
 
 
 ConfDialogBase::ConfDialogBase( QWidget* parent , bool onlyRatio ):
-    QDialog(parent),
+    wmconfdialogbase(parent),
     ui(new Ui::ConfDialogBase),
     m_bOnlyRatio(onlyRatio)
 {
@@ -22,12 +22,6 @@ ConfDialogBase::~ConfDialogBase()
     destroy();
     delete ui;
     delete mGuiHelper;
-}
-
-void ConfDialogBase::setScreenShooter(screenshooter* poi)
-{
-    mScrShooter = poi;
-    connect(mScrShooter,SIGNAL(keyboardScreenShot()),this,SLOT(keyboardScreenshorTriggerd()));
 }
 
 void ConfDialogBase::init()

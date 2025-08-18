@@ -4,6 +4,7 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include <QRadioButton>
+#include <wmconfdialogbase.h>
 #include "qcombobox.h"
 #include "qvalidator.h"
 #include "confdata.h"
@@ -16,7 +17,7 @@ namespace Ui {
     class ConfDialogBase;
 }
 
-class ConfDialogBase : public QDialog
+class ConfDialogBase : public wmconfdialogbase
 {
     Q_OBJECT
 
@@ -26,7 +27,6 @@ public:
     virtual bool is_3( const QString & s );
     virtual bool is_w3( const QString & s );
     void setKeyboard(wmKeyboardForm *keyboard);
-    void setScreenShooter(screenshooter *poi);
 
 public slots:
     virtual void SetConfInfoSlot( cConfData * cd );
@@ -60,7 +60,6 @@ private:
     wmKeyboardForm* mWmKeyBoard;
     confGuiHelper *mGuiHelper;
     wmMessageBox mWmMsgBox;
-    screenshooter* mScrShooter;
 
     void init();
     void Actualize();
