@@ -770,18 +770,6 @@ void ConfDialogBase::SxRadioButtonChecked()
     SetnConventMenu();
 }
 
-
-bool ConfDialogBase::is_3( const QString &s )
-{
-    return (s.contains("/3"));
-}
-
-
-bool ConfDialogBase::is_w3( const QString &s )
-{
-    return (s.contains("/w3"));
-}
-
 void ConfDialogBase::setKeyboard(wmKeyboardForm *keyboard)
 {
     mWmKeyBoard = keyboard;
