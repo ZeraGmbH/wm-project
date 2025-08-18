@@ -28,6 +28,7 @@ protected:
     wmMessageBox mWmMsgBox;
 
     void showRatio(QWidget *poi);
+    void SuggestASDUs();
 private:
 
 };
