@@ -19,6 +19,7 @@ HEADERS = \
     gui/cwmessagebox.h \
     gui/cwmlineedit.h \
     gui/vectordiagramm.h \
+    gui/wmconfdialogbase.h \
     gui/wmkeyboardform.h \
     gui/wmmessagebox.h \
     gui/wmscreenshoterguibase.h \
@@ -114,6 +115,7 @@ SOURCES = \
     gui/cwmessagebox.cpp \
     gui/cwmlineedit.cpp \
     gui/vectordiagramm.cpp \
+    gui/wmconfdialogbase.cpp \
     gui/wmkeyboardform.cpp \
     gui/wmmessagebox.cpp \
     gui/wmscreenshoterguibase.cpp \
