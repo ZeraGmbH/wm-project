@@ -13,6 +13,7 @@ ConfDialogBase::ConfDialogBase(QWidget* parent, bool onlyRatio):
 {
     ui->setupUi(this);
     init();
+    this->setModal(false);
 }
 
 ConfDialogBase::~ConfDialogBase()
@@ -112,6 +113,7 @@ void ConfDialogBase::init()
     if (!m_bOnlyRatio)
     {
         ui->RatioApplyPushButton->hide();
+        ui->RatioCancelPushButton->hide();
         if (g_WMDevice->isConventional())
         {
             ui->ConfTabWidget->removeTab(ui->ConfTabWidget->indexOf(ui->nConventTabPage));
@@ -140,6 +142,7 @@ void ConfDialogBase::init()
     else
     {
         connect(ui->RatioApplyPushButton,SIGNAL(clicked()),this,SLOT(accept()));
+        connect(ui->RatioCancelPushButton,SIGNAL(clicked()),this,SLOT(cancel()));
     }
 }
 
@@ -224,6 +227,12 @@ void ConfDialogBase::Actualize()
     resizeRatioTab();
 }
 
+void ConfDialogBase::cancel()
+{
+    mWmKeyBoard->hide();
+    ui->RatioTabPage->close();
+    //SetRatioMenu();
+}
 
 void ConfDialogBase::accept()
 {
@@ -749,9 +758,7 @@ void ConfDialogBase::keyboardScreenshorTriggerd()
 
 void ConfDialogBase::showRatio()
 {
-    ui->RatioTabPage->setParent(0);
-    ui->RatioTabPage->setWindowTitle("Transformer Ratio");
-    ui->RatioTabPage->show();
+    wmconfdialogbase::showRatio(ui->RatioTabPage);
 }
 
 void ConfDialogBase::FxRadioButtonChecked()

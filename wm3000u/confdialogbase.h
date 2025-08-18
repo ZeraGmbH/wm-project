@@ -29,6 +29,7 @@ public:
 public slots:
     virtual void SetConfInfoSlot( cConfData * cd );
     virtual void SetConfListSlot( QStringList & NPItems, QStringList & NSItems );
+    virtual void cancel();
     virtual void accept();
     virtual void abortSlot();
     virtual void SetnConventMenu();

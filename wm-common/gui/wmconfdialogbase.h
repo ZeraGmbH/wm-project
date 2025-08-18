@@ -27,6 +27,7 @@ protected:
     confGuiHelper *mGuiHelper;
     wmMessageBox mWmMsgBox;
 
+    void showRatio(QWidget *poi);
 private:
 
 };

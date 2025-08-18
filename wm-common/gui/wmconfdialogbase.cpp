@@ -3,7 +3,6 @@
 wmconfdialogbase::wmconfdialogbase(QWidget *parent):
     QDialog(parent)
 {
-    this->setModal(false);
     mGuiHelper = new confGuiHelper(true);
 }
 
@@ -17,6 +16,14 @@ void wmconfdialogbase::setScreenShooter(screenshooter *poi)
     mScrShooter = poi;
     connect(mScrShooter,SIGNAL(keyboardScreenShot()),this,SLOT(keyboardScreenshorTriggerd()));
 
+}
+
+void wmconfdialogbase::showRatio(QWidget *poi)
+{
+    poi->setParent(0);
+    poi->setWindowTitle("Transformer Ratio");
+    poi->setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
+    poi->show();
 }
 
 bool wmconfdialogbase::is_3(const QString &s)
