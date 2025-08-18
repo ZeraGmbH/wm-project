@@ -61,14 +61,7 @@ protected:
 
 private:
     Ui::ConfDialogBase *ui;
-    cConfData m_ConfData, m_ConfDataTemp;
-    bool m_bRemoteCtrl;
     bool m_bOnlyRatio;
-    QString m_sText;
-    wmKeyboardForm* mWmKeyBoard;
-    confGuiHelper *mGuiHelper;
-    wmMessageBox mWmMsgBox;
-
 
     void init();
     void Actualize();
