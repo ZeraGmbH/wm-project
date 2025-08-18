@@ -14,6 +14,8 @@ class wmconfdialogbase : public QDialog
 public:
     wmconfdialogbase(QWidget* parent);
     ~wmconfdialogbase();
+    bool is_3( const QString & s );
+    bool is_w3( const QString & s );
     void setScreenShooter(screenshooter *poi);
 
 protected:

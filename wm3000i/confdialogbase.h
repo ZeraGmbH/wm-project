@@ -31,15 +31,13 @@ class ConfDialogBase : public wmconfdialogbase
 public:
     explicit ConfDialogBase(QWidget* parent = 0, bool onlyRatio = false);
     ~ConfDialogBase();
-    virtual bool is_3( const QString & s );
-    virtual bool is_w3( const QString & s );
     void setKeyboard(wmKeyboardForm* keyboard);
 
 public slots:
     virtual void SetConfInfoSlot( cConfData * cd );
     virtual void SetConfListSlot( QStringList & NPItems, QStringList & NSItems );
     virtual void accept() override;
-    void abortSlot();
+    virtual void abortSlot();
     virtual void SetnConventMenu();
     virtual void RemoteCtrlInfoSlot( bool remote );
     void screenshooterTriggered();
