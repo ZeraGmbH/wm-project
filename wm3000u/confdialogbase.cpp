@@ -231,7 +231,7 @@ void ConfDialogBase::cancel()
 {
     mWmKeyBoard->hide();
     ui->RatioTabPage->close();
-    //SetRatioMenu();
+    SetRatioMenu();
 }
 
 void ConfDialogBase::accept()

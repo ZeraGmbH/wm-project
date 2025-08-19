@@ -16,7 +16,7 @@ class ConfDialogBase;
 class confGuiHelper
 {
 public:
-    confGuiHelper(bool voltage);
+    confGuiHelper();
     const QString &baseUnitTextCurrent(const QString & s , QComboBox *unit, QComboBox *divider);
     const QString &baseUnitTextVoltage(const QString & s , QComboBox *unit, QComboBox *divider);
     const QString &genRatioText(const QString & s, QComboBox *unit, QComboBox *divider);
