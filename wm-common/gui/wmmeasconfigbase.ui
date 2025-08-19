@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>541</width>
+    <width>577</width>
     <height>251</height>
    </rect>
   </property>
@@ -351,6 +351,13 @@
           </property>
           <property name="maximum">
            <number>6</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="RCFshowCheckBox">
+          <property name="text">
+           <string>show RCF</string>
           </property>
          </widget>
         </item>

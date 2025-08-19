@@ -18,8 +18,8 @@ WMMeasValuesBase::WMMeasValuesBase(QWidget *parent, QString machineName, QList<e
     ui->setupUi(this);
     setInitialDefaults();
     m_pContextMenu = new WMMeasConfigBase(this, lpUnitList);
-    connect(this,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool,int,int,int, cFormatInfo*)));
-    connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(int,int,int, cFormatInfo*)));
+    connect(this,SIGNAL(SendFormatInfoSignal(bool,bool,int,int,int, cFormatInfo*)),m_pContextMenu,SLOT(ReceiveFormatInfoSlot(bool,bool,int,int,int, cFormatInfo*)));
+    connect(m_pContextMenu,SIGNAL(SendFormatInfoSignal(bool,int,int,int, cFormatInfo*)),this,SLOT(ReceiveFormatInfoSlot(bool,int,int,int, cFormatInfo*)));
     connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
     onLoadSession(".ses");
     m_Timer.setSingleShot(true);
@@ -76,8 +76,25 @@ void WMMeasValuesBase::moveEvent(QMoveEvent*)
 
 void WMMeasValuesBase::activateContextMenu()
 {
-    emit SendFormatInfoSignal(m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
+    emit SendFormatInfoSignal(m_bshowRCF, m_ConfData.m_bDCmeasurement, m_nDisplayMode,m_nLPDisplayMode, 4, m_Format);
     m_pContextMenu->show();
+}
+
+void WMMeasValuesBase::showRCF(bool show)
+{
+    m_bshowRCF = show;
+    if (show)
+    {
+        ui->mBigRCF->show();
+        ui->mBigRCFName->show();
+        ui->mBigRCFUnit->show();
+    }
+    else
+    {
+        ui->mBigRCF->hide();
+        ui->mBigRCFName->hide();
+        ui->mBigRCFUnit->hide();
+    }
 }
 
 void WMMeasValuesBase::setScreenShooter(screenshooter *poi)
@@ -270,6 +287,8 @@ void WMMeasValuesBase::readStream(QDataStream &stream)
         stream >> m_Format[i];
     stream >> m_nDisplayMode;
     stream >> m_nLPDisplayMode;
+    stream >> m_bshowRCF;
+    showRCF(m_bshowRCF);
     geometryToWidget(m_geomToFromStream, this);
 }
 
@@ -280,6 +299,7 @@ void WMMeasValuesBase::writeStream(QDataStream &stream)
         stream << m_Format[i];
     stream << m_nDisplayMode;
     stream << m_nLPDisplayMode;
+    stream << m_bshowRCF;
 }
 
 void WMMeasValuesBase::setDefaults()
@@ -297,12 +317,13 @@ void WMMeasValuesBase::setInitialDefaults()
     m_Format[3] = cFormatInfo(6,4,RCFUnit[nix]);
 }
 
-void WMMeasValuesBase::ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo* fi)
+void WMMeasValuesBase::ReceiveFormatInfoSlot(bool rcf, int m, int m2, int n, cFormatInfo* fi)
 {
     for(int i = 0; i < n; i++, fi++)
         m_Format[i] = *fi;
     m_nDisplayMode = m;
     m_nLPDisplayMode = m2;
+    showRCF(rcf);
     onSaveConfig();
 }
 

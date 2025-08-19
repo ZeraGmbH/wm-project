@@ -53,7 +53,7 @@ void WMMeasConfigBase::init()
 }
 
 
-void WMMeasConfigBase::ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFormatInfo* fi )
+void WMMeasConfigBase::ReceiveFormatInfoSlot(bool rcf, bool dc, int m, int m2, int n, cFormatInfo* fi )
 {
     int i;
     for(i = 0; i < n; i++, fi++)
@@ -77,6 +77,7 @@ void WMMeasConfigBase::ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFor
 
     ui->RCFspinBoxFW->setValue(m_Format[3].FieldWidth);
     ui->RCFspinBoxRS->setValue(m_Format[3].Resolution);
+    ui->RCFshowCheckBox->setChecked(rcf);
 
     Actualize();
 }
@@ -171,6 +172,6 @@ void WMMeasConfigBase::SendData2AppSlot()
     m_Format[3].FieldWidth = ui->RCFspinBoxFW->value();
     m_Format[3].Resolution = ui->RCFspinBoxRS->value();
 
-    emit SendFormatInfoSignal(m_nDisplayMode, m_nLPDisplayMode, 4, m_Format);
+    emit SendFormatInfoSignal(ui->RCFshowCheckBox->isChecked(),m_nDisplayMode, m_nLPDisplayMode, 4, m_Format);
 }
 

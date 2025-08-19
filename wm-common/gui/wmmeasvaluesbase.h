@@ -33,14 +33,14 @@ public slots:
     virtual void SetConfInfoSlot(cConfData * cd);
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
-    virtual void ReceiveFormatInfoSlot(int m, int m2, int n, cFormatInfo * fi );
+    virtual void ReceiveFormatInfoSlot(bool rcf, int m, int m2, int n, cFormatInfo * fi );
     void takeScreenshoots();
     void takeScreenshootSetting();
     void takeScreenshootSettingFinished();
 
 signals:
     void sigIsVisible(bool);
-    void SendFormatInfoSignal(bool, int, int, int, cFormatInfo*);
+    void SendFormatInfoSignal(bool, bool, int, int, int, cFormatInfo*);
 
 protected:
     virtual void closeEvent(QCloseEvent *ce ) override;
@@ -62,6 +62,7 @@ private:
     void actualizeLoadPoint();
     void setLayoutSize();
     void activateContextMenu();
+    void showRCF(bool show);
     Ui::WMMeasValuesBase *ui;
     cwmActValues m_ActValues;
     cConfData m_ConfData;
@@ -69,6 +70,7 @@ private:
     cFormatInfo m_Format[4];
     int m_nDisplayMode;
     int m_nLPDisplayMode;
+    bool m_bshowRCF;
     SettingsChangeTimer m_settingsChangeTimer;
     WidgetGeometry m_geomToFromStream;
     SessionStreamer m_sessionStreamer;
