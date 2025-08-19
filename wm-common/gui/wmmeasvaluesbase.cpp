@@ -311,6 +311,7 @@ void WMMeasValuesBase::setInitialDefaults()
 {
     m_nDisplayMode = IEC; // wmglobal
     m_nLPDisplayMode = totalRms;
+    showRCF(true);
     m_Format[0] = cFormatInfo(7,3,LoadpointUnit[LPProzent]); // defaults
     m_Format[1] = cFormatInfo(7,3,ErrorUnit[ErrProzent]);
     m_Format[2] = cFormatInfo(7,4,AngleUnit[Anglegrad]);
