@@ -18,12 +18,12 @@ public:
     ~WMMeasConfigBase();
 
 public slots:
-    virtual void ReceiveFormatInfoSlot(bool dc, int m, int m2, int n, cFormatInfo * fi );
+    virtual void ReceiveFormatInfoSlot(bool rcf, bool dc, int m, int m2, int n, cFormatInfo * fi );
     virtual void TotalRMScheckedSlot();
     virtual void H1RMScheckedSlot();
 
 signals:
-    void SendFormatInfoSignal(int, int, int, cFormatInfo*);
+    void SendFormatInfoSignal(bool,int, int, int, cFormatInfo*);
 
 private:
     Ui::WMMeasConfigBase *ui;
