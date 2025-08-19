@@ -1,17 +1,7 @@
 #include "confguihelper.h"
 
-confGuiHelper::confGuiHelper(bool voltage) :
-    mVoltage(voltage)
+confGuiHelper::confGuiHelper()
 {
-    if (voltage)
-    {
-        m_unitListV = m_unitListA = {"mV","kV","V"};
-    }
-    else
-    {
-        m_unitListA = {"mA","kA","A"};
-        m_unitListV = {"mV","kV","V"};
-    }
 }
 
 const QString &confGuiHelper::genRatioText(const QString &s, QComboBox *unit, QComboBox *divider)

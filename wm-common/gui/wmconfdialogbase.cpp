@@ -4,7 +4,7 @@
 wmconfdialogbase::wmconfdialogbase(QWidget *parent):
     QDialog(parent)
 {
-    mGuiHelper = new confGuiHelper(true);
+    mGuiHelper = new confGuiHelper();
 }
 
 wmconfdialogbase::~wmconfdialogbase()
