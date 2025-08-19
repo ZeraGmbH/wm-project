@@ -6,8 +6,8 @@
 extern cWM3000I* g_WMDevice;
 
 
-ConfDialogBase::ConfDialogBase( QWidget* parent , bool onlyRatio ):
-    wmconfdialogbase(parent),
+ConfDialogBase::ConfDialogBase(QWidget* parent, QString machineName , bool onlyRatio ):
+    wmconfdialogbase(parent, machineName),
     ui(new Ui::ConfDialogBase),
     m_bOnlyRatio(onlyRatio)
 {
@@ -233,8 +233,7 @@ void ConfDialogBase::Actualize()
 
 void ConfDialogBase::cancel()
 {
-    mWmKeyBoard->hide();
-    ui->RatioTabPage->close();
+    wmconfdialogbase::cancelRatio(ui->RatioTabPage);
     SetRatioMenu();
 }
 

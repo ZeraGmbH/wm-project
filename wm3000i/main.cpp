@@ -210,14 +210,14 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMDevice->DspIFace->iFaceSock, SIGNAL(SendLogData(const QString&)), &LogFile, SLOT(onAddLogText(const QString&))); // der auch
     LogFile.SendLogSlot(); // alte log daten an view
 
-    ConfDialogBase *g_WMConfDialog = new ConfDialogBase(g_WMView); // confdialog erzeugen
+    ConfDialogBase *g_WMConfDialog = new ConfDialogBase(g_WMView, machineName); // confdialog erzeugen
     g_WMConfDialog->setKeyboard(g_KeyBoard);
     QObject::connect(g_WMView,SIGNAL(UIeinstellungenConfActionActivated()),g_WMConfDialog,SLOT(show())); // öffnen der konfigurations dialoges vom hauptfenster
     QObject::connect(g_WMConfDialog,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // confdialog sendet konfigurationsdaten an device
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMConfDialog,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an confdialog
     QObject::connect(g_WMDevice,SIGNAL(SendConfDialogInfoSignal(QStringList&,QStringList&)),g_WMConfDialog,SLOT(SetConfListSlot( QStringList&, QStringList&))); // device sendet wandler primär/sekundär stufen und nennwerte
 
-    ConfDialogBase *g_WMRatioDialog = new ConfDialogBase(g_WMView,true); // confdialog erzeugen
+    ConfDialogBase *g_WMRatioDialog = new ConfDialogBase(g_WMView, machineName, true); // confdialog erzeugen
     g_WMRatioDialog->setKeyboard(g_KeyBoard);
     QObject::connect(g_WMView,SIGNAL(UIeinstellungenTeilerActionActivated()),g_WMRatioDialog,SLOT(showRatio()));
     QObject::connect(g_WMRatioDialog,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // ratiodialog sendet konfigurationsdaten an device
