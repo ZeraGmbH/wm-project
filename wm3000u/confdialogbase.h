@@ -22,7 +22,7 @@ class ConfDialogBase : public wmconfdialogbase
     Q_OBJECT
 
 public:
-    explicit ConfDialogBase( QWidget* parent = 0,  bool onlyRatio = false);
+    explicit ConfDialogBase(QWidget* parent = 0, QString machineName ="wm3000",  bool onlyRatio = false);
     ~ConfDialogBase();
     void setKeyboard(wmKeyboardForm *keyboard);
 

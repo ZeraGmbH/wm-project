@@ -1,8 +1,10 @@
 #include "wmconfdialogbase.h"
+#include "geometrytowidget.h"
 #include "wmglobalcommon.h"
 
-wmconfdialogbase::wmconfdialogbase(QWidget *parent):
-    QDialog(parent)
+wmconfdialogbase::wmconfdialogbase(QWidget *parent, QString machineName):
+    QDialog(parent),
+    m_sessionStreamer(machineName, this)
 {
     mGuiHelper = new confGuiHelper();
 }
@@ -19,12 +21,32 @@ void wmconfdialogbase::setScreenShooter(screenshooter *poi)
 
 }
 
+bool wmconfdialogbase::onLoadSession(QString session)
+{
+    m_sessionStreamer.readSession(objectName(), session);
+    return true;
+}
+
+void wmconfdialogbase::onSaveSession(QString session)
+{
+    m_sessionStreamer.writeSession(objectName(), session);
+}
+
 void wmconfdialogbase::showRatio(QWidget *poi)
 {
+    mpTransRatio = poi;
     poi->setParent(0);
     poi->setWindowTitle("Transformer Ratio");
     poi->setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
+    onLoadSession(".ses");
     poi->show();
+}
+
+void wmconfdialogbase::cancelRatio(QWidget *poi)
+{
+    mWmKeyBoard->hide();
+    onSaveSession(".ses");
+    poi->close();
 }
 
 void wmconfdialogbase::SuggestASDUs()
@@ -68,6 +90,29 @@ void wmconfdialogbase::SuggestASDUs()
         }
         break;
     }
+}
+
+void wmconfdialogbase::readStream(QDataStream &stream)
+{
+    if (mpTransRatio != nullptr)
+    {
+        stream >> m_geomToFromStream;
+        geometryToWidget(m_geomToFromStream, mpTransRatio);
+    }
+}
+
+void wmconfdialogbase::writeStream(QDataStream &stream)
+{
+    if (mpTransRatio != nullptr)
+    {
+        m_geomToFromStream = geometryFromWidget( mpTransRatio);
+        stream << m_geomToFromStream;
+    }
+}
+
+void wmconfdialogbase::setDefaults()
+{
+
 }
 
 bool wmconfdialogbase::is_3(const QString &s)

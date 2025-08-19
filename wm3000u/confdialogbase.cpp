@@ -6,8 +6,8 @@
 extern cWM3000U* g_WMDevice;
 
 
-ConfDialogBase::ConfDialogBase(QWidget* parent, bool onlyRatio):
-    wmconfdialogbase(parent),
+ConfDialogBase::ConfDialogBase(QWidget* parent, QString machineName, bool onlyRatio):
+    wmconfdialogbase(parent, machineName),
     ui(new Ui::ConfDialogBase),
     m_bOnlyRatio(onlyRatio)
 {
@@ -229,8 +229,7 @@ void ConfDialogBase::Actualize()
 
 void ConfDialogBase::cancel()
 {
-    mWmKeyBoard->hide();
-    ui->RatioTabPage->close();
+    wmconfdialogbase::cancelRatio(ui->RatioTabPage);
     SetRatioMenu();
 }
 
@@ -370,8 +369,8 @@ void ConfDialogBase::clearUnitComboBoxes()
 void ConfDialogBase::SetRatioMenu()
 {
     clearUnitComboBoxes();
-    ui->RatioPrimNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
-    ui->RatioSekNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioPrimNUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
+    ui->RatioSekNUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
 
     ui->RatioPrimNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
     ui->RatioSekNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
@@ -380,8 +379,8 @@ void ConfDialogBase::SetRatioMenu()
     ui->RatioPrimNLineEdit->setText(mGuiHelper->baseUnitTextVoltage(m_ConfDataTemp.m_NPrimary, ui->RatioPrimNUnitComboBox, ui->RatioPrimNDivComboBox));
     ui->RatioSekNLineEdit->setText(mGuiHelper->baseUnitTextVoltage(m_ConfDataTemp.m_NSecondary, ui->RatioSekNUnitComboBox, ui->RatioSekNDivComboBox));
 
-    ui->RatioPrimXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
-    ui->RatioSekXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioPrimXUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
+    ui->RatioSekXUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
 
     ui->RatioPrimXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
     ui->RatioSekXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
@@ -389,7 +388,7 @@ void ConfDialogBase::SetRatioMenu()
     ui->RatioPrimXLineEdit->setText(mGuiHelper->baseUnitTextVoltage(m_ConfDataTemp.m_XPrimary, ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox));
     ui->RatioSekXLineEdit->setText(mGuiHelper->baseUnitTextVoltage(m_ConfDataTemp.m_XSecondary, ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox));
 
-    ui->RatioPrimEVTUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
+    ui->RatioPrimEVTUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
     ui->RatioSekEVTUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
 
     ui->RatioPrimEVTDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
