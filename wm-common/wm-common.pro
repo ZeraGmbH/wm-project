@@ -22,6 +22,7 @@ HEADERS = \
     gui/wmconfdialogbase.h \
     gui/wmkeyboardform.h \
     gui/wmmessagebox.h \
+    gui/wmrangedialogbase.h \
     gui/wmscreenshoterguibase.h \
     gui/wmviewbase.h \
     gui/bigletter.h \
@@ -118,6 +119,7 @@ SOURCES = \
     gui/wmconfdialogbase.cpp \
     gui/wmkeyboardform.cpp \
     gui/wmmessagebox.cpp \
+    gui/wmrangedialogbase.cpp \
     gui/wmscreenshoterguibase.cpp \
     gui/wmviewbase.cpp \
     gui/en61850monitor.cpp \
