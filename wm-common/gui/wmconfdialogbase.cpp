@@ -125,3 +125,36 @@ bool wmconfdialogbase::is_w3(const QString &s)
     return (s.contains("/w3"));
 }
 
+void wmconfdialogbase::screenshooterTriggered()
+{
+    mScrShooter->storeScreen("2_Alles");
+    this->show();
+    mScrShooter->setTabWidgetPoi(this, getConfWidgetThis());
+}
+
+void wmconfdialogbase::keyboardScreenshorTriggerd()
+{
+    mScrShooter->setKeyBoardWidgetPoi(mWmKeyBoard);
+}
+
+void wmconfdialogbase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    {
+        showRatio(getRatioWidgetThis());
+        getRatioWidgetThis()->move(0,0);
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(getRatioWidgetThis(), 42);
+
+}
+
+void wmconfdialogbase::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        getRatioWidgetThis()->hide();
+    }
+
+}
+

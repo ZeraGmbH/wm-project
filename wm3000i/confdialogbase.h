@@ -41,11 +41,8 @@ public slots:
     virtual void abortSlot();
     virtual void SetnConventMenu();
     virtual void RemoteCtrlInfoSlot( bool remote );
-    void screenshooterTriggered();
-    void keyboardScreenshorTriggerd();
     void showRatio();
-    void takeScreenshoots();
-    void takeScreenshootFinished();
+
 signals:
     void SendConfDataSignal(cConfData*);
 
@@ -56,6 +53,8 @@ protected:
     virtual void SetRatioMenu();
     virtual void SetLogMenu();
     virtual void SetMessungMenu();
+    virtual QWidget* getRatioWidgetThis() override;
+    virtual QTabWidget* getConfWidgetThis() override;
 
 
 private:

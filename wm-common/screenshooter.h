@@ -51,6 +51,7 @@ private:
 //    void initMouseEvent();
     bool mShowed;
     int mActualNumber;
+    quint16 miVerboseLevel;
     QTimer* mTimer;
     QWidget* mWidgetPoi;
     QTabWidget* mTabWidgetPoi;

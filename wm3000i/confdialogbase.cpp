@@ -678,6 +678,15 @@ void ConfDialogBase::SetMessungMenu()
     ui->TIntegrationSpinBox->setValue(m_ConfDataTemp.m_nIntegrationTime);
 }
 
+QWidget *ConfDialogBase::getRatioWidgetThis()
+{
+    return ui->RatioTabPage;
+}
+
+QTabWidget *ConfDialogBase::getConfWidgetThis()
+{
+    return ui->ConfTabWidget;
+}
 
 void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
@@ -686,38 +695,6 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
     if (remote)
         ui->RatioTabPage->hide();
     Actualize();
-}
-
-
-void ConfDialogBase::takeScreenshoots()
-{
-    mScrShooter->showed(false);
-    {
-        showRatio();
-        this->move(0,0);
-        mScrShooter->showed(true);
-    }
-    mScrShooter->useTimer(ui->RatioTabPage, 42);
-}
-
-void ConfDialogBase::takeScreenshootFinished()
-{
-    if(mScrShooter->showed())
-    {
-        ui->RatioTabPage->hide();
-    }
-}
-
-void ConfDialogBase::screenshooterTriggered()
-{
-    mScrShooter->storeScreen("2_Alles");
-    this->show();
-    mScrShooter->setTabWidgetPoi(this, ui->ConfTabWidget);
-}
-
-void ConfDialogBase::keyboardScreenshorTriggerd()
-{
-    mScrShooter->setKeyBoardWidgetPoi(mWmKeyBoard);
 }
 
 void ConfDialogBase::showRatio()

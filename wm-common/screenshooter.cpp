@@ -1,5 +1,6 @@
 #include "screenshooter.h"
 #include "qapplication.h"
+#include "qdebug.h"
 #include "qdesktopwidget.h"
 #include <QDir>
 
@@ -8,8 +9,13 @@ screenshooter::screenshooter(QObject *parent)
 {
     mActualNumber = INVALID;
     mTimer = new QTimer;
-    mTimer->setInterval(250);
+    mTimer->setInterval(500);
     mTimer->setSingleShot(true);
+#ifdef QT_DEBUG
+    miVerboseLevel = 1;
+#else
+    miVerboseLevel = 0;
+#endif
     connect(mTimer,SIGNAL(timeout()),this,SLOT(timerExpired()));
 }
 
@@ -34,6 +40,8 @@ void screenshooter::showUIbyExec(QMenu *uipoi)
 
 void screenshooter::useTimer(QWidget* poi,int nr)
 {
+    if ((miVerboseLevel & 1) == 1 )
+        qWarning() << "timer start" ;
     mWidgetPoi = poi;
     mActualNumber = nr;
     mTimer->start();
@@ -134,6 +142,8 @@ bool screenshooter::storeMap(QPixmap *map, QString fileName)
 {
     QString strFileName;
     strFileName= mFolderName + fileName +".png";
+    if ((miVerboseLevel & 1) == 1 )
+        qWarning() << "store" << fileName ;
     return map->save(strFileName);
 }
 
