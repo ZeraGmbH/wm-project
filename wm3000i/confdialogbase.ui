@@ -64,7 +64,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>5</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="Widget8">
         <attribute name="title">
@@ -1861,9 +1861,6 @@
                     <width>30</width>
                     <height>20</height>
                    </size>
-                  </property>
-                  <property name="focusPolicy">
-                   <enum>Qt::StrongFocus</enum>
                   </property>
                   <property name="text">
                    <string>FF</string>
