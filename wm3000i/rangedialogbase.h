@@ -15,6 +15,7 @@
 #include <QComboBox>
 #include <QGridLayout>
 #include <QLabel>
+#include <wmrangedialogbase.h>
 #include "range.h"
 #include "confdata.h"
 #include "screenshooter.h"
@@ -23,12 +24,12 @@ namespace Ui {
     class RangeDialogBase;
 }
 
-class RangeDialogBase : public QDialog
+class RangeDialogBase : public wmRangeDialogBase
 {
     Q_OBJECT
 
 public:
-    explicit RangeDialogBase( QWidget* parent = 0);
+    explicit RangeDialogBase( QWidget* parent = 0, QString machineName = "");
     ~RangeDialogBase();
     void setScreenShooter(screenshooter* poi);
 
@@ -49,7 +50,7 @@ signals:
 
 protected:
     virtual void showEvent( QShowEvent * );
-
+    virtual void closeEvent (QCloseEvent * );
 
 private:
     void ActualizeDialog();

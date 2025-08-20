@@ -3,8 +3,8 @@
 #include "ui_rangedialogbase.h"
 #include "wmglobal.h"
 
-RangeDialogBase::RangeDialogBase( QWidget* parent ):
-    QDialog(parent),
+RangeDialogBase::RangeDialogBase( QWidget* parent, QString machineName ):
+    wmRangeDialogBase(parent, machineName),
     ui(new Ui::RangeDialogBase)
 {
     ui->setupUi(this);
@@ -106,7 +106,13 @@ void RangeDialogBase::SetEVTRangeSlot( const QString & er)
 
 void RangeDialogBase::showEvent( QShowEvent * )
 {
+    wmRangeDialogBase::onLoadSession(".ses");
     emit SendRangeInfoReqSignal(); // aufforderung an device bereichliste und configuration zu senden
+}
+
+void RangeDialogBase::closeEvent(QCloseEvent *)
+{
+    wmRangeDialogBase::onSaveSession(".ses");
 }
 
 
