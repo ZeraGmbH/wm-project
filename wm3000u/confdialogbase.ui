@@ -64,7 +64,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Widget8">
         <attribute name="title">
@@ -222,100 +222,127 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
-            <widget class="QGroupBox" name="CmpKorrGroupBox">
-             <property name="title">
-              <string>Phasenfehler Prüfling</string>
-             </property>
-             <layout class="QGridLayout">
-              <item row="0" column="1" rowspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QGroupBox" name="CmpKorrGroupBox">
+                 <property name="title">
+                  <string>Phasenfehler Prüfling</string>
+                 </property>
+                 <layout class="QGridLayout">
+                  <item row="0" column="1" rowspan="2">
+                   <layout class="QVBoxLayout">
+                    <item>
+                     <widget class="cWmLineEdit" name="CmpKorrLineEdit1">
+                      <property name="focusPolicy">
+                       <enum>Qt::StrongFocus</enum>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="maxLength">
+                       <number>8</number>
+                      </property>
+                      <property name="dragEnabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="readOnly">
+                       <bool>false</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="cWmLineEdit" name="CmpKorrLineEdit2">
+                      <property name="maxLength">
+                       <number>8</number>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="CmpKorrLabel2">
+                    <property name="text">
+                     <string>Totzeit</string>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="CmpKorrLabel1">
+                    <property name="text">
+                     <string>Phasenlage</string>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="label_2">
+                    <property name="text">
+                     <string>°</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLabel" name="label_3">
+                    <property name="text">
+                     <string>ms</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="CmpKorrGroupBox_3">
+                 <property name="title">
+                  <string>Offset Korrektur</string>
+                 </property>
+                 <layout class="QGridLayout" name="_32">
+                  <item row="1" column="0">
+                   <widget class="QCheckBox" name="OffsetCorrectionNCheckbox">
+                    <property name="text">
+                     <string>Kanal N</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QCheckBox" name="OffsetCorrectionXCheckbox">
+                    <property name="text">
+                     <string>Kanal X</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="CmpCorrGroupBox">
+               <property name="title">
+                <string>Korrektur Normwandler</string>
+               </property>
                <layout class="QVBoxLayout">
                 <item>
-                 <widget class="cWmLineEdit" name="CmpKorrLineEdit1">
-                  <property name="focusPolicy">
-                   <enum>Qt::StrongFocus</enum>
-                  </property>
+                 <widget class="QCheckBox" name="CmpCorrCheckBox">
                   <property name="text">
-                   <string/>
+                   <string>A&amp;ktiv</string>
                   </property>
-                  <property name="maxLength">
-                   <number>8</number>
-                  </property>
-                  <property name="dragEnabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="readOnly">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="cWmLineEdit" name="CmpKorrLineEdit2">
-                  <property name="maxLength">
-                   <number>8</number>
+                  <property name="shortcut">
+                   <string>Alt+K</string>
                   </property>
                  </widget>
                 </item>
                </layout>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="CmpKorrLabel2">
-                <property name="text">
-                 <string>Totzeit</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="CmpKorrLabel1">
-                <property name="text">
-                 <string>Phasenlage</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>°</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>ms</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="CmpKorrGroupBox_3">
-             <property name="title">
-              <string>Offset Korrektur</string>
-             </property>
-             <layout class="QGridLayout" name="_32">
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="OffsetCorrectionNCheckbox">
-                <property name="text">
-                 <string>Kanal N</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="OffsetCorrectionXCheckbox">
-                <property name="text">
-                 <string>Kanal X</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <spacer name="horizontalSpacer_2">
@@ -331,25 +358,6 @@
             </spacer>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="CmpCorrGroupBox">
-           <property name="title">
-            <string>Korrektur Normwandler</string>
-           </property>
-           <layout class="QVBoxLayout">
-            <item>
-             <widget class="QCheckBox" name="CmpCorrCheckBox">
-              <property name="text">
-               <string>A&amp;ktiv</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+K</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
          </item>
         </layout>
        </widget>
