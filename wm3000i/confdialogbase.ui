@@ -839,9 +839,9 @@
         <attribute name="title">
          <string>Teilerverhältnisse</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
+        <layout class="QVBoxLayout" name="verticalLayout_71">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <layout class="QHBoxLayout" name="horizontalLayout_31">
            <item>
             <widget class="QGroupBox" name="NTRatioGroupBox">
              <property name="sizePolicy">
@@ -1248,7 +1248,7 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <layout class="QHBoxLayout" name="horizontalLayout_61">
            <item>
             <widget class="QPushButton" name="RatioApplyPushButton">
              <property name="text">
