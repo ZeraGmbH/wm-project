@@ -22,7 +22,7 @@ public slots:
     void takeScreenshoots();
     void takeScreenshootFinished();
 protected:
-    virtual QDialog* getChildThis() = 0;
+    virtual QWidget* getChildThis() = 0;
 
 private:
     virtual void readStream(QDataStream& stream) override;

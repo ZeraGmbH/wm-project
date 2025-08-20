@@ -24,6 +24,11 @@ public slots:
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
 
+    void screenshooterTriggered();
+    void keyboardScreenshorTriggerd();
+    void takeScreenshoots();
+    void takeScreenshootFinished();
+
 protected:
     screenshooter* mScrShooter;
     cConfData m_ConfData, m_ConfDataTemp;
@@ -39,7 +44,10 @@ protected:
 private:
     virtual void readStream(QDataStream& stream) override;
     virtual void writeStream(QDataStream& stream) override;
-     virtual void setDefaults() override;
+    virtual void setDefaults() override;
+protected:
+    virtual QWidget* getRatioWidgetThis() = 0;
+    virtual QTabWidget* getConfWidgetThis() = 0;
 
     cFormatInfo m_Format[4];
     WidgetGeometry m_geomToFromStream;
