@@ -31,7 +31,7 @@ class RangeDialogBase : public wmRangeDialogBase
 public:
     explicit RangeDialogBase( QWidget* parent = 0, QString machineName = "");
     ~RangeDialogBase();
-    void setScreenShooter(screenshooter* poi);
+
 
 public slots:
     virtual void SetRangeListSlot( cWMRangeList & nx, cWMRangeList & evt );
@@ -40,8 +40,6 @@ public slots:
     void SetXRangeSlot( const QString & xr );
     void SetECTRangeSlot( const QString & er );
     virtual void RemoteCtrlInfoSlot( bool );
-    void takeScreenshoots();
-    void takeScreenshootFinished();
 
 signals:
     void SendRange(cConfData*);
@@ -49,8 +47,9 @@ signals:
     void SendRangeInfoReqSignal();
 
 protected:
-    virtual void showEvent( QShowEvent * );
-    virtual void closeEvent (QCloseEvent * );
+    virtual void showEvent( QShowEvent * ) override;
+    virtual void closeEvent (QCloseEvent * ) override;
+    virtual QDialog* getChildThis() override;
 
 private:
     void ActualizeDialog();
@@ -58,7 +57,6 @@ private:
     cConfData m_ConfData;
     QStringList m_sNXItemList;
     QStringList m_sECTItemList;
-    screenshooter* mScrShooter;
 
 };
 

@@ -6,6 +6,11 @@ wmRangeDialogBase::wmRangeDialogBase(QWidget *parent, QString machineName) :
     m_sessionStreamer(machineName, this)
 {}
 
+wmRangeDialogBase::~wmRangeDialogBase()
+{
+
+}
+
 bool wmRangeDialogBase::onLoadSession(QString session)
 {
     m_sessionStreamer.readSession(objectName(), session);
@@ -32,4 +37,29 @@ void wmRangeDialogBase::writeStream(QDataStream &stream)
 void wmRangeDialogBase::setDefaults()
 {
 
+}
+
+void wmRangeDialogBase::setScreenShooter(screenshooter *poi)
+{
+    mScrShooter = poi;
+}
+
+void wmRangeDialogBase::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!getChildThis()->isShown())
+    {
+        getChildThis()->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(getChildThis(), 37);
+}
+
+
+void wmRangeDialogBase::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        getChildThis()->hide();
+    }
 }
