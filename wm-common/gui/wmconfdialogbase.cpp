@@ -127,7 +127,7 @@ bool wmconfdialogbase::is_w3(const QString &s)
 
 void wmconfdialogbase::screenshooterTriggered()
 {
-    mScrShooter->storeScreen("2_Alles");
+    mScrShooter->storeScreen("02_Alles");
     this->show();
     mScrShooter->setTabWidgetPoi(this, getConfWidgetThis());
 }

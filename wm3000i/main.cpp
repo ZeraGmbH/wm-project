@@ -321,9 +321,13 @@ int main(int argc, char *argv[])
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_ETHMonitor,SLOT(takeScreenshoots()));
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_ETHMonitor,SLOT(takeScreenshootFinished()));
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_WMScrShoGui,SLOT(show()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_WMScreenShooter,SLOT(exportXML()));
         }
         else
+        {
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScrShoGui,SLOT(show()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScreenShooter,SLOT(exportXML()));
+        }
 
         QObject::connect(g_WMScrShoGui,SIGNAL(screenShooterStart()),g_WMView,SLOT(AutoScreenShoterTriggered()));
         QObject::connect(g_WMView,SIGNAL(ScreenshooterTriggeredByUser()),g_WMView,SLOT(takeScreenshoots()));
