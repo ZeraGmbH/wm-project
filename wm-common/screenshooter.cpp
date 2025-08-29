@@ -2,7 +2,9 @@
 #include "qapplication.h"
 #include "qdebug.h"
 #include "qdesktopwidget.h"
+#include "versserial.h"
 #include <QDir>
+#include <QtXml/qdom.h>
 
 screenshooter::screenshooter(QObject *parent)
     : QObject{parent}
@@ -74,6 +76,7 @@ void screenshooter::setFolderName(const QString folderName)
     {
         QDir().mkdir(mFolderName);
     }
+    mXmlExport.setPicFolderName("/pic/" + folderName);
 }
 
 void screenshooter::setFontSize(int size)
@@ -144,6 +147,7 @@ bool screenshooter::storeMap(QPixmap *map, QString fileName)
     strFileName= mFolderName + fileName +".png";
     if ((miVerboseLevel & 1) == 1 )
         qWarning() << "store" << fileName ;
+    mXmlExport.addFoto(fileName);
     return map->save(strFileName);
 }
 
@@ -172,7 +176,7 @@ void screenshooter::timerExpired()
     case INVALID:
         break;
     case MAIN:
-        storeScreenShotW(mWidgetPoi, "2_HauptFenster");
+        storeScreenShotW(mWidgetPoi, "02_HauptFenster");
         mActualNumber = INVALID;
         emit screenShotHauptFinished();
         break;
@@ -302,4 +306,431 @@ void screenshooter::timerExpired()
         break;
 
     }
+}
+
+void screenshooter::exportXML()
+{
+    mXmlExport.storeXml();
+}
+/*
+<DOKULIST>
+    <DEVICE>WM3000I</DEVICE>
+    <TYP>3k</TYP>
+    <LANGUAGE>de</LANGUAGE>
+    <PICFOLDER>../xml-definition/pic/dewm3000Idc/</PICFOLDER>
+    <PROSAFOLDER>html-prosa/</PROSAFOLDER>
+    <RELEASE>snapshot-2023-07-06</RELEASE>
+    */
+
+xmlScreenShooterExport::xmlScreenShooterExport()
+{
+    createDokuDefinition();
+}
+
+void xmlScreenShooterExport::addFoto(QString foto)
+{
+    QString str = foto.mid(0,2);
+    int nr = str.toInt();
+    mFotos.append(nr);
+}
+
+void xmlScreenShooterExport::storeXml()
+{
+    if(!mPicFolder.isEmpty() && !mType.isEmpty() &&! mLanguage.isEmpty() && !mDevice.isEmpty() && !mFileName.isEmpty() && !mRelease.isEmpty() &&!mProsaFolder.isEmpty() )
+    {
+        QDomDocument picDoc("MSWDokuDefinition");
+        QDomElement rootTag;
+        rootTag = picDoc.createElement( "DOKULIST");
+        picDoc.appendChild(rootTag);
+        QDomElement tag = picDoc.createElement( "DEVICE");
+        rootTag.appendChild(tag);
+        QDomText t = picDoc.createTextNode(mDevice);
+        tag.appendChild( t );
+
+        tag = picDoc.createElement( "TYP");
+        rootTag.appendChild(tag);
+        t = picDoc.createTextNode(mType);
+        tag.appendChild( t );
+
+        tag = picDoc.createElement( "LANGUAGE");
+        rootTag.appendChild(tag);
+        t = picDoc.createTextNode(mLanguage);
+        tag.appendChild( t );
+
+        tag = picDoc.createElement( "PICFOLDER");
+        rootTag.appendChild(tag);
+        t = picDoc.createTextNode(mPicFolder);
+        tag.appendChild( t );
+
+        tag = picDoc.createElement( "PROSAFOLDER");
+        rootTag.appendChild(tag);
+        t = picDoc.createTextNode(mProsaFolder);
+        tag.appendChild( t );
+
+        tag = picDoc.createElement( "RELEASE");
+        rootTag.appendChild(tag);
+        t = picDoc.createTextNode(mRelease);
+        tag.appendChild( t );
+
+/*        <ENTRIES>
+            <ENTRY>
+            <ITEM>File Menu</ITEM>
+            <DESCRCOM>FileMenu.html</DESCRCOM>
+            <FOTOLEFT>07_Datei.png</FOTOLEFT>
+            <FOTORIGHT>08_Datei.png</FOTORIGHT>
+            <DESCRCOMTEXT>FileMenuText.html</DESCRCOMTEXT>
+            </ENTRY>*/
+
+        QDomElement entries = picDoc.createElement( "ENTRIES" );
+        rootTag.appendChild( entries );
+
+        foreach(auto dokuItem, mDokuDefinition)
+        {
+            foreach(int nr, mFotos)
+            {
+                if (dokuItem.m_Nr == nr)
+                {
+                    QDomElement entry = picDoc.createElement( "ENTRY" );
+                    entries.appendChild( entry );
+
+                    QDomElement item = picDoc.createElement( "ITEM" );
+                    entry.appendChild(item);
+                    t = picDoc.createTextNode(dokuItem.mItem);
+                    item.appendChild(t);
+                    if (!dokuItem.mDescrCom.isEmpty())
+                    {
+                        item = picDoc.createElement( "DESCRCOM" );
+                        entry.appendChild(item);
+                        t = picDoc.createTextNode(dokuItem.mDescrCom);
+                        item.appendChild(t);
+                    }
+                    item = picDoc.createElement( "FOTOLEFT" );
+                    entry.appendChild(item);
+                    t = picDoc.createTextNode(dokuItem.mFotoLeft);
+                    item.appendChild(t);
+                    if(!dokuItem.mFotoRight.isEmpty())
+                    {
+                        item = picDoc.createElement( "FOTORIGHT" );
+                        entry.appendChild(item);
+                        t = picDoc.createTextNode(dokuItem.mFotoRight);
+                        item.appendChild(t);
+                    }
+                    if(!dokuItem.mDescrComText.isEmpty())
+                    {
+                    item = picDoc.createElement( "DESCRCOMTEXT" );
+                    entry.appendChild(item);
+                    t = picDoc.createTextNode(dokuItem.mDescrComText);
+                    item.appendChild(t);
+                    }
+                    if(!dokuItem.mDescrTyp.isEmpty())
+                    {
+                    item = picDoc.createElement( "DESCRTYP" );
+                    entry.appendChild(item);
+                    t = picDoc.createTextNode(dokuItem.mDescrTyp);
+                    item.appendChild(t);
+                    }
+                    if(!dokuItem.mDescr.isEmpty())
+                    {
+                    item = picDoc.createElement( "DESCR" );
+                    entry.appendChild(item);
+                    t = picDoc.createTextNode(dokuItem.mDescr);
+                    item.appendChild(t);
+                    }
+
+                }
+            }
+
+        }
+
+        QFile picFile(mFileName);
+        if (picFile.open( QIODevice::WriteOnly ) ) {
+            QString xml = picDoc.toString();
+            QTextStream stream( &picFile );
+            stream << xml;
+            picFile.close();
+        }
+    }
+}
+
+void xmlScreenShooterExport::setPicFolderName(const QString name)
+{   // name = "/pic/gbwm3000idcjust"
+    // name = "/pic/dewm3000u"
+    // name = "/pic/dewm3000u"
+    QString temp;
+    temp = name.simplified();
+    mPicFolder = "../xml-definition" + temp + "/";
+    if (temp.contains("wm3000")) mType = "3k"; else mType = "1k";
+    if (temp.contains("/de")) mLanguage = "de";
+    if (temp.contains("/gb")) mLanguage = "en";
+    mDevice = temp.mid(7,7).toUpper();
+    mFileName = QDir::homePath() + temp + ".xml";
+    mProsaFolder = "html-prosa/";
+    tVersSerial serialNr;
+    mRelease = serialNr.GetReleaseVersion();
+
+   // storeXml();
+}
+
+void xmlScreenShooterExport::createDokuDefinition()
+{
+    autoDokuDefinition entry;
+    entry.m_Nr = 7;
+    entry.mItem = "File Menu";
+    entry.mDescrCom = "FileMenu.html";
+    entry.mFotoLeft = "07_Datei.png";
+    entry.mFotoRight = "08_Datei.png";
+    entry.mDescrComText = "FileMenuText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 11;
+    entry.mItem = "Meassurement Menu";
+    entry.mDescrCom = "MeasMenu.html";
+    entry.mFotoLeft = "11_Messung.png";
+    entry.mFotoRight = "12_Messung.png";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "MeasMenuText.html";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 13;
+    entry.mItem = "View Menu";
+    entry.mDescrCom = "ViewMenu.html";
+    entry.mFotoLeft = "13_Ansicht.png";
+    entry.mFotoRight = "14_Ansicht.png";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "ViewMenuText.html";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 31;
+    entry.mItem = "ERRORVALUES Menu";
+    entry.mDescrCom = "ErrWind.html";
+    entry.mFotoLeft = "31_Fehler.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "ErrWindText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 32;
+    entry.mItem = "ERRORVALUES SETTINGS";
+    entry.mDescrCom = "ErrSettWind.html";
+    entry.mFotoLeft = "32_FehlerEinstell.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "ErrSettWindText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 33;
+    entry.mItem = "Vektoren Main";
+    entry.mDescrCom = "VekWind.html";
+    entry.mFotoLeft = "33_Vektoren.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "VekWindText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 34;
+    entry.mItem = "VektorenSettings Main";
+    entry.mDescrCom = "VekSettWind.html";
+    entry.mFotoLeft = "34_Vektoren.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "VekSettWindText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 35;
+    entry.mItem = "Eigenfehler Main";
+    entry.mDescrCom = "EigenWind.html";
+    entry.mFotoLeft = "35_Eigen.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "EigenWindText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 36;
+    entry.mItem = "Ethernet Menu";
+    entry.mDescrCom = "EtherWind.html";
+    entry.mFotoLeft = "36_EthernMon.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "EtherWindText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 15;
+    entry.mItem = "Settings Menu";
+    entry.mDescrCom = "SettMenu.html";
+    entry.mFotoLeft = "15_Einstell.png";
+    entry.mFotoRight = "16_Einstell.png";
+    entry.mDescrComText = "SettMenuText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 17;
+    entry.mItem = "Configuration Mode";
+    entry.mDescrCom = "ConfModeWind.html";
+    entry.mFotoLeft = "17_Modus.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "";
+    entry.mDescr = "KonfModus.html";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 18;
+    entry.mItem = "Configuration Calc";
+    entry.mDescrCom = "ConfCalcWind.html";
+    entry.mFotoLeft = "18_Berechnung.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "ConfCalcText.html";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 19;
+    entry.mItem = "Configuration Meas";
+    entry.mDescrCom = "ConfMeasWind.html";
+    entry.mFotoLeft = "19_Messung.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "ConfMeasText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 20;
+    entry.mItem = "Configuration Sync";
+    entry.mDescrCom = "ConfSyncWind.html";
+    entry.mFotoLeft = "20_Synchr.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "ConfSyncText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 21;
+    entry.mItem = "Configuration Divi";
+    entry.mDescrCom = "ConfDiviWind.html";
+    entry.mFotoLeft = "21_Teiler.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "";
+    entry.mDescr = "ConfDiviText.html";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 22;
+    entry.mItem = "Configuration nCon";
+    entry.mDescrCom = "ConfnConWind.html";
+    entry.mFotoLeft = "22_nConv.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "ConfnConText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 23;
+    entry.mItem = "Configuration Log";
+    entry.mDescrCom = "ConfLogWind.html";
+    entry.mFotoLeft = "23_Logfile.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "ConfLogText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 38;
+    entry.mItem = "keyboardhex";
+    entry.mDescrCom = "keyhexWind.html";
+    entry.mFotoLeft = "39_KeyboardHex.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 39;
+    entry.mItem = "keyboardfloat";
+    entry.mDescrCom = "keyfloatWind.html";
+    entry.mFotoLeft = "38_KeyboardFloat.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 37;
+    entry.mItem = "Ranges Main";
+    entry.mDescrCom = "rangesWind.html";
+    entry.mFotoLeft = "37_Messbereiche.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 37;
+    entry.mItem = "Divider Main";
+    entry.mDescrCom = "dividerWind.html";
+    entry.mFotoLeft = "42_RatioWidget.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 37;
+    entry.mItem = "Help Menu";
+    entry.mDescrCom = "HelpMenu.html";
+    entry.mFotoLeft = "24_Hilfe.png";
+    entry.mFotoRight = "25_Hilfe.png";
+    entry.mDescrComText = "HelpMenuText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 41;
+    entry.mItem = "version Main";
+    entry.mDescrCom = "versionWind.html";
+    entry.mFotoLeft = "41_Version.png";
+    entry.mFotoRight = "";
+    entry.mDescrComText = "";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+    entry.m_Nr = 26;
+    entry.mItem = "Language Main";
+    entry.mDescrCom = "LangMenu.html";
+    entry.mFotoLeft = "26_Sprache.png";
+    entry.mFotoRight = "27_Sprache.png";
+    entry.mDescrComText = "LangMenuText.html";
+    entry.mDescrTyp = "";
+    entry.mDescr = "";
+    mDokuDefinition.append(entry);
+
+
+
+}
+
+autoDokuDefinition::autoDokuDefinition()
+{
+    m_Nr = 0;
+    mItem = "";
+    mDescrCom = "";
+    mFotoLeft = "";
+    mFotoRight = "";
+    mDescrComText = "";
+    mDescrTyp = "";
+    mDescr = "";
+}
+
+autoDokuDefinition::autoDokuDefinition(const autoDokuDefinition &t)
+{
+
+    this->m_Nr = t.m_Nr;
+    this->mItem = t.mItem;
+    this->mDescrCom = t.mDescrCom;
+    this->mFotoLeft = t.mFotoLeft;
+    this->mFotoRight = t.mFotoRight;
+    this->mDescrComText = t.mDescrComText;
+    this->mDescrTyp = t.mDescrTyp;
+    this->mDescr = t.mDescr;
+
+}
+
+autoDokuDefinition &autoDokuDefinition::operator=(const autoDokuDefinition &t)
+{
+    autoDokuDefinition *local = new autoDokuDefinition;
+    local->m_Nr = t.m_Nr;
+    local->mItem = t.mItem;
+    local->mDescrCom = t.mDescrCom;
+    local->mFotoLeft = t.mFotoLeft;
+    local->mFotoRight = t.mFotoRight;
+    local->mDescrComText = t.mDescrComText;
+    local->mDescrTyp = t.mDescrTyp;
+    local->mDescr = t.mDescr;
+    return *local;
 }

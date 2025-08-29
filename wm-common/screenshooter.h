@@ -9,6 +9,41 @@
 #include "QEvent"
 #include <QObject>
 
+class autoDokuDefinition :
+                           public QObject
+{
+    Q_OBJECT
+public:
+    autoDokuDefinition();
+    autoDokuDefinition(const autoDokuDefinition &t);
+    autoDokuDefinition& operator=(const autoDokuDefinition &t);
+    int m_Nr;
+    QString mItem;
+    QString mDescrCom;
+    QString mFotoLeft;
+    QString mFotoRight;
+    QString mDescrComText;
+    QString mDescrTyp;
+    QString mDescr;
+};
+
+class xmlScreenShooterExport: public QObject
+{
+    Q_OBJECT
+public:
+    xmlScreenShooterExport();
+    void addFoto(QString fotoNr);
+    void storeXml();
+    void setPicFolderName(const QString name);
+private:
+    void createDokuDefinition();
+    QList<int> mFotos;
+    QString mDevice, mType, mLanguage, mPicFolder, mProsaFolder, mRelease, mFileName;
+    QList<autoDokuDefinition> mDokuDefinition;
+
+
+};
+
 class screenshooter : public QObject
 {
     Q_OBJECT
@@ -47,6 +82,7 @@ signals:
     void screenShotRatioFinished();
     void update(uint nr, QString text);
 private:
+    xmlScreenShooterExport mXmlExport;
     bool storeMap(QPixmap* map, QString fileName);
 //    void initMouseEvent();
     bool mShowed;
@@ -85,6 +121,7 @@ private:
     };
 private slots:
     void timerExpired();
+    void exportXML();
 
 
 };
