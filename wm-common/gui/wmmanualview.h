@@ -15,12 +15,22 @@ class wmManualView : public QWidget
 
 public:
     explicit wmManualView(QWidget *parent = nullptr);
-    void load(const QString adr);
     ~wmManualView();
+    void setLanguage(const QString str);
+    void setTyp(const QString str);
+    void setConventional(bool b);
+    void setDC(bool b);
 
+public slots:
     void myExecute();
+
 private:
     Ui::wmManualView *ui;
+    QString mPath, mLanguage,mTyp;
+    bool mbDC, mbConventional;
+
+    void setPath();
+    QString getDevice();
 };
 
 #endif // WMMANUALVIEW_H
