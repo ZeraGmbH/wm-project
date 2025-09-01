@@ -194,6 +194,7 @@ void WMViewBase::init()
     connect(ui->dateiBeendenAction,SIGNAL(activated()),this,SIGNAL(UIdateiBeendenActionActivated()));
     connect(ui->hilfeVersionAction,SIGNAL(activated()),this,SIGNAL(UIhilfeVersionActionActivated()));
     connect(ui->hilfeReleaseInfoAction,SIGNAL(activated()),this,SIGNAL(UIhilfeReleaseInfoActionActivated()));
+    connect(ui->actionAnleitung,SIGNAL(activated()),this,SIGNAL(UIAnleitungActionActivated()));
 }
 
 
