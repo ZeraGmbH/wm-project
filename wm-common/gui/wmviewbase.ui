@@ -117,6 +117,7 @@
     <addaction name="hilfeInfoAction"/>
     <addaction name="hilfeInfo_ber_ZeraAction"/>
     <addaction name="hilfeInfo_ber_QtAction"/>
+    <addaction name="actionAnleitung"/>
     <addaction name="separator"/>
     <addaction name="hilfeVersionAction"/>
     <addaction name="hilfeReleaseInfoAction"/>
@@ -815,6 +816,11 @@
    </property>
    <property name="shortcut">
     <string>F8</string>
+   </property>
+  </action>
+  <action name="actionAnleitung">
+   <property name="text">
+    <string>Anleitung</string>
    </property>
   </action>
  </widget>
