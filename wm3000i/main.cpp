@@ -66,6 +66,9 @@ int main(int argc, char *argv[])
 
     QString qmPath = "/usr/share/wm3000i";
     QString qmFileCom, qmFileWm;
+    wmManualView *g_WMDocuView = new wmManualView();
+    g_WMDocuView->setTyp("i");
+    g_WMDocuView->setLanguage("gb");
 
     switch (g_WMDevice->m_ConfData.Language)
     {
@@ -73,6 +76,7 @@ int main(int argc, char *argv[])
             qmFileWm = "";
             qmFileCom = "wm-common_de.qm";
             mCmdLPar.setLanguage("de");
+            g_WMDocuView->setLanguage("de");
             break;
        case gb:
            qmFileWm = "wm3000i_gb.qm";
@@ -100,8 +104,7 @@ int main(int argc, char *argv[])
             qWarning() << qPrintable(qmFileCom) << " translation file not found ";
         else
             app.installTranslator(qtTranslator);
-    }
-
+    }  
 
     g_WMView = new WMViewBaseI; // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
@@ -114,11 +117,17 @@ int main(int argc, char *argv[])
 
     g_WMDevice->setConventional(mCmdLPar.GetConvent());
     if (mCmdLPar.GetConvent())
+    {
         g_WMView->configureWM1000Items();
+        g_WMDocuView->setConventional(true);
+    }
 
     g_WMDevice->setDC(mCmdLPar.GetDC());
     if (!mCmdLPar.GetDC())
+    {
         g_WMView->configureWMwoDC();
+        g_WMDocuView->setDC(true);
+    }
 
     g_WMDevice->setNewSamplerates(mCmdLPar.GetNewSampleRates());
 
@@ -251,8 +260,7 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMView,SIGNAL(UIhilfeInfo_ber_ZeraActionActivated()),g_WMInfo,SLOT(AboutZeraSlot())); // informationen zu Zera
     QObject::connect(g_WMView,SIGNAL(UIhilfeInfoActionActivated()),g_WMInfo,SLOT(AboutWM3000Slot())); // informationen zu WM3000
     QObject::connect(g_WMView,SIGNAL(UIhilfeSelbsttestActionActivated()),g_WMDevice,SLOT(SelfTestManuell())); // manuellen selbststest starten
-    wmManualView *wmmView = new wmManualView();
-    wmmView->myExecute();
+    QObject::connect(g_WMView,SIGNAL(UIAnleitungActionActivated()),g_WMDocuView,SLOT(myExecute()));
 
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMView,SLOT(SetViewConfDataInfoSlot(cConfData*))); //  device sendet configurationsdaten an das hauptfenster
     QObject::connect(g_WMDevice,SIGNAL(JustifiedSignal(bool)),g_WMView,SLOT(SetJustifiedSlot(bool))); //  device sendet info ob justiert oder nicht an das hauptfenster
