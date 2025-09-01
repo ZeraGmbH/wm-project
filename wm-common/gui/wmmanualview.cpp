@@ -3,7 +3,8 @@
 #include "wmmessagebox.h"
 
 // path of the dokumentation may be:
-// /usr/share/wm3000(i,u)/wm-docu/html-output
+// /usr/share/wm3000/wm-docu/html-output
+//                          /xml-input/pic/
 
 wmManualView::wmManualView(QWidget *parent)
     : QWidget(parent)
@@ -37,8 +38,7 @@ void wmManualView::setDC(bool b)
 
 void wmManualView::setPath()
 {
-    mPath = "/usr/share/";
-    mPath = mPath.append(getDevice()+"/");
+    mPath = "/usr/share/wm3000/";
     mPath = mPath.append("wm-docu/html-output/");
     mPath = mPath.append(mLanguage);
     mPath = mPath.append(getDevice());

@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
     QString qmPath = "/usr/share/wm3000u";
     QString qmFileCom, qmFileWm;
-    mCmdLPar.setDevice("U");
+    mCmdLPar.setDevice("u");
 
     switch (g_WMDevice->m_ConfData.Language)
     {
