@@ -102,3 +102,8 @@ void wmMessageBox::msgRatioEotErr()
     QMessageBox::information( 0, trUtf8("refernece transducer"),  trUtf8("Please check! \nNo range selected"));
 }
 
+void wmMessageBox::noDocu(QString path)
+{
+    QMessageBox::information( 0, trUtf8("documentation not found"),  trUtf8("documentation File missing at \n")+path);
+}
+
