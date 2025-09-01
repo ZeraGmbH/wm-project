@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 
     g_WMDevice = new cWM3000I; //  die eigentliche Messeinrichtung wird später dynamisch je nach aufruf erzeugt
     g_WMDevice->setIpAddress(mCmdLPar.GetIpAdress());
-    mCmdLPar.setDevice("I");
+    mCmdLPar.setDevice("i");
 
     QString qmPath = "/usr/share/wm3000i";
     QString qmFileCom, qmFileWm;
