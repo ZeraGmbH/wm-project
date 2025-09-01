@@ -106,7 +106,7 @@ signals:
     void UIhilfeVersionActionActivated();
     void UIhilfeReleaseInfoActionActivated();
     void ScreenshooterTriggeredByUser();
-    void myShowanleitung();
+    void UIAnleitungActionActivated();
 
 protected:
     virtual void closeEvent(QCloseEvent *ce) override;
