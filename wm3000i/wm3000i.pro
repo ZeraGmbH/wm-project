@@ -43,7 +43,7 @@ FORMS	= confdialogbase.ui \
 TRANSLATIONS    = wm3000i_gb.ts \
                   wm3000i_pl.ts
 
-QT += widgets network xml qt3support core
+QT += widgets network xml qt3support core webkit
 
 INCLUDEPATH += \
     ../wm-common \
