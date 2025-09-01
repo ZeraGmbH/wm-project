@@ -20,6 +20,7 @@ public:
     void setSchnubbel();
     void msgRatioErr();
     void msgRatioEotErr();
+    void noDocu(QString path);
 signals:
 
 };
