@@ -16,6 +16,30 @@ wmManualView::wmManualView(QWidget *parent)
 
 }
 
+void wmManualView::setScreenShooter(screenshooter* poi)
+{
+    mScrShooter = poi;
+}
+
+void wmManualView::takeScreenshoots()
+{
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 43);
+}
+
+void wmManualView::takeScreenshootFinished()
+{
+    if(mScrShooter->showed())
+    {
+        this->hide();
+    }
+}
+
 void wmManualView::setLanguage(const QString str)
 {
     mLanguage = str;
@@ -56,6 +80,11 @@ QString wmManualView::getDevice()
 
 void wmManualView::myExecute()
 {
+    show();
+}
+
+void wmManualView::show()
+{
     setPath();
     QFile file;
     if(!file.exists(mPath))
@@ -63,10 +92,10 @@ void wmManualView::myExecute()
         wmMessageBox msgb;
         msgb.noDocu(mPath);
     }
-        else
+    else
     {
         ui->wvIntroduction->load(QUrl(mPath));
-        show();
+        QWidget::show();
     }
 }
 

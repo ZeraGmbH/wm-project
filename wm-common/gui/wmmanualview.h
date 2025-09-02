@@ -1,6 +1,8 @@
 #ifndef WMMANUALVIEW_H
 #define WMMANUALVIEW_H
 
+#include "screenshooter.h"
+
 #include <QWidget>
 #include <QtWebKit/QWebElement>
 #include <QtWebKit/QtWebKit>
@@ -21,13 +23,17 @@ public:
     void setConventional(bool b);
     void setDC(bool b);
 
+    void setScreenShooter(screenshooter *poi);
 public slots:
     void myExecute();
-
+    void show();
+    void takeScreenshoots();
+    void takeScreenshootFinished();
 private:
     Ui::wmManualView *ui;
     QString mPath, mLanguage,mTyp;
     bool mbDC, mbConventional;
+    screenshooter *mScrShooter;
 
     void setPath();
     QString getDevice();
