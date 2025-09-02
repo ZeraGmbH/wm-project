@@ -17,11 +17,13 @@ public:
     autoDokuDefinition();
     autoDokuDefinition(const autoDokuDefinition &t);
     autoDokuDefinition& operator=(const autoDokuDefinition &t);
+    void clear();
     int m_Nr;
     QString mItem;
     QString mDescrCom;
     QString mFotoLeft;
     QString mFotoRight;
+    QString mFoto;
     QString mDescrComText;
     QString mDescrTyp;
     QString mDescr;
@@ -80,6 +82,7 @@ signals:
     void screenShotInfoFinished();
     void screenShotVersionFinished();
     void screenShotRatioFinished();
+    void screenShotAnleiFinished();
     void update(uint nr, QString text);
 private:
     xmlScreenShooterExport mXmlExport;
@@ -117,7 +120,8 @@ private:
         KEYBOARDHEX,
         INFO,
         VERSION,
-        RATIOWIDGET
+        RATIOWIDGET,
+        ANLEITUNGWIDGET
     };
 private slots:
     void timerExpired();
