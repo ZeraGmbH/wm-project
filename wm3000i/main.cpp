@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
     wmManualView *g_WMDocuView = new wmManualView();
     g_WMDocuView->setTyp("i");
     g_WMDocuView->setLanguage("gb");
+    mCmdLPar.setDevice("i");
 
     switch (g_WMDevice->m_ConfData.Language)
     {
