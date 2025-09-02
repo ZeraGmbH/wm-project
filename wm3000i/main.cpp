@@ -123,10 +123,10 @@ int main(int argc, char *argv[])
     }
 
     g_WMDevice->setDC(mCmdLPar.GetDC());
+    g_WMDocuView->setDC(mCmdLPar.GetDC());
     if (!mCmdLPar.GetDC())
     {
         g_WMView->configureWMwoDC();
-        g_WMDocuView->setDC(true);
     }
 
     g_WMDevice->setNewSamplerates(mCmdLPar.GetNewSampleRates());
@@ -326,6 +326,7 @@ int main(int argc, char *argv[])
         g_WMRangeDialog->setScreenShooter(g_WMScreenShooter);
         g_VersionsView->setScreenShooter(g_WMScreenShooter);
         g_WMRatioDialog->setScreenShooter(g_WMScreenShooter);
+        g_WMDocuView->setScreenShooter(g_WMScreenShooter);
         if (g_WMInfo->isWM3000())
         {
             g_ETHMonitor->setScreenShooter(g_WMScreenShooter);
@@ -362,7 +363,10 @@ int main(int argc, char *argv[])
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_WMRatioDialog,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMRatioDialog,SLOT(takeScreenshootFinished()));
 
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMRangeDialog,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMDocuView,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotAnleiFinished()),g_WMDocuView,SLOT(takeScreenshootFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotAnleiFinished()), g_WMRangeDialog,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMRangeDialog,SLOT(takeScreenshootFinished()));
 
     }
