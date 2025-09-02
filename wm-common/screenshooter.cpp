@@ -176,7 +176,7 @@ void screenshooter::timerExpired()
     case INVALID:
         break;
     case MAIN:
-        storeScreenShotW(mWidgetPoi, "02_HauptFenster");
+        storeScreenShotW(mWidgetPoi, "03_HauptFenster");
         mActualNumber = INVALID;
         emit screenShotHauptFinished();
         break;
@@ -302,6 +302,12 @@ void screenshooter::timerExpired()
         mActualNumber = INVALID;
         emit screenShotRatioFinished();
         break;
+    case ANLEITUNGWIDGET:
+        storeScreenShotW(mWidgetPoi, "43_Anleitung");
+        mActualNumber = INVALID;
+        emit screenShotAnleiFinished();
+        break;
+
     default:
         break;
 
@@ -404,15 +410,25 @@ void xmlScreenShooterExport::storeXml()
                         t = picDoc.createTextNode(dokuItem.mDescrCom);
                         item.appendChild(t);
                     }
-                    item = picDoc.createElement( "FOTOLEFT" );
-                    entry.appendChild(item);
-                    t = picDoc.createTextNode(dokuItem.mFotoLeft);
-                    item.appendChild(t);
+                    if (!dokuItem.mFotoLeft.isEmpty())
+                    {
+                        item = picDoc.createElement( "FOTOLEFT" );
+                        entry.appendChild(item);
+                        t = picDoc.createTextNode(dokuItem.mFotoLeft);
+                        item.appendChild(t);
+                    }
                     if(!dokuItem.mFotoRight.isEmpty())
                     {
                         item = picDoc.createElement( "FOTORIGHT" );
                         entry.appendChild(item);
                         t = picDoc.createTextNode(dokuItem.mFotoRight);
+                        item.appendChild(t);
+                    }
+                    if (!dokuItem.mFoto.isEmpty())
+                    {
+                        item = picDoc.createElement( "FOTO" );
+                        entry.appendChild(item);
+                        t = picDoc.createTextNode(dokuItem.mFoto);
                         item.appendChild(t);
                     }
                     if(!dokuItem.mDescrComText.isEmpty())
@@ -473,226 +489,189 @@ void xmlScreenShooterExport::setPicFolderName(const QString name)
 
 void xmlScreenShooterExport::createDokuDefinition()
 {
+    mDokuDefinition.clear();
     autoDokuDefinition entry;
+    entry.m_Nr = 2;
+    entry.mItem = "Main Screen";
+    entry.mDescrCom = "AllesMenu.html";
+    entry.mFoto = "02_Alles.png";
+    entry.mDescrComText = "AllesText.html";
+    mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 7;
     entry.mItem = "File Menu";
     entry.mDescrCom = "FileMenu.html";
     entry.mFotoLeft = "07_Datei.png";
     entry.mFotoRight = "08_Datei.png";
     entry.mDescrComText = "FileMenuText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 11;
     entry.mItem = "Meassurement Menu";
     entry.mDescrCom = "MeasMenu.html";
     entry.mFotoLeft = "11_Messung.png";
     entry.mFotoRight = "12_Messung.png";
-    entry.mDescrComText = "";
     entry.mDescrTyp = "MeasMenuText.html";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 13;
     entry.mItem = "View Menu";
     entry.mDescrCom = "ViewMenu.html";
     entry.mFotoLeft = "13_Ansicht.png";
     entry.mFotoRight = "14_Ansicht.png";
-    entry.mDescrComText = "";
     entry.mDescrTyp = "ViewMenuText.html";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 31;
     entry.mItem = "ERRORVALUES Menu";
     entry.mDescrCom = "ErrWind.html";
-    entry.mFotoLeft = "31_Fehler.png";
-    entry.mFotoRight = "";
+    entry.mFoto = "31_Fehler.png";
     entry.mDescrComText = "ErrWindText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 32;
     entry.mItem = "ERRORVALUES SETTINGS";
     entry.mDescrCom = "ErrSettWind.html";
-    entry.mFotoLeft = "32_FehlerEinstell.png";
-    entry.mFotoRight = "";
+    entry.mFoto = "32_FehlerEinstell.png";
     entry.mDescrComText = "ErrSettWindText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 33;
     entry.mItem = "Vektoren Main";
     entry.mDescrCom = "VekWind.html";
     entry.mFotoLeft = "33_Vektoren.png";
-    entry.mFotoRight = "";
     entry.mDescrComText = "VekWindText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 34;
     entry.mItem = "VektorenSettings Main";
     entry.mDescrCom = "VekSettWind.html";
     entry.mFotoLeft = "34_Vektoren.png";
-    entry.mFotoRight = "";
     entry.mDescrComText = "VekSettWindText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 35;
     entry.mItem = "Eigenfehler Main";
     entry.mDescrCom = "EigenWind.html";
     entry.mFotoLeft = "35_Eigen.png";
-    entry.mFotoRight = "";
     entry.mDescrComText = "EigenWindText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 36;
     entry.mItem = "Ethernet Menu";
     entry.mDescrCom = "EtherWind.html";
-    entry.mFotoLeft = "36_EthernMon.png";
-    entry.mFotoRight = "";
+    entry.mFoto = "36_EthernMon.png";
     entry.mDescrComText = "EtherWindText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 15;
     entry.mItem = "Settings Menu";
     entry.mDescrCom = "SettMenu.html";
     entry.mFotoLeft = "15_Einstell.png";
     entry.mFotoRight = "16_Einstell.png";
     entry.mDescrComText = "SettMenuText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 17;
     entry.mItem = "Configuration Mode";
     entry.mDescrCom = "ConfModeWind.html";
-    entry.mFotoLeft = "17_Modus.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
-    entry.mDescrTyp = "";
+    entry.mFoto = "17_Modus.png";
     entry.mDescr = "KonfModus.html";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 18;
     entry.mItem = "Configuration Calc";
     entry.mDescrCom = "ConfCalcWind.html";
-    entry.mFotoLeft = "18_Berechnung.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
+    entry.mFoto = "18_Berechnung.png";
     entry.mDescrTyp = "ConfCalcText.html";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 19;
     entry.mItem = "Configuration Meas";
     entry.mDescrCom = "ConfMeasWind.html";
-    entry.mFotoLeft = "19_Messung.png";
-    entry.mFotoRight = "";
+    entry.mFoto = "19_Messung.png";
     entry.mDescrComText = "ConfMeasText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 20;
     entry.mItem = "Configuration Sync";
     entry.mDescrCom = "ConfSyncWind.html";
-    entry.mFotoLeft = "20_Synchr.png";
-    entry.mFotoRight = "";
+    entry.mFoto = "20_Synchr.png";
     entry.mDescrComText = "ConfSyncText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 21;
     entry.mItem = "Configuration Divi";
     entry.mDescrCom = "ConfDiviWind.html";
-    entry.mFotoLeft = "21_Teiler.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
-    entry.mDescrTyp = "";
+    entry.mFoto = "21_Teiler.png";
     entry.mDescr = "ConfDiviText.html";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 22;
     entry.mItem = "Configuration nCon";
     entry.mDescrCom = "ConfnConWind.html";
-    entry.mFotoLeft = "22_nConv.png";
-    entry.mFotoRight = "";
+    entry.mFoto = "22_nConv.png";
     entry.mDescrComText = "ConfnConText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 23;
     entry.mItem = "Configuration Log";
     entry.mDescrCom = "ConfLogWind.html";
-    entry.mFotoLeft = "23_Logfile.png";
-    entry.mFotoRight = "";
+    entry.mFoto = "23_Logfile.png";
     entry.mDescrComText = "ConfLogText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 38;
     entry.mItem = "keyboardhex";
     entry.mDescrCom = "keyhexWind.html";
     entry.mFotoLeft = "39_KeyboardHex.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 39;
     entry.mItem = "keyboardfloat";
     entry.mDescrCom = "keyfloatWind.html";
     entry.mFotoLeft = "38_KeyboardFloat.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 37;
     entry.mItem = "Ranges Main";
     entry.mDescrCom = "rangesWind.html";
     entry.mFotoLeft = "37_Messbereiche.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 37;
     entry.mItem = "Divider Main";
     entry.mDescrCom = "dividerWind.html";
     entry.mFotoLeft = "42_RatioWidget.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 37;
     entry.mItem = "Help Menu";
     entry.mDescrCom = "HelpMenu.html";
     entry.mFotoLeft = "24_Hilfe.png";
     entry.mFotoRight = "25_Hilfe.png";
     entry.mDescrComText = "HelpMenuText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 41;
     entry.mItem = "version Main";
     entry.mDescrCom = "versionWind.html";
-    entry.mFotoLeft = "41_Version.png";
-    entry.mFotoRight = "";
-    entry.mDescrComText = "";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
+    entry.mFoto = "41_Version.png";
     mDokuDefinition.append(entry);
+    entry.clear();
+    entry.m_Nr = 43;
+    entry.mItem = "Anleitung Main";
+    entry.mDescrCom = "AnleitungWind.html";
+    entry.mFoto = "43_Anleitung.png";
+    mDokuDefinition.append(entry);
+    entry.clear();
     entry.m_Nr = 26;
     entry.mItem = "Language Main";
     entry.mDescrCom = "LangMenu.html";
     entry.mFotoLeft = "26_Sprache.png";
     entry.mFotoRight = "27_Sprache.png";
     entry.mDescrComText = "LangMenuText.html";
-    entry.mDescrTyp = "";
-    entry.mDescr = "";
     mDokuDefinition.append(entry);
-
-
-
 }
 
 autoDokuDefinition::autoDokuDefinition()
@@ -702,6 +681,7 @@ autoDokuDefinition::autoDokuDefinition()
     mDescrCom = "";
     mFotoLeft = "";
     mFotoRight = "";
+    mFoto = "";
     mDescrComText = "";
     mDescrTyp = "";
     mDescr = "";
@@ -715,6 +695,7 @@ autoDokuDefinition::autoDokuDefinition(const autoDokuDefinition &t)
     this->mDescrCom = t.mDescrCom;
     this->mFotoLeft = t.mFotoLeft;
     this->mFotoRight = t.mFotoRight;
+    this->mFoto = t.mFoto;
     this->mDescrComText = t.mDescrComText;
     this->mDescrTyp = t.mDescrTyp;
     this->mDescr = t.mDescr;
@@ -729,8 +710,22 @@ autoDokuDefinition &autoDokuDefinition::operator=(const autoDokuDefinition &t)
     local->mDescrCom = t.mDescrCom;
     local->mFotoLeft = t.mFotoLeft;
     local->mFotoRight = t.mFotoRight;
+    local->mFoto = t.mFoto;
     local->mDescrComText = t.mDescrComText;
     local->mDescrTyp = t.mDescrTyp;
     local->mDescr = t.mDescr;
     return *local;
+}
+
+void autoDokuDefinition::clear()
+{
+    m_Nr = 0;
+    mItem = "";
+    mDescrCom = "";
+    mFotoLeft = "";
+    mFotoRight = "";
+    mFoto = "";
+    mDescrComText = "";
+    mDescrTyp = "";
+    mDescr = "";
 }
