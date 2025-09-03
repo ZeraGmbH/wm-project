@@ -95,7 +95,7 @@ void cwm3000DeviceServer::ReceiveSelftestRequest()
 }
 
 
-void cwm3000DeviceServer::ReceiveOffsetNXResult(double offs)
+void cwm3000DeviceServer::ReceiveOffsetResult(double offs)
 {
     emit SendOffsetResult(offs);
 }

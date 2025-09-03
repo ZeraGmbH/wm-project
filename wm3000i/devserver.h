@@ -41,7 +41,7 @@ public slots:
     void ReceiveENInfoReguest(); // wenn eins der interfaces en61850 info angefragt hat
     void ReceiveSelftestResult(int);
     void ReceiveSelftestRequest(); // wenn eins der interfaces *tst ausführen soll
-    void ReceiveOffsetNXResult(double offs);
+    void ReceiveOffsetResult(double offs);
     void ReceiveChannelNOffsetMeasureRequest();
     void ReceiveChannelXOffsetMeasureRequest();
     void ReceiveResetETHStatusCommand();
