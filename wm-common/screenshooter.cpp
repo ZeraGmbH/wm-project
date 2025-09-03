@@ -475,7 +475,21 @@ void xmlScreenShooterExport::setPicFolderName(const QString name)
     QString temp;
     temp = name.simplified();
     mPicFolder = "../xml-definition" + temp + "/";
-    if (temp.contains("wm3000")) mType = "3k"; else mType = "1k";
+    if (temp.contains("wm3000"))
+    {
+        if (temp.contains("dc"))
+        {
+        mType = "dc";
+        }
+        else
+        {
+            mType = "3k";
+        }
+    }
+    else
+    {
+        mType = "1k";
+    }
     if (temp.contains("/de")) mLanguage = "de";
     if (temp.contains("/gb")) mLanguage = "en";
     mDevice = temp.mid(7,7).toUpper();
@@ -656,13 +670,13 @@ void xmlScreenShooterExport::createDokuDefinition()
     entry.m_Nr = 41;
     entry.mItem = "version Main";
     entry.mDescrCom = "versionWind.html";
-    entry.mFoto = "41_Version.png";
+    entry.mFotoLeft = "41_Version.png";
     mDokuDefinition.append(entry);
     entry.clear();
     entry.m_Nr = 43;
     entry.mItem = "Anleitung Main";
     entry.mDescrCom = "AnleitungWind.html";
-    entry.mFoto = "43_Anleitung.png";
+    entry.mFotoLeft = "43_Anleitung.png";
     mDokuDefinition.append(entry);
     entry.clear();
     entry.m_Nr = 26;
