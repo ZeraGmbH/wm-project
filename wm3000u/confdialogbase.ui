@@ -64,7 +64,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Widget8">
         <attribute name="title">
@@ -1148,6 +1148,19 @@
             </widget>
            </item>
            <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QGroupBox" name="EVTratioGroupBox">
              <property name="enabled">
               <bool>true</bool>
@@ -1165,24 +1178,11 @@
               <item row="1" column="3">
                <widget class="QComboBox" name="RatioSekEVTDivComboBox"/>
               </item>
-              <item row="1" column="1">
-               <widget class="cWmLineEdit" name="RatioSekEVTLineEdit">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>75</width>
-                  <height>26</height>
-                 </size>
-                </property>
-                <property name="maxLength">
-                 <number>9</number>
-                </property>
-               </widget>
+              <item row="0" column="2">
+               <widget class="QComboBox" name="RatioPrimEVTUnitComboBox"/>
+              </item>
+              <item row="0" column="3">
+               <widget class="QComboBox" name="RatioPrimEVTDivComboBox"/>
               </item>
               <item row="0" column="1">
                <widget class="cWmLineEdit" name="RatioPrimEVTLineEdit">
@@ -1206,6 +1206,9 @@
                 </property>
                </widget>
               </item>
+              <item row="1" column="2">
+               <widget class="QComboBox" name="RatioSekEVTUnitComboBox"/>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="RatioPrimXLabel_3">
                 <property name="sizePolicy">
@@ -1218,9 +1221,6 @@
                  <string>Prim:</string>
                 </property>
                </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QComboBox" name="RatioSekEVTUnitComboBox"/>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="RatioSekXLabel_3">
@@ -1235,11 +1235,24 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="3">
-               <widget class="QComboBox" name="RatioPrimEVTDivComboBox"/>
-              </item>
-              <item row="0" column="2">
-               <widget class="QComboBox" name="RatioPrimEVTUnitComboBox"/>
+              <item row="1" column="1">
+               <widget class="cWmLineEdit" name="RatioSekEVTLineEdit">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>75</width>
+                  <height>26</height>
+                 </size>
+                </property>
+                <property name="maxLength">
+                 <number>9</number>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -1251,14 +1264,14 @@
            <item>
             <widget class="QPushButton" name="RatioApplyPushButton">
              <property name="text">
-              <string>Apply</string>
+              <string>Übernehmen</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="RatioCancelPushButton">
              <property name="text">
-              <string>Cancel</string>
+              <string>Abbruch</string>
              </property>
             </widget>
            </item>

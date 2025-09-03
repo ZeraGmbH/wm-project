@@ -37,6 +37,7 @@ public:
     void addFoto(QString fotoNr);
     void storeXml();
     void setPicFolderName(const QString name);
+    void clear();
 private:
     void createDokuDefinition();
     QList<int> mFotos;
@@ -68,6 +69,7 @@ public:
     void setConvent(bool convent);
     void setJustage(bool just);
     bool isJustage();
+    void clearFotoList();
 signals:
     void keyboardScreenShot();
     void keyboardScreenShotFinished();

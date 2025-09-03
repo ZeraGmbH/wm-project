@@ -13,7 +13,7 @@ wmManualView::wmManualView(QWidget *parent)
     ui->setupUi(this);
     mbDC = false;
     mbConventional = false;
-
+    setWindowTitle("Benutzeranleitung");
 }
 
 void wmManualView::setScreenShooter(screenshooter* poi)

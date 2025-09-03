@@ -99,6 +99,11 @@ bool screenshooter::isJustage()
     return mJustage;
 }
 
+void screenshooter::clearFotoList()
+{
+    mXmlExport.clear();
+}
+
 void screenshooter::storeScreen(QString fileName)
 {
     QPixmap map;
@@ -499,6 +504,11 @@ void xmlScreenShooterExport::setPicFolderName(const QString name)
     mRelease = serialNr.GetReleaseVersion();
 
    // storeXml();
+}
+
+void xmlScreenShooterExport::clear()
+{
+    mFotos.clear();
 }
 
 void xmlScreenShooterExport::createDokuDefinition()

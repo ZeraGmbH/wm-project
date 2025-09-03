@@ -14,7 +14,7 @@ cZeraInfo::cZeraInfo(int nr)
 
 bool cZeraInfo::isWM3000()
 {
-    return ((m_nr & wmInfoWm3000I) | (m_nr & wmInfoWm3000U));
+    return ((m_nr == wmInfoWm3000I) || (m_nr == wmInfoWm3000U));
 }
 
 void cZeraInfo::AboutZeraSlot()
