@@ -29,6 +29,7 @@ void WMViewBase::AutoScreenShoterTriggered()
 {
     QPoint point;
     uint adjust;
+    mScrShooter->clearFotoList();
     point = ui->MenuBarEditor->rect().bottomLeft();
     ui->Datei->exec(mapToGlobal(point));
     adjust = mScrShooter->storeScreenShot(ui->Datei,"07_Datei");

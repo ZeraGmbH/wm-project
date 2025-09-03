@@ -64,7 +64,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Widget8">
         <attribute name="title">
@@ -1149,6 +1149,19 @@
             </widget>
            </item>
            <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QGroupBox" name="ECTratioGroupBox">
              <property name="enabled">
               <bool>true</bool>
@@ -1252,14 +1265,14 @@
            <item>
             <widget class="QPushButton" name="RatioApplyPushButton">
              <property name="text">
-              <string>Apply</string>
+              <string>Übernehmen</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="RatioCancelPushButton">
              <property name="text">
-              <string>Cancel</string>
+              <string>Abbruch</string>
              </property>
             </widget>
            </item>
