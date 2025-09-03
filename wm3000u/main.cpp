@@ -5,7 +5,6 @@
 #include <qtranslator.h> 
 #include <qdir.h>
 #include <qfontdatabase.h>
-#include <qstring.h>
 #include <qevent.h>
 #include <qnamespace.h>
 #include <qmenubar.h>
@@ -59,6 +58,7 @@ int main(int argc, char *argv[])
     mCmdLPar.Parse(argc, argv);
     mCmdLPar.setFileName("/etc/WMConfFile");
     mCmdLPar.ParseFile();
+    mCmdLPar.setDevice("u");
 
     g_WMDevice = new cWM3000U; //  die eigentliche Messeinrichtung wird später dynamisch je nach aufruf erzeugt
     g_WMDevice->setIpAddress(mCmdLPar.GetIpAdress());
@@ -68,7 +68,6 @@ int main(int argc, char *argv[])
     wmManualView *g_WMDocuView = new wmManualView();
     g_WMDocuView->setTyp("u");
     g_WMDocuView->setLanguage("gb");
-    mCmdLPar.setDevice("u");
 
     switch (g_WMDevice->m_ConfData.Language)
     {
@@ -111,7 +110,8 @@ int main(int argc, char *argv[])
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
 
     g_WMDevice->setPPSWatchDog(mCmdLPar.GetPpsWatchDog());
-    if (!mCmdLPar.GetJustage()) {
+    if (!mCmdLPar.GetJustage())
+    {
         g_WMView->removeJustageItem();
         g_WMDevice->setJustage();
     }
@@ -132,7 +132,8 @@ int main(int argc, char *argv[])
 
     g_WMDevice->setNewSamplerates(mCmdLPar.GetNewSampleRates());
 
-    if(mCmdLPar.GetScreenShoter()){
+    if(mCmdLPar.GetScreenShoter())
+    {
         g_WMScrShoGui = new wmscreenshoterguibase(g_WMView);
         g_WMScreenShooter = new screenshooter;
         g_WMScrShoGui->show();
@@ -184,7 +185,7 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMActValView,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIansichtIstwerteActionSet(bool))); //schliessen der istwertanzeige
     QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMActValView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
     QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMActValView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
-    QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMActValView,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an rawactualanzei
+    QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMActValView,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an rawactualanzeige
     QObject::connect(g_WMDevice,SIGNAL(SendActValuesSignal(cwmActValues*)),g_WMActValView,SLOT(ReceiveAVDataSlot( cwmActValues*))); // senden von istwerten
 
     WMOffsetValBase *g_WMOffsetView = new WMOffsetValBase(machineName, new WmuOffsetCustomLabels, g_WMView);
@@ -193,6 +194,7 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMView,SIGNAL(onSaveSessionSignal(QString)),g_WMOffsetView,SLOT(onSaveSession(QString))); // fenster grösse und position einrichten
     QObject::connect(g_WMView,SIGNAL(onLoadSessionSignal(QString)),g_WMOffsetView,SLOT(onLoadSession(QString))); // fenster grösse und position einrichten
     QObject::connect(g_WMDevice,SIGNAL(SendJustValuesSignal(tJustValues*)),g_WMOffsetView,SLOT(ReceiveJustDataSlot(tJustValues*))); // device sendet konfigurationsdaten an rawactualanzei
+    QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMOffsetView,SLOT(SetConfInfoSlot(cConfData*)));
 
     CLogFileView* g_WMSCPILogFileView;
     if (mCmdLPar.GetConvent())
@@ -255,7 +257,7 @@ int main(int argc, char *argv[])
     QObject::connect((QObject*)g_WMView,SIGNAL(JustFlashExportSignal(QString)),g_WMDevice,SLOT(JustageFlashExportSlot(QString))); // automatischer phasenabgleich wenn jumper
     QObject::connect((QObject*)g_WMView,SIGNAL(JustFlashImportSignal(QString)),g_WMDevice,SLOT(JustageFlashImportSlot(QString))); // automatischer phasenabgleich wenn jumper
 
-    QObject::connect(g_WMView,SIGNAL(UIhilfeInfo_ber_QtActionActivated()), &app, SLOT(aboutQt())); // informationen zu Qt
+    QObject::connect(g_WMView,SIGNAL(UIhilfeInfo_ber_QtActionActivated()), &app,SLOT(aboutQt())); // informationen zu Qt
     QObject::connect(g_WMView,SIGNAL(UIhilfeInfo_ber_ZeraActionActivated()),g_WMInfo,SLOT(AboutZeraSlot())); // informationen zu Zera
     QObject::connect(g_WMView,SIGNAL(UIhilfeInfoActionActivated()),g_WMInfo,SLOT(AboutWM3000Slot())); // informationen zu WM3000
     QObject::connect(g_WMView,SIGNAL(UIhilfeSelbsttestActionActivated()),g_WMDevice,SLOT(SelfTestManuell())); // manuellen selbststest starten
@@ -329,11 +331,13 @@ int main(int argc, char *argv[])
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_ETHMonitor,SLOT(takeScreenshoots()));
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_ETHMonitor,SLOT(takeScreenshootFinished()));
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_WMScrShoGui,SLOT(show()));
-            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScreenShooter,SLOT(exportXML()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEtherMonFinished()),g_WMScreenShooter,SLOT(exportXML()));
         }
         else
+        {
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScrShoGui,SLOT(show()));
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScreenShooter,SLOT(exportXML()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScreenShooter,SLOT(exportXML()));
+        }
 
         QObject::connect(g_WMScrShoGui,SIGNAL(screenShooterStart()),g_WMView,SLOT(AutoScreenShoterTriggered()));
         QObject::connect(g_WMView,SIGNAL(ScreenshooterTriggeredByUser()),g_WMView,SLOT(takeScreenshoots()));
@@ -354,13 +358,13 @@ int main(int argc, char *argv[])
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotEigenFinished()),g_VersionsView,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_VersionsView,SLOT(takeScreenshootFinished()));
 
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_WMDocuView,SLOT(takeScreenshoots()));
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotAnleiFinished()),g_WMDocuView,SLOT(takeScreenshootFinished()));
-
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotAnleiFinished()),g_WMRatioDialog,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVersionFinished()),g_WMRatioDialog,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMRatioDialog,SLOT(takeScreenshootFinished()));
 
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMRangeDialog,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotRatioFinished()),g_WMDocuView,SLOT(takeScreenshoots()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotAnleiFinished()),g_WMDocuView,SLOT(takeScreenshootFinished()));
+
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotAnleiFinished()), g_WMRangeDialog,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMRangeDialog,SLOT(takeScreenshootFinished()));
 
     }
