@@ -376,8 +376,8 @@ void ConfDialogBase::SetRatioMenu()
     ui->RatioPrimNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
     ui->RatioSekNUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
 
-    ui->RatioPrimNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
-    ui->RatioSekNDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioPrimNDivComboBox->insertStringList(mGuiHelper->GetList(ADIVLIST));
+    ui->RatioSekNDivComboBox->insertStringList(mGuiHelper->GetList(ADIVLIST));
 
     // alle edit felder  und radiobuttons vorbesetzen
     ui->RatioPrimNLineEdit->setText(mGuiHelper->baseUnitTextCurrent(m_ConfDataTemp.m_NPrimary, ui->RatioPrimNUnitComboBox, ui->RatioPrimNDivComboBox));
@@ -386,8 +386,8 @@ void ConfDialogBase::SetRatioMenu()
     ui->RatioPrimXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
     ui->RatioSekXUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
 
-    ui->RatioPrimXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
-    ui->RatioSekXDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioPrimXDivComboBox->insertStringList(mGuiHelper->GetList(ADIVLIST));
+    ui->RatioSekXDivComboBox->insertStringList(mGuiHelper->GetList(ADIVLIST));
 
     ui->RatioPrimXLineEdit->setText(mGuiHelper->baseUnitTextCurrent(m_ConfDataTemp.m_XPrimary, ui->RatioPrimXUnitComboBox, ui->RatioPrimXDivComboBox));
     ui->RatioSekXLineEdit->setText(mGuiHelper->baseUnitTextCurrent(m_ConfDataTemp.m_XSecondary, ui->RatioSekXUnitComboBox, ui->RatioSekXDivComboBox));
@@ -395,8 +395,8 @@ void ConfDialogBase::SetRatioMenu()
     ui->RatioPrimECTUnitComboBox->insertStringList(mGuiHelper->GetList(ALIST));
     ui->RatioSekECTUnitComboBox->insertStringList(mGuiHelper->GetList(VLIST));
 
-    ui->RatioPrimECTDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
-    ui->RatioSekECTDivComboBox->insertStringList(mGuiHelper->GetList(DIVLIST));
+    ui->RatioPrimECTDivComboBox->insertStringList(mGuiHelper->GetList(ADIVLIST));
+    ui->RatioSekECTDivComboBox->insertStringList(mGuiHelper->GetList(ADIVLIST));
 
     ui->RatioPrimECTLineEdit->setText(mGuiHelper->baseUnitTextCurrent(m_ConfDataTemp.m_ETPrimary, ui->RatioPrimECTUnitComboBox, ui->RatioPrimECTDivComboBox));
     ui->RatioSekECTLineEdit->setText(mGuiHelper->baseUnitTextVoltage(m_ConfDataTemp.m_ETSecondary, ui->RatioSekECTUnitComboBox, ui->RatioSekECTDivComboBox));

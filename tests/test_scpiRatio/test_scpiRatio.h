@@ -23,6 +23,7 @@ private slots:
     void test_withPrefixCurrent();
     void test_withDividerVoltage();
     void test_withDividerCurrent();
+    void test_withNeww2Divider();
 
 };
 

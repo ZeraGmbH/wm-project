@@ -89,4 +89,15 @@ void test_scpiRatio::test_withDividerCurrent()
     fromParameter("100A:10A/w3");
 }
 
+void test_scpiRatio::test_withNeww2Divider()
+{
+    fromParameter("100V/w2:10V");
+    fromParameter("100kV/w2:10V");
+    fromParameter("100mV/w2:10V");
+    fromParameter("100:100V/w2");
+    fromParameter("100:100kV/w2");
+    fromParameter("100:100mV/w2");
+
+}
+
 QTEST_MAIN(test_scpiRatio)
