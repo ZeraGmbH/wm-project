@@ -14,7 +14,6 @@
 #include "wmscreenshoterguibase.h"
 #include "zerainfo.h"
 #include "confdialogbase.h"
-#include "dbushelper.h"
 #include "rangedialogbase.h"
 #include "wmmeasvaluesbase.h"
 #include "wmoeviewbase.h"
@@ -368,18 +367,6 @@ int main(int argc, char *argv[])
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMRangeDialog,SLOT(takeScreenshootFinished()));
 
     }
-
-
-    //add dbus controls for visibility of windows
-    WM3000UDBusHelper dbushelper;
-    dbushelper.registerWidget(g_WMErrMeasValView);
-    dbushelper.registerWidget(g_WMOeView);
-    dbushelper.registerWidget(g_WMActValView);
-    dbushelper.registerWidget(g_WMSCPILogFileView);
-    dbushelper.registerWidget(g_ETHMonitor);
-    dbushelper.registerWidget(g_WMConfDialog);
-    dbushelper.registerWidget(g_WMRangeDialog);
-    dbushelper.registerWidget(g_WMOffsetView);
 
     int ret = app.exec();
 
