@@ -14,431 +14,441 @@
         <translation>Tryb</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="95"/>
-        <location filename="confdialogbase.ui" line="340"/>
+        <location filename="confdialogbase.ui" line="90"/>
+        <location filename="confdialogbase.ui" line="372"/>
         <source>Messung</source>
         <translation>Pomiar</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="110"/>
+        <location filename="confdialogbase.ui" line="105"/>
         <source>Un/Ux &amp;abs.</source>
         <translation>Un/Ux &amp;abs.</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="113"/>
-        <location filename="confdialogbase.ui" line="2256"/>
+        <location filename="confdialogbase.ui" line="108"/>
+        <location filename="confdialogbase.ui" line="2276"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="126"/>
+        <location filename="confdialogbase.ui" line="121"/>
         <source>Un/&amp;EVT</source>
         <translation>Un/&amp;EVT</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="129"/>
-        <location filename="confdialogbase.ui" line="640"/>
+        <location filename="confdialogbase.ui" line="124"/>
+        <location filename="confdialogbase.ui" line="672"/>
         <source>Alt+E</source>
         <translation>Alt+E</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="145"/>
+        <location filename="confdialogbase.ui" line="140"/>
         <source>Un/n&amp;Convent</source>
         <translation>Un/n&amp;Convent</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="148"/>
+        <location filename="confdialogbase.ui" line="143"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="167"/>
+        <location filename="confdialogbase.ui" line="162"/>
         <source>Signal</source>
         <translation>Sygnal</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="176"/>
+        <location filename="confdialogbase.ui" line="171"/>
         <source>AC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="183"/>
+        <location filename="confdialogbase.ui" line="178"/>
         <source>DC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="195"/>
+        <location filename="confdialogbase.ui" line="219"/>
         <source>Berechnung</source>
         <translation>Obliczanie</translation>
     </message>
     <message utf8="true">
-        <location filename="confdialogbase.ui" line="203"/>
+        <location filename="confdialogbase.ui" line="231"/>
         <source>Phasenfehler Prüfling</source>
         <translation>Błąd kątowy przekładnika badanego</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="276"/>
+        <location filename="confdialogbase.ui" line="304"/>
         <source>Offset Korrektur</source>
         <translation>Offset korekcja</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="282"/>
+        <location filename="confdialogbase.ui" line="310"/>
         <source>Kanal N</source>
         <translation>Kanal N</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="289"/>
+        <location filename="confdialogbase.ui" line="317"/>
         <source>Kanal X</source>
         <translation>Kanal X</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="314"/>
+        <location filename="confdialogbase.ui" line="329"/>
         <source>Korrektur Normwandler</source>
         <translation>Poprawka przekładnika wzorcowego</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="320"/>
+        <location filename="confdialogbase.ui" line="335"/>
         <source>A&amp;ktiv</source>
         <translation>A&amp;ktywne</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="323"/>
+        <location filename="confdialogbase.ui" line="338"/>
         <source>Alt+K</source>
         <translation>Alt+K</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="554"/>
+        <location filename="confdialogbase.ui" line="586"/>
         <source>Integrationszeit</source>
         <translation>Czas całkowania</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="360"/>
+        <location filename="confdialogbase.ui" line="392"/>
         <source>Signalfrequenz</source>
         <translation>Częstotliwość sygnału</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="375"/>
+        <location filename="confdialogbase.ui" line="407"/>
         <source>16.66 Hz</source>
         <translation>16.66 Hz</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="391"/>
+        <location filename="confdialogbase.ui" line="423"/>
         <source>50 Hz</source>
         <translation>50 Hz</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="407"/>
+        <location filename="confdialogbase.ui" line="439"/>
         <source>60 Hz</source>
         <translation>60 Hz</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="430"/>
+        <location filename="confdialogbase.ui" line="462"/>
         <source>Abtastungen</source>
         <translation>Próbki</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="436"/>
+        <location filename="confdialogbase.ui" line="468"/>
         <source>  80 / Periode</source>
         <translation>80 / Okres</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="443"/>
+        <location filename="confdialogbase.ui" line="475"/>
         <source>  96 / Periode</source>
         <translation type="unfinished">80 / Okres {96 ?}</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="450"/>
+        <location filename="confdialogbase.ui" line="482"/>
         <source>240 / Periode</source>
         <translation type="unfinished">256 / Okres {240 ?}</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="457"/>
+        <location filename="confdialogbase.ui" line="489"/>
         <source>256 / Periode</source>
         <translation>256 / Okres</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="464"/>
+        <location filename="confdialogbase.ui" line="496"/>
         <source>288 / Periode</source>
         <translation type="unfinished">256 / Okres {288 ?}</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="500"/>
+        <location filename="confdialogbase.ui" line="532"/>
         <source>Messintervall</source>
         <translation>Przedział pomiaru</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="609"/>
+        <location filename="confdialogbase.ui" line="641"/>
         <source>Synchronisation</source>
         <translation>Synchronizacja</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="623"/>
+        <location filename="confdialogbase.ui" line="655"/>
         <source>PPS-Signal</source>
         <translation>Sygnał PPS</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="637"/>
+        <location filename="confdialogbase.ui" line="669"/>
         <source>&amp;Extern</source>
         <translation>&amp;Zewnętrzny</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="653"/>
+        <location filename="confdialogbase.ui" line="685"/>
         <source>&amp;Intern</source>
         <translation>&amp;Wewnętrzny</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="656"/>
+        <location filename="confdialogbase.ui" line="688"/>
         <source>Alt+I</source>
         <translation>Alt+I</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="796"/>
+        <location filename="confdialogbase.ui" line="828"/>
         <source>Strenge EN61850 Synchronisation</source>
         <translation>Pełna synchronizacja EN 61850</translation>
     </message>
     <message utf8="true">
-        <location filename="confdialogbase.ui" line="807"/>
+        <location filename="confdialogbase.ui" line="839"/>
         <source>Teilerverhältnisse</source>
         <translation>Przekładnie</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1038"/>
+        <location filename="confdialogbase.ui" line="1175"/>
         <source>EVT</source>
         <translation>EVT</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="831"/>
-        <location filename="confdialogbase.ui" line="934"/>
-        <location filename="confdialogbase.ui" line="1088"/>
-        <location filename="confdialogbase.ui" line="1179"/>
+        <location filename="confdialogbase.ui" line="865"/>
+        <location filename="confdialogbase.ui" line="975"/>
+        <location filename="confdialogbase.ui" line="1077"/>
+        <location filename="confdialogbase.ui" line="1234"/>
         <source>Sek:</source>
         <translation>Wt:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="239"/>
+        <location filename="confdialogbase.ui" line="267"/>
         <source>Totzeit</source>
         <translation>Opóźnienie</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="249"/>
+        <location filename="confdialogbase.ui" line="277"/>
         <source>Phasenlage</source>
         <translation>Błąd kątowy</translation>
     </message>
     <message utf8="true">
-        <location filename="confdialogbase.ui" line="259"/>
+        <location filename="confdialogbase.ui" line="287"/>
         <source>°</source>
         <translation type="unfinished">°</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="266"/>
+        <location filename="confdialogbase.ui" line="294"/>
         <source>ms</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="515"/>
+        <location filename="confdialogbase.ui" line="547"/>
         <source>Perioden</source>
         <translation>Okres</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="560"/>
+        <location filename="confdialogbase.ui" line="592"/>
         <source>Zeit</source>
         <translation>Czas</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="583"/>
+        <location filename="confdialogbase.ui" line="615"/>
         <source>sec</source>
         <translation>sek</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="850"/>
-        <location filename="confdialogbase.ui" line="953"/>
-        <location filename="confdialogbase.ui" line="1072"/>
-        <location filename="confdialogbase.ui" line="1237"/>
+        <location filename="confdialogbase.ui" line="884"/>
+        <location filename="confdialogbase.ui" line="1033"/>
+        <location filename="confdialogbase.ui" line="1118"/>
+        <location filename="confdialogbase.ui" line="1221"/>
         <source>Prim:</source>
         <translation>Pierw:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="819"/>
-        <location filename="confdialogbase.ui" line="1154"/>
+        <location filename="confdialogbase.ui" line="853"/>
+        <location filename="confdialogbase.ui" line="950"/>
         <source>N</source>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="707"/>
+        <location filename="confdialogbase.ui" line="739"/>
         <source>TSync[ms]:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="919"/>
+        <location filename="confdialogbase.ui" line="1059"/>
         <source>X</source>
         <translation>X</translation>
     </message>
+    <message utf8="true">
+        <location filename="confdialogbase.ui" line="1267"/>
+        <source>Übernehmen</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
-        <location filename="confdialogbase.ui" line="1264"/>
+        <location filename="confdialogbase.ui" line="1274"/>
+        <source>Abbruch</source>
+        <translation type="unfinished">Przerwij</translation>
+    </message>
+    <message>
+        <location filename="confdialogbase.ui" line="1284"/>
         <source>nConvent</source>
         <translation>nConvent</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1276"/>
+        <location filename="confdialogbase.ui" line="1296"/>
         <source>MAC adresses 61850-9-2</source>
         <translation>Adresy MAC 61850-9-2</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1287"/>
+        <location filename="confdialogbase.ui" line="1307"/>
         <source>Source:</source>
         <translation>Źródło:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1300"/>
+        <location filename="confdialogbase.ui" line="1320"/>
         <source>Destination:</source>
         <translation>Przeznaczenie:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1331"/>
-        <location filename="confdialogbase.ui" line="1378"/>
-        <location filename="confdialogbase.ui" line="1422"/>
-        <location filename="confdialogbase.ui" line="1466"/>
-        <location filename="confdialogbase.ui" line="1510"/>
-        <location filename="confdialogbase.ui" line="1554"/>
-        <location filename="confdialogbase.ui" line="1602"/>
-        <location filename="confdialogbase.ui" line="1649"/>
-        <location filename="confdialogbase.ui" line="1693"/>
-        <location filename="confdialogbase.ui" line="1737"/>
-        <location filename="confdialogbase.ui" line="1781"/>
-        <location filename="confdialogbase.ui" line="1825"/>
+        <location filename="confdialogbase.ui" line="1351"/>
+        <location filename="confdialogbase.ui" line="1398"/>
+        <location filename="confdialogbase.ui" line="1442"/>
+        <location filename="confdialogbase.ui" line="1486"/>
+        <location filename="confdialogbase.ui" line="1530"/>
+        <location filename="confdialogbase.ui" line="1574"/>
+        <location filename="confdialogbase.ui" line="1622"/>
+        <location filename="confdialogbase.ui" line="1669"/>
+        <location filename="confdialogbase.ui" line="1713"/>
+        <location filename="confdialogbase.ui" line="1757"/>
+        <location filename="confdialogbase.ui" line="1801"/>
+        <location filename="confdialogbase.ui" line="1845"/>
         <source>FF</source>
         <translation>FF</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1353"/>
-        <location filename="confdialogbase.ui" line="1400"/>
-        <location filename="confdialogbase.ui" line="1444"/>
-        <location filename="confdialogbase.ui" line="1488"/>
-        <location filename="confdialogbase.ui" line="1532"/>
-        <location filename="confdialogbase.ui" line="1624"/>
-        <location filename="confdialogbase.ui" line="1671"/>
-        <location filename="confdialogbase.ui" line="1715"/>
-        <location filename="confdialogbase.ui" line="1759"/>
-        <location filename="confdialogbase.ui" line="1803"/>
+        <location filename="confdialogbase.ui" line="1373"/>
+        <location filename="confdialogbase.ui" line="1420"/>
+        <location filename="confdialogbase.ui" line="1464"/>
+        <location filename="confdialogbase.ui" line="1508"/>
+        <location filename="confdialogbase.ui" line="1552"/>
+        <location filename="confdialogbase.ui" line="1644"/>
+        <location filename="confdialogbase.ui" line="1691"/>
+        <location filename="confdialogbase.ui" line="1735"/>
+        <location filename="confdialogbase.ui" line="1779"/>
+        <location filename="confdialogbase.ui" line="1823"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1866"/>
+        <location filename="confdialogbase.ui" line="1886"/>
         <source>Priority tagged</source>
         <translation>Oznaczony priorytetowo</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1872"/>
+        <location filename="confdialogbase.ui" line="1892"/>
         <source>User priority:</source>
         <translation>Priorytet użytkownika:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1897"/>
-        <location filename="confdialogbase.ui" line="1967"/>
-        <location filename="confdialogbase.ui" line="1993"/>
+        <location filename="confdialogbase.ui" line="1917"/>
+        <location filename="confdialogbase.ui" line="1987"/>
+        <location filename="confdialogbase.ui" line="2013"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1907"/>
+        <location filename="confdialogbase.ui" line="1927"/>
         <source>TPID:</source>
         <translation>TPID:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1932"/>
+        <location filename="confdialogbase.ui" line="1952"/>
         <source>8100</source>
         <translation>8100</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1942"/>
+        <location filename="confdialogbase.ui" line="1962"/>
         <source>CFI:</source>
         <translation>CFI:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="1977"/>
+        <location filename="confdialogbase.ui" line="1997"/>
         <source>VID:</source>
         <translation>VID:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2003"/>
+        <location filename="confdialogbase.ui" line="2023"/>
         <source>Ethertype header</source>
         <translation>Nagłówek EtherType</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2009"/>
+        <location filename="confdialogbase.ui" line="2029"/>
         <source>Ethertype:</source>
         <translation>EtherType:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2028"/>
+        <location filename="confdialogbase.ui" line="2048"/>
         <source>88BA</source>
         <translation>88BA</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2038"/>
+        <location filename="confdialogbase.ui" line="2058"/>
         <source>APPID:</source>
         <translation>APPID:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2054"/>
+        <location filename="confdialogbase.ui" line="2074"/>
         <source>0000</source>
         <translation>0000</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2067"/>
+        <location filename="confdialogbase.ui" line="2087"/>
         <source>Data set</source>
         <translation>Zbiór danych</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2073"/>
+        <location filename="confdialogbase.ui" line="2093"/>
         <source>First ASDU:</source>
         <translation>Pierwszy ASDU:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2089"/>
         <location filename="confdialogbase.ui" line="2109"/>
-        <location filename="confdialogbase.ui" line="2132"/>
+        <location filename="confdialogbase.ui" line="2129"/>
+        <location filename="confdialogbase.ui" line="2152"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2096"/>
+        <location filename="confdialogbase.ui" line="2116"/>
         <source>Last ASDU:</source>
         <translation>Ostatni ASDU:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2116"/>
+        <location filename="confdialogbase.ui" line="2136"/>
         <source>Set:</source>
         <translation>Zbiór:</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2145"/>
+        <location filename="confdialogbase.ui" line="2165"/>
         <source>Log</source>
         <translation>Log</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2153"/>
+        <location filename="confdialogbase.ui" line="2173"/>
         <source>Logfile</source>
         <translation>LogFile</translation>
     </message>
     <message utf8="true">
-        <location filename="confdialogbase.ui" line="2159"/>
+        <location filename="confdialogbase.ui" line="2179"/>
         <source>Grösse</source>
         <translation>Rozmiar</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2184"/>
+        <location filename="confdialogbase.ui" line="2204"/>
         <source>Kb</source>
         <translation>Kb</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2237"/>
+        <location filename="confdialogbase.ui" line="2257"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="confdialogbase.ui" line="2253"/>
+        <location filename="confdialogbase.ui" line="2273"/>
         <source>&amp;Abbruch</source>
         <translation>&amp;Anuluj</translation>
     </message>
@@ -446,12 +456,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="158"/>
+        <location filename="main.cpp" line="201"/>
         <source>WM1000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM1000U</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="161"/>
+        <location filename="main.cpp" line="204"/>
         <source>WM3000U SCPI Kommunikation</source>
         <translation>Komunikacja SCPI WM3000U</translation>
     </message>
@@ -522,8 +532,8 @@
     <message utf8="true">
         <location filename="wmrawactualvalbase.cpp" line="19"/>
         <location filename="wmrawactualvalbase.cpp" line="21"/>
-        <location filename="wmrawactualvalbase.cpp" line="92"/>
-        <location filename="wmrawactualvalbase.cpp" line="119"/>
+        <location filename="wmrawactualvalbase.cpp" line="97"/>
+        <location filename="wmrawactualvalbase.cpp" line="124"/>
         <source>°</source>
         <translation>°</translation>
     </message>

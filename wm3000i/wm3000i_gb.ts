@@ -320,6 +320,18 @@
         <source>Abtastungen</source>
         <translation>Samples</translation>
     </message>
+    <message>
+        <source>Signal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>Übernehmen</source>
+        <translation>Apply</translation>
+    </message>
+    <message>
+        <source>Abbruch</source>
+        <translation>Abort</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

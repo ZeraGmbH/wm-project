@@ -328,6 +328,14 @@
         <source>sec</source>
         <translation type="unfinished"></translation>
     </message>
+    <message utf8="true">
+        <source>Übernehmen</source>
+        <translation>Apply</translation>
+    </message>
+    <message>
+        <source>Abbruch</source>
+        <translation>Abort</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -372,10 +380,6 @@
     <message>
         <source>Ux:</source>
         <translation>Ux:</translation>
-    </message>
-    <message>
-        <source>F:</source>
-        <translation type="obsolete">F:</translation>
     </message>
     <message>
         <source>---------</source>
