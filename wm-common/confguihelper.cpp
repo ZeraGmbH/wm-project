@@ -18,10 +18,8 @@ QStringList confGuiHelper::GetList(int nr)
 {
     switch (nr)
     {
-    case ADIVLIST:
-        return m_DividerStrA;
-    case VDIVLIST:
-        return m_DividerStrV;
+    case DIVLIST:
+        return m_DividerStr;
     case ALIST:
         return m_unitListA;
     case VLIST:
@@ -36,7 +34,7 @@ const QString &confGuiHelper::baseUnitTextVoltage(const QString &s, QComboBox *u
     m_sText = s;
     divider->setCurrentText("1");
     unit->setCurrentText("V");
-    foreach (QString strDiv, m_DividerStrV)
+    foreach (QString strDiv, m_DividerStr)
     {
         if(strDiv != "1")
         {
@@ -67,7 +65,7 @@ const QString& confGuiHelper::baseUnitTextCurrent(const QString &s , QComboBox* 
     m_sText = s;
     divider->setCurrentText("1");
     unit->setCurrentText("A");
-    foreach (QString strDiv, m_DividerStrA)
+    foreach (QString strDiv, m_DividerStr)
     {
         if(strDiv != "1")
         {
