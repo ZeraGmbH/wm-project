@@ -14,4 +14,10 @@ eUnit CurrentUnit[AnzCurrentUnits] ={ eUnit("kA/w3", 577.3502692),
 
                                       eUnit("A/w3", 0.57735026),
                                       eUnit("A/3", 0.33333333),
-                                      eUnit("A", 1.0)};
+                                      eUnit("A", 1.0),
+
+                                      eUnit("kA/w2", 0.707106781187e+3),
+                                      eUnit("A/w2", 0.707106781187),
+                                      eUnit("mA/w2", 0.707106781187e-3),
+                                      eUnit("uA/w2", 0.707106781187e-6)
+};
