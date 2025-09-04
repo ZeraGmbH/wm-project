@@ -3,7 +3,7 @@
 
 #include "eunit.h"
 
-enum ScaleFactors { d3, dw3, dw2, AnzScaleFactors};
+enum ScaleFactors { d3, dw2, dw3, AnzScaleFactors};
 
 extern eUnit ScaleFactor[AnzScaleFactors];
 
