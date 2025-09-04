@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang = "de">
+  <head>
+</head>
+<body>
+<h3>Eigenfehlertabellen</h3>
+<p>
+Eigenfehlertabellen beschreiben einen bekannten Fehler des verwendeten Normawandlers.<br/>
+Die bekannten Werte sind durch Semikolon getrennt in die Datei eingetragen. 
+</p>
+<p>
+Beispiel:
+</p>
+<p>
+2000V;100V;100%;0.001%;0.005°
+</p>
+Die Werte werden in folgender Reiehnfolge erwartet:
+
+
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Bezeichnung</th>
+      <th>Wert</th>
+	<th>Einheit</th>
+   </tr>
+   <tr>
+      <td>Primärstufe</td>
+      <td>z.B.: 2000V</td>
+      <td>m,k,M<br/>V oder A<br/>/3,/w3</td>
+   </tr>
+   <tr>
+      <td>Sekundärstufe</td>
+      <td>z.B.: 100V</td>
+      <td>m,k,M<br/>V oder A<br/>/3,/w3</td>
+   </tr>
+   <tr>
+      <td>Lastpunkt</td>
+      <td>z.B.: 100%</td>
+      <td>%</td>
+   </tr>
+   <tr>
+      <td>Amplitudenfehler</td>
+      <td>z.B.: 0.001%</td>
+            <td>%</td>
+   </tr>
+   <tr>
+      <td>Winkelfehler</td>
+      <td>z.B.: 0.005°</td>
+      <td>°,',<br/>rad,<br/>crad,<br/>µrad</td>
+   </tr>
+
+</table>
+
+</body>
+</html>

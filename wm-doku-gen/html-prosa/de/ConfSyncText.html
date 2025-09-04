@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang = "de">
+  <head>
+</head>
+<body>
+<p>Wählen Sie im Menü Synchronisation das PPS-Signal.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Auswahl</th>
+      <th>Beschreibung</th>
+   </tr>
+   <tr>
+      <td>Extern</td>
+      <td>Synchronisation erfolgt über ein externes Signal.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Intern</td>
+      <td>Die Synchronisation erfolgt über ein internes Signal. Geben Sie die Synchronisationszeit
+TSync in ms an.	
+</td>
+   </tr>
+
+</table>
+<p>
+Die Synchronisation der Abtastung kann durch ein intern erzeugtes Signal oder durch ein externes Signal
+erfolgen. Synchronisation heißt in diesem Zusammenhang, dass das Abtastsystem zurückgesetzt wird und alle
+Samples für die Messperiode neu aufgenommen werden. Das intern generierte Sync-Signal lässt sich mit
+100 ms Auflösung zwischen 0,5 und 2,5 Sekunden einstellen. Es steht an den Sync-Ausgängen zur Verfügung.
+Extern angelegte Sync-Signale stehen ebenfalls an den freien Ausgängen zur Verfügung. Desweiteren ist ein
+Ausgang mit einer 1000-fach höheren Frequenz des Sync-Signales vorhanden.
+</p>
+<p><b>
+Strenge Synchronisation</b> bedeutet, dass das Messsystem die Synchronität der Daten einer angeschlossenen
+Merging Unit überwacht und es zu keiner „gültigen“ Messperiode kommt, wenn die Samples nicht zu dieser
+Messperiode passen. Das System läuft dann in ein Timeout, was zu einer Fehlermeldung führt.
+Im Detail: Nach einem PPS-Impuls muss die Nummerierung der Samples mit 0 starten. Sind beispielsweise eine
+Messperiode aus 16 Signalperioden à 80 Samples eingestellt (also 1280 Samples), gehören die Samples mit den
+Nummern 0 ... 1279 zur 1. Messperiode, die Samples 1280 ... 2559 zur 2. Messperiode usw.
+Abweichungen hiervon werden als Fehler interpretiert und es kommt zum Timeout.
+</p>
+</body>
+</html>

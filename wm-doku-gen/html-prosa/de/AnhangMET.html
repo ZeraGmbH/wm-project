@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "de">
+  <head>
+</head>
+<body>
+<h2>Anhang</h2>
+<h3>Messergebnis Datei</h3>
+<p>
+Messergebnisse können in einer Ergebnisdatei gespeichert werden. Die Ablage erfolgt im XML-Format.
+</p>
+<p>
+Beispiel:
+</p>
+<p>
+<img src= "../xml-definition/pic/global/AnhangMED_1.png" alt="file missing"> </img>
+</p>
+
+Im Kopf der XML-Datei steht einmalig
+    <ul>
+        <li>das doctype</li>
+        <li>Name der Messeinrichtung</li>
+        <li>Versions der Messeinrichtung</li>
+        <li>VSeriennummer der Messeinrichtung</li>
+    </ul>
+
+Bei jeder Speicherung werden folgende Daten abgelegt:
+  <ul>
+        <li>Ergebnis
+            <ul>
+                <li>Lastpunkt in % des Gesamt-RMS-Wertes und des RMS der Grundschwingung</li>
+                <li>Amplitudenfehler in % (IEC)</li>
+                <li>Winkelfehler in ° (IEC)</li>
+                <li>Fehler nach ANSI</li>
+                <li>Datum</li>
+                <li>Uhrzeit</li>
+            </ul>
+        </li>
+        <li>Bedingungen</li>
+            <ul>
+                <li>Messart in welcher der Fehler gemessen wurde.</li>
+                <li>Bereich Kanal N</li>
+                <li>Bereich Kanal X</li>
+            </ul>
+        <li>Korrektur</li>
+        <li>Benutzte Korrekturfaktoren der Amplitude des Normalwandlers
+Die Korrekturwerte werden aus der benutzten Eigenfehlertabelle abgeleitet.</li>
+    </ul>
+
+
+</body>
+</html>

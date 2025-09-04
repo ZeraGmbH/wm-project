@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+</head>
+<body>
+<h2>Annex</h2>
+<h3>Result Data File</h3>
+<p>
+Measuring results can be stored into result data file in XML format.
+</p>
+<p>
+Beispiel:
+</p>
+<p>
+<img src= "../xml-definition/pic/global/AnhangMED_1.png" alt="file missing"> </img>
+</p>
+
+The head of the XML file contains:
+    <ul>
+        <li>Doc type</li>
+        <li>Name of the measuring unit</li>
+        <li>Version of the measuring unit</li>
+        <li>Serial No. of the measuring unit</li>
+    </ul>
+
+If results are stored the following data will be indicated:
+  <ul>
+        <li>RESULT
+            <ul>
+                <li>Load point in % of total RMS value and RMS of fundamental wave</li>
+                <li>Amplitude error in % (IEC)</li>
+                <li>Angle error in ° (IEC)</li>
+                <li>Error according to ANSI</li>
+                <li>Date</li>
+                <li>Time</li>
+            </ul>
+        </li>
+        <li>Conditions</li>
+            <ul>
+                <li>Measuring mode in which the error has been detected.</li>
+                <li>Range channel N</li>
+                <li>Range channel X</li>
+            </ul>
+        <li>Correction</li>
+        <li>Used correction factors of the amplitude of the standard transformer.
+Correction values will be  derived from the used inherent error table.</li>
+    </ul>
+
+
+</body>
+</html>

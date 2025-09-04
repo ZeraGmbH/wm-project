@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang = "de">
+  <head>
+</head>
+<body>
+<p>Wählen Sie im Menü nConvent die Mac-Adresse, Priority tagged, Ethertype header und Data set.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Auswahl</th>
+      <th>Beschreibung</th>
+   </tr>
+   <tr>
+      <td>SMac-Adresse</td>
+      <td>Geben Sie über die externe Tastatur die MAC-Adresse für die Merging unit und die
+WM3000 ein.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Priority tagged</td>
+      <td>User priority – definiert die Frame Priorität<br/>
+Priority tagged<br/>
+CFI- cananonical format indicator<br/>
+(TPID) Tag protocol ID fix 0x8100<br/>
+VID- VLAN ID (Virtual LAN identification)
+</td>
+   </tr>
+   <tr>
+      <td>Ethertype header</td>
+      <td>Ethertype is fix 0x88BA<br/>
+APPID (Application ID)
+</td>
+   </tr>
+   <tr>
+      <td>Data set</td>
+      <td>ASDU application set data unit<br/>
+Set data set within ASDU	
+</td>
+   </tr>
+
+</table>
+<p>
+Geben Sie die MAC Adressen ein, um einen Verbindungsaufbau zwischen WM3000 und angeschlossener Merging
+unit zu ermöglichen.
+<p></p>
+Der Wert 0x8100 für TPID weist den Frame als IEEE802.1Q Frame aus. Der EtherType 0x88BA weist den Frame
+als Layer 2 Frame gemäß IEC61850 aus.
+<p></p>
+User priority, CFI und APPID entnehmen Sie bitte der Konfiguration der angeschlossenen Merging unit.
+<p></p>
+In ASDU stellen Sie ein in welcher Data Unit die Daten des zu messenden Wandlers übertragen werden. Mit Set
+wählen Sie einen von acht möglichen Werten aus.
+</p>
+</body>
+</html>

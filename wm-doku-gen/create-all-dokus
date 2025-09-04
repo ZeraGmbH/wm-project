@@ -1,0 +1,10 @@
+#!/bin/sh
+
+BASEPATH=`dirname $0`
+mkdir -p "${BASEPATH}/html-output"
+
+for XMLFILE in `find "${BASEPATH}/xml-definition/pic" -name '*.xml'`; do
+    HTMLFILE=`echo "$XMLFILE" | sed '-e s:\.xml:\.html:g' '-e s:xml-definition/pic:html-output:g'`
+    echo "Writing $HTMLFILE"
+    xmlstarlet tr wm-descr-gen.xsl "$XMLFILE" > "$HTMLFILE"
+done

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+</head>
+<body>
+<p>Select signal frequency, measurement interval, scanning and integration time in the menu Measurement.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>Signal frequency</td>
+      <td>Select 16.66 Hz, 50 Hz or 60 Hz.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Measurement interval</td>
+      <td>Set the periods via arrows.
+</td>
+   </tr>
+   <tr>
+      <td>Samples</td>
+      <td>Select between 80 or 256 samples per period.</td>
+   </tr>
+   <tr>
+      <td>Integration time</td>
+      <td>Set the time in seconds via arrows.	
+</td>
+   </tr>
+
+</table>
+<p>
+<b>Signal frequency</b><br/>
+The signal frequency defines the nominal frequency of the test values. The real frequency of the test values may
+differ up to ±1%. The sampling frequency of the measuring device is the product of configured nominal frequency
+and sample rate. Therefore a nominal frequency of 50 Hz and 80 samples/period equals 4000 Hz scanning
+frequency.
+</p>
+<p>
+<b>Measuring interval</b><br/>
+You can define how many signal periods are summarized in a measuring period.
+Example: You have selected 256 samples/period and 16 periods as measuring interval <br/>
+16 x 256 = 4096 samples will be recorded and analyzed.
+</p>
+<p>
+<b>Samples</b><br/>
+You can select between 80 und 256 samples per period. These are the basically used values of the merging unit.
+</p>
+<p>
+<b>Integration time</b><br/>
+All measuring periods will be processed and filtered successively until the integration time is passed by. If a
+measuring period has not been finished until this moment data will not be considered and will be processed in
+the next integration period.
+</p>
+</body>
+</html>
