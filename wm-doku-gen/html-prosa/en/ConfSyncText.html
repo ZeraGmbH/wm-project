@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+</head>
+<body>
+<p>Select PPS signal in the Synchronisation menu.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>External</td>
+      <td>SSynchronisation will be performed via external signal.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Internal</td>
+      <td>Synchronisation will be performed via internal signal. Enter the synchronization time
+TSync in ms.	
+</td>
+   </tr>
+
+</table>
+<p>
+Synchronization of scanning can be performed via internally generated signal or externally. In this context
+synchronization means reset of the scanning system and new recording of all samples for the measuring period.
+The internally generated sync signal can be adjusted with a resolution of 100 ms between 0,5 and 2,5 s. The
+signal is available at the sync outputs. Additionally external sync signals are available at the free outputs.
+Furthermore an output with a 1000 times higher frequency than the sync signal exists.
+</p>
+<p><b>
+Strict synchronization</b> means, that the measuring system controls synchronization of data via connected merging
+unit and no “valid” measuring period will be performed if the samples are not equal to this measuring period. The
+system runs into timeout which leads to a malfunction message.
+Detailed: After a PPS pulse numbering of samples should be start with 0. If a measuring period of 16 signal
+periods with 80 samples is set (= 1280 samples), samples with number 0 ... 1279 belongs to the first measuring
+period, the samples 1280 ... 2559 to the second and so on.
+Deviations from this will be interpreted as malfunction which leads to timeout.
+</p>
+</body>
+</html>

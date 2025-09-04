@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+</head>
+<body>
+<p>MAC address, priority tagged, ether type header and data set can be entered in the nConvent menu.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>Mac-Adresse</td>
+      <td>GEnter the MAC address for the merging unit and the WM3000 via external keypad.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Priority tagged</td>
+      <td>User priority – definiert die Frame Priorität<br/>
+Priority tagged<br/>
+CFI- cananonical format indicator<br/>
+(TPID) Tag protocol ID fix 0x8100<br/>
+VID- VLAN ID (Virtual LAN identification)
+</td>
+   </tr>
+   <tr>
+      <td>Ethertype header</td>
+      <td>Ethertype is fix 0x88BA<br/>
+APPID (Application ID)
+</td>
+   </tr>
+   <tr>
+      <td>Data set</td>
+      <td>ASDU application set data unit<br/>
+Set data set within ASDU	
+</td>
+   </tr>
+
+</table>
+<p>
+Enter the MAC address to enable a connection between WM3000 and connected merging unit.
+The value 0x8100 for TPID reports the frame as IEEE802.1Q frame. The ether type 0x88BA reports the frame as
+layer 2 frame according to IEC61850.
+</p>
+<p>
+Please see configuration of the connected merging unit for user priority, CFI and APPID.
+</p>
+<p>
+You can set in which data unit the data of the transformer to be measured will be transferred inside ASDU. If you
+select “set”, you choose one out of eight values.
+</p>
+<p>
+Geben Sie die MAC Adressen ein, um einen Verbindungsaufbau zwischen WM3000 und angeschlossener Merging
+unit zu ermöglichen.
+</p>
+
+</body>
+</html>

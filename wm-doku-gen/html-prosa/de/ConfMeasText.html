@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang = "de">
+  <head>
+</head>
+<body>
+<p>Wählen Sie im Menü Messung die Signalfrequenz, das Messintervall, die Abtastungen und die Integrationszeit.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Auswahl</th>
+      <th>Beschreibung</th>
+   </tr>
+   <tr>
+      <td>Signalfrequenz</td>
+      <td>Wählen Sie zwischen 16.66 Hz, 50 Hz oder 60 Hz.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Messintervall</td>
+      <td>Einstellen der Perioden mittels Pfeilen.	
+</td>
+   </tr>
+   <tr>
+      <td>Abtastungen</td>
+      <td>Wählen Sie zwischen 80 oder 256 Abtastungen pro Periode.</td>
+   </tr>
+   <tr>
+      <td>Integrationszeit</td>
+      <td>Einstellen der Zeit in Sekunden mittels Pfeilen.	
+</td>
+   </tr>
+
+</table>
+<p>
+<b>Signalfrequenz</b><br/>
+Die Signalfrequenz definiert die Nominalfrequenz der Prüfgrößen. Die tatsächliche Frequenz der Prüfgrößen darf
+hiervon bis zu ±1% abweichen. Die Abtastfrequenz des Messsystems ist das Produkt aus eingestellter
+Nominalfrequenz und Samplerate. 50 Hz Nominalfrequenz und 80 Abtastungen/Periode ergeben demnach
+4000 Hz Abtastfrequenz.
+</p>
+<p>
+<b>Messintervall</b><br/>
+Bei Messintervall definieren Sie, wie viele Signalperioden zu einer Messperiode zusammengefasst werden.
+Beispiel: Sie haben 256 Samples/Periode gewählt und 16 Perioden als Messintervall<br/>
+Es werden 16 x 256 = 4096 Samples aufgenommen und ausgewertet.
+</p>
+<p>
+<b>Abtastungen</b><br/>
+Bei den Abtastraten kann zwischen 80 und 256 gewählt werden. Dies sind, die bei Merging units üblicher Weise
+genutzten Werte.
+</p>
+<p>
+<b>Integrationszeit</b><br/>
+Es werden so viele Messperioden in Folge verarbeitet und gefiltert bis die eingestellte Integrationszeit
+abgelaufen ist. Eine dann noch laufende, d.h. noch nicht abgeschlossene Messperiode wird nicht berücksichtigt
+und wird für den nächsten Integrationszeitraum verwendet.
+</p>
+</body>
+</html>

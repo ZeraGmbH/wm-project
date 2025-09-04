@@ -1,0 +1,1102 @@
+<html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<body>
+<h1>
+<DEVICE>WM3000I</DEVICE>_MAN_EXT_<LANGUAGE>en</LANGUAGE>
+</h1>
+<p> This is automatic generated gui description from: release-1.2.14</p>
+<p>Including DC option</p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>GUI Overview</h2>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/02_Alles.png"><html lang="de">
+  <head>
+</head>
+<body>
+<p>
+The Graphical user interface comprises of the WM software (top) and the menu bar (left hand side)
+</p>
+<p>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>State bar</th>
+      <th>Discription</th>
+   </tr>
+   <tr>
+      <td>EFT</td>
+      <td>Own Error Table Name or None</td>
+   </tr>
+   <tr>
+      <td>MED</td>
+      <td>Result File Name or None</td>
+   </tr>
+   <tr>
+      <td>ChN</td>
+      <td>Measurement Range N-Channel</td>
+   </tr>
+   <tr>
+      <td>ChX</td>
+      <td>Measurement Range X-Channel</td>
+   </tr>
+   <tr>
+      <td>State</td>
+      <td>State of the Measurement<br>started or stopped</td>
+   </tr>
+   <tr>
+      <td>Notification</td>
+      <td>e.g. Simulation, jutified, not justified, Signalfrequency or No PPS</td>
+   </tr>
+   <tr>
+      <td>IP:</td>
+      <td>Actual IP Address (LAN Connector)</td>
+   </tr>
+
+</table>
+</p>
+
+<p>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Menu Bar</th>
+      <th>Discription</th>
+   </tr>
+   <tr>
+      <td>top most icon</td>
+      <td>Starts the WM software</td>
+   </tr>
+   <tr>
+      <td>2. Icon</td>
+      <td>Open a file browser</td>
+   </tr>
+   <tr>
+      <td>3. Icon</td>
+      <td>System settings</td>
+   </tr>
+   <tr>
+      <td>untere Icons</td>
+      <td>Network</td>
+   </tr>
+   <tr>
+      <td>2. Icon</td>
+      <td>Zera Update</td>
+   </tr>
+   <tr>
+      <td>3. Icon</td>
+      <td>Watch</td>
+   </tr>
+</table>
+</p>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h1>Mainmenu</h1>
+<h2>File</h2>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/07_Datei.png"><img width="50%" alt="file not found" style="vertical-align:top" src="../xml-definition/pic/gbwm3000idc/08_Datei.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Description</th>
+      <th>Functions</th>
+   </tr>
+   <tr>
+      <td>Reference transformer error</td>
+      <td>
+	<ul>
+	<li>Open</li>
+	<li>Close</li>
+	<li>Edit</li>
+	</ul>
+Select the menu Edit and a window will open, where you can select an
+existing table for further editing. If a table has already been opened, the
+menu automatically opens this table and you can edit this table. If you
+want to create a new table and no table has been opened before, a window
+will open where you can select the location and the file name. The default
+name is transformer.oet, change the name as it is required and click to
+Save. An example file with predetermined data will open. Data can be
+edited as required. If you close the window, though you have not saved it
+before, a window will open automatically, where you are requested to
+save the file. Enter a new file name or save the data as before.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Result file</td>
+      <td>	<ul>
+	<li>Open</li>
+	<li>Close</li>
+	<li>Edit</li>
+	</ul>
+</td>
+   </tr>
+   <tr>
+      <td>Exit</td>
+      <td>To close the software</td>
+   </tr>
+</table>
+<p>
+<b>Reference transformer error</b>
+Reference transformer errors are stored in the system and include known error values of used standard
+transformers. You can find a description of the file structure in the annex. While opening a reference transformer
+error the measuring bridge analyses all its entries and generates corrective curves for every transformer ratio,
+which has been found, by interpolating linearly between the detected correction marks. The detected correction
+values are used for compensation, if it is activated before in the configuration menu. Currently used correction
+values can be visualized in the inherent error indicator.
+</p>
+<p>
+<b>Measuring results</b>
+Measuring results can be stored in result data files. This can be activated by using function key F5 or via main
+menu “Store measuring values”. Open a result data file for activation. Results will be stored as XML data files.
+Please see annex for further information about the data file.
+</p>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>Measurement</h2>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/11_Messung.png"><img width="50%" alt="file not found" style="vertical-align:top" src="../xml-definition/pic/gbwm3000idc/12_Messung.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Description</th>
+      <th>Functions</th>
+   </tr>
+   <tr>
+      <td>Store session
+	</td>
+      <td>Stores the current session
+	</td>
+   </tr>
+   <tr>
+      <td>Load session
+	</td>
+      <td>Loads an existing session
+	</td>
+   </tr>
+   <tr>
+      <td>Stop
+	</td>
+      <td>Stops a running measurement
+	</td>
+   </tr>
+   <tr>
+      <td>Store results
+	</td>
+      <td>Stores the results of the Measurement
+	</td>
+   </tr>
+
+   <tr>
+      <td>Offset adjustment WM3000
+	</td>
+      <td>Performance of an offset adjustment of the complete WM3000I – without
+consideration of the connected components. Duration of the adjustment:
+approx. 15 min
+	</td>
+   </tr>
+  <tr>
+      <td>Offset measurement Chanel N
+	</td>
+
+      <td>Performance of an offset measurements channel N:<br>
+The offset measurement channel N detects the offset in the present range
+with the connected components. If one component generates an offset, it
+will be adjusted. This process is only active if it is activated in this menu.
+	</td>
+   </tr>
+  <tr>
+      <td>Offset measurement Chanel X
+	</td>
+
+      <td>Performance of an offset measurements channel X:<br>
+The offset measurement channel X detects the offset in the present range
+with the connected components. If one component generates an offset, it
+will be adjusted. This process is only active if it is activated in this menu.
+	</td>
+   </tr>
+   <tr>
+      <td>Simulation
+	</td>
+      <td>Switches between simulation and real measurement
+	</td>
+   </tr>
+
+</table>
+<p>
+A session is characterized by all settings in the configuration menu and all windows selectable in “views”. All this
+session data will be stored “default” by leaving the software and will be set after restarting. The user can also
+save these settings under a special name and reactivate the session by “load”.
+</p>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>View</h2>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/13_Ansicht.png"><img width="50%" alt="file not found" style="vertical-align:top" src="../xml-definition/pic/gbwm3000idc/14_Ansicht.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<p>
+All other Windows can be opend and close in the view menu
+</p>
+<p>
+<b>Error values</b>
+The error value indication shows the current load point, the error and error angle. TThe window can be zoomed. 
+You can open the context menu with double click and configure
+this indication. Field length, resolution and several units can be selected for every single indicated value. The
+measuring bridge determines the errors according to IEC and ANSI. Which value will be indicated, can also be set
+in the context menu. According to ANSI the angle will be indicated “inactive”.
+* The load point can be indicated relatively to the total RMS value of the N-channel or to the RMS value of the fundamental wave.
+</p>
+<p>
+<b>Vectors</b>
+The vector indication shows the „raw“ vectors of the primary side of the transformer under test. These „raw”
+vectors are the amplitudes of the fundamental wave and phase angle relatively to the sampling window. The
+values of the current measuring period will be indicated. The context menu opens by using the right mouse
+button in the vector menu. In this window you can select the amplitude resp. the RMS value of the vector and
+configure the angle indication in the mathematical resp. technical positive direction of rotation.
+</p>
+<p>
+<b>Inherent error</b>
+The inherent error indication shows which inherent error tables are loaded and which ratio is set currently. If the
+“inherent error correction” is activated and valid correction data exist the currently used correction values are
+shown as “amount” and “angle”.
+</p>
+<p>
+<b>DC Offset</b> Option<br>
+Der DC Offset Dialog is displayed.
+</p>
+<p>
+<b>Dialog</b>
+The indication of the dialog between the WM3000 application and the servers working in the background should
+be deactivated basically due to tying up resources. The dialog should only be used in case of trouble shooting
+between client and server.
+</p>
+<p>
+<b>EN61850</b>
+The EN61850 monitor the number of incoming databytes and the number of synchronization losses since the last
+start-up of the WM3000 application. Also errors are indicated which lead to synchronization losses. Two
+categories of errors are existing: errors, which are registered by the MAC (Media Access Controller) or errors,
+which appear while decoding the layer 2 reports. Errors can be reset by the reset button.
+</p>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Error measurement</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/31_Fehler.png"><html lang="en">
+  <head>
+</head>
+<body>
+<p>Error Display of the bridge:
+<ul>
+<li>
+Loadpoint Standard</li>
+<li>
+Loadpoint DUT</li>
+<li>
+Error </li>
+<li>
+RCF Ratio Correction Factor</li>
+<li>
+Angle phi</li>
+</ul>
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Actual values format control</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/32_FehlerEinstell.png"><html lang="en">
+  <head>
+</head>
+<body>
+<p>
+<b>Actual values format control</b>
+</p>
+<p>
+Controls the format of the Actual value display<br>
+reachable by double click.
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="de">
+  <head>
+</head>
+<body>
+<h3>Vectors</h3>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/33_Vektoren.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<p>Vector display of the bridge</p>
+<p>Shows the actual values</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Vectors format control</h3>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/34_Vektoren.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<p>
+<b>Vectors format control</b>
+</p>
+<p>
+Controls the format of the Vector value display<br>
+reachable by double click.
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Reference Transformer Error</h3>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/35_Eigen.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<p>Error of the Reference Transformer if .oet is set
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>EN61850-9-2 Monitor</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/36_EthernMon.png"><html lang="en">
+  <head>
+</head>
+<body>
+<p>Shows the Erros occured during Ethernt cacture</p>
+<p>The errors can be reset by the reset button.</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>Settings</h2>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/15_Einstell.png"><img width="50%" alt="file not found" style="vertical-align:top" src="../xml-definition/pic/gbwm3000idc/16_Einstell.png"></p>
+<html lang="ee">
+  <head>
+</head>
+<body>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Name</th>
+      <th>Function</th>
+   </tr>
+   <tr>
+      <td>Configuration</td>
+      <td>
+Opens the configuration dialog
+	</td>
+
+   </tr>
+   <tr>
+      <td>Ranges</td>
+      <td>
+Opens the measurement ranges dialog
+</td>
+   </tr>
+   <tr>
+      <td>Divider</td>
+      <td>Opens the divider dialog</td>
+   </tr>
+</table>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>Configuration</h2>
+<h3>Mode</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/17_Modus.png"><html>
+<body>
+    <p>
+	Select the type of transformer in the <b>Mode</b> menu.
+	</p>
+<table>
+<tr bgcolor="#d3d3d3">
+<th>Selection</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Measurement</td>
+<td>Select <br>In/Ix (conventional transformer), <br>In/ECT (electronical transformer or LPCT) or
+<br>In / nConvent (non-conventional, digital transformer).</td>
+</tr>
+<tr>
+<td>Signal</td>
+<td>AC or DC (option)</td>
+</tr>
+</table>
+  </body>
+  </html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Computaion</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/18_Berechnung.png"><html lang="en">
+  <head>
+</head>
+<body>
+<p>Select the phase error of the transformer under test and activate or deactivate the correction of the standard
+transformer in the menu Computation.</p>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>Phase error DUT
+	</td>
+      <td>Enter the phase of the transformer under test in ° and the dead time in ms. via external
+keypad
+	</td>
+   </tr>
+   <tr>
+      <td>SReference transformer
+correction
+	</td>
+      <td>Activate or deactivate the correction of the reference transformer.
+	</td>
+   </tr>
+   <tr>
+      <td>Offset correction
+	</td>
+      <td>Activate or deactivate the offset correction channel N or channel X
+	</td>
+   </tr>
+
+</table>
+<p>
+All values of the transformer to be measured can be entered here. For example phase rotations and/or dead times
+inherent in the system. Dead times are calculated depending on the frequency into phase corrections.
+</p>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Measurement</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/19_Messung.png"><html lang="en">
+  <head>
+</head>
+<body>
+<p>Select signal frequency, measurement interval, scanning and integration time in the menu Measurement.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>Signal frequency</td>
+      <td>Select 16.66 Hz, 50 Hz or 60 Hz.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Measurement interval</td>
+      <td>Set the periods via arrows.
+</td>
+   </tr>
+   <tr>
+      <td>Samples</td>
+      <td>Select between 80 or 256 samples per period.</td>
+   </tr>
+   <tr>
+      <td>Integration time</td>
+      <td>Set the time in seconds via arrows.	
+</td>
+   </tr>
+
+</table>
+<p>
+<b>Signal frequency</b><br>
+The signal frequency defines the nominal frequency of the test values. The real frequency of the test values may
+differ up to ±1%. The sampling frequency of the measuring device is the product of configured nominal frequency
+and sample rate. Therefore a nominal frequency of 50 Hz and 80 samples/period equals 4000 Hz scanning
+frequency.
+</p>
+<p>
+<b>Measuring interval</b><br>
+You can define how many signal periods are summarized in a measuring period.
+Example: You have selected 256 samples/period and 16 periods as measuring interval <br>
+16 x 256 = 4096 samples will be recorded and analyzed.
+</p>
+<p>
+<b>Samples</b><br>
+You can select between 80 und 256 samples per period. These are the basically used values of the merging unit.
+</p>
+<p>
+<b>Integration time</b><br>
+All measuring periods will be processed and filtered successively until the integration time is passed by. If a
+measuring period has not been finished until this moment data will not be considered and will be processed in
+the next integration period.
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Synchronisation</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/20_Synchr.png"><html lang="en">
+  <head>
+</head>
+<body>
+<p>Select PPS signal in the Synchronisation menu.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>External</td>
+      <td>SSynchronisation will be performed via external signal.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Internal</td>
+      <td>Synchronisation will be performed via internal signal. Enter the synchronization time
+TSync in ms.	
+</td>
+   </tr>
+
+</table>
+<p>
+Synchronization of scanning can be performed via internally generated signal or externally. In this context
+synchronization means reset of the scanning system and new recording of all samples for the measuring period.
+The internally generated sync signal can be adjusted with a resolution of 100 ms between 0,5 and 2,5 s. The
+signal is available at the sync outputs. Additionally external sync signals are available at the free outputs.
+Furthermore an output with a 1000 times higher frequency than the sync signal exists.
+</p>
+<p><b>
+Strict synchronization</b> means, that the measuring system controls synchronization of data via connected merging
+unit and no “valid” measuring period will be performed if the samples are not equal to this measuring period. The
+system runs into timeout which leads to a malfunction message.
+Detailed: After a PPS pulse numbering of samples should be start with 0. If a measuring period of 16 signal
+periods with 80 samples is set (= 1280 samples), samples with number 0 ... 1279 belongs to the first measuring
+period, the samples 1280 ... 2559 to the second and so on.
+Deviations from this will be interpreted as malfunction which leads to timeout.
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Transformer Ratios</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/21_Teiler.png"><html>
+<body>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>N<sub>Prim</sub>
+</td>
+      <td>Standard transformer primary current</td>
+   </tr>
+   <tr>
+      <td>N<sub>Sek</sub>
+</td>
+      <td>Standard transformer secondary current</td>
+   </tr>
+   <tr>
+      <td>X<sub>Prim</sub>
+</td>
+      <td>Test primary current</td>
+   </tr>
+   <tr>
+      <td>X<sub>Sek</sub>
+</td>
+      <td>Test secondary current</td>
+   </tr>
+   <tr>
+      <td>ECT<sub>Prim</sub>
+</td>
+      <td>Test primary current</td>
+   </tr>
+   <tr>
+      <td>ECT<sub>Sek</sub>
+</td>
+      <td>Test secondary voltage</td>
+   </tr>
+
+</table>
+<p>
+Combo boxes with corresponding primary and secondary steps will be offered by entering the transformer ratio
+inside reference transformer errors. You can also enter the value with/without units. “No unit” will be interpreted
+as Ampere. You can also enter mA or kA. The measuring unit converts the values internally.
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>nConvent, non Conventionel</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/22_nConv.png"><html lang="en">
+  <head>
+</head>
+<body>
+<p>MAC address, priority tagged, ether type header and data set can be entered in the nConvent menu.
+</p>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Selection</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>Mac-Adresse</td>
+      <td>GEnter the MAC address for the merging unit and the WM3000 via external keypad.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Priority tagged</td>
+      <td>User priority – definiert die Frame Priorität<br>
+Priority tagged<br>
+CFI- cananonical format indicator<br>
+(TPID) Tag protocol ID fix 0x8100<br>
+VID- VLAN ID (Virtual LAN identification)
+</td>
+   </tr>
+   <tr>
+      <td>Ethertype header</td>
+      <td>Ethertype is fix 0x88BA<br>
+APPID (Application ID)
+</td>
+   </tr>
+   <tr>
+      <td>Data set</td>
+      <td>ASDU application set data unit<br>
+Set data set within ASDU	
+</td>
+   </tr>
+
+</table>
+<p>
+Enter the MAC address to enable a connection between WM3000 and connected merging unit.
+The value 0x8100 for TPID reports the frame as IEEE802.1Q frame. The ether type 0x88BA reports the frame as
+layer 2 frame according to IEC61850.
+</p>
+<p>
+Please see configuration of the connected merging unit for user priority, CFI and APPID.
+</p>
+<p>
+You can set in which data unit the data of the transformer to be measured will be transferred inside ASDU. If you
+select “set”, you choose one out of eight values.
+</p>
+<p>
+Geben Sie die MAC Adressen ein, um einen Verbindungsaufbau zwischen WM3000 und angeschlossener Merging
+unit zu ermöglichen.
+</p>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Logfile</h3>
+</body>
+</html>
+<p></p>
+<img alt="file not found" width="75%" src="../xml-definition/pic/gbwm3000idc/23_Logfile.png"><html lang="en">
+  <head>
+</head>
+<body>
+
+<p>
+Select the log file size in kB via arrow keys in the Log menu.
+</p>
+<p>
+The log file will be performed as FIFO (first in – first out). You can enter a size between 1 and 64 kB.
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h4>Hexadecimal keyboard</h4>
+<p>
+The hexadecimal keyboard is display in configuration menu when a hex input is requried.
+</p>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/39_KeyboardHex.png"></p>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h4>Float keyboard</h4>
+<p>
+The float keyboard is display in configuration menu when a float input is requried.
+</p>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/38_KeyboardFloat.png"></p>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>Measurement Ranges</h2>
+<p>
+Measurement Ranges can be set manually here, or set to automatic (reconmended)
+</p>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/37_Messbereiche.png"></p>
+<div style="break-after:page"></div>
+<html lang="de">
+  <head>
+</head>
+<body>
+<h2>Transformer Ratios</h2>
+<p>Set the Transformer Ratio like in in the configuration menu. Ratios are set on Apply.
+</p>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/42_RatioWidget.png"></p>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>Help</h2>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/24_Hilfe.png"><img width="50%" alt="file not found" style="vertical-align:top" src="../xml-definition/pic/gbwm3000idc/25_Hilfe.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Menu</th>
+      <th>Description</th>
+   </tr>
+   <tr>
+      <td>Info</td>
+      <td>Info about the Transfomer Measuring Bridge
+	</td>
+
+   </tr>
+   <tr>
+      <td>Info about ZERA</td>
+      <td>Info about ZERA GmbH
+	</td>
+
+   </tr>
+   <tr>
+      <td>Info about Qt</td>
+      <td>Info about Qt
+	</td>
+
+   </tr>
+   <tr>
+      <td>Version</td>
+      <td>Opens a window with information about:
+	<ul>
+	<li>
+Version</li>
+<li>
+Status of version of WM3000I software</li>
+<li>
+Serial number read out from the hardware</li>
+<li>
+Checksum of current adjustment data</li>
+<li>
+Name and version of measurement, circuit board, version of FPGA firmware and Microcontroller software</li>
+<li>
+Version of circuit board server</li>
+<li>
+Version of FPGA firmware and DSP</li>
+<li>
+Version of DSP server</li>
+<li>
+Release Info</li>
+<li>
+Options set</li>
+</ul>
+	</td>
+
+   </tr>
+
+   <tr>
+      <td>Release Info</td>
+      <td>ZERA Software change log
+	</td>
+
+   </tr>
+   <tr>
+      <td>Self test</td>
+      <td>Performs a self test
+	</td>
+
+   </tr>
+
+</table>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h3>Version Window</h3>
+<p>
+All versions are shown in this window
+</p>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/41_Version.png"></p>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>User Manual</h2>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/43_Anleitung.png"></p>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>Language</h2>
+</body>
+</html>
+<p><img alt="file not found" src="../xml-definition/pic/gbwm3000idc/26_Sprache.png"><img width="50%" alt="file not found" style="vertical-align:top" src="../xml-definition/pic/gbwm3000idc/27_Sprache.png"></p>
+<html lang="en">
+  <head>
+</head>
+<body>
+<p>
+You can select the language in the language menu.
+</p>
+<p>
+Texts for the corresponding language will be loaded while starting the device. Therefore program restarts if you
+change the language.
+</p>
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="en">
+  <head>
+</head>
+<body>
+<h2>Annex</h2>
+<h3>Result Data File</h3>
+<p>
+Measuring results can be stored into result data file in XML format.
+</p>
+<p>
+Beispiel:
+</p>
+<p>
+<img src="../xml-definition/pic/global/AnhangMED_1.png" alt="file missing">
+</p>
+
+The head of the XML file contains:
+    <ul>
+        <li>Doc type</li>
+        <li>Name of the measuring unit</li>
+        <li>Version of the measuring unit</li>
+        <li>Serial No. of the measuring unit</li>
+    </ul>
+
+If results are stored the following data will be indicated:
+  <ul>
+        <li>RESULT
+            <ul>
+                <li>Load point in % of total RMS value and RMS of fundamental wave</li>
+                <li>Amplitude error in % (IEC)</li>
+                <li>Angle error in ° (IEC)</li>
+                <li>Error according to ANSI</li>
+                <li>Date</li>
+                <li>Time</li>
+            </ul>
+        </li>
+        <li>Conditions</li>
+            <ul>
+                <li>Measuring mode in which the error has been detected.</li>
+                <li>Range channel N</li>
+                <li>Range channel X</li>
+            </ul>
+        <li>Correction</li>
+        <li>Used correction factors of the amplitude of the standard transformer.
+Correction values will be  derived from the used inherent error table.</li>
+    </ul>
+
+
+</body>
+</html>
+<div style="break-after:page"></div>
+<html lang="de">
+  <head>
+</head>
+<body>
+<h3>Reference Transformer Errors</h3>
+<p>
+Each line of an inherent error table describes a known error of the used standard transformer.<br>
+The known error of the transformers are sperated by Semikolon. 
+</p>
+<p>
+Example:
+</p>
+<p>
+2000V;100V;100%;0.001%;0.005°
+</p>
+The Values are expected in the following order:
+
+
+<table>
+   <tr bgcolor="#d3d3d3">
+      <th>Description</th>
+      <th>Value</th>
+	<th>Unit</th>
+   </tr>
+   <tr>
+      <td>Primay Step</td>
+      <td>z.B.: 2000V</td>
+      <td>m,k,M<br>V oder A<br>/3,/w3</td>
+   </tr>
+   <tr>
+      <td>Sekundary Step</td>
+      <td>z.B.: 100V</td>
+      <td>m,k,M<br>V oder A<br>/3,/w3</td>
+   </tr>
+   <tr>
+      <td>Load Point</td>
+      <td>z.B.: 100%</td>
+      <td>%</td>
+   </tr>
+   <tr>
+      <td>Amplitude error</td>
+      <td>z.B.: 0.001%</td>
+            <td>%</td>
+   </tr>
+   <tr>
+      <td>Angle error</td>
+      <td>z.B.: 0.005°</td>
+      <td>°,',<br>rad,<br>crad,<br>µrad</td>
+   </tr>
+
+</table>
+
+</body>
+</html>
+<div style="break-after:page"></div>
+</body>
+</html>

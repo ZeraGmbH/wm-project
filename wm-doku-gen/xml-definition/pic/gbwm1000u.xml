@@ -1,0 +1,149 @@
+<!DOCTYPE MSWDokuDefinition>
+<DOKULIST>
+ <DEVICE>WM1000U</DEVICE>
+ <TYP>1k</TYP>
+ <LANGUAGE>en</LANGUAGE>
+ <PICFOLDER>../xml-definition/pic/gbwm1000u/</PICFOLDER>
+ <PROSAFOLDER>html-prosa/</PROSAFOLDER>
+ <RELEASE>release-1.2.14</RELEASE>
+ <ENTRIES>
+  <ENTRY>
+   <ITEM>Main Screen</ITEM>
+   <DESCRCOM>AllesMenu.html</DESCRCOM>
+   <FOTO>02_Alles.png</FOTO>
+   <DESCRCOMTEXT>AllesText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>File Menu</ITEM>
+   <DESCRCOM>FileMenu.html</DESCRCOM>
+   <FOTOLEFT>07_Datei.png</FOTOLEFT>
+   <FOTORIGHT>08_Datei.png</FOTORIGHT>
+   <DESCRCOMTEXT>FileMenuText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Meassurement Menu</ITEM>
+   <DESCRCOM>MeasMenu.html</DESCRCOM>
+   <FOTOLEFT>11_Messung.png</FOTOLEFT>
+   <FOTORIGHT>12_Messung.png</FOTORIGHT>
+   <DESCRTYP>MeasMenuText.html</DESCRTYP>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>View Menu</ITEM>
+   <DESCRCOM>ViewMenu.html</DESCRCOM>
+   <FOTOLEFT>13_Ansicht.png</FOTOLEFT>
+   <FOTORIGHT>14_Ansicht.png</FOTORIGHT>
+   <DESCRTYP>ViewMenuText.html</DESCRTYP>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>ERRORVALUES Menu</ITEM>
+   <DESCRCOM>ErrWind.html</DESCRCOM>
+   <FOTO>31_Fehler.png</FOTO>
+   <DESCRCOMTEXT>ErrWindText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>ERRORVALUES SETTINGS</ITEM>
+   <DESCRCOM>ErrSettWind.html</DESCRCOM>
+   <FOTO>32_FehlerEinstell.png</FOTO>
+   <DESCRCOMTEXT>ErrSettWindText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Vektoren Main</ITEM>
+   <DESCRCOM>VekWind.html</DESCRCOM>
+   <FOTOLEFT>33_Vektoren.png</FOTOLEFT>
+   <DESCRCOMTEXT>VekWindText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>VektorenSettings Main</ITEM>
+   <DESCRCOM>VekSettWind.html</DESCRCOM>
+   <FOTOLEFT>34_Vektoren.png</FOTOLEFT>
+   <DESCRCOMTEXT>VekSettWindText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Eigenfehler Main</ITEM>
+   <DESCRCOM>EigenWind.html</DESCRCOM>
+   <FOTOLEFT>35_Eigen.png</FOTOLEFT>
+   <DESCRCOMTEXT>EigenWindText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Settings Menu</ITEM>
+   <DESCRCOM>SettMenu.html</DESCRCOM>
+   <FOTOLEFT>15_Einstell.png</FOTOLEFT>
+   <FOTORIGHT>16_Einstell.png</FOTORIGHT>
+   <DESCRCOMTEXT>SettMenuText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Configuration Mode</ITEM>
+   <DESCRCOM>ConfModeWind.html</DESCRCOM>
+   <FOTO>17_Modus.png</FOTO>
+   <DESCR>KonfModus.html</DESCR>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Configuration Calc</ITEM>
+   <DESCRCOM>ConfCalcWind.html</DESCRCOM>
+   <FOTO>18_Berechnung.png</FOTO>
+   <DESCRTYP>ConfCalcText.html</DESCRTYP>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Configuration Meas</ITEM>
+   <DESCRCOM>ConfMeasWind.html</DESCRCOM>
+   <FOTO>19_Messung.png</FOTO>
+   <DESCRCOMTEXT>ConfMeasText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Configuration Divi</ITEM>
+   <DESCRCOM>ConfDiviWind.html</DESCRCOM>
+   <FOTO>21_Teiler.png</FOTO>
+   <DESCR>ConfDiviText.html</DESCR>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Configuration Log</ITEM>
+   <DESCRCOM>ConfLogWind.html</DESCRCOM>
+   <FOTO>23_Logfile.png</FOTO>
+   <DESCRCOMTEXT>ConfLogText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>keyboardhex</ITEM>
+   <DESCRCOM>keyhexWind.html</DESCRCOM>
+   <FOTOLEFT>39_KeyboardHex.png</FOTOLEFT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>keyboardfloat</ITEM>
+   <DESCRCOM>keyfloatWind.html</DESCRCOM>
+   <FOTOLEFT>38_KeyboardFloat.png</FOTOLEFT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Ranges Main</ITEM>
+   <DESCRCOM>rangesWind.html</DESCRCOM>
+   <FOTOLEFT>37_Messbereiche.png</FOTOLEFT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Divider Main</ITEM>
+   <DESCRCOM>dividerWind.html</DESCRCOM>
+   <FOTOLEFT>42_RatioWidget.png</FOTOLEFT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Help Menu</ITEM>
+   <DESCRCOM>HelpMenu.html</DESCRCOM>
+   <FOTOLEFT>24_Hilfe.png</FOTOLEFT>
+   <FOTORIGHT>25_Hilfe.png</FOTORIGHT>
+   <DESCRCOMTEXT>HelpMenuText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>version Main</ITEM>
+   <DESCRCOM>versionWind.html</DESCRCOM>
+   <FOTOLEFT>41_Version.png</FOTOLEFT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Anleitung Main</ITEM>
+   <DESCRCOM>AnleitungWind.html</DESCRCOM>
+   <FOTOLEFT>43_Anleitung.png</FOTOLEFT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Language Main</ITEM>
+   <DESCRCOM>LangMenu.html</DESCRCOM>
+   <FOTOLEFT>26_Sprache.png</FOTOLEFT>
+   <FOTORIGHT>27_Sprache.png</FOTORIGHT>
+   <DESCRCOMTEXT>LangMenuText.html</DESCRCOMTEXT>
+  </ENTRY>
+ </ENTRIES>
+</DOKULIST>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang = "de">
+  <head>
+</head>
+<body>
+<table>
+   <tr bgcolor="#d3d3d3" >
+      <th>Bezeichnung</th>
+      <th>Funktionen</th>
+   </tr>
+   <tr>
+      <td>Eigenfehlertabelle</td>
+      <td>
+	<ul>
+	<li>Öffnen</li>
+	<li>Schließen</li>
+	<li>Bearbeiten</li>
+	</ul>
+Mit dem Menüpunkt Bearbeiten öffnet sich ein Fenster, in dem Sie eine
+vorhandene Tabelle zur weiteren Bearbeitung auswählen können. <br/>
+Ist bereits eine Tabelle geöffnet, springt das Menü direkt in die Eigenfehlertabelle, 
+die sie dann weiter bearbeiten können. <br/>
+Möchten Sie eine neue Tabelle anlegen und es ist noch keine Datei geöffnet, öffnet sich ein
+Fenster, in dem Sie sowohl den Speicherort als auch den Dateinamen
+auswählen können.<br/> 
+Der Default-Name ist transformer.oet, ändern Sie den 
+Name wie benötigt ab und klicken Sie auf Save. Es öffnet sich eine
+Beispieldatei mit vorgegebenen Daten, die Sie entsprechend überschreiben können. <br/>Wenn Sie die Datei schließen, obwohl Sie sie noch nicht
+abgespeichert haben, öffnet sich automatisch ein Fenster, das Sie zum
+Speichern der Datei auffordert. Wählen Sie hier nun entweder einen neuen
+Namen für die Datei oder speichern es unter dem bisherigen Namen ab.
+	</td>
+
+   </tr>
+   <tr>
+      <td>Ergebnisdatei</td>
+      <td>	<ul>
+	<li>Öffnen</li>
+	<li>Schließen</li>
+	<li>Bearbeiten</li>
+	</ul>
+</td>
+   </tr>
+   <tr>
+      <td>Beenden</td>
+      <td>Zum Beenden der Software</td>
+   </tr>
+</table>
+<p>
+<b>Eigenfehlertabelle</b>
+Eigenfehlertabellen werden im System gespeichert und beinhalten bekannte Fehler verwendeter Normalwandler.
+Im Anhang finden Sie eine Beschreibung des Aufbaus einer solchen Datei. Beim Öffnen einer Eigenfehlerdatei
+analysiert die Wandlermesseinrichtung alle Einträge dieser Datei und bildet sich für jedes gefundene Wandlerverhältnis 
+Korrekturkurven, in dem es zwischen den gefundenen Korrekturpunkten linear interpoliert. Die
+ermittelten Korrekturwerte werden zur Kompensation verwendet, wenn dies im Konfigurationsmenü unter
+Berechnung aktiviert worden ist. Aktuell verwendete Korrekturwerte können in der Eigenfehleranzeige sichtbar
+gemacht werden.
+</p>
+<p>
+<b>Messergebnisse</b>
+Messergebnisse können in Ergebnisdateien gespeichert werden. Dies geschieht über die Funktionstaste F6 bzw.
+über das Hauptmenü „Messung / Speichern Messwerte F6“. Hierzu muss eine Ergebnisdatei geöffnet werden. Ergebnisse
+werden als XML Dateien gespeichert. Das Format dieser Datei entnehmen Sie bitte dem Anhang.
+</p>
+
+</body>
+</html>
