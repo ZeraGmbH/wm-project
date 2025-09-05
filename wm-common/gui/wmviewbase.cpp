@@ -14,6 +14,7 @@ WMViewBase::WMViewBase(WMViewBase *parent) :
     m_statusLabelContainer(this)
 {
     ui->setupUi((QMainWindow*) this);
+    ui->actionAnleitung->setDisabled(true);
 }
 
 
