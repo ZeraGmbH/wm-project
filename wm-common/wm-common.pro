@@ -5,7 +5,7 @@ TRANSLATIONS    = wm-common_de.ts \
                   wm-common_gb.ts \
                   wm-common_pl.ts
 
-QT += widgets network qt3support webkit \
+QT += widgets network qt3support \
 
 HEADERS = \
     client-access/clientiodevice.h \
@@ -21,7 +21,6 @@ HEADERS = \
     gui/vectordiagramm.h \
     gui/wmconfdialogbase.h \
     gui/wmkeyboardform.h \
-    gui/wmmanualview.h \
     gui/wmmessagebox.h \
     gui/wmrangedialogbase.h \
     gui/wmscreenshoterguibase.h \
@@ -119,7 +118,6 @@ SOURCES = \
     gui/vectordiagramm.cpp \
     gui/wmconfdialogbase.cpp \
     gui/wmkeyboardform.cpp \
-    gui/wmmanualview.cpp \
     gui/wmmessagebox.cpp \
     gui/wmrangedialogbase.cpp \
     gui/wmscreenshoterguibase.cpp \
@@ -186,7 +184,6 @@ SOURCES = \
 
 FORMS = \
     gui/wmkeyboardform.ui \
-    gui/wmmanualview.ui \
     gui/wmscreenshoterguibase.ui \
     gui/wmviewbase.ui \
     gui/en61850monitor.ui \

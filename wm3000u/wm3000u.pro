@@ -333,7 +333,7 @@ IMAGES	= images/filenew \
 TRANSLATIONS    = wm3000u_gb.ts \
                   wm3000u_pl.ts
 
-QT += widgets network xml qt3support dbus core webkit
+QT += widgets network xml qt3support dbus core
 
 INCLUDEPATH += \
     ../wm-common \
