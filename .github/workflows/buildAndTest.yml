@@ -17,6 +17,8 @@ jobs:
       - name: install deps
         run: |
           sudo dnf -y install xorg-x11-server-Xvfb
+      - name: Install packages
+        run: dnf install qtwebkit-devel -y
       - name: Build
         run: |
           echo $HOME
