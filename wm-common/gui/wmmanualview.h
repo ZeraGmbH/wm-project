@@ -4,12 +4,8 @@
 #include "screenshooter.h"
 
 #include <QWidget>
-#if (QT_VERSION < 0x050000)
-#include <QWebView>
-#else
 #include <QtWebKit/QWebElement>
 #include <QtWebKit/QtWebKit>
-#endif
 
 namespace Ui {
 class wmManualView;
