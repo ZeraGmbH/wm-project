@@ -61,7 +61,7 @@ void wmManualView::setDC(bool b)
 
 void wmManualView::setPath()
 {
-    mPath = "/usr/share/wm3000/";
+    mPath = "/usr/share/"+getDevice()+"-docu/";
     mPath = mPath.append("wm-docu/html-output/");
     mPath = mPath.append(mLanguage);
     mPath = mPath.append(getDevice());
