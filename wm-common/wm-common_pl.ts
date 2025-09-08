@@ -1366,17 +1366,13 @@ Zeile : %2
     <name>wmManualView</name>
     <message>
         <location filename="gui/wmmanualview.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
+        <source>Benutzersanleitung</source>
+        <oldsource>Bedienungsanleitung</oldsource>
+        <translation>Instrukcja obsługi</translation>
     </message>
     <message>
         <location filename="gui/wmmanualview.ui" line="21"/>
         <source>file:///home/wschunk/Source/wm-doku-gen/html-output/dewm3000Idc.html</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui/wmmanualview.cpp" line="16"/>
-        <source>Benutzeranleitung</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
