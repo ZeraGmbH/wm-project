@@ -1092,7 +1092,7 @@
     <message>
         <location filename="gui/wmviewbase.ui" line="815"/>
         <source>Teiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdzielacz</translation>
     </message>
     <message>
         <location filename="gui/wmviewbase.ui" line="818"/>
@@ -1102,7 +1102,7 @@
     <message>
         <location filename="gui/wmviewbase.ui" line="823"/>
         <source>Anleitung</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrukcja obsługi</translation>
     </message>
     <message>
         <location filename="gui/wmviewbase.cpp" line="206"/>
