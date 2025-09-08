@@ -63,10 +63,8 @@ int main(int argc, char *argv[])
     g_WMDevice->setIpAddress(mCmdLPar.GetIpAdress());
 
     QString qmPath = "/usr/share/wm3000i";
+    QString language = "gb";
     QString qmFileCom, qmFileWm;
-    wmManualView *g_WMDocuView = new wmManualView();
-    g_WMDocuView->setTyp("i");
-    g_WMDocuView->setLanguage("gb");
 
     switch (g_WMDevice->m_ConfData.Language)
     {
@@ -74,7 +72,7 @@ int main(int argc, char *argv[])
             qmFileWm = "";
             qmFileCom = "wm-common_de.qm";
             mCmdLPar.setLanguage("de");
-            g_WMDocuView->setLanguage("de");
+            language = "de";
             break;
        case gb:
            qmFileWm = "wm3000i_gb.qm";
@@ -102,7 +100,11 @@ int main(int argc, char *argv[])
             qWarning() << qPrintable(qmFileCom) << " translation file not found ";
         else
             app.installTranslator(qtTranslator);
-    }  
+    }
+
+   wmManualView *g_WMDocuView = new wmManualView();
+   g_WMDocuView->setTyp("i");
+   g_WMDocuView->setLanguage(language);
 
     g_WMView = new WMViewBaseI; // erst mal hauptfenster erzeugen
     app.setMainWidget(g_WMView); // hauptfenster der applikation mitteilen
