@@ -1087,7 +1087,7 @@
     <message>
         <location filename="gui/wmviewbase.ui" line="812"/>
         <source>&amp;Teiler</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rozdzielacz</translation>
     </message>
     <message>
         <location filename="gui/wmviewbase.ui" line="815"/>
