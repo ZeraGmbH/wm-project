@@ -341,7 +341,8 @@
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="360"/>
-        <source>show RCF</source>
+        <source>zeige RCF</source>
+        <oldsource>show RCF</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
