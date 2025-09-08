@@ -357,7 +357,7 @@
         <item>
          <widget class="QCheckBox" name="RCFshowCheckBox">
           <property name="text">
-           <string>show RCF</string>
+           <string>zeige RCF</string>
           </property>
           <property name="checked">
            <bool>true</bool>

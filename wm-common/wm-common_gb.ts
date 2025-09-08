@@ -335,8 +335,9 @@
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="360"/>
-        <source>show RCF</source>
-        <translation type="unfinished"></translation>
+        <source>zeige RCF</source>
+        <oldsource>show RCF</oldsource>
+        <translation>show RCF</translation>
     </message>
     <message>
         <location filename="gui/wmmeasconfigbase.ui" line="409"/>
@@ -1078,12 +1079,12 @@
     <message>
         <location filename="gui/wmviewbase.ui" line="812"/>
         <source>&amp;Teiler</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ratio</translation>
     </message>
     <message>
         <location filename="gui/wmviewbase.ui" line="815"/>
         <source>Teiler</source>
-        <translation type="unfinished"></translation>
+        <translation>Ratio</translation>
     </message>
     <message>
         <location filename="gui/wmviewbase.ui" line="818"/>
@@ -1093,7 +1094,7 @@
     <message>
         <location filename="gui/wmviewbase.ui" line="823"/>
         <source>Anleitung</source>
-        <translation type="unfinished"></translation>
+        <translation>User Manual</translation>
     </message>
     <message>
         <location filename="gui/wmviewbase.cpp" line="206"/>
