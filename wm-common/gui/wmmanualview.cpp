@@ -13,6 +13,10 @@ wmManualView::wmManualView(QWidget *parent)
     ui->setupUi(this);
     mbDC = false;
     mbConventional = false;
+    ui->wvIntroduction->setContextMenuPolicy(Qt::NoContextMenu);
+    int width(550);
+    this->resize(width,600);
+    this->move(1024-width,0);
 }
 
 void wmManualView::setScreenShooter(screenshooter* poi)
