@@ -5,7 +5,7 @@
  <LANGUAGE>en</LANGUAGE>
  <PICFOLDER>../xml-definition/pic/gbwm1000i/</PICFOLDER>
  <PROSAFOLDER>html-prosa/</PROSAFOLDER>
- <RELEASE>release-1.2.14</RELEASE>
+ <RELEASE>release-1.2.22</RELEASE>
  <ENTRIES>
   <ENTRY>
    <ITEM>Main Screen</ITEM>
