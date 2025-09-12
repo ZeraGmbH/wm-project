@@ -15,8 +15,23 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:variable name="var_prosatyp" select="concat($var_prosafolder, $var_typ,'/',$var_language,'/')" />
 
 
-  <html>
+  <html class="noselect" >
   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <head>
+<style> 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+</style>
+</head>
+
   <body>
   <h1><xsl:copy-of select="$var_device" />_MAN_EXT_<xsl:copy-of select="$var_language" /></h1>
   <xsl:if test="LANGUAGE='de'">
