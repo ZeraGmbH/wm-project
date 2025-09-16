@@ -3335,7 +3335,7 @@ bool cWM3000I::isDC()
 void cWM3000I::setNewSamplerates(bool b)
 {
     Q_UNUSED(b); // unused until ZERA wants to use the new Sample rates
-    m_bNewSamplerates = false; //b;
+    m_bNewSamplerates = b;
 }
 
 
@@ -3718,6 +3718,8 @@ void cWM3000I::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     if (m_bNewSamplerates) {         // new sample rates
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcNPhase, S96, 4, 20))));
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcXPhase, S96, 4, 20))));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.60", adcNadcX, In_IxAbs, adcNPhase, S96, 4, 20))));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.60", adcNadcX, In_IxAbs, adcXPhase, S96, 4, 20))));
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcNPhase, S288, 4, 20))));
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcXPhase, S288, 4, 20))));
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW240.60", adcNadcX, In_IxAbs, adcNPhase, S240, 4, 20))));
