@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 
     CommandLineParameter mCmdLPar;
     mCmdLPar.Parse(argc, argv);
-    mCmdLPar.setFileName("/etc/WMConfFile");
+    mCmdLPar.setFileName("/usr/share/WMConfFile");
     mCmdLPar.ParseFile();
     mCmdLPar.setDevice("i");
 
