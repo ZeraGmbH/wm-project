@@ -92,6 +92,11 @@ void wmMessageBox::setSchnubbel()
     QMessageBox::critical(0,("Schnubbel"),tr("PCB Server reported:\n'Schnubbel not set!'\n\nPlease enable justage by activating\njustage-switch by inserting 'Schnubbel'\n\nAnd try again!\n\nNo data written!"));
 }
 
+void wmMessageBox::Simulation()
+{
+    QMessageBox::critical(0,("Simulation"),tr("Simulation running"));
+}
+
 void wmMessageBox::msgRatioErr()
 {
     QMessageBox::information( 0, trUtf8("scaling factor"),  trUtf8("Please check!"));

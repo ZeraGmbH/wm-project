@@ -18,6 +18,7 @@ public:
     int msgBusy(QString host, int port);
     void justDataWritten();
     void setSchnubbel();
+    void Simulation();
     void msgRatioErr();
     void msgRatioEotErr();
     void noDocu(QString path);

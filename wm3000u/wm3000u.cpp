@@ -3176,16 +3176,32 @@ void cWM3000U::JustageAmplitudeSlot(void)
 
 void cWM3000U::JustagePhaseSlot(void)
 {
-    SetPhaseCalcInfo(); // zum löschen der koeffizienten
-    SetPhaseNodeMeasInfo(); // zum ermitteln der nodes
-    emit StartStateMachine(PhaseNodeMeasStart);
+    if (m_ConfData.m_bSimulation)
+    {
+        wmMessageBox msgb;
+        msgb.Simulation();
+    }
+    else
+    {
+        SetPhaseCalcInfo(); // zum löschen der koeffizienten
+        SetPhaseNodeMeasInfo(); // zum ermitteln der nodes
+        emit StartStateMachine(PhaseNodeMeasStart);
+    }
 }
 
 
 void cWM3000U::JustagePhaseBerechnungSlot(void)
 {
-    SetPhaseCalcInfo();
-    emit StartStateMachine(CmpPhaseCoeffStart);
+    if (m_ConfData.m_bSimulation)
+    {
+        wmMessageBox msgb;
+        msgb.Simulation();
+    }
+    else
+    {
+        SetPhaseCalcInfo();
+        emit StartStateMachine(CmpPhaseCoeffStart);
+    }
 }
 
 
