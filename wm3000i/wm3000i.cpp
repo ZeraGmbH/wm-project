@@ -3684,10 +3684,15 @@ void cWM3000I::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.60"));
     if (m_bNewSamplerates) {
+    m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.16"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.60"));
-    m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
+    m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.16"));
+    m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.60"));
+    m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.16"));
+    m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
+    m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.60"));
     }
     for (uint i = 0; i < m_sXRangeList.count()-1; i++)
         m_CalcInfoList.append(new cCalcInfo(chn, m_sXRangeList.at(i)->Selector()));
@@ -3713,17 +3718,10 @@ void cWM3000I::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     // jetzt doch wieder
     m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW80.50", adcNadcX, In_IxAbs, adcNPhase, S80, 4, 20)))); // bereiche optimal für hw freq messung, modus adc/adc, für 80 samples/periode und 4 messungen einschwingzeit, 10 messungen für stützstellenermittlung
     m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW256.50", adcNadcX, In_IxAbs, adcNPhase, S256, 4, 20))));
-    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW80.50", adcNadcX, In_IxAbs, adcXPhase, S80, 4, 20))));
-    m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW256.50", adcNadcX, In_IxAbs, adcXPhase, S256, 4, 20))));
     if (m_bNewSamplerates) {         // new sample rates
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcNPhase, S96, 4, 20))));
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.50", adcNadcX, In_IxAbs, adcXPhase, S96, 4, 20))));
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.60", adcNadcX, In_IxAbs, adcNPhase, S96, 4, 20))));
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW96.60", adcNadcX, In_IxAbs, adcXPhase, S96, 4, 20))));
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcNPhase, S288, 4, 20))));
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW288.50", adcNadcX, In_IxAbs, adcXPhase, S288, 4, 20))));
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW240.60", adcNadcX, In_IxAbs, adcNPhase, S240, 4, 20))));
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo>(new cJustMeasInfo( "5mA", "5mA", "ADW240.60", adcNadcX, In_IxAbs, adcXPhase, S240, 4, 20))));
     }
 
     // die liste für alle konv. bereiche in kanal n
@@ -3908,8 +3906,14 @@ void cWM3000I::SetConfDataSlot(cConfData *cd) // signal kommt vom konfigurations
     // we limit the number of
     if ((cd->m_nSRate == S80) && (cd->m_nMeasPeriod > nmaxS80MeasPeriod))
         cd->m_nMeasPeriod = nmaxS80MeasPeriod;
+    if ((cd->m_nSRate == S96) && (cd->m_nMeasPeriod > nmaxS96MeasPeriod))
+        cd->m_nMeasPeriod = nmaxS96MeasPeriod;
+    if ((cd->m_nSRate == S240) && (cd->m_nMeasPeriod > nmaxS240MeasPeriod))
+        cd->m_nMeasPeriod = nmaxS240MeasPeriod;
     if ((cd->m_nSRate == S256) && (cd->m_nMeasPeriod > nmaxS256MeasPeriod))
         cd->m_nMeasPeriod = nmaxS256MeasPeriod;
+    if ((cd->m_nSRate == S288) && (cd->m_nMeasPeriod > nmaxS288MeasPeriod))
+        cd->m_nMeasPeriod = nmaxS288MeasPeriod;
 
     m_ConfDataCopy = m_ConfData; // alte konfiguration
     m_ConfData = *cd;
