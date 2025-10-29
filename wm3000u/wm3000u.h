@@ -419,8 +419,6 @@ private:
     bool m_bJustage;
     bool m_bPpsWatchDogDisable;
     bool m_bPpsWatchDogTriggered;
-    // cWM3000SCPIFace* m_pWM3000SCPIFace;
-    // cZeraDeviceServer* m_pZeraDeviceServer;
     
     void DefaultSettings(cConfData&);
     void DefaultSettingsMeasurement(cConfData&);
@@ -436,6 +434,7 @@ private:
     CWMRange* Range(cRSelectString,cWMRangeList&); // sucht den bereich über den selector
     CWMRange* Range(QString,cWMRangeList&); // sucht den bereich über den namen
     CWMRange* Range(float,cWMRangeList&); // sucht einen beeich dessen bereichendwert >= float par ist
+
     CWMRange* DummyRange;
  
     int getSampleRate(int sr);
@@ -502,6 +501,7 @@ private:
     QTime mTime;
     void setupServers();
     void setupSampleDialog();
+    //ComplexVectorWidget *mVecWidget;
 };
 
 #endif    

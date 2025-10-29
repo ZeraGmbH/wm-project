@@ -168,6 +168,7 @@ cWM3000I::cWM3000I() :
 
     m_bNewSamplerates = false;
     m_bJustage = false;
+// This is a simple Vector widget for some test for vector display understanding
 //    mVecWidget = new ComplexVectorWidget;
 //    mVecWidget->resize(250,200);
 //    mVecWidget->show();

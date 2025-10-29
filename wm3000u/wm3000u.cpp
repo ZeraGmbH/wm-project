@@ -169,6 +169,10 @@ cWM3000U::cWM3000U() :
     m_bNewSamplerates = false;
     m_bJustage = false;
     m_bPpsWatchDogTriggered = false;
+    // This is a simple Vector widget for some test for vector display understanding
+    //    mVecWidget = new ComplexVectorWidget;
+    //    mVecWidget->resize(250,200);
+    //    mVecWidget->show();
 }
 
 
@@ -4181,6 +4185,11 @@ void cWM3000U::SimulatedMeasurement()
 
     wmCmpActValues();
     CmpRMSValues();
+    //    mVecWidget->setValue(1,ActValues.VekN.re(),ActValues.VekN.im());
+    //    mVecWidget->setValue(2,ActValues.VekX.re(), ActValues.VekX.im());
+    //    mVecWidget->setValue(3,ActValues.VekDX.re(), ActValues.VekDX.im());
+    //    mVecWidget->update();
+
     emit SendActValuesSignal(&ActValues);
     emit SendLPSignal(&ActValues);
 }
