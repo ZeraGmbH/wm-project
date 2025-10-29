@@ -6,6 +6,7 @@
 #include "wmactvalues.h"
 #include "wm3000scpiface.h"
 #include "wm3kscpispecialbase.h"
+#include "defsamplerates.h"
 
 #include <QString>
 

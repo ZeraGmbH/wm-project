@@ -12,6 +12,7 @@ HEADERS = \
     client-access/clientsocketdevice.h \
     client-access/deviceserver.h \
     confguihelper.h \
+    defsamplerates.h \
     dsp/dspactvalues.h \
     dsp/dspmeasdata.h \
     dsp/dspsetup.h \
@@ -112,6 +113,7 @@ SOURCES = \
     client-access/clientsocketdevice.cpp \
     client-access/deviceserver.cpp \
     confguihelper.cpp \
+    defsamplerates.cpp \
     dsp/dspmeasdata.cpp \
     dsp/dspsetup.cpp \
     gui/cwmessagebox.cpp \

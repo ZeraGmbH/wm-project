@@ -2,6 +2,7 @@
 #define WMGLOBALCOMMON_H
 
 #include "range.h"
+#include "defsamplerates.h"
 
 #include <memory>
 #include <vector>
@@ -13,7 +14,7 @@ const float TDBase = 100.0e6; // 100 mhz auflösung für td messung (pps->1. sam
 
 enum SyncSources {Intern,Extern,MaxSSource}; // sync sources
 enum SignalFreqs {F16,F50,F60,MaxFreq}; // -> feste abtastfrequenzen
-enum SampleRates {S80,S96,S240,S256,S288,MaxSRate}; // abtastraten
+
 enum SenseMode {sensNsensX, adcNadcX, sensNadcX, sensXadcN, sensNsensX0V, anzSenseMode}; // sense modes innerhalb der hardware
 enum SignalModes {AC, DC, maxSMode}; // signal modi
 enum UserDecisions {AbortProgram,Stop,Retry,SimulationMode}; // benutzer entscheidungen

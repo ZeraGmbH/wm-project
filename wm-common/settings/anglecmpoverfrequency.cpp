@@ -1,4 +1,7 @@
 #include "anglecmpoverfrequency.h"
+#include "defsamplerates.h"
+
+extern int g_SRates[];
 
 angleCmpOverFrequency::angleCmpOverFrequency()
 {
@@ -62,6 +65,5 @@ double angleCmpOverFrequency::getAngleCorrectionValue()
 
 int angleCmpOverFrequency::getSampleRate(int sr)
 {  // don't repeat yourselve!
-    int SRates[5]={80,96,240,256,288};
-    return SRates[sr];
+    return g_SRates[sr];
 }

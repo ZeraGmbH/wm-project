@@ -16,8 +16,8 @@
 extern  scpiErrorType SCPIError[];
 extern char* MModeName[];
 
-extern char* SRatesName[];
-extern int SRates[];
+extern char* g_SRatesName[];
+extern int g_SRates[];
 
 char* SModeName[maxSMode] = {(char*)"AC",(char*)"DC"};
 char* FreqName[MaxFreq] = {(char*)"16.67",(char*)"50.0",(char*)"60.0"};
@@ -1036,7 +1036,7 @@ char* cWM3000SCPIFace::mGetConfMeasSRate()
 {
     QString rs;
 
-    rs = SRatesName[m_ConfDataActual.m_nSRate];
+    rs = g_SRatesName[m_ConfDataActual.m_nSRate];
     return sAlloc(rs);
 }
 
@@ -1045,7 +1045,7 @@ void cWM3000SCPIFace::mSetConfMeasSRate(char* s)
 {
     int src;
 
-    if ( SearchEntry(&s, SRates, MaxSRate, src, true) )
+    if ( SearchEntry(&s, g_SRates, MaxSRate, src, true) )
     {
         switch (src)
         {

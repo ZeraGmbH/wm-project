@@ -35,8 +35,12 @@
 #include "wmmessagebox.h"
 #include "anglecmpoverfrequency.h"
 #include "cmpactvalues.h"
+#include "defsamplerates.h"
 
 extern WMViewBase *g_WMView;
+extern char* g_SRatesName[];
+extern int g_SRates[];
+
 char* MModeName[maxMMode] = {(char*)"Un/Ux",(char*)"Un/EVT",(char*)"Un/nConvent"};
 
 const double PI = 3.141592654;
@@ -2019,7 +2023,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                       .arg(PhaseNodeMeasInfo->m_srngX)
                       .arg(MModeName[PhaseNodeMeasInfo->m_nMMode]);
             stream << QString("SenseMode=%1 nS=").arg(SenseModeText[PhaseNodeMeasInfo->m_nSMode]);
-            stream << getSampleRate(PhaseNodeMeasInfo->m_nnS);
+            stream << getSampleRateStr(PhaseNodeMeasInfo->m_nnS);
             stream << QString(" Frequency=%1").arg(NewConfData.m_fSFreq) << "\n" ;
 
             m_PhaseJustLogfile.flush();
@@ -2365,10 +2369,7 @@ void cWM3000U::ActionHandler(int entryAHS)
                       .arg(OffsetMeasInfo->m_srngX)
                       .arg(MModeName[OffsetMeasInfo->m_nMMode]);
             stream << QString("SenseMode=%1 nS=").arg(SenseModeText[OffsetMeasInfo->m_nSMode]);
-            if (OffsetMeasInfo->m_nnS == S80)
-                stream << "80\n";
-            else
-                stream << "256\n";
+            stream << QString(getSampleRateStr(PhaseNodeMeasInfo->m_nnS)) << "\n" ;
 
             m_OffsetJustLogfile.flush();
             m_OffsetJustLogfile.close();
@@ -4083,8 +4084,12 @@ CWMRange* cWM3000U::Range(float mw,cWMRangeList& rlist)
 
 int cWM3000U::getSampleRate(int sr)
 {
-    int SRates[5]={80,96,240,256,288};
-    return SRates[sr];
+    return g_SRates[sr];
+}
+
+QString cWM3000U::getSampleRateStr(int sr)
+{
+    return g_SRatesName[sr];
 }
 
 

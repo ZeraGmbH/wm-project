@@ -438,6 +438,7 @@ private:
     CWMRange* DummyRange;
  
     int getSampleRate(int sr);
+    QString getSampleRateStr(int sr);
     void SetDspWMVarList();
     void SetDspWMCmdList();
 
