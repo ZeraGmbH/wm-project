@@ -38,7 +38,7 @@ public:
     int m_nTSync; // T [ms] für internes sync.-timing
     int m_nSFreq; // abtastfrequenz 16 2/3, 50, 60 Hz enum
     float m_fSFreq; // signal frequenzwert float
-    int m_nSRate; // abtastrate 80 bzw 256 samples /periode 
+    int m_nSRate; // [abtastrate] 0-4 -> 80 - 288 sample   //80 bzw 256 samples /periode
     int m_nSenseMode; // der aktuelle sense mode normal 0 !!! wird nicht gespeichert !!!!!!
     int FirstASDU; // logical node (61850-9-2)
     int LastASDU; // dito

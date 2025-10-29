@@ -2003,6 +2003,10 @@ void cWM3000U::ActionHandler(int entryAHS)
         mWmProgressDialog->setValue(lprogress);
         if (N == 0) PhaseNodeMeasInfo = std::move(m_PhaseNodeMeasInfoList.at(lprogress-1)); // info was zu tun ist
 
+        NewConfData.m_nSenseMode = PhaseNodeMeasInfo->m_nSMode; // sense modus
+        NewConfData.m_nSRate = PhaseNodeMeasInfo->m_nnS; // samples / periode
+        NewConfData.m_fSFreq = PhaseJustFreq[N];
+
         if (m_PhaseJustLogfile.open( QIODevice::WriteOnly  | QIODevice::Append) ) // wir loggen das mal
         {
             QTextStream stream( &m_PhaseJustLogfile );
@@ -2011,18 +2015,14 @@ void cWM3000U::ActionHandler(int entryAHS)
                       .arg(PhaseNodeMeasInfo->m_srngX)
                       .arg(MModeName[PhaseNodeMeasInfo->m_nMMode]);
             stream << QString("SenseMode=%1 nS=").arg(SenseModeText[PhaseNodeMeasInfo->m_nSMode]);
-            if (PhaseNodeMeasInfo->m_nnS == S80)
-                stream << "80\n";
-            else
-                stream << "256\n";
+            stream << getSampleRate(PhaseNodeMeasInfo->m_nnS);
+            stream << QString(" Frequency=%1").arg(NewConfData.m_fSFreq) << "\n" ;
 
             m_PhaseJustLogfile.flush();
             m_PhaseJustLogfile.close();
         }
 
-        NewConfData.m_nSenseMode = PhaseNodeMeasInfo->m_nSMode; // sense modus
-        NewConfData.m_nSRate = PhaseNodeMeasInfo->m_nnS; // samples / periode
-        NewConfData.m_fSFreq = PhaseJustFreq[N];
+
         NewConfData.m_nMeasMode  =  PhaseNodeMeasInfo->m_nMMode;
         NewConfData.m_sRangeNVorgabe = PhaseNodeMeasInfo->m_srngN; // bereich kanal n
         if (PhaseNodeMeasInfo->m_nMMode == Un_UxAbs)
@@ -3480,10 +3480,15 @@ void cWM3000U::SetPhaseCalcInfo() // wir init. die liste damit die statemachine 
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.50"));
     m_CalcInfoList.append(new cCalcInfo(chn,"ADW256.60"));
     if (m_bNewSamplerates) {
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.16"));
         m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.50"));
         m_CalcInfoList.append(new cCalcInfo(chn,"ADW96.60"));
-        m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.16"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.50"));
         m_CalcInfoList.append(new cCalcInfo(chn,"ADW240.60"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.16"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.50"));
+        m_CalcInfoList.append(new cCalcInfo(chn,"ADW288.60"));
     }
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
         m_CalcInfoList.append(new cCalcInfo(chn, m_sNRangeList.at(i)->Selector()));
@@ -3520,9 +3525,8 @@ void cWM3000U::SetPhaseNodeMeasInfo() // wir init. die liste damit die statemach
     m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW256.50", adcNadcX, Un_UxAbs, adcNPhase, S256, 4, 20))));
     if (m_bNewSamplerates) {
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW96.50", adcNadcX, Un_UxAbs, adcNPhase, S96, 4, 20))));
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW96.60", adcNadcX, Un_UxAbs, adcNPhase, S96, 4, 20))));
+        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW240.50", adcNadcX, Un_UxAbs, adcNPhase, S240, 4, 20))));
         m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW288.50", adcNadcX, Un_UxAbs, adcNPhase, S288, 4, 20))));
-        m_PhaseNodeMeasInfoList.push_back(( std::unique_ptr<cJustMeasInfo> (new cJustMeasInfo( "3.75V", "3.75V", "ADW240.60", adcNadcX, Un_UxAbs, adcNPhase, S240, 4, 20))));
     }
     // die liste für alle konv. bereiche in kanal n
     for (uint i = 0; i < m_sNRangeList.count()-1; i++)
@@ -3713,8 +3717,15 @@ void cWM3000U::SetConfDataSlot(cConfData *cd) // signal kommt vom konfigurations
     // we limit the number of
     if ((cd->m_nSRate == S80) && (cd->m_nMeasPeriod > nmaxS80MeasPeriod))
         cd->m_nMeasPeriod = nmaxS80MeasPeriod;
+    if ((cd->m_nSRate == S96) && (cd->m_nMeasPeriod > nmaxS96MeasPeriod))
+        cd->m_nMeasPeriod = nmaxS96MeasPeriod;
+    if ((cd->m_nSRate == S240) && (cd->m_nMeasPeriod > nmaxS240MeasPeriod))
+        cd->m_nMeasPeriod = nmaxS240MeasPeriod;
     if ((cd->m_nSRate == S256) && (cd->m_nMeasPeriod > nmaxS256MeasPeriod))
         cd->m_nMeasPeriod = nmaxS256MeasPeriod;
+    if ((cd->m_nSRate == S288) && (cd->m_nMeasPeriod > nmaxS288MeasPeriod))
+        cd->m_nMeasPeriod = nmaxS288MeasPeriod;
+
 
     m_ConfDataCopy = m_ConfData; // alte konfiguration
     m_ConfData = *cd;
