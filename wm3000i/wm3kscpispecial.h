@@ -22,6 +22,7 @@ public:
     virtual bool setWM1000SetConfOperMode(cConfData *conf, int m) override;
     virtual bool setWM3000SetConfOperMode(cConfData *conf, int m) override;
     virtual QString fetchActualValues(cwmActValues *act) override;
+    virtual bool isCurrentWM() override {return true;};
 };
 
 #endif // WM3KSCPISPECIAL_H
