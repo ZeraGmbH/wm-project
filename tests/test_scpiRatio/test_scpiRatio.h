@@ -4,6 +4,8 @@
 #include <QTest>
 #include "scpihelper.h"
 
+enum Channel {currentChan = 0, voltageChan, ECTChan};
+
 class test_scpiRatio : public QObject
 {
 	Q_OBJECT
@@ -13,12 +15,12 @@ private:
     char* m_s; // das Kommando?
 
     void init();
-    void fromParameter(QString param);
+    void fromParameter(QString param, int typ);
 private slots:
     void test_justRatio();
     void test_withUnits();
-//    void test_withDivider();
-//    void test_withPrefix();
+    void test_withDivider();
+    void test_withPrefix();
     void test_withPrefixVoltage();
     void test_withPrefixCurrent();
     void test_withDividerVoltage();

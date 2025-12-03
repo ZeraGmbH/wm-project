@@ -1,4 +1,5 @@
 #include "scpihelper.h"
+#include "qregexp.h"
 #include "scpierrorindicator.h"
 #include "wmparameter.h"
 
@@ -9,7 +10,7 @@ scpiHelper::scpiHelper(cParse *poiParser) :
 
 }
 
-bool scpiHelper::GetTransformerRatio(char** s, QString& ps, QString& ss, bool chkEnd)
+bool scpiHelper::GetTransformerRatio(char** s, QString& ps, QString& ss, bool chkEnd, int iChan)
 {
     bool ok = true ;
     int i;
@@ -36,11 +37,34 @@ bool scpiHelper::GetTransformerRatio(char** s, QString& ps, QString& ss, bool ch
         return false;
     }
 
-    for ( i = 0; i < 2; i++)
+    presetUnits(par[0],par[1],iChan);
+
+    if (iChan == 0) // Current N, X
     {
-        ep[i] = par[i];
-        if ( !( ep[i].isVoltage() || ep[i].isCurrent() || ep[i].withoutUnit() ))
-            ok = false;
+        for ( i = 0; i < 2; i++)
+        {
+            ep[i] = par[i];
+            if ( !( ep[i].isCurrent()))
+                ok = false;
+        }
+    }
+    if (iChan == 1) // voltage N, X, EVT
+    {
+        for ( i = 0; i < 2; i++)
+        {
+            ep[i] = par[i];
+            if ( !( ep[i].isVoltage()))
+                ok = false;
+        }
+    }
+    if (iChan == 2) // ECT
+    {
+        for ( i = 0; i < 2; i++)
+        {
+            ep[i] = par[i];
+            if ( !(  ep[i].isCurrent() || ep[i].isVoltage()))
+                ok = false;
+        }
     }
 
     if ( !ok)
@@ -53,6 +77,37 @@ bool scpiHelper::GetTransformerRatio(char** s, QString& ps, QString& ss, bool ch
     ss = par[1];
 
     return true;
+}
+
+void scpiHelper::presetUnits(QString &par1, QString &par2, int iChan)
+{
+    QString unit1, unit2;
+    switch (iChan)
+    {
+    case 0 :unit1 = "A";
+            unit2 = "A";
+            break;
+    case 1 :unit1 = "V";
+            unit2 = "V";
+            break;
+    case 2 :unit1 = "A";
+            unit2 = "V";
+            break;
+    }
+    if (!par1.contains(unit1))
+    {
+        if (par1.contains("/"))
+            par1.insert(par1.indexOf("/"),unit1);
+        else
+            par1.append(unit1);
+    }
+    if (!par2.contains(unit2))
+    {
+        if(par2.contains("/"))
+            par2.insert(par2.indexOf("/"),unit2);
+        else
+            par2.append(unit2);
+    }
 }
 
 void scpiHelper::AddEventError(int e)

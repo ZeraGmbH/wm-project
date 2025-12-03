@@ -24,6 +24,7 @@ char* FreqName[MaxFreq] = {(char*)"16.67",(char*)"50.0",(char*)"60.0"};
 double SFrequency[MaxFreq] = {16.67, 50.0, 60.0};
 char* SSourceName[MaxSSource] = {(char*)"intern",(char*)"extern"};
 
+enum Channel {currentChan = 0, voltageChan, ECTChan};
 
 cWM3000SCPIFace::cWM3000SCPIFace(cClientIODevice* ciod, short l, WM3kSCPISpecialBase* special)
     :cSCPIFace(ciod, l),
@@ -863,7 +864,10 @@ char* cWM3000SCPIFace::mGetConfRatioExt()
 void cWM3000SCPIFace::mSetConfRatioExt(char* s)
 {
     QString sprim, ssek;
-    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek,true) )
+    int typ(voltageChan);
+    if (m_Special->isCurrentWM())
+        typ = static_cast<int>(ECTChan);
+    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek,true, typ) )
     {
         m_ConfDataTarget.m_ETPrimary = sprim;
         m_ConfDataTarget.m_ETSecondary = ssek;
@@ -888,8 +892,10 @@ char* cWM3000SCPIFace::mGetConfRatioChx()
 void cWM3000SCPIFace::mSetConfRatioChx(char* s)
 {
     QString sprim, ssek;
-
-    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek,true) )
+    int typ(voltageChan);
+    if (m_Special->isCurrentWM())
+        typ = static_cast<int>(currentChan);
+    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek,true,typ) )
     {
         m_ConfDataTarget.m_XPrimary = sprim;
         m_ConfDataTarget.m_XSecondary = ssek;
@@ -914,8 +920,10 @@ char* cWM3000SCPIFace::mGetConfRatioChn()
 void cWM3000SCPIFace::mSetConfRatioChn(char* s)
 {
     QString sprim, ssek;
-
-    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek, true) )
+    int typ(voltageChan);
+    if (m_Special->isCurrentWM())
+        typ = static_cast<int>(currentChan);
+    if ( m_pScpiHelper->GetTransformerRatio(&s, sprim, ssek, true,typ) )
     {
         m_ConfDataTarget.m_NPrimary = sprim;
         m_ConfDataTarget.m_NSecondary = ssek;
