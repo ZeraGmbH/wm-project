@@ -40,11 +40,13 @@ public slots:
     void SetXRangeSlot( const QString & xr );
     void SetECTRangeSlot( const QString & er );
     virtual void RemoteCtrlInfoSlot( bool );
+    virtual void onShowHide(bool shw);
 
 signals:
     void SendRange(cConfData*);
     void isVisible(bool);
     void SendRangeInfoReqSignal();
+    void sigIsVisible(bool);
 
 protected:
     virtual void showEvent( QShowEvent * ) override;

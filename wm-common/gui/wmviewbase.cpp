@@ -148,6 +148,8 @@ void WMViewBase::init()
     ui->ansichtEigenfehlerAction->setChecked(false);
     ui->ansichtEN61850Action->setChecked(false);
     ui->ansichtScopeAction->setChecked(false);
+    ui->einstellungenBereichAction->setChecked(false);
+    ui->einstellungenTeilerAction->setChecked(false);
 
     onLoadSession(".ses");
     connect(ui->ansichtScopeAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtScopeViewToggled(bool)));
@@ -161,25 +163,32 @@ void WMViewBase::init()
     connect(ui->ansichtEigenfehlerAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
     connect(this,SIGNAL(UIansichtEigenfehlerActionSet(bool)),ui->ansichtEigenfehlerAction,SLOT(setChecked(bool)));
 
-    connect(ui->ansichtIstwerteAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtIstwerteActionToggled(bool))); // öffnen der eigenfehler anzeige
-    connect(ui->ansichtIstwerteAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtIstwerteAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtIstwerteActionToggled(bool))); // öffnen der Istwert anzeige
+    connect(ui->ansichtIstwerteAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der Istwert anzeige
     connect(this,SIGNAL(UIansichtIstwerteActionSet(bool)),ui->ansichtIstwerteAction,SLOT(setChecked(bool)));
 
-    connect(ui->ansichtOffsetAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtOffsetActionToggled(bool))); // öffnen der eigenfehler anzeige
-    connect(ui->ansichtOffsetAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtOffsetAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtOffsetActionToggled(bool))); // öffnen der Offset anzeige
+    connect(ui->ansichtOffsetAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der Offset anzeige
     connect(this,SIGNAL(UIansichtOffsetActionSet(bool)),ui->ansichtOffsetAction,SLOT(setChecked(bool)));
 
-    connect(ui->ansichtDialogAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtDialogActionToggled(bool))); // öffnen der eigenfehler anzeige
-    connect(ui->ansichtDialogAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtDialogAction,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtDialogActionToggled(bool))); // öffnen der Dialog anzeige
+    connect(ui->ansichtDialogAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der Dialog anzeige
     connect(this,SIGNAL(UIansichtDialogActionSet(bool)),ui->ansichtDialogAction,SLOT(setChecked(bool)));
 
-    connect(ui->ansichtEN61850Action,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtEN61850ActionToggled(bool))); // öffnen der eigenfehler anzeige
-    connect(ui->ansichtEN61850Action,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der eigenfehler anzeige
+    connect(ui->ansichtEN61850Action,SIGNAL(toggled(bool)),this,SIGNAL(UIansichtEN61850ActionToggled(bool))); // öffnen der en61850 anzeige
+    connect(ui->ansichtEN61850Action,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool))); // öffnen der en61850 anzeige
     connect(this,SIGNAL(UIansichtEN61850ActionSet(bool)),ui->ansichtEN61850Action,SLOT(setChecked(bool)));
 
-    connect(ui->einstellungenConfAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenConfActionActivated()));
-    connect(ui->einstellungenBereichAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenBereichActionActivated()));
-    connect(ui->einstellungenTeilerAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenTeilerActionActivated()));
+    connect(ui->einstellungenConfAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenConfActionActivated())); // öffnen der configurationsdialog
+
+    connect(ui->einstellungenBereichAction,SIGNAL(toggled(bool)),this,SIGNAL(UIeinstellungenBereichActionToggled(bool))); // öffnen des Bereich Dialog
+    connect(ui->einstellungenBereichAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
+    connect(this,SIGNAL(UIeinstellungenBereichActionSet(bool)),ui->einstellungenBereichAction,SLOT(setChecked(bool)));
+
+    connect(ui->einstellungenTeilerAction,SIGNAL(toggled(bool)),this,SIGNAL(UIeinstellungenTeilerActionToggled(bool))); // öffnen ratio dialog
+    connect(ui->einstellungenTeilerAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
+    connect(this,SIGNAL(UIeinstellungenTeilerActionSet(bool)),ui->einstellungenTeilerAction,SLOT(setChecked(bool)));
+
     connect(ui->JustageAmplitudeAction,SIGNAL(activated()),this,SIGNAL(UIJustageAmplitudeActionActivated()));
     connect(ui->JustagePhaseAction,SIGNAL(activated()),this,SIGNAL(UIJustagePhaseActionActivated()));
     connect(ui->JustageKoeffBerechnungAction,SIGNAL(activated()),this,SIGNAL(UIJustageKoeffBerechnungActionActivated()));
@@ -472,17 +481,20 @@ bool WMViewBase::onLoadSession(QString session)
     QFile file(ls);
     if ( file.open( IO_ReadOnly ) ) {
         QDataStream stream( &file );
-        int mA, iA, oA, dA, eA, enA;
+        int mA, iA, oA, dA, eA, enA, einRang,einRatio;
         stream >> mA >> iA >> oA >> dA >> eA >> enA;
         stream >> m_widGeometry;
+        stream >> einRang >> einRatio;
         file.close();
 
-        ui->ansichtFehlerMessungAction->setChecked(mA);
-        ui->ansichtIstwerteAction->setChecked(iA);
+        //ui->ansichtFehlerMessungAction->setChecked(mA);
+       // ui->ansichtIstwerteAction->setChecked(iA);
         ui->ansichtOffsetAction->setChecked(oA);
         ui->ansichtDialogAction->setChecked(dA);
         ui->ansichtEigenfehlerAction->setChecked(eA);
         ui->ansichtEN61850Action->setChecked(enA);
+        ui->einstellungenBereichAction->setChecked(einRang);
+        ui->einstellungenTeilerAction->setChecked(einRatio);
 
         hide();
         resize(m_widGeometry.getSize());
@@ -531,6 +543,8 @@ void WMViewBase::onSaveSession(QString session)
                << (int)ui->ansichtEN61850Action->isChecked();
 
         stream << m_widGeometry;
+        stream << (int)ui->einstellungenBereichAction->isChecked()
+               << (int)ui->einstellungenTeilerAction->isChecked();
         file.close();
     }
 }

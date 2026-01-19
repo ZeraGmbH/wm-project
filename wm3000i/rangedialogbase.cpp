@@ -110,11 +110,24 @@ void RangeDialogBase::showEvent( QShowEvent * )
 void RangeDialogBase::closeEvent(QCloseEvent *)
 {
     wmRangeDialogBase::onSaveSession(".ses");
+    emit sigIsVisible(false);
 }
 
 void RangeDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
     setEnabled(!remote);
+}
+
+void RangeDialogBase::onShowHide(bool shw)
+{
+    if (shw)
+    {
+        show();
+    }
+    else
+    {
+        hide();
+    }
 }
 
 
