@@ -115,9 +115,9 @@
 // 2.45 17.2.25     adds releaseinfo to version widget
 // 2.46 7.10.25     improves translations
 // 2.47 12.8.25     Ratio Widget
+// 2.48 5.12.25     bugfix on ratio scpi interface
 
-#define WMVersion "V2.47"
-
+#define WMVersion "V2.48"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000i/log/ServerComm.log"

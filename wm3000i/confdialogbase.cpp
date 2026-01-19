@@ -147,6 +147,8 @@ void ConfDialogBase::init()
     {
         connect(ui->RatioApplyPushButton,SIGNAL(clicked()),this,SLOT(accept()));
         connect(ui->RatioCancelPushButton,SIGNAL(clicked()),this,SLOT(cancel()));
+        setRatioPointer(ui->RatioTabPage);
+        onLoadSession("Ratio.ses");
     }
 }
 
@@ -233,7 +235,7 @@ void ConfDialogBase::Actualize()
 
 void ConfDialogBase::cancel()
 {
-    wmconfdialogbase::cancelRatio(ui->RatioTabPage);
+    wmconfdialogbase::cancelRatio();
     SetRatioMenu();
 }
 
@@ -697,9 +699,22 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
     Actualize();
 }
 
+void ConfDialogBase::onShowHideRatio(bool shw)
+{
+    if(shw)
+    {
+        showRatio();
+    }
+    else
+    {
+        wmconfdialogbase::cancelRatio();
+      //  emit sigIsVisible(false);
+    }
+}
+
 void ConfDialogBase::showRatio()
 {
-    wmconfdialogbase::showRatio(ui->RatioTabPage);
+    wmconfdialogbase::showRatio();
 }
 
 void ConfDialogBase::FxRadioButtonChecked()

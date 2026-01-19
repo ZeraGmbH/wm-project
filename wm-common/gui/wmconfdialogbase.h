@@ -7,6 +7,7 @@
 #include "qdialog.h"
 #include "screenshooter.h"
 #include "sessionstreamer.h"
+#include "settingschangetimer.h"
 #include "widgetgeometry.h"
 #include "wmmessagebox.h"
 #include <QObject>
@@ -20,6 +21,8 @@ public:
     bool is_3( const QString & s );
     bool is_w3( const QString & s );
     void setScreenShooter(screenshooter *poi);
+signals:
+    void sigIsVisible(bool);
 public slots:
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
@@ -38,13 +41,17 @@ protected:
     confGuiHelper *mGuiHelper;
     wmMessageBox mWmMsgBox;
 
-    void showRatio(QWidget *poi);
-    void cancelRatio(QWidget *poi);
+    void setRatioPointer(QWidget *poi);
+    void showRatio();
+    void cancelRatio();
     void SuggestASDUs();
 private:
     virtual void readStream(QDataStream& stream) override;
     virtual void writeStream(QDataStream& stream) override;
     virtual void setDefaults() override;
+    SettingsChangeTimer m_settingsChangeTimer;
+private slots:
+    void onWriteStreamForGeomChange();
 protected:
     virtual QWidget* getRatioWidgetThis() = 0;
     virtual QTabWidget* getConfWidgetThis() = 0;
