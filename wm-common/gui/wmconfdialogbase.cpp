@@ -7,6 +7,7 @@ wmconfdialogbase::wmconfdialogbase(QWidget *parent, QString machineName):
     m_sessionStreamer(machineName, this)
 {
     mGuiHelper = new confGuiHelper();
+    connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
 }
 
 wmconfdialogbase::~wmconfdialogbase()
@@ -32,21 +33,32 @@ void wmconfdialogbase::onSaveSession(QString session)
     m_sessionStreamer.writeSession(objectName(), session);
 }
 
-void wmconfdialogbase::showRatio(QWidget *poi)
+
+void wmconfdialogbase::setRatioPointer(QWidget *poi)
 {
     mpTransRatio = poi;
-    poi->setParent(0);
-    poi->setWindowTitle("Transformer Ratio");
-    poi->setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
-    onLoadSession(".ses");
-    poi->show();
+    mpTransRatio->setParent(0);
+    mpTransRatio->setWindowTitle("Transformer Ratio");
+    mpTransRatio->setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
 }
 
-void wmconfdialogbase::cancelRatio(QWidget *poi)
+void wmconfdialogbase::showRatio()
 {
+    if (mpTransRatio != nullptr)
+{
+    m_settingsChangeTimer.startDelayed();
+    onSaveSession("Ratio.ses");
+    mpTransRatio->show();
+}
+}
+
+void wmconfdialogbase::cancelRatio()
+{
+    m_settingsChangeTimer.startDelayed();
     mWmKeyBoard->hide();
-    onSaveSession(".ses");
-    poi->close();
+    onSaveSession("Ratio.ses");
+    emit sigIsVisible(false);
+    mpTransRatio->close();
 }
 
 void wmconfdialogbase::SuggestASDUs()
@@ -115,6 +127,12 @@ void wmconfdialogbase::setDefaults()
 
 }
 
+void wmconfdialogbase::onWriteStreamForGeomChange()
+{
+    m_geomToFromStream = geometryFromWidget(this);
+    onSaveSession("Ratio.ses");
+}
+
 bool wmconfdialogbase::is_3(const QString &s)
 {
      return (s.contains("/3"));
@@ -141,7 +159,8 @@ void wmconfdialogbase::takeScreenshoots()
 {
     mScrShooter->showed(false);
     {
-        showRatio(getRatioWidgetThis());
+        setRatioPointer(getRatioWidgetThis());
+        showRatio();
         getRatioWidgetThis()->move(0,0);
         mScrShooter->showed(true);
     }

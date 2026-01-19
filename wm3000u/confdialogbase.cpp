@@ -229,7 +229,7 @@ void ConfDialogBase::Actualize()
 
 void ConfDialogBase::cancel()
 {
-    wmconfdialogbase::cancelRatio(ui->RatioTabPage);
+    wmconfdialogbase::cancelRatio();
     SetRatioMenu();
 }
 
@@ -697,7 +697,7 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 
 void ConfDialogBase::showRatio()
 {
-    wmconfdialogbase::showRatio(ui->RatioTabPage);
+    wmconfdialogbase::showRatio();
 }
 
 void ConfDialogBase::FxRadioButtonChecked()
