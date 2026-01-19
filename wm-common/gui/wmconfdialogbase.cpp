@@ -46,7 +46,7 @@ void wmconfdialogbase::showRatio()
 {
     if (mpTransRatio != nullptr)
 {
-    m_settingsChangeTimer.startDelayed();
+    m_settingsChangeTimer.startDelayed(true);
     onSaveSession("Ratio.ses");
     mpTransRatio->show();
 }
@@ -110,6 +110,8 @@ void wmconfdialogbase::readStream(QDataStream &stream)
     {
         stream >> m_geomToFromStream;
         geometryToWidget(m_geomToFromStream, mpTransRatio);
+        if(m_geomToFromStream.getVisible())
+            m_settingsChangeTimer.startDelayed(true);
     }
 }
 
@@ -129,8 +131,17 @@ void wmconfdialogbase::setDefaults()
 
 void wmconfdialogbase::onWriteStreamForGeomChange()
 {
-    m_geomToFromStream = geometryFromWidget(this);
-    onSaveSession("Ratio.ses");
+    if (mpTransRatio != nullptr)
+    {
+        WidgetGeometry temp = geometryFromWidget(mpTransRatio);
+        if (m_geomToFromStream == temp)
+            ;
+        else
+        {
+            m_geomToFromStream = geometryFromWidget(mpTransRatio);
+            onSaveSession("Ratio.ses");
+        }
+    }
 }
 
 bool wmconfdialogbase::is_3(const QString &s)
