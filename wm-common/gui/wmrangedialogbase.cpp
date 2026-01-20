@@ -4,7 +4,10 @@
 wmRangeDialogBase::wmRangeDialogBase(QWidget *parent, QString machineName) :
     QDialog (parent),
     m_sessionStreamer(machineName, this)
-{}
+{
+    connect(&m_settingsChangeTimer, SIGNAL(sigWriteStreamForGeomChange()), this, SLOT(onWriteStreamForGeomChange()));
+    onLoadSession(".ses");
+}
 
 wmRangeDialogBase::~wmRangeDialogBase()
 {
@@ -13,6 +16,7 @@ wmRangeDialogBase::~wmRangeDialogBase()
 
 bool wmRangeDialogBase::onLoadSession(QString session)
 {
+    setObjectName("WMRangeDialogBase");
     m_sessionStreamer.readSession(objectName(), session);
     return true;
 }
@@ -62,4 +66,31 @@ void wmRangeDialogBase::takeScreenshootFinished()
     {
         getChildThis()->hide();
     }
+}
+
+void wmRangeDialogBase::closeEvent(QCloseEvent *ce)
+{
+    m_settingsChangeTimer.startDelayed();
+    ce->accept();
+}
+
+void wmRangeDialogBase::resizeEvent(QResizeEvent *)
+{
+    m_settingsChangeTimer.startDelayed();
+}
+
+void wmRangeDialogBase::moveEvent(QMoveEvent *)
+{
+    m_settingsChangeTimer.startDelayed();
+}
+
+void wmRangeDialogBase::onSaveConfig()
+{
+    onSaveSession(".ses");
+}
+
+void wmRangeDialogBase::onWriteStreamForGeomChange()
+{
+    m_geomToFromStream = geometryFromWidget(this);
+    onSaveConfig();
 }

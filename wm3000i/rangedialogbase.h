@@ -40,26 +40,22 @@ public slots:
     void SetXRangeSlot( const QString & xr );
     void SetECTRangeSlot( const QString & er );
     virtual void RemoteCtrlInfoSlot( bool );
-    virtual void onShowHide(bool shw);
 
 signals:
     void SendRange(cConfData*);
     void isVisible(bool);
     void SendRangeInfoReqSignal();
-    void sigIsVisible(bool);
 
 protected:
-    virtual void showEvent( QShowEvent * ) override;
-    virtual void closeEvent (QCloseEvent * ) override;
     virtual QDialog* getChildThis() override;
 
 private:
-    void ActualizeDialog();
     Ui::RangeDialogBase *ui;
     cConfData m_ConfData;
     QStringList m_sNXItemList;
     QStringList m_sECTItemList;
 
+    void ActualizeDialog();
 };
 
 #endif // RANGEDIALOGBASE_H

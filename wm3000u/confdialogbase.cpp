@@ -143,6 +143,8 @@ void ConfDialogBase::init()
     {
         connect(ui->RatioApplyPushButton,SIGNAL(clicked()),this,SLOT(accept()));
         connect(ui->RatioCancelPushButton,SIGNAL(clicked()),this,SLOT(cancel()));
+        setRatioPointer(ui->RatioTabPage);
+        onLoadSession("Ratio.ses");
     }
 }
 
@@ -402,7 +404,7 @@ void ConfDialogBase::SetRatioMenu()
 
 void ConfDialogBase::SetLogMenu()
 {
-   ui->LogfileSizeSpinbox->setValue(m_ConfDataTemp.m_nLogFileMax >>10);
+   ui->LogfileSizeSpinbox->setValue(m_ConfDataTemp.m_nLogFileMax>>10);
 }
 
 
@@ -693,6 +695,18 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
     if (remote)
         ui->RatioTabPage->hide();
     Actualize();
+}
+
+void ConfDialogBase::onShowHideRatio(bool shw)
+{
+    if(shw)
+    {
+        showRatio();
+    }
+    else
+    {
+        wmconfdialogbase::cancelRatio();
+    }
 }
 
 void ConfDialogBase::showRatio()

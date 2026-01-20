@@ -518,7 +518,7 @@
   </action>
   <action name="einstellungenBereichAction">
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Bereiche</string>
@@ -812,7 +812,7 @@
   </action>
   <action name="einstellungenTeilerAction">
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Teiler</string>

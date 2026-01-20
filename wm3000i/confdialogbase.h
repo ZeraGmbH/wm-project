@@ -42,7 +42,6 @@ public slots:
     virtual void SetnConventMenu();
     virtual void RemoteCtrlInfoSlot( bool remote );
     void showRatio();
-
     void onShowHideRatio(bool shw);
 signals:
     void SendConfDataSignal(cConfData*);

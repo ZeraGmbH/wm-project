@@ -6,7 +6,7 @@
 extern cWM3000I* g_WMDevice;
 
 
-ConfDialogBase::ConfDialogBase(QWidget* parent, QString machineName , bool onlyRatio ):
+ConfDialogBase::ConfDialogBase(QWidget* parent, QString machineName , bool onlyRatio):
     wmconfdialogbase(parent, machineName),
     ui(new Ui::ConfDialogBase),
     m_bOnlyRatio(onlyRatio)
@@ -416,6 +416,7 @@ void ConfDialogBase::SuggestASDUs()
     wmconfdialogbase::SuggestASDUs();
 }
 
+
 void ConfDialogBase::ApplyDataSlot() // einstellungen werden intern übernommen, die menus aktualisiert
 {
     switch (m_ConfDataTemp.m_nMeasMode) {
@@ -708,7 +709,6 @@ void ConfDialogBase::onShowHideRatio(bool shw)
     else
     {
         wmconfdialogbase::cancelRatio();
-      //  emit sigIsVisible(false);
     }
 }
 

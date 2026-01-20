@@ -57,7 +57,6 @@ void wmconfdialogbase::cancelRatio()
     m_settingsChangeTimer.startDelayed();
     mWmKeyBoard->hide();
     onSaveSession("Ratio.ses");
-    emit sigIsVisible(false);
     mpTransRatio->close();
 }
 
@@ -187,4 +186,3 @@ void wmconfdialogbase::takeScreenshootFinished()
     }
 
 }
-

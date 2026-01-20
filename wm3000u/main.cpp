@@ -243,7 +243,6 @@ int main(int argc, char *argv[])
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMRangeDialog,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfiguration an rangedialog
     QObject::connect(g_WMRangeDialog,SIGNAL(SendRange(cConfData*)),g_WMDevice,SLOT(SetRangeSlot(cConfData*))); // rangedialog sendet neue bereiche an device
 
-
     QObject::connect(g_WMView,SIGNAL(UIJustageAmplitudeActionActivated()),g_WMDevice,SLOT(JustageAmplitudeSlot())); // welchsel in den amplituden justage modus wenn jumper
     QObject::connect(g_WMView,SIGNAL(UIJustagePhaseActionActivated()),g_WMDevice,SLOT(JustagePhaseSlot())); // automatischer phasenabgleich wenn jumper
     QObject::connect(g_WMView,SIGNAL(UIJustageKoeffBerechnungActionActivated()),g_WMDevice,SLOT(JustagePhaseBerechnungSlot())); // automatischer phasenabgleich wenn jumper
