@@ -21,8 +21,6 @@ public:
     bool is_3( const QString & s );
     bool is_w3( const QString & s );
     void setScreenShooter(screenshooter *poi);
-signals:
-    void sigIsVisible(bool);
 public slots:
     bool onLoadSession(QString session);
     void onSaveSession(QString session);

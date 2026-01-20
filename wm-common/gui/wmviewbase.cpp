@@ -181,13 +181,9 @@ void WMViewBase::init()
 
     connect(ui->einstellungenConfAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenConfActionActivated())); // öffnen der configurationsdialog
 
-    connect(ui->einstellungenBereichAction,SIGNAL(toggled(bool)),this,SIGNAL(UIeinstellungenBereichActionToggled(bool))); // öffnen des Bereich Dialog
-    connect(ui->einstellungenBereichAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
-    connect(this,SIGNAL(UIeinstellungenBereichActionSet(bool)),ui->einstellungenBereichAction,SLOT(setChecked(bool)));
+    connect(ui->einstellungenBereichAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenBereichActionActivated())); // öffnen des Bereich Dialog
 
-    connect(ui->einstellungenTeilerAction,SIGNAL(toggled(bool)),this,SIGNAL(UIeinstellungenTeilerActionToggled(bool))); // öffnen ratio dialog
-    connect(ui->einstellungenTeilerAction,SIGNAL(toggled(bool)),this,SLOT(SaveDefaultSessionSlot(bool)));
-    connect(this,SIGNAL(UIeinstellungenTeilerActionSet(bool)),ui->einstellungenTeilerAction,SLOT(setChecked(bool)));
+    connect(ui->einstellungenTeilerAction,SIGNAL(activated()),this,SIGNAL(UIeinstellungenTeilerActionActivated())); // öffnen ratio dialog
 
     connect(ui->JustageAmplitudeAction,SIGNAL(activated()),this,SIGNAL(UIJustageAmplitudeActionActivated()));
     connect(ui->JustagePhaseAction,SIGNAL(activated()),this,SIGNAL(UIJustagePhaseActionActivated()));

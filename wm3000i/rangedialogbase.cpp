@@ -100,40 +100,12 @@ void RangeDialogBase::SetECTRangeSlot( const QString & er)
     emit SendRange(&m_ConfData);
 }
 
-
-void RangeDialogBase::showEvent( QShowEvent * )
-{
-    wmRangeDialogBase::onLoadSession(".ses");
-    emit SendRangeInfoReqSignal(); // aufforderung an device bereichliste und configuration zu senden
-}
-
-void RangeDialogBase::closeEvent(QCloseEvent *)
-{
-    wmRangeDialogBase::onSaveSession(".ses");
-    emit sigIsVisible(false);
-}
-
 void RangeDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
     setEnabled(!remote);
 }
 
-void RangeDialogBase::onShowHide(bool shw)
-{
-    if (shw)
-    {
-        show();
-    }
-    else
-    {
-        hide();
-    }
-}
-
-
-
 QDialog *RangeDialogBase::getChildThis()
 {
     return this;
 }
-

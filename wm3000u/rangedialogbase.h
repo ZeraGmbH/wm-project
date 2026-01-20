@@ -38,8 +38,6 @@ signals:
     void SendRangeInfoReqSignal();
 
 protected:
-    virtual void showEvent( QShowEvent * ) override;
-    virtual void closeEvent (QCloseEvent * ) override;
     virtual QDialog* getChildThis() override;
 
 private:
@@ -49,7 +47,6 @@ private:
     QStringList m_sEVTItemList;
 
     void ActualizeDialog();
-
 };
 
 #endif // RANGEDIALOGBASE_H

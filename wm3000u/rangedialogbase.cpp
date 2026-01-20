@@ -98,16 +98,9 @@ void RangeDialogBase::SetEVTRangeSlot( const QString & er)
     emit SendRange(&m_ConfData);
 }
 
-
-void RangeDialogBase::showEvent( QShowEvent * )
+void RangeDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
-    wmRangeDialogBase::onLoadSession(".ses");
-    emit SendRangeInfoReqSignal(); // aufforderung an device bereichliste und configuration zu senden
-}
-
-void RangeDialogBase::closeEvent(QCloseEvent *)
-{
-    wmRangeDialogBase::onSaveSession(".ses");
+    setEnabled(!remote);
 }
 
 QDialog *RangeDialogBase::getChildThis()
@@ -116,7 +109,3 @@ QDialog *RangeDialogBase::getChildThis()
 }
 
 
-void RangeDialogBase::RemoteCtrlInfoSlot(bool remote)
-{
-    setEnabled(!remote);
-}

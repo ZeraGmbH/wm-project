@@ -231,18 +231,16 @@ int main(int argc, char *argv[])
 
     ConfDialogBase *g_WMRatioDialog = new ConfDialogBase(g_WMView, machineName, true); // confdialog erzeugen
     g_WMRatioDialog->setKeyboard(g_KeyBoard);
-    QObject::connect(g_WMView,SIGNAL(UIeinstellungenTeilerActionToggled(bool)),g_WMRatioDialog,SLOT(onShowHideRatio(bool)));
+    QObject::connect(g_WMView,SIGNAL(UIeinstellungenTeilerActionActivated()),g_WMRatioDialog,SLOT(showRatio()));
     QObject::connect(g_WMRatioDialog,SIGNAL(SendConfDataSignal(cConfData*)),g_WMDevice,SLOT(SetConfDataSlot(cConfData*))); // ratiodialog sendet konfigurationsdaten an device
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMRatioDialog,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfigurationsdaten an confdialog
     QObject::connect(g_WMDevice,SIGNAL(SendConfDialogInfoSignal(QStringList&,QStringList&)),g_WMRatioDialog,SLOT(SetConfListSlot( QStringList&, QStringList&))); // device sendet wandler primär/sekundär stufen und nennwerte
-    QObject::connect(g_WMRatioDialog,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIeinstellungenTeilerActionSet(bool)));
 
     RangeDialogBase *g_WMRangeDialog = new RangeDialogBase(g_WMView, machineName);   // bereichauswahlmenu erzeugen
-    QObject::connect(g_WMView,SIGNAL(UIeinstellungenBereichActionToggled(bool)),g_WMRangeDialog,SLOT(onShowHide(bool)));  // öffnen des bereichauswahl dialoges vom hauptfenster
+    QObject::connect(g_WMView,SIGNAL(UIeinstellungenBereichActionActivated()),g_WMRangeDialog,SLOT(show()));  // öffnen des bereichauswahl dialoges vom hauptfenster
     QObject::connect(g_WMDevice,SIGNAL(SendRangeListSignal( cWMRangeList&, cWMRangeList&)),g_WMRangeDialog,SLOT(SetRangeListSlot( cWMRangeList&, cWMRangeList&))); // device sendet bereich informationen an rangedialog
     QObject::connect(g_WMDevice,SIGNAL(SendConfDataSignal(cConfData*)),g_WMRangeDialog,SLOT(SetConfInfoSlot(cConfData*))); // device sendet konfiguration an rangedialog
     QObject::connect(g_WMRangeDialog,SIGNAL(SendRange(cConfData*)),g_WMDevice,SLOT(SetRangeSlot(cConfData*))); // rangedialog sendet neue bereiche an device
-    QObject::connect(g_WMRangeDialog,SIGNAL(sigIsVisible(bool)),g_WMView,SIGNAL(UIeinstellungenBereichActionSet(bool)));
 
     QObject::connect(g_WMView,SIGNAL(UIJustageAmplitudeActionActivated()),g_WMDevice,SLOT(JustageAmplitudeSlot())); // welchsel in den amplituden justage modus wenn jumper
     QObject::connect(g_WMView,SIGNAL(UIJustagePhaseActionActivated()),g_WMDevice,SLOT(JustagePhaseSlot())); // automatischer phasenabgleich wenn jumper
