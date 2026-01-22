@@ -4,6 +4,9 @@
 #include "eunit.h"
 
 enum VoltageUnits { VoltMV,
+                    VoltMV3,
+                    VoltMVw2,
+                    VoltMVw3,
                     VoltkV3,
                     VoltkVw2,
                     VoltkVw3,
