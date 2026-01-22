@@ -247,6 +247,7 @@ void ConfDialogBase::accept()
         m_ConfData = m_ConfDataTemp;
         emit SendConfDataSignal(&m_ConfData);
         mWmKeyBoard->hide();
+        emit showState(false);
         close();
     }
 }
@@ -306,6 +307,7 @@ void ConfDialogBase::abortSlot()
     m_ConfDataTemp = m_ConfData;
     SetConfInfoSlot(&m_ConfData);
     mWmKeyBoard->hide();
+    emit showState(false);
     close();
 }
 
@@ -695,8 +697,7 @@ void ConfDialogBase::RemoteCtrlInfoSlot(bool remote)
 {
     m_bRemoteCtrl = remote;
     ui->buttonOk->setEnabled(!remote);
-    if (remote)
-        ui->RatioTabPage->hide();
+    ui->RatioApplyPushButton->setDisabled(remote);
     Actualize();
 }
 

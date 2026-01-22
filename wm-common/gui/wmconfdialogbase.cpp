@@ -186,3 +186,14 @@ void wmconfdialogbase::takeScreenshootFinished()
     }
 
 }
+
+void wmconfdialogbase::confDisplay(bool shown)
+{
+    mpTransRatio->setDisabled(shown);
+}
+
+void wmconfdialogbase::show()
+{
+    emit showState(true);
+    QDialog::show();
+}
