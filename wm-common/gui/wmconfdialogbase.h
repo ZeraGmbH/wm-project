@@ -21,6 +21,8 @@ public:
     bool is_3( const QString & s );
     bool is_w3( const QString & s );
     void setScreenShooter(screenshooter *poi);
+signals:
+    void showState(bool shown);
 public slots:
     bool onLoadSession(QString session);
     void onSaveSession(QString session);
@@ -29,6 +31,8 @@ public slots:
     void keyboardScreenshorTriggerd();
     void takeScreenshoots();
     void takeScreenshootFinished();
+    void confDisplay(bool shown);
+    void show();
 
 protected:
     screenshooter* mScrShooter;
