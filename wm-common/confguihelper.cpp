@@ -54,6 +54,7 @@ const QString &confGuiHelper::baseUnitTextVoltage(const QString &s, QComboBox *u
         {
             m_sText = m_sText.replace(strUnit, "");
             unit->setCurrentText(strUnit);
+            break;
         }
     }
     return m_sText;
@@ -84,6 +85,7 @@ const QString& confGuiHelper::baseUnitTextCurrent(const QString &s , QComboBox* 
         {
             m_sText = m_sText.replace(strUnit, "");
             unit->setCurrentText(strUnit);
+            break;
         }
     }
     return m_sText;

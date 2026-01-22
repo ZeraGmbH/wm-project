@@ -24,8 +24,8 @@ public:
 private:
     QString m_sText;
     const QStringList m_DividerStr = {"1",QString::fromUtf8("/\u221A2"),QString::fromUtf8("/\u221A3"),"/3"};
-    QStringList m_unitListA = {"uA","mA","A","kA"};
-    QStringList m_unitListV = {"mV","V","kV","MV"};
+    QStringList m_unitListA = {"uA","mA","kA","A"};
+    QStringList m_unitListV = {"mV","kV","MV","V"};
     bool mVoltage;
 
 };
