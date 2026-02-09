@@ -477,20 +477,17 @@ bool WMViewBase::onLoadSession(QString session)
     QFile file(ls);
     if ( file.open( IO_ReadOnly ) ) {
         QDataStream stream( &file );
-        int mA, iA, oA, dA, eA, enA, einRang,einRatio;
+        int mA, iA, oA, dA, eA, enA;
         stream >> mA >> iA >> oA >> dA >> eA >> enA;
         stream >> m_widGeometry;
-        stream >> einRang >> einRatio;
         file.close();
 
-        //ui->ansichtFehlerMessungAction->setChecked(mA);
-       // ui->ansichtIstwerteAction->setChecked(iA);
+        ui->ansichtFehlerMessungAction->setChecked(mA);
+        ui->ansichtIstwerteAction->setChecked(iA);
         ui->ansichtOffsetAction->setChecked(oA);
         ui->ansichtDialogAction->setChecked(dA);
         ui->ansichtEigenfehlerAction->setChecked(eA);
         ui->ansichtEN61850Action->setChecked(enA);
-        ui->einstellungenBereichAction->setChecked(einRang);
-        ui->einstellungenTeilerAction->setChecked(einRatio);
 
         hide();
         resize(m_widGeometry.getSize());
@@ -539,8 +536,6 @@ void WMViewBase::onSaveSession(QString session)
                << (int)ui->ansichtEN61850Action->isChecked();
 
         stream << m_widGeometry;
-        stream << (int)ui->einstellungenBereichAction->isChecked()
-               << (int)ui->einstellungenTeilerAction->isChecked();
         file.close();
     }
 }
