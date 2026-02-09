@@ -49,6 +49,7 @@ private:
     void setInitialDefaults();
     void setSettingslabel();
     void activateContextMenu();
+    void actFontSize();
     Ui::WMRawActualValBase *ui;
     cwmActValues m_ActValues;
     cConfData *m_pConfData;
