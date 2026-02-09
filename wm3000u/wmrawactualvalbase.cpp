@@ -1,4 +1,5 @@
 #include "wmrawactualvalbase.h"
+#include "qdebug.h"
 #include "ui_wmrawactualvalbase.h"
 #include "wmglobal.h"
 #include "common-modes.h"
@@ -48,6 +49,7 @@ void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 
 void WMRawActualValBase::resizeEvent(QResizeEvent *)
 {
+    actFontSize();
     m_settingsChangeTimer.startDelayed();
 }
 
@@ -163,6 +165,35 @@ void WMRawActualValBase::activateContextMenu()
     emit SendVektorDispFormat(m_pConfData->m_bDCmeasurement, AmplDispMode, WinkelDispMode, PrimSekDispMode);
     m_pContextMenu->show();
 
+}
+
+void WMRawActualValBase::actFontSize()
+{
+    QSize ls = this->size();
+    QFont fo(ui->FreqDisp->font());
+    int divider, divider2;
+#ifdef FVWM // height = 104 -> 15 (was 10) on PC and on device (104/5 = 21 (was 14))
+    divider = 5;
+    divider2 = 7;
+#else
+    divider = 10;
+    divider2 = 12;
+#endif
+    int pointSize = ls.height()/divider;
+    fo.setPointSize(pointSize);
+    ui->FreqDisp->setFont(fo);
+    ui->FreqLabel->setFont(fo);
+
+//    qDebug() << ls.height() << ls.width() << fo.pointSize();
+
+    pointSize = ls.height()/divider2;
+    fo.setPointSize(pointSize);
+    ui->XnAmplDisp->setFont(fo);
+    ui->XnPhaseDisp->setFont(fo);
+    ui->XnLabel->setFont(fo);
+    ui->XxAmplDisp->setFont(fo);
+    ui->XxPhaseDisp->setFont(fo);
+    ui->XxLabel->setFont(fo);
 }
 
 void WMRawActualValBase::mousePressEvent(QMouseEvent *event)
