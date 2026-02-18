@@ -146,7 +146,6 @@ void WMRawActualValBase::SetConfInfoSlot(cConfData * cd)
         ui->FreqLabel->setVisible(true);
     }
     m_settingsChangeTimer.startDelayed();
-    resize(ui->gridLayout->minimumSize());
 }
 
 

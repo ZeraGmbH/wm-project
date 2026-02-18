@@ -180,7 +180,6 @@ void WMRawActualValBase::SetConfInfoSlot(cConfData *cd)
         ui->dXxLabel->setVisible(true);
     }
     m_settingsChangeTimer.startDelayed();
-    resize(ui->gridLayout->minimumSize());
 }
 
 bool WMRawActualValBase::onLoadSession(QString session)
