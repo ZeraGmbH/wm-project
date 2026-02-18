@@ -205,22 +205,23 @@ void WMRawActualValBase::actFontSize()
 {
     QSize ls = this->size();
     QFont fo(ui->FreqDisp->font());
-    int divider, divider2;
+    int divider, divider2, minSize;
 #ifdef FVWM // height = 150 -> 15 (was 10) on PC and on device (150/7 = 21 (was 14))
     divider = 7;
     divider2 = 11;
+    minSize = 14;
 #else
     divider = 10;
     divider2 = 15;
+    minSize = 10;
 #endif
     int pointSize = ls.height()/divider;
     fo.setPointSize(pointSize);
     ui->FreqDisp->setFont(fo);
     ui->FreqLabel->setFont(fo);
 
-//    qDebug() << ls.height() << ls.width() << fo.pointSize();
-
     pointSize = ls.height()/divider2;
+    if (pointSize < minSize) pointSize = minSize;
     fo.setPointSize(pointSize);
     ui->XnAmplDisp->setFont(fo);
     ui->XnPhaseDisp->setFont(fo);
@@ -231,8 +232,6 @@ void WMRawActualValBase::actFontSize()
     ui->dXxAmplDisp->setFont(fo);
     ui->dXxPhaseDisp->setFont(fo);
     ui->dXxLabel->setFont(fo);
-
-
 }
 
 void WMRawActualValBase::mousePressEvent(QMouseEvent *event)
