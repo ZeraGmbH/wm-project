@@ -44,6 +44,7 @@ void WMRawActualValBase::setScreenShooter(screenshooter *poi)
 void WMRawActualValBase::closeEvent(QCloseEvent* ce)
 {
     m_settingsChangeTimer.startDelayed();
+    emit sigIsVisible(false);
     ce->accept();
 }
 

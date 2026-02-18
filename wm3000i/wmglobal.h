@@ -116,8 +116,9 @@
 // 2.46 7.10.25     improves translations
 // 2.47 12.8.25     Ratio Widget
 // 2.48 5.12.25     bugfix on ratio scpi interface
+// 2.49 18.2.26     resize vector widget and bugfixes on scpi and Transformer Widget
 
-#define WMVersion "V2.48"
+#define WMVersion "V2.49"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000i/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000i/log/ServerComm.log"
