@@ -73,7 +73,7 @@ void ConfDialogBase::init()
     ui->APPIDlineEdit->setInputMask("HHHH");
     ui->APPIDlineEdit->setValidator(APPIDValidator);
     
-    QRegExp rx6 ("^([0-9]+)$" ); // war zusätzlich (|\\.([0-9]+))(|mV|kV|V)
+    QRegExp rx6 ("^([0-9]+)(|\\.[0-9]+)$" ); // war zusätzlich (|mV|kV|V)
     QValidator* RatioValidator = new QRegExpValidator( rx6, this );
     ui->RatioPrimNLineEdit->setValidator(RatioValidator);
     ui->RatioSekNLineEdit->setValidator(RatioValidator);
