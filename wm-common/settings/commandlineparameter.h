@@ -32,6 +32,7 @@ private:
     bool bPpsWatchDog = false;
     bool bIpAdress = false;
     bool bScreen = false;
+    bool bIgnoreFile = false;
     QString mstrIPAdress = "127.0.0.1";
     QString mLanguage, mDevice;
     QString mFileName;
@@ -43,6 +44,7 @@ private:
     const QString strIPAdress = "-ip";
     const QString strPpsWatchDog = "-ppswatchdog";
     const QString strScreen = "-screen";
+    const QString strIgnore = "-ignoreFile";
 
 };
 
