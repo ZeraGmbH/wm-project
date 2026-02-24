@@ -76,7 +76,7 @@ void ConfDialogBase::init()
     QRegExp rx6 ("^([0-9]+)$" ); // war (|\\.([0-9]+))(|mA|kA|A)
     QValidator* RatioCurrentValidator = new QRegExpValidator( rx6, this );
 
-    QRegExp rx7	("^([0-9]+)$" ); // war (|\\.([0-9]+))(|mV|kV|V)
+    QRegExp rx7	("^([0-9]+)(|\\.[0-9]+)$" ); // war zusätzlich (|mV|kV|V)
     QValidator* RatioVoltageValidator = new QRegExpValidator( rx7, this );
 
     ui->RatioPrimNLineEdit->setValidator(RatioCurrentValidator);
