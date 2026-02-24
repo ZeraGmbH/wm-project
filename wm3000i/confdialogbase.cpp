@@ -73,18 +73,15 @@ void ConfDialogBase::init()
     ui->APPIDlineEdit->setInputMask("HHHH");
     ui->APPIDlineEdit->setValidator(APPIDValidator);
 
-    QRegExp rx6 ("^([0-9]+)$" ); // war (|\\.([0-9]+))(|mA|kA|A)
-    QValidator* RatioCurrentValidator = new QRegExpValidator( rx6, this );
+    QRegExp rx6	("^([0-9]+)(|\\.[0-9]+)$" );
+    QValidator* RatioValidator = new QRegExpValidator( rx6, this );
 
-    QRegExp rx7	("^([0-9]+)(|\\.[0-9]+)$" ); // war zusätzlich (|mV|kV|V)
-    QValidator* RatioVoltageValidator = new QRegExpValidator( rx7, this );
-
-    ui->RatioPrimNLineEdit->setValidator(RatioCurrentValidator);
-    ui->RatioSekNLineEdit->setValidator(RatioCurrentValidator);
-    ui->RatioPrimXLineEdit->setValidator(RatioCurrentValidator);
-    ui->RatioSekXLineEdit->setValidator(RatioCurrentValidator);
-    ui->RatioPrimECTLineEdit->setValidator(RatioCurrentValidator);
-    ui->RatioSekECTLineEdit->setValidator(RatioVoltageValidator);
+    ui->RatioPrimNLineEdit->setValidator(RatioValidator);
+    ui->RatioSekNLineEdit->setValidator(RatioValidator);
+    ui->RatioPrimXLineEdit->setValidator(RatioValidator);
+    ui->RatioSekXLineEdit->setValidator(RatioValidator);
+    ui->RatioPrimECTLineEdit->setValidator(RatioValidator);
+    ui->RatioSekECTLineEdit->setValidator(RatioValidator);
 
     QRegExp rx8( "^[1-8]{1,1}$" );
     QValidator* ASDUSetValidator = new QRegExpValidator( rx8, this );
