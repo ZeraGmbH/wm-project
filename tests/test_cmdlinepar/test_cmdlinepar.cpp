@@ -25,7 +25,7 @@ void test_cmdlinepar::test_numberone()
     init("-ip127.0.0.2");
     CommandLineParameter cmdLPar;
     cmdLPar.Parse(argc,argv);
-    QString str, sollStr="ip";
+    QString str, sollStr="ip ";
     str = cmdLPar.GetOptionString();
     QCOMPARE(str,sollStr);
 }
