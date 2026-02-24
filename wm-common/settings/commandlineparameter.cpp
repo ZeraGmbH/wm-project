@@ -47,6 +47,11 @@ void CommandLineParameter::ParseFromStringList(QStringList largv)
             bScreen = true;
             qDebug("Found option Screen");
         }
+        if (option == strIgnore){
+            bIgnoreFile = true;
+            qDebug("Found option Ignore File");
+        }
+
     }
 }
 
@@ -60,20 +65,23 @@ void CommandLineParameter::ParseFile()
     QStringList largv;
     QString option;
     QFile fConfFile;
-    if (!mFileName.isEmpty())
+    if (!bIgnoreFile)
     {
-        fConfFile.setFileName(mFileName);
-        if (fConfFile.open(QIODevice::ReadOnly))
+        if (!mFileName.isEmpty())
         {
-            while(!fConfFile.atEnd())
+            fConfFile.setFileName(mFileName);
+            if (fConfFile.open(QIODevice::ReadOnly))
             {
-                option = fConfFile.readLine();
-                option = option.mid(0,option.length()-1);
-                largv.append(option);
+                while(!fConfFile.atEnd())
+                {
+                    option = fConfFile.readLine();
+                    option = option.mid(0,option.length()-1);
+                    largv.append(option);
+                }
+                fConfFile.close();
             }
-            fConfFile.close();
+            ParseFromStringList(largv);
         }
-        ParseFromStringList(largv);
     }
 }
 
@@ -95,7 +103,8 @@ QString CommandLineParameter::GetOptionString()
     if(bDc) option += "dc ";
     if(bNewSampleRates) option += "newsr ";
     if(bPpsWatchDog) option += "pwdt ";
-    if(bIpAdress) option += "ip";
+    if(bIpAdress) option += "ip ";
+    if(bIgnoreFile) option += "ignore";
     return option;
 }
 
