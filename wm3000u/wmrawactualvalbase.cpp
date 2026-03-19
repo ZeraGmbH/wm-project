@@ -280,14 +280,18 @@ void WMRawActualValBase::setSettingslabel()
     str.append("sec");
     break;
     }
-    str.append("\t");
-    switch (WinkelDispMode ) {
-    case mathpos:
-    str.append("math pos");
-    break;
-    case techpos:
-    str.append("tec pos");
-    break;
+    if(!m_pConfData->m_bDCmeasurement)
+    {
+        str.append("\t");
+        switch (WinkelDispMode )
+        {
+            case mathpos:
+            str.append("math pos");
+            break;
+            case techpos:
+            str.append("tec pos");
+            break;
+        }
     }
     ui->Settingslabel->setStyleSheet("color: gray");
     ui->Settingslabel->setText(str);
