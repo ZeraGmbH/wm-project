@@ -37,6 +37,8 @@ public slots:
     void takeScreenshoots();
     void takeScreenshootSetting();
     void takeScreenshootSettingFinished();
+    void takeScreenshootsNoRCF();
+    void takeScreenshootsNoPhi();
 
 signals:
     void sigIsVisible(bool);
@@ -63,6 +65,7 @@ private:
     void setLayoutSize();
     void activateContextMenu();
     void showRCF(bool show);
+    void takeScreens();
     Ui::WMMeasValuesBase *ui;
     cwmActValues m_ActValues;
     cConfData m_ConfData;
@@ -76,6 +79,7 @@ private:
     SessionStreamer m_sessionStreamer;
     QTimer m_Timer;
     screenshooter* mScrShooter;
+
 };
 
 #endif // WMMEASVALUESBASE_H

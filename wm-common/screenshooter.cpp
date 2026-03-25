@@ -43,7 +43,7 @@ void screenshooter::showUIbyExec(QMenu *uipoi)
 void screenshooter::useTimer(QWidget* poi,int nr)
 {
     if ((miVerboseLevel & 1) == 1 )
-        qWarning() << "timer start" ;
+        qWarning() << "timer start" << nr;
     mWidgetPoi = poi;
     mActualNumber = nr;
     mTimer->start();
@@ -312,10 +312,18 @@ void screenshooter::timerExpired()
         mActualNumber = INVALID;
         emit screenShotAnleiFinished();
         break;
-
+    case FEHLERMESSOHNE_RCF:
+        storeScreenShotW(mWidgetPoi, "44_Fehler_RCF");
+        mActualNumber = INVALID;
+        emit screenShotFehlerOhneRCFFinished();
+        break;
+    case FEHLERMESS_DC:
+        storeScreenShotW(mWidgetPoi, "45_Fehler_DC");
+        mActualNumber = INVALID;
+        emit screenShotFehler_DCFinished();
+        break;
     default:
         break;
-
     }
 }
 
@@ -559,6 +567,23 @@ void xmlScreenShooterExport::createDokuDefinition()
     entry.mFoto = "32_FehlerEinstell.png";
     entry.mDescrComText = "ErrSettWindText.html";
     mDokuDefinition.append(entry);
+
+    entry.clear();
+    entry.m_Nr = 44;
+    entry.mItem = "ERRORVALUES Menu";
+    entry.mDescrCom = "ErrWindOhneRCF.html";
+    entry.mFoto = "44_Fehler.png";
+    entry.mDescrComText = "ErrWindOhneRCFText.html";
+    mDokuDefinition.append(entry);
+
+    entry.clear();
+    entry.m_Nr = 45;
+    entry.mItem = "ERRORVALUES Menu";
+    entry.mDescrCom = "ErrWindDC.html";
+    entry.mFoto = "45_Fehler.png";
+    entry.mDescrComText = "ErrWindDCText.html";
+    mDokuDefinition.append(entry);
+
     entry.clear();
     entry.m_Nr = 33;
     entry.mItem = "Vektoren Main";
@@ -566,6 +591,15 @@ void xmlScreenShooterExport::createDokuDefinition()
     entry.mFotoLeft = "33_Vektoren.png";
     entry.mDescrComText = "VekWindText.html";
     mDokuDefinition.append(entry);
+
+    entry.clear();
+    entry.m_Nr = 46;
+    entry.mItem = "Vektoren Main";
+    entry.mDescrCom = "VekWindDC.html";
+    entry.mFoto = "45_Vektoren.png";
+    entry.mDescrComText = "VekWindDCText.html";
+    mDokuDefinition.append(entry);
+
     entry.clear();
     entry.m_Nr = 34;
     entry.mItem = "VektorenSettings Main";

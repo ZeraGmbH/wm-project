@@ -102,19 +102,44 @@ void WMMeasValuesBase::setScreenShooter(screenshooter *poi)
     mScrShooter = poi;
 }
 
-void WMMeasValuesBase::takeScreenshoots()
+void WMMeasValuesBase::takeScreens()
 {
+
     mScrShooter->showed(false);
     if (!this->isShown())
     {
         this->show();
         mScrShooter->showed(true);
     }
+}
+
+void WMMeasValuesBase::takeScreenshoots()
+{
+    takeScreens();
     mScrShooter->useTimer(this, 31);
+}
+
+void WMMeasValuesBase::takeScreenshootsNoRCF()
+{
+    showRCF(false);
+    resize(650,300);
+    mScrShooter->useTimer(this, 44);
+}
+
+void WMMeasValuesBase::takeScreenshootsNoPhi()
+{
+    m_ConfData.m_bDCmeasurement = true;
+    SetConfInfoSlot(&m_ConfData);
+    resize(650,250);
+    mScrShooter->useTimer(this, 45);
 }
 
 void WMMeasValuesBase::takeScreenshootSetting()
 {
+    showRCF(true);
+    m_ConfData.m_bDCmeasurement = false;
+    SetConfInfoSlot(&m_ConfData);
+    resize(650,400);
     activateContextMenu();
     mScrShooter->useTimer(m_pContextMenu, 32);
 }

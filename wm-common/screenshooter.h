@@ -85,6 +85,8 @@ signals:
     void screenShotVersionFinished();
     void screenShotRatioFinished();
     void screenShotAnleiFinished();
+    void screenShotFehlerOhneRCFFinished();
+    void screenShotFehler_DCFinished();
     void update(uint nr, QString text);
 private:
     xmlScreenShooterExport mXmlExport;
@@ -123,7 +125,10 @@ private:
         INFO,
         VERSION,
         RATIOWIDGET,
-        ANLEITUNGWIDGET
+        ANLEITUNGWIDGET,
+        FEHLERMESSOHNE_RCF = 44,
+        FEHLERMESS_DC,
+        VEKTOREN_DC
     };
 private slots:
     void timerExpired();
