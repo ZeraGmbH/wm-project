@@ -322,6 +322,12 @@ void screenshooter::timerExpired()
         mActualNumber = INVALID;
         emit screenShotFehler_DCFinished();
         break;
+    case VEKTOREN_DC:
+        storeScreenShotW(mWidgetPoi, "46_Vektoren_DC");
+        mActualNumber = INVALID;
+        emit screenShotVektorFinishedDC();
+        break;
+
     default:
         break;
     }
@@ -572,7 +578,7 @@ void xmlScreenShooterExport::createDokuDefinition()
     entry.m_Nr = 44;
     entry.mItem = "ERRORVALUES Menu";
     entry.mDescrCom = "ErrWindOhneRCF.html";
-    entry.mFoto = "44_Fehler.png";
+    entry.mFoto = "44_Fehler_RCF.png";
     entry.mDescrComText = "ErrWindOhneRCFText.html";
     mDokuDefinition.append(entry);
 
@@ -580,7 +586,7 @@ void xmlScreenShooterExport::createDokuDefinition()
     entry.m_Nr = 45;
     entry.mItem = "ERRORVALUES Menu";
     entry.mDescrCom = "ErrWindDC.html";
-    entry.mFoto = "45_Fehler.png";
+    entry.mFoto = "45_Fehler_DC.png";
     entry.mDescrComText = "ErrWindDCText.html";
     mDokuDefinition.append(entry);
 
@@ -596,7 +602,7 @@ void xmlScreenShooterExport::createDokuDefinition()
     entry.m_Nr = 46;
     entry.mItem = "Vektoren Main";
     entry.mDescrCom = "VekWindDC.html";
-    entry.mFoto = "45_Vektoren.png";
+    entry.mFotoLeft = "46_Vektoren_DC.png";
     entry.mDescrComText = "VekWindDCText.html";
     mDokuDefinition.append(entry);
 

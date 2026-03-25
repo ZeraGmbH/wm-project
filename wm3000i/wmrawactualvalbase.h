@@ -29,7 +29,8 @@ public slots:
     void takeScreenshoots();
     void takeScreenshootSetting();
     void takeScreenshootSettingFinished();
-
+    void takeScreenshootsDC();
+    void screenShotVektorFinishedDC();
 signals:
     void sigIsVisible(bool);
     void SendVektorDispFormat(bool,int,int,int);

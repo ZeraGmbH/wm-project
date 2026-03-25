@@ -87,6 +87,7 @@ signals:
     void screenShotAnleiFinished();
     void screenShotFehlerOhneRCFFinished();
     void screenShotFehler_DCFinished();
+    void screenShotVektorFinishedDC();
     void update(uint nr, QString text);
 private:
     xmlScreenShooterExport mXmlExport;
