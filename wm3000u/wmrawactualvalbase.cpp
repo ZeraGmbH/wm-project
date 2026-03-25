@@ -233,10 +233,30 @@ void WMRawActualValBase::takeScreenshoots()
     mScrShooter->useTimer(this, 33);
 }
 
+void WMRawActualValBase::takeScreenshootsDC()
+{
+    m_pConfData->m_bDCmeasurement = true;
+    SetConfInfoSlot(m_pConfData);
+    mScrShooter->showed(false);
+    if (!this->isShown())
+    {
+        this->show();
+        mScrShooter->showed(true);
+    }
+    mScrShooter->useTimer(this, 46);
+}
+
 void WMRawActualValBase::takeScreenshootSetting()
 {
     activateContextMenu();
     mScrShooter->useTimer(m_pContextMenu, 34);
+}
+
+void WMRawActualValBase::screenShotVektorFinishedDC()
+{
+    m_pConfData->m_bDCmeasurement = false;
+    SetConfInfoSlot(m_pConfData);
+    takeScreenshootSettingFinished();
 }
 
 void WMRawActualValBase::takeScreenshootSettingFinished()

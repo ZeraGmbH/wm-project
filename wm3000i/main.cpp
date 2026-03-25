@@ -342,7 +342,9 @@ int main(int argc, char *argv[])
         if (mCmdLPar.GetDC())
         {
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerOhneRCFFinished()),g_WMErrMeasValView,SLOT(takeScreenshootsNoPhi()));
-            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehler_DCFinished()),g_WMErrMeasValView,SLOT(takeScreenshootSetting()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehler_DCFinished()),g_WMActValView,SLOT(takeScreenshootsDC()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVektorFinishedDC()),g_WMErrMeasValView,SLOT(takeScreenshootSetting()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVektorFinishedDC()),g_WMActValView,SLOT(screenShotVektorFinishedDC()));
         }
         else
         {
