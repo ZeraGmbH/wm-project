@@ -340,6 +340,15 @@ int main(int argc, char *argv[])
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScrShoGui,SLOT(show()));
             QObject::connect(g_WMScreenShooter,SIGNAL(screenShotMessBerFinished()),g_WMScreenShooter,SLOT(exportXML()));
         }
+        if (mCmdLPar.GetDC())
+        {
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerOhneRCFFinished()),g_WMErrMeasValView,SLOT(takeScreenshootsNoPhi()));
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehler_DCFinished()),g_WMErrMeasValView,SLOT(takeScreenshootSetting()));
+        }
+        else
+        {
+            QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerOhneRCFFinished()),g_WMErrMeasValView,SLOT(takeScreenshootSetting()));
+        }
 
         QObject::connect(g_WMScrShoGui,SIGNAL(screenShooterStart()),g_WMView,SLOT(AutoScreenShoterTriggered()));
         QObject::connect(g_WMView,SIGNAL(ScreenshooterTriggeredByUser()),g_WMView,SLOT(takeScreenshoots()));
@@ -347,9 +356,8 @@ int main(int argc, char *argv[])
 
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotHauptFinished()),g_WMConfDialog,SLOT(screenshooterTriggered()));
         QObject::connect(g_WMScreenShooter,SIGNAL(keyboardScreenShotFinished()),g_WMErrMeasValView,SLOT(takeScreenshoots()));
-        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerFinished()),g_WMErrMeasValView,SLOT(takeScreenshootSetting()));
+        QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerFinished()),g_WMErrMeasValView,SLOT(takeScreenshootsNoRCF()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerEinstellFinished()),g_WMErrMeasValView,SLOT(takeScreenshootSettingFinished()));
-
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotFehlerEinstellFinished()),g_WMActValView,SLOT(takeScreenshoots()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVektorFinished()),g_WMActValView,SLOT(takeScreenshootSetting()));
         QObject::connect(g_WMScreenShooter,SIGNAL(screenShotVektorEinstellFinished()),g_WMActValView,SLOT(takeScreenshootSettingFinished()));
