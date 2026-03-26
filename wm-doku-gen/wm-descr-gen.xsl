@@ -35,11 +35,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <body>
   <h1><xsl:copy-of select="$var_device" />_MAN_EXT_<xsl:copy-of select="$var_language" /></h1>
   <xsl:if test="LANGUAGE='de'">
-    <p> Diese Beschreibung wurde automatisch erstellt aus: release-1.2.25 </p>
+    <p> Diese Beschreibung wurde automatisch erstellt aus: release-1.2.29 </p>
     <xsl:if test="TYP='dc'"><p>Mit DC Option</p></xsl:if>
     </xsl:if>
   <xsl:if test="LANGUAGE='en'">
-    <p> This is automatic generated gui description from: <xsl:value-of select="RELEASE"/></p>
+    <p> This is automatic generated gui description from: release-1.2.29</p>
     <xsl:if test="TYP='dc'"><p>Including DC option</p></xsl:if>
   </xsl:if>
 
