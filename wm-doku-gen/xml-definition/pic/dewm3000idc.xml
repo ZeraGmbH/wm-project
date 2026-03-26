@@ -5,7 +5,7 @@
  <LANGUAGE>de</LANGUAGE>
  <PICFOLDER>../xml-definition/pic/dewm3000idc/</PICFOLDER>
  <PROSAFOLDER>html-prosa/</PROSAFOLDER>
- <RELEASE>release-1.2.22</RELEASE>
+ <RELEASE>release-1.2.14</RELEASE>
  <ENTRIES>
   <ENTRY>
    <ITEM>Main Screen</ITEM>
@@ -47,10 +47,28 @@
    <DESCRCOMTEXT>ErrSettWindText.html</DESCRCOMTEXT>
   </ENTRY>
   <ENTRY>
+   <ITEM>ERRORVALUES Menu</ITEM>
+   <DESCRCOM>ErrWindOhneRCF.html</DESCRCOM>
+   <FOTO>44_Fehler_RCF.png</FOTO>
+   <DESCRCOMTEXT>ErrWindOhneRCFText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>ERRORVALUES Menu</ITEM>
+   <DESCRCOM>ErrWindDC.html</DESCRCOM>
+   <FOTO>45_Fehler_DC.png</FOTO>
+   <DESCRCOMTEXT>ErrWindDCText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
    <ITEM>Vektoren Main</ITEM>
    <DESCRCOM>VekWind.html</DESCRCOM>
    <FOTOLEFT>33_Vektoren.png</FOTOLEFT>
    <DESCRCOMTEXT>VekWindText.html</DESCRCOMTEXT>
+  </ENTRY>
+  <ENTRY>
+   <ITEM>Vektoren Main</ITEM>
+   <DESCRCOM>VekWindDC.html</DESCRCOM>
+   <FOTOLEFT>46_Vektoren_DC.png</FOTOLEFT>
+   <DESCRCOMTEXT>VekWindDCText.html</DESCRCOMTEXT>
   </ENTRY>
   <ENTRY>
    <ITEM>VektorenSettings Main</ITEM>
