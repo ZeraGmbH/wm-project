@@ -10,6 +10,11 @@ void cConfData::setConfVersion()
     m_nVersion = ConfVersion10;
 }
 
+void cConfData::setConventional(bool b)
+{
+    mbConventional = b;
+}
+
 void cConfData::serialize(QDataStream& ts)
 {
     ts << m_nVersion << (int)m_bSimulation << (int)m_bRunning << (int)m_bOECorrection << (int)m_bOENewLoad;
@@ -125,15 +130,17 @@ QString cConfData::extractJson()
     map["DCmeasurement"] = m_bDCmeasurement;
     map["OffsetCorrectionN"] = m_bOffsetCorrectionN;
     map["OffsetCorrectionX"] = m_bOffsetCorrectionX;
-
-    map["FirstASDU"] = FirstASDU;
-    map["LastASDU"] = LastASDU;
-    map["DataSet"] = DataSet;
-    map["PriorityTagged"] = m_nPriorityTagged;
-    map["EthTypeHeader"] = m_nEthTypeHeader;
-    map["StrongEthSynchronisation"] = m_bStrongEthSynchronisation;
-    map["MacSourceAdr"] = m_MacSourceAdr.GetMacAdress();
-    map["MacDestAdr"] = m_MacDestAdr.GetMacAdress();
+    if(!mbConventional)
+    {
+        map["FirstASDU"] = FirstASDU;
+        map["LastASDU"] = LastASDU;
+        map["DataSet"] = DataSet;
+        map["PriorityTagged"] = m_nPriorityTagged;
+        map["EthTypeHeader"] = m_nEthTypeHeader;
+        map["StrongEthSynchronisation"] = m_bStrongEthSynchronisation;
+        map["MacSourceAdr"] = m_MacSourceAdr.GetMacAdress();
+        map["MacDestAdr"] = m_MacDestAdr.GetMacAdress();
+    }
 
 
     return jsonExport.variantToJson(map);
