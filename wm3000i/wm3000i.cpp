@@ -3311,6 +3311,7 @@ void cWM3000I::InitWM3000()
 void cWM3000I::setConventional(bool b)
 {
     m_bConventional = b;
+    m_ConfData.setConventional(b);
 }
 
 

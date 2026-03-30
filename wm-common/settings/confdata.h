@@ -20,7 +20,7 @@ public:
     cConfData(){}
 
     void setConfVersion();
-    
+    void setConventional(bool b);
     void serialize(QDataStream&);
     bool deserialize(QDataStream&);
     QString extractJson();
@@ -66,6 +66,7 @@ public:
     QString m_sADSPFile;
 private:
     cwmJsonExport jsonExport;
+    bool mbConventional = false;
 };
 
 #endif
