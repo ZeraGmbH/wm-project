@@ -6,16 +6,14 @@
 #include "complex.h"
 #include <Q3MemArray>
 #include <q3ptrlist.h>
+#include "cwmjsonexport.h"
 
-#include <qmap.h>
-#include "qvariant.h"
 
 typedef Q3MemArray<float> cDspVarMemArray;
 typedef Q3PtrList<cDspVar> cDspVarPtrList;
 
 class cwmActValues {    // wird an andere objekte gesendet
 public:
-    cwmActValues();
     cDspActValues dspActValues;
     cDspFastRMSValues dspRMSValues;
     double TDSync;
@@ -41,11 +39,8 @@ public:
     QString extractJson();
     void setWM3ki(bool b);
 private:
+    cwmJsonExport jsonExport;
     bool mWM3ki;
-    QString maptoJson(QMap<QString, QVariant> map);
-    QMap<QString, QVariant> addVektor(complex vector);
-    QString escapeString(const QString &str);
-    QString variantToJson(const QVariant &value);
 };
 
 

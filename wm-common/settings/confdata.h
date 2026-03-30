@@ -7,6 +7,7 @@
 
 #include <qstring.h>
 
+#include "cwmjsonexport.h"
 #include "ethadress.h"
 
 const int ConfVersion8 = 8;
@@ -22,6 +23,7 @@ public:
     
     void serialize(QDataStream&);
     bool deserialize(QDataStream&);
+    QString extractJson();
     
     int m_nVersion; // die Version steht hier
     bool m_bSimulation; // ist simulation oder nicht
@@ -62,6 +64,8 @@ public:
     QString m_sRangeX,m_sRangeXSoll,m_sRangeXVorgabe; // bereichDUT gesetzt, soll, gewählt
     QString m_sRangeET,m_sRangeETSoll,m_sRangeETVorgabe;  // bereichECT/EVT  gesetzt, soll, gewählt
     QString m_sADSPFile;
+private:
+    cwmJsonExport jsonExport;
 };
 
 #endif

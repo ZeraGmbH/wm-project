@@ -719,6 +719,12 @@ void cWM3000SCPIFace::mConfigurationApply(char*)
         m_bAddEventError = true;
 }
 
+char *cWM3000SCPIFace::mConfigurationJson()
+{
+    QString s = m_ConfDataActual.extractJson();
+        return sAlloc(s);
+}
+
 
 char* cWM3000SCPIFace::mGetConfEnAppid()
 {
@@ -2095,6 +2101,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case MeasurementJson: an = mMeasurementJson(); break;
 
             //	case GetConfLogFileSize: an = mGetConfLogFileSize();break;
+        case ConfJson: an = mConfigurationJson(); break;
         case GetConfEnAppid: an = mGetConfEnAppid();break;
         case GetConfEnVid: an = mGetConfEnVid();break;
         case GetConfEnCfi: an = mGetConfEnCfi();break;
@@ -2162,6 +2169,7 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetRange:
         case OutChannelCatalog:
             //	case GetConfLogFileSize:
+        case ConfJson:
         case GetConfEnAppid:
         case GetConfEnVid:
         case GetConfEnCfi:
@@ -2224,6 +2232,7 @@ cNodeSCPI* deviceJustOffset;
 cNodeSCPI* deviceJustStatus;
 
 cNodeSCPI* Configuration;
+cNodeSCPI* ConfigurationJson;
 cNodeSCPI* ConfigurationOperation;
 cNodeSCPI* ConfigurationOperationMode;
 cNodeSCPI* ConfigurationOperationModeCatalog;
@@ -2395,8 +2404,8 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     Measure=new cNodeSCPI("MEASURE",isNode | isQuery,Initiate,MeasJson,nixCmd,Measurement);
 
     // implementiertes configuration model
-    
-    ConfigurationApply=new cNodeSCPI("APPLY",isCommand,NULL,NULL,ConfApply,nixCmd);
+    ConfigurationJson=new  cNodeSCPI("JSON",isQuery,NULL,NULL,nixCmd,ConfJson);
+    ConfigurationApply=new cNodeSCPI("APPLY",isCommand,ConfigurationJson,NULL,ConfApply,nixCmd);
     
     //    ConfigurationLogFileSize=new cNodeSCPI("SIZE",isQuery | isCommand,NULL,NULL,SetConfLogFileSize,GetConfLogFileSize);
     //    ConfigurationLogFile=new cNodeSCPI("LOGFILE",isNode,ConfigurationApply,ConfigurationLogFileSize,nixCmd,nixCmd);

@@ -85,6 +85,7 @@ enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
 			      
 //			  GetConfLogFileSize,
 //			  SetConfLogFileSize, // 53
+              ConfJson,
 			  ConfApply,
 			  ConfEnStatusClear,			    
 			  GetConfEnStatus,			    
@@ -334,6 +335,7 @@ private:
 
     // implementiertes configuration model 
     void mConfigurationApply(char*);
+    char* mConfigurationJson();
 //    char* mGetConfLogFileSize();
 //    void mSetConfLogFileSize(char*);
     char* mGetConfEnAppid();
