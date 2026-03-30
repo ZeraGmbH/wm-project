@@ -2,7 +2,8 @@
 
 #include <qdatastream.h>
 #include "confdata.h"
- 
+#include "qmap.h"
+#include "qvariant.h"
 
 void cConfData::setConfVersion()
 {
@@ -81,4 +82,59 @@ bool cConfData::deserialize(QDataStream& ts)
     }
 
     return ret;
+}
+
+QString cConfData::extractJson()
+{
+     QMap<QString, QVariant> map;
+
+    map["Version"] =  m_nVersion;
+    map["Simulation"] = m_bSimulation;
+    map["Running"] = m_bRunning;
+    map["OECorrection"] = m_bOECorrection;
+    map["OENewLoad"] = m_bOENewLoad;
+    map["MeasMode"] =  m_nMeasMode;
+    map["MeasPeriod"] = m_nMeasPeriod;
+    map["IntegrationTime"] = m_nIntegrationTime;
+    map["SyncSource"] = m_nSyncSource;
+    map["TSync"] = m_nTSync;
+    map["SFreq"] = m_nSFreq;
+    map["SRate"] = m_nSRate;
+    map["nLogFileMax"] = m_nLogFileMax;
+    map["xPhaseShift"] = m_fxPhaseShift;
+    map["xTimeShift"] = m_fxTimeShift;
+    map["OETFile"] = m_sOETFile;
+    map["ResultFile"] = m_sResultFile;
+    map["NPrimary"] = m_NPrimary;
+    map["NSecondary"] = m_NSecondary;
+    map["XPrimary"] = m_XPrimary;
+    map["XSecondary"] = m_XSecondary;
+    map["ETPrimary"] = m_ETPrimary;
+    map["ETSecondary"] = m_ETSecondary;
+    map["RangeN"] = m_sRangeN;
+    map["RangeNSoll"] = m_sRangeNSoll;
+    map["RangeNVorgabe"] = m_sRangeNVorgabe;
+    map["RangeX"] = m_sRangeX;
+    map["RangeXSoll"] = m_sRangeXSoll;
+    map["RangeXVorgabe"] = m_sRangeXVorgabe;
+    map["RangeET"] = m_sRangeET;
+    map["RangeETSoll"] = m_sRangeETSoll;
+    map["RangeETVorgabe"] = m_sRangeETVorgabe;
+    //map["ADSPFile"] = m_sADSPFile;        // there is no need to hand out the location of the adsp file!
+    map["Language"] = Language;
+    map["DCmeasurement"] = m_bDCmeasurement;
+    map["OffsetCorrectionN"] = m_bOffsetCorrectionN;
+    map["OffsetCorrectionX"] = m_bOffsetCorrectionX;
+
+    map["FirstASDU"] = FirstASDU;
+    map["LastASDU"] = LastASDU;
+    map["DataSet"] = DataSet;
+    map["PriorityTagged"] = m_nPriorityTagged;
+    map["EthTypeHeader"] = m_nEthTypeHeader;
+    map["StrongEthSynchronisation"] = m_bStrongEthSynchronisation;
+    map["MacSourceAdr"] = m_MacSourceAdr.GetMacAdress();
+    map["MacDestAdr"] = m_MacDestAdr.GetMacAdress();
+
+
+    return jsonExport.variantToJson(map);
 }
