@@ -158,7 +158,7 @@ cWM3000U::cWM3000U() :
     ActValues.PHIN = 0.0;
     ActValues.PHIX = 0.0;
     ActValues.Frequenz = 50.0;
-
+    ActValues.setWM3ki(false);
 
     m_OVLMsgBox = new cWMessageBox ( trUtf8("Übersteuerung"), trUtf8("Es ist eine Übersteuerung im grössten Bereich\naufgetreten. Bitte überprüfen Sie die Messgrössen"), QMessageBox::Critical, QMessageBox::Ok, Qt::NoButton, Qt::NoButton, 0, 0, false ) ;
     connect(m_OVLMsgBox,SIGNAL(WMBoxClosed()),this,SLOT(OverLoadMaxQuitSlot()));

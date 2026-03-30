@@ -7,10 +7,15 @@
 #include <Q3MemArray>
 #include <q3ptrlist.h>
 
+#include <qmap.h>
+#include "qvariant.h"
+
 typedef Q3MemArray<float> cDspVarMemArray;
 typedef Q3PtrList<cDspVar> cDspVarPtrList;
 
-struct cwmActValues {  // wird an andere objekte gesendet
+class cwmActValues {    // wird an andere objekte gesendet
+public:
+    cwmActValues();
     cDspActValues dspActValues;
     cDspFastRMSValues dspRMSValues;
     double TDSync;
@@ -32,6 +37,15 @@ struct cwmActValues {  // wird an andere objekte gesendet
     double PHIN;
     double PHIX;
     bool bvalid;
+
+    QString extractJson();
+    void setWM3ki(bool b);
+private:
+    bool mWM3ki;
+    QString maptoJson(QMap<QString, QVariant> map);
+    QMap<QString, QVariant> addVektor(complex vector);
+    QString escapeString(const QString &str);
+    QString variantToJson(const QVariant &value);
 };
 
 

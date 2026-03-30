@@ -36,6 +36,7 @@ cWM3000SCPIFace::cWM3000SCPIFace(cClientIODevice* ciod, short l, WM3kSCPISpecial
     mMeasChannelList << "N" << "X" << m_Special->getExTName();
     m_pVersion  = 0;
     m_JustState = "unknow";
+    mbJson = false;
 }
 
 
@@ -575,6 +576,14 @@ char* cWM3000SCPIFace::mMeasurementRead()
 }
 
 
+char* cWM3000SCPIFace::mMeasurementReadJson()
+{
+    mbJson = true;
+    m_stateMachineTimer.start(0, ReadStart);
+    return 0;
+}
+
+
 char* cWM3000SCPIFace::mMeasurementReadLoadpoint()
 {
     m_stateMachineTimer.start(0, ReadLPStart);
@@ -595,6 +604,14 @@ char* cWM3000SCPIFace::mMeasurementFetch()
 }
 
 
+char* cWM3000SCPIFace::mMeasurementFetchJson()
+{
+    mbJson = true;
+    m_stateMachineTimer.start(0, FetchStart);
+    return 0;
+}
+
+
 void cWM3000SCPIFace::mMeasurementInitiate(char*)
 {
     m_stateMachineTimer.start(0, InitiateStart); // wir gehen auf die statemachine weil wir synch. müssen
@@ -602,11 +619,17 @@ void cWM3000SCPIFace::mMeasurementInitiate(char*)
 
 
 char* cWM3000SCPIFace::mMeasurement()
-{ 	
+{
     m_stateMachineTimer.start(0, MeasStart); // wir gehen auf die statemachine weil wir synch. müssen
     return 0;
 }
 
+char* cWM3000SCPIFace::mMeasurementJson()
+{
+    mbJson = true;
+    m_stateMachineTimer.start(0, MeasStart); // wir gehen auf die statemachine weil wir synch. müssen
+    return 0;
+}
 
 // implementiertes configuration model 
 /*
@@ -1772,28 +1795,35 @@ void cWM3000SCPIFace::ExecuteCommand(int entryState) // ausführen eines common 
     case FetchStart:
     {
         double ampln, amplx;
-
-        if (m_ConfDataActual.m_bDCmeasurement)
+        if (mbJson)
         {
-            ampln = mActValues.VekN.re();
-            amplx = mActValues.VekX.re();
+            s = mActValues.extractJson();
+            mbJson = false;
         }
         else
         {
-            ampln = fabs(mActValues.VekN);
-            amplx = fabs(mActValues.VekX);
+            if (m_ConfDataActual.m_bDCmeasurement)
+            {
+                ampln = mActValues.VekN.re();
+                amplx = mActValues.VekX.re();
+            }
+            else
+            {
+                ampln = fabs(mActValues.VekN);
+                amplx = fabs(mActValues.VekX);
+            }
+            s = QString("%1;%2;%3;%4;%5;%6;%7;%8;%9")
+                    .arg(mActValues.Frequenz)
+                    .arg(ampln)
+                    .arg(mActValues.PHIN)
+                    .arg(amplx)
+                    .arg(mActValues.PHIX)
+                    .arg(mActValues.LoadPointX)
+                    .arg(mActValues.LoadPoint1X)
+                    .arg(mActValues.AmplErrorIEC)
+                    .arg(mActValues.AmplErrorANSI);
+            s += m_Special->fetchActualValues(&mActValues);
         }
-        s = QString("%1;%2;%3;%4;%5;%6;%7;%8;%9")
-                .arg(mActValues.Frequenz)
-                .arg(ampln)
-                .arg(mActValues.PHIN)
-                .arg(amplx)
-                .arg(mActValues.PHIX)
-                .arg(mActValues.LoadPointX)
-                .arg(mActValues.LoadPoint1X)
-                .arg(mActValues.AmplErrorIEC)
-                .arg(mActValues.AmplErrorANSI);
-        s += m_Special->fetchActualValues(&mActValues);
         answ = sAlloc(s);
         m_stateMachineTimer.start(0, ExecCmdPartFinished); // teil kommando fertig
         break;
@@ -2057,9 +2087,13 @@ char* cWM3000SCPIFace::SCPIQuery( int cmd, char* s) {
         case GetRange: an = mGetRange();break;
         case OutChannelCatalog: an = mOutChannelCatalog();break;
         case MeasurementRead: an = mMeasurementRead();break;
+        case MeasurementReadJson: an = mMeasurementReadJson();break;
         case MeasurementReadLoadpoint: an = mMeasurementReadLoadpoint();break;
         case MeasurementFetch: an = mMeasurementFetch();break;
+        case MeasurementFetchJson: an = mMeasurementFetchJson();break;
         case Measurement: an = mMeasurement();break;
+        case MeasurementJson: an = mMeasurementJson(); break;
+
             //	case GetConfLogFileSize: an = mGetConfLogFileSize();break;
         case GetConfEnAppid: an = mGetConfEnAppid();break;
         case GetConfEnVid: an = mGetConfEnVid();break;
@@ -2237,10 +2271,13 @@ cNodeSCPI* ConfigurationEN61850Appid;
 cNodeSCPI* ConfigurationApply;
 
 
+cNodeSCPI* MeasJson;
 cNodeSCPI* Measure;
 cNodeSCPI* Initiate;
 cNodeSCPI* Fetch;
+cNodeSCPI* FetchJson;
 cNodeSCPI* Read;
+cNodeSCPI* ReadJson;
 cNodeSCPI* ReadLoadpoint;
 
 
@@ -2348,11 +2385,14 @@ cNode* cWM3000SCPIFace::InitScpiCmdTree(cNode* cn) {
     
     // implementiertes measure model
     
-    ReadLoadpoint=new cNodeSCPI("LOADPOINT",isQuery,NULL,NULL,nixCmd,MeasurementReadLoadpoint);
+    MeasJson = new cNodeSCPI("JSON",isQuery,NULL,NULL,nixCmd,MeasurementJson);
+    ReadJson = new cNodeSCPI("JSON",isQuery,NULL,NULL,nixCmd, MeasurementReadJson);
+    ReadLoadpoint=new cNodeSCPI("LOADPOINT",isQuery,ReadJson,NULL,nixCmd,MeasurementReadLoadpoint);
     Read=new cNodeSCPI("READ",isNode | isQuery,Sense,ReadLoadpoint,nixCmd,MeasurementRead);
-    Fetch=new cNodeSCPI("FETCH",isNode | isQuery,Read,NULL,nixCmd,MeasurementFetch);
+    FetchJson = new cNodeSCPI("JSON",isQuery,NULL,NULL,nixCmd,MeasurementFetchJson);
+    Fetch=new cNodeSCPI("FETCH",isNode | isQuery,Read,FetchJson,nixCmd,MeasurementFetch);
     Initiate=new cNodeSCPI("INITIATE",isNode | isCommand,Fetch,NULL,MeasurementInitiate,nixCmd);
-    Measure=new cNodeSCPI("MEASURE",isNode | isQuery,Initiate,NULL,nixCmd,Measurement);
+    Measure=new cNodeSCPI("MEASURE",isNode | isQuery,Initiate,MeasJson,nixCmd,Measurement);
 
     // implementiertes configuration model
     

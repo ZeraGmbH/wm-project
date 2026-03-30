@@ -147,7 +147,6 @@ cWM3000I::cWM3000I() :
     m_PhaseJustLogfile.setName(QDir(PhaseJustLogFilePath).absPath());
     m_OffsetJustLogfile.setName(QDir(OffsetJustLogFilePath).absPath());
 
-
     ActValues.RMSNSek = 0.0;  // wir benötigen definierte istwerte, damit wir die korrekturwerte
     ActValues.RMSXSek = 0.0; // lesen können
     ActValues.VekN = 0.0;
@@ -159,6 +158,7 @@ cWM3000I::cWM3000I() :
     ActValues.PHIN = 0.0;
     ActValues.PHIX = 0.0;
     ActValues.Frequenz = 50.0;
+    ActValues.setWM3ki(true);
     
     m_OVLMsgBox = new cWMessageBox ( trUtf8("Übersteuerung"), trUtf8("Es ist eine Übersteuerung im grössten Bereich\naufgetreten. Bitte überprüfen Sie die Messgrössen"), QMessageBox::Critical, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton, 0, 0, false ) ;
     connect(m_OVLMsgBox,SIGNAL(WMBoxClosed()),this,SLOT(OverLoadMaxQuitSlot()));

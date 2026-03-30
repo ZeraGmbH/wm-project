@@ -181,6 +181,7 @@ SOURCES = \
     tcpconfig.cpp \
     tools.cpp \
     versserial.cpp \
+    wmactvalues.cpp \
     wmparameter.cpp \
     zerainfo.cpp
 
