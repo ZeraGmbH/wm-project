@@ -73,9 +73,12 @@ enum wm3000SCPICmdType  { nixWCmd = LastCommonCommand, // 13
     
 			  MeasurementRead,
 			  MeasurementReadLoadpoint,
+              MeasurementReadJson,
 			  MeasurementConfigure,	         
-			  MeasurementFetch,	         
-			  MeasurementInitiate,	     
+			  MeasurementFetch,
+              MeasurementFetchJson,
+              MeasurementInitiate,
+              MeasurementJson,
 			  Measurement,
      
 			  // implementiertes configuration model 
@@ -160,9 +163,9 @@ enum wmExecuteCommandStates   { EN61850SynclostCountStart = ExecCmdLast,
 				     
 			             EN61850DataCountStart,
 			             EN61850DataCountFinished,
-				     
+
 			             MeasStart,
-			             MeasConfiguration,  
+                         MeasConfiguration,
  			             MeasInitiate,
 			             MeasFetch,
 			             MeasFinished,
@@ -173,9 +176,7 @@ enum wmExecuteCommandStates   { EN61850SynclostCountStart = ExecCmdLast,
 				     
 			             InitiateStart,
 			             InitiateFinished,
-				     
 			             FetchStart, // finished ist von selbst
-				     
 			             ReadStart,
 			             ReadRead,
 				     
@@ -268,6 +269,7 @@ private:
     void startMeasWaitTimeout();
     void stopMeasWaitTimeout();
     cConfData m_ConfDataActual, m_ConfDataTarget;
+    bool mbJson;
     bool GetParameter(char**, ushort&, bool); // zeiger auf input ,  der gefundene wert, test auf blank?
     bool GetParameter(char**, ushort&, int, int, int, bool); // zeiger auf input ,  der gefundene wert, min, max, base, test auf blank?
     bool GetParameter(char**, double&, double, double, bool); // zeiger auf input ,  der gefundene wert, min, max ,test auf blank?
@@ -321,12 +323,15 @@ private:
     
     // implementiertes measure model 
     char* mMeasurementRead();
+    char* mMeasurementReadJson();
     char* mMeasurementReadLoadpoint();
     void mMeasurementConfigure(char*);
-    char* mMeasurementFetch();	         
+    char* mMeasurementFetch();
+    char* mMeasurementFetchJson();
     void mMeasurementInitiate(char*);
     char* mMeasurement();
-     
+    char* mMeasurementJson();
+
     // implementiertes configuration model 
     void mConfigurationApply(char*);
 //    char* mGetConfLogFileSize();
