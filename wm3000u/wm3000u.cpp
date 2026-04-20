@@ -4277,8 +4277,19 @@ void cWM3000U::wmCmpActValues() {  // here we will do all the necessary computat
     }
 
     re = im = ( val * ActValues.dspActValues.ampl1xf ) / rej;
+    if (m_ConfData.m_bDCmeasurement)
+    {
+        if (m_ConfData.m_nMeasMode == Un_nConvent)
+        {
+            im = 0.0;
+            re /= 2.0;
+        }
+    }
+    else
+    {
     im *= sin(ActValues.dspActValues.dphif);
     re *= cos(ActValues.dspActValues.dphif);
+    }
     ActValues.VekXSek = complex(re,im);
 
     if (m_ConfData.m_bOffsetCorrectionX && m_ConfData.m_bDCmeasurement)
