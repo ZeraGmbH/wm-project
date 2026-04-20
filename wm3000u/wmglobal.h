@@ -137,8 +137,9 @@
 // 2.53 5.12.25     bugfix on ratio scpi interface
 // 2.54 18.2.26     resize vector widget and bugfixes on scpi and Transformer Widget
 // 2.55 24.2.26     bugfix RegExp RatioValidator
+// 2.56 20.4.26     bugfix DC Vektor value
 
-#define WMVersion "V2.55"
+#define WMVersion "V2.56"
 
 // #define ServerCommLogFilePath "/usr/share/wm3000u/log/ServerComm.log"
 #define ServerCommLogFilePath QDir::homePath()+"/wm3000u/log/ServerComm.log"

@@ -1598,14 +1598,19 @@ void cWM3000I::ActionHandler(int entryAHS)
         }
         else
         {
+            float divider = 1.41421356;
             float *source = DspIFace->data(m_dspSetup.getMeasData()->RMSValData);
             float *dest = (float*) &ActValues.dspRMSValues;
             for (uint i=0; i< sizeof(ActValues.dspRMSValues)/sizeof(float);i++) *dest++ = *source++;
 
+            if(m_ConfData.m_bDCmeasurement)
+            {
+                divider = 2.0;
+            }
             ActValues.dspRMSValues.fastRMSN *= 1.63299; // hanning fenster korrektur
-            ActValues.dspRMSValues.fastRMSN1 = ActValues.dspRMSValues.fastRMSN1 * 2.0 / 1.41421356; // korrektur einheitswurzeln, ammplitude->rms
+            ActValues.dspRMSValues.fastRMSN1 = ActValues.dspRMSValues.fastRMSN1 * 2.0 / divider; // korrektur einheitswurzeln, ammplitude->rms
             ActValues.dspRMSValues.fastRMSX *= 1.63299; // hanning fenster korrektur
-            ActValues.dspRMSValues.fastRMSX1 = ActValues.dspRMSValues.fastRMSX1 * 2.0 / 1.41421356; // korrektur einheitswurzeln, ammplitude->rms
+            ActValues.dspRMSValues.fastRMSX1 = ActValues.dspRMSValues.fastRMSX1 * 2.0 / divider; // korrektur einheitswurzeln, ammplitude->rms
 
             CorrRMSValues();
             CmpRMSValues();
@@ -4508,7 +4513,6 @@ void cWM3000I::wmCmpActValues() {  // here we will do all the necessary computat
         {
             im = 0.0;
             re /= 2.0;
-
         }
     }
     else
